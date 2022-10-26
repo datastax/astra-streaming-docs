@@ -1,0 +1,11 @@
+[source,json]
+----
+{
+    "database.whitelist": "asdasd",
+    "mongodb.hosts": "asd",
+    "mongodb.name": "asdasd",
+    "mongodb.password": "asd",
+    "mongodb.task.id": "123",
+    "mongodb.user": "asd"
+}
+----

@@ -1,0 +1,53 @@
+:connectorName: jdbc-postgres
+:connectorType: jdbc-postgres
+:slug: postgres-sink-connector
+:page-tag: jdbc,postgres,sink-connector
+
+= JDBC PostgreSQL Sink Connector for {product_name}
+
+PostgreSQL is a powerful, open source, object-relational database system with over 30 years of active development. 
+
+It has earned a strong reputation for reliability, feature robustness, and performance. 
+
+The PostgreSQL JDBC Driver is an open source JDBC driver written in Pure Java (Type 4) that communicates using the PostgreSQL native network protocol. This allows Java programs to connect to a PostgreSQL database using standard, database-independent Java code.  
+
+[NOTE]
+====
+{product_name} currently supports Apache Pulsar {pulsar_version}, which uses the https://jdbc.postgresql.org/documentation/setup/[PostgreSQL JDBC 42.4.1 library] to interact with PostgreSQL.
+====
+
+== Get Started
+
+include::partial$connectors/sinks/get-started.adoc[]
+
+== Managing the Connector
+
+include::partial$connectors/sinks/manage.adoc[]
+
+== Monitoring the Connector
+
+include::partial$connectors/sinks/monitoring.adoc[]
+
+== Connector Reference
+
+There are two sets of parameters that support sink connectors.
+
+=== Astra Streaming
+
+[%header,format=csv,cols="2,1,1,3"]
+|===
+include::example$connectors/sinks/astra.csv[]
+|===
+
+=== PostgreSQL (configs)
+
+These values are provided in the "configs" area.
+
+The {product_name} JDBC PostgreSQL sink connector supports all configuration properties provided by Apache Pulsar. Refer to the https://pulsar.apache.org/docs/io-jdbc-sink#property[connector
+properties^] for a complete list.
+
+== What's next?
+
+Learn more about PostgreSQL on https://www.postgresql.org/[their site^].
+
+Read more about Apache Pulsar's PostgreSQL sink connector https://pulsar.apache.org/docs/io-jdbc-sink[here^].

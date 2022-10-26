@@ -1,0 +1,37 @@
+= Subscriptions in Pulsar
+
+:page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
+
+*Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
+
+Subscriptions are managed in the broker as a collection of metadata about a topic and its subscribed consumers. This metadata includes: 
+
+* Topic name - which topic the consumer wants data from
+* Subscription name - a string representing a qualified name for the subscription
+* Subscription type - which type of subscription is being used
+* Subscription cursor - a representation of the consumer's current place in the subscribed topic log 
+
+For example, the Pulsar consumer below has a *shared* subscription starting at the *earliest* cursor position in `my-subscription` to `my-topic`:
+
+[source,java]
+----
+pulsarConsumer = pulsarClient.newConsumer(Schema.BYTES)
+    .topic("my-topic")
+    .subscriptionName("my-subscription")
+    .subscriptionType(SubscriptionType.Shared)
+    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
+    .subscribe();
+----
+
+Read on to use Pulsar's four types of subscriptions to manage your topic consumption.
+
+* xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
+* xref:astream-subscriptions-shared.adoc[Shared subscriptions]
+* xref:astream-subscriptions-failover.adoc[Failover subscriptions]
+* xref:astream-subscriptions-keyshared.adoc[Key_shared subscriptions]
+
+== What's next? 
+
+For more on {product_name}, see xref:astream-quick-start.adoc[Astra Streaming quickstart]. +
+For using Kafka with {product_name}, see xref:astream-kafka.adoc[Starlight for Kafka].
+

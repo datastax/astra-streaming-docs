@@ -1,0 +1,66 @@
+= {product_name} Regions
+:slug: astra-streaming-regions
+
+:page-tag: astra-streaming,admin,manage,pulsar
+
+When creating a tenant, select a region for your tenant. Choose a region that is geographically close to your users to optimize performance.
+
+Here are the regions {product_name} supports:
+
+== AWS
+[cols=2*,options=header]
+|===
+|Region
+|Location
+
+| us-east-1
+| Northern Virginia, US
+
+| us-east-2
+| Ohio, US
+
+| us-west-2
+| Oregon, US
+|===
+
+== Azure
+[cols=2*,options=header]
+|===
+|Region
+|Location
+
+| eastus
+| Virginia, US
+
+| westus2
+| Washington (state), US
+|===
+
+== Google Cloud
+[cols=2*,options=header]
+|===
+|Region
+|Location
+
+| australia-southeast1
+| Sydney, Australia, APAC
+
+| europe-west1
+| Saint-Ghislain, Belgium, Europe
+
+| us-central1
+| Council Bluffs, Iowa, US
+
+| us-east1
+| Moncks Corner, South Carolina, US
+
+| us-east4
+| Ashburn, Virginia, US
+
+|===
+
+[NOTE]
+====
+These regions are also supported by CDC for Astra DB. {product_name} CDC can only be used in a region that supports both {product_name} and Astra DB. ElasticSearch and Snowflake can be in different
+regions than {product_name}.
+====

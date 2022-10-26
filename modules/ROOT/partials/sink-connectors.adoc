@@ -1,0 +1,53 @@
+== Sink connectors
+
+*Sink connectors* consume messages from Apache Pulsar™ topics and write them to external systems. +
+
+These sinks are available for {product_name}:
+
+* xref:astream-astradb-sink.adoc[Astra DB]
+* xref:astream-elastic-sink.adoc[Elasticsearch]
+* xref:astream-kafka-sink-connector.adoc[Kafka]
+* xref:astream-connectors.adoc#jdbc-clickhouse-sink[]
+* xref:astream-connectors.adoc#jdbc-mariadb-sink[]
+* xref:astream-connectors.adoc#jdbc-postgres-sink[]
+* xref:astream-connectors.adoc#kinesis-sink[]
+* xref:astream-connectors.adoc#snowflake-sink[]
+
+[#astradb-sink]
+=== Astra DB sink
+To configure, deploy, and use the ElasticSearch sink connector, see the xref:astream-astradb-sink.adoc[Astra DB sink documentation].
+
+[#elasticsearch-sink]
+=== ElasticSearch sink
+
+To configure, deploy, and use the ElasticSearch sink connector, see the xref:astream-elastic-sink.adoc[Elasticsearch sink documentation].
+
+[#jdbc-clickhouse-sink]
+=== JDBC-Clickhouse sink
+
+To configure, deploy, and use the JDBC-Clickhouse sink connector, see the https://pulsar.apache.org/docs/next/io-jdbc-sink/[Pulsar documentation^].
+
+[#jdbc-mariadb-sink]
+=== JDBC-MariaDB sink
+
+To configure, deploy, and use the JDBC-MariaDB sink connector, see the https://pulsar.apache.org/docs/next/io-jdbc-sink#example-for-mariadb[Pulsar documentation^].
+
+[#jdbc-postgres-sink]
+=== JDBC-PostgreSQL sink
+
+To configure, deploy, and use the JDBC-PostgreSQL connector, see the xref:astream-jdbc-postgresql-sink.adoc[PostgreSQL documentation].
+
+[#kafka-sink]
+=== Kafka sink
+
+To configure, deploy, and use the Kafka sink connector, see the xref:astream-kafka-sink-connector.adoc[Kafka sink documentation].
+
+[#kinesis-sink]
+=== Kinesis sink
+
+To configure, deploy, and use the Kinesis sink connector, see the https://pulsar.apache.org/docs/next/io-kinesis-sink#configuration[Pulsar documentation^].
+
+[#snowflake-sink]
+=== Snowflake sink
+
+To configure, deploy, and use the Snowflake sink connector, see the https://github.com/datastax/snowflake-connector[DataStax Snowflake connector].

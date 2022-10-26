@@ -1,0 +1,65 @@
+= Manage Tokens
+
+// [NOTE]
+// ====
+// You can also create an application token using the xref:astream-use-devops[DevOps API].
+// ====
+
+. From any page in {product_name}, select the *Organizations* dropdown.
++
+image::ROOT:OrgSelection.png[alt="Organization Selection",width=300]
++
+. In the main dropdown, select *Organization Settings*.
+. From your Organization page, select *Token Management*.
+. Select the role you want to attach to your token. The permissions for your selected role will be displayed.
+. Select *Generate Token*. {product_name} will generate your token and display the _Client ID_, _Client Secret_, and _Token_.
+. Download your _Client ID_, _Client Secret_, and _Token_.
+
+[IMPORTANT]
+====
+After you navigate away from the page, you won't be able to download your _Client ID_, _Client Secret_, and _Token_ again.
+====
+
+== Set environment variables
+
+In your command-line interface associated with your environment, paste the following environment variables copied for {product_name}:
+
+[source, shell]
+----
+export ASTRA_STREAMING_ID=<database_id>
+export ASTRA_STREAMING_REGION=<database_region>
+export ASTRA_STREAMING_KEYSPACE=<keyspace_name>
+export ASTRA_STREAMING_TOKEN=<app_token>
+----
+
+== Delete token
+
+If you need to limit access to your database, you can delete a token.
+
+. Select the overflow menu for the token you want to delete.
+. Select *Delete* to delete that token.
+. If necessary, generate a new token for the same user role.
+
+== Manage Pulsar token
+
+To generate, copy, or delete Pulsar JSON Web Tokens (JWTs) within your streaming tenant, visit the **Token Management** section of your streaming tenant's **Settings** page. 
+
+image::ROOT:astream-token-created.png[alt="Token Management"]
+
+Select **Create Token** to generate a Pulsar token for this streaming tenant. 
+
+Token duration ranges from 7 days to never expiring. 
+
+If you choose a token with an expiration, ensure you replace your token with a new, valid Pulsar token before the expiration date.
+
+Select the **clipboard** icon to copy a Pulsar token to your clipboard. 
+
+Select the **trashcan** icon to delete a Pulsar token. 
+
+Ensure you update your application with a new, valid Pulsar token before deletion. Applications using the deleted Pulsar token will no longer be able to connect to {product_name}.  
+
+For more on JSON Web Tokens, see the https://jwt.io/introduction/[JWT documentation].
+
+== Next 
+
+Use your new token to start event streaming with the xref::astream-quick-start.adoc[Astra Streaming QuickStart].

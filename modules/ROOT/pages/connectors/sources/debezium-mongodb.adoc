@@ -1,0 +1,51 @@
+:connectorName: debezium-mongo-src
+:connectorType: debezium-mongodb
+:attribute-missing: skip
+:slug: mongodb-source-connector
+:page-tag: debezium,cdc,mongodb,source-connector
+
+= Debezium MongoDB Source Connector for {product_name}
+
+Debezium’s MongoDB connector tracks a MongoDB replica set or a MongoDB sharded cluster for document changes in databases and collections and records those changes as messages in an Apache Pulsar topic. 
+
+The connector automatically handles the addition or removal of shards in a sharded cluster, changes in membership of each replica set, elections within each replica set, and the resolution of communications problems.
+
+Astra Streaming currently supports Apache Pulsar {pulsar_version}, which uses Debezium {debezium_version} libraries. For a list of supported MongoDB versions, please refer to the https://debezium.io/releases/{debezium_version}/[Debezium documentation^].
+
+== Get Started
+
+include::partial$connectors/sources/get-started.adoc[]
+
+== Managing the Connector
+
+include::partial$connectors/sources/manage.adoc[]
+
+== Monitoring the Connector
+
+include::partial$connectors/sources/monitoring.adoc[]
+
+== Connector Reference
+
+There are two sets of parameters that support source connectors.
+
+=== Astra Streaming
+
+[%header,format=csv,cols="2,1,1,3"]
+|===
+include::example$connectors/sources/astra.csv[]
+|===
+
+=== Debezium MongoDB (configs)
+
+These values are provided in the "configs" area.
+
+[%header,format=csv,cols="2,1,1,3"]
+|===
+include::example$connectors/sources/{connectorType}/config.csv[]
+|===
+
+== What's next?
+
+For a detailed explanation of Debezium's MongoDB connector, read https://debezium.io/documentation/reference/{debezium_version}/connectors/mongodb.html[the Debezium documentation^].
+
+Learn more about Debezium's MongoDB connector in the https://pulsar.apache.org/docs/io-debezium-source/#example-of-mongodb[Apache Pulsar MongoDB documentation^].

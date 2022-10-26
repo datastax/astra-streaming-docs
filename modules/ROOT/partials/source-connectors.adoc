@@ -1,0 +1,36 @@
+== Source connectors
+
+*Source connectors* read data from external systems and produce them on Apache Pulsar™ topics. +
+
+These sinks are available for {product_name}: +
+
+* xref:astream-connectors.adoc#debezium-mongodb-source[]
+* xref:astream-connectors.adoc#debezium-mysql-source[]
+* xref:astream-connectors.adoc#debezium-postgres-source[]
+* xref:astream-connectors.adoc#kafka-source[]
+* xref:astream-connectors.adoc#kinesis-source[]
+
+[#debezium-mongodb-source]
+=== Debezium MongoDB source
+
+To configure, deploy, and use the Debezium MongoDB source connector, see the https://pulsar.apache.org/docs/next/io-debezium-source#mongodb-configuration[Pulsar documentation^].
+
+[#debezium-mysql-source]
+=== Debezium MySQL source
+
+To configure, deploy, and use the Debezium MySQL source connector, see the https://pulsar.apache.org/docs/next/io-debezium-source#configuration-1[Pulsar documentation^].
+
+[#debezium-postgres-source]
+=== Debezium Postgres source
+
+To configure, deploy, and use the Debezium PostgreSQL source connector, see the https://pulsar.apache.org/docs/next/io-debezium-source#configuration-2[Pulsar documentation^].
+
+[#kafka-source]
+=== Kafka source
+
+To configure, deploy, and use the Kafka source connector, see the xref:astream-kafka-source.adoc[Kafka source connector documentation].
+
+[#kinesis-source]
+=== Kinesis source
+
+To configure, deploy, and use the Kinesis source connector, see the https://pulsar.apache.org/docs/next/io-kinesis-source#configuration[Pulsar documentation^].

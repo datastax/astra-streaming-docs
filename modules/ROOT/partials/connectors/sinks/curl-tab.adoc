@@ -1,0 +1,51 @@
+// tag::curl-prereq[]
+You'll need to create an Astra Streaming API token to be used with the REST API. This is different from your Astra tokens. 
+
+Navigate to the "Settings" area in the Astra Streaming UI and choose "Create Token".
+
+Retrieve the web service URL from the "Connect" tab in the Astra Streaming UI.
+
+Refer to the complete https://pulsar.apache.org/sink-rest-api/#tag/sink[Pulsar sinks REST API spec^] for all available options.
+
+[source,shell,subs="attributes+"]
+----
+export WEB_SERVICE_URL=<replace-me>
+export ASTRA_STREAMING_TOKEN=<replace-me>
+----
+// end::curl-prereq[]
+// tag::curl-start[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/curl-start.sh[]
+----
+// end::curl-start[]
+// tag::curl-stop[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/curl-stop.sh[]
+----
+// end::curl-stop[]
+// tag::curl-restart[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/curl-restart.sh[]
+----
+// end::curl-restart[]
+// tag::curl-delete[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/curl-delete.sh[]
+----
+// end::curl-delete[]
+// tag::curl-info[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/curl-info.sh[]
+----
+// end::curl-info[]
+// tag::curl-status[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/curl-status.sh[]
+----
+// end::curl-status[]

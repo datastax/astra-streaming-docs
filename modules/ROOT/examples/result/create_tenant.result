@@ -1,0 +1,20 @@
+{
+    "namespace": "default",
+    "topic": "",
+    "tenantName": "testcreate",
+    "clusterName": "astradev-aws",
+    "webServiceUrl": "https://pulsar-aws-useast2.api.astra.datastax.com",
+    "brokerServiceUrl": "pulsar+ssl://pulsar-aws-useast2.astra.datastax.com:6651",
+    "websocketUrl": "wss://pulsar-aws-useast2.astra.datastax.com:8001/ws/v2",
+    "websocketQueryParamUrl": "wss://pulsar-aws-useast2.astra.datastax.com:8964/ws/v2",
+    "pulsarToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbGllbnQ7YjgzMTY2NzQtNmExMi00MDE0LWE1NmUtZjQ2OWU5MmRlNGFkO2RHVnpkR055WldGMFpRPT0ifQ.GpuQHK0KNUDmWxhHkZMRLgyGtw5bNp6WNjxPic0nfg3ps3-Ayq5VjLUKGLReHQ5KtOtaPfVsUh2oEagKi06uLVzcX8t4fXBooy88a1Q5muNicF-pWPUBzMeYzU9OAb3Mh9LOXcl8jsQb5Mhkz5crkWG0AO_7Cee1G2hsAwSTLquGd6M7LvVroE4wR9xwtvXrszm1m01g22WDbcpxJ9QV9hwjzE1XeJ8aLV-kzYuZRWryb5qSF5OdXBNeDBBRKw3nijWXEzvyfF8OebO_SfXYT72Wsy6kxyYKQAKbZQNJUFa1N0RZIZaztEvuSNEh2E1L9wWOaMwzpybmyAHNfzZAoA",
+    "plan": "payg",
+    "planCode": "",
+    "astraOrgGUID": "b8316674-6a12-4014-a56e-f469e92de4ad",
+    "cloudProvider": "aws",
+    "cloudProviderCode": "",
+    "cloudRegion": "useast2",
+    "status": "active",
+    "jvmVersion": "JDK11",
+    "pulsarVersion": "2.7.2"
+}

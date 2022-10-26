@@ -1,0 +1,199 @@
+= Connect to {product_name} using NodeJS
+
+:page-tag: astra-streaming,connect,dev,develop,nodejs,pulsar
+
+include::partial$code-examples-text.adoc[]
+
+== Node.js
+
+The Node.js client APIs are distributed through https://github.com/apache/pulsar-client-node[NPM].
+On Linux, we recommend Node version 10+ and npm 6+.
+You can find document and source code for the Node.js client library https://github.com/apache/pulsar-client-node[here].
+
+Since the current Node.js client library depends on the C{plus}{plus} client library,
+please install the https://archive.apache.org/dist/pulsar/pulsar-{pulsar_full_version}/[C++ library version {pulsar_full_version}].
+
+In the code examples, you'll need to make the following substitutions:
+
+* *<service-url>*: The Pulsar Broker Service URL from the {product_name} *Connect* tab.
+* *<streaming-token>*: Your access token from the {product_name} *Connect* tab.
+* *<topic-url>*: A topic URL of your choice from the {product_name} *Namespaces and Topics* tab.
+* *<subscription-name>*: A subscription name of your choice, or one that you've configured in the *Details* tab of an existing topic.
+
+[tabs]
+====
+npm::
++
+--
+Since the current Node.js client library depends on the C{plus}{plus} client library, please install the https://archive.apache.org/dist/pulsar/pulsar-{pulsar_full_version}/[C++ library version {pulsar_full_version}]. For an Ubuntu based deb package:
+
+[source,bash,subs="attributes+"]
+----
+wget https://archive.apache.org/dist/pulsar/pulsar-{pulsar_full_version}/DEB/apache-pulsar-client.deb
+wget https://archive.apache.org/dist/pulsar/pulsar-{pulsar_full_version}/DEB/apache-pulsar-client-dev.deb
+
+sudo apt install -y ./apache-pulsar-client.deb
+sudo apt install -y ./apache-pulsar-client-dev.deb
+
+sudo ldconfig
+----
+--
+
+Producer::
++
+--
+This sample creates a producer on a topic, sends 10 messages.
+
+[source,javascript]
+----
+const Pulsar = require('pulsar-client');
+(async () => {
+  // Token based authentication
+  const tokenStr = '<streaming-token>';
+  const pulsarUri = '<service-url>';
+  const topicName = '<topic-url>';
+
+  const trustStore = '/etc/ssl/certs/ca-bundle.crt';
+  // Debian Ubuntu:
+  // const trustStore = '/etc/ssl/certs/ca-certificates.crt'
+  // OSX:
+  // Export the default certificates to a file, then use that file:
+  // security find-certificate -a -p /System/Library/Keychains/SystemCACertificates.keychain > ./ca-certificates.crt
+  // trust_certs='./ca-certificates.crt'
+
+  const auth = new Pulsar.AuthenticationToken({token: tokenStr});
+
+  // Create Pulsar Client
+  const client = new Pulsar.Client({
+    serviceUrl: pulsarUri,
+    authentication: auth,
+    tlsTrustCertsFilePath: trustStore,
+    operationTimeoutSeconds: 30,
+  });
+
+  // Create a producer
+  const producer = await client.createProducer({
+    topic: topicName,
+  });
+
+  // Send messages
+  for (let i = 0; i < 10; i += 1) {
+    producer.send({
+      data: Buffer.from('nodejs-message-'+i)
+    });
+    console.log('send message ' + i);
+  }
+  await producer.flush();
+
+  await producer.close();
+  await client.close();
+})();
+----
+--
+Consumer::
++
+--
+This sample creates a consumer on a topic, waits for a message, acknowledges it in a loop.
+
+[source,javascript]
+----
+const Pulsar = require('pulsar-client');
+(async () => {
+  // Token based on authentication
+  const tokenStr = '<streaming-token>';
+  const pulsarUri = '<service-url>';
+  const topicName = '<topic-url>';
+  const subscriptionName = '<topic-name>'
+
+  const trustStore = '/etc/ssl/certs/ca-bundle.crt';
+  // Debian Ubuntu:
+  // const trustStore = '/etc/ssl/certs/ca-certificates.crt'
+  // OSX:
+  // Export the default certificates to a file, then use that file:
+  // security find-certificate -a -p /System/Library/Keychains/SystemCACertificates.keychain > ./ca-certificates.crt
+  // trust_certs='./ca-certificates.crt'
+
+  const auth = new Pulsar.AuthenticationToken({token: tokenStr});
+
+  // Create a client
+  const client = new Pulsar.Client({
+    serviceUrl: pulsarUri,
+    authentication: auth,
+    tlsTrustCertsFilePath: trustStore,
+    operationTimeoutSeconds: 30,
+  });
+
+  // Create consumer
+  const consumer = await client.subscribe({
+    topic: topicName,
+    subscription: subscriptionName,
+    subscriptionType: 'Exclusive',
+    ackTimeoutMs: 10000,
+  });
+
+  // Receive and acknowledge messages
+  for (let i = 0; i < 100; i += 1) {
+    const msg = await consumer.receive();
+    console.log(msg.getData().toString());
+    consumer.acknowledge(msg);
+  }
+
+  await consumer.close();
+  await client.close();
+})();
+----
+--
+Reader::
++
+--
+This sample creates a reader on a topic and reads the earliest or latest message from the topic up to 1000 messages.
+
+[source,javascript]
+----
+const Pulsar = require('pulsar-client');
+
+(async () => {
+  // Token based authentication
+  const tokenStr = '<streaming-token>';
+  const pulsarUri = '<service-url>';
+  const topicName = '<topic-url>';
+
+  const trustStore = '/etc/ssl/certs/ca-bundle.crt';
+  // Debian Ubuntu:
+  // const trustStore = '/etc/ssl/certs/ca-certificates.crt'
+  // OSX:
+  // Export the default certificates to a file, then use that file:
+  // security find-certificate -a -p /System/Library/Keychains/SystemCACertificates.keychain > ./ca-certificates.crt
+  // trust_certs='./ca-certificates.crt'
+
+  const auth = new Pulsar.AuthenticationToken({token: tokenStr});
+
+  // Create a client
+   const client = new Pulsar.Client({
+    serviceUrl: pulsarUri,
+    authentication: auth,
+    tlsTrustCertsFilePath: trustStore,
+    operationTimeoutSeconds: 30,
+  });
+
+  // Create a reader
+  const reader = await client.createReader({
+    topic: topicName,
+    startMessageId: Pulsar.MessageId.earliest(),
+  });
+
+  for (let i = 0; i < 1000; i += 1) {
+    console.log((await reader.readNext()).getData().toString());
+  }
+
+  await reader.close();
+  await client.close();
+})();
+----
+--
+====
+
+== Next
+
+* xref:astream-quick-start.adoc[{product_name} QuickStart]
+* Browse the xref:api.adoc[Astra API References]

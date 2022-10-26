@@ -1,0 +1,57 @@
+:connectorName: es-sink
+:connectorType: elastic-search
+:attribute-missing: skip
+:slug: elasticsearch-sink-connector
+:page-tag: elasticsearch,sink-connector
+
+= Elasticsearch Sink Connector for {product_name}
+
+Elasticsearch is the distributed, RESTful search and analytics engine at the heart of the Elastic Stack. 
+
+Use Elasticsearch to store, search, and manage data for logs, metrics, search backend, application monitoring, and endpoint security. 
+
+[NOTE]
+====
+Astra Streaming currently supports Apache Pulsar {pulsar_version}, which uses the https://opensearch.org/docs/1.2/clients/java-rest-high-level/[OpenSearch 1.2.4 library^] to interact with
+Elasticsearch.
+====
+
+[NOTE]
+====
+To understand compatibility between OpenSearch and Elasticsearch, refer to https://opensearch.org/faq/#q1.8[question 1.8^] in the FAQs.
+====
+
+== Get Started
+
+include::partial$connectors/sinks/get-started.adoc[]
+
+== Managing the Connector
+
+include::partial$connectors/sinks/manage.adoc[]
+
+== Monitoring the Connector
+
+include::partial$connectors/sinks/monitoring.adoc[]
+
+== Connector Reference
+
+There are two sets of parameters that support sink connectors.
+
+=== Astra Streaming
+
+[%header,format=csv,cols="2,1,1,3"]
+|===
+include::example$connectors/sinks/astra.csv[]
+|===
+
+=== Elasticsearch (configs)
+
+These values are provided in the "configs" area.
+
+The Astra Streaming Elasticsearch sink connector supports all configuration properties provided by Apache Pulsar. Please refer to the https://pulsar.apache.org/docs/io-elasticsearch-sink/#property[connector properties^] for a complete list.
+
+== What's next?
+
+Learn more about Elasticsearch’s features and capabilities on https://www.elastic.co/elasticsearch/[Elasticsearch^].
+
+Learn more about Apache Pulsar's Elasticsearch sink in the https://pulsar.apache.org/docs/io-elasticsearch-sink/[Pulsar documentation^].

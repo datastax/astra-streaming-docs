@@ -1,0 +1,40 @@
+Set the required variables using any of the methods below.
+
+[source,shell,subs="attributes+"]
+----
+export TENANT=<replace-me>
+export DESTINATION_TOPIC=<replace-me>
+export NAMESPACE=default
+export SOURCE_NAME={connectorName}
+----
+
+[tabs]
+====
+Pulsar Admin::
++
+--
+include::partial$connectors/sources/pulsar-admin-tab.adoc[tags=admin-prereq]
+
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sources/{connectorType}/pulsar-admin-create.sh[]
+----
+--
+
+cURL::
++
+--
+include::partial$connectors/sources/curl-tab.adoc[tags=curl-prereq]
+
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sources/{connectorType}/curl-create.sh[]
+----
+--
+
+Sample Config Data::
++
+--
+include::example$connectors/sources/{connectorType}/sample-data.adoc[]
+--
+====

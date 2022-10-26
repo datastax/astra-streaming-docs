@@ -1,0 +1,14 @@
+= API References
+:slug: astream-api
+:description: Astra provides APIs to manage both DB and Streaming instances
+:keywords: datastax astra
+:meta-description: Astra provides APIs to manage both DB and Streaming instances
+:page-tag: astra-streaming,dev,develop,pulsar
+
+Astra provides APIs to manage both DB and Streaming instances.
+
+== Astra DB and {product_name} DevOps APIs
+
+Astra DB and {product_name} provide DevOps APIs to manage the lifecycles of your databases and streaming instances:
+
+* link:_attachments/devopsv2.html[DevOps API v2]

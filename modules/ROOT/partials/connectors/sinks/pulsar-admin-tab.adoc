@@ -1,0 +1,43 @@
+// TODO: include an explanation or link to retrieving the client.conf from AS UI
+
+// tag::admin-prereq[]
+Refer to the complete https://pulsar.apache.org/tools/pulsar-admin/{pulsar_version}.0-SNAPSHOT/#sinks[pulsar-admin sinks spec^] for all available options.
+
+Assuming you have downloaded client.conf to the Pulsar folder:
+// end::admin-prereq[]
+// tag::admin-start[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/pulsar-admin-start.sh[]
+----
+// end::admin-start[]
+// tag::admin-stop[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/pulsar-admin-stop.sh[]
+----
+// end::admin-stop[]
+// tag::admin-restart[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/pulsar-admin-restart.sh[]
+----
+// end::admin-restart[]
+// tag::admin-delete[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/pulsar-admin-delete.sh[]
+----
+// end::admin-delete[]
+// tag::admin-info[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/pulsar-admin-info.sh[]
+----
+// end::admin-info[]
+// tag::admin-status[]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sinks/pulsar-admin-status.sh[]
+----
+// end::admin-status[]

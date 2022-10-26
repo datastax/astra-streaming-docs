@@ -1,0 +1,68 @@
+= Create an Astra DB sink
+:slug: astream-astradb-sink
+:description: Creating a new Astra DB sink
+:meta-description: Creating a new Astra DB sink
+:keywords: apache pulsar sink
+:page-tag: astra-streaming,connectors,sinks
+
+To create an Astra DB sink for {product_name} topics:
+
+. Select the *Sinks* tab...
++
+image::astream-new-sink.png[New sink]
+
+. ... and select *Create Sink*.
++
+[NOTE]
+====
+Your sink name and index name must start with a lowercase alphabetic character and can only contain lowercase alphabetic characters, numbers, and hyphens.
+====
+
+. Enter the namespace, sink type, and sink name.
++
+image::astream-new-astradb-sink.png[Name the new sink]
+
+. Complete the advanced settings. The settings below are the recommended defaults.
++
+image::astream-astradb-sink-advanced.png[Add configuration details for the new Astra DB sink]
+
+. Set optional Apache Pulsar®-specific sink configurations for your Astra DB sink. For more on Pulsar sink configurations, see the https://pulsar.apache
+.org/sink-rest-api/#operation/registerSink[Pulsar docs].
+
+. Choose the input topic for your sink. If you do not have a topic in your namespace, create one in the *Topics* tab. 
+
+. Set connection configuration for your sink. 
++
+image::astream-astradb-sink-connect.png[Add connection details for the new Astra DB sink]
+
+. Selecting an existing table in Astra DB auto-populates the topic schema mapping. For more on mapping Astra DB connector tables, see https://docs.datastax.com/en/pulsar-connector/1
+.4/cfgPulsarMapTopicTable.html[here].
++
+image::astream-astradb-schema-map.png[Schema Map]
+
+. Set optional Astra DB specific configurations for your sink. Set the *Config Key* as `verbose` and the *Config Value* as `true` to enable verbose logging on the sink.
++
+For more on configuring built-in Pulsar sink connectors, see the https://pulsar.apache.org/docs/en/io-connectors/#sink-connector[Pulsar docs].
+
+. Select *Create*. In the *Sinks* tab, your Astra DB sink will change status to *Running*. Your sink connector is now deployed.
++
+image::astream-astradb-sink-confirm.png[New Astra DB sink confirmed]
+
+. To check the configuration settings for your sink connector, select your sink in the *Sinks* tab and select *View Config*. +
+You should see the `verbose` setting under `configs` set to `true`.
+[source,json]
+----
+  "configs": {
+    "verbose": true
+  },
+----
+
+== What's next?
+
+To use your connector with CDC, see xref:astream-cdc.adoc[CDC for Astra DB]. +
+For more on {product_name} sinks, see xref:astream-connectors.adoc#sink-connectors[{product_name} Sinks].
+
+
+
+
+

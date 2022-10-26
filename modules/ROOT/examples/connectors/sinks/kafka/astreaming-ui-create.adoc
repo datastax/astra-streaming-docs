@@ -1,0 +1,46 @@
+To create a Kafka Sink Connector, visit the *Sinks* tab in {product_name} and choose "Create Sink".
+This step opens the *Create New Sink* page with a list of fields required to build your new Kafka Sink Connector.
+
+image::astream-kafka-sink-basics.png[Basics]
+
+=== Advanced Settings
+
+In your *Advanced Settings*, control the number of instances, auto-acknowledgement, and timeout.
+Processing Guarantee offers three options:
+
+* *ATLEAST_ONCE*: Each message sent to the sink can be processed more than once.
+* *ATMOST_ONCE*: The message sent to the sink is processed at most once. Therefore, there is a chance that the message is not processed.
+* *EFFECTIVELY_ONCE*: Each message sent to the sink will have one output associated with it.
+
+image::astream-kafka-sink-advanced.png[Advanced]
+
+=== Connect Topics
+
+Choose the topic messages will be published to from the connected sink:
+
+image::astream-kafka-sink-connect-topics.png[Connect Topics]
+
+=== Sink-Specific Configuration
+
+The bootstrap server `host`/`port` pairs must be in the format `hostname1:port1,hostname2:port2,...`
+
+The Kafka topic here will receive messages from Pulsar:
+
+image::astream-kafka-sink-specific-config.png[Sink Specific Configuration]
+
+`Acks` is the number of acknowledgements that the producer requires before a request is complete.
+
+`Batch Size` is the batch size that a Kafka producer attempts to batch records together before sending them to brokers.
+
+`Max Request Size` is the maximum size of a Kafka request in bytes.
+
+==== Producer Configuration Properties
+
+Currently, only `SASL_SSL` is supported.
+Your `username` and `password` are required.
+
+image::astream-kafka-sink-producer-config.png[Consumer Configuration Properties]
+
+=== Review and Submit
+
+Confirm your values are correct and select *Create*. Confirm you've created your new Kafka Sink Connector in the *Sinks* tab.

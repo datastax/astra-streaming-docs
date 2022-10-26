@@ -1,0 +1,5 @@
+"Name","Required","Default","Description"
+"gssapi","true","{""service"": ""dse""}",""
+"password","true","",""
+"provider","true","None",""
+"username","true","token",""

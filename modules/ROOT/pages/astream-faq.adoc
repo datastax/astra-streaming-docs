@@ -1,0 +1,49 @@
+= {product_name}FAQs
+
+:page-tag: astra-streaming,dev,admin,planner,plan,pulsar
+
+== How do I sign up for the {product_name}?
+
+For instructions on signing up for the {product_name}, see xref:astream-quick-start.adoc#create-astra-acct[Create Astra account].
+
+== How is {product_name} priced?
+{product_name} offers customers a pay-as-you-go, consumption based pricing model that allows customers to use {product_name} with a cost model that scales as they grow.
+
+Customers can opt to customize their deployment to meet specific requirements which will adjust their pricing up or down depending on their specific requirement. These customizations options include items such as:
+
+* Message retention duration
+* Maximum message retention storage
+* Number of tenants
+* Region of tenant
+
+== Why did DataStax opt to base {product_name} on Apache Pulsar?
+See our https://www.datastax.com/blog/four-reasons-why-apache-pulsar-essential-modern-data-stack[blog post] that explains why we are excited about Apache Pulsar and why we decided it was the best technology to base {product_name} on.
+
+== What are DataStax’s plans for Kesque?
+{product_name} is based heavily on technology originally created as part of Kesque. With the launch of {product_name} we will begin the process of shutting down the Kesque service and migrating customers to the new {product_name} platform.
+
+== How can I get started with {product_name}?
+To get started with {product_name}, you can create a free account at https://astra.datastax.com and create your first streaming instance immediately. No credit card required.
+
+== Who are the target customers for {product_name}?
+{product_name} has been architected to satisfy the most stringent enterprise requirements around availability, scale and latency. {product_name} was built to handle mission critical use cases for Fortune 100 companies across BFSI, Telecommunications, Technology, Retail, Oil & Gas and Healthcare.
+
+The pricing model also makes {product_name} accessible to mid market and small/medium business customers who need event stream processing capabilities to run core parts of their business.
+
+And finally {product_name} offers a user friendly interface and free tier to satisfy the needs of individual developers and technologists who want to learn more about Apache Pulsar and data streaming in general.
+
+== What is CDC for Astra DB?
+
+Change Data Capture (CDC) for Astra DB uses a Pulsar IO source connector that processes changes from the Cassandra Change Agent via a Pulsar topic. For more, see https://docs.datastax.com/en/astra/docs/astream-cdc.html[CDC for Astra DB].
+
+== What are tenants, namespaces, topics, and sinks?
+
+*Tenants* are an isolated administrative unit for which an authorization scheme can be set and a set of clusters can be defined.
+Each tenant can have multiple *namespaces*, a logical container for creating and managing a hierarchy of topics.
+A *topic* is a named channel for transmitting messages from producers to consumers.
+A *sink* feeds data from {product_name} to an external system, such as Cassandra or Elastic Search.
+
+== Next
+
+* xref:astream-quick-start.adoc[{product_name} QuickStart]
+* Browse the xref:api.adoc[Astra API References]

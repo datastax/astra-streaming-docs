@@ -1,0 +1,52 @@
+[source,json]
+----
+{
+  "topicName": "string",
+  "producerConfig": {
+    "maxPendingMessages": 0,
+    "maxPendingMessagesAcrossPartitions": 0,
+    "useThreadLocalProducers": true,
+    "cryptoConfig": {
+      "cryptoKeyReaderClassName": "string",
+      "cryptoKeyReaderConfig": {
+        "property1": {},
+        "property2": {}
+      },
+      "encryptionKeys": [
+        "string"
+      ],
+      "producerCryptoFailureAction": "FAIL",
+      "consumerCryptoFailureAction": "FAIL"
+    },
+    "batchBuilder": "string"
+  },
+  "serdeClassName": "string",
+  "schemaType": "string",
+  "configs": {
+    "property1": {},
+    "property2": {}
+  },
+  "secrets": {
+    "property1": {},
+    "property2": {}
+  },
+  "parallelism": 0,
+  "processingGuarantees": "ATLEAST_ONCE",
+  "resources": {
+    "cpu": 0,
+    "ram": 0,
+    "disk": 0
+  },
+  "archive": "string",
+  "runtimeFlags": "string",
+  "customRuntimeOptions": "string",
+  "batchSourceConfig": {
+    "discoveryTriggererClassName": "string",
+    "discoveryTriggererConfig": {
+      "property1": {},
+      "property2": {}
+    }
+  },
+  "batchBuilder": "string"
+}
+----

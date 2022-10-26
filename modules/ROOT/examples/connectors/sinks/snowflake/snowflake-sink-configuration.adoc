@@ -1,0 +1,15 @@
+[cols="2,2,1",options=header]
+|===
+|*Parameter Name*
+|*Description*
+|*Default value*
+
+|batchSize |Size of messages in bytes the sink will attempt to batch messages together before flush.|16384
+|lingerTimeMs|Time interval in milliseconds the sink will attempt to batch messages together before flush.|2147483647
+|topic|The topic name that passed to kafka sink.|n/a
+|kafkaConnectorSinkClass|A kafka-connector sink class to use.|com.snowflake.kafka.connector.SnowflakeSinkConnector
+|offsetStorageTopic|Pulsar topic to store offsets at.|snowflake-sink-offsets
+|unwrapKeyValueIfAvailable|In case of `Record<KeyValue<>>` data use key from KeyValue<> instead of one from Record.|true
+|kafkaConnectorConfigProperties|Config properties to pass to the kafka connector.|n/a|
+
+|===

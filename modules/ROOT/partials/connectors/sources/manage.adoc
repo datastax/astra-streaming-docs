@@ -1,0 +1,90 @@
+=== Start
+[tabs]
+====
+Pulsar Admin::
++
+--
+include::partial$connectors/sources/pulsar-admin-tab.adoc[tags=admin-prereq;admin-start]
+--
+cURL::
++
+--
+include::partial$connectors/sources/curl-tab.adoc[tags=curl-prereq;curl-start]
+--
+====
+
+=== Stop
+[tabs]
+====
+Pulsar Admin::
++
+--
+include::partial$connectors/sources/pulsar-admin-tab.adoc[tags=admin-prereq;admin-stop]
+--
+cURL::
++
+--
+include::partial$connectors/sources/curl-tab.adoc[tags=curl-prereq;curl-stop]
+--
+====
+
+=== Restart
+[tabs]
+====
+Pulsar Admin::
++
+--
+include::partial$connectors/sources/pulsar-admin-tab.adoc[tags=admin-prereq;admin-restart]
+--
+cURL::
++
+--
+include::partial$connectors/sources/curl-tab.adoc[tags=curl-prereq;curl-restart]
+--
+====
+
+=== Update
+
+[tabs]
+====
+Pulsar Admin::
++
+--
+include::partial$connectors/sources/pulsar-admin-tab.adoc[tags=admin-prereq]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sources/{connectorType}/pulsar-admin-update.sh[]
+----
+--
+
+cURL::
++
+--
+include::partial$connectors/sources/curl-tab.adoc[tags=curl-prereq]
+[source,shell,subs="attributes+"]
+----
+include::example$connectors/sources/{connectorType}/curl-update.sh[]
+----
+--
+
+Response::
++
+--
+include::partial$connectors/sources/curl-monitor-response.adoc[]
+--
+====
+
+=== Delete
+[tabs]
+====
+Pulsar Admin::
++
+--
+include::partial$connectors/sources/pulsar-admin-tab.adoc[tags=admin-prereq;admin-delete]
+--
+cURL::
++
+--
+include::partial$connectors/sources/curl-tab.adoc[tags=curl-prereq;curl-delete]
+--
+====

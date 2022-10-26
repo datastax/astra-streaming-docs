@@ -1,0 +1,181 @@
+= {product_name} Functions
+
+:page-tag: astra-streaming,dev,develop,pulsar,java,python
+
+Functions are lightweight compute processes that enable you to process each message received on a topic. You can apply custom logic to that message, transforming or enriching it, and then output it to a different topic.
+
+Functions run inside {product_name} and are therefore serverless. You write the code for your function in Java or Python, then upload the code. It will be automatically run for each message published to the specified input topic.
+
+Functions are implemented using Apache Pulsar(R) functions. See https://pulsar.apache.org/docs/en/functions-overview/[Pulsar Functions overview] for more information about Pulsar functions.
+
+== Add functions in dashboard 
+
+Add functions in the Functions tab of the Astra Streaming dashboard.
+
+. Select *Create Function* to get started.
+. Choose your function's name and namespace. 
++
+image::astream-name-function.png[Function and Namespace]
+
+. Choose the file you want to pull the function from and which function you want to use within that file.
+
+Astra generates a list of acceptable classes. Python and Java functions are added a little differently from each other.
+
+Python functions are added by loading a Python file (.py) or a zipped Python file (.zip). When adding Python files, the Class Name is specified as the name of the Python file without the extension plus the class you want to execute. 
+
+For example, if the Python file is called `testfunction.py` and the class is `ExclamationFunction`, then the class name would be `testfunction.ExclamationFunction`. The file can contain multiple classes, but only one will be used. If there is no class in the Python file (when using a basic function, for example) just specify the filename without the extension (ex. `function`).
+
+Java functions are added by loading a Java jar file (.jar). When adding Java files, you also need to specify the name of the class to execute as the function. 
+
+image::astream-exclamation-function.png[Exclamation Function]
+[start=4]
+. Choose your input topics. 
++
+image::astream-io-topics.png[IO Topics]
+
+. Choose *Optional Destination Topics* for output and logging. 
++
+image::astream-optional-destination-topics.png[Optional Topics]
+
+. Choose *Advanced Options* and run at least one sink instance.
++
+image::astream-advanced-config.png[Advanced Configuration]
+ 
+. Choose your *Processing Guarantee*. The default value is *ATLEAST_ONCE*. Processing Guarantee offers three options:
++
+* *ATLEAST_ONCE*: Each message sent to the function can be processed more than once.
+* *ATMOST_ONCE*: The message sent to the function is processed at most once. Therefore, there is a chance that the message is not processed.
+* *EFFECTIVELY_ONCE*: Each message sent to the function will have one output associated with it.
+
+. Provide an *Option Configuration Key*. See the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[Pulsar Docs] for a list of configuration keys.
++
+image::astream-provide-config-keys.png[Provide Config Key]
+
+. Select *Create*.
+
+You have created a function for this namespace. You can confirm your function was created in the *Functions* tab.
+
+== Add function with Pulsar CLI 
+
+You can also add functions using the Pulsar CLI. We will create a new Python function to consume a message from one topic, add an exclamation point, and publish the results to another topic. 
+
+. Create the following Python function in `testfunction.py`:
++
+[source, python]
+----
+from pulsar import Function
+
+class ExclamationFunction(Function):
+  def __init__(self):
+    pass
+
+  def process(self, input, context):
+    return input + '!'
+----
++
+. Deploy `testfunction.py` to your Pulsar cluster using the Pulsar CLI:
++
+[source, bash]
+----
+$ ./pulsar-admin functions create \
+  --py /full/path/to/testfunction.py \
+  --classname testfunction.ExclamationFunction \
+  --tenant <tenant-name> \
+  --namespace default \
+  --name exclamation \
+  --auto-ack true \
+  --inputs persistent://<tenant-name>/default/in \
+  --output persistent://<tenant-name>/default/out \
+  --log-topic persistent://<tenant-name>/default/log
+----
++
+If the function is set up and ready to accept messages, you should see "Created Successfully!"
+
+. Use `./pulsar-admin functions list --tenant <tenant-name>` to list the functions in your tenant and confirm your new function was created.  
+
+== Testing Your Function
+
+Triggering a function is a convenient way to test that the function is working. When you trigger a function, you are publishing a message on the function’s input topic, which triggers the function to run. If the function has an output topic and the function returns data to the output topic, it will be displayed.
+
+Send a test value with Pulsar CLI's `trigger` to test a function you've set up. 
+
+. Listen for messages on the output topic: 
++
+[source, bash]
+----
+$ ./pulsar-client consume persistent://<tenant-name>/default/<topic-name> \
+  --subscription-name my-subscription \
+  --num-messages 0 # Listen indefinitely
+----
++
+. Test your exclamation function with `trigger`:
++
+[source, bash]
+----
+$ ./pulsar-admin functions trigger \
+  --name exclamation \
+  --tenant <tenant-name> \
+  --namespace default \
+  --trigger-value "Hello world"
+----
++
+The trigger sends the string `Hello world` to your exclamation function. Your function should output `Hello world!` to your consumed output. 
+
+== Controlling Your Function
+
+You can start, stop, and restart your function by selecting it in the *Functions* dashboard. 
+
+image::astream-function-controls.png[Function Controls]
+
+== Monitoring Your Function
+
+Functions produce logs to help you in debugging. To view your function's logs, open your function in the *Functions* dashboard.
+
+image::astream-function-log.png[Function Log]
+
+In the upper right corner of the function log are controls to *Refresh*, *Copy to Clipboard*, and *Save* your function log.
+
+== Updating Your Function
+
+A function that is already running can be updated with new configuration. The following settings can be updated:
+
+* Function code
+* Output topic
+* Log topic
+* Number of instances
+* Configuration keys
+
+If you need to update any other setting of the function, delete and then re-add the function.
+
+To update your function, select your function in the *Functions* dashboard. 
+
+image::astream-function-update.png[Update Function]
+
+. Select *Change File* to find your function locally and click *Open*.
+
+. Update your function's *Instances* and *Timeout*. When you're done, click *Update*. 
+
+. An *Updates Submitted Successfully* flag will appear to let you know your function has been updated.
+
+== Deleting Your Function
+
+To delete a function, select the function to be deleted in the *Functions* dashboard. 
+
+image::astream-delete-function.png[Delete Function]
+
+. Click *Delete*.
+. A popup will ask you to confirm deletion by entering the function's name and clicking *Delete*. 
+
+image::astream-delete-confirmation.png[Confirm Deletion]
+[start=3]
+. A *Function-name Deleted Successfully!* flag will appear to let you know you've deleted your function.
+
+== Pulsar functions video
+
+Follow along with this video from our *Five Minutes About Pulsar* series to see a Pulsar Python function in action. 
+
+video::OCqxcNK0HEo[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+
+== Next
+
+Learn more about developing functions for {product_name} and Pulsar https://pulsar.apache.org/docs/en/functions-develop/[here].

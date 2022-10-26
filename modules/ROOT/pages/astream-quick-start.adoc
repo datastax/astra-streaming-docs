@@ -1,0 +1,720 @@
+= {product_name} QuickStart
+:slug: astra-streaming-quick-start
+
+:page-tag: astra-streaming,planner,quickstart,pulsar
+
+This QuickStart aims to make you familiar with the following steps:
+
+* _Prerequisite:_ xref:astream-quick-start.adoc#create-astra-acct[Create an Astra account, if you don't have one already.]
+* xref:astream-quick-start.adoc#create-a-tenant[Create an {product_name} tenant.]
+* xref:astream-quick-start.adoc#create-a-namespace[Create an {product_name} namespace.]
+* xref:astream-quick-start.adoc#create-a-topic[Create an {product_name} topic.]
+* xref:astream-quick-start.adoc#download-connect-info[Download Pulsar connection information.]
+* _Optional:_ xref:astream-quick-start.adoc#download-pulsar[Download and configure Apache Pulsar command-line (CLI) tools.]
+* _Optional:_ xref:astream-quick-start.adoc#use-pulsar-tools[Use the Apache Pulsar CLI tools to produce and consume messages.]
+* _Optional:_ xref:astream-quick-start.adoc#review-topic-statistics[Review messaging statistics.]
+* _Optional:_ xref:astream-quick-start.adoc#create-a-sink[Create an {product_name} sink.]
+* _Optional:_ xref:astream-quick-start.adoc#create-a-source[Create an {product_name} source.]
+* _Optional:_ xref:astream-quick-start.adoc#delete-a-tenant[Delete an {product_name} tenant.]
+
+You can also follow along with this video from our *Five Minutes About Pulsar* series to get started with {product_name}.
+
+video::Wk__BrI-CCk[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+
+[#create-astra-acct]
+== Create an Astra account
+
+Before you can complete this quick start, you'll need to create an Astra account.
+
+. Go to https://astra.datastax.com, create an account ...
++
+image::astream-login.png[Login to {product_name}]
+
+. ... and https://astra.datastax.com[login].
+. Click *Create Streaming*:
++
+image::astream-create-streaming.png[Create Streaming]
+
+[#create-a-tenant]
+== Create an Astra Streaming tenant
+
+{product_name} is based on Apache Pulsar which uses a concept of tenant as its
+top level administrative unit.
+A tenant has multiple namespaces for logical grouping of different applications.
+In each namespace you can create multiple topics to send and receive data.
+
+Let's begin by creating a new {product_name} tenant:
+
+. Enter the name for your new streaming tenant and select a provider ...
++
+image::astream-create-tenant.png[Create new tenant]
+
+. ... and click *Create Tenant*.
+
+[NOTE]
+====
+For more information on available tenant regions, check out xref:astream-regions.adoc[{product_name} Regions].
+====
+
+Your tenant name must start with a lowercase alphabetic character, and can only contain lowercase alphabetic characters, numbers, and hyphens (kebab-case).
+
+Your tenant name must be *unique*. If you try to enter a tenant name that already exists on the selected provider, you will receive a *Tenant name is already in use. Please choose a different name* error. 
+
+[#create-a-namespace]
+== Create an {product_name} namespace
+
+When {product_name} creates the new streaming tenant, it automatically creates a new namespace called *default*.
+However, you can add a namespace:
+
+. Click the *Namespaces* tab...
++
+image::astream-new-namespace.png[New namespace]
+
+. ... and click *Create Namespace*
+
+. Enter a namespace name...
++
+image::astream-name-namespace.png[Name the new namespace]
+
+. ... and click *Create*.
+
+Your namespace name must start with a lowercase alphabetic character.
+It can only contain lowercase alphabetic characters, numbers, and hyphens (kebab-case).
+
+[#create-a-topic]
+== Create an {product_name} topic
+
+With your tenant and namespace in place, you can now create a new topic:
+
+. Click the *Topics* tab...
++
+image::astream-new-topic.png[New topic]
+
+. ... and click *Add Topic*
+
+. Enter a topic name...
++
+image::astream-name-topic.png[Name the new topic]
+
+. ... and click *Save*.
++
+[NOTE]
+====
+*Persistent* and *non-partitioned* is the default setting. *Persistent* topics safely store messages on disk and guarantee at-least once delivery, and a *non-partitioned* topic is served by one broker. 
+*Partitioned* topics can span multiple brokers, which allows higher throughput for that topic. *Non-persistent* topics do not store messages on disk and only deliver messages to consumers that are connected when the messages are published. *Non-persistent* topics have higher performance but give only best-effort delivery guarantees.
+====
+
+For more on *partitioned* topics, see this video from our *Five Minutes About Pulsar* series. 
+
+video::ALAqUeTbUE4[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+
+[#download-connect-info]
+== Download Pulsar connection information
+
+You'll need the following information to connect to your new {product_name} topic:
+
+* *Broker Service URL*: The Pulsar Binary Protocol URL used for production and consumption of messages.
+* *Web Service URL*: URL used for administrative operations.
+* *Astra web token*: The JWT used for authentication in all {product_name} operations.
+
+[NOTE]
+====
+For more information on generating tokens for {product_name}, see xref:astream-token-gen.adoc[Managing {product_name} tokens].
+====
+{product_name} lets you download a ready-to-go configuration file containing all of that information pre-populated, so let's download it now:
+
+. Click the *Connect* tab...
++
+image::astream-conf-download.png[Connection tab]
+
+. ... and then click *Download Client.conf*
+. Save the `client.conf` file to a convenient location.
+
+[#download-pulsar]
+== Download and configure Apache Pulsar command line tools
+
+To interact with your {product_name} topic, you can use the command line tools included with the Apache Pulsar™ distribution.
+
+Download and configure Apache Pulsar:
+
+. Download the binary of https://pulsar.apache.org/en/download[Apache Pulsar].
+. Extract the Apache Pulsar zip file to a convenient directory.
+. Copy the `client.conf` file you downloaded in <<Download Pulsar connection information>> and copy it to the `/conf` directory.
+
+The Apache Pulsar command line tools are now configured and ready to use.
+
+[#use-pulsar-tools]
+== Use the Apache Pulsar command line tools
+
+You can use the Apache Pulsar command line tools to easily interact with your {product_name} Pulsar instance. We'll take a look at the most useful commands in this section.
+
+[NOTE]
+====
+You can find all of the Apache Pulsar command line utilities in the `/bin` directory within the Pulsar distribution.
+====
+
+[#get-instance-info]
+=== Get information about your {product_name} Pulsar instance
+
+Since you may not remember details about your {product_name} Pulsar instance, let's query some information using the `pulsar-admin` utility:
+
+[TIP]
+====
+If you can't remember your tenant name, retrieve it from the {product_name}.
+====
+
+. Retrieve the namespaces associated with your tenant:
++
+[tabs]
+====
+shell command::
++
+--
+[source,bash]
+----
+./pulsar-admin namespaces list <tenant-name>
+----
+--
++
+Result::
++
+--
+[source,plaintext]
+----
+"<tenant-name>/default"
+----
+--
+====
+
+. Retrieve the topics within a namespace:
++
+[tabs]
+====
+shell command::
++
+--
+[source,bash]
+----
+./pulsar-admin topics list <tenant-name>/default
+----
+--
++
+Result::
++
+--
+[source,plaintext]
+----
+"persistent://<tenant-name>/default/<topic-name>"
+----
+--
+====
+
+The URI, `persistent://<tenant-name>/default/<topic-name>`, is what we'll use to
+target a particular topic in the following sections.
+
+[IMPORTANT]
+====
+The following `pulsar-admin` commands don't work with {product_name},
+either because they're not applicable in a cloud environment or they would cause
+issues with privacy or data integrity:
+
+* `brokers`
+* `broker-stats`
+* `clusters`
+* `ns-isolation-policies`
+* `resource-quotas`
+* `tenants`
+====
+
+For more on `pulsar-admin`, see the Apache Pulsar https://pulsar.apache.org/docs/pulsar-admin/[documentation].
+
+[#produce-some-messages]
+=== Produce some messages for your topic
+
+Let's begin by sending some messages to your {product_name} instance using
+the `pulsar-client produce` command. You'll produce 100 `Hello world` messages:
+
+[tabs]
+====
+shell command::
++
+--
+[source,bash]
+----
+./pulsar-client produce -m "Hello world" -n 100 \
+persistent://<tenant-name>/default/<topic-name>
+----
+--
++
+Result::
++
+--
+[source,plaintext]
+----
+13:52:49.857 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ConnectionPool
+- [[id: 0x8efe7ee3, L:/192.168.50.153:60842 -
+R:pulsar-aws-useast2.dev.streaming.datastax.com/3.130.180.131:6651]] Connected to server
+... Additional status messages...
+R:pulsar-aws-useast2.dev.streaming.datastax.com/3.130.180.131:6651] Disconnected
+13:52:59.609 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool
+- 100 messages successfully produced
+----
+--
+====
+
+==== Producer video
+
+Follow along with this video from our *Five Minutes About Pulsar* series to see a Pulsar producer in action. 
+
+video::GaZCLm2j5GA[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+
+[#consume-some-messages]
+=== Consume messages from your topic
+
+With some messages in your topic, you can use `pulsar-client consume` to consume
+one of them:
+
+[tabs]
+====
+shell command::
++
+--
+[source,bash]
+----
+./pulsar-client consume -p Earliest -t Shared -s test-subscription \
+persistent://<tenant-name>/default/<topic-name>
+----
+--
++
+Result::
++
+--
+[source,plaintext]
+----
+13:56:16.612 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ConnectionPool
+- [[id: 0x34f3b14e, L:/192.168.50.153:60858
+- R:pulsar-aws-useast2.dev.streaming.datastax.com/3.130.180.131:6651]]
+Connected to server
+... Additional status messages...
+----- got message -----
+key:[null], properties:[], content:Hello world
+13:56:17.319 [main] INFO  org.apache.pulsar.client.impl.PulsarClientImpl
+- Client closing. URL: pulsar+ssl://pulsar-aws-useast2.dev.streaming.datastax.com:6651
+13:56:17.382 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ConsumerImpl
+- [persistent://example-tenant/default/example-topic] [test-subscription]
+Closed consumer
+13:56:17.388 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ClientCnx
+- [id: 0x34f3b14e, L:/192.168.50.153:60858 !
+R:pulsar-aws-useast2.dev.streaming.datastax.com/3.130.180.131:6651] Disconnected
+13:56:17.393 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ClientCnx
+- [id: 0x1339b07b, L:/192.168.50.153:60859 !
+R:pulsar-aws-useast2.dev.streaming.datastax.com/3.130.180.131:6651]
+Disconnected
+13:56:17.397 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool
+- 1 messages successfully consumed
+----
+--
+====
+
+Notice that the content of the message outputs after the `----- got message -----`
+line.
+
+Of course, you created 100 messages, and consumed one, so that means there are
+still 99 messages hanging around in the topic. We can specify the `-n 99` flag
+to consume the remaining messages:
+
+[tabs]
+====
+shell command::
++
+--
+[source,bash]
+----
+./pulsar-client consume -p Earliest -t Shared -n 99 -s test-subscription \
+persistent://<tenant-name>/default/<topic-name>
+----
+--
++
+Result::
++
+--
+[source,plaintext]
+----
+14:18:09.990 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ConnectionPool
+- [[id: 0xe2a6fe1f, L:/192.168.50.153:60958
+- R:pulsar-aws-useast2.dev.streaming.datastax.com/3.143.105.197:6651]]
+Connected to server
+... Additional status messages...
+----- got message -----
+key:[null], properties:[], content:hello world
+----- got message -----
+key:[null], properties:[], content:hello world
+----- got message -----
+key:[null], properties:[], content:hello world
+... Additional retrieved messages...
+14:18:10.760 [main] INFO  org.apache.pulsar.client.impl.PulsarClientImpl
+- Client closing. URL: pulsar+ssl://pulsar-aws-useast2.dev.streaming.datastax.com:6651
+14:18:10.809 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ConsumerImpl
+- [persistent://example-tenant/default/example-topic] [test-subscription]
+Closed consumer
+14:18:10.812 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ClientCnx
+- [id: 0x81b78021, L:/192.168.50.153:60959 !
+R:pulsar-aws-useast2.dev.streaming.datastax.com/3.143.105.197:6651]
+Disconnected
+14:18:10.817 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ClientCnx
+- [id: 0xe2a6fe1f, L:/192.168.50.153:60958 !
+R:pulsar-aws-useast2.dev.streaming.datastax.com/3.143.105.197:6651]
+Disconnected
+14:18:10.821 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool
+- 99 messages successfully consumed
+----
+--
+====
+
+For more information on `pulsar-client` see the Apache Pulsar https://pulsar.apache.org/docs/en/reference-cli-tools[documentation] or follow along with this video from our *Five Minutes About Pulsar* series to see a Pulsar consumer in action. 
+
+video::uVRerzNq_nQ[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+
+[#review-topic-statistics]
+== Review messaging statistics for a topic
+
+The {product_name} portal reports on a variety of useful messaging statistics.
+Let's create a new topic and use the `pulsar-perf` testing tool to generate some
+synthetic messaging traffic.
+
+[#create-a-new-statistics-topic]
+=== Create a new topic
+
+. Create a new topic following the instructions in <<Create an {product_name} topic>>.
+. Click the topic name to open the statistics view:
++
+image::astream-topic-details.png[Topic details]
+. Copy the URI adjacent Topic Name to the clipboard:
++
+image::astream-copy-topic-uri.png[Topic URI]
+
+Set the topic statistics screen aside for now.
+You'll refer back to it once you've got some message traffic flowing.
+
+[#set-up-producer]
+=== Set up a message producer
+
+You'll use `pulsar-perf produce` to create some message traffic for your new topic.
+In addition to the topic URI, the command specifies `-n 5` which creates `5` topic
+producers. After a brief initialization and warm up period, `pulsar-perf`
+will begin to publish messages.
+
+Open a new terminal and, replacing `persistent://<tenant-name>/default/<topic-name>`
+with your own topic URI, enter:
+
+[tabs]
+====
+shell command::
++
+--
+[source,bash]
+----
+./pulsar-perf produce -n 5 \
+persistent://<tenant-name>/default/<topic-name>
+----
+--
++
+Result::
++
+--
+[source,plaintext]
+----
+... Additional status messages...
+[pulsar-perf-producer-exec-1-1] INFO  org.apache.pulsar.testclient.PerformanceProducer
+- Created 5 producers
+11:42:47.128 [pulsar-client-io-2-1] WARN  com.scurrilous.circe.checksum.Crc32cIntChecksum
+- Failed to load Circe JNI library. Falling back to Java based CRC32c provider
+11:42:54.881 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer
+- Throughput produced:     77.1  msg/s ---      0.0 Mbit/s --- failure      0.0 msg/s
+--- Latency: mean:  47.355 ms - med:  47.388 - 95pct:  52.136 - 99pct:  60.332
+- 99.9pct:  68.171 - 99.99pct:  74.945 - Max:  74.945
+11:43:04.921 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer
+- Throughput produced:    100.0  msg/s ---      0.0 Mbit/s --- failure      0.0 msg/s
+--- Latency: mean:  47.144 ms - med:  47.216 - 95pct:  50.479 - 99pct:  57.532
+- 99.9pct:  75.748 - 99.99pct:  76.038 - Max:  76.038
+11:43:14.949 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer
+- Throughput produced:    100.0  msg/s ---      0.0 Mbit/s --- failure      0.0 msg/s
+--- Latency: mean:  46.905 ms - med:  47.080 - 95pct:  49.409 - 99pct:  59.734
+- 99.9pct:  72.989 - 99.99pct:  74.619 - Max:  74.619
+^C11:43:19.208 [Thread-1] INFO  org.apache.pulsar.testclient.PerformanceProducer
+- Aggregated throughput stats --- 3206 records sent --- 93.302 msg/s --- 0.007 Mbit/s
+11:43:19.231 [Thread-1] INFO  org.apache.pulsar.testclient.PerformanceProducer
+- Aggregated latency stats --- Latency: mean:  47.095 ms - med:  47.188
+- 95pct:  50.436 - 99pct:  60.078 - 99.9pct:  74.945 - 99.99pct:  77.277
+- 99.999pct:  77.277 - Max:  77.277
+----
+--
+====
+
+[#set-up-consumer]
+=== Set up a message consumer
+
+Now that you're producing messages, you can create a process to consume them.
+In addition to the topic URI, the command specifies `-n 5` which sets the number
+of consumers to `5` as well as `-st Shared` which sets the subscription type
+to `Shared` which is required if you want more than a single consumer for the topic.
+As with the `produce` command, there will be a brief warm up and initialization
+and the consumer will start consuming messages
+
+Open a new terminal and, replacing `persistent://<tenant-name>/default/<topic-name>`
+with your own topic URI, enter:
+
+[tabs]
+====
+shell command::
++
+--
+[source,bash]
+----
+./pulsar-perf consume -n 5 -st Shared \
+persistent://<tenant-name>/default/<topic-name>
+----
+--
++
+Result::
++
+--
+[source,plaintext]
+----
+11:50:37.976 [main] INFO  org.apache.pulsar.testclient.PerformanceConsumer
+- Start receiving from 5 consumers per subscription on 1 topics
+11:50:38.026 [pulsar-client-io-1-1] WARN  com.scurrilous.circe.checksum.Crc32cIntChecksum
+- Failed to load Circe JNI library. Falling back to Java based CRC32c provider
+11:50:47.988 [main] INFO  org.apache.pulsar.testclient.PerformanceConsumer
+- Throughput received: 93.192  msg/s -- 0.007 Mbit/s --- Latency: mean: 533.483 ms
+- med: 530 - 95pct: 999 - 99pct: 1041 - 99.9pct: 1053 - 99.99pct: 1055 - Max: 1055
+11:50:58.002 [main] INFO  org.apache.pulsar.testclient.PerformanceConsumer
+- Throughput received: 99.893  msg/s -- 0.008 Mbit/s --- Latency: mean: 548.510 ms
+- med: 546 - 95pct: 997 - 99pct: 1036 - 99.9pct: 1047 - 99.99pct: 1047 - Max: 1047
+11:51:08.009 [main] INFO  org.apache.pulsar.testclient.PerformanceConsumer
+- Throughput received: 99.927  msg/s -- 0.008 Mbit/s --- Latency: mean: 546.160 ms
+- med: 545 - 95pct: 997 - 99pct: 1037 - 99.9pct: 1041 - 99.99pct: 1049 - Max: 1049
+11:51:18.015 [main] INFO  org.apache.pulsar.testclient.PerformanceConsumer
+- Throughput received: 99.944  msg/s -- 0.008 Mbit/s --- Latency: mean: 549.184 ms
+- med: 546 - 95pct: 996 - 99pct: 1036 - 99.9pct: 1045 - 99.99pct: 1052 - Max: 1052
+11:51:28.026 [main] INFO  org.apache.pulsar.testclient.PerformanceConsumer
+- Throughput received: 100.002  msg/s -- 0.008 Mbit/s --- Latency: mean: 546.996 ms
+- med: 547 - 95pct: 998 - 99pct: 1039 - 99.9pct: 1048 - 99.99pct: 1048 - Max: 1048
+----
+--
+====
+
+For more information on `pulsar-perf` see the
+Apache Pulsar https://pulsar.apache.org/docs/en/reference-cli-tools/#pulsar-perf[documentation].
+
+[#review-the-topic-statistics]
+=== Review topic statistics
+
+If you return to your topic details screen and refresh your browser, you'll now see statistics information for your new topic:
+
+image::astream-topic-details-metrics.png[Topic statistics]
+
+You can track the following statistics on this tab:
+
+* *Data In*
+** *Rate*: Sum of inbound (producer) messages per second
+** *Data*: Sum of inbound (producer) message size in bytes
+** *Throughput*: Sum of inbound (producer) message throughput in bytes per second
+** *Messages*: Sum of inbound (producer) messages
+
+* *Data Out*
+** *Rate*: Sum of outbound (consumer) messages per second
+** *Data*: Sum of outbound (consumer) message size in bytes
+** *Throughput*: Sum of outbound (consumer) message throughput in bytes per second
+** *Messages*: Sum of outbound (consumer) messages
+
+* *Details*
+** *Storage*: Disk space used to store messages in bytes
+** *Producers*: Number of producers sending messages to the topic
+** *Subscriptions*: Number of subscribers to the topic
+** *Consumers*: Number of consumers retrieving messages from the topic
+** *Backlog Size*: Number of messages in the backlog
+** *Avg Message Size*: Average size of each  inbound (producer)/outbound (consumer) message in bytes
+
+==== Storage versus Backlog
+
+The *Backlog* statistic represents messages that are stored in subscriptions for consumers.
+As messages are consumed and acknowledged by consumers, they are removed from
+the backlog.
+When the backlog is 0, then all messages in the subscription have been acknowledged.
+
+The *Storage* statistic, on the other hand, represents the total amount of messages
+stored in the topic, including messages that are part of subscription backlog as
+well as messages that are being retained for message replay.
+
+[NOTE]
+====
+Stored messages that are no longer needed for replay or subscription backlogs are
+not deleted immediately. Thus, the storage value on a topic can be greater than zero
+even if message retention is disabled and there are no messages in subscription
+backlogs.
+====
+
+[#review-subscription-statistics]
+=== Review subscription statistics
+
+Click the *Subscriptions* tab and you'll see aggregate statistics for the consumers
+subscribed to your topics:
+
+image::astream-sub-metrics.png[Subscription statistics]
+
+You can track the following statistics on this tab:
+
+* *Name*: Subscription name or prefix if there are multiple consumers for the subscription
+* *Type*: Type of subscription - Shared, Exclusive, Failover, or Key Shared
+* *Bytes Out*: Sum of the size of all outgoing messages in bytes
+* *Backlog Size*: Number of messages in the backlog
+* *Rate Out*: The rate messages are flowing outbound in messages per second
+* *Redeliver*: Sum of redelivered messages
+* *Throughput Out*: The outbound message throughput in bytes per second
+* *Consumers*: Number of subscribed consumers
+
+Click on the expand glyph on the right side of the subscription line to view the
+consumers that are connected to that subscription.
+The four glyphs on the right side of the subscription line allow you to peek at
+a message, go back to a message, skip forward through messages, and delete the
+subscription.
+
+image::astream-sub-glyph.png[Subscription statistics glyphs]
+
+In the expand subscription view, you can track additional statistics on a per-consumer
+basis:
+
+image::astream-sub-detail-metrics.png[Subscription statistics by consumer]
+
+* *Name*: Name of the subscription specific to the particular consumer
+* *Rate Out*: The rate messages are flowing outbound for the consumer in messages per second
+* *Throughput Out*: The throughput of messages for the consumer in bytes per second
+* *Total Bytes Out*: The total size of all outgoing messages for the consumer in bytes
+
+//[#review-schema-statistics]
+//=== Review schema statistics
+
+[#review-producers-statistics]
+=== Review producers statistics
+
+Click the *Producers* tab and you'll see aggregate statistics for the producers
+of your topics:
+
+image::astream-prod-metrics.png[Producers statistics]
+
+You can track the following statistics on this tab:
+
+* *Name*: Name of the producer
+* *Producer ID*: Number of the producer
+* *Connected Since*: The time since the producer connected
+* *Average Message Size*: The average message size in bytes
+* *Message Rate*: The message rate per second
+* *Throughput*: The inbound message throughput in bytes per second
+
+[#review-consumers-statistics]
+=== Review consumers statistics
+
+Click the *Consumers* tab and you'll see aggregate statistics for the consumers
+of your topics:
+
+image::astream-consumer-metrics.png[Consumers statistics]
+
+You can track the following statistics on this tab:
+
+* *Name*: Name of the consumer
+* *Subscription name*: Subscription name that the consumer is consuming
+* *Last Ack Timestamp*: The time when the message was acknowledged
+* *Last Consume Timestamp*: The time of the last consumed message
+* *Connected Since*: The time since the consumer connected
+* *Unacked Messages*: The number of unacknowledged messages
+* *Message Rate*: The message rate per second
+* *Throughput*: The inbound message throughput in bytes per second
+* *Available Permits*: Number of messages to be requested by the consumer to refill its receiver queue
+
+[#create-a-sink]
+== Create an {product_name} sink
+
+[NOTE]
+====
+{product_name} does not support custom sink or source connectors.
+====
+
+A sink takes data from a Pulsar topic and sends it to an external system, such as Elasticsearch®. Sinks make it easy to get external data out of {product_name}.
+
+To create a sink for {product_name} topics, you must first have an input topic for the sink to connect to and process the messages in. If you haven't already created a topic, follow the instructions in xref:astream-quick-start.adoc#create-a-topic[Create a topic.]
+
+. Click the *Sinks* tab...
++
+image::astream-new-sink.png[New sink]
+
+. ... and click *Create Sink*
+
+. First enter the namespace, sink type, and sink name...
++
+image::astream-name-sink1.png[Name the new sink]
+
+. ... and click *Create*.
+
+Your sink name and index name must start with a lowercase alphabetic character.
+It can only contain lowercase alphabetic characters, numbers, and hyphens (kebab-case).
+
+For more specific sink instructions, see:  
+
+* xref:astream-astradb-sink.adoc[Create Astra DB Sink]
+* xref:astream-elastic-sink.adoc[Create Elasticsearch Sink]
+* xref:astream-kafka-sink-connector.adoc[Create Kafka Sink Connector]
+
+[#create-a-source]
+== Create an {product_name} source
+
+[NOTE]
+====
+{product_name} does not support custom sink or source connectors.
+====
+
+A source takes data from an external system, such as Apache Kafka®, and publishes that data as messages into a Pulsar topic. Sources make it easy to get external data into {product_name}.
+
+To create a source for {product_name} topics, you must first have an output topic for the source to connect to and process the messages from. If you haven't already created a topic, follow the instructions in xref:astream-quick-start.adoc#create-a-topic[Create a topic.]
+
+To create a source for {product_name} topics, click the *Sources* tab, and click *Create Source*. 
+
+image::astream-new-source.png[New Source]
+[start=1]
+. Enter your namespace, source type, and connector name. Your source name must start with a lowercase alphabetic character and can only contain lowercase alphabetic characters, numbers, and hyphens (kebab-case).
+
+image::astream-kafka-source-basics.png[Basics]
+[start=2]
+. Choose which topic messages will be published from the connected source:
+
+image::astream-kafka-source-config.png[Source Specific Configuration]
+[start=4]
+. ... and enter your security protocol, mechanism, username, and password.
+
+image::astream-kafka-source-consumer-config.png[Consumer Configuration Properties]
+[start=5]
+. Click *Create*. 
+
+For more specific source instructions, see:  
+
+* xref:astream-kafka-source.adoc[Create Kafka Source Connector]
+
+[#delete-a-tenant]
+== Delete an {product_name} tenant
+
+To delete an {product_name} tenant:
+
+. Click the *Settings* tab for the tenant to delete ...
++
+image::astream-delete-tenant.png[Delete tenant]
+
+. ... and click *Delete tenant*
+
+== Next
+
+* xref:astream-faq.adoc[Browse the {product_name} FAQ]
+* xref:astream-code-examples.adoc[Check out {product_name} code examples]
+** xref:astream-golang-eg.adoc[{product_name} Go code examples]
+** xref:astream-java-eg.adoc[{product_name} Java code examples]
+** xref:astream-nodejs-eg.adoc[{product_name} NodeJS code examples]
+** xref:astream-python-eg.adoc[{product_name} Python code examples]

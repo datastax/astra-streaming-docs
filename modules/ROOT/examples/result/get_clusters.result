@@ -1,0 +1,29 @@
+[
+    {
+        "clusterName": "astradev-aws",
+        "cloudProvider": "aws",
+        "cloudRegion": "useast2",
+        "clusterType": "cloud",
+        "webServiceUrl": "https://pulsar-aws-useast2.astra.datastax.com:8443",
+        "brokerServiceUrl": "pulsar+ssl://pulsar-aws-useast2.astra.datastax.com:6651",
+        "websocketUrl": "wss://pulsar-aws-useast2.astra.datastax.com:8001/ws/v2"
+    },
+    {
+        "clusterName": "pulsar-azure-us-west-2",
+        "cloudProvider": "azure",
+        "cloudRegion": "uswest2",
+        "clusterType": "cloud",
+        "webServiceUrl": "https://pulsar-azure-us-west-2.astra.datastax.com:8443",
+        "brokerServiceUrl": "pulsar+ssl://pulsar-azure-us-west-2.astra.datastax.com:6651",
+        "websocketUrl": "wss://pulsar-azure-us-west-2.astra.datastax.com:8001/ws/v2"
+    },
+    {
+        "clusterName": "pulsar-gke-useast4",
+        "cloudProvider": "gcp",
+        "cloudRegion": "useast4",
+        "clusterType": "cloud",
+        "webServiceUrl": "https://pulsar-gke-useast4.astra.datastax.com:8443",
+        "brokerServiceUrl": "pulsar+ssl://pulsar-gke-useast4.astra.datastax.com:6651",
+        "websocketUrl": "wss://pulsar-gke-useast4.astra.datastax.com:8001/ws/v2"
+    }
+]

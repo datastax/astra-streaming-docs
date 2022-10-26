@@ -1,0 +1,291 @@
+= {product_name} Limits
+
+:page-tag: astra-streaming,admin,manage,pulsar
+
+DataStax {product_name} includes guardrails and limits to ensure good practices, foster availability, and promote optimal configurations for your databases.
+
+== {product_name} guardrails
+
+Guardrails are initially provisioned in the default settings by {product_name} and cannot be changed directly by users. If you need assistance, open https://support.datastax.com[a support ticket].
+
+[cols=2*]
+|===
+|*Guardrail*
+|*Limit*
+
+|Number of tenants per organization
+|10
+
+|Number of namespaces per tenant
+|10
+
+|Number of topics per namespace
+|100
+
+|Max message size
+|5MB (default)
+
+|Max throughput per topic for consumer
+|5000 messages/s, 25MB/s +
+Max throughput for a *non-partitioned topic* or a *single partition of a partitioned topic*.
+
+|Max throughput per topic for producer
+|5000 messages/s, 25MB/s +
+*Multiple producers* to a *non-partitioned topic* or a *single partition of a partitioned topic* can produce a *combined* 5000 messages per second maximum.
+
+|Max throughput per subscription
+|5000 messages/s, 25MB/s +
+*Multiple subscriptions* from a *non-partitioned topic* or a *single partition of a partitioned topic* can dispatch a *combined* 5000 messages per second maximum. 
+
+|Auto topic creation
+|Disabled
+
+|Number of producers per topic
+|50
+
+|Number of consumers per topic
+|50
+
+|Number of consumers per subscription
+|50
+
+|Max unacked messages per consumer
+|50000
+
+|Max unacked messages per subscription
+|200000
+
+|Subscription Expiry
+|Not set
+|===
+
+== Function and connector resource limits
+
+Functions and connector resources are set in the control plane per pod resource limits. The user cannot customize these resources. 
+The default settings are:
+
+* CPU: 0.25 core
+* RAM: 500 MB
+
+== Non-changeable configurations
+
+* Data persistency (En,Qw,Qa)
+* `Managedledger` policy/deletion
+* Namespace bundle related
+  * Bundle split
+  * Bundle level clear backlog
+  * Bundle level unload
+  * Bundle level subscribe and unsubscribe
+* Replication
+* Delayed delivery
+* Offload policy
+* Offload deletion
+
+== Pulsar-admin CLI limits
+
+The following `pulsar-admin` commands don't work with {product_name},
+either because they're not applicable in a cloud environment or they would cause
+issues with privacy or data integrity:
+
+* `brokers`
+* `broker-stats`
+* `clusters`
+* `ns-isolation-policies`
+* `resource-quotas`
+* `tenants`
+
+For more on `pulsar-admin`, see the Apache Pulsar https://pulsar.apache.org/docs/pulsar-admin/[documentation].
+
+== {product_name} namespace policies
+
+These namespace policies are initially provisioned in the default settings by {product_name} and _can_ be changed by users.
+
+[cols=3*]
+|===
+|*Policy*
+|*Default Setting*
+|*Exposed by UI?*
+
+|Max retention time
+|Disabled/no data retention by default
+|Yes
+
+|Max retention size 
+|Disabled/no data retention by default
+|Yes
+
+|Max TTL
+|Infinite, minimum setting is 2 days
+|Yes
+
+|Backlog size
+|5 GB, minimum setting is -1, which disables backlog size quota enforcement
+|Yes
+
+|Backlog Quota Retention Policy
+|Producer Exception
+|Yes
+
+|Unload topic
+|Enabled
+|Yes
+
+|Message deduplicate
+|Disabled
+|No
+
+|Subscription auto creation 
+|Enabled
+|No
+
+|Subscription expiration per namespace
+|Default policy: `subscription_expiration_time_minutes` as 0
+|No
+
+|Inactive topic policy
+|Default policy: `delete_when_no_subscriptions` set to two days
+|No
+
+|===
+
+== {product_name} topic and namespace actions
+
+These topic and namespace actions are initially provisioned in the default settings by {product_name} and can be performed by users. 
+
+[cols=3*]
+|===
+|*Allowed Action*
+|*Default Setting*
+|*Exposed by UI?*
+
+|Terminate topic
+|Enabled
+|No
+
+|Unload namespace
+|Enabled
+|No
+
+|Clear backlog at topic level
+|Enabled
+|No
+
+|Clear backlog at namespace level
+|Enabled
+|No
+
+|Set compaction threshold at namespace level
+|Disabled
+|No
+
+|Trigger compaction at topic level
+|Enabled
+|No
+
+|Topic compaction
+|Enabled
+|No
+
+|All subscription expiration
+|
+|No
+
+|===
+
+== Configuration file
+
+Here is an example of a default namespace policy with limits set:
+
+```yaml
+{
+  "auth_policies" : {
+    "namespace_auth" : {
+      "client;{client key}" : [ "consume", "produce" ],
+      "websocket" : [ "consume", "produce" ]
+    },
+    "destination_auth" : { },
+    "subscription_auth_roles" : { }
+  },
+  "replication_clusters" : [ "pulsar-gcp-europewest1" ],
+  "bundles" : {
+    "boundaries" : [ "0x00000000", "0x40000000", "0x80000000", "0xc0000000", "0xffffffff" ],
+    "numBundles" : 4
+  },
+  "backlog_quota_map" : {
+    "destination_storage" : {
+      "limit" : 1000000000,
+      "policy" : "producer_exception"
+    }
+  },
+  "clusterDispatchRate" : { },
+  "topicDispatchRate" : {
+    "pulsar-gcp-europewest1" : {
+      "dispatchThrottlingRateInMsg" : 5000,
+      "dispatchThrottlingRateInByte" : 25000000,
+      "relativeToPublishRate" : false,
+      "ratePeriodInSecond" : 1
+    }
+  },
+  "subscriptionDispatchRate" : {
+    "pulsar-gcp-europewest1" : {
+      "dispatchThrottlingRateInMsg" : 5000,
+      "dispatchThrottlingRateInByte" : 25000000,
+      "relativeToPublishRate" : false,
+      "ratePeriodInSecond" : 1
+    }
+  },
+  "replicatorDispatchRate" : { },
+  "clusterSubscribeRate" : {
+    "pulsar-gcp-europewest1" : {
+      "subscribeThrottlingRatePerConsumer" : 5000,
+      "ratePeriodInSecond" : 30
+    }
+  },
+  "persistence" : {
+    "bookkeeperEnsemble" : 2,
+    "bookkeeperWriteQuorum" : 2,
+    "bookkeeperAckQuorum" : 2,
+    "managedLedgerMaxMarkDeleteRate" : 0.0
+  },
+  "deduplicationEnabled" : false,
+  "autoTopicCreationOverride" : {
+    "allowAutoTopicCreation" : false,
+    "topicType" : "",
+    "defaultNumPartitions" : 0
+  },
+  "publishMaxMessageRate" : {
+    "pulsar-gcp-europewest1" : {
+      "publishThrottlingRateInMsg" : 1000,
+      "publishThrottlingRateInByte" : 5000000
+    }
+  },
+  "latency_stats_sample_rate" : { },
+  "message_ttl_in_seconds" : 0,
+  "subscription_expiration_time_minutes" : 0,
+  "retention_policies" : {
+    "retentionTimeInMinutes" : 2880,
+    "retentionSizeInMB" : -1
+  },
+  "deleted" : false,
+  "encryption_required" : false,
+  "inactive_topic_policies" : {
+    "inactiveTopicDeleteMode" : "delete_when_no_subscriptions",
+    "maxInactiveDurationSeconds" : 86400,
+    "deleteWhileInactive" : true
+  },
+  "subscription_auth_mode" : "None",
+  "max_producers_per_topic" : 50,
+  "max_consumers_per_topic" : 50,
+  "max_consumers_per_subscription" : 50,
+  "max_unacked_messages_per_consumer" : 50000,
+  "max_unacked_messages_per_subscription" : 200000,
+  "compaction_threshold" : 0,
+  "offload_threshold" : -1,
+  "offload_deletion_lag_ms" : 0,
+  "schema_auto_update_compatibility_strategy" : "Full",
+  "schema_compatibility_strategy" : "UNDEFINED",
+  "is_allow_auto_update_schema" : true,
+  "schema_validation_enforced" : false
+}
+
+```

@@ -1,0 +1,1 @@
+{"namespace_limit":2,"topic_per_namespace_limit":5,"usage":[{"namespace":"tester/default","topics":["persistent://tester/default/example-topic"]}]}

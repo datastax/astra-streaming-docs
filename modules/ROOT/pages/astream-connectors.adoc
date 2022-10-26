@@ -1,0 +1,30 @@
+= {product_name} IO connectors
+
+:page-tag: astra-streaming,dev,develop,pulsar,go
+
+Once you have {product_name} xref:astream-quick-start.adoc[deployed], add *sink* and *source* connectors to connect your deployment to external systems like https://cassandra.apache.org/_/index.html[Apache Cassandra], https://www.elastic.co/[ElasticSearch], and more. +
+
+* xref:astream-connectors.adoc#sink-connectors[Sink connectors]: sink connectors consume messages from Apache Pulsar™ topics and write them to external systems. +
+
+* xref:astream-connectors.adoc#source-connectors[Source connectors]: source connectors read data from external systems and produce them on Apache Pulsar topics. +
+
+This doc lists the connectors supported by *{product_name}*. 
+
+[#sink-connectors]
+include::partial$sink-connectors.adoc[]
+
+[#source-connectors]
+include::partial$source-connectors.adoc[]
+
+[NOTE]
+====
+{product_name} does not support custom sink or source connectors.
+====
+
+== What's next?
+
+For more on Pulsar IO connectors, see the https://pulsar.apache.org/docs/en/io-overview/[Pulsar documentation^].
+
+
+
+

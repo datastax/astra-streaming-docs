@@ -1,0 +1,39 @@
+result:
+[
+  {
+    "tenantName":"test-mine",
+    "clusterName":"astradev-aws",
+    "webServiceUrl":"https://pulsar-aws-useast2.api.astra.datastax.com",
+    "brokerServiceUrl":"pulsar+ssl://pulsar-aws-useast2.astra.datastax.com:6651",
+    "websocketUrl":"wss://pulsar-aws-useast2.astra.datastax.com:8001/ws/v2",
+    "websocketQueryParamUrl":"wss://pulsar-aws-useast2.astra.datastax.com:8964/ws/v2",
+    "pulsarToken":"eyJhbGciOiJSUzI1NiIsInR5xxxxxxkpXVCJ9.eyJzdWIiOiJjbGllbnQ7YjgzMTY2NzQtNmExMi00MDE0LWE1NmUtZjQ2OWU5MmRlNGFkOzE2MjMwOTI4OTAifQ.U6a7q0GujzjREa6fYxYjrccwrLnnXmoUdy32rdohEwMKvoBw-KvwNG-Ko2nNSCq7LgR71Zx9SzExsorO2KBIM9j1v_Lr_meBa9hRy8YU10Bsr4e5-Re6_yYLz9Ww2JxnptYqRLBOUgCUG03kzmmsiWvyaVjGGi3oD5AXQMbP_liYnfFbSxZM8ULjy0opkko-61d3MjGfj0BYSy9wIQ_qbYKFr-EhIXrUUXF_9KK4YRo8DSfnrJ3ZJ-50ePfVb-wcN1sOFFUJ7-6UzZa4p0TcbUHupFZzANJxxUPbssGAO0yO-qOu8Ka4COJJ9o58eCVQt3bjY7xuJgSYAiQ7lJfBow",
+    "plan":"free",
+    "planCode":"1",
+    "astraOrgGUID":"b8316674-6a12-5014-a56e-f469e92de4ad",
+    "cloudProvider":"aws",
+    "cloudProviderCode":"1",
+    "cloudRegion":"useast2",
+    "status":"active",
+    "jvmVersion":"JDK11",
+    "pulsarVersion":"2.7.2"
+  },
+  {
+    "tenantName":"tester",
+    "clusterName":"astradev-aws",
+    "webServiceUrl":"https://pulsar-aws-useast2.api.astra.datastax.com",
+    "brokerServiceUrl":"pulsar+ssl://pulsar-aws-useast2.astra.datastax.com:6651",
+    "websocketUrl":"wss://pulsar-aws-useast2.astra.datastax.com:8001/ws/v2",
+    "websocketQueryParamUrl":"wss://pulsar-aws-useast2.astra.datastax.com:8964/ws/v2",
+    "pulsarToken":"eyJhbGciOiJSUzI1xxxxxxR5cCI6IkpXVCJ9.eyJzdWIiOiJjbGllbnQ7YjgzMTY2NzQtNmExMi00MDE0LWE1NmUtZjQ2OWU5MmRlNGFkOzE2MjMxMDU1ODAifQ.BNLpkqSd5RojvnUxqX9vFqb7y0I8UHHteLZ13i_GdXDEHG_bkQSU06hR73XBErciFAPG1xTPyiixfeFTk-1_VGYkQuv9MNd1kOjZ4n-plUJo8oPnHAnWEowiq2Czq5BDpskcPfYQ0azrF7n3DivVtfe72UWyrIKfX8ZwdrjycXz78QaFUt6tWYHIvdr4lq5KX3IMT9t8zP2GxxFfgKoNAFcUJO4wCdGH63qXzOebEdXenmmshg5g49uD2OI4vwPB8DFtyNNXKUPTFF9FVdvBq1sjJOlmeug1MGt1Y-NNkryMKZCs2u8OwuMqercGLCUDfP3WmF5x99zYcQ60Wad7XA",
+    "plan":"free",
+    "planCode":"1",
+    "astraOrgGUID":"b8316674-6a12-5014-a56e-f469e92de4ad",
+    "cloudProvider":"aws",
+    "cloudProviderCode":"1",
+    "cloudRegion":"useast2",
+    "status":"active",
+    "jvmVersion":"JDK11",
+    "pulsarVersion":"2.7.2"
+  }
+]

@@ -1,17 +1,51 @@
-* xref:index.adoc[Overview]
+* xref:index.adoc[About {product_name}]
+** xref:astream-faq.adoc[FAQs]
+** xref:astream-pricing.adoc[Pricing]
+** xref:astream-regions.adoc[Regions]
+** xref:astream-limits.adoc[Limits]
+** xref:astream-release-notes.adoc[Release notes]
+* xref:astream-quick-start.adoc[Getting started]
+* Guides and Examples
+** xref:astream-org-permissions.adoc[Manage permissions]
+*** xref:astream-token-gen.adoc[Managing tokens]
+*** xref:astream-custom-roles.adoc[Use custom roles]
+** xref:astream-code-examples.adoc[Code Examples]
+*** xref:astream-golang-eg.adoc[Connect using GoLang]
+*** xref:astream-java-eg.adoc[Connect using Java]
+*** xref:astream-nodejs-eg.adoc[Connect using NodeJS]
+*** xref:astream-python-eg.adoc[Connect using Python]
+** xref:astream-subscriptions.adoc[Pulsar subscriptions]
+*** xref:astream-subscriptions-exclusive.adoc[Exclusive]
+*** xref:astream-subscriptions-shared.adoc[Shared]
+*** xref:astream-subscriptions-failover.adoc[Failover]
+*** xref:astream-subscriptions-keyshared.adoc[Key_shared]
+** xref:astream-functions.adoc[{product_name} functions]
+** xref:astream-cdc.adoc[CDC for Astra DB]
+** xref:astream-kafka.adoc[Starlight for Kafka]
+** xref:astream-rabbit.adoc[Starlight for RabbitMQ]
+** xref:astream-scrape-metrics.adoc[Scrape with Prometheus]
+** xref:astream-georeplication.adoc[Geo-replication]
+* xref:connectors/index.adoc[IO Connectors]
+** Sinks
+*** xref:connectors/sinks/astra-db.adoc[Astra DB]
+*** xref:connectors/sinks/elastic-search.adoc[Elasticsearch]
+*** xref:connectors/sinks/jdbc-postgres.adoc[JDBC PostgreSQL]
+*** xref:connectors/sinks/jdbc-mariadb.adoc[JDBC MariaDB]
+*** xref:connectors/sinks/jdbc-clickhouse.adoc[JDBC ClickHouse]
+*** xref:connectors/sinks/jdbc-sqllite.adoc[JDBC SQLite]
+*** xref:connectors/sinks/kafka.adoc[Kafka]
+*** xref:connectors/sinks/kinesis.adoc[Kinesis]
+*** xref:connectors/sinks/snowflake.adoc[Snowflake]
+** Sources
+*** xref:connectors/sources/data-generator.adoc[Data Generator]
+*** xref:connectors/sources/debezium-mongodb.adoc[Debezium MongoDB]
+*** xref:connectors/sources/debezium-mysql.adoc[Debezium MySQL]
+*** xref:connectors/sources/debezium-oracle.adoc[Debezium Oracle]
+*** xref:connectors/sources/debezium-postgres.adoc[Debezium PostgreSQL]
+*** xref:connectors/sources/debezium-sqlserver.adoc[Debezium SQL Server]
+*** xref:connectors/sources/kafka.adoc[Kafka]
+*** xref:connectors/sources/kinesis.adoc[AWS Kinesis]
+* API Docs
+** xref:astream-use-devops.adoc[Use the DevOps API]
+** xref:api.adoc[API references]
 
-* Getting Started
-
-* Operations
-
-* Security
-
-* Developing
-
-** Client Examples
-
-** Functions Examples
-
-** Transformations
-
-** Starlight APIs

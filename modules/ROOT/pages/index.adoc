@@ -1,1 +1,48 @@
-Welcome to the Astra Streaming site
+= What is DataStax {product_name}?
+:slug: what-is-datastax-astra-streaming
+
+:page-tag: astra-streaming,planner,admin,dev,pulsar
+
+{product_name} is a cloud native data streaming and event stream processing
+service tightly integrated into the Astra cloud platform and powered by Apache Pulsar™.
+Using {product_name}, customers can quickly create Pulsar instances,
+manage their clusters, scale across cloud regions, and manage Pulsar resources
+such as topics, connectors, functions and subscriptions.
+
+{product_name} takes advantage of the core capabilities built into Astra such
+as SSO, IAM and billing.
+Existing Astra customers can augment their existing database capabilities
+with pub/sub and streaming to address a wider range of use cases right away.
+
+With {product_name}, customers now have powerful capabilities to help drive key
+business and technical outcomes including:
+
+*Real Time Processing*:: Legacy batch processing jobs result in stale data that
+can slow down an entire business.
+With {product_name}, customers can capture event data and data changes in real-time,
+process that data and take action to create a more responsive, nimble organization.
+
+*Data Science & Machine Learning*:: Today, every business is a data business.
+{product_name} allows event data to be stored as a persistent event log which
+can be retained indefinitely and played back to refine ML data models or
+offloaded to a data lake or other storage for further analysis in the future.
+
+*Modernized Event Driven Architectures*:: {product_name} provides a unified
+messaging platform that addresses streaming, pub/sub and queuing use cases with
+low latency and at massive scale. Organizations that are struggling to make
+their legacy messaging technologies keep up will find {product_name} to be a
+frictionless path to modernization.
+
+*Faster Access to Data*:: No one has patience for slow loading web pages or mobile apps.
+By combining {product_name} with Astra DB, customers can create read-optimized
+views of data that can be quickly read from Astra DB and ensure that data is
+always up to date by leveraging the event stream processing capabilities of {product_name}.
+
+== {product_name} limits
+
+For details about about the {product_name} limits, see xref:astream-limits.adoc[{product_name} Limits].
+
+== What's next?
+
+* Start with the xref:astream-quick-start.adoc[{product_name} QuickStart].
+* Browse the xref:api.adoc[{product_name} API References].

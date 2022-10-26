@@ -1,0 +1,2 @@
+"Name","Required","Default","Description"
+"sleepBetweenMessages ","false","50","How many seconds to sleep between emitting messages"

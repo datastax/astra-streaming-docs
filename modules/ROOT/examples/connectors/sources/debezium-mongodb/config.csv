@@ -1,0 +1,7 @@
+"Name","Required","Default","Description"
+"database.whitelist","true","","A list of all databases hosted by this server which is monitored by the connector. This is optional, and there are other properties for listing databases and tables to include or exclude from monitoring."
+"mongodb.hosts","true","","The comma-separated list of hostname and port pairs ('host' or 'host:port') of the MongoDB servers in the replica set. If mongodb.members.auto.discover is set to false, prefix with the replica set name (e.g., rs0/localhost:27017)."
+"mongodb.name","true","","A unique name that identifies the connector and/or MongoDB replica set or shared cluster that this connector monitors. Each server should be monitored by at most one Debezium connector."
+"mongodb.password","true","","Password to be used when connecting to MongoDB. This is required only when MongoDB is configured to use authentication."
+"mongodb.task.id","true","","The taskId of the MongoDB connector that attempts to use a separate task for each replica set."
+"mongodb.user","true","","Name of the database user to be used when connecting to MongoDB. This is required only when MongoDB is configured to use authentication."
