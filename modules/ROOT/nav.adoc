@@ -1,0 +1,17 @@
+* xref:index.adoc[Overview]
+
+* Getting Started
+
+* Operations
+
+* Security
+
+* Developing
+
+** Client Examples
+
+** Functions Examples
+
+** Transformations
+
+** Starlight APIs
