@@ -1,4 +1,5 @@
 = Manage Tokens
+:page alias: docs@astra-streaming::astream-token-gen.adoc
 
 // [NOTE]
 // ====

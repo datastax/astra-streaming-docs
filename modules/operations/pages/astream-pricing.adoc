@@ -1,6 +1,7 @@
 = {product_name} Pricing
 
 :page-tag: astra-streaming,planner,plan,pulsar
+:page alias: docs@astra-streaming::astream-pricing.adoc
 
 For information on *pricing* for {product_name}, see the https://www.datastax.com/products/astra-streaming[Astra Streaming pricing page].
 

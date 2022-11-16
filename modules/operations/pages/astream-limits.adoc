@@ -1,6 +1,7 @@
 = {product_name} Limits
 
 :page-tag: astra-streaming,admin,manage,pulsar
+:page alias: docs@astra-streaming::astream-limits.adoc
 
 DataStax {product_name} includes guardrails and limits to ensure good practices, foster availability, and promote optimal configurations for your databases.
 

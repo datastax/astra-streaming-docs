@@ -2,6 +2,7 @@
 :slug: astra-streaming-quick-start
 
 :page-tag: astra-streaming,planner,quickstart,pulsar
+:page alias: docs@astra-streaming::astream-quick-start.adoc
 
 This QuickStart aims to make you familiar with the following steps:
 

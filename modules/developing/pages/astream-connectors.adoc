@@ -1,6 +1,7 @@
 = {product_name} IO connectors
 
 :page-tag: astra-streaming,dev,develop,pulsar,go
+:page alias: docs@astra-streaming::astream-connectors.adoc
 
 Once you have {product_name} xref:astream-quick-start.adoc[deployed], add *sink* and *source* connectors to connect your deployment to external systems like https://cassandra.apache.org/_/index.html[Apache Cassandra], https://www.elastic.co/[ElasticSearch], and more. +
 
