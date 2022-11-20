@@ -71,7 +71,7 @@ If you encounter a `mounts denied` permissions error, ensure your local director
 
 . Open your Prometheus dashboard at `localhost:9090`. In the *Status -> Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
 . Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product_name} cluster.
-. xref:astream-quick-start.adoc#produce-some-messages[Produce some messages] in your tenant with the Pulsar CLI or the {product_name} Websocket. 
+. xref:getting-started:astream-quick-start.adoc#produce-some-messages[Produce some messages] in your tenant with the Pulsar CLI or the {product_name} Websocket.
 . Your Prometheus graph displays the number of incoming Pulsar messages with each 60 second scrape.
 +
 image::astream-prometheus-graph.png[Scraping {product_name} with Prometheus]
@@ -130,6 +130,6 @@ Cluster operational metrics are *not* exposed to individual cluster tenants. A t
 
 == What's next?
 
-For more on {product_name}, see the xref:astream-faq.adoc[FAQ] or the xref:astream-quick-start.adoc[Quickstart]. +
+For more on {product_name}, see the xref:ROOT:astream-faq.adoc[FAQ] or the xref:getting-started:astream-quick-start.adoc[Quickstart]. +
 For more on Prometheus, see the https://prometheus.io/docs/introduction/overview/[Prometheus docs^].
 

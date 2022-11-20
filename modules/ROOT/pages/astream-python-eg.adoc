@@ -161,5 +161,5 @@ client.close()
 
 == What's next?
 
-* xref:astream-quick-start.adoc[{product_name} QuickStart]
+* xref:getting-started:astream-quick-start.adoc[{product_name} QuickStart]
 * Browse the xref:api.adoc[Astra API References]

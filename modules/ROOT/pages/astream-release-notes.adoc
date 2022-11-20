@@ -7,27 +7,27 @@
 
 == 16 September 2022
 
-{product_name} now supports xref:astream-georeplication.adoc[geo-replication].
+{product_name} now supports xref:operations:astream-georeplication.adoc[geo-replication].
 
 == 7 June 2022
 
-{product_name} now supports xref:astream-scrape-metrics.adoc[scraping metrics with Prometheus].
+{product_name} now supports xref:operations:astream-scrape-metrics.adoc[scraping metrics with Prometheus].
 
 == 28 April 2022
 
-xref:astream-rabbit.adoc[{starlight_rabbitmq}] is now available. {starlight_rabbitmq} brings native RabbitMQ® protocol support to Apache Pulsar™, enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code. 
+xref:developing:astream-rabbit.adoc[{starlight_rabbitmq}] is now available. {starlight_rabbitmq} brings native RabbitMQ® protocol support to Apache Pulsar™, enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code.
 
 == 19 April 2022
 
-xref:astream-kafka.adoc[{kafka_for_astra}] is now available. {kafka_for_astra} brings native Apache Kafka(R) protocol support to Apache Pulsar.
+xref:developing:astream-kafka.adoc[{kafka_for_astra}] is now available. {kafka_for_astra} brings native Apache Kafka(R) protocol support to Apache Pulsar.
 
 == 24 March 2022 
-xref:astream-cdc.adoc[CDC for Astra DB] is now available. CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
+xref:developing:astream-cdc.adoc[CDC for Astra DB] is now available. CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
 
 == 31 January 2022: General Availability
-* Added support for serverless Google Cloud `us-central1` (Council Bluffs, Iowa) region. For more, see xref:astream-regions.adoc[{product_name} regions].
-* xref:astream-token-gen.adoc[Pulsar tokens] simplify connecting to your streaming instances.
-* Enabled xref:astream-pricing.adoc[billing].
+* Added support for serverless Google Cloud `us-central1` (Council Bluffs, Iowa) region. For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+* xref:operations:astream-token-gen.adoc[Pulsar tokens] simplify connecting to your streaming instances.
+* Enabled xref:operations:astream-pricing.adoc[billing].
 
 == 20 December 2021
 

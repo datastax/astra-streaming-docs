@@ -106,4 +106,4 @@ video::Qy2ZlelLjXg[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445p
 
 {kafka_for_astra} is based on the DataStax https://github.com/datastax/starlight-for-kafka[Starlight for Kafka^] project.
 
-For more on {product_name}, see xref:astream-quick-start.adoc[{product_name} Quickstart].
+For more on {product_name}, see xref:getting-started:astream-quick-start.adoc[{product_name} Quickstart].

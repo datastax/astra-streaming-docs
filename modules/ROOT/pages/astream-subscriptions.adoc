@@ -32,6 +32,6 @@ Read on to use Pulsar's four types of subscriptions to manage your topic consump
 
 == What's next? 
 
-For more on {product_name}, see xref:astream-quick-start.adoc[Astra Streaming quickstart]. +
-For using Kafka with {product_name}, see xref:astream-kafka.adoc[Starlight for Kafka].
+For more on {product_name}, see xref:getting-started:astream-quick-start.adoc[Astra Streaming quickstart]. +
+For using Kafka with {product_name}, see xref:developing:astream-kafka.adoc[Starlight for Kafka].
 

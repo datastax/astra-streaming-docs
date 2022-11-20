@@ -26,7 +26,7 @@ The Manage Streaming permission is required when the Astra token is generated, o
 
 [NOTE]
 ====
-For more information on generating tokens for {product_name}, see xref:astream-token-gen.adoc[Managing {product_name} tokens].
+For more information on generating tokens for {product_name}, see xref:operations:astream-token-gen.adoc[Managing {product_name} tokens].
 ====
 
 // tag::get-pulsar-clusters[]

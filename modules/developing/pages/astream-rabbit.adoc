@@ -165,6 +165,6 @@ channel.basic_publish(exchange='header_logs',
 == What's Next?
 
 {starlight_rabbitmq} is based on the DataStax https://github.com/datastax/starlight-for-rabbitmq[Starlight for RabbitMQ^] project. +
-For more on {product_name}, see xref:astream-quick-start.adoc[Astra Streaming quickstart]. +
+For more on {product_name}, see xref:getting-started:astream-quick-start.adoc[Astra Streaming quickstart]. +
 For using Kafka with {product_name}, see xref:astream-kafka.adoc[Starlight for Kafka].
 

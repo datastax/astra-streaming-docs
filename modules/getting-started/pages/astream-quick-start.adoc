@@ -54,7 +54,7 @@ image::astream-create-tenant.png[Create new tenant]
 
 [NOTE]
 ====
-For more information on available tenant regions, check out xref:astream-regions.adoc[{product_name} Regions].
+For more information on available tenant regions, check out xref:operations:astream-regions.adoc[{product_name} Regions].
 ====
 
 Your tenant name must start with a lowercase alphabetic character, and can only contain lowercase alphabetic characters, numbers, and hyphens (kebab-case).
@@ -120,7 +120,7 @@ You'll need the following information to connect to your new {product_name} topi
 
 [NOTE]
 ====
-For more information on generating tokens for {product_name}, see xref:astream-token-gen.adoc[Managing {product_name} tokens].
+For more information on generating tokens for {product_name}, see xref:operations:astream-token-gen.adoc[Managing {product_name} tokens].
 ====
 {product_name} lets you download a ready-to-go configuration file containing all of that information pre-populated, so let's download it now:
 
@@ -662,9 +662,9 @@ It can only contain lowercase alphabetic characters, numbers, and hyphens (kebab
 
 For more specific sink instructions, see:  
 
-* xref:astream-astradb-sink.adoc[Create Astra DB Sink]
-* xref:astream-elastic-sink.adoc[Create Elasticsearch Sink]
-* xref:astream-kafka-sink-connector.adoc[Create Kafka Sink Connector]
+* xref:learning:pulsar-io:connectors/sinks/astra-db.adoc[Create Astra DB Sink]
+* xref:learning:pulsar-io:connectors/sinks/elastic-search.adoc[Create Elasticsearch Sink]
+* xref:learning:pulsar-io:connectors/sinks/kafka.adoc[Create Kafka Sink Connector]
 
 [#create-a-source]
 == Create an {product_name} source
@@ -698,7 +698,7 @@ image::astream-kafka-source-consumer-config.png[Consumer Configuration Propertie
 
 For more specific source instructions, see:  
 
-* xref:astream-kafka-source.adoc[Create Kafka Source Connector]
+* xref:learning:pulsar-io:connectors/sources/kafka.adoc[Create Kafka Source Connector]
 
 [#delete-a-tenant]
 == Delete an {product_name} tenant
@@ -713,9 +713,9 @@ image::astream-delete-tenant.png[Delete tenant]
 
 == Next
 
-* xref:astream-faq.adoc[Browse the {product_name} FAQ]
-* xref:astream-code-examples.adoc[Check out {product_name} code examples]
-** xref:astream-golang-eg.adoc[{product_name} Go code examples]
-** xref:astream-java-eg.adoc[{product_name} Java code examples]
-** xref:astream-nodejs-eg.adoc[{product_name} NodeJS code examples]
-** xref:astream-python-eg.adoc[{product_name} Python code examples]
+* xref:ROOT:astream-faq.adoc[Browse the {product_name} FAQ]
+* xref:ROOT:astream-code-examples.adoc[Check out {product_name} code examples]
+** xref:ROOT:astream-golang-eg.adoc[{product_name} Go code examples]
+** xref:ROOT:astream-java-eg.adoc[{product_name} Java code examples]
+** xref:ROOT:astream-nodejs-eg.adoc[{product_name} NodeJS code examples]
+** xref:ROOT:astream-python-eg.adoc[{product_name} Python code examples]

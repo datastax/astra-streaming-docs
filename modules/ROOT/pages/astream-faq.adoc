@@ -4,7 +4,7 @@
 
 == How do I sign up for the {product_name}?
 
-For instructions on signing up for the {product_name}, see xref:astream-quick-start.adoc#create-astra-acct[Create Astra account].
+For instructions on signing up for the {product_name}, see xref:getting-started:astream-quick-start.adoc#create-astra-acct[Create Astra account].
 
 == How is {product_name} priced?
 {product_name} offers customers a pay-as-you-go, consumption based pricing model that allows customers to use {product_name} with a cost model that scales as they grow.
@@ -45,5 +45,5 @@ A *sink* feeds data from {product_name} to an external system, such as Cassandra
 
 == Next
 
-* xref:astream-quick-start.adoc[{product_name} QuickStart]
+* xref:getting-started:astream-quick-start.adoc[{product_name} QuickStart]
 * Browse the xref:api.adoc[Astra API References]
