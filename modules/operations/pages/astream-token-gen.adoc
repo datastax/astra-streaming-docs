@@ -8,7 +8,7 @@
 
 . From any page in {product_name}, select the *Organizations* dropdown.
 +
-image::ROOT:OrgSelection.png[alt="Organization Selection",width=300]
+image::OrgSelection.png[alt="Organization Selection",width=300]
 +
 . In the main dropdown, select *Organization Settings*.
 . From your Organization page, select *Token Management*.
@@ -45,7 +45,7 @@ If you need to limit access to your database, you can delete a token.
 
 To generate, copy, or delete Pulsar JSON Web Tokens (JWTs) within your streaming tenant, visit the **Token Management** section of your streaming tenant's **Settings** page. 
 
-image::ROOT:astream-token-created.png[alt="Token Management"]
+image::astream-token-created.png[alt="Token Management"]
 
 Select **Create Token** to generate a Pulsar token for this streaming tenant. 
 
