@@ -1,7 +1,7 @@
 = {starlight_rabbitmq}
 
 :page-tag: starlight-rabbitmq,quickstart,admin,dev,pulsar
-:page alias: docs@astra-streaming::astream-rabbit.adoc
+:page-aliases: docs@astra-streaming::astream-rabbit.adoc
 
 {starlight_rabbitmq} brings native RabbitMQ® protocol support to Apache Pulsar®, enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code. RabbitMQ applications can now leverage Pulsar’s powerful features, such as:
 

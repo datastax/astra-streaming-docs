@@ -1,7 +1,7 @@
 = Starlight for Kafka
 
 :page-tag: starlight-kafka,dev,admin,pulsar,kafka
-:page alias: docs@astra-streaming::astream-kafka.adoc
+:page-aliases: docs@astra-streaming::astream-kafka.adoc
 
 {kafka_for_astra} brings native Apache Kafka® protocol support to Apache Pulsar®, enabling migration of existing Kafka applications and services to Pulsar without modifying the code. Kafka applications can now leverage Pulsar’s powerful features, such as:
 

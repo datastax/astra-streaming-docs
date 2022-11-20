@@ -3,7 +3,7 @@
 :description: CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data
 :keywords: datastax astra, change data capture, cdc, astra db
 :meta-description: CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data
-:page alias: docs@astra-streaming::astream-cdc.adoc
+:page-aliases: docs@astra-streaming::astream-cdc.adoc
 
 CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
 

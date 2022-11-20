@@ -1,6 +1,6 @@
 = Geo-replication
 
-:page alias: docs@astra-streaming::astream-georeplication.adoc
+:page-aliases: docs@astra-streaming::astream-georeplication.adoc
 
 A key feature of Apache Pulsar™ is how it handles geo-replication. While other pub-sub messaging systems require additional processes to mirror messages between data centers, Pulsar has multi-datacenter replication as an integrated feature.
 

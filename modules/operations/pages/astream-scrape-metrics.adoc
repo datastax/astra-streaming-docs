@@ -67,7 +67,7 @@ If you encounter a `mounts denied` permissions error, ensure your local director
 ====
 
 == Scrape with Prometheus
-:page alias: docs@astra-streaming::astream-scrape-metrics.adoc
+:page-aliases: docs@astra-streaming::astream-scrape-metrics.adoc
 
 . Open your Prometheus dashboard at `localhost:9090`. In the *Status -> Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
 . Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product_name} cluster.
