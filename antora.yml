@@ -20,6 +20,7 @@ asciidoc:
     tenant_name_with_topics: 'llp-test'
     cluster_name: 'astradev-aws'
     tenant_name: 'testcreate'
+    topic_name: 'blah'
 
 nav:
   - modules/ROOT/nav.adoc
