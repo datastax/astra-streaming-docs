@@ -1,7 +1,7 @@
 name: astra-streaming
 title: Astra Streaming Documentation
 version: 2.10_1.7
-start_page: astra-streaming::index.adoc
+start_page: index.adoc
 
 asciidoc:
   attributes:
