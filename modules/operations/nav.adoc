@@ -1,0 +1,9 @@
+.Operations
+
+** xref:astream-georeplication.adoc[]
+** xref:astream-limits.adoc[]
+** xref:astream-pricing.adoc[]
+** xref:astream-regions.adoc[]
+** xref:astream-scrape-metrics.adoc[]
+** xref:astream-token-gen.adoc[]
+** xref:astream-release-notes.adoc[]

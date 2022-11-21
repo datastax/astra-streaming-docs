@@ -38,4 +38,4 @@ Security upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105.
 The Public Preview of {product_name} brings the ability to quickly create Apache Pulsar™ instances, manage your clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
 
 Instead of listing the features included in this release, learn about what {product_name} is, and then get started with data and event streaming.
-If you have questions, review the xref:astream-faq.adoc[FAQ] for answers.
+If you have questions, review the xref:ROOT:astream-faq.adoc[FAQ] for answers.

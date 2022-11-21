@@ -23,4 +23,7 @@ asciidoc:
     topic_name: 'blah'
 
 nav:
+  - modules/getting-started/nav.adoc
   - modules/ROOT/nav.adoc
+  - modules/developing/nav.adoc
+  - modules/operations/nav.adoc
