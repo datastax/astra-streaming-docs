@@ -1,5 +1,5 @@
 = Connect to {product_name} using NodeJS
-
+:page-aliases: docs@astra-streaming::astream-nodejs-eg.adoc
 :page-tag: astra-streaming,connect,dev,develop,nodejs,pulsar
 
 include::partial$code-examples-text.adoc[]

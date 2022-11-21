@@ -1,5 +1,5 @@
 = Connect to {product_name} using GoLang
-
+:page-aliases: docs@astra-streaming::astream-golang-eg.adoc
 :page-tag: astra-streaming,dev,develop,pulsar,go
 
 include::partial$code-examples-text.adoc[]

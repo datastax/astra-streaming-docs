@@ -1,5 +1,5 @@
 = Connect to {product_name} using Java
-
+:page-aliases: docs@astra-streaming::astream-java-eg.adoc
 :page-tag: astra-streaming,dev,develop,pulsar,java
 
 include::partial$code-examples-text.adoc[]

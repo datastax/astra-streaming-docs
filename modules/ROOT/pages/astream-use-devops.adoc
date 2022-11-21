@@ -1,5 +1,5 @@
 = Using the DevOps v2 API
-
+:page-aliases: docs@astra-streaming::astream-use-devops.adoc
 :page-tag: astra-streaming,dev,develop,pulsar
 
 How to use the DevOps API to do:

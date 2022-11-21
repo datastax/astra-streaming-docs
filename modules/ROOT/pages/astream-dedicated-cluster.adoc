@@ -1,4 +1,5 @@
 = {product_name} Dedicated Cluster
+:page-aliases: docs@astra-streaming::astream-dedicated-cluster.adoc
 
 {product_name} supports *dedicated clusters*, which are your very own Apache Pulsar™ clusters provisioned under {product_name}'s cloud account. +
 

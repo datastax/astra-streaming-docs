@@ -1,6 +1,6 @@
 = User permissions
 :slug: user-permissions
-
+:page-aliases: docs@astra-streaming::astream-org-permissions.adoc
 :page-tag: astra-streaming,security,secure,pulsar
 
 Default and xref:astream-custom-roles.adoc[custom roles] allow admins to manage unique permissions for users based on your organization and database requirements.

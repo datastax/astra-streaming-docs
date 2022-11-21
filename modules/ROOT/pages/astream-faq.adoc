@@ -1,5 +1,5 @@
 = {product_name}FAQs
-
+:page-aliases: docs@astra-streaming::astream-faq.adoc
 :page-tag: astra-streaming,dev,admin,planner,plan,pulsar
 
 == How do I sign up for the {product_name}?

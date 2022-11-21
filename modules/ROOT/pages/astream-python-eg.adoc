@@ -1,5 +1,5 @@
 = Connect to {product_name} using Python
-
+:page-aliases: docs@astra-streaming::astream-python-eg.adoc
 :page-tag: astra-streaming,dev,develop,python,pulsar
 
 include::partial$code-examples-text.adoc[]

@@ -1,4 +1,5 @@
 = Scrape {product_name} metrics with Prometheus
+:page-aliases: docs@astra-streaming::astream-scrape-metrics.adoc
 
 Prometheus collects system metrics by scraping targets at intervals. These metrics are used to monitor deployments, generate alerts, and diagnose problems. 
 

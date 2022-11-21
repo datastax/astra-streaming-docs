@@ -1,7 +1,7 @@
 = {product_name} release notes
 :slug: release-notes
-
 :page-tag: astra-streaming,admin,dev,pulsar
+:page-aliases: docs@astra-streaming::astream-release-notes.adoc
 
 {product_name} release notes provide information about new and improved features, known and resolved issues, and bug fixes. 
 

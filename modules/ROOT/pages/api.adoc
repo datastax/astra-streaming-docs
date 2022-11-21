@@ -4,6 +4,7 @@
 :keywords: datastax astra
 :meta-description: Astra provides APIs to manage both DB and Streaming instances
 :page-tag: astra-streaming,dev,develop,pulsar
+:page-aliases: docs@astra-streaming::api.adoc
 
 Astra provides APIs to manage both DB and Streaming instances.
 
