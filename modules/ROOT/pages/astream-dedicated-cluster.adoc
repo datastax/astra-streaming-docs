@@ -1,11 +1,13 @@
 = {product_name} Dedicated Cluster
-:page-aliases: docs@astra-streaming::astream-dedicated-cluster.adoc
+
+[IMPORTANT]
+====
+To test-drive a dedicated cluster, please send a request to {request_feature_access_email} and include your Astra account UUID.
+====
 
 {product_name} supports *dedicated clusters*, which are your very own Apache Pulsar™ clusters provisioned under {product_name}'s cloud account. +
 
 We take care of setup, monitoring, and maintenance, and let you get to work.
-
-If you'd rather provision your cluster under your own cloud account, see our xref:astream-dedicated-cluster.adoc#byoa[Bring Your Own Account] offering.
 
 == Creating a dedicated cluster
 
@@ -23,30 +25,8 @@ image::astream-create-dedicated-cluster.png[Create dedicated cluster]
 
 . Confirm your new tenant displays *Plan Type: Dedicated* in the *Connect* tab. You now have a dedicated {product_name} cluster. 
 
-[#byoa]
-== Bring your own account (BYOA)
-
-*Bring your own account* or *BYOA* clusters are a type of dedicated cluster. You still get your own Apache Pulsar™ cluster, but it's provisioned under your organization's cloud account. +
-
-We take care of setup, monitoring, and maintenance, and let you get to work.
-
-Creating a BYOA cluster in {product_name} is the same as creating a streaming tenant, but with one small difference.
-
-. Enter the name for your new streaming tenant and select a provider.
-+
-image::astream-create-tenant.png[Create new tenant]
-
-. Select a region with the *Dedicated cluster* option available. 
-+
-image::astream-create-dedicated-cluster.png[Create dedicated cluster]
-
-. Select *Create Tenant* to create a new tenant.
-
-. Confirm your new tenant displays *Plan Type: Dedicated* in the *Connect* tab. You now have a dedicated {product_name} cluster. 
-
 == What's next?
 
-* Create a xref:getting-started:astream-quick-start.adoc#create-a-namespace[namespace] and xref:getting-started:astream-quick-start.adoc#create-a-topic[topic] in your new tenant with the xref:getting-started:astream-quick-start.adoc#create-a-namespace[{product_name} Quickstart].
-* For more on pricing of dedicated clusters, see xref:operations:astream-pricing.adoc[{product_name} Pricing].
-
+* Create a xref:astream-quick-start.adoc#create-a-namespace[namespace] and xref:astream-quick-start.adoc#create-a-topic[topic] in your new tenant with the xref:astream-quick-start.adoc#create-a-namespace[{product_name} Quickstart].
+* For more on pricing of dedicated clusters, see https://www.datastax.com/products/astra-streaming[{product_name} Pricing].
 
