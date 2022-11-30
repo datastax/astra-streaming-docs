@@ -1,0 +1,32 @@
+= Transform Functions 
+
+A Pulsar *transform function* is a low-code implementation of xref:astream-functions.adoc[Pulsar functions]. +
+Functions receive data from one or more input topics, apply user-supplied processing, and publish the results to another topic. +
+Custom functions are a powerful feature, but for common data transformations, we now include *Transform Functions*. +
+<<Drop-fields>>, <<Flatten>>, <<Compute>>, and more without coding or deep schema knowledge. +
+DataStax has created the following transform functions for common data transforms, but we're always experimenting with new ones. 
+Check back as the list grows, or let us know some functions you'd find helpful in your deployment. 
+
+[#transform-list]
+== Transforms
+include::partial$functions/function-list.adoc[]
+
+[#transform-config]
+== Configuration
+
+include::partial$/functions/configuration.adoc[]
+
+[#deploy-cli]
+== Deploy with Pulsar CLI
+
+include::partial$/functions/deploy-cli.adoc[]
+
+[#deploy-as]
+== Deploy with {product_name} 
+
+include::partial$/functions/deploy-as.adoc[]
+
+== What's next?
+
+For more, see xref:astream-functions.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].
+

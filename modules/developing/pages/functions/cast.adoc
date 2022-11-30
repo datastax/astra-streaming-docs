@@ -1,0 +1,54 @@
+:functionName: cast
+:attribute-missing: skip
+:slug: cast-transform-function
+:page-tag: cast, transform-function
+
+= Cast
+
+The cast transform function transforms the data to a target compatible schema.
+
+The `step` name is `cast`, and the `UserConfig` is controlled here: `{"steps": [{"type": "cast", "schema-type": "STRING"}]}`.
+
+== Parameters:
+[cols=2*,options=header]
+|===
+|*Parameter*
+|*Description*
+
+|schema-type
+|The target schema type. Only `STRING` is available. 
+
+|part
+|when used with KeyValue data, defines if the transform function is done on the `key` or on the `value`. If `null` or absent the transform function applies to both the key and the value. 
+|===
+
+== Example:
+
+. Produce an AVRO message with the payload: `{field1: value1, field2: value2}`:
++
+[tabs]
+====
+AVRO::
++
+--
+[source,json,subs="attributes+"]
+----
+{field1: value1, field2: value2}
+----
+--
+
+Result::
++
+--
+[source,json,subs="attributes+"]
+----
+{"field1": "value1", "field2": "value2"}
+----
+--
+====
+
+. The function casts the values as a string: `{"field1": "value1", "field2": "value2"}`.
+
+== What's next?
+
+For more, see xref::functions/index.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].

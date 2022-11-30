@@ -1,0 +1,39 @@
+:functionName: merge-key-value
+:attribute-missing: skip
+:slug: merge-key-value-transform-function
+:page-tag: merge-key-value, transform-function
+
+= Merge KeyValue
+
+The {functionName} transform function merges the fields of KeyValue records where both the key and value are structured types of the same schema type. (Currently only AVRO is supported). +
+The step name is `merge-key-value` and the `UserConfig` is controlled here: `{"steps": [{"type": "merge-key-value"}]}`.
+
+== Example
+
+. Produce an AVRO message with the payload: `{key={keyField: key}, value={valueField: value}}`.
++
+[tabs]
+====
+AVRO::
++
+--
+[source,json,subs="attributes+"]
+----
+{key={keyField: key}, value={valueField: value}}
+----
+--
+
+Result::
++
+--
+[source,json,subs="attributes+"]
+----
+{key={keyField: key}, value={keyField: key, valueField: value}}
+----
+--
+====
+. The function merges the KeyValue fields (because both are AVRO type) and outputs `{key={keyField: key}, value={keyField: key, valueField: value}}` to the output topic.
+
+== What's next?
+
+For more, see xref::functions/index.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].

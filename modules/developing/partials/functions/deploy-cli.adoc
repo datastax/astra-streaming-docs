@@ -1,0 +1,88 @@
+[NOTE]
+====
+https://github.com/datastax/pulsar[Luna Streaming 2.10+] is required to deploy custom functions in Pulsar. 
+====
+
+The transform function `.nar` lives in the `/functions` directory of your Pulsar deployment. 
+
+=== Pulsar standalone
+
+To deploy the built-in transform function locally in Pulsar standalone:
+
+. Start Pulsar standalone:
++
+[source,shell]
+----
+./bin/pulsar standalone
+----
+
+. Create a transform function in `localrun` mode:
++
+[source,shell,subs="attributes+"]
+----
+./bin/pulsar-admin functions localrun \
+--jar functions/pulsar-transformations-2.0.1.nar \
+--classname com.datastax.oss.pulsar.functions.transforms.TransformFunction \
+--inputs my-input-topic \
+--output my-output-topic \
+--user-config '{"steps": [{"type": "drop-fields", "fields": "password"}, {"type": "merge-key-value"}, {"type": "unwrap-key-value"}, {"type": "cast", "schema-type": "STRING"}]}'
+----
+
+=== Pulsar cluster
+
+To deploy a built-in transform function to a Pulsar cluster: 
+
+. Create a built-in transform function:
++
+[tabs]
+====
+Pulsar Admin::
++
+--
+----
+./bin/pulsar-admin functions create \
+--tenant ${TENANT} \
+--namespace ${NAMESPACE} \
+--name transform-function \
+--inputs persistent://${TENANT}/${NAMESPACE}/${INPUT_TOPIC} 
+--output persistent://${TENANT}/${NAMESPACE}/${OUTPUT_TOPIC}  \
+--classname com.datastax.oss.pulsar.functions.transforms.TransformFunction \
+--jar functions/pulsar-transformations-2.0.1.nar
+----
+--
+
+Result::
++
+--
+[source,shell,subs="attributes+"]
+----
+Created successfully
+----
+--
+====
+
+. Confirm your function has been created with the Pulsar CLI:
++
+[tabs]
+====
+Pulsar Admin::
++
+--
+[source,shell,subs="attributes+"]
+----
+./bin/pulsar-admin functions list --tenant ${TENANT}
+----
+--
+
+Result::
++
+--
+[source,shell,subs="attributes+"]
+----
+cast-function
+flatten-function
+transform-function
+transform-function-2
+----
+--
+====

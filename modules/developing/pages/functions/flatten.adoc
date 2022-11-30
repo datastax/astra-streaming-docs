@@ -1,0 +1,52 @@
+:functionName: flatten
+:attribute-missing: skip
+:slug: flatten-transform-function
+:page-tag: flatten, transform-function
+= Flatten
+
+The {functionName} transform function converts structured, nested data into a new single-hierarchy-level structured data. +
+The names of the new fields are built by concatenating the intermediate level field names. +
+The step name is `flatten`, and the `UserConfig` is controlled here: `UserConfig: {"steps": [{"type": "flatten"}]}`.
+
+== Parameters:
+[cols=2*,options=header]
+|===
+|*Parameter*
+|*Description*
+
+|delimiter
+|The delimiter to use when concatenating the field names (default: _)
+
+|part
+|When used with KeyValue data, defines if the transform function is done on the `key` or on the `value`. If `null` or absent the transform function applies to both the key and the value. 
+|===
+
+== Example
+
+. Produce an AVRO message with the payload: `{field1: {field11: value11, field12: value12}}`.
++
+[tabs]
+====
+AVRO::
++
+--
+[source,json,subs="attributes+"]
+----
+{field1: {field11: value11, field12: value12}}
+----
+--
+
+Result::
++
+--
+[source,json,subs="attributes+"]
+----
+{field1_field11: value11, field1_field12: value12}
+----
+--
+====
+. The function flattens the fields with the default `delimiter` between values, and outputs `{field1_field11: value11, field1_field12: value12}` to the output topic.
+
+== What's next?
+
+For more, see xref::functions/index.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].

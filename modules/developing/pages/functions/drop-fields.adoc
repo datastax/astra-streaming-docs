@@ -1,0 +1,53 @@
+:functionName: drop-fields
+:attribute-missing: skip
+:slug: drop-fields-transform-function
+:page-tag: drop-fields, transform-function
+= Drop fields
+
+The {functionName} transform function drops fields of structured data (Currently only AVRO is supported). +
+The cast transform function transforms the data to a target compatible schema.
+
+The `step` name is `drop-field`, and the `UserConfig` is controlled here: `{"steps": [{"type": "drop-fields", "fields": "password,other"}]}`.
+
+== Parameters:
+[cols=2*,options=header]
+|===
+|*Parameter*
+|*Description*
+
+|fields
+|A comma-separated list of fields to drop.
+
+|part
+|When used with KeyValue data, defines if the transform function is done on the `key` or on the `value`. If `null` or absent the transform function applies to both the key and the value. 
+|===
+
+== Example 
+
+. Produce an AVRO message with the payload: `{name: value1, password: value2}`.
++
+[tabs]
+====
+AVRO::
++
+--
+[source,json,subs="attributes+"]
+----
+{name: value1, password: value2}
+----
+--
+
+Result::
++
+--
+[source,json,subs="attributes+"]
+----
+{"{name: value1}"}
+----
+--
+====
+. The function drops the fields specified in the `fields` parameter, and outputs `{"{name: value1}"}` to the output topic.
+
+== What's next?
+
+For more, see xref::functions/index.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].

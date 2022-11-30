@@ -1,0 +1,48 @@
+The `TransformFunction` reads its configuration as `JSON` from the Function `userConfig` parameter in the format:
+
+[source,json]
+----
+{
+  "steps": [
+    {
+      "type": "drop-fields", "fields": "keyField1,keyField2", "part": "key"
+    },
+    {
+      "type": "merge-key-value"
+    },
+    {
+      "type": "unwrap-key-value"
+    },
+    {
+      "type": "cast", "schema-type": "STRING"
+    }
+  ]
+}
+----
+
+Transform functions are performed in the order in which they appear in the `steps` array.
+Each step is defined by its `type` and uses its own arguments. 
+Each step can be dynamically toggled on or off by supplying a `when` condition that evaluates to `true` or `false`. 
+
+For example, the above configuration applied on a `KeyValue<AVRO, AVRO>` input record with value `{key={keyField1: key1, keyField2: key2, keyField3: key3}, value={valueField1: value1, valueField2: value2, valueField3: value3}}` will return transformed values after each step:
+[source,shell]
+----
+{key={keyField1: key1, keyField2: key2, keyField3: key3}, value={valueField1: value1, valueField2: value2, valueField3: value3}}(KeyValue<AVRO, AVRO>)
+           |
+           | ”type": "drop-fields", "fields": "keyField1,keyField2”, "part": "key”
+           |
+{key={keyField3: key3}, value={valueField1: value1, valueField2: value2, valueField3: value3}} (KeyValue<AVRO, AVRO>)
+           |
+           | "type": "merge-key-value"
+           |
+{key={keyField3: key3}, value={keyField3: key3, valueField1: value1, valueField2: value2, valueField3: value3}} (KeyValue<AVRO, AVRO>)
+           |
+           | "type": "unwrap-key-value"
+           |
+{keyField3: key3, valueField1: value1, valueField2: value2, valueField3: value3} (AVRO)
+           |
+           | "type": "cast", "schema-type": "STRING"
+           |
+{"keyField3": "key3", "valueField1": "value1", "valueField2": "value2", "valueField3": "value3"} (STRING)
+----
+

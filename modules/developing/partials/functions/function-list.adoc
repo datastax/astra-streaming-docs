@@ -1,0 +1,49 @@
+[#cast]
+=== Cast 
+
+The `cast` transform function modifies the key or value schema to a target compatible schema.
+
+xref:functions/cast.adoc[Cast documentation].
+
+[#compute]
+=== Compute
+
+The `compute` transform function computes new field values based on an expression evaluated at runtime. If the field already exists, it will be overwritten.
+
+xref:functions/compute.adoc[Compute documentation].
+
+[#drop-fields]
+=== Drop-fields
+
+The `drop-fields` transform function drops fields from structured data.
+
+xref:functions/drop-fields.adoc[Drop-fields documentation].
+
+[#drop]
+=== Drop
+
+The `drop` transform function drops a record from further processing.
+
+xref:functions/drop.adoc[Drop documentation].
+
+[#flatten]
+=== Flatten
+
+The `flatten` transform function flattens structured data.
+
+xref:functions/flatten.adoc[Flatten documentation].
+
+[#merge-key-value]
+=== Merge KeyValue
+
+The `merge-key-value` transform function merges the fields of KeyValue records where both the key and value are structured data with the same schema type.
+
+xref:functions/merge-key-value.adoc[Merge KeyValue documentation].
+
+[#unwrap-key-value]
+=== Unwrap key value
+
+The `unwrap-key-value` transform function extracts the KeyValue's key or value and makes it the record value (if the record is a KeyValue).
+
+xref:functions/unwrap-key-value.adoc[Unwrap KeyValue documentation].
+

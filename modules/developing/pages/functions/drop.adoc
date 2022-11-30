@@ -1,0 +1,30 @@
+:functionName: drop
+:attribute-missing: skip
+:slug: drop-transform-function
+:page-tag: drop, transform-function
+= Drop
+
+The {functionName} transform function drops a record from further processing. +
+Use in conjunction with `when` to selectively drop records. +
+The step name is `drop`, and the `UserConfig` is controlled here: `{"steps": [{"type": "drop", "when": "value.firstName == value1"}]}`.
+
+== Parameters:
+[cols=2*,options=header]
+|===
+|*Parameter*
+|*Description*
+
+|when
+|By default, the record is dropped. Set this parameter to selectively choose when to drop a message.
+
+|===
+
+== Example
+
+. Produce an AVRO message with the payload: `{firstName: value1, lastName: value2}`.
+. The function drops records matching the `when` statement `value.firstName == value1`. +
+There is no output. 
+
+== What's next?
+
+For more, see xref::functions/index.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].

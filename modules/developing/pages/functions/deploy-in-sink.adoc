@@ -1,0 +1,62 @@
+:attribute-missing: skip
+:slug: cast-transform-function
+:page-tag: cast, transform-function
+
+= Deploy transform function in sink
+
+As of https://www.datastax.com/products/luna-streaming[Luna Streaming] version 2.10.1.6, transform functions can be deployed inside of a sink process. +
+Before this update, functions transformed data either after it was written to a topic by a source connector, or before it was read from a topic by a sink connector. +
+This required either an intermediate topic, with additional storage, IO, and latency, or a custom connector. +
+Now, functions can be deployed at sink creation and apply preprocessing to sink topic writes. +
+
+== Create sink function in {product_name}
+
+Creating a sink function is similar to xref::connectors/index.adoc[creating a sink in the {astra_ui}], but with a few additional steps. 
+
+. xref::connectors/index.adoc[Create a sink] as described in the {product_name} documentation. 
+. During sink creation, select the transform function you want to run inside the sink.
++
+image::astream-transform-functions.png[Connect Topics]
+. When the sink is up and running, inspect the sink connector's log. +
+The function is loaded at sink creation:
++
+[source,shell]
+----
+2022-11-14T15:01:02.398190413Z 2022-11-14T15:01:02,397+0000 [main] INFO  org.apache.pulsar.functions.runtime.thread.ThreadRuntime - ThreadContainer starting function with instanceId 0 functionId f584ae69-2eda-449b-9759-2d19fd7c4da5 namespace astracdc
+----
+
+. The function then applies preprocessing to outgoing messages, in this case casting an AVRO record to `String` to your selected topic:
++
+[source,shell]
+----
+{{"field1": "value1", "field2": "value2"}}
+----
+
+== Create sink function in pulsar-admin
+
+[NOTE]
+====
+https://github.com/datastax/pulsar[Luna Streaming 2.10+] is required to deploy custom functions in Pulsar. 
+====
+
+Create a sink connector, and include the path to the transform function and configuration at creation:
+[source,shell,subs="attributes+"]
+----
+pulsar-admin sinks create \
+--sink-type elastic-sink \
+--inputs my-input-topic \
+--tenant public \
+--namespace default \
+--name my-sink \
+--transform-function "builtin://transforms" \
+--transform-function-config '{"steps": [{"type": "drop-fields", "fields": "password"}, {"type": "merge-key-value"}, {"type": "unwrap-key-value"}'
+----
+
+== What's next?
+
+For more, see xref::functions/index.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].
+
+
+
+
+

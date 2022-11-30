@@ -1,0 +1,50 @@
+:functionName: unwrap-key-value
+:attribute-missing: skip
+:slug: unwrap-key-value-transform-function
+:page-tag: unwrap-key-value, transform-function
+
+= Unwrap KeyValue
+
+If the record value is a KeyValue, the {functionName} transform function extracts the KeyValue's key or value and makes it the record value. +
+The step name is `unwrap-key-value`, and the `UserConfig` is controlled here: `{"steps": [{"type": "unwrap-key-value"}]}`.
+
+== Parameters:
+[cols=2*,options=header]
+|===
+|*Parameter*
+|*Description*
+
+|unwrapKey
+|By default, the KeyValue's value is unwrapped. Set this parameter to `true` to unwrap the key instead.
+
+|===
+
+== Example
+
+. Produce an AVRO message with the payload: `{key={keyField: key}, value={valueField: value}}`.
++
+[tabs]
+====
+AVRO::
++
+--
+[source,json,subs="attributes+"]
+----
+{key={keyField: key}, value={valueField: value}}
+----
+--
+
+Result::
++
+--
+[source,json,subs="attributes+"]
+----
+{valueField: value}
+----
+--
+====
+. The function extracts the KeyValue's key and outputs `{valueField: value}` to the output topic.
+
+== What's next?
+
+For more, see xref::functions/index.adoc[] or the https://pulsar.apache.org/docs/functions-overview[Pulsar documentation].
