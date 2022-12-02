@@ -1,3 +1,1 @@
-.Getting Started
-
-** xref:astream-quick-start.adoc[]
+* xref:astream-quick-start.adoc[Getting Started]

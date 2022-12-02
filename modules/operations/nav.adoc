@@ -1,5 +1,4 @@
-.Operations
-
+* xref:astream-georeplication.adoc[Operations]
 ** xref:astream-georeplication.adoc[]
 ** xref:astream-limits.adoc[]
 ** xref:astream-pricing.adoc[]
