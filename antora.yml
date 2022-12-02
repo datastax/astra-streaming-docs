@@ -21,6 +21,7 @@ asciidoc:
     cluster_name: 'astradev-aws'
     tenant_name: 'testcreate'
     topic_name: 'blah'
+    request_feature_access_email: 'astrastreaming@datastax.com'
 
 nav:
   - modules/getting-started/nav.adoc
