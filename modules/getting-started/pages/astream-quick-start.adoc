@@ -662,9 +662,9 @@ It can only contain lowercase alphabetic characters, numbers, and hyphens (kebab
 
 For more specific sink instructions, see:  
 
-* xref:learning:pulsar-io:connectors/sinks/astra-db.adoc[Create Astra DB Sink]
-* xref:learning:pulsar-io:connectors/sinks/elastic-search.adoc[Create Elasticsearch Sink]
-* xref:learning:pulsar-io:connectors/sinks/kafka.adoc[Create Kafka Sink Connector]
+* xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[Create Astra DB Sink]
+* xref:streaming-learning:pulsar-io:connectors/sinks/elastic-search.adoc[Create Elasticsearch Sink]
+* xref:streaming-learning:pulsar-io:connectors/sinks/kafka.adoc[Create Kafka Sink Connector]
 
 [#create-a-source]
 == Create an {product_name} source
@@ -698,7 +698,7 @@ image::astream-kafka-source-consumer-config.png[Consumer Configuration Propertie
 
 For more specific source instructions, see:  
 
-* xref:learning:pulsar-io:connectors/sources/kafka.adoc[Create Kafka Source Connector]
+* xref:streaming-learning:pulsar-io:connectors/sources/kafka.adoc[Create Kafka Source Connector]
 
 [#delete-a-tenant]
 == Delete an {product_name} tenant
