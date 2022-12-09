@@ -13,7 +13,7 @@
 *** xref:astream-subscriptions-failover.adoc[Failover]
 *** xref:astream-subscriptions-keyshared.adoc[Key_shared]
 
-* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO Connectors,window=_blank]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO Connectors]
 
 * xref:api.adoc[API Docs]
 ** xref:astream-use-devops.adoc[]
