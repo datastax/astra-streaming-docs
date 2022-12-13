@@ -1,4 +1,5 @@
-* xref:astream-cdc.adoc[Developing]
+* xref:configure-pulsar-env.adoc[Developing]
+** xref:astream-cdc.adoc[]
 ** xref:astream-cdc.adoc[]
 ** xref:astream-functions.adoc[]
 ** xref:astream-kafka.adoc[]
