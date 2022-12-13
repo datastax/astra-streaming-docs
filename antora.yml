@@ -22,6 +22,8 @@ asciidoc:
     tenant_name: 'testcreate'
     topic_name: 'blah'
     request_feature_access_email: 'astrastreaming@datastax.com'
+    astra-streaming-examples-repo: 'https://raw.githubusercontent.com/ddieruf/astra-streaming-examples/master'
+    external-link-icon: '&#x29C9;'
 
 nav:
   - modules/getting-started/nav.adoc
