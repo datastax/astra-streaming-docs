@@ -1,0 +1,42 @@
+= Producing and consuming messages with the Pulsar Client on Astra Streaming
+:title: Pulsar client with Astra Streaming
+:description: Use this guide to interact with your Astra Streaming tenant via the pulsar-client cli.
+
+This guide assumes you have completed the xref::index.adoc[Astra Streaming quickstart], and you have xref:developing:configure-pulsar-env.adoc[set up your Pulsar binaries] to work with your tenant. Now it's time to produce and consume messages in your new streaming tenant.
+
+. Set the required variables (if you've just completed the quickstart these values should already be set)
++
+[source,shell,subs="attributes+"]
+----
+TOPIC="my-topic"
+NAMESPACE="my-namespace"
+TENANT="my-stream-<rand>" #replace <rand> with a few alphanumeric chars
+----
+
+. Run the following script to create 1 new message
++
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/pulsar-client/produce-message.sh[]
+----
+
+. Now you have a new, unacknowledged message in your topic
+
+. Run the following script to create a consumer that reads and acknowledges that message
++
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/pulsar-client/consume-message.sh[]
+----
+
+The output should look similar to this:
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/pulsar-client/consume-output.log[]
+----
+
+If you made it here then your produce & consume journey was successful. Congrats{emoji-tada}! Now it's time to take your skills further {emoji-rocket}{emoji-rocket}.
+
+== Next steps
+
+xref:developing:aaaa.adoc[]
