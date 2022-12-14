@@ -2,7 +2,7 @@
 :page-aliases:
 :description:
 :navtitle: Get started
-:title: getting started with Astra Streaming
+:title: Getting started with Astra Streaming
 
 Follow this guide to get started using Astra Streaming.
 
@@ -107,6 +107,7 @@ a|image:namespace-tab.png[Namespace tab in Astra Streaming]
 
 . Click the "Create Namespace" button and give your namespace a super original name like "my-namespace"
 +
+[width=75%]
 |===
 a|image:create-namespace.png[Create namespace in Astra Streaming]
 |===
@@ -182,6 +183,7 @@ Astra Portal::
 
 . Provide a name for the topic like "my-topic". It needs to start with a lowercase letter, be alphanumeric, and can contain hyphens. Leave the choice of persistence and partitioning as is. Those can be part of https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[future learning^]{external-link-icon} :).
 +
+[width=75%]
 |===
 a|image:add-topic.png[Add topic in Astra Streaming]
 |===
@@ -209,7 +211,7 @@ export TOPIC="my-topic"
 # export TENANT="my-stream-<rand>" # this should have been set in the previous step
 ----
 
-. Run the following script to create a new namespace
+. Run the following script to create a new topic
 +
 [source,shell,subs="attributes+"]
 ----
@@ -235,7 +237,7 @@ export TOPIC="my-topic"
 # export TENANT="my-stream-<rand>" # this should have been set in the previous step
 ----
 
-. Run the following script to create a new namespace
+. Run the following script to create a new topic
 +
 [source,shell,subs="attributes+"]
 ----
@@ -250,18 +252,15 @@ include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
 
 Now it's time to produce and consume messages in your new message topic. There are quite a few different ways to accomplish this. Choose the right one for your needs (they all end up doing the same thing).
 
-[cols=2*,frame=none,grid=none]
+[cols=1*,frame=none,grid=none]
 |===
 |
 xref::produce-consume-astra-portal.adoc[Astra Portal] +
 [.small]##Using Astra Streaming's "Try Me" feature in the UI##
 |
-xref::produce-consume-astra-portal.adoc[Pulsar Client] +
+xref::produce-consume-pulsar-client.adoc[Pulsar Client] +
 [.small]##Downloading and using the cli provided within Pulsar to interact with the topic##
 |
-xref::produce-consume-astra-portal.adoc[Curl] +
-[.small]##Creating and using a Pulsar token to send restful requests in a terminal##
-|
-xref::produce-consume-astra-portal.adoc[Runtime Clients] +
+xref::produce-consume-clients.adoc[Runtime Clients] +
 [.small]##Compiling a client application that interacts with Pulsar (C#, Java, Node, etc)##
 |===
