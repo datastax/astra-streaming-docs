@@ -51,7 +51,7 @@ sasl.mechanism: PLAIN
 
 You're now ready to connect Kafka and Pulsar.
 
-== Example: Boo!
+== Example: Hello Pulsar
 
 . Create a new topic in the newly created `kafka` namespace. For this example, we created `test-topic` within the `kafka` namespace on the `tenant-1` tenant.
 +
@@ -73,32 +73,32 @@ session.timeout.ms=45000
 ----
 
 . Change directory to Kafka.
-. Create a Kafka producer to produce messages on `tenant-1/kafka/test-topic`. 
+. Create a Kafka producer to produce messages on `tenant-1/kafka/test-topic`.
 +
-Once the producer is ready, it accepts standard input from the user. 
+Once the producer is ready, it accepts standard input from the user.
 +
 [source,bash]
 ----
 $ bin/kafka-console-producer --broker-list kafka-aws-useast2.streaming.datastax.com:9093 --topic tenant-1/kafka/test-topic --producer.config config/ssl.properties
->boo
+>hello pulsar
 ----
 . In a new terminal window, create a Kafka consumer to consume messages from the beginning of `tenant-1/kafka/test-topic`:
 +
 [source,bash]
 ----
 $ bin/kafka-console-consumer --bootstrap-server kafka-aws-useast2.streaming.datastax.com:9093 --topic tenant-1/kafka/test-topic --consumer.config config/ssl.properties --from-beginning
-boo
+hello pulsar
 ----
 
-. Frighten yourself with `boo` as many times as you'd like, then return to your `kafka` namespace dashboard in {product_name} and monitor your activity.
+. Send as many messages as you'd like, then return to your `kafka` namespace dashboard in {product_name} and monitor your activity.
 
-Your Kafka messages are being produced and consumed in a Pulsar cluster! 
+Your Kafka messages are being produced and consumed in a Pulsar cluster!
 
 image::astream-kafka-monitor.png[Monitor Kafka Activity]
 
 == Starlight for Kafka video
 
-Follow along with this video from our *Five Minutes About Pulsar* series to migrate from Kafka to Pulsar. 
+Follow along with this video from our *Five Minutes About Pulsar* series to migrate from Kafka to Pulsar.
 
 video::Qy2ZlelLjXg[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 
