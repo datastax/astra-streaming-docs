@@ -5,10 +5,6 @@
 
 {product_name} release notes provide information about new and improved features, known and resolved issues, and bug fixes.
 
-== 2 December 2022
-
-{product_name} now supports https://pulsar.apache.org/docs/next/txn-how[Pulsar transactions].
-
 == 21 November 2022
 
 Added support for serverless Azure `australiaeast` (New South Wales, Australia) region. For more, see xref:operations:astream-regions.adoc[{product_name} regions].
