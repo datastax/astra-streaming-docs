@@ -15,7 +15,7 @@ Added support for serverless Azure `australiaeast` (New South Wales, Australia) 
 
 == 11 November 2022
 
-{product_name} now supports xref:streaming-learning/functions/index.adoc[transform functions].
+{product_name} now supports xref:streaming-learning:functions:index.adoc[transform functions].
 
 == 16 September 2022
 
