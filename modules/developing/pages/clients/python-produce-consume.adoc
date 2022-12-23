@@ -1,0 +1,74 @@
+= Producing and consuming messages using the python pulsar client on Astra Streaming
+:description: This is a guide to create a simple producer and consumer using Pulsar's python client.
+:title: Python pulsar client on Astra Streaming
+:page-aliases: docs@astra-streaming::astream-python-eg.adoc,astra-streaming:ROOT:astream-python-eg.adoc
+:page-tag: astra-streaming,dev,develop,python,pulsar
+
+== Pre-req's
+
+You will need the following things in place to complete this guide:
+
+* Linux Python versions 3.4 to 3.7 are supported
+* MacOS version 3.7 is supported
+* a working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+
+TIP: Visit our {astra-streaming-examples-repo}/python[examples repo] to see the complete source of this example.
+
+== Create a project
+
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/create-project.sh[]
+----
+
+== Add the client
+
+[source,python,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-client]
+----
+
+== Create a producer
+
+[source,python,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-producer]
+----
+
+[source,python,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=produce-message]
+----
+
+== Create a consumer
+
+[source,python,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-consumer]
+----
+
+[source,python,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=consume-message]
+----
+
+[source,python,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=clean-up]
+----
+
+== Run the example
+
+[source,python,subs="attributes+"]
+----
+python3 index.py
+----
+
+You should see output similar to the following
+
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/python/simple-producer-consumer/output.sh[]
+----
+
+== Next steps

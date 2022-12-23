@@ -1,0 +1,102 @@
+= Producing and consuming messages using the Golang pulsar client on Astra Streaming
+:description: This is a guide to create a simple producer and consumer using Pulsar's golang client.
+:title: Golang pulsar client on Astra Streaming
+:page-aliases: docs@astra-streaming::astream-golang-eg.adoc,astra-streaming:ROOT:astream-golang-eg.adoc
+:page-tag: astra-streaming,dev,develop,pulsar,go
+
+== Pre-req's
+
+You will need the following things in place to complete this guide:
+
+* Golang version 1.15 and above
+* Go CLI
+* a working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+* a basic text editor or IDE
+
+TIP: Visit our {astra-streaming-examples-repo}/go[examples repo] to see the complete source of this example.
+
+== Create a project
+
+First thing is to create a new GO project. Open a new terminal and run the following script to create a project folder, change into it, and init a new GO project.
+
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/go/simple-producer-consumer/create-project.sh[]
+----
+
+Within the new project a "main" file is created and the Pulsar client package is retrieved.
+
+== Add the client
+
+Open the new "main.go" file in your editor and paste the following code within.
+
+[source,golang,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-client]
+----
+
+Don't be alarmed, this isn't a complete code snippet. It imports in the required packages, established an entry point for the app, and creates a new instance of a Pulsar client. Notice there are a few variables waiting for a replacement value.
+
+include::partial$client-variables-table.adoc[]
+
+== Create a producer
+
+Now we'll use the client to create a producer. While the client holds directions of where to connect and how to authenticate, the producer has the full topic address where a message will be published. The full topic address includes the topic persistence, the tenant, namespace, and topic name.
+
+Paste the following code in "main.go".
+
+[source,golang,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-producer]
+----
+
+Next step is to create a message to be sent. In our case we'll set the payload to something super memorable - "Hello World". And with a producer and message ready to go, we can asynchronously send.
+
+Paste the following code in "main.go".
+
+[source,golang,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=produce-message]
+----
+
+== Create a consumer
+
+What's a message for if it never gets read, right? Let's create a new subscription instance from the client. In this example you can think of a consumer and subscription as the same. Notice a topic is set as well as a name for the subscription, and an initial position. In this case our subscription will start with the "Earliest" unacknowledged message, which happens to be the first message in the topic.
+
+Add the following code to your "main.go" file.
+
+[source,golang,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-consumer]
+----
+
+Add this code to your file to have the consumer "Receive" and then "Ack" and messages provided to the subscription.
+
+[source,golang,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=receive-message]
+----
+
+== Run the example
+
+Your example GO app is complete. Here it is your big moment. Back to the terminal, still in the same folder as the main.go file. Run the application.
+
+[source,shell,subs="attributes+"]
+----
+go run main.go
+----
+
+If everything went as planned, you should see output similar to the following.
+
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/go/simple-producer-consumer/output.sh[]
+----
+
+== Next steps
+
+Your messaging skills are progressing well! Let's continue learning.
+
+* xref:developing:configure-pulsar-env.adoc[]
+* xref:developing:astream-functions.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[]

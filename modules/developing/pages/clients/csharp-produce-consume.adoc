@@ -1,0 +1,95 @@
+= Producing and consuming messages using the C# pulsar client on Astra Streaming
+:description: This is a guide to create a simple producer and consumer using Pulsar's c# client.
+:title: C# pulsar client on Astra Streaming
+
+== Pre-req's
+
+You will need the following things in place to complete this guide:
+
+* .NET 7 SDK installed (https://learn.microsoft.com/en-us/dotnet/core/install/[install now,title=Install .net sdk]{external-link-icon})
+* a working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+
+TIP: Visit our {astra-streaming-examples-repo}/csharp[examples repo] to see the complete source of this example.
+
+== Create a console project
+
+Create a new console project and add a reference to the https://www.nuget.org/packages/DotPulsar/[dotpulsar client]
+
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/create-project.sh[]
+----
+
+== Create a client instance
+
+With a new project in place, first step is to create an instance of `PulsarClient`. Notice how we chain different configurations together to choose how connections are handled.
+
+Open the Program.cs file in your favorite text editor and clear its contents
+
+Add the following to the file, starting at line 1
+
+[source,csharp,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-client]
+----
+
+Notice there a few values that you'll need to fill in
+
+include::partial$client-variables-table.adoc[]
+
+== The producer
+
+We're making progress! Now that we have a client, next is to use that connection to produce a single message.
+
+In the Program.cs file append the following code just below the client code. Here we are creating a new instance of a `producer` and giving it instruction that the messages will have a string format (other examples are json, byte[], avro, etc).
+
+[source,csharp,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-producer]
+----
+
+It's how time! Asynchronously send a single (string) message and wait for acknowledgment.
+
+[source,csharp,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=produce-message]
+----
+
+== The consumer
+
+The final piece to the puzzle - a consumer. What value is a message that's never consumed!?
+
+Back in the Program.cs file append the following code below the producer code. A new `consumer` instance is created with instruction to expect messages in a string format. The consumer uses subscriptions with the broker to gather messages. The initial position is one of Pulsar's superpowers. Here we choose to start at the "earliest" message, which is the first message added to the topic.
+
+[source,csharp,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-consumer]
+----
+
+Loop through the messages provided to the consumer's subscription and write its contents.
+
+[source,csharp,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=consumer-loop]
+----
+
+== Run the example
+
+The moment of truth... run the app
+
+[source,shell,subs="attributes+"]
+----
+dotnet run
+----
+
+You should see output similar to the following
+
+[source,shell,subs="attributes+"]
+----
+include::{astra-streaming-examples-repo}/csharp/output.sh[]
+----
+
+Woo-hoo{emoji-tada}! You did it! You're on your way to messaging glory.
+
+== Next steps
+

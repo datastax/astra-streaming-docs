@@ -1,12 +1,10 @@
 * xref:astream-faq.adoc[Guides and Examples]
+
 ** xref:astream-faq.adoc[FAQs]
+
 ** xref:astream-org-permissions.adoc[Manage permissions]
 *** xref:astream-custom-roles.adoc[Use custom roles]
-** xref:astream-code-examples.adoc[Code Examples]
-*** xref:astream-golang-eg.adoc[Connect using GoLang]
-*** xref:astream-java-eg.adoc[Connect using Java]
-*** xref:astream-nodejs-eg.adoc[Connect using NodeJS]
-*** xref:astream-python-eg.adoc[Connect using Python]
+
 ** xref:astream-subscriptions.adoc[Pulsar subscriptions]
 *** xref:astream-subscriptions-exclusive.adoc[Exclusive]
 *** xref:astream-subscriptions-shared.adoc[Shared]

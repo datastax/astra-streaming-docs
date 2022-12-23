@@ -1,6 +1,15 @@
 * xref:configure-pulsar-env.adoc[Developing]
-** xref:astream-cdc.adoc[]
-** xref:astream-cdc.adoc[]
+
+** xref:configure-pulsar-env.adoc[]
+** xref:using-curl.adoc[]
 ** xref:astream-functions.adoc[]
 ** xref:astream-kafka.adoc[]
 ** xref:astream-rabbit.adoc[]
+
+** Producing and consuming messages
+*** xref:produce-consume-astra-portal.adoc[Astra Portal]
+*** xref:produce-consume-pulsar-client.adoc[Pulsar Cli]
+*** xref:clients/index.adoc[Client Applications]
+
+** Change data capture (CDC)
+*** xref:astream-cdc.adoc[]

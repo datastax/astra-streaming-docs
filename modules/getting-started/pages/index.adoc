@@ -4,7 +4,7 @@
 :navtitle: Get started
 :title: Getting started with Astra Streaming
 
-Follow this guide to get started using Astra Streaming.
+Follow this guide to create an Astra account and use it to create a streaming tenant where streaming messages are produced and consumed.
 
 == Pre-req's
 
@@ -12,40 +12,38 @@ Follow this guide to get started using Astra Streaming.
 
 == Creating your Astra account
 
-Follow these steps to create your free Astra account.
+Navigate to the https://astra.datastax.com[Astra portal sign in page^]{external-link-icon}.
 
-. Navigate to the https://astra.datastax.com[Astra portal sign in page^]{external-link-icon}
-+
-image::astream-login.png[Login to Astra]
+image:astream-login.png[Login to Astra]
 
-. Click the "Sign Up" link (toward the bottom)
+Click the "Sign Up" link (toward the bottom).
 
-. Provide your information along with a valid email
-+
-image::astream-create-account.png[Create Astra account]
+Provide your information along with a valid email.
 
-. You should receive an email from DataStax, verifying your email. Click the button within
+image:astream-create-account.png[Create Astra account]
 
-. If you weren't automatically signed in, visit the https://astra.datastax.com[Astra sign in page^]{external-link-icon} and use your new account creds
+You should receive an email from DataStax, verifying your email. Click the button within.
 
-== Creating your first streaming tenant
+If you weren't automatically signed in, visit the https://astra.datastax.com[Astra sign in page^]{external-link-icon} and use your new account creds.
 
-Think of a tenant in Astra Streaming as your safe space to work. It is a portion of DataStax's managed Apache Pulsar that is only yours. Learn more about tenancy in https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar docs^]{external-link-icon}.
+== Your first streaming tenant
 
-These steps will guide you through creating a Pulsar streaming tenant. You'll use this to create namespaces, topics, functions, and pretty much everything else.
+Think of a tenant in Astra Streaming as your safe space to work. It is a portion of DataStax's managed Apache Pulsar that is only yours. Learn more about tenancy in the https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar docs^]{external-link-icon}.
+
+The steps in these tabs will guide you through creating a streaming tenant. You'll use the tenant to create namespaces, topics, functions, and pretty much everything else. The only difference between the tabs is how your tenant is created - they all have the same result.
 
 [tabs]
 ====
 Astra Portal::
 +
 --
-. Once signed in, click the "Create a Stream" button on your Astra home page
+. Once signed in, click the "Create a Stream" button on the Astra home page.
 +
 |===
 a|image:home-quick-access.png[Create a stream in Astra Streaming]
 |===
 
-. Name your streaming tenant something memorable like "my-stream-<rand>", replace <rand> with random letters or numbers. All tenant names in Astra Streaming must be unique. Then choose your preferred cloud provider and region. For your first example tenant, the region doesn't really matter (it's all free).
+. Name your streaming tenant something memorable like "my-stream-<rand>". Replace <rand> with random letters or numbers (all tenant names in Astra Streaming must be unique). Then choose your preferred cloud provider and region. For your first example tenant, the region doesn't really matter (it's all free).
 +
 |===
 a|image:create-a-stream.png[Create a new tenant in Astra Streaming]
@@ -58,8 +56,6 @@ a|image:create-a-stream.png[Create a new tenant in Astra Streaming]
 |===
 a|image:new-tenant-quickstart.png[New tenant quickstart in Astra Streaming]
 |===
-
-. With a new tenant created, you're ready to create a namespace
 --
 
 Astra Cli::
@@ -88,9 +84,9 @@ include::{astra-streaming-examples-repo}/astra-cli/create-tenant.sh[]
 --
 ====
 
-== Creating a namespace to hold topics
+== A namespace to hold topics
 
-A namespace is within a tenant. It is a logical grouping of message topics. Tenants usually have many namespaces. The delimiter of a namespace could be by environment (dev,stage,prod) or by application (catalog,cart,user) or whatever makes sense to you. If you would like to learn more about namespaces in Pulsar, https://pulsar.apache.org/docs/concepts-messaging/#namespaces[read the docs^]{external-link-icon}.
+A namespace is within a tenant. It is a logical grouping of message topics. Tenants usually have many namespaces. What makes up a namespace is only limited by your imagination. It could be by environment (dev, stage, prod) or by application (catalog, cart, user) or whatever makes sense to you. If you would like to learn more about namespaces in Pulsar, https://pulsar.apache.org/docs/concepts-messaging/#namespaces[read the docs^]{external-link-icon}.
 
 NOTE: Astra Streaming automatically created a namespace named "default" when you created the tenant. If you would like to use that instead of creating a new namespace, it's perfectly fine.
 
@@ -99,26 +95,24 @@ NOTE: Astra Streaming automatically created a namespace named "default" when you
 Astra Portal::
 +
 --
-. Navigate to the "Namespace And Topics" tab
+. Navigate to the "Namespace And Topics" tab.
 +
 |===
 a|image:namespace-tab.png[Namespace tab in Astra Streaming]
 |===
 
-. Click the "Create Namespace" button and give your namespace a super original name like "my-namespace"
+. Click the "Create Namespace" button and give your namespace a super original name like "my-namespace".
 +
 [width=75%]
 |===
 a|image:create-namespace.png[Create namespace in Astra Streaming]
 |===
 
-. Click "Create" to create the namespace
+. Click "Create" to create the namespace.
 +
 |===
 a|image:namespace-listing.png[Namespaces in Astra Streaming]
 |===
-
-. You're ready to create a topic in the namespace
 --
 
 Pulsar Admin::
@@ -126,7 +120,7 @@ Pulsar Admin::
 --
 Not sure about this? Learn more about xref:developing:configure-pulsar-env.adoc[configuring your local environment for Astra Streaming].
 
-. Set the required variables
+. Set the required variables.
 +
 [source,shell,subs="attributes+"]
 ----
@@ -140,8 +134,6 @@ export NAMESPACE="my-namespace"
 ----
 include::{astra-streaming-examples-repo}/pulsar-admin/create-namespace.sh[]
 ----
-
-. You're ready to create a topic in the namespace
 --
 
 Curl::
@@ -170,16 +162,16 @@ include::{astra-streaming-examples-repo}/curl/create-namespace.sh[]
 --
 ====
 
-== Creating a topic to organize messages
+== A topic to organize messages
 
-Topics are the core construct of a messaging system. They provide a way to group messages matching certain criteria. The name of the topic usually loosely defines the criteria, then more advanced things like schemas might also be in use. Topics are where others cab  "listen" for new messages and do additional work. In Pulsar topics have a URL structure (ie persistent://tenant/namespace/topic). Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar docs^]{external-link-icon}.
+Topics are the core construct of a messaging system. They provide a way to group messages matching certain criteria. The name of the topic usually loosely defines the criteria, then more advanced things like schemas might also be in use. Topics are where others can  "listen" for new messages. Functions and connectors can also "listen" for messages and automate workflows. In Pulsar, topics addresses look like a URL (ie persistent://tenant/namespace/topic). Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar docs^]{external-link-icon}.
 
 [tabs]
 ====
 Astra Portal::
 +
 --
-. Within the "Namespace And Topics tab", locate the namespace created previously and click its "Add Topic" button
+. Within the "Namespace And Topics tab", locate the namespace created previously and click its "Add Topic" button.
 
 . Provide a name for the topic like "my-topic". It needs to start with a lowercase letter, be alphanumeric, and can contain hyphens. Leave the choice of persistence and partitioning as is. Those can be part of https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[future learning^]{external-link-icon} :).
 +
@@ -188,13 +180,11 @@ Astra Portal::
 a|image:add-topic.png[Add topic in Astra Streaming]
 |===
 
-. Click the "Add Topic" button to create the topic within the namespace
+. Click the "Add Topic" button to create the topic within the namespace.
 +
 |===
 a|image:topic-listing.png[Topic listing in Astra Streaming]
 |===
-
-. You're ready to put it all together and work with messages!
 --
 
 Pulsar Admin::
@@ -217,8 +207,6 @@ export TOPIC="my-topic"
 ----
 include::{astra-streaming-examples-repo}/pulsar-admin/create-topic.sh[]
 ----
-
-. You're ready to put it all together and work with messages!
 --
 
 Curl::
@@ -226,7 +214,7 @@ Curl::
 --
 Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here].
 
-. Set the required variables
+. Set the required variables.
 +
 [source,shell,subs="attributes+"]
 ----
@@ -237,14 +225,12 @@ export TOPIC="my-topic"
 # export TENANT="my-stream-<rand>" # this should have been set in the previous step
 ----
 
-. Run the following script to create a new topic
+. Run the following script to create a new topic.
 +
 [source,shell,subs="attributes+"]
 ----
 include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
 ----
-
-. You're ready to put it all together and work with messages!
 --
 ====
 
@@ -252,15 +238,15 @@ include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
 
 Now it's time to produce and consume messages in your new message topic. There are quite a few different ways to accomplish this. Choose the right one for your needs (they all end up doing the same thing).
 
-[cols=1*,frame=none,grid=none]
+[cols=3*,frame=none,grid=none]
 |===
 |
-xref::produce-consume-astra-portal.adoc[Astra Portal] +
+xref:produce-consume-astra-portal.adoc[Astra Portal] +
 [.small]##Using Astra Streaming's "Try Me" feature in the UI##
 |
-xref::produce-consume-pulsar-client.adoc[Pulsar Client] +
-[.small]##Downloading and using the cli provided within Pulsar to interact with the topic##
+xref:produce-consume-pulsar-client.adoc[Pulsar Client] +
+[.small]##Use the cli provided within Pulsar to interact with the topic##
 |
-xref::produce-consume-clients.adoc[Runtime Clients] +
-[.small]##Compiling a client application that interacts with Pulsar (C#, Java, Node, etc)##
+xref:clients/index.adoc[Runtime Clients] +
+[.small]##Create a client application that interacts with Pulsar (C#, Java, Python, etc)##
 |===

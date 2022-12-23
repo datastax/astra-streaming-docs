@@ -1,0 +1,30 @@
+= Producing and consuming messages on Astra Streaming with pulsar clients
+:title: Pulsar clients with Astra Streaming
+:description: Use any of the Pulsar Clients to interact with your Astra Streaming topics.
+:page-aliases: astream-code-examples.adoc
+
+{product_name} is powered by http://pulsar.apache.org/[Apache Pulsar].
+To connect to your service, use the open-source client APIs provided by the Apache Pulsar project. Astra Streaming is running Pulsar version {pulsar_version}. You should use this API version or higher.
+
+Below is a list of popular Pulsar client runtimes. Visit each guide to create a simple message producer and consumer in your Astra Streaming tenant.
+
+== Pulsar Clients
+
+[cols="^1,^1,^1,^1", grid=none,frame=none]
+|===
+| xref:clients/csharp-produce-consume.adoc[image:csharp-icon.png[]]
+
+xref:clients/csharp-produce-consume.adoc[C#]
+| xref:clients/golang-produce-consume.adoc[image:golang-icon.png[]]
+
+xref:clients/golang-produce-consume.adoc[Golang]
+| xref:clients/java-produce-consume.adoc[image:java-icon.png[]]
+
+xref:clients/java-produce-consume.adoc[Java]
+| xref:clients/nodejs-produce-consume.adoc[image:node-icon.png[]]
+
+xref:clients/nodejs-produce-consume.adoc[Node.js]
+| xref:clients/python-produce-consume.adoc[image:python-icon.png[]]
+
+xref:clients/python-produce-consume.adoc[Python]
+|===
