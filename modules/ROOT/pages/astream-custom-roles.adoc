@@ -9,11 +9,11 @@ image::ROOT:astream-roles.png[]
 
 If the default roles don't meet your requirements, you can use custom roles that meet your organizational needs.
 
-== Create custom role
+== Create custom role in Astra portal
 
 [NOTE]
 ====
-You can also create custom roles using the DevOps API.
+You can also create custom roles using the https://docs.datastax.com/en/astra-serverless/docs/manage/devops/devops-roles.html[DevOps API].
 ====
 
 . From any page in https://astra.datastax.com[{product_name}], select the *Organizations* dropdown.
@@ -41,3 +41,18 @@ To see your custom roles, select *Role Management* within your Organization. You
 . Once you have updated your permissions, select *Edit Role*.
 
 Your updated custom role will show up in *Role Management* within your Organization.
+
+== Multi-tenancy in Pulsar
+
+Pulsar was created with support for multi-tenancy.
+Multi-tenant systems run isolated workloads on shared hardware. For example, when provisioning multiple customers' applications on the same datacenter, a multi-tenant system must meet each customer's security, isolation, and performance requirements, while minimizing the impact they have on each other's workloads.
+
+Pulsar provisions resources to a *tenant*. A tenant can contain multiple *namespaces*. Namespaces administrate all *topics* within them. This structure is built into the Pulsar persistent topic URL:
+[source,shell]
+----
+persistent://tenant/namespace/topic
+----
+
+Each tenant has its own security context, resource utilization, and isolation policies.
+
+Role management in {product_name} is restricted. For more on creating custom roles in Pulsar, see xref:pulsar-docs:operations/custom-roles.adoc[].
