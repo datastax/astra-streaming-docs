@@ -1,18 +1,26 @@
 = What is DataStax {product_name}?
+:page-layout: gcx-landing
 :slug: what-is-datastax-astra-streaming
 :page-aliases: docs@astra-streaming::index.adoc
 :page-tag: astra-streaming,planner,admin,dev,pulsar
 :navtitle: Astra Streaming
+:blank: {empty} +
 
 
+++++
+<div class="landing-row">
+++++
 
-{product_name} takes advantage of the core capabilities built into Astra such
-as SSO, IAM and billing.
-Existing Astra customers can augment their existing database capabilities
-with pub/sub and streaming to address a wider range of use cases right away.
-
-With {product_name}, customers now have powerful capabilities to help drive key
-business and technical outcomes including:
+[sidebar.landing-card]
+.What is {product_name}?
+****
+--
+{product_name} is a cloud native data streaming and event stream processing
+service tightly integrated into the Astra cloud platform and powered by Apache Pulsar™.
+Using {product_name}, customers can quickly create Pulsar instances,
+manage their clusters, scale across cloud regions, and manage Pulsar resources
+such as topics, connectors, functions and subscriptions. With {product_name}, customers 
+now have powerful capabilities to help drive key business and technical outcomes including:
 
 *Real Time Processing*:: Legacy batch processing jobs result in stale data that
 can slow down an entire business.
@@ -34,37 +42,6 @@ frictionless path to modernization.
 By combining {product_name} with Astra DB, customers can create read-optimized
 views of data that can be quickly read from Astra DB and ensure that data is 
 always up to date by leveraging the event stream processing capabilities of {product_name}.
-
-== {product_name} limits
-
-For details about about the {product_name} limits, see xref:operations:astream-limits.adoc[{product_name} Limits].
-
-== What's next?
-
-* Start with the xref:getting-started:astream-quick-start.adoc[{product_name} QuickStart].
-* Browse the xref:api.adoc[{product_name} API References].
-
-= DataStax {product_name} Documentation
-:page-layout: gcx-landing
-:slug: what-is-datastax-astra-streaming
-:blank: {empty} +
-
-
-++++
-<div class="landing-row">
-++++
-
-[sidebar.landing-card]
-.What is {product_name}?
-****
---
-{product_name} is a cloud native data streaming and event stream processing
-service tightly integrated into the Astra cloud platform and powered by Apache Pulsar™.
-Using {product_name}, customers can quickly create Pulsar instances,
-manage their clusters, scale across cloud regions, and manage Pulsar resources
-such as topics, connectors, functions and subscriptions.
-
-{blank}
 --
 --
 [link=https://astra.datastax.com, window="_blank"]
@@ -90,11 +67,11 @@ image::icons/create-db-now.svg["Create a free streaming instance icon",40]
 ****
 --
 New to {product_name}?
-Use these tutorials to get familiar with streaming.
+Use these tutorials to get familiar with {product_name}.
 
-. xref:streaming-learning:ROOT:index.adoc[]
-. xref:getting-started/astream-quick-start.adoc[]
-. xref:streaming-learning:pulsar-io:connectors/index.adoc[]
+* xref:streaming-learning:ROOT:index.adoc[]
+* xref:getting-started:astream-quick-start.adoc[]
+* xref:docs@astra-streaming::astream-code-examples.adoc[]
 --
 [.landing-card-body-icon]
 image::icons/using-the-astra-console.svg["Try out Astra Streaming icon",40]
@@ -102,13 +79,13 @@ image::icons/using-the-astra-console.svg["Try out Astra Streaming icon",40]
 
 
 [sidebar.landing-card]
-.Is {product_name} right for you?
+.{product_name} integrations
 ****
 --
-{product_name} offers APIs for painlessly migrating existing messaging workloads. 
+{product_name} offers APIs for painlessly integrating existing messaging workloads.
 
-* xref:docs@starlight-jms::index.adoc[]
-* xref:docs@starlight-for-kafka::index.adoc[]
+* xref:docs@starlight-jms::index.adoc[Starlight for JMS]
+* xref:docs@starlight-kafka::index.adoc[]
 * xref:docs@starlight-rabbitmq::index.adoc[]
 --
 [.landing-card-body-icon]
@@ -126,33 +103,31 @@ image::icons/what-is-datastax-luna.svg["Astra DB card icon",40]
 ++++
 
 [sidebar.landing-card]
-.Secure your database
+.Sink and source connectors
 ****
 --
-{product_name} is designed to be secure by default, with built-in security controls that integrate with your existing security policies and protocols.
+{product_name} supports many popular streaming connectors, including:
 
-* xref:manage:org/managing-org.adoc#_manage_application_tokens[Manage application tokens]
-ifeval::["{evalproduct}" == "DB Serverless"]
-* xref:manage:db/manage-access-list.adoc[Manage IP access list for public endpoints]
-endif::[]
-* xref:secure:astra-plugin-hashi-vault.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/sinks/elastic-search.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/sinks/kafka.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/sinks/snowflake.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[...and more!]
 --
 [.landing-card-body-icon]
-image::icons/security.svg[Astra DB card icon,40]
+image::icons/connect-clients-to-astra-db.svg[Astra DB card icon,40]
 ****
 
 
 [sidebar.landing-card]
-.Connect to your database
+.Develop with {product_name}
 ****
 --
-Connect to your database using APIs, native drivers, or the command line.
+Use your favorite developer tools to create applications with {product_name}.
 
-* xref:connect:connecting.adoc[Connect to your Astra DB database]
-ifeval::["{evalproduct}" == "DB Serverless"]
-* xref:connect:private_endpoints/connect-private-endpoints.adoc[Connect to a private endpoint]
-endif::[]
-* xref:connect:connecting-to-astra-databases-using-datastax-drivers.adoc[Connect drivers with secure connect bundle]
+* xref:operations:astream-scrape-metrics.adoc[]
+* xref:developing:astream-functions.adoc[]
+* xref:developing:astream-kafka.adoc[]
+* xref:developing:astream-rabbit.adoc[]
 
 --
 [.landing-card-body-icon]
@@ -161,61 +136,23 @@ image::icons/connect-clients-to-astra-db.svg[Astra DB card icon,40]
 
 
 [sidebar.landing-card]
-.Migrate data
+.Manage your {product_name} instance
 ****
 --
-Migrate applications from any CQL-based cluster (Apache Cassandra®, DSE, {product_name}, or any type of CQL-based database) to any other CQL-based cluster, without any interruption of service to the client applications and data.
+Manage your cluster's security and deployment.
 
-xref:migrate:introduction.adoc[Get started with Zero Downtime Migration]
+* xref:operations:astream-georeplication.adoc[]
+* xref:operations:astream-regions.adoc[]
 --
 [.landing-card-body-icon]
-image::icons/migration.svg[Astra DB card icon,40]
+image::icons/security.svg[Astra DB card icon,40]
 ****
 
 ++++
 </div>
 ++++
-
-
-++++
-<div class="landing-row">
-++++
-
-[sidebar.landing-card]
-.Develop with Stargate APIs
-****
---
-{product_name} includes Stargate, an open-source, data API gateway that sits between your application and the database.
-Every database you create automatically has gRPC, GraphQL, REST, a Document (schemaless JSON) API, alongside native driver (CQL) coordinators.
-
-xref:develop:developing.adoc[Get started with Stargate APIs]
---
-[.landing-card-body-icon]
-image::icons/start-coding-with-stargate.svg[Astra DB card icon,40]
-****
-
-[sidebar.landing-card]
-.Integrations
-****
---
-Extend {product_name} with additional capabilities through integrations with other popular technologies like Temporal, Feast, and Grafana.
-
-xref:getting-started:integrations.adoc[Explore integrations]
-// Replace the line above with the following when Welcome Home launches:
-// https://astra.datastax.com/integrations[Explore integrations in the Astra DB console,window="_blank"]
---
-[.landing-card-body-icon]
-image::icons/extend-astra-db.svg[Astra DB card icon,40]
-****
-
-
-++++
-</div>
-++++
-
 
 == Do more with Astra
-
 
 ++++
 <div class="landing-row">
@@ -227,7 +164,7 @@ image::icons/extend-astra-db.svg[Astra DB card icon,40]
 --
 DataStax Astra DB is a serverless, multi-cloud database service built on Apache Cassandra® that is optimized for real-time applications that require large data volume, low latency, and flexible data models.
 
-https://docs.datastax.com/en/astra-serverless/docs/index.html[]
+https://docs.datastax.com/en/astra-serverless/docs/index.html[Astra DB]
 --
 [.landing-card-body-icon]
 image::icons/what-is-astra-streaming.svg[Astra DB card icon,40]
@@ -241,27 +178,23 @@ image::icons/what-is-astra-streaming.svg[Astra DB card icon,40]
 Change Data Capture (CDC) for {product_name} enables you to send data changes in real time throughout your entire ecosystem.
 With a wide range of connectors to data warehouses, messaging systems, data lakes as well as client libraries, you can send your data wherever it needs to go in real time.
 
-xref:connect:astream-cdc.adoc[]
+xref:developing:astream-cdc.adoc[]
 --
 [.landing-card-body-icon]
 image::icons/migrating-apps.svg[Astra DB card icon,40]
 ****
 
-
-ifeval::["{evalproduct}" == "DB Serverless"]
 [sidebar.landing-card]
 .DataStax Astra Block for Ethereum
 ****
 --
 With the DataStax Astra Block for Ethereum, you can stream a set of sanitized Ethereum data sets into your Astra database in real-time.
 
-xref:block:overview.adoc[]
+https://docs.datastax.com/en/astra-serverless/docs/block/overview.html[Astra Block for Ethereum]
 --
 [.landing-card-body-icon]
 image::icons/avoid-cloud-lockin.svg[Astra DB card icon,40]
 ****
-endif::[]
-
 
 ++++
 </div>
@@ -283,17 +216,10 @@ Get a jump on your learning and start coding today!
 --
 ****
 
-
 ++++
 </div>
 ++++
-
 
 {blank}
 
-
 '''
-
-++++
-</div>
-++++
