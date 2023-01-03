@@ -25,6 +25,8 @@ asciidoc:
     request_feature_access_email: 'astrastreaming@datastax.com'
     astra-streaming-examples-repo: 'https://raw.githubusercontent.com/ddieruf/astra-streaming-examples/master'
     external-link-icon: '&#x29C9;'
+    streaming_signup_url: 'https://astra.datastax.com/streaming'
+    login_url: 'https://astra.datastax.com'
 
     emoji-tada: "&#127881;"
     emoji-rocket: "&#128640;"
