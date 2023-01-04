@@ -1,16 +1,16 @@
 [cols="^1,2"]
 |===
 .^|serviceUrl
-|This is the URL for connecting to the Pulsar cluster. In the Astra Portal navigate to the "Connect" tab. In the "Details" area you will find the "Broker Service URL".
+|This is the URL for connecting to the Pulsar cluster. In the Astra Portal navigate to your streaming tenant. Then to the "Connect" tab. In the "Details" area you will find the "Broker Service URL".
 
 .^|pulsarToken
-|This is the token used for Pulsar cluster authentications. In the Astra Portal navigation to the "Settings" tab and choose "Create Token". A new token will be generated and available to copy.
+|This is the token used for Pulsar cluster authentications. In the Astra Portal navigate to your streaming tenant. Then to the "Settings" tab and choose "Create Token". A new token will be generated and available to copy.
 
 .^|tenantName
-|The name of your streaming tenant. In the Astra Portal navigate to the "Connect" tab. In the "Details" area you will find the "Name".
+|The name of your streaming tenant. In the Astra Portal navigate to your streaming tenant. In the "Details" area you will find the "Name".
 
 .^|namespace
-|Within your streaming tenant, this is the segmented area for certain topics. In the Astra Portal navigate to the "Namespace And Topics" tab. There will be a list of namespaces to choose.
+|Within your streaming tenant, this is the segmented area for certain topics. In the Astra Portal navigate to your streaming tenant. Then to the "Namespace And Topics" tab. There will be a list of namespaces to choose.
 
 .^|topicName
 |Expanding the above chosen namespace will list the topics within. This value is just the topic name (not the "Full Name").
