@@ -73,7 +73,7 @@ Not sure about this? Visit the https://awesome-astra.github.io/docs/pages/astra/
 
 . Set the required variables, replacing <rand> with a few random numbers or letters. Optionally you can choose a different cloud provider and region. Use `astra streaming list-regions` to see values.
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 TENANT="my-stream-<rand>"
 CLOUD_PROVIDER_STREAMING="gcp"
@@ -82,7 +82,7 @@ CLOUD_REGION_STREAMING="uscentral-1"
 
 . Run the following script to create a new streaming tenant
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/astra-cli/create-tenant.sh[]
 ----
@@ -130,7 +130,7 @@ Not sure about this? Learn more about xref:developing:configure-pulsar-env.adoc[
 
 . Set the required variables.
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 NAMESPACE="my-namespace"
 # TENANT="my-stream-<rand>" # set previously
@@ -138,7 +138,7 @@ NAMESPACE="my-namespace"
 
 . Run the following script to create a new namespace
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/pulsar-admin/create-namespace.sh[]
 ----
@@ -151,7 +151,7 @@ Not sure about this? Learn more about interacting with Astra Streaming through c
 
 . Set the required variables
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 PULSAR_TOKEN="<REPLACE-ME-WITH-TOKEN>"
 WEB_SERVICE_URL="<REPLACE-ME-WITH-URL>"
@@ -161,7 +161,7 @@ NAMESPACE="my-namespace"
 
 . Run the following script to create a new namespace
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/curl/create-namespace.sh[]
 ----
@@ -200,7 +200,7 @@ Not sure about this? Learn more about connecting to Astra Streaming with the pul
 
 . Set the required variables
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 TOPIC="my-topic"
 # NAMESPACE="my-namespace" # set previously
@@ -209,7 +209,7 @@ TOPIC="my-topic"
 
 . Run the following script to create a new topic
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/pulsar-admin/create-topic.sh[]
 ----
@@ -222,7 +222,7 @@ Not sure about this? Learn more about interacting with Astra Streaming through c
 
 . Set the required variables.
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 TOPIC="my-topic"
 # PULSAR_TOKEN="<REPLACE-ME-WITH-TOKEN>" # set previously
@@ -233,7 +233,7 @@ TOPIC="my-topic"
 
 . Run the following script to create a new topic.
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
 ----

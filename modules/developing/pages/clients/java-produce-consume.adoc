@@ -19,7 +19,7 @@ TIP: Visit our {astra-streaming-examples-repo}/java[examples repo] to see the co
 
 Create a new maven project and add the Pulsar client dependency.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/create-project.sh[]
 
@@ -34,7 +34,7 @@ include::{astra-streaming-examples-repo}/java/simple-producer-consumer/create-pr
 
 Let's set up the main class to have some fun! Open the src/main/java/org/example/App.java file in your favorite text editor or IDE. Clear whatever code the file was created with and add the following to bring in needed dependencies, create a client instance, and configure it to use your Astra Streaming tenant.
 
-[source,java,subs="attributes+"]
+[source,java]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-client]
 ----
@@ -47,14 +47,14 @@ include::partial$client-variables-table.adoc[]
 
 Next add this code to create a new producer. It builds on the client configuration to give direction about what topic to use.
 
-[source,java,subs="attributes+"]
+[source,java]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-producer]
 ----
 
 And then add this code to asynchronously send a single message to the broker and wait for acknowledgment.
 
-[source,java,subs="attributes+"]
+[source,java]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=produce-message]
 ----
@@ -65,21 +65,21 @@ Still in the "App.java" file, create a new consumer instance. This code directs 
 
 Add the following code to "App.java".
 
-[source,java,subs="attributes+"]
+[source,java]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-consumer]
 ----
 
 With the consumer and subscription in place, we can receive the unacknowledged messages added earlier. Add the following to "App.java".
 
-[source,java,subs="attributes+"]
+[source,java]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=consumer-loop]
 ----
 
 Finally, add a little clean up and close out the class.
 
-[source,java,subs="attributes+"]
+[source,java]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=close-consumer]
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=close-client]
@@ -89,7 +89,7 @@ include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimplePro
 
 Your Java class is ready for the big time! Let's build the app and run.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 maven build
 java run xxxxx
@@ -97,7 +97,7 @@ java run xxxxx
 
 You should see output similar to the following
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/output.sh[]
 ----

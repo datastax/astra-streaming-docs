@@ -19,7 +19,7 @@ TIP: Visit our {astra-streaming-examples-repo}/go[examples repo] to see the comp
 
 First thing is to create a new GO project. Open a new terminal and run the following script to create a project folder, change into it, and init a new GO project.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/create-project.sh[]
 ----
@@ -30,7 +30,7 @@ Within the new project a "main" file is created and the Pulsar client package is
 
 Open the new "main.go" file in your editor and paste the following code within.
 
-[source,golang,subs="attributes+"]
+[source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-client]
 ----
@@ -45,7 +45,7 @@ Now we'll use the client to create a producer. While the client holds directions
 
 Paste the following code in "main.go".
 
-[source,golang,subs="attributes+"]
+[source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-producer]
 ----
@@ -54,7 +54,7 @@ Next step is to create a message to be sent. In our case we'll set the payload t
 
 Paste the following code in "main.go".
 
-[source,golang,subs="attributes+"]
+[source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=produce-message]
 ----
@@ -65,14 +65,14 @@ What's a message for if it never gets read, right? Let's create a new subscripti
 
 Add the following code to your "main.go" file.
 
-[source,golang,subs="attributes+"]
+[source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-consumer]
 ----
 
 Add this code to your file to have the consumer "Receive" and then "Ack" and messages provided to the subscription.
 
-[source,golang,subs="attributes+"]
+[source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=receive-message]
 ----
@@ -81,14 +81,14 @@ include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProdu
 
 Your example GO app is complete. Here it is your big moment. Back to the terminal, still in the same folder as the main.go file. Run the application.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 go run main.go
 ----
 
 If everything went as planned, you should see output similar to the following.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/output.sh[]
 ----

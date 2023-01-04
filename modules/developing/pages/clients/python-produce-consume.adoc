@@ -16,57 +16,57 @@ TIP: Visit our {astra-streaming-examples-repo}/python[examples repo] to see the 
 
 == Create a project
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/create-project.sh[]
 ----
 
 == Add the client
 
-[source,python,subs="attributes+"]
+[source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-client]
 ----
 
 == Create a producer
 
-[source,python,subs="attributes+"]
+[source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-producer]
 ----
 
-[source,python,subs="attributes+"]
+[source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=produce-message]
 ----
 
 == Create a consumer
 
-[source,python,subs="attributes+"]
+[source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-consumer]
 ----
 
-[source,python,subs="attributes+"]
+[source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=consume-message]
 ----
 
-[source,python,subs="attributes+"]
+[source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=clean-up]
 ----
 
 == Run the example
 
-[source,python,subs="attributes+"]
+[source,python]
 ----
 python3 index.py
 ----
 
 You should see output similar to the following
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/output.sh[]
 ----

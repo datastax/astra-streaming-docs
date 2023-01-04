@@ -24,7 +24,7 @@ Before we get started with the app, a little pre-work needs to be done. The Node
 Ubuntu based deb::
 +
 --
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-project.sh[tag=prep-env]
 ----
@@ -49,7 +49,7 @@ sudo ldconfig
 
 With the environment dependencies out of the way, let's create a new Node.js project. Run the following script in a terminal. If NPM asks for project values just go with the defaults it suggests.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-project.sh[tag=create-project]
 ----
@@ -58,7 +58,7 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-
 
 A new "index.js" file was created within the project folder. Open that file in your editor of choice and add the following code.
 
-[source,javascript,subs="attributes+"]
+[source,javascript]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-client]
 ----
@@ -73,21 +73,21 @@ Using that new client instance let's create a producer. While there are quite a 
 
 Add the following code to "index.js".
 
-[source,javascript,subs="attributes+"]
+[source,javascript]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-producer]
 ----
 
 Then add this code to actually send the message and receive acknowledgment.
 
-[source,javascript,subs="attributes+"]
+[source,javascript]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=produce-message]
 ----
 
 Also, add a little clean-up to properly handle things.
 
-[source,javascript,subs="attributes+"]
+[source,javascript]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=cleanup-producer]
 ----
@@ -96,33 +96,33 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleP
 
 Now we have a message waiting to be consumed and acknowledged. This code creates a new consumer subscription, declaring what topic to watch and naming the subscription. Add this to "index.js".
 
-[source,javascript,subs="attributes+"]
+[source,javascript]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-consumer]
 ----
 
 
 
-[source,javascript,subs="attributes+"]
+[source,javascript]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=consume-message]
 ----
 
-[source,javascript,subs="attributes+"]
+[source,javascript]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=cleanup-consumer]
 ----
 
 == Run the example
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 npm run
 ----
 
 You should see output similar to the following
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/output.sh[]
 ----

@@ -15,7 +15,7 @@ TIP: Visit our {astra-streaming-examples-repo}/csharp[examples repo] to see the 
 
 Create a new console project and add a reference to the https://www.nuget.org/packages/DotPulsar/[dotpulsar client]
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/create-project.sh[]
 ----
@@ -28,7 +28,7 @@ Open the Program.cs file in your favorite text editor and clear its contents
 
 Add the following to the file, starting at line 1
 
-[source,csharp,subs="attributes+"]
+[source,csharp]
 ----
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-client]
 ----
@@ -43,14 +43,14 @@ We're making progress! Now that we have a client, next is to use that connection
 
 In the Program.cs file append the following code just below the client code. Here we are creating a new instance of a `producer` and giving it instruction that the messages will have a string format (other examples are json, byte[], avro, etc).
 
-[source,csharp,subs="attributes+"]
+[source,csharp]
 ----
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-producer]
 ----
 
-It's how time! Asynchronously send a single (string) message and wait for acknowledgment.
+Add the following code to asynchronously send a single (string) message and wait for acknowledgment.
 
-[source,csharp,subs="attributes+"]
+[source,csharp]
 ----
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=produce-message]
 ----
@@ -61,35 +61,41 @@ The final piece to the puzzle - a consumer. What value is a message that's never
 
 Back in the Program.cs file append the following code below the producer code. A new `consumer` instance is created with instruction to expect messages in a string format. The consumer uses subscriptions with the broker to gather messages. The initial position is one of Pulsar's superpowers. Here we choose to start at the "earliest" message, which is the first message added to the topic.
 
-[source,csharp,subs="attributes+"]
+[source,csharp]
 ----
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-consumer]
 ----
 
-Loop through the messages provided to the consumer's subscription and write its contents.
+This code will loop through the messages provided to the consumer's subscription and write its contents.
 
-[source,csharp,subs="attributes+"]
+[source,csharp]
 ----
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=consumer-loop]
 ----
 
 == Run the example
 
-The moment of truth... run the app
+The moment of truth... running the app. Head back to the terminal where you created the dotnet project and run the following command.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
 dotnet run
 ----
 
-You should see output similar to the following
+You should see output similar to the following.
 
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
-include::{astra-streaming-examples-repo}/csharp/output.sh[]
+~/SimpleProducerConsumer$ dotnet run
+
+Sent message
+Received: Hello World
 ----
 
 Woo-hoo{emoji-tada}! You did it! You're on your way to messaging glory.
 
 == Next steps
 
+* xref:developing:astream-cdc.adoc[]
+* xref:developing:astream-kafka.adoc[]
+* xref:developing:astream-rabbit.adoc[]
