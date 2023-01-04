@@ -7,13 +7,13 @@
 You will need the following things in place to complete this guide:
 
 * .NET 7 SDK installed (https://learn.microsoft.com/en-us/dotnet/core/install/[install now,title=Install .net sdk]{external-link-icon})
-* a working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+* A working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
 
-TIP: Visit our {astra-streaming-examples-repo}/csharp[examples repo] to see the complete source of this example.
+TIP: Visit our {astra-streaming-examples-repo}/csharp[examples repo^]{external-link-icon} to see the complete source of this example.
 
 == Create a console project
 
-Create a new console project and add a reference to the https://www.nuget.org/packages/DotPulsar/[dotpulsar client]
+Create a new console project and add a reference to the https://www.nuget.org/packages/DotPulsar/[dotpulsar client^]{external-link-icon}
 
 [source,shell]
 ----
