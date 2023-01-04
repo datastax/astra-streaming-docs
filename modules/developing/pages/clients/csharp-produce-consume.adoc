@@ -8,6 +8,7 @@ You will need the following things in place to complete this guide:
 
 * .NET 7 SDK installed (https://learn.microsoft.com/en-us/dotnet/core/install/[install now,title=Install .net sdk]{external-link-icon})
 * A working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+* A basic text editor or IDE
 
 TIP: Visit our {astra-streaming-examples-repo}/csharp[examples repo^]{external-link-icon} to see the complete source of this example.
 
@@ -96,6 +97,6 @@ Woo-hoo{emoji-tada}! You did it! You're on your way to messaging glory.
 
 == Next steps
 
-* xref:developing:astream-cdc.adoc[]
-* xref:developing:astream-kafka.adoc[]
-* xref:developing:astream-rabbit.adoc[]
+* xref:developing:configure-pulsar-env.adoc[]
+* xref:developing:astream-functions.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[]

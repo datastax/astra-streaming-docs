@@ -9,11 +9,10 @@
 You will need the following things in place to complete this guide:
 
 * Golang version 1.15 and above
-* Go CLI
-* a working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
-* a basic text editor or IDE
+* A working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+* A basic text editor or IDE
 
-TIP: Visit our {astra-streaming-examples-repo}/go[examples repo] to see the complete source of this example.
+TIP: Visit our {astra-streaming-examples-repo}/go[examples repo^]{external-link-icon} to see the complete source of this example.
 
 == Create a project
 
@@ -35,7 +34,7 @@ Open the new "main.go" file in your editor and paste the following code within.
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-client]
 ----
 
-Don't be alarmed, this isn't a complete code snippet. It imports in the required packages, established an entry point for the app, and creates a new instance of a Pulsar client. Notice there are a few variables waiting for a replacement value.
+Don't be alarmed, this isn't a complete code snippet. It imports in the required packages, establishes an entry point for the app, and creates a new instance of a Pulsar client. Notice there are a few variables waiting for a replacement value.
 
 include::partial$client-variables-table.adoc[]
 
@@ -90,7 +89,11 @@ If everything went as planned, you should see output similar to the following.
 
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/go/simple-producer-consumer/output.sh[]
+2023/01/04 13:43:00 Pulsar Producer
+2023/01/04 13:43:00 creating producer...
+2023/01/04 13:43:01 checking error of producer creation...
+2023/01/04 13:43:01 the Hello World successfully published with the message ID 421788:1:0
+2023/01/04 13:43:01 Received message : Hello World
 ----
 
 == Next steps

@@ -10,7 +10,7 @@ Below is a list of popular Pulsar client runtimes. Visit each guide to create a 
 
 == Pulsar Clients
 
-[cols="^1,^1,^1,^1", grid=none,frame=none]
+[cols="^1,^1,^1,^1,^1", grid=none,frame=none]
 |===
 | xref:clients/csharp-produce-consume.adoc[image:csharp-icon.png[]]
 

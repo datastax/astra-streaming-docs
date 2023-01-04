@@ -9,30 +9,66 @@
 You will need the following things in place to complete this guide:
 
 * JRE 8 installed (https://sdkman.io/[install now^,title=Install java]{external-link-icon})
-* maven installed (or you can use gradle)
-* a working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
-* a basic text editor or IDE
+* Maven installed (or you can use gradle)
+* A working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+* A basic text editor or IDE
 
-TIP: Visit our {astra-streaming-examples-repo}/java[examples repo] to see the complete source of this example.
+TIP: Visit our {astra-streaming-examples-repo}/java[examples repo^]{external-link-icon} to see the complete source of this example.
 
 == Create a project
 
-Create a new maven project and add the Pulsar client dependency.
+Create a new maven project and add the Pulsar client dependency in pom.xml.
 
 [source,shell]
 ----
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/create-project.sh[]
+----
 
+[source,xml]
+----
 <dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-client</artifactId>
-  <version>2.10.2</version>
+    <groupId>org.apache.pulsar</groupId>
+    <artifactId>pulsar-client</artifactId>
+    <version>2.10.2</version>
 </dependency>
+----
+
+For this example we will be creating a single artifact. Add the following build target in pom.xml.
+
+[source,xml]
+----
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>org.example.App</mainClass>
+                    </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+----
+
+You may also need to specify the versions on pom.xml as well.
+
+[source,xml]
+----
+<properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+</properties>
 ----
 
 == Add the client
 
-Let's set up the main class to have some fun! Open the src/main/java/org/example/App.java file in your favorite text editor or IDE. Clear whatever code the file was created with and add the following to bring in needed dependencies, create a client instance, and configure it to use your Astra Streaming tenant.
+Let's set up the main class to have some fun! Open the src/main/java/org/example/App.java file in your favorite text editor or IDE. Clear the contents of the file and add the following to bring in needed dependencies, create a client instance, and configure it to use your Astra Streaming tenant.
 
 [source,java]
 ----
@@ -91,15 +127,15 @@ Your Java class is ready for the big time! Let's build the app and run.
 
 [source,shell]
 ----
-maven build
-java run xxxxx
+mvn clean package assembly:single
+java -jar target/SimpleProducerConsumer-1.0-SNAPSHOT-jar-with-dependencies.jar
 ----
 
 You should see output similar to the following
 
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/output.sh[]
+Message received: Hello World
 ----
 
 == Next steps
