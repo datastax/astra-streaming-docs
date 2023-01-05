@@ -3,14 +3,34 @@
 :page-aliases: docs@astra-streaming::astream-custom-roles.adoc
 :page-tag: astra-streaming,security,secure,pulsar
 
+Apache Pulsar was created with support for multi-tenancy.
+A Pulsar cluster can have multiple tenants, and tenants can be spread across multiple Pulsar clusters.
+A tenant might represent a product line, a business unit, or an application.
+However you use a tenant, the tenant must be secure and isolated, so each tenant has its own security context, resource utilization, and isolation policies.
+A tenant can contain multiple *namespaces*. Namespaces administrate all *topics* within them. This structure is built into the Pulsar persistent topic URL:
+[source,shell]
+----
+persistent://tenant/namespace/topic
+----
+
+{product_name} is running Pulsar under the hood, but DataStax takes care of administration at the tenant level, so administration of `tenants` is blocked in `pulsar-admin`.
+
+[TIP]
+====
+If you want to control your own tenants in Pulsar, check out https://www.datastax.com/products/luna-streaming[Luna Streaming], a production-ready, open-source distribution of Apache Pulsar.
+====
+
+You can still manage roles, users, and organizations in the {astra_ui}.
+
+== Create custom role in Astra portal
+
+Role management in {product_name} is restricted. For more on creating custom roles in Pulsar, see xref:pulsar-docs:operations/custom-roles.adoc[].
+
 Within *Organization Settings* > *User Management*, you can see the permissions for a specific role by hovering over the number in the *Roles* column of the table. This will show the permissions granted to the role.
 
 image::ROOT:astream-roles.png[]
 
 If the default roles don't meet your requirements, you can use custom roles that meet your organizational needs.
-
-== Create custom role in Astra portal
-
 [NOTE]
 ====
 You can also create custom roles using the https://docs.datastax.com/en/astra-serverless/docs/manage/devops/devops-roles.html[DevOps API].
@@ -41,18 +61,3 @@ To see your custom roles, select *Role Management* within your Organization. You
 . Once you have updated your permissions, select *Edit Role*.
 
 Your updated custom role will show up in *Role Management* within your Organization.
-
-== Multi-tenancy in Pulsar
-
-Pulsar was created with support for multi-tenancy.
-Multi-tenant systems run isolated workloads on shared hardware. For example, when provisioning multiple customers' applications on the same datacenter, a multi-tenant system must meet each customer's security, isolation, and performance requirements, while minimizing the impact they have on each other's workloads.
-
-Pulsar provisions resources to a *tenant*. A tenant can contain multiple *namespaces*. Namespaces administrate all *topics* within them. This structure is built into the Pulsar persistent topic URL:
-[source,shell]
-----
-persistent://tenant/namespace/topic
-----
-
-Each tenant has its own security context, resource utilization, and isolation policies.
-
-Role management in {product_name} is restricted. For more on creating custom roles in Pulsar, see xref:pulsar-docs:operations/custom-roles.adoc[].
