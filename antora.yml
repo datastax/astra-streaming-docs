@@ -30,6 +30,7 @@ asciidoc:
 
     emoji-tada: "&#127881;"
     emoji-rocket: "&#128640;"
+    emoji-smile: "&#128512"
 
 nav:
   - modules/getting-started/nav.adoc

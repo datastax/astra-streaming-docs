@@ -98,3 +98,10 @@ Produce a message:
 ----
 ./bin/pulsar-client produce <REPLACE_ME_WITH_TENANT_NAME>/default/<REPLACE_ME_WITH_TOPIC_NAME> --messages "Hi there" --num-produce 1
 ----
+
+== What's next?
+
+Now that your configuration is set up and validated, see:
+
+* xref:produce-consume-astra-portal.adoc[]
+* xref:produce-consume-pulsar-client.adoc[]
