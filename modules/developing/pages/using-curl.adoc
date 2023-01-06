@@ -86,10 +86,10 @@ curl -sS --fail --location --request GET \
   "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks"
 ----
 
-The output should be a very long JSON-formatted string that contains details about all the sink connectors waiting for you to have fun with {emoji-smile}.
+The output should be a very long JSON-formatted string containing details about all the sink connectors waiting for you to have fun with {emoji-smile}.
 
 TIP: If your curl command doesn't go so smoothly, add `-v` to your call. +
-The v is for verbose, and prints more detail about what's problem has occurred.
+The `-v` is for verbose, and prints more detail about what problem has occurred.
 
 == What's next?
 
