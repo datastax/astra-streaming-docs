@@ -3,11 +3,18 @@
 :description: This guide will provide the necessary steps to download a compatible Pulsar artifact and configure the binaries for use with Astra Streaming.
 :title: A guide to configuring Pulsar binaries with Astra Streaming
 
-Did we mention that Astra Streaming is running Apache Pulsar? All the benefits you enjoy with the open source project can also be used on our platform. This guide will detail the necessary steps to getting set up and validating the connection.
+Did we mention that Astra Streaming is running Apache Pulsar™?
+
+All the benefits you enjoy with the open source Pulsar project can also be used on our platform.
+This guide details the necessary steps to getting set up and validating the connection.
 
 == Choosing a compatible version
 
-Pulsar is distributed as a single artifact. Its https://pulsar.apache.org/download/[download page^]{external-link-icon} offers the latest version as well as older releases. Astra Streaming is currently compatible with Pulsar {pulsar_version}. Locate the latest patch version matching that major.minor and download the binaries.
+Pulsar is distributed as a single artifact.
+The Pulsar https://pulsar.apache.org/download/[download page^]{external-link-icon} offers the latest version, as well as older releases.
+
+Astra Streaming is currently compatible with Pulsar {pulsar_version}.
+Locate the latest patch version matching the major.minor version and download the binaries.
 
 [source,shell,subs="attributes+"]
 ----
@@ -17,41 +24,51 @@ wget https://archive.apache.org/dist/pulsar/pulsar-$PULSAR_VERSION/apache-pulsar
 
 == Setting up your Pulsar folder
 
-With the artifact downloaded, next step is to extract its contents. The following script will extract the tarball into a directory named for the pulsar version. This new directory is considered the "Pulsar folder". Typically, Pulsar guides assume you are working within this directory.
+With the artifact downloaded, the next step is to extract its contents.
+
+The following script will extract the tarball into a directory named for the pulsar version.
+This new directory is considered the "Pulsar folder".
+Pulsar guides typically assume you are working within this directory.
 
 [source,shell,subs="attributes+"]
 ----
 tar xvfz apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 ----
 
-You will see most pulsar commands prefixed with "./bin". That means you have `cd apache-pulsar-$PULSAR_VERSION` and are running commands from there.
+You will see most Pulsar commands prefixed with "./bin".
+That means you have `cd apache-pulsar-$PULSAR_VERSION` and are running commands from there.
 
 == Configuring your binaries for Astra Streaming
 
-The Pulsar folder includes quite a few files & folders. The two most important are `./conf` and `./bin`. The executables in bin use the configurations in conf to run commands. Each tenant you create in Astra Streaming comes with its own custom configuration (for SSO, endpoints, etc). You will need to download the tenant configuration from Astra Streaming and overwrite the `./conf/client.conf` file.
+The Pulsar folder contains quite a few files and folders, but two most important are `./conf` and `./bin`.
+
+The executables in bin use the configurations in conf to run commands.
+Each tenant you create in Astra Streaming comes with its own custom configuration (for SSO, endpoints, etc).
+You will need to download the tenant configuration from Astra Streaming and overwrite the `./conf/client.conf` file.
 
 [tabs]
 ====
 Astra Portal::
 +
 --
-. Navigate to the "Connect" tab in the Astra Streaming portal
+. Navigate to the "Connect" tab in the Astra Streaming portal.
 +
 |===
 a|image:connect-tab.png[Connect tab in Astra Streaming]
 |===
 
-. Locate the "Download client.conf" button and click to download the conf file
+. Locate the "Download client.conf" button and click to download the conf file.
 +
 |===
 a|image:download-client.png[Download pulsar client conf in Astra Streaming]
 |===
 
-. Save the file in the "conf" folder of the Pulsar folder (you will overwrite the default client.conf already in the folder)
+. Save the file in the "/conf" folder of the Pulsar folder.
+This will overwrite the default client.conf already in the /conf folder.
 --
 ====
 
-With your Astra Streaming tenant's configuration in place, you can use any of the binaries meant to interact with a Pulsar cluster.
+With your Astra Streaming tenant's configuration in place, you can use any of the binaries to interact with a Pulsar cluster.
 
 |===
 |Binary |Uses
@@ -65,17 +82,18 @@ With your Astra Streaming tenant's configuration in place, you can use any of th
 
 == Validating your configuration and connection
 
-With the Pulsar folder in place and the correct client configuration saved, the next step is to validate everything. Run each command to validate binary conf.
+With the Pulsar folder in place and the correct client configuration saved, the next step is to validate everything.
+Run each command to validate binary conf.
 
-TIP: For a full reference of all commands within the cli's, read https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's cli docs^]{external-link-icon}.
+TIP: For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's CLI docs^]{external-link-icon}.
 
-List all tenants
+List all tenants:
 [source,shell,subs="attributes+"]
 ----
 ./bin/pulsar-admin tenants list
 ----
 
-Produce a message
+Produce a message:
 [source,shell,subs="attributes+"]
 ----
 ./bin/pulsar-client produce <REPLACE_ME_WITH_TENANT_NAME>/default/<REPLACE_ME_WITH_TOPIC_NAME> --messages "Hi there" --num-produce 1
