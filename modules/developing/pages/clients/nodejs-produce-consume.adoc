@@ -4,9 +4,9 @@
 :page-aliases: docs@astra-streaming::astream-nodejs-eg.adoc, astra-streaming:ROOT:astream-nodejs-eg.adoc
 :page-tag: astra-streaming,connect,dev,develop,nodejs,pulsar
 
-== Pre-req's
+== Prerequisites
 
-You will need the following things in place to complete this guide:
+You will need the following prerequisites in place to complete this guide:
 
 * sudo permission to install dependencies
 * Node.js version 10+ and npm 6+
