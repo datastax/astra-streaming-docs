@@ -4,9 +4,12 @@
 :page-aliases: astream-code-examples.adoc
 
 {product_name} is powered by http://pulsar.apache.org/[Apache Pulsar].
-To connect to your service, use the open-source client APIs provided by the Apache Pulsar project. Astra Streaming is running Pulsar version {pulsar_version}. You should use this API version or higher.
 
-Below is a list of popular Pulsar client runtimes. Visit each guide to create a simple message producer and consumer in your Astra Streaming tenant.
+To connect to your service, use the open-source client APIs provided by the Apache Pulsar project.
+Astra Streaming is running Pulsar version {pulsar_version}. You should use this API version or higher.
+
+Below is a list of popular Pulsar client runtimes.
+Visit each guide to create a simple message producer and consumer in your Astra Streaming tenant.
 
 == Pulsar Clients
 
