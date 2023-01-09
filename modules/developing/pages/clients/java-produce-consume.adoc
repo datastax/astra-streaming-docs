@@ -4,9 +4,9 @@
 :page-aliases: docs@astra-streaming::astream-java-eg.adoc,astra-streaming:ROOT:astream-java-eg.adoc
 :page-tag: astra-streaming,dev,develop,pulsar,java
 
-== Pre-req's
+== Prerequisites
 
-You will need the following things in place to complete this guide:
+You will need the following prerequisites in place to complete this guide:
 
 * JRE 8 installed (https://sdkman.io/[install now^,title=Install java]{external-link-icon})
 * Maven installed (or you can use gradle)

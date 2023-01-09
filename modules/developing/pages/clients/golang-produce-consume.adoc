@@ -4,9 +4,9 @@
 :page-aliases: docs@astra-streaming::astream-golang-eg.adoc,astra-streaming:ROOT:astream-golang-eg.adoc
 :page-tag: astra-streaming,dev,develop,pulsar,go
 
-== Pre-req's
+== Prerequisites
 
-You will need the following things in place to complete this guide:
+You will need the following prerequisites in place to complete this guide:
 
 * Golang version 1.15 and above
 * A working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)

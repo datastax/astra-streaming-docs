@@ -4,9 +4,9 @@
 :page-aliases: docs@astra-streaming::astream-python-eg.adoc,astra-streaming:ROOT:astream-python-eg.adoc
 :page-tag: astra-streaming,dev,develop,python,pulsar
 
-== Pre-req's
+== Prerequisites
 
-You will need the following things in place to complete this guide:
+You will need the following prerequisites in place to complete this guide:
 
 * Linux Python versions 3.4 to 3.7 are supported
 * MacOS version 3.7 is supported
