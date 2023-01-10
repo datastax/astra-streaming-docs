@@ -20,6 +20,7 @@ Visit our https://github.com/datastax/astra-streaming-examples/tree/master/astra
 == Create a project
 
 Create a new GO project.
+
 Open a new terminal and run the following script to create a project folder, change directory into it, and initialize a new GO project.
 
 [source,shell]
