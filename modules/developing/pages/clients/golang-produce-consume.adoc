@@ -41,7 +41,7 @@ include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProdu
 
 This is NOT a complete code snippet: it imports the required packages, establishes an entry point for the application, and creates a new instance of a Pulsar client.
 
-Notice there are a few variables that are waiting for a replacement value.
+Notice there are a few variables that are waiting for replacement values.
 You can find those values here:
 
 include::partial$client-variables-table.adoc[]

@@ -84,7 +84,7 @@ include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimplePro
 
 *This isn't a complete class*, so don't be alarmed if your editor shows errors.
 
-Notice there are a few variables waiting for a replacement value.
+Notice there are a few variables waiting for replacement values.
 You can find those values here:
 
 include::partial$client-variables-table.adoc[]
