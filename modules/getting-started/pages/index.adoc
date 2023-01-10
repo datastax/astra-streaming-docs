@@ -145,7 +145,7 @@ a|image:namespace-listing.png[Namespaces in Astra Streaming]
 Pulsar Admin::
 +
 --
-Not sure about this? Learn more about xref:developing:configure-pulsar-env.adoc[configuring your local environment for Astra Streaming,window="_blank"].
+Not sure about this? Learn more about xref:developing:configure-pulsar-env.adoc[configuring your local environment for Astra Streaming,window="_blank"]{external-link-icon}.
 
 . Set the required variables.
 +
@@ -166,7 +166,7 @@ include::{astra-streaming-examples-repo}/pulsar-admin/create-namespace.sh[]
 Curl::
 +
 --
-Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here,window="_blank"].
+Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here,window="_blank"]{external-link-icon}.
 
 . Set the required variables.
 +
@@ -244,7 +244,7 @@ include::{astra-streaming-examples-repo}/pulsar-admin/create-topic.sh[]
 Curl::
 +
 --
-Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here,window="_blank"].
+Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here,window="_blank"]{external-link-icon}.
 
 . Set the required variables.
 +
