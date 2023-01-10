@@ -9,21 +9,25 @@
 You will need the following prerequisites in place to complete this guide:
 
 * Golang version 1.15 and above
-* A working Pulsar topic (xref:getting-started:index.adoc[get started here] if you don't have one)
+* A working Pulsar topic (get started xref:getting-started:index.adoc[here] if you don't have a topic)
 * A basic text editor or IDE
 
-TIP: Visit our {astra-streaming-examples-repo}/go[examples repo^]{external-link-icon} to see the complete source of this example.
+[TIP]
+====
+Visit our https://github.com/datastax/astra-streaming-examples/tree/master/astra-streaming-csharp-examples[examples repo^]{external-link-icon} to see the complete source of this example.
+====
 
 == Create a project
 
-First thing is to create a new GO project. Open a new terminal and run the following script to create a project folder, change into it, and init a new GO project.
+Create a new GO project.
+Open a new terminal and run the following script to create a project folder, change directory into it, and initialize a new GO project.
 
 [source,shell]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/create-project.sh[]
 ----
 
-Within the new project a "main" file is created and the Pulsar client package is retrieved.
+Within the new project, a "main" file is created and the Pulsar client package is retrieved.
 
 == Add the client
 
@@ -34,13 +38,19 @@ Open the new "main.go" file in your editor and paste the following code within.
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-client]
 ----
 
-Don't be alarmed, this isn't a complete code snippet. It imports in the required packages, establishes an entry point for the app, and creates a new instance of a Pulsar client. Notice there are a few variables waiting for a replacement value.
+This is NOT a complete code snippet: it imports the required packages, establishes an entry point for the application, and creates a new instance of a Pulsar client.
+
+Notice there are a few variables that are waiting for a replacement value.
+You can find those values here:
 
 include::partial$client-variables-table.adoc[]
 
 == Create a producer
 
-Now we'll use the client to create a producer. While the client holds directions of where to connect and how to authenticate, the producer has the full topic address where a message will be published. The full topic address includes the topic persistence, the tenant, namespace, and topic name.
+Use the client to create a producer.
+
+While the client contains directions for where to connect and how to authenticate, the producer has the full topic address where a message will be published.
+The full topic address includes the tenant, namespace, and topic names, as well as topic persistence.
 
 Paste the following code in "main.go".
 
@@ -60,7 +70,12 @@ include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProdu
 
 == Create a consumer
 
-What's a message for if it never gets read, right? Let's create a new subscription instance from the client. In this example you can think of a consumer and subscription as the same. Notice a topic is set as well as a name for the subscription, and an initial position. In this case our subscription will start with the "Earliest" unacknowledged message, which happens to be the first message in the topic.
+What's a message for if it never gets read, right? Let's create a new subscription instance from the client.
+
+Subscriptions are covered in more depth in xref:ROOT:astream-subscriptions.adoc[their own topic]{emoji-smile}, but for now, think of a consumer and a subscription as the same idea.
+
+A topic is set with a subscription name and an initial position.
+In this case our subscription will start with the "Earliest" unacknowledged message, which happens to be the first message in the topic.
 
 Add the following code to your "main.go" file.
 
@@ -69,7 +84,7 @@ Add the following code to your "main.go" file.
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-consumer]
 ----
 
-Add this code to your file to have the consumer "Receive" and then "Ack" and messages provided to the subscription.
+Add this code to your file to have the consumer receive and then acknowledge (or "ack") messages provided to the subscription.
 
 [source,golang]
 ----
@@ -78,14 +93,16 @@ include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProdu
 
 == Run the example
 
-Your example GO app is complete. Here it is your big moment. Back to the terminal, still in the same folder as the main.go file. Run the application.
+Your example GO application is complete. Here it is, your big moment!
+
+Return to the terminal in the same folder as the "main.go" file, and run the application.
 
 [source,shell]
 ----
 go run main.go
 ----
 
-If everything went as planned, you should see output similar to the following.
+If everything works as planned, you should see output similar to the following.
 
 [source,shell]
 ----
