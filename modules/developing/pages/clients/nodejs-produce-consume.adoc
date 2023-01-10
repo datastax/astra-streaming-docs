@@ -74,6 +74,8 @@ Open that file in your editor of choice and add the following code.
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-client]
 ----
 
+*This isn't complete code (yet)*, so don't be alarmed if your editor shows errors.
+
 Notice there are a few variables waiting for replacement values.
 You can find those values here:
 
@@ -92,7 +94,7 @@ Add the following code to "index.js".
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-producer]
 ----
 
-After the above code creates a producer, add this code to actually send the message and receive acknowledgment.
+After the code above creates a producer, add this code to actually send the message and receive acknowledgment.
 
 [source,javascript]
 ----

@@ -20,8 +20,9 @@ Visit our https://github.com/datastax/astra-streaming-examples/tree/master/astra
 
 == Create a project
 
-First things first let's create a folder, change in to it, and start a new python project.
+Create a folder, change directory into it, and start a new Python project.
 
+Install the Pulsar client library with pip.
 [source,shell]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/create-project.sh[]
@@ -29,27 +30,34 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/create-
 
 == Add the client
 
-Open "index.py" in your favorite text editor or IDE and copy the following code in. This sets up the topic URL and creates a new pulsar client instance, using token authentication.
+Create a new Pulsar client instance with the topic URL and using token authentication.
+
+Open "index.py" in your favorite text editor or IDE and copy in the following code.
 
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-client]
 ----
 
-Don't be alarmed if you see error messages in your editor, this is not complete code... yet. Notice there are a few variables waiting for a replacement value. Go ahead and fill those in.
+*This isn't complete code (yet)*, so don't be alarmed if your editor shows errors.
+
+Notice there are a few variables waiting for replacement values.
+You can find those values here:
 
 include::partial$client-variables-table.adoc[]
 
 == Create a producer
 
-Now bring in the following code to "index.py" to use the client to create a message producer.
+Use the client to create a producer.
+
+Add the following code to "index.py".
 
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-producer]
 ----
 
-Send that message! (copy the following code in  to index.py)
+Once the code above creates a producer, add this code to "index.py" to actually send the message.
 
 [source,python]
 ----
@@ -58,21 +66,26 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleP
 
 == Create a consumer
 
-Just like the producer, we'll use the client instance to create a consumer subscription to the same topic we sent a message to.
+Just like the producer, use the Python client instance to create a consumer subscription to the same topic we sent a message to.
+
+Add this code to "index.py".
 
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-consumer]
 ----
 
-And now for the good stuff! Let's iterate through messages and write their data.
+And now for the good stuff!
+Let's iterate through messages and write their data.
+
+Add this code to "index.py".
 
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=consume-message]
 ----
 
-Then a little clean-up.
+Finally, add a little clean-up.
 
 [source,python]
 ----
@@ -81,23 +94,27 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleP
 
 == Run the example
 
-Here it comes! Your greatest python creation ever. Run the following command in the terminal where you created the python project.
+Here it comes: your greatest Python creation yet!
+
+Return to the terminal where you created your Python project and run the following command.
 
 [source,python]
 ----
 python3 index.py
 ----
 
-There will probably be a lot of logging in the output but the following message is what you want to see.
+There will likely be a lot of logging in the output, but look closely and you should see the following message.
 
 [source,shell]
 ----
 Received message 'Hello World' id='(422529,5,-1,0)'
 ----
 
+You did it{emoji-tada}!
+
 == Next steps
 
-You are one step closer to being a messaging ninja. Let's continue the learning with these guides.
+You're one step closer to being a messaging ninja. Let's continue the learning with these guides.
 
 * xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astream-functions.adoc[]
