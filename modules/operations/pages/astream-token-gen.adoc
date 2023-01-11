@@ -63,4 +63,4 @@ For more on JSON Web Tokens, see the https://jwt.io/introduction/[JWT documentat
 
 == Next 
 
-Use your new token to start event streaming with the xref:getting-started:astream-quick-start.adoc[Astra Streaming QuickStart].
+Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.

@@ -1,0 +1,166 @@
+= Producing and consuming messages using the Java pulsar client with Astra Streaming
+:description: This is a guide to create a simple producer and consumer using Pulsar's java client.
+:title: Java pulsar client on Astra Streaming
+:page-aliases: docs@astra-streaming::astream-java-eg.adoc,astra-streaming:ROOT:astream-java-eg.adoc
+:page-tag: astra-streaming,dev,develop,pulsar,java
+
+== Prerequisites
+
+You will need the following prerequisites in place to complete this guide:
+
+* JRE 8 installed (https://sdkman.io/[install now^,title=Install java]{external-link-icon})
+* (https://maven.apache.org/install.html[Maven^,title=Maven]{external-link-icon}) or (https://gradle.org/install/[Gradle^,title=Gradle]{external-link-icon}) installed
+* A working Pulsar topic (get started xref:getting-started:index.adoc[here] if you don't have a topic)
+* A basic text editor or IDE
+
+[TIP]
+====
+Visit our https://github.com/datastax/astra-streaming-examples/tree/master/astra-streaming-csharp-examples[examples repo^]{external-link-icon} to see the complete source of this example.
+====
+
+== Create a project
+
+Create a new Maven project and add the Pulsar client dependency in pom.xml.
+
+[source,shell]
+----
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/create-project.sh[]
+----
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.pulsar</groupId>
+    <artifactId>pulsar-client</artifactId>
+    <version>2.10.2</version>
+</dependency>
+----
+
+For this example we will be creating a single artifact.
+Add the following build target in pom.xml.
+
+[source,xml]
+----
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>org.example.App</mainClass>
+                    </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+----
+
+You may also need to specify the versions on pom.xml as well.
+
+[source,xml]
+----
+<properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+</properties>
+----
+
+== Add the client
+
+Let's set up the main Java class and have some fun!
+
+Open the "src/main/java/org/example/App.java" file in your favorite text editor or IDE.
+Clear the contents of the file and add the following to bring in needed dependencies, create a client instance, and configure it to use your Astra Streaming tenant.
+
+[source,java]
+----
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-client]
+----
+
+*This isn't a complete class*, so don't be alarmed if your editor shows errors.
+
+Notice there are a few variables waiting for replacement values.
+You can find those values here:
+
+include::partial$client-variables-table.adoc[]
+
+== Create a producer
+
+Use the client to create a producer.
+
+The producer builds on the client configuration for directions about what topic to produce messages to.
+
+Add this code to "App.java" to create a new producer.
+
+[source,java]
+----
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-producer]
+----
+
+Add this code to "App.java" to asynchronously send a single message to the broker and wait for acknowledgment.
+
+[source,java]
+----
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=produce-message]
+----
+
+== Create a consumer
+
+Create a new consumer instance in "App.java".
+
+This code directs the consumer to watch a certain topic, names the subscription for watching topics, and begins the subscription.
+
+Add the following code to "App.java".
+
+[source,java]
+----
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-consumer]
+----
+
+With the consumer and subscription in place, we can receive the unacknowledged messages added by the producer earlier.
+
+Add the following to "App.java".
+
+[source,java]
+----
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=consumer-loop]
+----
+
+Finally, add a little clean up and close out the Java class.
+
+[source,java]
+----
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=close-consumer]
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=close-client]
+----
+
+== Run the example
+
+Your Java class is ready for the big time!
+Let's build the app and run.
+
+[source,shell]
+----
+mvn clean package assembly:single
+java -jar target/SimpleProducerConsumer-1.0-SNAPSHOT-jar-with-dependencies.jar
+----
+
+You should see output similar to the following:
+
+[source,shell]
+----
+Message received: Hello World
+----
+
+== Next steps
+
+Woo-hoo{emoji-tada}! You did it! You're on your way to messaging glory. Let's continue learning.
+
+* xref:developing:configure-pulsar-env.adoc[]
+* xref:developing:astream-functions.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[]

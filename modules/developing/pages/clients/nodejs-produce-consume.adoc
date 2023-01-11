@@ -1,0 +1,166 @@
+= Producing and consuming messages using the Node.js Pulsar client on Astra Streaming
+:description: This is a guide to create a simple producer and consumer using Pulsar's Node.js client.
+:title: Node.js Pulsar client on Astra Streaming
+:page-aliases: docs@astra-streaming::astream-nodejs-eg.adoc, astra-streaming:ROOT:astream-nodejs-eg.adoc
+:page-tag: astra-streaming,connect,dev,develop,nodejs,pulsar
+
+== Prerequisites
+
+You will need the following prerequisites in place to complete this guide:
+
+* `sudo` permission to install dependencies
+* Node.js version 10+ and npm 6+
+* A working Pulsar topic (get started xref:getting-started:index.adoc[here] if you don't have a topic)
+* A basic text editor or IDE
+
+[TIP]
+====
+Visit our https://github.com/datastax/astra-streaming-examples/tree/master/astra-streaming-csharp-examples[examples repo^]{external-link-icon} to see the complete source of this example.
+====
+
+== Setup environment
+
+Before we get started with the app, a little pre-work needs to be done.
+
+The Node.js Pulsar client npm package depends on the C++ Pulsar library.
+
+Install the C++ Pulsar library dependency.
+
+[tabs]
+====
+Ubuntu-based deb::
++
+--
+[source,shell]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-project.sh[tag=prep-env]
+----
+--
+Centos/RHEL based rpm::
++
+--
+[source,shell]
+----
+wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/RPMS/apache-pulsar-client-2.10.2-1.x86_64.rpm
+wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/RPMS/apache-pulsar-client-devel-2.10.2-1.x86_64.rpm
+
+sudo rpm -i ./apache-pulsar-client-2.10.2-1.x86_64.rpm
+sudo rpm -i ./apache-pulsar-client-devel-2.10.2-1.x86_64.rpm
+
+sudo ldconfig
+----
+--
+====
+
+== Create a project
+
+With the environment dependencies set up, let's create a new Node.js project.
+
+Run the following script in a terminal.
+If NPM asks for project values, use the defaults it suggests.
+
+[source,shell]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-project.sh[tag=create-project]
+----
+
+== Add the client
+
+A new "index.js" file will be created within the project folder.
+Open that file in your editor of choice and add the following code.
+
+[source,javascript]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-client]
+----
+
+*This isn't complete code (yet)*, so don't be alarmed if your editor shows errors.
+
+Notice there are a few variables waiting for replacement values.
+You can find those values here:
+
+include::partial$client-variables-table.adoc[]
+
+== Create a producer
+
+Use the client to create a producer.
+
+While there are quite a few configuration options available for the producer, for now we'll just declare the topic where messages should go.
+
+Add the following code to "index.js".
+
+[source,javascript]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-producer]
+----
+
+After the code above creates a producer, add this code to actually send the message and receive acknowledgment.
+
+[source,javascript]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=produce-message]
+----
+
+Finally, add a little clean-up.
+
+[source,javascript]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=cleanup-producer]
+----
+
+== Create a consumer
+
+If we ran the above example, we'd have a produced message waiting to be consumed and acknowledged.
+
+The code below creates a new consumer subscription, names the subscription, and declares what topic to watch.
+
+Add this code to "index.js".
+
+[source,javascript]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-consumer]
+----
+
+We want this consumer to receive messages, write them to console, and acknowledge receipt with the broker.
+
+Add this code to "index.js".
+
+[source,javascript]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=consume-message]
+----
+
+Finally, add a little clean-up.
+No one likes loose ends, right?!
+
+[source,javascript]
+----
+include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=cleanup-consumer]
+----
+
+== Run the example
+
+Alright, it's that time! Let's see if all that hard work will pay off.
+
+Return to the terminal and run the following command.
+
+[source,shell]
+----
+node index.js
+----
+
+You should see output similar to the following.
+
+[source,shell]
+----
+sent message
+Hello World
+----
+
+== Next steps
+
+You did it{emoji-tada}! You're on your way to messaging glory. Let's continue learning.
+
+* xref:developing:configure-pulsar-env.adoc[]
+* xref:developing:astream-functions.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[]

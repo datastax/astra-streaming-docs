@@ -1,9 +1,0 @@
-= {product_name} code examples
-:slug: astra-streaming-code-examples
-:description: Astra Streaming code examples
-:keywords: datastax astra
-:meta-description: Astra Streaming code examples
-:page-aliases: docs@astra-streaming::astream-code-examples.adoc
-:page-tag: astra-streaming,dev,develop,pulsar
-
-include::partial$code-examples-text.adoc[]
