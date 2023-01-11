@@ -15,7 +15,7 @@ You will need the following prerequisites in place to complete this guide:
 
 [TIP]
 ====
-Visit our https://github.com/datastax/astra-streaming-examples/tree/master/astra-streaming-csharp-examples[examples repo^]{external-link-icon} to see the complete source of this example.
+Visit our https://github.com/datastax/astra-streaming-examples[examples repo^]{external-link-icon} to see the complete source of this example.
 ====
 
 == Create a project
