@@ -260,4 +260,4 @@ You will receive a JSON response with your changes to the index, which confirms 
 == What's next?
 
 * xref:ROOT:astream-faq.adoc[Browse the Astra Streaming FAQ.]
-* xref:ROOT:astream-code-examples.adoc[Check out the Astra Streaming code examples.]
+* xref:developing:clients/index.adoc[]

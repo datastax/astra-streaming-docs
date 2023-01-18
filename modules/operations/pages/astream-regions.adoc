@@ -29,6 +29,9 @@ Here are the regions {product_name} supports:
 |Region
 |Location
 
+| australiaeast
+| New South Wales, Australia
+
 | eastus
 | Virginia, US
 

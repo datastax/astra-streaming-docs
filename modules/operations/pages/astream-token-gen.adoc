@@ -230,3 +230,4 @@ curl --request GET \
 == Next
 
 Use your new token to start event streaming with the xref::astream-quick-start.adoc[Astra Streaming QuickStart].
+

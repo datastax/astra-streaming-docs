@@ -27,6 +27,6 @@ image::astream-create-dedicated-cluster.png[Create dedicated cluster]
 
 == What's next?
 
-* Create a xref:getting-started:astream-quick-start.adoc#create-a-namespace[namespace] and xref:getting-started:astream-quick-start.adoc#create-a-topic[topic] in your new tenant with the xref:getting-started:astream-quick-start.adoc#create-a-namespace[{product_name} Quickstart].
+* Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.
 * For more on pricing of dedicated clusters, see https://www.datastax.com/products/astra-streaming[{product_name} Pricing].
 
