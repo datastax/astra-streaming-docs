@@ -78,7 +78,11 @@ a|image:new-tenant-quickstart.png[New tenant quickstart in Astra Streaming]
 Astra CLI::
 +
 --
-Not sure about this? Visit the https://awesome-astra.github.io/docs/pages/astra/astra-cli/[Astra Cli install instructions^]{external-link-icon}
+[NOTE]
+====
+(astra_cli) is a set of commands for creating and managing all Astra resources.
+For more, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation, window="_blank"]{external-link-icon}.
+====
 
 . Set the required variables, replacing <rand> with a few random numbers or letters.
 Optionally you can choose a different cloud provider and region. Use `astra streaming list-regions` to see values.
@@ -97,7 +101,7 @@ CLOUD_REGION_STREAMING="uscentral-1"
 include::{astra-streaming-examples-repo}/astra-cli/create-tenant.sh[]
 ----
 
-. Withing the newly created tenant, you're ready to create a namespace.
+. Within the newly created tenant, you're ready to create a namespace.
 
 --
 ====
