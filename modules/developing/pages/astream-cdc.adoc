@@ -14,7 +14,7 @@ This doc will show you how to create a CDC connector for your Astra DB deploymen
 [NOTE]
 ====
 Enabling CDC for {astra_db} will result in increased costs based on your {astra_stream} usage.
-See https://www.datastax.com/products/astra-streaming/pricing[Astra Streaming pricing^]{external-link-icon} for {astra_stream} pricing and  https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC for Astra DB^]{external-link-icon} for metering rates.
+See https://www.datastax.com/products/astra-streaming/pricing[Astra Streaming pricing^]{external-link-icon} for {astra_stream} pricing and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC for Astra DB^]{external-link-icon} for metering rates.
 ====
 
 == Supported data structures
