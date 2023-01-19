@@ -16,9 +16,63 @@ The advantage for you: {astra_cli} makes it possible to submit commands instead 
 
 {astra_cli} features are provided especially for operators, Site Reliability Engineers (SREs), and developers who want the option of using commands when working with {astra_db} databases and {astra_stream} tenants.
 
-Ready to learn more?
+== Two quick examples
 
-* See the {astra_cli} https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation, window="_blank"]
+Here are two quick {astra_cli} command examples to demonstrate how Astra CLI manages resources across {astra_db} databases and {astra_stream} tenants from your local terminal.
 
-* See the https://awesome-astra.github.io/docs/pages/astra/astra-cli/[Astra CLI install instructions^]{external-link-icon}
+Let's create an {astra_db} database named `demo` from the command line:
+
+[tabs]
+====
+Astra CLI::
++
+--
+[source,bash,subs="attributes+"]
+----
+astra db create demo -k ks2 --if-not-exist --wait
+----
+--
+
+Result::
++
+--
+[source,bash,subs="attributes+"]
+----
+[INFO]  Database 'demo' does not exist. Creating database 'demo' with keyspace 'ks2'
+[INFO]  Database 'demo' and keyspace 'ks2' are being created.
+[INFO]  Database 'demo' has status 'PENDING' waiting to be 'ACTIVE' ...
+[INFO]  Database 'demo' has status 'ACTIVE' (took 103513 millis)
+[OK]    Database 'demo' is ready.
+----
+--
+====
+
+Now let's create a Pulsar tenant:
+
+[tabs]
+====
+Astra CLI::
++
+--
+[source,bash,subs="attributes+"]
+----
+astra streaming create new-tenant-from-cli
+----
+--
+
+Result::
++
+--
+[source,bash,subs="attributes+"]
+----
+[OK]    Tenant 'new-tenant-from-cli' has being created.
+----
+--
+====
+
+== What's next?
+
+* See the {astra_cli} https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation, window="_blank"].
+
+* See the https://awesome-astra.github.io/docs/pages/astra/astra-cli/[Astra CLI install instructions^]{external-link-icon}.
 
