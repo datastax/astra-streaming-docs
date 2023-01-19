@@ -78,11 +78,8 @@ a|image:new-tenant-quickstart.png[New tenant quickstart in Astra Streaming]
 Astra CLI::
 +
 --
-[NOTE]
-====
-(astra_cli) is a set of commands for creating and managing all Astra resources.
+{astra_cli} is a set of commands for creating and managing all Astra resources.
 For more, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation, window="_blank"]{external-link-icon}.
-====
 
 . Set the required variables, replacing <rand> with a few random numbers or letters.
 Optionally you can choose a different cloud provider and region. Use `astra streaming list-regions` to see values.
