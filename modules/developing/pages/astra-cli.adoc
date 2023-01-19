@@ -1,0 +1,24 @@
+= {astra_cli}
+
+The {company} Astra Command-Line Interface ({astra_cli}) is a set of commands for creating and managing Astra resources.
+{astra_cli} commands are available for {astra_db} and {astra_stream}.
+They're designed to get you working quickly, with an emphasis on automation.
+
+{astra_cli} provides a one-stop shop for managing your Astra resources through scripts or commands in your local terminal.
+The wide variety of capabilities include:
+
+* Creation and management of {astra_db} and {astra_stream} artifacts
+* Querying & data loading
+* Organization and user management
+* Security and token configuration
+
+The advantage for you: {astra_cli} makes it possible to submit commands instead of *or in addition to* using {astra_ui} and {company} API calls.
+
+{astra_cli} features are provided especially for operators, Site Reliability Engineers (SREs), and developers who want the option of using commands when working with {astra_db} databases and {astra_stream} tenants.
+
+Ready to learn more?
+
+* See the {astra_cli} https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation, window="_blank"]
+
+* See the https://awesome-astra.github.io/docs/pages/astra/astra-cli/[Astra CLI install instructions^]{external-link-icon}
+
