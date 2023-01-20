@@ -1,0 +1,78 @@
+= {astra_cli}
+
+The {company} Astra Command-Line Interface ({astra_cli}) is a set of commands for creating and managing Astra resources.
+{astra_cli} commands are available for {astra_db} and {astra_stream}.
+They're designed to get you working quickly, with an emphasis on automation.
+
+{astra_cli} provides a one-stop shop for managing your Astra resources through scripts or commands in your local terminal.
+The wide variety of capabilities include:
+
+* Creation and management of {astra_db} and {astra_stream} artifacts
+* Querying & data loading
+* Organization and user management
+* Security and token configuration
+
+The advantage for you: {astra_cli} makes it possible to submit commands instead of *or in addition to* using {astra_ui} and {company} API calls.
+
+{astra_cli} features are provided especially for operators, Site Reliability Engineers (SREs), and developers who want the option of using commands when working with {astra_db} databases and {astra_stream} tenants.
+
+== Two quick examples
+
+Here are two quick {astra_cli} command examples to demonstrate how Astra CLI manages resources across {astra_db} databases and {astra_stream} tenants from your local terminal.
+
+Let's create an {astra_db} database named `demo` from the command line:
+
+[tabs]
+====
+Astra CLI::
++
+--
+[source,bash,subs="attributes+"]
+----
+astra db create demo -k ks2 --if-not-exist --wait
+----
+--
+
+Result::
++
+--
+[source,bash,subs="attributes+"]
+----
+[INFO]  Database 'demo' does not exist. Creating database 'demo' with keyspace 'ks2'
+[INFO]  Database 'demo' and keyspace 'ks2' are being created.
+[INFO]  Database 'demo' has status 'PENDING' waiting to be 'ACTIVE' ...
+[INFO]  Database 'demo' has status 'ACTIVE' (took 103513 millis)
+[OK]    Database 'demo' is ready.
+----
+--
+====
+
+Now let's create a Pulsar tenant:
+
+[tabs]
+====
+Astra CLI::
++
+--
+[source,bash,subs="attributes+"]
+----
+astra streaming create new-tenant-from-cli
+----
+--
+
+Result::
++
+--
+[source,bash,subs="attributes+"]
+----
+[OK]    Tenant 'new-tenant-from-cli' has being created.
+----
+--
+====
+
+== What's next?
+
+* See the {astra_cli} https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation, window="_blank"].
+
+* See the https://awesome-astra.github.io/docs/pages/astra/astra-cli/[Astra CLI install instructions^]{external-link-icon}.
+
