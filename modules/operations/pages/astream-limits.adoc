@@ -7,7 +7,7 @@ DataStax {product_name} includes guardrails and limits to ensure good practices,
 
 [NOTE]
 ====
-The below limits are for Pay As You Go clusters. These limits may be changed on <<dedicated clusters, dedicated clusters>> if necessary. https://support.datastax.com[Contact Support] to change the limits on a dedicated cluster.
+The below limits are for Pay As You Go clusters. These limits may be changed on <<Dedicated clusters,dedicated clusters>> if necessary. https://support.datastax.com[Contact Support] to change the limits on a dedicated cluster.
 ====
 
 == {product_name} guardrails
