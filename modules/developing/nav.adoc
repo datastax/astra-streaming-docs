@@ -2,6 +2,7 @@
 
 ** xref:configure-pulsar-env.adoc[]
 ** xref:using-curl.adoc[]
+** xref:astra-cli.adoc[]
 ** xref:astream-functions.adoc[]
 ** xref:astream-kafka.adoc[]
 ** xref:astream-rabbit.adoc[]
