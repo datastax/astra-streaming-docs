@@ -7,7 +7,7 @@ DataStax {product_name} includes guardrails and limits to ensure good practices,
 
 [NOTE]
 ====
-The below limits are for Pay As You Go clusters. These limits may be changed on dedicated clusters if necessary. https://support.datastax.com[Contact Support] to change the limits on a dedicated cluster.
+The below limits are for Pay As You Go clusters. These limits may be changed on <<dedicated clusters, dedicated clusters>> if necessary. https://support.datastax.com[Contact Support] to change the limits on a dedicated cluster.
 ====
 
 == {product_name} guardrails
@@ -41,7 +41,7 @@ Max throughput for a *non-partitioned topic* or a *single partition of a partiti
 
 |Max throughput per subscription
 |5000 messages/s, 25MB/s +
-*Multiple subscriptions* from a *non-partitioned topic* or a *single partition of a partitioned topic* can dispatch a *combined* 5000 messages per second maximum. 
+*Multiple subscriptions* from a *non-partitioned topic* or a *single partition of a partitioned topic* can dispatch a *combined* 5000 messages per second maximum.
 
 |Auto topic creation
 |Disabled
@@ -67,7 +67,7 @@ Max throughput for a *non-partitioned topic* or a *single partition of a partiti
 
 == Function and connector resource limits
 
-Functions and connector resources are set in the control plane per pod resource limits. The user cannot customize these resources. 
+Functions and connector resources are set in the control plane per pod resource limits. The user cannot customize these resources.
 The default settings are:
 
 * CPU: 0.25 core
@@ -116,7 +116,7 @@ These namespace policies are initially provisioned in the default settings by {p
 |Disabled/no data retention by default
 |Yes
 
-|Max retention size 
+|Max retention size
 |Disabled/no data retention by default
 |Yes
 
@@ -140,7 +140,7 @@ These namespace policies are initially provisioned in the default settings by {p
 |Disabled
 |No
 
-|Subscription auto creation 
+|Subscription auto creation
 |Enabled
 |No
 
@@ -156,7 +156,7 @@ These namespace policies are initially provisioned in the default settings by {p
 
 == {product_name} topic and namespace actions
 
-These topic and namespace actions are initially provisioned in the default settings by {product_name} and can be performed by users. 
+These topic and namespace actions are initially provisioned in the default settings by {product_name} and can be performed by users.
 
 [cols=3*]
 |===
@@ -198,9 +198,44 @@ These topic and namespace actions are initially provisioned in the default setti
 
 |===
 
+== Dedicated clusters
+
+Message throughput, rate, and message max size can be customized on dedicated clusters. If you need assistance, open https://support.datastax.com[a support ticket].
+
+[cols=2*]
+|===
+|*Guardrail*
+|*Limit*
+
+|Number of tenants per organization
+|No limit
+
+|Number of namespaces per tenant
+|10
+
+|Number of topics per namespace
+|5000
+
+|Number of functions per namespace
+|5000
+
+|Functions resources
+|0.50 core, 1GB RAM
+
+|Consumers per topic
+|500
+
+|Subscriptions per topic
+|500
+
+|Producers per topic
+|500
+
+|===
+
 == Configuration file
 
-Here is an example of a default namespace policy with limits set:
+Here is an example default namespace policy with limits set:
 
 [source,yaml]
 ----
