@@ -1,4 +1,4 @@
-= {product_name}FAQs
+= {product_name} FAQs
 :page-aliases: docs@astra-streaming::astream-faq.adoc
 :page-tag: astra-streaming,dev,admin,planner,plan,pulsar
 
