@@ -1,16 +1,7 @@
 = Manage Tokens
 :page-aliases: docs@astra-streaming::astream-token-gen.adoc
 
-// [NOTE]
-// ====
-// You can also create an application token using the xref:astream-use-devops[DevOps API].
-// ====
-
-. From any page in {product_name}, select the *Organizations* dropdown.
-+
-image::OrgSelection.png[alt="Organization Selection",width=300]
-+
-. In the main dropdown, select *Organization Settings*.
+. From any page in {product_name}, select *Settings* in the left navigation menu.
 . From your Organization page, select *Token Management*.
 . Select the role you want to attach to your token. The permissions for your selected role will be displayed.
 . Select *Generate Token*. {product_name} will generate your token and display the _Client ID_, _Client Secret_, and _Token_.
@@ -21,9 +12,9 @@ image::OrgSelection.png[alt="Organization Selection",width=300]
 After you navigate away from the page, you won't be able to download your _Client ID_, _Client Secret_, and _Token_ again.
 ====
 
-== Set environment variables
+== Set token as environment variable
 
-In your command-line interface associated with your environment, paste the following environment variables copied for {product_name}:
+In the command-line interface associated with your environment, paste the following environment variables copied for {product_name}, including your token:
 
 [source, shell]
 ----
