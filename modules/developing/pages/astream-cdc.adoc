@@ -126,14 +126,32 @@ CREATE TABLE IF NOT EXISTS <keyspacename>.tbl1 (key text PRIMARY KEY, c1 text);
 
 . Confirm you created your table:
 +
-[source]
-----
-select * from <keyspacename>.tbl1;
-----
+[tabs]
+====
+CQLSH::
 +
-Results:
+--
+[source,sql,subs="attributes+"]
+----
+select * from ks1.tbl1;
+----
+--
+
+Result::
 +
-image::astream-create-cdc-table.png[Create a CDC table]
+--
+[source,sql,subs="attributes+"]
+----
+token@cqlsh> select * from ks1.tbl1;
+
+ key | c1
+-----+----
+
+(0 rows)
+token@cqlsh>
+----
+--
+====
 
 == Connecting to CDC for Astra DB
 
@@ -155,17 +173,12 @@ image::astream-create-cdc-confirmed.png[Confirm CDC Created]
 After creating your CDC connector, connect an Elasticsearch sink to it. DataStax recommends using the default {product_name} settings.
 
 . Select the cdc-enabled table from the database CDC tab and click on *Add Elastic Search Sink* to enforce the default settings.
-+
-image::astream-connect-ecs-cdc.png[Connect ECS Sink]
 
-. Select the corresponding *data* topic for the chosen table
-+
-image::astream-connect-topic-cdc.png[Choose the related data topic]
-
+. Select the corresponding *data* topic for the chosen table.
+The topic name will look something like this: `data-64b406e3-28ec-4eaf-a802-69ade0415b58-ks1.tbl1`.
 . Use your Elasticsearch deployment to complete the fields.
-+
 To find your *Elasticsearch URL*, navigate to your deployment within the Elastic Common Schema (ECS).
-Copy the Elasticsearch endpoint to the *Elastic Search URL* field. 
+Copy the Elasticsearch endpoint to the *Elastic Search URL* field.
 +
 image::astream-ecs-find-url.png[Find ECS URL]
 
@@ -200,24 +213,27 @@ INSERT INTO <keyspacename>.tbl1 (key,c1) VALUES ('32b','bob3123b');
 
 . Confirm the changes you've made:
 +
-[source]
+[source,sql]
 ----
-select * from <keyspacename>.tbl1;
+token@cqlsh> select * from ks1.tbl1;
+
+ key | c1
+-----+----------
+ 32a |  bob3123
+ 32b | bob3123b
+
+(2 rows)
 ----
-+
-Results:
-+
-image::astream-table-change.png[Table Changes]
 
 == Confirming ECS is receiving data
 
-To confirm ECS is receiving your CDC changes, use a `curl` request to your ECS deployment.
+To confirm ECS is receiving your CDC changes, issue a curl GET request to your ECS deployment.
 
 . Get your index name from your ECS sink tab:
 +
 image::astream-ecs-index.png[ECS Index]
 
-. Issue your `curl` request with your Elastic `username`, `password`, and `index name`:
+. Issue your curl GET request with your Elastic `username`, `password`, and `index name`:
 
 +
 [source,curl]
@@ -230,7 +246,7 @@ curl  -u <username>:<password>  \
 +
 [NOTE]
 ====
-If you have a trial account, the username is `elastic`.
+If you're using a trial account, the username is `elastic`.
 ====
 
 You will receive a JSON response with your changes to the index, which confirms {product_name} is sending your CDC changes to your ECS sink.
