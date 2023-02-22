@@ -152,7 +152,7 @@ All tokens would have access to all namespaces.
 ====
 As mentioned previously, Astra Streaming is actively maintained to keep parity with the official https://pulsar.apache.org[Apache Pulsar project^]{external-link-icon}.
 The notable differences arise from accessibility and security.
-Naturally, you have less control in a managed, serverless cluster than you do a cluster running in your own environment.
+Naturally, you have less control in a managed, serverless cluster than you do in a cluster running in your own environment.
 Beyond those differences, the effort to develop locally and then move to Astra Streaming should not be significant, but it is recommended to develop directly in Astra Streaming.
 If you are trying to save costs, use the free tier of Astra Streaming and then “switch” when you are ready to stage your production services.
 ====
