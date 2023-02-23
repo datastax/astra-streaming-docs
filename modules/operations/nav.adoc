@@ -6,3 +6,4 @@
 ** xref:astream-scrape-metrics.adoc[]
 ** xref:astream-token-gen.adoc[]
 ** xref:astream-release-notes.adoc[]
+** xref:onboarding-faq.adoc[]

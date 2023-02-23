@@ -1,0 +1,174 @@
+= Astra Streaming Enrollment FAQ
+:slug: enrollment-faq
+:page-tag: astra-streaming,onboarding,Orientation
+:navtitle: Enrollment FAQ
+:description: These are the most common questions we receive about getting started with Astra Streaming.
+
+When considering Astra Streaming for your production workloads, you might have questions about what options are available for connecting and consuming your serverless clusters.
+This page answers the most common questions we receive about enrollment, and we hope that this FAQ will help you navigate the enrollment process smoothly and successfully.
+
+If you have additional questions or concerns that are not addressed here, please contact us!
+The Streaming team is available to assist you in any way we can.
+
+== Astra Streaming Environments
+
+.What are the different ways I can use Astra Streaming?
+[%collapsible]
+====
+Astra Streaming offers two types of serverless environments: *Pay-As-You-Go (PAYG)* and *dedicated*. +
+When you create a free account in Astra (with or without a credit card) you are using the *PAYG* option.
+When a payment method is provided, you are paying only for resources used when messages are produced and consumed.
+Thus, you are "paying as you go".
+In PAYG environments, your data and interaction with Pulsar are secured over a (public) internet connection, and there are limitations to how many resources you can create.
+
+* For more on PAYG pricing, see https://www.datastax.com/products/astra-streaming/pricing[Astra Streaming Pricing^]{external-link-icon}. +
+* For more on PAYG limits, see xref:astream-limits.adoc[Astra Streaming Limits].
+
+A *dedicated environment* is your own private Pulsar cluster with the additional benefits of Astra Streaming.
+Sign in to Astra just as you would a PAYG account.
+When you create new tenants, additional options are available for deploying to your private cluster(s).
+There are less limits in dedicated environments than in PAYG - it's your cluster, after all.
+Finally, billing for a dedicated cluster is unique to each customer. +
+mailto:streaming@datastax.com[Contact the team] to learn more.
+
+TIP: In a PAYG environment, you can create tenants in any of the xref:astream-regions.adoc[supported regions], while dedicated environments are open to almost any public cloud region.
+====
+
+.Why does DataStax call it "serverless"?
+[%collapsible]
+====
+Running a production grade Pulsar cluster that can handle at-scale workloads is not a trivial task. It requires many (virtual) machines to be configured in a very particular way.
+
+In traditional cloud environments, you would pay hourly for every machine whether they are being used for workloads or not, and you would carry the burden of maintaining the server infrastructure.
+
+Serverless removes those operational burdens, and you pay only for the resources you actually use.
+====
+
+== Cluster Connections
+
+.Can a dedicated cluster have a private connection?
+[%collapsible]
+====
+All connections in Astra Streaming are guarded by AuthN, AuthZ, and secure (TLS) communications.
+With a dedicated cluster you have the option to connect over the (public) internet or establish a private connection. To learn more about private connections, refer to your cloud provider's private link documentation:
+
+https://aws.amazon.com/privatelink/[AWS PrivateLink^]{external-link-icon} &nbsp;|&nbsp; https://learn.microsoft.com/en-us/azure/private-link/private-link-overview[Azure Private Link^]{external-link-icon} &nbsp;|&nbsp; https://cloud.google.com/vpc/docs/private-service-connect[GCP Private Service Connect^]{external-link-icon}
+====
+
+.Can a PAYG account have a private connection to the Pulsar cluster?
+[%collapsible]
+====
+PAYG accounts are using a shared Pulsar cluster. Without dedicated cloud resources, a private link typically can’t be established. mailto:streaming@datastax.com[Email the team] if you would like to explore this option.
+====
+
+== Secure Sign-on, Roles, and Permissions
+
+.Can I use my own single sign-on with Astra Streaming?
+[%collapsible]
+====
+As a PAYG customer, the Astra platform offers single sign-on through your GitHub account and your Google account.
+Astra also offers custom SSO integration as a premium option. mailto:streaming@datastax.com[Email the team] for more information.
+
+NOTE: To integrate a custom SSO provider, you will need a non-default Astra Organization.
+Refer to the https://docs.datastax.com/en/astra-serverless/docs/manage/org/configuring-sso.html[Astra Serverless SSO documentation^]{external-link-icon} or mailto:streaming@datastax.com[email the team] for more information.
+====
+
+.How do Astra roles and permissions map to Pulsar roles and permissions?
+[%collapsible]
+====
+Pulsar has the concept of https://pulsar.apache.org/docs/security-authorization/[clients with role tokens^]{external-link-icon}. Authentication in Pulsar is the process of verifying a provided (JWT) token, and authorization is the process of determining if the role claimed in that token is allowed to complete the requested action.
+
+Astra Streaming uses the DataStax version of Apache Pulsar (called xref:luna-streaming::index.adoc[Luna Streaming]).
+The https://github.com/datastax/pulsar[Luna project^]{external-link-icon} is an open fork of the Pulsar project that maintains feature parity with OSS Pulsar. Astra Streaming, as a managed service, abstracts some features/options of Pulsar to ensure continuous, reliable service.
+
+Your PAYG environment is an Astra Organization (Org) that has a tenant (or multiple tenants) on a shared Pulsar cluster.
+Each of your tenants is secured by Pulsar AuthN & AuthZ models *and* the Astra Org AuthN and AuthZ.
+The shared cluster is created and administered by Astra Streaming Admins.
+Each tenant is assigned a custom role (and permission) limited to only that tenant.
+All tokens created within a tenant are assigned roles similar to the assigning tenant.
+====
+
+.What is the difference between the Astra token and the Astra Streaming token? Are they interchangeable?
+[%collapsible]
+====
+The Astra platform offers different layers of authentication based on the desired action.
+In general, actions related to your Astra Org (members, org billing, usage metrics, etc.) use your Astra Token, and actions specific to a Pulsar tenant (message namespaces, topics, message metrics, etc.) use a Pulsar JWT token.
+
+If you would like to get a little deeper into exactly which token covers what action, see the following guides and documentation.
+
+xref:astra-streaming:developing:astra-cli.adoc[] +
+xref:astra-streaming:developing:using-curl.adoc[] +
+xref:astra-streaming:developing:configure-pulsar-env.adoc[] +
+https://awesome-astra.github.io/docs/pages/astra/astra-cli/#astra-streaming[Astra Streaming functions of the Astra CLI^]{external-link-icon}
+====
+
+== Data Migration and Geo-replication
+
+.What are the differences between dedicated and PAYG geo-replication?
+[%collapsible]
+====
+Geo-replication is available to both PAYG and dedicated serverless environments. Both can replicate to other clusters, but there are some differences. +
+In PAYG, traffic between clusters will be secured over the (public) internet, while dedicated clusters have the option for private communication. PAYG environments can replicate between any xref:astream-regions.adoc[supported region] of the same cloud provider. With dedicated clusters, you can use almost any region supported by your cloud provider, as well as across cloud providers.
+mailto:streaming@datastax.com[Email the team] for more information.
+
+For more on geo-replication, see xref:astream-georeplication.adoc[].
+====
+
+.Can I migrate data from my existing Pulsar cluster to Astra Streaming?
+[%collapsible]
+====
+Unless you are starting a project from scratch, you likely have message data that needs to be brought over to your Astra Streaming tenant(s). The Streaming Team has quite a bit of experience with this and can help you find the right way to migrate. mailto:streaming@datastax.com[Email the team] for more information.
+
+TIP: Did you know every tenant in Astra Streaming comes with custom ports for Kafka and RabbitMQ workloads? We also offer a fully compatible JMS implementation for your Java workloads! xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more here].
+====
+
+== Application Development
+
+.How do I separate messaging traffic?
+[%collapsible]
+====
+It is common to have a hierarchy of development environments which app changes are promoted through before reaching production.
+The configurations of middleware and platforms supporting the app should be kept in parity to promote stability and fast iterations with low volatility.
+
+[discrete]
+==== By Tenant
+To support the hierarchy of development environments pattern, we recommend using Tenants to represent each development environment.
+This gives you the greatest flexibility to balance a separation of roles with consistent service configuration.
+All tokens created within a Tenant are limited to that Tenant.
+
+For example, start with a tenant named “Dev” that development teams have access to (and create tokens from), then create other tenants named “Staging” and “Production”.
+Each Tenant has progressively less permissions to create tokens, but maintains parity between the three running environments.
+
+[discrete]
+==== By Namespace
+Alternatively, you might choose to separate development environments by namespace within your Astra Streaming tenant.
+While this doesn’t offer as much flexibility as separation by tenant, it does offer a much simpler model to manage.
+Also, note that in this scheme you cannot limit access by namespace.
+All tokens would have access to all namespaces.
+====
+
+.Can we develop applications on open source Pulsar and then move to Astra Streaming?
+[%collapsible]
+====
+As mentioned previously, Astra Streaming is actively maintained to keep parity with the official https://pulsar.apache.org[Apache Pulsar project^]{external-link-icon}.
+The notable differences arise from accessibility and security.
+Naturally, you have less control in a managed, serverless cluster than you do in a cluster running in your own environment.
+Beyond those differences, the effort to develop locally and then move to Astra Streaming should not be significant, but it is recommended to develop directly in Astra Streaming.
+If you are trying to save costs, use the free tier of Astra Streaming and then “switch” when you are ready to stage your production services.
+====
+
+.Can I use Astra Streaming with my existing Kafka or RabbitMQ applications?
+[%collapsible]
+====
+Yes, Astra Streaming offers a fully compatible Kafka and RabbitMQ implementation. This means you can use your existing Kafka or RabbitMQ applications with Astra Streaming. You can also use the Astra Streaming Kafka or RabbitMQ implementation with your existing Pulsar applications. Astra Streaming comes with custom ports for Kafka and RabbitMQ workloads. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+====
+
+.Can I use Astra Streaming with my existing Java applications?
+[%collapsible]
+====
+Yes, Astra Streaming offers a fully compatible JMS implementation. This means you can use your existing JMS applications with Astra Streaming. You can also use the Astra Streaming JMS implementation with your existing Pulsar applications. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+====
+
+== Additional Questions
+
+If you have additional questions about the Astra Platform, Astra Streaming, or any other DataStax product, please mailto:streaming@datastax.com[email the team]. We're happy to share best practices and ideas to help you get the most out of your Astra Streaming environment.
