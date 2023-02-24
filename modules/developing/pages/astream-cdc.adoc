@@ -172,7 +172,7 @@ image::astream-create-cdc-confirmed.png[Confirm CDC Created]
 
 After creating your CDC connector, connect an Elasticsearch sink to it. DataStax recommends using the default {product_name} settings.
 
-. Select the cdc-enabled table from the database CDC tab and click on *Add Elastic Search Sink* to enforce the default settings.
+. Select the cdc-enabled table from the database CDC tab and click *Add Elastic Search Sink* to enforce the default settings.
 
 . Select the corresponding *data* topic for the chosen table.
 The topic name will look something like this: `data-64b406e3-28ec-4eaf-a802-69ade0415b58-ks1.tbl1`.
