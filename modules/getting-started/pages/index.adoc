@@ -7,7 +7,7 @@
 :page-aliases: docs@astra-streaming::astream-quick-start.adoc
 
 Astra Streaming is a cloud native data streaming and event stream processing
-service tightly integrated into the Astra cloud platform and powered by Apache Pulsar™.
+service tightly integrated into the {astra_ui} and powered by Apache Pulsar™.
 Using Astra Streaming, customers can quickly create Pulsar instances,
 manage their clusters, scale across cloud regions, and manage Pulsar resources
 such as topics, connectors, functions and subscriptions.
