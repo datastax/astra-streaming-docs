@@ -154,6 +154,13 @@ These namespace policies are initially provisioned in the default settings by {p
 
 |===
 
+[NOTE]
+====
+The total characters of tenant name + namespace name + function name cannot exceed 54 characters.
+This is a Kubernetes restriction based on a pod label's maximum size of 63 characters.
+You can read more about Kubernetes pod naming conventions https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set[here].
+====
+
 == {product_name} topic and namespace actions
 
 These topic and namespace actions are initially provisioned in the default settings by {product_name} and can be performed by users.
