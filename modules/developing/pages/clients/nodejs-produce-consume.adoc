@@ -24,6 +24,11 @@ Before we get started with the app, a little pre-work needs to be done.
 
 The Node.js Pulsar client npm package depends on the C++ Pulsar library.
 
+[NOTE]
+====
+Node versions 1.8 and greater no longer require the C++ Pulsar library.
+====
+
 Install the C++ Pulsar library dependency.
 
 [tabs]
