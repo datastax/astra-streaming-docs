@@ -9,6 +9,10 @@
 
 // {product_name} now supports https://pulsar.apache.org/docs/next/txn-how[Pulsar transactions].
 
+== 27 February 2023
+
+*Welcome Home* is now generally available, which includes UI improvements and https://astra.datastax.com/integrations[data integrations].
+
 == 21 November 2022
 
 Added support for serverless Azure `australiaeast` (New South Wales, Australia) region. For more, see xref:operations:astream-regions.adoc[{product_name} regions].
