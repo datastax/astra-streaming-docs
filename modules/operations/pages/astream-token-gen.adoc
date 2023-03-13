@@ -1,10 +1,20 @@
 = Manage Tokens
 
-There are *two* different tokens within Astra- the *Astra token* and the *Astra Streaming Pulsar token*.
+There are *two* different tokens within Astra - the *Astra token* and the *Astra Streaming Pulsar token*.
 
 The <<astra-token, Astra token>> is used for authentication within {astra_ui} and the xref:ROOT:astream-use-devops.adoc[DevOps API].
 
 The <<pulsar-token, Pulsar token>> is a native Pulsar JSON Web Token (JWT) token that controls authentication to the Pulsar cluster.
+
+== What's the difference?
+
+The Astra token is an access token. It is used to authenticate your service account in the DevOps API and {astra_ui}.
+
+The Astra Streaming Pulsar token is a JWT token. Astra authenticates this token and verifies if the role claimed in that token is allowed to complete the required action in the Pulsar cluster.
+
+In general, actions related to your Astra Org (members, org billing, usage metrics, etc.) use your Astra Token, and actions specific to a Pulsar tenant (message namespaces, topics, message metrics, etc.) use a Pulsar JWT token.
+
+For more, see https://docs.datastax.com/en/streaming/astra-streaming/operations/onboarding-faq.html#secure-sign-on-roles-and-permissions[SSO Roles and Permissions].
 
 [#astra-token]
 == Generate Astra token
@@ -24,11 +34,10 @@ Curl::
 --
 [source,shell]
 ----
-curl --request POST \
+curl --request GET \
  --url 'https://api.astra.datastax.com/v2/clientIdSecrets' \
  --header 'Accept: application/json' \
- --header 'Authorization: Bearer <application_token>' \
- --data '{"roles": ["<roleId>"]}'
+ --header 'Authorization: Bearer <application_token>'
 ----
 --
 +
@@ -37,14 +46,14 @@ Result::
 --
 [source,json]
 ----
-{"clients":
+{"clients":[
 	{"clientId":"DkFtHKMhDQDuQtlExkSzwbya",
 		"roles":["21ef3576-0197-415a-b167-d510af12ecf0"],
 		"generatedOn":"2021-02-22T17:09:58.668Z"},
 	{"clientId":"eYSboCJaESiblJZnKZWMxROv",
 		"roles":["21ef3576-0197-415a-b167-d510af12ecf0"],
-		"generatedOn":"2021-04-28T18:49:11.323Z"}]
-}
+		"generatedOn":"2021-04-28T18:49:11.323Z"}
+]}
 ----
 --
 ====
@@ -176,11 +185,11 @@ Use `pulsar-admin` for interacting with your Pulsar clusters. Topics, namespaces
 
 Use the DevOps API for org-wide Astra scope. Users, tenants, billing, and usage metrics fall under this scope.
 
-Some cases can use `pulsar-admin` **or** the DevOps API- we want the tools to be complementary, not restrictive, so do what works best for you!
+Some cases can use `pulsar-admin` **or** the DevOps API - we want the tools to be complementary, not restrictive, so do what works best for you!
 
 This section should help you choose which tool to use, and which token is required.
 
-[cols="1,1,4",options=header]
+[cols="2,2,4",options=header]
 |===
 |*Use case*
 |*Token*
