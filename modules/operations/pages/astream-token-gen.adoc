@@ -10,9 +10,9 @@ The <<pulsar-token, Pulsar token>> is a native Pulsar JSON Web Token (JWT) token
 
 The Astra token is an access token. It is used to authenticate your service account in the DevOps API and {astra_ui}.
 
-The Astra Streaming Pulsar token is a JWT token. Astra authenticates this token and verifies if the role claimed in that token is allowed to complete the required action in the Pulsar cluster.
+The Astra Streaming Pulsar token is a JWT token. Astra forwards the token on to the Pulsar cluster, which verifies if the role in allowed.
 
-In general, actions related to your Astra Org (members, org billing, usage metrics, etc.) use your Astra Token, and actions specific to a Pulsar tenant (message namespaces, topics, message metrics, etc.) use a Pulsar JWT token.
+In general, actions related to your Astra Org (tenant management, members, org billing, usage metrics, etc.) use your Astra Token, and actions specific to a Pulsar tenant (message namespaces, topics, message metrics, etc.) use a Pulsar JWT token.
 
 For more, see https://docs.datastax.com/en/streaming/astra-streaming/operations/onboarding-faq.html#secure-sign-on-roles-and-permissions[SSO Roles and Permissions].
 
@@ -189,15 +189,15 @@ Some cases can use `pulsar-admin` **or** the DevOps API - we want the tools to b
 
 This section should help you choose which tool to use, and which token is required.
 
-[cols="2,2,4",options=header]
+[cols="2,2",options=header]
 |===
 |*Use case*
 |*Token*
-|*Example code*
 
 |Track monthly usage
 |Astra token
-a|
+
+2+a|Example
 [source,shell]
 ----
 curl --request GET \
@@ -208,23 +208,26 @@ curl --request GET \
 
 |Monitor a topic's health
 |Pulsar token
-|`/bin/pulsar-admin topics stats`
+
+2+a|Example
+[source,shell]
+----
+bin/pulsar-admin topics stats
+----
 
 |Monitor a connector's health
 |Pulsar token
-a|
+
+2+a|Example
 [source,shell]
 ----
-./bin/pulsar-admin sinks status \
-  --instance-id "${SINK_INSTANCEID}" \
-  --namespace "${NAMESPACE}" \
-  --name "${SINK_NAME}" \
-  --tenant "${TENANT}"
+./bin/pulsar-admin sinks status
 ----
 
 |Billing report by tenant
 |Astra token
-a|
+
+2+a|Example
 [source,shell]
 ----
 curl --request GET \
