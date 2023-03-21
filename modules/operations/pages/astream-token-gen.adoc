@@ -221,7 +221,7 @@ bin/pulsar-admin topics stats
 2+a|Example
 [source,shell]
 ----
-./bin/pulsar-admin sinks status
+bin/pulsar-admin sinks status
 ----
 
 |Billing report by tenant
