@@ -65,7 +65,7 @@ Max throughput for a *non-partitioned topic* or a *single partition of a partiti
 |Not set
 |===
 
-* These guardrails cannot be changed.
+*These guardrails cannot be changed.
 
 == Function and connector resource limits
 
