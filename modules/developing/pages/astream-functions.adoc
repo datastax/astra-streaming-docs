@@ -9,6 +9,14 @@ Functions run inside {product_name} and are therefore serverless. You write the 
 
 Functions are implemented using Apache Pulsar(R) functions. See https://pulsar.apache.org/docs/en/functions-overview/[Pulsar Functions overview] for more information about Pulsar functions.
 
+[NOTE]
+====
+Custom functions can only be created by *qualified organizations*.
+You can upgrade your organization to a qualified organization by enrolling in the Pay As You Go plan.
+For assistance, open https://support.datastax.com[a support ticket].
+Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
+====
+
 == Add functions in dashboard
 
 Add functions in the Functions tab of the Astra Streaming dashboard.
@@ -90,7 +98,8 @@ $ ./pulsar-admin functions create \
   --log-topic persistent://<tenant-name>/default/log
 ----
 +
-If the function is set up and ready to accept messages, you should see "Created Successfully!"
+You will see "Created Successfully!" if the function is set up and ready to accept messages.
+If you receive an error message with "Reason: only qualified organizations can create functions", this means your organization needs to be upgraded to a Pay As You Go plan to use user-defined functions. For assistance, open https://support.datastax.com[a support ticket].
 
 . Use `./pulsar-admin functions list --tenant <tenant-name>` to list the functions in your tenant and confirm your new function was created.
 

@@ -73,6 +73,11 @@ The default settings are:
 * CPU: 0.25 core
 * RAM: 500 MB
 
+Custom functions can only be created by *qualified organizations*.
+You can upgrade your organization to a qualified organization by enrolling in the Pay As You Go plan.
+For assistance, open https://support.datastax.com[a support ticket].
+Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
+
 == Non-changeable configurations
 
 * Data persistency (En,Qw,Qa)
