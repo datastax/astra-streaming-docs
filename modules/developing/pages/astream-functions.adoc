@@ -15,7 +15,7 @@ Custom functions can only be created by *qualified organizations*.
 A *qualified organization* is an organization on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a payment method on file.
 Upgrade your organization to a qualified organization by:
 
-* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[].
+* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[Plan Options].
 * Contacting our sales team to see how we can help.
 * Opening https://support.datastax.com[a support ticket].
 
@@ -111,7 +111,7 @@ If you receive a 402 error with "Reason: only qualified organizations can create
 A *qualified organization* is an organization on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a credit card on file.
 Upgrade your organization to a qualified organization by:
 
-* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[].
+* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[Plan Options].
 * Contacting our sales team to see how we can help.
 * Opening https://support.datastax.com[a support ticket].
 ====
