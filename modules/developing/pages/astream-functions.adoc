@@ -12,8 +12,10 @@ Functions are implemented using Apache Pulsar(R) functions. See https://pulsar.a
 [NOTE]
 ====
 Custom functions can only be created by *qualified organizations*.
-You can upgrade your organization to a qualified organization by enrolling in the Pay As You Go plan.
-For assistance, open https://support.datastax.com[a support ticket].
+Upgrade your organization to a qualified organization by:
+* Enrolling in the Pay As You Go plan in the Astra UI with a credit card.
+* Contacting our sales team to see how we can help.
+* Opening a https://support.datastax.com[a support ticket].
 Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
 ====
 
@@ -99,7 +101,15 @@ $ ./pulsar-admin functions create \
 ----
 +
 You will see "Created Successfully!" if the function is set up and ready to accept messages.
-If you receive an error message with "Reason: only qualified organizations can create functions", this means your organization needs to be upgraded to a Pay As You Go plan to use user-defined functions. For assistance, open https://support.datastax.com[a support ticket].
++
+[NOTE]
+====
+If you receive a 402 error with "Reason: only qualified organizations can create functions", this means your organization needs to be upgraded to a Pay As You Go plan to use user-defined functions.
+Upgrade your organization to a qualified organization by:
+* Enrolling in the Pay As You Go plan in the Astra UI with a credit card.
+* Contacting our sales team to see how we can help.
+* Opening a https://support.datastax.com[a support ticket].
+====
 
 . Use `./pulsar-admin functions list --tenant <tenant-name>` to list the functions in your tenant and confirm your new function was created.
 
