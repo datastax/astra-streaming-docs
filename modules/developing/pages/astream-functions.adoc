@@ -12,12 +12,12 @@ Functions are implemented using Apache Pulsar(R) functions. See https://pulsar.a
 [NOTE]
 ====
 Custom functions can only be created by *qualified organizations*.
-A *qualified organization* is an organization on the Pay As You Go plan with a credit card on file.
+A *qualified organization* is an organization on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a payment method on file.
 Upgrade your organization to a qualified organization by:
 
-* Enrolling in the Pay As You Go plan in the Astra UI with a credit card. For more on available Astra Streaming plans, see the https://docs.datastax.com/en/streaming/astra-streaming/operations/onboarding-faq.html#astra-streaming-environments[Onboarding FAQ].
+* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the Astra UI with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[].
 * Contacting our sales team to see how we can help.
-* Opening a https://support.datastax.com[a support ticket].
+* Opening https://support.datastax.com[a support ticket].
 
 Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
 ====
@@ -108,12 +108,12 @@ You will see "Created Successfully!" if the function is set up and ready to acce
 [NOTE]
 ====
 If you receive a 402 error with "Reason: only qualified organizations can create functions", this means your organization needs to be upgraded to a Pay As You Go plan with a credit card to use user-defined functions.
-A *qualified organization* is an organization on the Pay As You Go plan with a credit card on file.
+A *qualified organization* is an organization on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a credit card on file.
 Upgrade your organization to a qualified organization by:
 
-* Enrolling in the Pay As You Go plan in the Astra UI with a credit card. For more on available Astra Streaming plans, see the https://docs.datastax.com/en/streaming/astra-streaming/operations/onboarding-faq.html#astra-streaming-environments[Onboarding FAQ].
+* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the Astra UI with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[].
 * Contacting our sales team to see how we can help.
-* Opening a https://support.datastax.com[a support ticket].
+* Opening https://support.datastax.com[a support ticket].
 ====
 
 . Use `./pulsar-admin functions list --tenant <tenant-name>` to list the functions in your tenant and confirm your new function was created.
