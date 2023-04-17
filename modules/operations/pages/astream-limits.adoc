@@ -65,7 +65,7 @@ Max throughput for a *non-partitioned topic* or a *single partition of a partiti
 |Not set
 |===
 
-_*These guardrails cannot be changed._
+_*These guardrails cannot be changed._ +
 _**Max message size can be changed on dedicated clusters, but not serverless clusters. If you need assistance, open https://support.datastax.com[a support ticket]._
 
 == Function and connector resource limits
