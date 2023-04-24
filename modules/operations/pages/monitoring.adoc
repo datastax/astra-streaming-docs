@@ -1,0 +1,202 @@
+= Externally Exposed Astra Streaming Metrics for Integration
+
+Because of the nature of Astra Streaming being an as-a-service product, not all Apache Pulsar metrics (Pulsar Metrics Reference Doc) are exposed for external integration purposes. At a high level, Astra Streaming only exposes metrics that are namespace related. Other metrics that are not directly namespace related are not exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
+
+In the following sections, we’ll go through each of the Astra Streaming metrics categories that are available for external integration. We also make a list of the recommended metrics for external integration as a starting point.
+
+== Raw Metrics
+
+=== Namespace or Topic Metrics
+The complete list of namespace metrics can be found at:
+https://pulsar.apache.org/docs/2.11.x/reference-metrics/#namespace-metrics
+
+=== The complete list of topic metrics can be found at:
+https://pulsar.apache.org/docs/2.11.x/reference-metrics/#topic-metrics
+
+Astra Streaming exposes both namespace and topic levels. The namespace metrics can always be inferred from corresponding topic metrics via metrics aggregation.
+
+The following table gives the list of recommended namespace and/or topic metrics as a starting point.
+
+== Namespace and topic metrics
+
+[%header,format=csv,cols="2,1,1,3"]
+|===
+include::example$namespace-topic-metrics.csv[]
+|===
+
+== Replication Metrics
+When geo-replication is enabled (for a particular namespace), there is a subset of namespace metrics just for geo-replication purposes.  Below is the list of recommended geo-replication metrics as a starting point.
+
+[%header,format=csv,cols="2,1,1,3"]
+|===
+include::example$replication-metrics.csv[]
+|===
+
+== Subscription metrics
+The following table gives the list of recommended subscription metrics as a starting point.
+
+[%header,format=csv,cols="2,1,3"]
+|===
+include::example$subscription-metrics.csv[]
+|===
+
+== Function Metrics
+
+The following table gives the list of recommended function metrics as a starting point. This is only relevant when Pulsar functions are deployed in Astra Streaming.
+
+[%header,format=csv,cols="2,1,3"]
+|===
+include::example$function-metrics.csv[]
+|===
+
+== Source connector metrics
+The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar source connectors are deployed in Astra Streaming.
+
+[%header,format=csv,cols="2,1,3"]
+|===
+include::example$source-connector-metrics.csv[]
+|===
+
+== Sink connector metrics
+The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar sink connectors are deployed in Astra Streaming.
+[%header,format=csv,cols="2,1,3"]
+|===
+include::example$sink-connector-metrics.csv[]
+|===
+
+== Aggregate Astra Streaming Metrics
+
+Each of the raw Astra Streaming metrics that are exposed externally is specific to a particular Pulsar server instance. The same raw metrics could come from multiple server instances. From an Astra Streaming user’s perspective, the direct monitoring of the raw metrics is not really useful. Normally these raw metrics need to be presented to the end users in an aggregated way (e.g. calculating average or summation of the raw metrics over a period of time).
+
+Prometheus provides a powerful yet simple to use query language. PromQL, that lets the user select and aggregate time series data in real time. Introducing PromQL is beyond the scope of this document. If needed please refer to the Prometheus doc for more information.
+
+In the rest of this section, we’ll show some common PromQL query patterns that we recommend for aggregating raw Astra Streaming metrics to the end users. In these examples, we’ll use one Astra Streaming raw metrics, pulsar_msg_backlog, as an example for illustrative purposes.
+
+Pattern 1: Aggregate metrics by topic
+sum(pulsar_msg_backlog) by (topic)
+
+Pattern 2: Aggregate metrics by topic, excluding system topics
+sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (topic)
+
+Note: Pulsar system topics usually have  “__” as the either topic name prefix or the corresponding namespace prefix (e.g. persistent://<tenant>/__kafak/__consumer_offsets_partition_0)
+
+Pattern 3: Aggregate metrics by namespace, excluding system topics
+sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (namespace)
+
+Pattern 4: Aggregate metrics by tenant, excluding system topics
+sum(pulsar_msg_backlog{topic !~ ".*__.*"})
+
+Pattern 5: Get the top N metrics by topic (or namespace
+ topk(5, sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (topic))
+ topk(5, sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (namespace))
+
+== Metrics to be Alerted
+Most of the exposed Astra Streaming metrics are for informational purposes only and in most cases the metrics values, no matter how big or small they are, don’t necessarily mean concerns. They’re more or less just reflecting the application workload characteristics. For example, message rate or throughput are common examples of such metrics.
+
+There are, however, several metrics that need special attention when we see an increasing number of their values. Among the exposed Astra Streaming metrics, these metrics are:
+Namespace or topic metrics
+Pulsar_msg_backlog
+Pulsar_storage_backlog_size
+Pulsar_storage_size
+Geo-replication metrics
+Pulsar_replication_backlog
+Subscription metrics
+Pulsar_subscription_msg_rate_redeliver
+Pulsar_subscription_unacked_messages
+Pulsar_subscription_blocked_on_unacked_messages
+
+NOTE:
+In the next chapter of Grafana Dashboards for Astra Streaming, we’ll go through the details of setting up Prometheus alerts for these metrics.
+
+== Grafana Dashboards for Astra Streaming Metrics
+The DataStax Pulsar Helm Chart repository has a list of ready-to-use dashboards (Dashboard Example Location). However because not all Astra Streaming metrics are exposed externally, not all the example dashboards are usable for external integration purposes. The following is the list of the dashboards that can be used
+Overview.json
+Tenant.json
+Namespace.json
+Topic.json
+Messaging.json
+Offload.json
+
+TBD: These dashboards also need some adjustments and improvements in order for better support of the  integration of  the externally exposed Astra Streaming metrics. It may also be possible to consolidate some of these dashboards into new ones.
+Set up Prometheus Alerts
+TBD: Complete this after the AS dashboards are in place.
+
+
+NOTE: There is a “side project” going on to create a set of dashboards designed for Astra Streaming metrics external integration and creating Prometheus alerts.
+
+== Appendix A: Configure Astra Streaming Metrics Integration with External Prometheus + Grafans Servers
+Overview
+Astra Streaming exposes some of the Pulsar metrics through the Prometheus endpoints. From the Astra streaming UI, you can get the prometheus configuration information (as below) to scrape the Astra streaming metrics into an external Prometheus server. In this chapter, we’ll show you how to set up a Prometheus server in a K8s cluster and then configure it properly to scrape the Astra streaming metrics.
+
+
+Procedures
+Prerequisite: Set up a K8s Cluster.
+
+In our example, we’re using the Prometheus Community Kubernetes Helm Charts to set up a Prometheus server and a Grafana server in a K8s cluster.
+
+Create a configuration yaml file (e.g. astra-msgenrich.yml) using the Astra Streaming Prometheus configuration from the UI.
+- job_name: 'astra-pulsar-metrics-msgenrich'
+   scheme: 'https'
+   metrics_path: '/pulsarmetrics/msgenrich'
+   authorization:
+      credentials: <jwt_token_value>
+   static_configs:
+   - targets: ['prometheus-gcp-uscentral1.streaming.datastax.com']
+
+Please NOTE that the above configuration, DO NOT add other prometheus configurations like scrape_interval or evaluation_interval. They will be added in later steps when configuring the helm chart.
+
+Make a K8s secret, named astra-msgenrich, out of the above configuration file.
+# Create a K8s secret for additional Prometheus scrape config
+kubectl create secret generic astra-msgenrich \
+  --from-file=astra-msgenrich.yml \
+  --dry-run=client -oyaml > k8s-additional-scrape-config-msgenrich.yaml
+
+kubectl apply -f k8s-additional-scrape-config-msgenrich.yaml
+
+
+Create a customized values file (e.g. custom-values.yaml) for Prometheus Community Kubernetes helm chart. Please pay attention to the additionalScrapeConfigsSecret section and make sure that the name and key are matching the K8s secret name and file name in the previous 2 steps.
+prometheus:
+   prometheusSpec:
+      scrapeInterval: 60s
+      evaluationInterval: 15s
+      additionalScrapeConfigsSecret:
+         enabled: true
+         name: astra-msgenrich
+         key: astra-msgenrich.yml
+
+
+Deploy the helm chart
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm upgrade --install kubeprom -f custom-values.yaml prometheus-community/kube-prometheus-stack
+
+
+(Optional) For Mac users (e.g. using docker-desktop as the underlying K8s cluster), run the following commands to make sure the deployment is successful. Otherwise, there might be issues to bring up the Prometheus node exporter daemon set.
+# Patch the Prometheus node exporter daemon set
+kubectl patch ds kubeprom-prometheus-node-exporter --type "json" -p '[{"op": "remove", "path" : "/spec/template/spec/containers/0/volumeMounts/2/mountPropagation"}]'
+
+== Confirm if the Prometheus node exporter daemonset is properly up and running.
+kubectl rollout status daemonset \
+  kubeprom-prometheus-node-exporter \
+  --timeout 60s
+
+
+Verify the Integration
+At this point, the Astra Streaming metrics integration with an external Prometheus server should be ready. We can double check this by going to the external Prometheus server UI.
+
+
+Please NOTE that the status of the additional scrape job, astra-pulsar-metrics-msgenrich, should be in the UP state. Otherwise, there are some issues in the previous configuration procedures.
+401 Unauthorized Issue
+One common issue that we see from integrating the Astra Streaming metrics into an external Prometheus server is the state of the additional scrap job shows as 401 Unauthorized. This is most likely because the JWT token we used in the previous step 1 has expired.
+
+In order to fix this issue, go to the Astra Streaming UI and create a new JWT token (preferably with no expiration date). Get the new token value and repeat the above procedure.
+Appendix B: Configure Astra Streaming Metrics Integration with New Relic
+According to the New Relic document, currently there are 3 different ways to integrate extnernal Prometheus data into it:
+Option 1: Prometheus Agent for Kubernetes.
+Option 2: Prometheus OpenMetrics integration for Docker.
+Option 3: Prometheus remote write integration
+For Astra streaming, options 1 and 2 are NOT relevant; and option 3 is the only possible option. Option 3 requires modifying the configuration of the Prometheus server configuration that Astra Streaming is relying on
+ However, due to the nature of Astra Streaming being a managed service
+
+
+Although Astra streaming also exposes

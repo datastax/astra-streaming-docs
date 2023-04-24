@@ -1,0 +1,6 @@
+Metrics Name,Namespace and/or Topic Level,Metrics Type,Note
+pulsar_replication_rate_in,Namespace,Gauge,The total message rate (message per second) of the namespace replicating from a remote cluster.
+pulsar_replication_rate_out,Namespace,Gauge,The total message rate (message per second) of the namespace replicating to a remote cluster.
+pulsar_replication_throughput_in,Namespace,Gauge,The total throughput (bytes per second) of the namespace replicating from a remote cluster.
+pulsar_replication_throughput_out,Namespace,Gauge,The total throughput (bytes per second) of the namespace replicating to a remote cluster.
+pulsar_replication_backlog,,,The total message backlog of the namespace replicating to a remote cluster.
