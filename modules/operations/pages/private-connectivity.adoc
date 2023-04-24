@@ -1,0 +1,59 @@
+= Private connectivity in
+
+To better protect your database connection, you can connect to a private endpoint using the {product_name} private endpoint.
+
+The private endpoint is only available within the same cloud provider and region as your {product_name} cluster.
+
+To open a private endpoint, open https://support.datastax.com[a support ticket].
+
+== Supported endpoints
+
+{product_name} supports the following inbound traffic (i.e. User → {product_name}).
+
+The endpoint pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
+
+.Inbound endpoints
+[cols=2*,options=header]
+|===
+|Service
+|Endpoint pattern
+
+|Pulsar Messaging
+|pulsar-azure-eastus.private.streaming.datastax.com:6651
+
+|Kafka Messaging
+|kafka-azure-eastus.private.streaming.datastax.com:9093
+
+|RabbitMQ Messaging
+|rabbitmq-azure-eastus.private.streaming.datastax.com
+
+|Prometheus Metrics
+|prometheus-azure-eastus.private.streaming.datastax.com
+|===
+
+{product_name} also supports private outbound traffic on a case-by-case basis.
+To open an outbound private endpoint, open https://support.datastax.com[a support ticket].
+
+For more on connecting to your cloud provider, see your cloud provider's documentation.
+Each cloud provider will require different credentials to connect to the private endpoint.
+.Cloud providers
+[cols=3*,options=header]
+|===
+|Cloud provider
+|Credentials required
+|Documentation
+
+|AWS
+|AWS account number(s)
+|https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-service.html[AWS Private Link]
+
+|Azure
+|Azure subscription id(s)
+|https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip[Azure Portal]
+
+|GCP
+|GCP project id(s)
+|https://console.cloud.google.com/net-services/psc/[GCP Private Service Connect]
+
+|===
+
