@@ -36,6 +36,7 @@ To open an outbound private endpoint, open https://support.datastax.com[a suppor
 
 For more on connecting to your cloud provider, see your cloud provider's documentation.
 Each cloud provider will require different credentials to connect to the private endpoint.
+
 .Cloud providers
 [cols=3*,options=header]
 |===
