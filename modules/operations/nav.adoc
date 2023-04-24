@@ -5,4 +5,5 @@
 ** xref:astream-regions.adoc[]
 ** xref:astream-scrape-metrics.adoc[]
 ** xref:astream-token-gen.adoc[]
+** xref:private-connectivity.adoc[]
 ** xref:onboarding-faq.adoc[]
