@@ -1,4 +1,4 @@
-= Private connectivity in
+= Private endpoints
 
 To better protect your database connection, you can connect to a private endpoint using the {product_name} private endpoint.
 
