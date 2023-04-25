@@ -70,12 +70,13 @@ include::example$sink-connector-metrics.csv[]
 Each externally exposed raw Astra Streaming metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product_name} user’s perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
 
 Below is an example of a raw metric for Pulsar message backlog (pulsar_msg_backlog) scraped from an Astra Streaming cluster located in the GCP US Central region:
-[source,plain]
+[source,bash]
 ----
 pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="broker", controller_revision_hash="pulsar-gcp-uscentral1-broker-<hash>f", exported_instance="<ip>:<port>", exported_job="broker", helm_release_name="astraproduction-gcp-pulsar-uscentral1", instance="prometheus-gcp-uscentral1.streaming.datastax.com:443", job="astra-pulsar-metrics-msgenrich", kubernetes_namespace="pulsar", kubernetes_pod_name="pulsar-gcp-uscentral1-broker-3", namespace="msgenrich/testns", prometheus="pulsar/astraproduction-gcp-pulsar-prometheus", prometheus_replica="prometheus-astraproduction-gcp-pulsar-prometheus-0", pulsar_cluster_dns="gcp-uscentral1.streaming.datastax.com", release="astraproduction-gcp-pulsar-uscentral1", statefulset_kubernetes_io_pod_name="pulsar-gcp-uscentral1-broker-3", topic="persistent://msgenrich/testns/raw-partition-0"}
 ----
 
 To make raw metrics like this useful for end users, we recommend the following guidelines when aggregating raw metrics:
+
 . Aggregate metrics to at least the parent topic level, instead of at the partition level. In Pulsar, end user applications only deal with messages at the parent topic level (but internally, Pulsar is handling message processing at the partition level).
 . Exclude reported metrics that are associated with Astra Streaming’s system namespaces and topics. These namespaces and topics normally have a name starting with ++__++ (two underscores). For example, when Pulsar’s Kafka protocol handler is enabled (via S4K integration), a system namespace ++__kafka++ is created with one system topic within called ++__transaction_producer_state++.
 Do NOT aggregate metrics with the Astra Streaming PAYG option, since one cluster may be shared among multiple organizations. For more, see xref:astream-limits.adoc[Cluster Limits].
