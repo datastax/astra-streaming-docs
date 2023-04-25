@@ -1,12 +1,12 @@
-= Private endpoints
+= Private connectivity
 
-To better protect your database connection, you can connect to a private endpoint using the {product_name} private endpoint.
+To better protect your streaming connections, connect {product_name} to a private link service for inbound connectivity, or to a private endpoint for outbound connectivity.
 
-The private endpoint is only available within the same cloud provider and region as your {product_name} cluster.
+Private connections are only available within the same cloud provider and region as your {product_name} cluster.
 
-To open a private endpoint, open https://support.datastax.com[a support ticket].
+To open a private link service or private endpoint, open https://support.datastax.com[a support ticket].
 
-== Supported endpoints
+== Supported traffic
 
 {product_name} supports the following inbound traffic (i.e. User → {product_name}).
 
