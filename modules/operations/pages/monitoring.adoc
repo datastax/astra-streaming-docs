@@ -161,7 +161,7 @@ The choice of the actual threshold values for these metrics will be highly depen
 
 == Grafana
 Grafana Dashboards for Astra Streaming Metrics
-A set of Grafana dashboards have been pre-built around core message processing for the exposed Astra Streaming metrics which can be found from: 
+A set of Grafana dashboards have been pre-built around core message processing for the exposed Astra Streaming metrics which can be found from:
 https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards
 
 == Overview Dashboard
