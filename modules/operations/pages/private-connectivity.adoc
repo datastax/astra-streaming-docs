@@ -10,9 +10,9 @@ To open a private link service or private endpoint, open https://support.datasta
 
 {product_name} supports the following inbound traffic (i.e. User → {product_name}).
 
-The endpoint pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
+The private link service pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
 
-.Inbound endpoints
+.Inbound private link service endpoints
 [cols=2*,options=header]
 |===
 |Service
