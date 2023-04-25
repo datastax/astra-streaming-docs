@@ -4,17 +4,21 @@ Because Astra Streaming is a software-as-a-service product, not all Apache Pulsa
 
 In the following sections, we’ll explore each of the Astra Streaming metrics categories that are available for external integration, and recommended metrics for external integration.
 
-== Pulsar Raw Metrics
+== Pulsar raw metrics
 
 If you're just looking for a complete reference for Pulsar metrics, they are available below.
 
-Namespace metrics
+Namespace metrics:
+
 https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics
 
-Topic metrics
+Topic metrics:
+
 https://pulsar.apache.org/docs/reference-metrics/#topic-metrics
 
-== Namespace and topic metrics
+== {product_name} metrics
+
+=== Namespace and topic metrics
 Astra Streaming exposes both namespace and topic level metrics.
 Namespace metrics can always be inferred from corresponding topic metrics via metrics aggregation.
 
@@ -25,7 +29,7 @@ The following table lists recommended namespace and/or topic metrics as a starti
 include::example$namespace-topic-metrics.csv[]
 |===
 
-== Replication Metrics
+=== Replication Metrics
 When geo-replication is enabled for a particular namespace, a subset of namespace metrics is available specifically for geo-replication purposes. Below is the list of recommended geo-replication metrics as a starting point.
 
 [%header,format=csv,cols="2,1,1,3"]
@@ -33,7 +37,7 @@ When geo-replication is enabled for a particular namespace, a subset of namespac
 include::example$replication-metrics.csv[]
 |===
 
-== Subscription metrics
+=== Subscription metrics
 The following table gives the list of recommended subscription metrics as a starting point.
 
 [%header,format=csv,cols="2,1,3"]
@@ -41,7 +45,7 @@ The following table gives the list of recommended subscription metrics as a star
 include::example$subscription-metrics.csv[]
 |===
 
-== Function Metrics
+=== Function Metrics
 
 The following table gives the list of recommended function metrics as a starting point. This is only relevant when Pulsar functions are deployed in Astra Streaming.
 
@@ -50,7 +54,7 @@ The following table gives the list of recommended function metrics as a starting
 include::example$function-metrics.csv[]
 |===
 
-== Source connector metrics
+=== Source connector metrics
 The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar source connectors are deployed in Astra Streaming.
 
 [%header,format=csv,cols="2,1,3"]
@@ -58,7 +62,7 @@ The following table gives the list of recommended source connector metrics as a 
 include::example$source-connector-metrics.csv[]
 |===
 
-== Sink connector metrics
+=== Sink connector metrics
 The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar sink connectors are deployed in Astra Streaming.
 [%header,format=csv,cols="2,1,3"]
 |===
@@ -69,11 +73,15 @@ include::example$sink-connector-metrics.csv[]
 
 Each externally exposed raw Astra Streaming metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product_name} user’s perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
 
-Below is an example of a raw metric for Pulsar message backlog (pulsar_msg_backlog) scraped from an Astra Streaming cluster located in the GCP US Central region:
-[source,bash]
-----
+Below is an example of a raw metric for the Pulsar message backlog (pulsar_msg_backlog) scraped from an Astra Streaming cluster located in the GCP US Central region:
+
+.Show raw metric for Pulsar message backlog:
+[%collapsible]
+====
+....
 pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="broker", controller_revision_hash="pulsar-gcp-uscentral1-broker-<hash>f", exported_instance="<ip>:<port>", exported_job="broker", helm_release_name="astraproduction-gcp-pulsar-uscentral1", instance="prometheus-gcp-uscentral1.streaming.datastax.com:443", job="astra-pulsar-metrics-msgenrich", kubernetes_namespace="pulsar", kubernetes_pod_name="pulsar-gcp-uscentral1-broker-3", namespace="msgenrich/testns", prometheus="pulsar/astraproduction-gcp-pulsar-prometheus", prometheus_replica="prometheus-astraproduction-gcp-pulsar-prometheus-0", pulsar_cluster_dns="gcp-uscentral1.streaming.datastax.com", release="astraproduction-gcp-pulsar-uscentral1", statefulset_kubernetes_io_pod_name="pulsar-gcp-uscentral1-broker-3", topic="persistent://msgenrich/testns/raw-partition-0"}
-----
+....
+====
 
 To make raw metrics like this useful for end users, we recommend the following guidelines when aggregating raw metrics:
 
@@ -88,24 +96,27 @@ Prometheus provides a powerful but easy-to-use query language called PromQL for 
 In the rest of this section, we’ll recommend some PromQL query patterns for aggregating raw Astra Streaming metrics.
 These examples use one Astra Streaming raw metric, pulsar_msg_backlog, as an example for illustrative purposes.
 We aggregate messages at the parent topic level or above, and exclude system topics per our recommendations above.
-The examples below filter out system messages with the pattern +{topic !~ ".*__.*"}+.
+We filter out system messages with the pattern +{topic !~ ".*__.*"}+.
 This PromQL pattern filters out messages when their topic labels do not include +__+.
 This works because Pulsar system topics usually have ++__++ as the topic or namespace name prefix (e.g. persistent://<tenant>/++__++kafka/__consumer_offsets_partition_0).
 This pattern assumes that the user applications don’t also have namespaces and topics with +__+ as part of the names, or they will be filtered as well.
 
 Pattern 1: Get the total message backlog of a specific parent topic, excluding system topics.
+"$ptopic” is a (Grafana dashboard) variable that represents a specific parent topic.
 [source,psql]
 ----
 sum(pulsar_msg_backlog{topic=~$ptopic, topic !~ ".*__.*"})
 ----
 
 Pattern 2: Get the total message backlog of a specific namespace, excluding system topics.
+“$namespace” is a (Grafana dashboard) variable that represents a specific namespace.
 [source,psql]
 ----
 sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})
 ----
 
 Pattern 3: Get the total message backlog of a tenant, excluding system topics.
+"$tenant” is a (Grafana dashboard) variable that represents a specific tenant.
 [source,psql]
 ----
 sum(pulsar_msg_backlog{namespace=~”$tenant.+”, topic !~ ".*__.*"})
