@@ -1,7 +1,7 @@
 Pattern,Query,Note
-Pattern 1: Get the total message backlog of a specific parent topic (excluding system topics),sum(pulsar_msg_backlog{topic=~$ptopic, topic !~ ".*__.*"}),“$ptopic” is a (Grafana dashboard) variable that represents a specific parent topic
-Pattern 2: Get the total message backlog of a specific namespace (excluding system topics),sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"}),“$namespace” is a (Grafana dashboard) variable that represents a specific namespace
-Pattern 3: Get the total message backlog of a tenant(excluding system topics),sum(pulsar_msg_backlog{namespace=~”$tenant.+”, topic !~ ".*__.*"}),“$tenant” is a (Grafana dashboard) variable that represents a specific tenant.
-Pattern 4: Get the total message backlog of each topic within a specific namespace(excluding system topics),sum by(topic) (pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"}),
-Pattern 5: Get the top 10 message backlog by topic within a specific namespace (excluding system topics),topk by(topic) (5, sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"}),
+Get the total message backlog of a specific parent topic (excluding system topics),sum(pulsar_msg_backlog{topic=~$ptopic+,+ topic !~ ".*__.*"}),“$ptopic” is a (Grafana dashboard) variable that represents a specific parent topic
+Get the total message backlog of a specific namespace (excluding system topics),sum(pulsar_msg_backlog{namespace=~”$namespace”+,+ topic !~ ".*__.*"})`,“$namespace” is a (Grafana dashboard) variable that represents a specific namespace
+Get the total message backlog of a tenant(excluding system topics),`sum(pulsar_msg_backlog{namespace=~”$tenant.+”\, topic !~ ".*__.*"})`,“$tenant” is a (Grafana dashboard) variable that represents a specific tenant.
+Get the total message backlog of each topic within a specific namespace(excluding system topics),`sum by(topic) (pulsar_msg_backlog{namespace=~”$namespace”\, topic !~ ".*__.*"})`,
+Get the top 10 message backlog by topic within a specific namespace (excluding system topics),`topk by(topic) (5, sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})`,
 

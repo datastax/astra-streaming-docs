@@ -67,58 +67,61 @@ include::example$sink-connector-metrics.csv[]
 
 == Aggregate Astra Streaming Metrics
 
-Each externally exposed raw Astra Streaming metric is specific to a particular Pulsar server instance. The same raw metrics could come from multiple server instances. From a {product_name} user’s perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, averaging or summing the raw metrics over a period of time.
+Each externally exposed raw Astra Streaming metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product_name} user’s perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
 
-Prometheus provides a powerful but easy-to-use query language, PromQL, for selecting and aggregating time series data in real time. PromQL syntax is beyond this document's scope, but the https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus documentation] is a good place to start.
+Below is an example of a raw metric for Pulsar message backlog (pulsar_msg_backlog) scraped from an Astra Streaming cluster located in the GCP US Central region:
+[source,plain]
+----
+pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="broker", controller_revision_hash="pulsar-gcp-uscentral1-broker-<hash>f", exported_instance="<ip>:<port>", exported_job="broker", helm_release_name="astraproduction-gcp-pulsar-uscentral1", instance="prometheus-gcp-uscentral1.streaming.datastax.com:443", job="astra-pulsar-metrics-msgenrich", kubernetes_namespace="pulsar", kubernetes_pod_name="pulsar-gcp-uscentral1-broker-3", namespace="msgenrich/testns", prometheus="pulsar/astraproduction-gcp-pulsar-prometheus", prometheus_replica="prometheus-astraproduction-gcp-pulsar-prometheus-0", pulsar_cluster_dns="gcp-uscentral1.streaming.datastax.com", release="astraproduction-gcp-pulsar-uscentral1", statefulset_kubernetes_io_pod_name="pulsar-gcp-uscentral1-broker-3", topic="persistent://msgenrich/testns/raw-partition-0"}
+----
 
-=== Common PromQL query patterns
+To make raw metrics like this useful for end users, we recommend the following guidelines when aggregating raw metrics:
+. Aggregate metrics to at least the parent topic level, instead of at the partition level. In Pulsar, end user applications only deal with messages at the parent topic level (but internally, Pulsar is handling message processing at the partition level).
+. Exclude reported metrics that are associated with Astra Streaming’s system namespaces and topics. These namespaces and topics normally have a name starting with ++__++ (two underscores). For example, when Pulsar’s Kafka protocol handler is enabled (via S4K integration), a system namespace ++__kafka++ is created with one system topic within called ++__transaction_producer_state++.
+Do NOT aggregate metrics with the Astra Streaming PAYG option, since one cluster may be shared among multiple organizations. For more, see xref:astream-limits.adoc[Cluster Limits].
+
+=== PromQL query patterns
+
+Prometheus provides a powerful but easy-to-use query language called PromQL for selecting and aggregating time series data in real time. PromQL syntax is beyond this document's scope, but the https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus documentation] is a great place to start.
+
 In the rest of this section, we’ll recommend some PromQL query patterns for aggregating raw Astra Streaming metrics.
 These examples use one Astra Streaming raw metric, pulsar_msg_backlog, as an example for illustrative purposes.
+We aggregate messages at the parent topic level or above, and exclude system topics per our recommendations above.
+The examples below filter out system messages with the pattern +{topic !~ ".*__.*"}+.
+This PromQL pattern filters out messages when their topic labels do not include +__+.
+This works because Pulsar system topics usually have ++__++ as the topic or namespace name prefix (e.g. persistent://<tenant>/++__++kafka/__consumer_offsets_partition_0).
+This pattern assumes that the user applications don’t also have namespaces and topics with +__+ as part of the names, or they will be filtered as well.
 
-The examples below are filtering out system messages with the pattern `{topic !~ ".*__.*"}`.
-This PromQL pattern filters out messages when their topic labels do not include “__”.
-This pattern assumes that the user applications don’t have namespaces and topics with “__” as part of the names.
-Otherwise, they will be excluded as well.
-
-Pattern 1: Get the total message backlog of a specific parent topic, excluding system topics
+Pattern 1: Get the total message backlog of a specific parent topic, excluding system topics.
 [source,psql]
 ----
 sum(pulsar_msg_backlog{topic=~$ptopic, topic !~ ".*__.*"})
 ----
 
-Pattern 2: Aggregate metrics by topic, excluding system topics
+Pattern 2: Get the total message backlog of a specific namespace, excluding system topics.
 [source,psql]
 ----
-sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (topic)
+sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})
 ----
-[NOTE]
-====
-Note: Pulsar system topics usually have  “__” as the either topic name prefix or the corresponding namespace prefix (e.g. persistent://<tenant>/__kafak/__consumer_offsets_partition_0)
-====
 
-Pattern 3: Aggregate metrics by namespace, excluding system topics
+Pattern 3: Get the total message backlog of a tenant, excluding system topics.
 [source,psql]
 ----
-sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (namespace)
+sum(pulsar_msg_backlog{namespace=~”$tenant.+”, topic !~ ".*__.*"})
 ----
 
-Pattern 4: Aggregate metrics by tenant, excluding system topics
+Pattern 4: Get the total message backlog of each topic within a specific namespace, excluding system topics.
 [source,psql]
 ----
-sum(pulsar_msg_backlog{topic !~ ".*__.*"})
+sum by(topic) (pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})
 ----
 
-Pattern 5: Get the top N metrics by topic (or namespace)
+Pattern 5: Get the top 10 message backlog by topic within a specific namespace, excluding system topics.
 [source,psql]
 ----
-topk(5, sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (topic))
-topk(5, sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (namespace))
+topk by(topic) (10, sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})
 ----
 
-[%header,format=csv,cols="1,3,2"]
-|===
-include::example$psql-queries.csv[]
-|===
 == Metrics to be Alerted
 Most of the exposed Astra Streaming metrics are for informational purposes only and in most cases the metrics values, no matter how big or small they are, don’t necessarily mean concerns. They’re more or less just reflecting the application workload characteristics. For example, message rate or throughput are common examples of such metrics.
 
