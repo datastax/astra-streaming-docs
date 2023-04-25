@@ -114,6 +114,7 @@ Pattern 5: Get the top N metrics by topic (or namespace)
 topk(5, sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (topic))
 topk(5, sum(pulsar_msg_backlog{topic !~ ".*__.*"}) by (namespace))
 ----
+
 [%header,format=csv,cols="1,3,2"]
 |===
 include::example$psql-queries.csv[]
