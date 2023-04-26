@@ -138,31 +138,28 @@ topk by(topic) (10, sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~
 Most of the exposed Astra Streaming metrics are for informational purposes only and in most cases the metrics values are just reflecting the application workload characteristics. For example, message rate or throughput are common examples of such metrics.
 
 There are, however, several metrics that need special attention when we see an increasing number of their values. Among the exposed Astra Streaming metrics, these metrics are:
+.Metrics for alerting
+[%header,format=csv,cols="2,2,1,3"]
+|===
+include::example$alert-metrics.csv[]
+|===
 
-* Namespace or topic metrics
-* Pulsar_msg_backlog
-* Pulsar_storage_backlog_size
-* Geo-replication metrics
-* Pulsar_replication_backlog
-* Subscription metrics
-* pulsar_subscription_back_log
-* Pulsar_subscription_delayed
-* pulsar_subscription_msg_drop_rate
-* Pulsar_subscription_unacked_messages
+=== Alerting rules
+In a perfect world, these metrics should always stay at 0, but in reality, these metrics will increase when the application workload becomes heavier.
+If your system is behaving correctly, these metrics should go down when the application workload drops.
 
-=== Alerting Rules general guideline
-In a perfect world, these metrics should always stay at 0, but in reality, these metrics will increase when the application workload becomes heavier. If the system is behaving correctly, these metrics should go down when the application workload drops.
+A simple way to trigger an alert on these metrics is to set a threshold which triggers an alert when the metric exceeds it. However, this will probably cause false alarms during workload spikes.
 
-So one way to trigger an alert on these metrics is to simply set a threshold beyond which the alert is triggered. However, this is likely going to cause false alarms when there is an incoming workload spike.
+A better approach is calculating the metrics' increase rate over a period of time (e.g. 1 hour) and setting a threshold on the rate of increase.
+For example, if the average message backlog increase rate exceeds a threshold, an alert is triggered.
 
-A better approach would be to calculate the increase rate of these metrics over a period of time (e.g. 1 hour) and set a threshold on it. For example if the average message backlog increase rate is beyond a certain threshold, an alert is triggered.
+The actual threshold values for these metrics is highly dependent on each application’s workload and requirements, but the values should be relatively large positive numbers, e.g. several hundreds or several thousands.
+Otherwise, they may trigger too many false alarms.
 
-The choice of the actual threshold values for these metrics will be highly dependent on each application’s workload and requirement. But they should be some relatively large positive numbers, e.g. several hundreds or several thousands. Otherwise, they may trigger too many false alarms.
+== Grafana dashboards for Astra Streaming metrics
 
-== Grafana
-Grafana Dashboards for Astra Streaming Metrics
-A set of Grafana dashboards have been pre-built around core message processing for the exposed Astra Streaming metrics which can be found from:
-https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards
+DataStax has built Grafana dashboards around core message processing for the exposed Astra Streaming metrics.
+The dashboards can be found https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[on GitHub^]{external-link-icon}.
 
 == Overview Dashboard
 
@@ -304,7 +301,7 @@ Create a configuration yaml file (e.g. astra-msgenrich.yml) using the Astra Stre
 Please NOTE that the above configuration, DO NOT add other prometheus configurations like scrape_interval or evaluation_interval. They will be added in later steps when configuring the helm chart.
 
 Make a K8s secret, named astra-msgenrich, out of the above configuration file.
-# Create a K8s secret for additional Prometheus scrape config
+==Create a K8s secret for additional Prometheus scrape config
 kubectl create secret generic astra-msgenrich \
   --from-file=astra-msgenrich.yml \
   --dry-run=client -oyaml > k8s-additional-scrape-config-msgenrich.yaml
@@ -330,10 +327,10 @@ helm upgrade --install kubeprom -f custom-values.yaml prometheus-community/kube-
 
 
 (Optional) For Mac users (e.g. using docker-desktop as the underlying K8s cluster), run the following commands to make sure the deployment is successful. Otherwise, there might be issues to bring up the Prometheus node exporter daemon set.
-# Patch the Prometheus node exporter daemon set
+== Patch the Prometheus node exporter daemon set
 kubectl patch ds kubeprom-prometheus-node-exporter --type "json" -p '[{"op": "remove", "path" : "/spec/template/spec/containers/0/volumeMounts/2/mountPropagation"}]'
 
-# Confirm if the Prometheus node exporter daemonset is properly up and running.
+== Confirm if the Prometheus node exporter daemonset is properly up and running.
 kubectl rollout status daemonset \
   kubeprom-prometheus-node-exporter \
   --timeout 60s

@@ -8,8 +8,8 @@ pulsar_rate_out,Topic,Gauge,The total message rate (message per second) coming o
 pulsar_throughput_in,Topic,Gauge,The total throughput (byte per second) coming into a topic.
 pulsar_throughput_out,Topic,Gauge,The total throughput (byte per second) coming out of a topic.
 pulsar_msg_backlog,Topic,Gauge,The total number of message backlog of a topic.
-pulsar_storage_size,Topic,Gauge,The total storage size (in bytes) of a topic .
-pulsar_storage_backlog_size,Topic,Gauge,The total backlog size (in bytes) of a topic .
+pulsar_storage_size,Topic,Gauge,The total storage size (in bytes) of a topic.
+pulsar_storage_backlog_size,Topic,Gauge,The total backlog size (in bytes) of a topic.
 pulsar_storage_offloaded_size,Topic,Gauge,The total amount of the data (in bytes) of a topic offloaded to the tiered storage.
 pulsar_in_bytes_total,Topic,Counter,The total number of messages (in bytes) received for a topic.
 pulsar_out_bytes_total,Topic,Counter,The total number of messages (in bytes) read from a topic.
