@@ -2,14 +2,14 @@
 
 [NOTE]
 ====
-The method described in this section also applies to integrating Astra Streaming metrics with other cloud observability platforms like https://grafana.com/products/cloud/[Grafana Cloud].
+The method described in this section also applies to integrating Astra Streaming metrics with other cloud observability platforms like https://grafana.com/products/cloud/[Grafana Cloud^]{external-link-icon}.
 ====
 
-According to the https://docs.newrelic.com/[New Relic documentation], there are 3 different ways to integrate external Prometheus data into New Relic:
+According to the https://docs.newrelic.com/[New Relic documentation^]{external-link-icon}, there are 3 different ways to integrate external Prometheus data into New Relic:
 
-* Option 1: https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#Agent[Prometheus Agent for Kubernetes]
-* Option 2: https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#OpenMetrics[Prometheus OpenMetrics integration for Docker]
-* Option 3: https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration]
+* Option 1: https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#Agent[Prometheus Agent for Kubernetes^]{external-link-icon}
+* Option 2: https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#OpenMetrics[Prometheus OpenMetrics integration for Docker^]{external-link-icon}
+* Option 3: https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration^]{external-link-icon}
 
 Options 1 and 2 are not relevant for Astra Streaming, so option 3 is the only possible solution.
 Option 3 would require modifying the configuration of the Prometheus server which Astra Streaming relies on, but due to the managed-service nature of Astra Streaming, this is not possible. Instead, an extra Prometheus server can be installed (per the instructions in xref:monitoring-integration.adoc[]) to act as a bridge to forward scraped Astra Streaming metrics to New Relic. The diagram below shows this idea:
@@ -17,7 +17,7 @@ Option 3 would require modifying the configuration of the Prometheus server whic
 image::monitoring-map.png[]
 
 == Prerequisites
-* https://docs.newrelic.com/[Set up a New Relic account]
+* https://docs.newrelic.com/[Set up a New Relic account^]{external-link-icon}
 * When creating a New Relic account, it will generate a license key. Save this key to a local file for usage in later steps.
 
 == Configure New Relic
