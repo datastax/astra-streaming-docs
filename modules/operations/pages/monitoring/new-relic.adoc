@@ -14,7 +14,7 @@ According to the https://docs.newrelic.com/[New Relic documentation^]{external-l
 Options 1 and 2 are not relevant for Astra Streaming, so option 3 is the only possible solution.
 Option 3 would require modifying the configuration of the Prometheus server which Astra Streaming relies on, but due to the managed-service nature of Astra Streaming, this is not possible. Instead, an extra Prometheus server can be installed (per the instructions in xref:monitoring/integration.adoc[]) to act as a bridge to forward scraped Astra Streaming metrics to New Relic. The diagram below shows this idea:
 
-image::monitoring-map.png[align="center"]
+image::monitoring-map.png[Map,align="center"]
 
 == Prerequisites
 * https://docs.newrelic.com/[Set up a New Relic account^]{external-link-icon}
@@ -56,7 +56,7 @@ The top section of this configuration is for scraping Astra Streaming metrics (a
 . Restart your local Prometheus server.
 . Return to the New Relic UI. If everything is set up correctly, you should see Astra Streaming metrics in New Relic UI. Below is a screenshot from New Relic data browsing UI in which we can see the Pulsar message backlog metrics are shown on the UI and aggregated by different Pulsar namespaces.
 
-image::pulsar-namespace-metrics.png[align="center"]
+image::pulsar-namespace-metrics.png[Metrics,align="center"]
 
 == What's next?
 
