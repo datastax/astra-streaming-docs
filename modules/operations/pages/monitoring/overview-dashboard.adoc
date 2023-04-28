@@ -6,8 +6,6 @@ The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-das
 Overview displays the aggregated total metrics values summarized at the tenant level. The following metrics are included:
 
 .Tenant overview
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total number of namespaces
@@ -23,14 +21,11 @@ Overview displays the aggregated total metrics values summarized at the tenant l
 |Total hourly incoming message number
 |Total hourly incoming message average size
 |===
-====
 
 == Messaging
 Messaging displays the time series metrics chart summarized at the tenant level. The following metrics are included:
 
 .Messaging
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total incoming message rate (msg/s) of the tenant divided by namespaces
@@ -52,7 +47,6 @@ Messaging displays the time series metrics chart summarized at the tenant level.
 |Top 10 topics of the tenant by unacknowledged message
 |Top 10 topics of the tenant by message storage size
 |===
-====
 
 == What's next?
 

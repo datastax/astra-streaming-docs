@@ -1,4 +1,5 @@
 = Topic dashboard
+
 The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-topic.json[topic dashboard^]{external-link-icon} aggregates metrics at the topic level. In the variable section, you can choose a cluster, tenant, and namespace, and topic.
 This dashboard analyzes metrics at the parent topic level, not at the partition level.
 
@@ -6,8 +7,6 @@ This dashboard analyzes metrics at the parent topic level, not at the partition 
 Overview displays the aggregated total metrics values summarized at the topic level.
 
 .Topic overview
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total number of producers
@@ -20,14 +19,11 @@ Overview displays the aggregated total metrics values summarized at the topic le
 |Total hourly incoming message number
 |Total hourly incoming message average size
 |===
-====
 
 == Messaging
 Messaging displays the time series metrics chart summarized at the topic level with an additional level of detail (partitions).
 
 .Messaging
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total incoming message rate (msg/s) of the topic divided by partitions
@@ -37,14 +33,11 @@ Messaging displays the time series metrics chart summarized at the topic level w
 |Total message backlog of the topic divided by partitions
 |Total unacknowledged messages of the topic divided by partitions
 |===
-====
 
 === Subscription
 Subscription displays the time series metrics chart summarized at the subscription level with an additional level of detail (by individual subscriptions).
 
 .Subscription
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total subscription message backlog divided by individual subscriptions
@@ -62,15 +55,12 @@ Subscription displays the time series metrics chart summarized at the subscripti
 |Total subscription messages rejected by EntryFilter, divided by individual subscriptions
 |Total subscription messages rescheduled by EntryFilter, divided by individual subscriptions
 |===
-====
 
 == Georeplication
 
 Georeplication displays the time series metrics chart summarized at the topic level with an additional level of detail (remote clusters).
 
 .Georeplication
-[%collapsible]
-====
 [cols=1*]
 |===
 |Incoming replication rate (msg/s) to the topic divided by remote clusters
@@ -79,7 +69,7 @@ Georeplication displays the time series metrics chart summarized at the topic le
 |Outgoing replication throughput (byte/s) from the topic divided by remote clusters
 |Total (outgoing) message replication backlog from the topic divided by remote clusters
 |===
-====
+
 
 == What's next?
 

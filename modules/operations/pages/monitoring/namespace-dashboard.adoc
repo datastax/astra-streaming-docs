@@ -1,12 +1,11 @@
 = Namespace dashboard
+
 The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-namespace.json[namespace dashboard^]{external-link-icon} aggregates metrics at the namespace level. In the variable section, you can choose a cluster, tenant, and namespace.
 
 == Namespace overview
 Namespace overview displays the aggregated total metrics values summarized at the namespace level.
 
 .Namespace overview
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total number of topics
@@ -20,14 +19,11 @@ Namespace overview displays the aggregated total metrics values summarized at th
 |Total hourly incoming message number
 |Total hourly incoming message average size
 |===
-====
 
 == Messaging
 Messaging displays the time series metrics chart summarized at the namespace level with an additional level of detail (topics).
 
 .Messaging
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total incoming message rate (msg/s) of the namespace divided by topics
@@ -39,14 +35,11 @@ Messaging displays the time series metrics chart summarized at the namespace lev
 |Total message drop rate of the namespace divided by topics
 |Total Producer/Consumer/Subscription count of the namespace divided by topics
 |===
-====
 
 == Georeplication
 Geo-replication displays the time series metrics chart summarized at the namespace level with an additional level of detail (remote clusters).
 
 .Georeplication
-[%collapsible]
-====
 [cols=1*]
 |===
 |Total incoming replication rate (msg/s) to the namespace divided by remote clusters
@@ -55,7 +48,6 @@ Geo-replication displays the time series metrics chart summarized at the namespa
 |Total outgoing replication throughput (byte/s) from the namespace divided by remote clusters
 |Total (outgoing) message replication backlog from the namespace divided by remote clusters
 |===
-====
 
 == What's next?
 
