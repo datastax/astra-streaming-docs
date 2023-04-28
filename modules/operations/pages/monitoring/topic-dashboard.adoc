@@ -8,15 +8,18 @@ Overview displays the aggregated total metrics values summarized at the topic le
 .Topic overview
 [%collapsible]
 ====
-Total number of producers +
-Total number of consumers +
-Total number of subscriptions +
-Total message backlog +
-Total message replication backlog +
-Total message storage size -  after replication +
-Total message size offloaded to a tiered storage +
-Total hourly incoming message number +
-Total hourly incoming message average size
+[cols=1*]
+|===
+|Total number of producers
+|Total number of consumers
+|Total number of subscriptions
+|Total message backlog
+|Total message replication backlog
+|Total message storage size -  after replication
+|Total message size offloaded to a tiered storage
+|Total hourly incoming message number
+|Total hourly incoming message average size
+|===
 ====
 
 == Messaging
@@ -25,12 +28,15 @@ Messaging displays the time series metrics chart summarized at the topic level w
 .Messaging
 [%collapsible]
 ====
-Total incoming message rate (msg/s) of the topic divided by partitions +
-Total outgoing message rate (msg/s) of the topic divided by partitions +
-Total incoming message throughput (bytes/s) of the topic divided by partitions +
-Total outgoing message throughput (bytes/s) of the topic divided by partitions +
-Total message backlog of the topic divided by partitions +
-Total unacknowledged messages of the topic divided by partitions
+[cols=1*]
+|===
+|Total incoming message rate (msg/s) of the topic divided by partitions
+|Total outgoing message rate (msg/s) of the topic divided by partitions
+|Total incoming message throughput (bytes/s) of the topic divided by partitions
+|Total outgoing message throughput (bytes/s) of the topic divided by partitions
+|Total message backlog of the topic divided by partitions
+|Total unacknowledged messages of the topic divided by partitions
+|===
 ====
 
 === Subscription
@@ -39,20 +45,23 @@ Subscription displays the time series metrics chart summarized at the subscripti
 .Subscription
 [%collapsible]
 ====
-Total subscription message backlog divided by individual subscriptions +
-Total subscription message backlog with no delay divided by individual subscriptions +
-Total subscription unacknowledged messages divided by individual subscriptions +
-Total subscription delayed messages divided by individual subscriptions +
-Total subscription message dispatch rate (msg/s) divided by individual subscriptions +
-Total subscription message throughput rate (byte/s) divided by individual subscriptions +
-Total subscription message acknowledgement rate (msg/s) divided by individual subscriptions +
-Total subscription message redelivery rate (msg/s) divided by individual subscriptions +
-Total subscription message expired rate (msg/s) divided by individual subscriptions +
-Total subscription message dropped rate (msg/s) divided by individual subscriptions +
-Total subscription messages processed by EntryFilter, divided by individual subscriptions +
-Total subscription messages accepted by EntryFilter, divided by individual subscriptions +
-Total subscription messages rejected by EntryFilter, divided by individual subscriptions +
-Total subscription messages rescheduled by EntryFilter, divided by individual subscriptions
+[cols=1*]
+|===
+|Total subscription message backlog divided by individual subscriptions
+|Total subscription message backlog with no delay divided by individual subscriptions
+|Total subscription unacknowledged messages divided by individual subscriptions
+|Total subscription delayed messages divided by individual subscriptions
+|Total subscription message dispatch rate (msg/s) divided by individual subscriptions
+|Total subscription message throughput rate (byte/s) divided by individual subscriptions
+|Total subscription message acknowledgement rate (msg/s) divided by individual subscriptions
+|Total subscription message redelivery rate (msg/s) divided by individual subscriptions
+|Total subscription message expired rate (msg/s) divided by individual subscriptions
+|Total subscription message dropped rate (msg/s) divided by individual subscriptions
+|Total subscription messages processed by EntryFilter, divided by individual subscriptions
+|Total subscription messages accepted by EntryFilter, divided by individual subscriptions
+|Total subscription messages rejected by EntryFilter, divided by individual subscriptions
+|Total subscription messages rescheduled by EntryFilter, divided by individual subscriptions
+|===
 ====
 
 == Georeplication
@@ -62,11 +71,14 @@ Georeplication displays the time series metrics chart summarized at the topic le
 .Georeplication
 [%collapsible]
 ====
-Incoming replication rate (msg/s) to the topic divided by remote clusters +
-Outgoing replication rate (msg/s) from the topic divided by remote clusters +
-Incoming replication throughput (byte/s) to the topic divided by remote clusters +
-Outgoing replication throughput (byte/s) from the topic divided by remote clusters +
-Total (outgoing) message replication backlog from the topic divided by remote clusters
+[cols=1*]
+|===
+|Incoming replication rate (msg/s) to the topic divided by remote clusters
+|Outgoing replication rate (msg/s) from the topic divided by remote clusters
+|Incoming replication throughput (byte/s) to the topic divided by remote clusters
+|Outgoing replication throughput (byte/s) from the topic divided by remote clusters
+|Total (outgoing) message replication backlog from the topic divided by remote clusters
+|===
 ====
 
 == What's next?
