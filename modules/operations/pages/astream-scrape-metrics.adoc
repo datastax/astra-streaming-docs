@@ -131,6 +131,7 @@ Cluster operational metrics are *not* exposed to individual cluster tenants. A t
 
 == What's next?
 
-* Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.
+* For more on monitoring Astra Streaming with Prometheus and Grafana, see xref:monitoring/index.adoc[].
+* Follow our xref:getting-started:index.adoc[getting started guide] to get started with Astra now.
 * For more on Prometheus, see the https://prometheus.io/docs/introduction/overview/[Prometheus docs^].
 
