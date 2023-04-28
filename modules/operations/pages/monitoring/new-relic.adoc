@@ -1,8 +1,8 @@
-= Configure Astra Streaming metrics integration with New Relic
+= New Relic Integration
 
 [NOTE]
 ====
-The method described in this section also applies to integrating Astra Streaming metrics with other cloud observability platforms like https://grafana.com/products/cloud/[Grafana Cloud^]{external-link-icon}.
+This article is a continuation of xref:monitoring/index.adoc[]. Please read that article first to understand the fundamentals of what resources are being used.
 ====
 
 According to the https://docs.newrelic.com/[New Relic documentation^]{external-link-icon}, there are 3 different ways to integrate external Prometheus data into New Relic:
@@ -12,7 +12,7 @@ According to the https://docs.newrelic.com/[New Relic documentation^]{external-l
 * Option 3: https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration^]{external-link-icon}
 
 Options 1 and 2 are not relevant for Astra Streaming, so option 3 is the only possible solution.
-Option 3 would require modifying the configuration of the Prometheus server which Astra Streaming relies on, but due to the managed-service nature of Astra Streaming, this is not possible. Instead, an extra Prometheus server can be installed (per the instructions in xref:monitoring-integration.adoc[]) to act as a bridge to forward scraped Astra Streaming metrics to New Relic. The diagram below shows this idea:
+Option 3 would require modifying the configuration of the Prometheus server which Astra Streaming relies on, but due to the managed-service nature of Astra Streaming, this is not possible. Instead, an extra Prometheus server can be installed (per the instructions in xref:monitoring/integration.adoc[]) to act as a bridge to forward scraped Astra Streaming metrics to New Relic. The diagram below shows this idea:
 
 image::monitoring-map.png[]
 
@@ -47,9 +47,15 @@ prometheus:
                  key: value
         	   name: nr-license-key
 ----
-The top section of this configuration is for scraping Astra Streaming metrics (as described in xref:monitoring-integration.adoc[]) and the bottom section is for sending local Prometheus metrics to New Relic via remote_write. The remote_write URL and authorization settings are described above.
+The top section of this configuration is for scraping Astra Streaming metrics (as described in xref:monitoring/integration.adoc[]) and the bottom section is for sending local Prometheus metrics to New Relic via remote_write. The remote_write URL and authorization settings are described above.
 
 . Restart your local Prometheus server.
 . Return to the New Relic UI. If everything is set up correctly, you should see Astra Streaming metrics in New Relic UI. Below is a screenshot from New Relic data browsing UI in which we can see the Pulsar message backlog metrics are shown on the UI and aggregated by different Pulsar namespaces.
 
 image::pulsar-namespace-metrics.png[]
+
+== What's next?
+
+* For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
+* To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
+* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].

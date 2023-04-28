@@ -1,0 +1,53 @@
+= Namespace Dashboards
+The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-namespace.json[namespace dashboard^]{external-link-icon} aggregates metrics at the namespace level. In the variable section, you can choose a cluster, tenant, and namespace.
+
+== Namespace overview
+Namespace overview displays the aggregated total metrics values summarized at the namespace level.
+
+.Namespace overview
+[%collapsible]
+====
+Total number of topics +
+Total number of producers +
+Total number of consumers +
+Total number of subscriptions +
+Total message backlog +
+Total message replication backlog +
+Total message storage size +
+Total message size offloaded to a tiered storage +
+Total hourly incoming message number +
+Total hourly incoming message average size
+====
+
+== Messaging
+Messaging displays the time series metrics chart summarized at the namespace level with an additional level of detail (topics).
+
+.Messaging
+[%collapsible]
+====
+Total incoming message rate (msg/s) of the namespace divided by topics +
+Total outgoing message rate (msg/s) of the namespace divided by topics +
+Total incoming message throughput (byte/s) of the namespace divided by topics +
+Total outgoing message throughput (byte/s) of the namespace divided by topics +
+Total message backlog of the namespace divided by topics +
+Total unacknowledged messages of the namespace divided by topics +
+Total message drop rate of the namespace divided by topics +
+Total Producer/Consumer/Subscription count of the namespace divided by topics
+====
+
+== Georeplication
+Geo-replication displays the time series metrics chart summarized at the namespace level with an additional level of detail (remote clusters).
+
+.Georeplication
+[%collapsible]
+====
+Total incoming replication rate (msg/s) to the namespace divided by remote clusters +
+Total outgoing replication rate (msg/s) from the namespace divided by remote clusters +
+Total incoming replication throughput (byte/s) to the namespace divided by remote clusters +
+Total outgoing replication throughput (byte/s) from the namespace divided by remote clusters +
+Total (outgoing) message replication backlog from the namespace divided by remote clusters
+====
+
+== What's next?
+
+Dashboards are available for scraping metrics at Pulsar's xref:monitoring/overview-dashboard.adoc[tenant], xref:monitoring/namespace-dashboard.adoc[namespace], and xref:monitoring/topic-dashboard.adoc[topic] levels.

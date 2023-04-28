@@ -1,0 +1,20 @@
+= Grafana dashboards for Astra Streaming metrics
+
+[NOTE]
+====
+This article is a continuation of xref:monitoring/index.adoc[]. Please read that article first to understand the fundamentals of what resources are being used.
+====
+
+DataStax has built Grafana dashboards around core message processing for the exposed Astra Streaming metrics.
+The dashboards can be found https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[on GitHub^]{external-link-icon}.
+
+Dashboards are available for scraping metrics at Pulsar's tenant, namespace, and topic levels:
+
+* xref:monitoring/overview-dashboard.adoc[Overview Dashboard]
+* xref:monitoring/namespace-dashboard.adoc[Namespace Dashboard]
+* xref:monitoring/topic-dashboard.adoc[Topic Dashboard]
+
+== What's next?
+
+* To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
+* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].

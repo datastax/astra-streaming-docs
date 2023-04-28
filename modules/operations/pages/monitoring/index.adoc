@@ -6,11 +6,13 @@ In the following sections, we’ll explore each of the Astra Streaming metrics c
 
 == Pulsar raw metrics
 
-If you're just looking for a complete reference for Pulsar metrics, they are available below.
+For a complete Pulsar metrics reference, see:
 
 * https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics[Namespace metrics^]{external-link-icon}
 
 * https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics^]{external-link-icon}
+
+For a complete Astra Streaming metrics reference, see xref:monitoring/metrics.adoc[].
 
 == {product_name} metrics
 
@@ -152,183 +154,9 @@ For example, if the average message backlog increase rate exceeds a threshold, a
 The actual threshold values for these metrics is highly dependent on each application’s workload and requirements, but the values should be relatively large positive numbers, e.g. several hundreds or several thousands.
 Otherwise, they may trigger too many false alarms.
 
-== Grafana dashboards for Astra Streaming metrics
-
-DataStax has built Grafana dashboards around core message processing for the exposed Astra Streaming metrics.
-The dashboards can be found https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[on GitHub^]{external-link-icon}.
-
-== Overview Dashboard
-
-The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-overview.json[overview dashboard^]{external-link-icon} has three major sections which display the highest aggregation level - tenant level, tenant level with namespace level separation, and the variable section, where you can choose a cluster and a tenant.
-
-=== Tenant overview
-Overview displays the aggregated total metrics values summarized at the tenant level. The following metrics are included:
-
-.Tenant overview
-[%collapsible]
-====
-Total number of namespaces +
-Total number of topics +
-Total number of producers +
-Total number of consumers +
-Total number of subscriptions +
-Total message storage size (logical) - before replication +
-Total message storage size -  after replication +
-Total message size offloaded to a tiered storage +
-Total message backlog +
-Total message replication backlog +
-Total hourly incoming message number +
-Total hourly incoming message average size
-====
-
-=== Messaging
-Messaging displays the time series metrics chart summarized at the tenant level. The following metrics are included:
-
-.Messaging
-[%collapsible]
-====
-Total incoming message rate (msg/s) of the tenant divided by namespaces +
-Total outgoing message rate (msg/s) of the tenant divided by namespaces +
-Total incoming message throughput (byte/s) of the tenant divided by namespaces +
-Total outgoing message throughput (byte/s) of the tenant divided by namespaces +
-Total message backlog of the tenant divided by namespaces +
-Total message storage size of the tenant divided by namespaces +
-Total Message replication backlog rate (msg/s) divided of the tenant divided by remote clusters +
-Total Producer/Consumer/Subscription count of the tenant +
-Total unacknowledged messages of the tenant divided by namespaces +
-Total message drop rate of the tenant divided by namespaces +
-Total incoming message replication rate (msg/s) of the tenant divided by remote clusters +
-Total outgoing message replication rate (msg/s) of the tenant divided by remote clusters +
-Total incoming message replication throughput (byte/s) of the tenant divided by remote clusters +
-Total outgoing message replication throughput (byte/s) of the tenant divided by remote clusters +
-Top 10 topics of the tenant by message backlog +
-Top 10 topics of the tenant by message replication backlog +
-Top 10 topics of the tenant by unacknowledged message +
-Top 10 topics of the tenant by message storage size
-====
-
-== Namespace Dashboard
-The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-namespace.json[namespace dashboard^]{external-link-icon} aggregates metrics at the namespace level. In the variable section, you can choose a cluster, tenant, and namespace.
-
-=== Namespace overview
-Namespace overview displays the aggregated total metrics values summarized at the namespace level.
-
-.Namespace overview
-[%collapsible]
-====
-Total number of topics +
-Total number of producers +
-Total number of consumers +
-Total number of subscriptions +
-Total message backlog +
-Total message replication backlog +
-Total message storage size +
-Total message size offloaded to a tiered storage +
-Total hourly incoming message number +
-Total hourly incoming message average size
-====
-
-=== Messaging
-Messaging displays the time series metrics chart summarized at the namespace level with an additional level of detail (topics).
-
-.Messaging
-[%collapsible]
-====
-Total incoming message rate (msg/s) of the namespace divided by topics +
-Total outgoing message rate (msg/s) of the namespace divided by topics +
-Total incoming message throughput (byte/s) of the namespace divided by topics +
-Total outgoing message throughput (byte/s) of the namespace divided by topics +
-Total message backlog of the namespace divided by topics +
-Total unacknowledged messages of the namespace divided by topics +
-Total message drop rate of the namespace divided by topics +
-Total Producer/Consumer/Subscription count of the namespace divided by topics
-====
-
-=== Georeplication
-Geo-replication displays the time series metrics chart summarized at the namespace level with an additional level of detail (remote clusters).
-
-.Georeplication
-[%collapsible]
-====
-Total incoming replication rate (msg/s) to the namespace divided by remote clusters +
-Total outgoing replication rate (msg/s) from the namespace divided by remote clusters +
-Total incoming replication throughput (byte/s) to the namespace divided by remote clusters +
-Total outgoing replication throughput (byte/s) from the namespace divided by remote clusters +
-Total (outgoing) message replication backlog from the namespace divided by remote clusters
-====
-
-== Topic dashboard
-The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-topic.json[topic dashboard^]{external-link-icon} aggregates metrics at the topic level. In the variable section, you can choose a cluster, tenant, and namespace, and topic.
-This dashboard analyzes metrics at the parent topic level, not at the partition level.
-
-=== Topic overview
-Overview displays the aggregated total metrics values summarized at the topic level.
-
-.Topic overview
-[%collapsible]
-====
-Total number of producers +
-Total number of consumers +
-Total number of subscriptions +
-Total message backlog +
-Total message replication backlog +
-Total message storage size -  after replication +
-Total message size offloaded to a tiered storage +
-Total hourly incoming message number +
-Total hourly incoming message average size
-====
-
-=== Messaging
-Messaging displays the time series metrics chart summarized at the topic level with an additional level of detail (partitions).
-
-.Messaging
-[%collapsible]
-====
-Total incoming message rate (msg/s) of the topic divided by partitions +
-Total outgoing message rate (msg/s) of the topic divided by partitions +
-Total incoming message throughput (bytes/s) of the topic divided by partitions +
-Total outgoing message throughput (bytes/s) of the topic divided by partitions +
-Total message backlog of the topic divided by partitions +
-Total unacknowledged messages of the topic divided by partitions
-====
-
-=== Subscription
-Subscription displays the time series metrics chart summarized at the subscription level with an additional level of detail (by individual subscriptions).
-
-.Subscription
-[%collapsible]
-====
-Total subscription message backlog divided by individual subscriptions +
-Total subscription message backlog with no delay divided by individual subscriptions +
-Total subscription unacknowledged messages divided by individual subscriptions +
-Total subscription delayed messages divided by individual subscriptions +
-Total subscription message dispatch rate (msg/s) divided by individual subscriptions +
-Total subscription message throughput rate (byte/s) divided by individual subscriptions +
-Total subscription message acknowledgement rate (msg/s) divided by individual subscriptions +
-Total subscription message redelivery rate (msg/s) divided by individual subscriptions +
-Total subscription message expired rate (msg/s) divided by individual subscriptions +
-Total subscription message dropped rate (msg/s) divided by individual subscriptions +
-Total subscription messages processed by EntryFilter, divided by individual subscriptions +
-Total subscription messages accepted by EntryFilter, divided by individual subscriptions +
-Total subscription messages rejected by EntryFilter, divided by individual subscriptions +
-Total subscription messages rescheduled by EntryFilter, divided by individual subscriptions
-====
-
-=== Georeplication
-
-Georeplication displays the time series metrics chart summarized at the topic level with an additional level of detail (remote clusters).
-
-.Georeplication
-[%collapsible]
-====
-Incoming replication rate (msg/s) to the topic divided by remote clusters +
-Outgoing replication rate (msg/s) from the topic divided by remote clusters +
-Incoming replication throughput (byte/s) to the topic divided by remote clusters +
-Outgoing replication throughput (byte/s) from the topic divided by remote clusters +
-Total (outgoing) message replication backlog from the topic divided by remote clusters
-====
-
 == What's next?
 
-To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring-integration.adoc[].
+* For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
+* To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
+* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].
 
