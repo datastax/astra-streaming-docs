@@ -25,10 +25,15 @@ image::monitoring-map.png[]
 . Log in the New Relic UI with your account.
 . Click “Add Data” and select “Prometheus Remote Write Integration” under the “Open source monitoring” category.
 . In the new window, supply the name of your local Prometheus server (e.g. prometheus-docker-desktop) and click “Generate URL”. This generates the URL endpoints required for configuring “remote_write integration” on your local Prometheus server.
-. Configure and restart your local Prometheus server. In this example, since the local Prometheus server is installed in a local docker-desktop K8s cluster, the installation and configuration method is K8s oriented.
-.. Create a K8s secret that corresponds to the New Relic license key that you get while setting up the account
-kubectl create secret generic nr-license-key --from-literal=value=<liencse_key_value>
+. Configure and restart your local Prometheus server. In this example, since the local Prometheus server is installed in a local docker-desktop K8s cluster, the installation and configuration method is K8s-oriented.
+.. Create a K8s secret that corresponds to the New Relic license key that you received when setting up the account:
++
+[source,bash]
+----
+kubectl create secret generic nr-license-key --from-literal=value=<license_key_value>
+----
 .. Modify the Prometheus configuration in the kube-prometheus-stack Helm chart file (e.g. custom-values.yaml).
++
 [source,yaml]
 ----
 prometheus:
@@ -48,7 +53,6 @@ prometheus:
         	   name: nr-license-key
 ----
 The top section of this configuration is for scraping Astra Streaming metrics (as described in xref:monitoring/integration.adoc[]) and the bottom section is for sending local Prometheus metrics to New Relic via remote_write. The remote_write URL and authorization settings are described above.
-
 . Restart your local Prometheus server.
 . Return to the New Relic UI. If everything is set up correctly, you should see Astra Streaming metrics in New Relic UI. Below is a screenshot from New Relic data browsing UI in which we can see the Pulsar message backlog metrics are shown on the UI and aggregated by different Pulsar namespaces.
 
