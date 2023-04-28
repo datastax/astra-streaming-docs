@@ -1,4 +1,4 @@
-= Namespace Dashboards
+= Namespace dashboard
 The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-namespace.json[namespace dashboard^]{external-link-icon} aggregates metrics at the namespace level. In the variable section, you can choose a cluster, tenant, and namespace.
 
 == Namespace overview

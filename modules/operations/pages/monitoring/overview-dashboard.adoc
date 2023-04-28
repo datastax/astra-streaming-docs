@@ -1,5 +1,4 @@
-
-= Overview Dashboard
+= Overview dashboard
 
 The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-overview.json[overview dashboard^]{external-link-icon} has three major sections which display the highest aggregation level - tenant level, tenant level with namespace level separation, and the variable section, where you can choose a cluster and a tenant.
 
