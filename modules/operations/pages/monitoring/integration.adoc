@@ -1,0 +1,103 @@
+
+= External Prometheus and Grafana Integration
+
+[NOTE]
+====
+This article is a continuation of xref:monitoring/index.adoc[]. Please read that article first to understand the fundamentals of what resources are being used.
+====
+
+Astra Streaming exposes some of the Pulsar metrics through Prometheus endpoints.
+The Prometheus configuration information to scrape Astra Streaming metrics into an external Prometheus server is found in the Astra streaming UI.
+This document will show you how to set up a Prometheus server in a Kubernetes cluster and configure it to scrape Astra streaming metrics.
+
+== Prerequisites
+* A Kubernetes cluster.
+
+== Configure and deploy Prometheus
+
+In this example, we use the https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack[Prometheus Community Kubernetes Helm Charts^]{external-link-icon} to set up a Prometheus server and a Grafana server in a K8s cluster.
+
+. Create a configuration yaml file (e.g. astra-msgenrich.yml) using the Astra Streaming Prometheus configuration from the UI.
+For more on downloading the Prometheus configuration from the Astra Streaming UI, see https://docs.datastax.com/en/streaming/astra-streaming/operations/astream-scrape-metrics.html[Scrape metrics from Astra Streaming].
++
+[source,yaml]
+----
+- job_name: 'astra-pulsar-metrics-msgenrich'
+   scheme: 'https'
+   metrics_path: '/pulsarmetrics/msgenrich'
+   authorization:
+      credentials: <jwt_token_value>
+   static_configs:
+   - targets: ['prometheus-gcp-uscentral1.streaming.datastax.com']
+----
++
+[NOTE]
+====
+DO NOT add other Prometheus configurations like scrape_interval or evaluation_interval yet. They will be added in later steps when configuring the Helm chart.
+====
+
+. Create a K8s secret named astra-msgenrich with the above configuration file and apply it.
++
+[source,bash]
+----
+kubectl create secret generic astra-msgenrich \
+  --from-file=astra-msgenrich.yml \
+  --dry-run=client -oyaml > k8s-additional-scrape-config-msgenrich.yaml
+kubectl apply -f k8s-additional-scrape-config-msgenrich.yaml
+----
+
+. Create a customized values file (e.g. custom-values.yaml) for the Prometheus Community Kubernetes Helm chart.
+Pay close attention to the 'additionalScrapeConfigsSecret' section and ensure that the name and key match the K8s secret name and file name in the previous 2 steps.
++
+[source,yaml]
+----
+prometheus:
+   prometheusSpec:
+      scrapeInterval: 60s
+      evaluationInterval: 15s
+      additionalScrapeConfigsSecret:
+         enabled: true
+         name: astra-msgenrich
+         key: astra-msgenrich.yml
+----
+
+. Deploy the Helm chart.
++
+[source,yaml]
+----
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm upgrade --install kubeprom -f custom-values.yaml prometheus-community/kube-prometheus-stack
+----
+
+[discrete]
+== Optional
+For Mac users (e.g. using docker-desktop as the underlying K8s cluster), run the following commands to ensure the deployment is successful. Otherwise, there might be issues to bring up the Prometheus node exporter daemon set.
+[source,bash]
+----
+# Patch Prometheus node exporter daemon set
+kubectl patch ds kubeprom-prometheus-node-exporter --type "json" -p '[{"op": "remove", "path" : "/spec/template/spec/containers/0/volumeMounts/2/mountPropagation"}]'
+
+# Confirm Prometheus node exporter daemonset is running properly
+kubectl rollout status daemonset \
+  kubeprom-prometheus-node-exporter \
+  --timeout 60s
+----
+
+== Verify the integration
+
+The Astra Streaming metrics should now be integrated with an external Prometheus server. Double check by visiting the external Prometheus server UI.
+
+The status of the additional scrape job 'astra-pulsar-metrics-msgenrich' should be in the UP state. If not, there are issues in the previous configuration procedures.
+
+image::scrape-status.png[]
+
+=== 401 Unauthorized Issue
+One common issue that we see when integrating Astra Streaming metrics into an external Prometheus server is the additional scrape job returning a 401 Unauthorized error. This is most likely because the JWT token we used in the previous steps has expired.
+
+To fix this issue, go to the {astra_ui} and create a new JWT token (preferably with no expiration date). Get the new token value and repeat the above procedure. For more, see xref:astream-token-gen.adoc[].
+
+== What's next?
+
+* For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
+* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].
+
