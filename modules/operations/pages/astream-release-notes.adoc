@@ -5,6 +5,12 @@
 
 {product_name} release notes provide information about new and improved features, known and resolved issues, and bug fixes.
 
+== 3 May 2023
+
+https://spring.io/[Spring Boot] support is here!
+You can now use everyone's favorite Java framework to build your {product_name} applications.
+For more, see xref:developing:spring-produce-consume.adoc[Spring Boot for {product_name}].
+
 == 17 April 2023
 
 Custom functions can now only be created by *qualified organizations*.

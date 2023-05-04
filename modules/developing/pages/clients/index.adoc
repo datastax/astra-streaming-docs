@@ -13,7 +13,7 @@ Visit each guide to create a simple message producer and consumer in your Astra 
 
 == Pulsar Clients
 
-[cols="^1,^1,^1,^1,^1", grid=none,frame=none]
+[cols="^1,^1,^1,^1,^1,^1", grid=none,frame=none]
 |===
 | xref:clients/csharp-produce-consume.adoc[image:csharp-icon.png[]]
 
@@ -30,4 +30,8 @@ xref:clients/nodejs-produce-consume.adoc[Node.js]
 | xref:clients/python-produce-consume.adoc[image:python-icon.png[]]
 
 xref:clients/python-produce-consume.adoc[Python]
+
+| xref:clients/spring-produce-consume.adoc[image:spring-boot-icon.png[]]
+
+xref:clients/spring-produce-consume.adoc[Spring Boot]
 |===
