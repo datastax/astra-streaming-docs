@@ -45,7 +45,7 @@ public class DemoApplication {
 
 }
 ----
-. Navigate to src/main/java/resources and replace the values in application.properties with your {product-name} credentials:
+. Navigate to src/main/java/resources and replace the values in application.properties with your Astra Streaming credentials:
 [source,bash]
 ----
 spring:
