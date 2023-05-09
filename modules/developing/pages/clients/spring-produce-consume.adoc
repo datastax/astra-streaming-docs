@@ -34,7 +34,7 @@ In src/main/java/DemoApplication, you'll find the main method that will run your
 ====
 [source,java]
 ----
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java
+include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/java/com/example/demo/DemoApplication.java
 ----
 ====
 
@@ -56,20 +56,7 @@ You could instead modify the values in the "application.properties" file in the 
 ====
 [source,plain]
 ----
-spring:
-    pulsar:
-      administration:
-        service-url: https://pulsar-aws-useast1.api.streaming.datastax.com
-        tls-hostname-verification-enable: true
-        auth-plugin-class-name: org.apache.pulsar.client.impl.auth.AuthenticationToken
-        authentication:
-          token: ***
-      client:
-        service-url: pulsar+ssl://pulsar-aws-useast1.streaming.datastax.com:6651
-        tls-hostname-verification-enable: true
-        auth-plugin-class-name: org.apache.pulsar.client.impl.auth.AuthenticationToken
-        authentication:
-          token: ***
+include::{astra-streaming-examples-repo}java/spring-boot/SpringBoot/src/main/resources/application.properties
 ----
 ====
 . Change directory to the project root and run the following command to compile the project:
