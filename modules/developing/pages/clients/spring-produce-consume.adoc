@@ -17,36 +17,44 @@ You will need the following prerequisites in place to complete this guide:
 Visit our https://github.com/datastax/astra-streaming-examples[examples repo^]{external-link-icon} to see the complete source of this example.
 ====
 
-== Create a Gradle project in Spring Initializr
+== Create a Maven project in Spring Initializr
 
 Spring Initializr is a great tool to quickly create a project with the dependencies you need. Let's use it to create a project with the Pulsar client dependency.
 
 . Go to https://start.spring.io/[Spring Initializr^,title=Spring Initializr]{external-link-icon} to initalize a new project.
-. Select Gradle, Java 17, a non-SNAPSHOT version of Spring Boot, and the Apache Pulsar dependency.
+. Select Maven, Java 17, a non-SNAPSHOT version of Spring Boot, and the Apache Pulsar dependency.
 +
 image::spring-initializr.png[Spring Initializr]
 . Select Generate Project and download the zip file.
 . Unzip the file and open the project in your IDE.
 In src/main/java/DemoApplication, you'll find the main method that will run your application, with the dependencies helpfully injected by Spring. This is where we'll add our code.
 +
+.Java application code
+[%collapsible]
+====
 [source,java]
 ----
-package com.example.demo;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class DemoApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
-
-}
+include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java
 ----
-. Navigate to src/main/java/resources and replace the values in application.properties with your Astra Streaming credentials:
-[source,bash]
+====
+
+. Replace the values in your Java application with values from the Connect tab of your {product_name} instance.
++
+[source,java]
+----
+	private static final String serviceUrl = "pulsar+ssl://pulsar-aws-useast1.streaming.datastax.com:6651";
+	private static final String pulsarToken = "ey...";
+	private static final String tenantName = "homelab";
+	private static final String namespace = "default";
+	private static final String topicName = "clue-sensors";
+----
++
+You could instead modify the values in the "application.properties" file in the /resources folder, which is a better practice for production applications. The Connect tab in Astra Streaming has a link to download a properties file with the values your application needs to connect to your {product_name} instance.
++
+.Spring application properties
+[%collapsible]
+====
+[source,plain]
 ----
 spring:
     pulsar:
@@ -63,20 +71,17 @@ spring:
         authentication:
           token: ***
 ----
-[NOTE]
 ====
-These values are found in the Connect tab of your Astra Streaming instance.
-====
-
-. Change directory to the project root and run the following command to build the project:
+. Change directory to the project root and run the following command to compile the project:
++
 [tabs]
 ====
-Gradle::
+Maven::
 +
 --
 [source,bash]
 ----
-./gradlew bootRun
+mvn clean compile
 ----
 --
 
@@ -85,79 +90,42 @@ Result::
 --
 [source,bash]
 ----
-> Task :bootRun
-
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.819 s
+[INFO] Finished at: 2023-05-09T15:36:33-04:00
+[INFO] ------------------------------------------------------------------------
 ----
 --
 ====
-
-Spring Initializr has created a simple Spring Boot application with the Pulsar client dependency. Now let's add some code to produce and consume messages.
-
-Add this code to "DemoApplication.java" to create a new producer.
 +
-[source,java]
-----
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-producer]
-----
-
-Add this code to "DemoApplication.java" to asynchronously send a single message to the broker and wait for acknowledgment.
+. Maven has compiled your Java application with the Pulsar client dependency.
+You can now run the project and send a message to your {product_name} cluster.
 +
-[source,java]
+[tabs]
+====
+Maven::
++
+--
+[source,bash]
 ----
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=produce-message]
+mvn spring-boot:run
 ----
+--
 
-== Create a consumer
-
-Create a new consumer instance in "DemoApplication.java".
-
-This code directs the consumer to watch a certain topic, names the subscription for watching topics, and begins the subscription.
-
-Add the following code to "DemoApplication.java".
-
-[source,java]
-----
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=build-consumer]
-----
-
-With the consumer and subscription in place, we can receive the unacknowledged messages added by the producer earlier.
-
-Add the following to "DemoApplication.java".
-
-[source,java]
-----
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=consumer-loop]
-----
-
-Finally, add a little clean up and close out the Java class.
-
-[source,java]
-----
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=close-consumer]
-include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimpleProducerConsumer/src/main/java/org/example/App.java[tag=close-client]
-----
-
-== Run the example
-
-Your Java class is ready for the big time!
-Let's build the app and run.
-
-[source,shell]
-----
-mvn clean package assembly:single
-java -jar target/SimpleProducerConsumer-1.0-SNAPSHOT-jar-with-dependencies.jar
-----
-
-You should see output similar to the following:
-
-[source,shell]
+Result::
++
+--
+[source,bash]
 ----
 Message received: Hello World
 ----
+--
+====
+. Remember to check in your {product_name} instance to see the message you sent to the newly created subscription "my-subscription".
 
 == What's next?
-
-Woo-hoo{emoji-tada}! You did it! You're on your way to messaging glory. Let's continue learning.
 
 * xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astream-functions.adoc[]
