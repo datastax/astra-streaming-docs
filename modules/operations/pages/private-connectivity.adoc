@@ -4,12 +4,15 @@ To better protect your streaming connections, connect {product_name} to a privat
 
 Private connections are only available within the same cloud provider and region as your {product_name} cluster.
 
-To open a private link service or private endpoint, open https://support.datastax.com[a support ticket].
+To open a private link service or private endpoint, open https://support.datastax.com[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
 
-== Supported traffic
+== Inbound traffic
 
-{product_name} supports the following inbound traffic (i.e. User → {product_name}).
+{product_name} supports the following inbound traffic (i.e. User's private endpoint → {product_name}).
 
+Inbound traffic describes Pulsar, Kafka, and RabbitMQ messaging traffic, as well as Prometheus metrics traffic flowing from a user's private endpoint to {product_name}.
+You create a connection to our private link service, and we route traffic to your {product_name} cluster.
+If you have multiple tenants, namespaces, 
 The private link service pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
 
 .Inbound private link service endpoints
@@ -31,12 +34,16 @@ The private link service pattern is the same across cloud providers, but the hos
 |prometheus-azure-eastus.private.streaming.datastax.com
 |===
 
-{product_name} also supports private outbound traffic on a case-by-case basis.
-To open an outbound private endpoint, open https://support.datastax.com[a support ticket].
+== Outbound traffic
+{product_name} also supports private outbound traffic (i.e. {product_name} → User's private endpoint) on a case-by-case basis.
+To open an outbound private endpoint, open https://support.datastax.com[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
 
+
+
+== Cloud provider credentials
 For more on connecting to your cloud provider, see your cloud provider's documentation.
 Each cloud provider will require different credentials to connect to the private endpoint.
-
+[#credentials]
 .Cloud providers
 [cols=3*,options=header]
 |===
