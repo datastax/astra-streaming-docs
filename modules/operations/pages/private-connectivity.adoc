@@ -1,6 +1,6 @@
 = Private connectivity
 
-To better protect your streaming connections, connect {product_name} to a private link service for inbound connectivity, or to a private endpoint for outbound connectivity.
+To better protect your streaming connections, connect {product_name} to a private link service for <<inbound>> connectivity, or to a private endpoint for <<outbound>> connectivity.
 
 Private connections are only available within the same cloud provider and region as your {product_name} cluster.
 
@@ -14,7 +14,7 @@ You create a connection to our private link service, and we route traffic to you
 If you have multiple tenants, they can have different VPCs. The different VPCs will have the same private FQDN with differing VNETs.
 The traffic on different private end point connections is isolated until it reaches our load balancer.
 The private link service pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
-
+[#inbound]
 .Inbound private link service endpoints
 [cols=2*,options=header]
 |===
@@ -33,7 +33,7 @@ The private link service pattern is the same across cloud providers, but the hos
 |Prometheus Metrics
 |prometheus-azure-eastus.private.streaming.datastax.com
 |===
-
+[#outbound]
 == Outbound traffic
 {product_name} also supports private outbound traffic (i.e. {product_name} → Your private endpoint) on a case-by-case basis.
 
