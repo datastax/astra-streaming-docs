@@ -10,9 +10,11 @@ To open a private link service or private endpoint, open https://support.datasta
 
 {product_name} supports inbound traffic (i.e. Your private endpoint → {product_name}).
 The first inbound traffic pattern describes Pulsar, Kafka, and RabbitMQ messaging traffic, as well as Prometheus metrics traffic, flowing from a user's private endpoint to {product_name}.
+
 You create a connection to our private link service, and we route traffic to your {product_name} cluster.
 If you have multiple tenants, they can have different VPCs. The different VPCs will have the same private FQDN with differing VNETs.
 The traffic on different private end point connections is isolated until it reaches our load balancer.
+
 The private link service pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
 [#inbound]
 .Inbound private link service endpoints
