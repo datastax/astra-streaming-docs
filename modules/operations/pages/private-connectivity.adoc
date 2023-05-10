@@ -1,6 +1,6 @@
 = Private connectivity
 
-To better protect your streaming connections, connect {product_name} to a private link service for <<inbound>> connectivity, or to a private endpoint for <<outbound>> connectivity.
+To better protect your streaming connections, connect {product_name} to a private link service for <<inbound,inbound>> connectivity, or to a private endpoint for <<outbound,outbound>> connectivity.
 
 Private connections are only available within the same cloud provider and region as your {product_name} cluster.
 
