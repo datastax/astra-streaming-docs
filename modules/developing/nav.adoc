@@ -16,6 +16,7 @@
 **** xref:clients/csharp-produce-consume.adoc[C#]
 **** xref:clients/golang-produce-consume.adoc[Golang]
 **** xref:clients/nodejs-produce-consume.adoc[Node.js]
+**** xref:clients/spring-produce-consume.adoc[Spring]
 
 ** Change data capture (CDC)
 *** xref:astream-cdc.adoc[]
