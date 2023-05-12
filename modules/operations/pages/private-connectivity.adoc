@@ -1,17 +1,22 @@
 = Private connectivity
 
-To better protect your streaming connections, connect {product_name} to a private link service for inbound connectivity, or to a private endpoint for outbound connectivity.
+To better protect your streaming connections, connect {product_name} to a private link service for <<inbound,inbound>> connectivity, or to a private endpoint for <<outbound,outbound>> connectivity.
 
 Private connections are only available within the same cloud provider and region as your {product_name} cluster.
 
-To open a private link service or private endpoint, open https://support.datastax.com[a support ticket].
+To open a private link service or private endpoint, open https://support.datastax.com[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
 
-== Supported traffic
+== Inbound traffic
 
-{product_name} supports the following inbound traffic (i.e. User → {product_name}).
+{product_name} supports inbound traffic (i.e. Your private endpoint → {product_name}).
+The first inbound traffic pattern describes Pulsar, Kafka, and RabbitMQ messaging traffic, as well as Prometheus metrics traffic, flowing from a user's private endpoint to {product_name}.
+
+You create a connection to our private link service, and we route traffic to your {product_name} cluster.
+If you have multiple tenants, they can have different VPCs. The different VPCs will have the same private FQDN with differing VNETs.
+The traffic on different private end point connections is isolated until it reaches our load balancer.
 
 The private link service pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
-
+[#inbound]
 .Inbound private link service endpoints
 [cols=2*,options=header]
 |===
@@ -30,13 +35,18 @@ The private link service pattern is the same across cloud providers, but the hos
 |Prometheus Metrics
 |prometheus-azure-eastus.private.streaming.datastax.com
 |===
+[#outbound]
+== Outbound traffic
+{product_name} also supports private outbound traffic (i.e. {product_name} → Your private endpoint) on a case-by-case basis.
 
-{product_name} also supports private outbound traffic on a case-by-case basis.
-To open an outbound private endpoint, open https://support.datastax.com[a support ticket].
+The outbound traffic pattern creates a private endpoint in {product_name} that connects to your private link service. We open a port on the tenant's firewall (firewalls are per tenant) so connectors and functions (running in a dedicated namespace on our cluster) can connect to your private network.
 
+To open an outbound private endpoint, open https://support.datastax.com[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
+
+== Cloud provider credentials
 For more on connecting to your cloud provider, see your cloud provider's documentation.
 Each cloud provider will require different credentials to connect to the private endpoint.
-
+[#credentials]
 .Cloud providers
 [cols=3*,options=header]
 |===
