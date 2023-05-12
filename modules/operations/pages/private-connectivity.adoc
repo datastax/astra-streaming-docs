@@ -4,7 +4,7 @@ To better protect your streaming connections, connect {product_name} to a privat
 
 Private connections are only available within the same cloud provider and region as your {product_name} cluster.
 
-To open a private link service or private endpoint, open https://support.datastax.com[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
+To open a private link service or private endpoint, open {support_url}[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
 
 == Inbound traffic
 
@@ -41,7 +41,7 @@ The private link service pattern is the same across cloud providers, but the hos
 
 The outbound traffic pattern creates a private endpoint in {product_name} that connects to your private link service. We open a port on the tenant's firewall (firewalls are per tenant) so connectors and functions (running in a dedicated namespace on our cluster) can connect to your private network.
 
-To open an outbound private endpoint, open https://support.datastax.com[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
+To open an outbound private endpoint, open {support_url}[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
 
 == Cloud provider credentials
 For more on connecting to your cloud provider, see your cloud provider's documentation.

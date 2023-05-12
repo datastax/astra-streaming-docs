@@ -7,12 +7,12 @@ DataStax {product_name} includes guardrails and limits to ensure good practices,
 
 [NOTE]
 ====
-The below limits are for Pay As You Go clusters. These limits may be changed on <<Dedicated clusters,dedicated clusters>> if necessary. https://support.datastax.com[Contact Support] to change the limits on a dedicated cluster.
+The below limits are for Pay As You Go clusters. These limits may be changed on <<Dedicated clusters,dedicated clusters>> if necessary. {support_url}[Contact Support] to change the limits on a dedicated cluster.
 ====
 
 == {product_name} guardrails
 
-Guardrails are initially provisioned in the default settings by {product_name} and cannot be changed directly by users. If you need assistance, open https://support.datastax.com[a support ticket].
+Guardrails are initially provisioned in the default settings by {product_name} and cannot be changed directly by users. If you need assistance, open {support_url}[a support ticket].
 
 [cols=2*]
 |===
@@ -67,7 +67,7 @@ Max throughput for a *non-partitioned topic* or a *single partition of a partiti
 
 _*These guardrails cannot be changed._
 
-_**Max message size can be changed on dedicated clusters, but not serverless clusters. If you need assistance, open https://support.datastax.com[a support ticket]._
+_**Max message size can be changed on dedicated clusters, but not serverless clusters. If you need assistance, open {support_url}[a support ticket]._
 
 == Function and connector resource limits
 
@@ -85,7 +85,7 @@ Upgrade your organization to a qualified organization by:
 
 * Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[Plan Options].
 * Contacting our sales team to see how we can help.
-* Opening https://support.datastax.com[a support ticket].
+* Opening {support_url}[a support ticket].
 
 Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
 ====
@@ -224,7 +224,7 @@ These topic and namespace actions are initially provisioned in the default setti
 
 == Dedicated clusters
 
-Message throughput, rate, and message max size can be customized on dedicated clusters. If you need assistance, open https://support.datastax.com[a support ticket].
+Message throughput, rate, and message max size can be customized on dedicated clusters. If you need assistance, open {support_url}[a support ticket].
 
 [cols=2*]
 |===

@@ -19,7 +19,7 @@ Upgrade your organization to a qualified organization by:
 
 * Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[Plan Options].
 * Contacting our sales team to see how we can help.
-* Opening https://support.datastax.com[a support ticket].
+* Opening {support_url}[a support ticket].
 
 Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
 
@@ -55,7 +55,7 @@ xref:developing:astream-rabbit.adoc[{starlight_rabbitmq}] is now available. {sta
 
 xref:developing:astream-kafka.adoc[{kafka_for_astra}] is now available. {kafka_for_astra} brings native Apache Kafka(R) protocol support to Apache Pulsar.
 
-== 24 March 2022 
+== 24 March 2022
 xref:developing:astream-cdc.adoc[CDC for Astra DB] is now available. CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
 
 == 31 January 2022: General Availability
