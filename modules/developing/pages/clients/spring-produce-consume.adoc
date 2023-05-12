@@ -34,7 +34,7 @@ In src/main/java/DemoApplication, you'll find the main method that will run your
 ====
 [source,java]
 ----
-include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/java/com/example/demo/DemoApplication.java
+include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/java/com/example/demo/DemoApplication.java[]
 ----
 ====
 
@@ -56,7 +56,7 @@ You could instead modify the values in the "application.properties" file in the 
 ====
 [source,plain]
 ----
-include::{astra-streaming-examples-repo}java/spring-boot/SpringBoot/src/main/resources/application.properties
+include::{astra-streaming-examples-repo}java/spring-boot/SpringBoot/src/main/resources/application.properties[]
 ----
 ====
 . Change directory to the project root and run the following command to compile the project:
