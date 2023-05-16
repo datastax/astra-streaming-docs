@@ -13,6 +13,18 @@ Here are the regions {product_name} supports:
 |Region
 |Location
 
+| ap-south-1
+| Mumbai, India
+
+| ap-southeast-1
+| Singapore
+
+| eu-central-1
+| Frankfurt, Germany
+
+| eu-west-1
+| Dublin, Ireland
+
 | us-east-1
 | Northern Virginia, US
 
@@ -34,6 +46,12 @@ Here are the regions {product_name} supports:
 
 | eastus
 | Virginia, US
+
+| eastus2
+| Virginia, US
+
+| westeurope
+| Amsterdam, Netherlands
 
 | westus2
 | Washington (state), US
@@ -64,6 +82,5 @@ Here are the regions {product_name} supports:
 
 [NOTE]
 ====
-These regions are also supported by CDC for Astra DB. {product_name} CDC can only be used in a region that supports both {product_name} and Astra DB. ElasticSearch and Snowflake can be in different
-regions than {product_name}.
+These regions are also supported by CDC for Astra DB. {product_name} CDC can only be used in a region that supports both {product_name} and Astra DB. ElasticSearch and Snowflake can be in different regions than {product_name}.
 ====
