@@ -22,7 +22,203 @@ Upgrade your organization to a qualified organization by:
 Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
 ====
 
-== Add functions in dashboard
+== Deploy Python functions in a ZIP file
+
+Astra Streaming supports Python-based Pulsar Functions.
+These functions can be packaged in a ZIP file and deployed to {product_name} or Pulsar. The same ZIP file can be deployed to either environment.
+We’ll create a ZIP file in the proper format, then use the “pulsar-admin” command to deploy the ZIP.
+We’ll pass a “create function" configuration file (a .yaml file) as a parameter to “pulsar-admin”, which defines the Pulsar Function options and parameters.
+
+Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folders looks like this:
++
+[source,plain]
+----
+   "testpythonfunction/src/pythonfunc.py"
+   "testpythonfunction/requirements.txt"
+   "testpythonfunction/deps"
+----
+
+. To deploy a ZIP, first create the proper ZIP file directory structure. That file format/layout looks like this:
++
+[source,plain]
+----
+.
+ ├── deps
+ │   └── sh-1.12.14-py2.py3-none-any.whl
+ └── src
+     └── pythonfunc.py
+----
+
+. Create a deployment configuration file. In this example we'll call this file “func-create-config.yaml”.
+This file will be passed to the “pulsar-admin” create function command.
+
+The contents of the YAML file should be:
++
+[source,yaml]
+----
+py: </absolute/path/to/my/testpythonfunction.zip>
+className: pythonfunc.ExclamationFunction
+parallelism: 1
+inputs:
+ - persistent://mytenant/n0/t1
+output: persistent://mytenant/ns/t2
+autoAck: true
+tenant: mytenant
+namespace: ns0
+name: testpythonfunction
+logTopic:
+userConfig:
+ logging_level: ERROR
+----
+
+. Use “pulsar-admin” to deploy the Python ZIP to Astra Streaming or Pulsar.
+The command below assumes you've properly configured the “client.conf” file for “pulsar-admin” commands against your Pulsar cluster. See the documentation xref:developing:configure-pulsar-env.html[here] for more information.
++
+[source,console]
+----
+bin/pulsar-admin functions create --function-config-file </absolute/path/to/your/python/func-create-config.yml>
+----
+
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See xref:developing:astream-functions.html#controlling-your-function[] for more information on testing and monitoring your function in {product_name}.
+
+== Deploy Java functions in a JAR file
+
+Astra Streaming supports Java-based Pulsar Functions which are packaged in a JAR file.
+The JAR can be deployed to Astra Streaming or Pulsar. The same JAR file can be deployed to either environment.
+
+We’ll create a JAR file using Maven, then use the “pulsar-admin” command to deploy the JAR.
+We’ll pass a "create function" configuration file (a .yaml file) as a parameter to “pulsar-admin”, which defines the Pulsar function options and parameters.
+
+. To deploy a JAR, first create the proper JAR with the Java code of the Pulsar Function.
+A POM example file is shown below:
++
+.Function pom.xml
+[%collapsible]
+====
+[source,pom]
+----
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+
+     <groupId>java-function</groupId>
+     <artifactId>java-function</artifactId>
+     <version>1.0-SNAPSHOT</version>
+
+     <dependencies>
+         <dependency>
+             <groupId>org.apache.pulsar</groupId>
+             <artifactId>pulsar-functions-api</artifactId>
+             <version>3.0.0</version>
+         </dependency>
+     </dependencies>
+
+     <build>
+         <plugins>
+             <plugin>
+                 <artifactId>maven-assembly-plugin</artifactId>
+                 <configuration>
+                     <appendAssemblyId>false</appendAssemblyId>
+                     <descriptorRefs>
+                         <descriptorRef>jar-with-dependencies</descriptorRef>
+                     </descriptorRefs>
+                     <archive>
+                     <manifest>
+                         <mainClass>org.example.test.ExclamationFunction</mainClass>
+                     </manifest>
+                 </archive>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <id>make-assembly</id>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>assembly</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-compiler-plugin</artifactId>
+                 <version>3.11.0</version>
+                 <configuration>
+                     <release>17</release>
+                 </configuration>
+             </plugin>
+         </plugins>
+     </build>
+
+ </project>
+----
+====
+
+. Package the JAR file with Maven.
++
+[tabs]
+====
+Maven::
++
+--
+[source,bash]
+----
+mvn package
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.989 s
+[INFO] Finished at: 2023-05-16T16:19:05-04:00
+[INFO] ------------------------------------------------------------------------
+----
+--
+====
+
+. Create a deployment configuration file. In this example we'll call this file “func-create-config.yaml”.
+This file will be passed to the “pulsar-admin” create function command.
+
+The contents of the YAML file should be:
+[source,yaml]
+----
+jar: </absolute/path/to/my/testpythonfunction.jar>
+className: com.example.pulsar.ExclamationFunction
+parallelism: 1
+inputs:
+  - persistent://mytenant/n0/t1
+output: persistent://mytenant/ns/t2
+autoAck: true
+tenant: mytenant
+namespace: ns0
+name: testjarfunction
+logTopic:
+userConfig: 
+  logging_level: ERROR
+----
+[NOTE]
+====
+Astra Streaming requires the “inputs” topic to have a message schema defined before deploying the function. Otherwise, deployment errors may occur. Use the {astra_ui} to define the message schema for a topic.
+====
+
+. Use “pulsar-admin” to deploy your new JAR to Astra Streaming or Pulsar.
+The command below assumes you've properly configured the “client.conf” file for “pulsar-admin” commands against your Pulsar cluster. See the documentation xref:developing:configure-pulsar-env.html[here] for more information.
++
+[source,bash]
+----
+bin/pulsar-admin functions create --function-config-file  </absolute/path/to/your/javajar/func-create-config.yml>
+----
+
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See xref:developing:astream-functions.html#controlling-your-function[] for more information on testing and monitoring your function in {product_name}.
+
+== Add functions in {product_name} dashboard
 
 Add functions in the Functions tab of the Astra Streaming dashboard.
 
