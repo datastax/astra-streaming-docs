@@ -17,6 +17,7 @@ Added new {product_name} regions:
 * Azure - eastus2
 
 For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+
 == 3 May 2023
 
 https://spring.io/[Spring Boot] support is here!
