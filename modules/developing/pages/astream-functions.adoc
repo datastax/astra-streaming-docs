@@ -26,11 +26,10 @@ Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[tran
 
 Astra Streaming supports Python-based Pulsar Functions.
 These functions can be packaged in a ZIP file and deployed to {product_name} or Pulsar. The same ZIP file can be deployed to either environment.
-We’ll create a ZIP file in the proper format, then use the “pulsar-admin” command to deploy the ZIP.
-We’ll pass a “create function" configuration file (a .yaml file) as a parameter to “pulsar-admin”, which defines the Pulsar Function options and parameters.
+We’ll create a ZIP file in the proper format, then use the pulsar-admin command to deploy the ZIP.
+We’ll pass a “create function" configuration file (a .yaml file) as a parameter to pulsar-admin, which defines the Pulsar Function options and parameters.
 
-Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folders looks like this:
-+
+Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folder looks like this:
 [source,plain]
 ----
    "testpythonfunction/src/pythonfunc.py"
@@ -50,8 +49,7 @@ Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpython
 ----
 
 . Create a deployment configuration file. In this example we'll call this file “func-create-config.yaml”.
-This file will be passed to the “pulsar-admin” create function command.
-
+This file will be passed to the pulsar-admin create function command. +
 The contents of the YAML file should be:
 +
 [source,yaml]
@@ -71,26 +69,26 @@ userConfig:
  logging_level: ERROR
 ----
 
-. Use “pulsar-admin” to deploy the Python ZIP to Astra Streaming or Pulsar.
-The command below assumes you've properly configured the “client.conf” file for “pulsar-admin” commands against your Pulsar cluster. See the documentation xref:developing:configure-pulsar-env.html[here] for more information.
+. Use pulsar-admin to deploy the Python ZIP to Astra Streaming or Pulsar.
+The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
 +
 [source,console]
 ----
 bin/pulsar-admin functions create --function-config-file </absolute/path/to/your/python/func-create-config.yml>
 ----
 
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See xref:developing:astream-functions.html#controlling-your-function[] for more information on testing and monitoring your function in {product_name}.
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,controlling-your-function>> for more information on testing and monitoring your function in {product_name}.
 
 == Deploy Java functions in a JAR file
 
 Astra Streaming supports Java-based Pulsar Functions which are packaged in a JAR file.
 The JAR can be deployed to Astra Streaming or Pulsar. The same JAR file can be deployed to either environment.
 
-We’ll create a JAR file using Maven, then use the “pulsar-admin” command to deploy the JAR.
-We’ll pass a "create function" configuration file (a .yaml file) as a parameter to “pulsar-admin”, which defines the Pulsar function options and parameters.
+We’ll create a JAR file using Maven, then use the pulsar-admin command to deploy the JAR.
+We’ll pass a "create function" configuration file (a .yaml file) as a parameter to pulsar-admin, which defines the Pulsar function options and parameters.
 
 . To deploy a JAR, first create the proper JAR with the Java code of the Pulsar Function.
-A POM example file is shown below:
+An example pom.xml file is shown below:
 +
 .Function pom.xml
 [%collapsible]
@@ -184,9 +182,9 @@ Result::
 ====
 
 . Create a deployment configuration file. In this example we'll call this file “func-create-config.yaml”.
-This file will be passed to the “pulsar-admin” create function command.
-
+This file will be passed to the pulsar-admin create function command. +
 The contents of the YAML file should be:
++
 [source,yaml]
 ----
 jar: </absolute/path/to/my/testpythonfunction.jar>
@@ -203,20 +201,21 @@ logTopic:
 userConfig: 
   logging_level: ERROR
 ----
++
 [NOTE]
 ====
 Astra Streaming requires the “inputs” topic to have a message schema defined before deploying the function. Otherwise, deployment errors may occur. Use the {astra_ui} to define the message schema for a topic.
 ====
-
-. Use “pulsar-admin” to deploy your new JAR to Astra Streaming or Pulsar.
-The command below assumes you've properly configured the “client.conf” file for “pulsar-admin” commands against your Pulsar cluster. See the documentation xref:developing:configure-pulsar-env.html[here] for more information.
++
+. Use pulsar-admin to deploy your new JAR to Astra Streaming or Pulsar.
+The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
 +
 [source,bash]
 ----
 bin/pulsar-admin functions create --function-config-file  </absolute/path/to/your/javajar/func-create-config.yml>
 ----
 
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See xref:developing:astream-functions.html#controlling-your-function[] for more information on testing and monitoring your function in {product_name}.
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
 
 == Add functions in {product_name} dashboard
 
@@ -342,6 +341,7 @@ $ ./pulsar-admin functions trigger \
 +
 The trigger sends the string `Hello world` to your exclamation function. Your function should output `Hello world!` to your consumed output.
 
+[#controlling-your-function]
 == Controlling Your Function
 
 You can start, stop, and restart your function by selecting it in the *Functions* dashboard.
