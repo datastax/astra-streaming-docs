@@ -77,7 +77,7 @@ The command below assumes you've properly configured the client.conf file for pu
 bin/pulsar-admin functions create --function-config-file </absolute/path/to/your/python/func-create-config.yml>
 ----
 
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,controlling-your-function>> for more information on testing and monitoring your function in {product_name}.
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
 
 == Deploy Java functions in a JAR file
 
