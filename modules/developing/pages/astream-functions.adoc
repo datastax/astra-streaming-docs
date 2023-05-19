@@ -32,22 +32,26 @@ We’ll pass a “create function" configuration file (a .yaml file) as a parame
 Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folder looks like this:
 [source,plain]
 ----
-/testpythonfunction
-   "testpythonfunction/testpythonfunction.py"
-   "testpythonfunction/test-deployment-package.zip"
-   "testpythonfunction/dependencies"
+/my-python-function
+   "python-code/python-function.py"
+   "python-code/deps/"
+   "python-code/src/test-deployment-package.zip"
+   "python-code/src/my-python-function."
 ----
 
 . To deploy a ZIP, first create the proper ZIP file directory structure. That file format/layout looks like this:
 +
 [source,python]
 ----
-mkdir testpythonfunction
-. cd testpythonfunction
-. touch testpythonfunction.py
+mkdir my-python-function
+mkdir my-python-function/python-code
+mkdir my-python-function/python-code/deps
+mkdir my-python-function/python-code/src
+
+touch my-python-function/python-code/src/python-function.py
 ----
 
-. Add your code. For this example, we'll just use a basic exclamation function:
+. Add your code to python-function.py. For this example, we'll just use a basic exclamation function:
 +
 [source,python]
 ----
@@ -61,29 +65,31 @@ class ExclamationFunction(Function):
     return input + '!'
 ----
 
-. Your directory structure should look like this:
+. Add your dependencies to the /deps folder. In this example, we'll use the pulsar-client library.
 +
-[source,plain]
+[source,bash]
 ----
-testpythonfunction$
-| testpythonfunction.py
+cd deps
+pip install pulsar-client==2.10.0
 ----
 
 . Run the following command to add my-deployment-package.zip to the root of the file structure:
 +
 [source,bash]
 ----
-cd testpythonfunction
-zip my-deployment-package.zip testpythonfunction.py
-  adding: testpythonfunction.py (deflated 28%)
+cd deps
+zip -r ../my-python-function.zip .
+  adding: sh-1.12.14-py2.py3-none-any.whl (deflated 2%)
 ----
 
 . Ensure your package has the ZIP file at the root of the file structure:
 +
 [source,plain]
 ----
-testpythonfunction ls
-my-deployment-package.zip testpythonfunction.py
+python-code ls -al
+deps
+my-python-function.zip
+src
 ----
 
 === Deploy a Python function with configuration file
