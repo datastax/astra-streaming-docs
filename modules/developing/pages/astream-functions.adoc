@@ -5,7 +5,7 @@
 
 Functions are lightweight compute processes that enable you to process each message received on a topic. You can apply custom logic to that message, transforming or enriching it, and then output it to a different topic.
 
-Functions run inside {product_name} and are therefore serverless. You write the code for your function in Java or Python, then upload the code. It will be automatically run for each message published to the specified input topic.
+Functions run inside {product_name} and are therefore serverless. You write the code for your function in Java, Python, or Go, then upload the code. It will be automatically run for each message published to the specified input topic.
 
 Functions are implemented using Apache Pulsar(R) functions. See https://pulsar.apache.org/docs/en/functions-overview/[Pulsar Functions overview] for more information about Pulsar functions.
 
@@ -30,23 +30,64 @@ We’ll create a ZIP file in the proper format, then use the pulsar-admin comman
 We’ll pass a “create function" configuration file (a .yaml file) as a parameter to pulsar-admin, which defines the Pulsar Function options and parameters.
 
 Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folder looks like this:
++
 [source,plain]
 ----
-   "testpythonfunction/src/pythonfunc.py"
-   "testpythonfunction/requirements.txt"
-   "testpythonfunction/deps"
+/testpythonfunction
+   "testpythonfunction/testpythonfunction.py"
+   "testpythonfunction/test-deployment-package.zip"
+   "testpythonfunction/dependencies"
 ----
 
 . To deploy a ZIP, first create the proper ZIP file directory structure. That file format/layout looks like this:
 +
+[source,python]
+----
+mkdir testpythonfunction
+. cd testpythonfunction
+. touch testpythonfunction.py
+----
+
+. Add your code. For this example, we'll just use a basic exclamation function:
++
+[source,python]
+----
+from pulsar import Function
+
+class ExclamationFunction(Function):
+  def __init__(self):
+    pass
+
+  def process(self, input, context):
+    return input + '!'
+----
+
+. Your directory structure should look like this:
++
 [source,plain]
 ----
-.
- ├── deps
- │   └── sh-1.12.14-py2.py3-none-any.whl
- └── src
-     └── pythonfunc.py
+testpythonfunction$
+| testpythonfunction.py
 ----
+
+. Run the following command to add testpythonfunction.zip to the root of the file structure:
++
+[source,bash]
+----
+cd testpythonfunction
+zip my-deployment-package.zip testpythonfunction.py
+  adding: testpythonfunction.py (deflated 28%)
+----
+
+. Ensure your package has the ZIP file at the root of the file structure:
++
+[source,plain]
+----
+testpythonfunction ls
+my-deployment-package.zip testpythonfunction.py
+----
+
+=== Deploying a Python function with configuration file
 
 . Create a deployment configuration file. In this example we'll call this file “func-create-config.yaml”.
 This file will be passed to the pulsar-admin create function command. +
@@ -78,6 +119,13 @@ bin/pulsar-admin functions create --function-config-file </absolute/path/to/your
 ----
 
 . Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
+
+.. You can also use the pulsar-admin command to list your functions:
++
+[source,bash]
+----
+bin/pulsar-admin functions list --tenant <mytenant> --namespace <my-namespace>
+----
 
 == Deploy Java functions in a JAR file
 
@@ -198,7 +246,7 @@ tenant: mytenant
 namespace: ns0
 name: testjarfunction
 logTopic:
-userConfig: 
+userConfig:
   logging_level: ERROR
 ----
 +
@@ -216,6 +264,13 @@ bin/pulsar-admin functions create --function-config-file  </absolute/path/to/you
 ----
 
 . Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
+
+.. You can also use the pulsar-admin command to list your functions:
++
+[source,bash]
+----
+bin/pulsar-admin functions list --tenant <mytenant> --namespace <my-namespace>
+----
 
 == Add functions in {product_name} dashboard
 
