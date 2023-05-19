@@ -33,10 +33,9 @@ Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpython
 [source,plain]
 ----
 /my-python-function
-   "python-code/python-function.py"
-   "python-code/deps/"
-   "python-code/src/test-deployment-package.zip"
-   "python-code/src/my-python-function."
+   python-code/my-python-function.zip
+   python-code/deps/sh-1.12.14-py2.py3-none-any.whl
+   python-code/src/my-python-function.py
 ----
 
 . To deploy a ZIP, first create the proper ZIP file directory structure. That file format/layout looks like this:
@@ -45,13 +44,13 @@ Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpython
 ----
 mkdir my-python-function
 mkdir my-python-function/python-code
-mkdir my-python-function/python-code/deps
-mkdir my-python-function/python-code/src
+mkdir my-python-function/python-code/deps/
+mkdir my-python-function/python-code/src/
 
-touch my-python-function/python-code/src/python-function.py
+touch my-python-function/python-code/src/my-python-function.py
 ----
 
-. Add your code to python-function.py. For this example, we'll just use a basic exclamation function:
+. Add your code to my-python-function.py. For this example, we'll just use a basic exclamation function:
 +
 [source,python]
 ----
@@ -65,7 +64,7 @@ class ExclamationFunction(Function):
     return input + '!'
 ----
 
-. Add your dependencies to the /deps folder. In this example, we'll use the pulsar-client library.
+. Add your dependencies to the /deps folder. For this example, we'll use the pulsar-client library.
 +
 [source,bash]
 ----
