@@ -5,6 +5,16 @@
 
 {product_name} release notes provide information about new and improved features, known and resolved issues, and bug fixes.
 
+== 16 May 2023
+
+Added new {product_name} regions:
+
+* AWS - ap-south-1
+* AWS - ap-southeast-1
+* AWS - eu-central-1
+
+For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+
 == 3 May 2023
 
 https://spring.io/[Spring Boot] support is here!
