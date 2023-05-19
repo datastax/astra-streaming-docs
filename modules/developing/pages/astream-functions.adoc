@@ -73,7 +73,7 @@ cd deps
 pip install pulsar-client==2.10.0
 ----
 
-. Run the following command to add my-deployment-package.zip to the root of the file structure:
+. Run the following command to add my-pulsar-function.zip to the root of the file structure:
 +
 [source,bash]
 ----
