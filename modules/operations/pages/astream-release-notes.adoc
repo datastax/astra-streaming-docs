@@ -12,9 +12,6 @@ Added new {product_name} regions:
 * AWS - ap-south-1
 * AWS - ap-southeast-1
 * AWS - eu-central-1
-* AWS - eu-west-1
-* Azure - westeurope
-* Azure - eastus2
 
 For more, see xref:operations:astream-regions.adoc[{product_name} regions].
 
