@@ -1,0 +1,384 @@
+= Apache Flink
+
+Apache Flink is an open source stream processing framework with powerful stream- and batch-processing capabilities.
+{product_name} offers a fully managed Apache Flink service enabling you to build and run streaming applications without having to manage the underlying infrastructure.
+Performance
+
+Turn off strict schema enforcement
+
+Fix schema conversion
+keyvalue not supported
+int and int_null different
+keyformat = row (avro)
+string JSON works
+CDC is supported
+partitioned topics: partitioned-*
+
+== Connecting
+
+The {product_name} Flink endpoint is currently available at `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/`.
+
+To connect, generate an AstraCS token and pass it as a bearer token in the `Authorization` header of your RESTful API calls.
+
+See xref:getting-started:index.adoc[] for more on generating an Astra token, and see xref:configure-pulsar-env.adoc[] for more on and setting up your Pulsar binaries.
+
+For now, set your environmental variables to follow along with the examples in this section:
+[source,bash]
+----
+export token=AstraCS:xxxx
+export tenant=flink-tenant
+export PULSAR_CLIENT_CONF=$(realpath client.conf)
+export endpoint="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant"
+----
+
+To test connectivity, issue a GET request for a list of your current Flink jobs:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant"
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[]%  //empty array
+----
+--
+====
+
+Now that you've connected {product_name} and Flink, you can start managing Flink jobs.
+
+== Managing Flink jobs
+
+A Flink *job* is a collection of one or more Flink applications that are submitted to a Flink cluster for execution. In a Flink job, data is typically ingested from various sources such as Kafka, HDFS, or databases. The data is then processed using Flink's high-level APIs or low-level operators, which provide a wide range of transformations and operations for data manipulation, filtering, aggregation, and analytics.
+
+Overall, a Flink job enables you to process and analyze large-scale data sets efficiently, with low-latency and high throughput, making it suitable for various use cases such as real-time analytics, event-driven applications, data pipelines, and ETL (Extract, Transform, Load) processes.
+
+=== Create a Flink job
+
+A little more setup is required.
+[NOTE]
+====
+It is VERY important that on the Pulsar side (in {product_name}, in this case) you have pre-created both the input and output topics, and that all the topics have a Schema that is compatible with the Flink table schema (in this case, a JSON schema).
+====
+First, you need to add more environment variables:
+[source,bash]
+----
+PULSAR_CLIENT_CONF=$PULSAR_HOME/conf/clienf.conf
+inputTopic=flink-tenant/flink/persons
+outputTopic=flink-tenant/flink/persons-output
+PULSAR_HOME=$(pwd)
+ADMINCMD=$PULSAR_HOME/bin/pulsar-admin
+CLIENTCMD=$PULSAR_HOME/bin/pulsar-client
+$ADMINCMD topics delete-partitioned-topic $inputTopic
+$ADMINCMD topics delete-partitioned-topic $outputTopic
+$ADMINCMD topics create-partitioned-topic -p 2 $inputTopic
+$ADMINCMD topics create-partitioned-topic -p 2 $outputTopic
+----
+
+The payload contains the definition of the job:
+- create the tables involved in the query
+- specifying the output table
+- specifying the “query”
+
+. Produce data and set a JSON schema:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$CLIENTCMD produce -k family-1 -m "{\"name\":\"giovanni\"}","{\"name\":\"enrico\"}","{\"name\":\"giovanni\"}" -vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}'  $inputTopic
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+...
+2023-05-24T17:35:21,391-0400 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 3 messages successfully produced
+----
+--
+====
++
+We produced three messages with JSON schema to the "persons" (`$inputTopic) topic.
++
+.. Let's confirm our schema looks as expected:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$ADMINCMD schemas get $inputTopic
+----
+--
+
+Result::
++
+--
+[source,json]
+----
+{
+  "version": 0,
+  "schemaInfo": {
+    "name": "persons",
+    "schema": {
+      "type": "record",
+      "namespace": "com.example",
+      "name": "Person",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    "type": "JSON",
+    "timestamp": 1684964118894,
+    "properties": {}
+  }
+}
+----
+--
+====
+
+Now, we'll do the same for the "persons-output" (`$outputTopic`) topic:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$CLIENTCMD produce -m "{\"name\":\"init\"}" -vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}' $outputTopic
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+...
+2023-05-24T17:55:34,707-0400 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
+----
+--
+====
++
+We produced a message with JSON schema to the "persons-output" (`$outputTopic) topic.
++
+.. Let's confirm our schema looks as expected:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$ADMINCMD schemas get $outputTopic
+----
+--
+
+Result::
++
+--
+[source,json]
+----
+{
+  "version": 0,
+  "schemaInfo": {
+    "name": "persons-output",
+    "schema": {
+      "type": "record",
+      "namespace": "com.example",
+      "name": "Person",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    "type": "JSON",
+    "timestamp": 1684965332419,
+    "properties": {}
+  }
+}
+----
+--
+====
+Issue a POST request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant`:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -v -H "Content-Type: application/json" -H "Authorization: Bearer $token" $endpoint/$jobName
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+
+----
+--
+====
+=== Check a Flink job's status
+Issue a GET request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant/$jobName`:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -v -H "Content-Type: application/json" -H "Authorization: Bearer $token" $endpoint/$jobName
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+
+----
+--
+====
+
+=== Delete a Flink job
+Issue a DELETE request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant/$jobName`:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -v -H "Content-Type: application/json" -H "Authorization: Bearer $token" -X DELETE $endpoint/$jobName
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+
+----
+--
+====
+== CRUD operations
+
+
+
+=== Create
+kafka example
+[source,plain]
+----
+CREATE TABLE user_behavior (
+    user_id BIGINT,
+    item_id BIGINT,
+    category_id BIGINT,
+    behavior STRING,
+    ts TIMESTAMP(3),
+    proctime AS PROCTIME(),   -- generates processing-time attribute using computed column
+    WATERMARK FOR ts AS ts - INTERVAL '5' SECOND  -- defines watermark on ts column, marks ts as event-time attribute
+) WITH (
+    'connector' = 'kafka',  -- using kafka connector
+    'topic' = 'user_behavior',  -- kafka topic
+    'scan.startup.mode' = 'earliest-offset',  -- reading from the beginning
+    'properties.bootstrap.servers' = 'kafka:9094',  -- kafka broker address
+    'format' = 'json'  -- the data format is json
+);
+
+----
+
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant"
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[]%  //empty array
+----
+--
+====
+=== Read
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant"
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[]%  //empty array
+----
+--
+====
+
+=== Update
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant"
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[]%  //empty array
+----
+--
+====
+
+== What's next?
+
+* link
+* link
