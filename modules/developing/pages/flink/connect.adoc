@@ -1,0 +1,76 @@
+= Activate Flink
+
+The {product_name} Flink endpoint is available at `https://api.dev.streaming.datastax.com/flink/api/`.
+
+The endpoint is currently *only* available in the aws-us-east2 region, so its full name is `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/`.
+
+To connect, you'll need both an AstraCS token and a Pulsar token.
+
+* For more on generating the Astra and Pulsar JWT tokens, see xref:getting-started:index.adoc[].
+* For more on the differences between the Astra and Pulsar tokens, see xref:operations:onboarding-faq.adoc#secure-sign-on-roles-and-permissions[].
+* For more on setting up your Pulsar binaries, see xref:configure-pulsar-env.adoc[].
+
+. Set your environmental variables to follow along with the examples in this section:
++
+[source,bash]
+----
+export TOKEN=AstraCS:xxxx
+export TENANT=flink-tenant
+export PULSAR_CLIENT_CONF=$(realpath client.conf)
+export PULSAR_TOKEN=eyXXXX
+export ENDPOINT="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
+----
+
+. Activate Flink in {product_name} with a POST request:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $PULSAR_TOKEN" -X POST "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/$TENANT"
+----
+--
+
+Result::
++
+--
+[source,]
+----
+{"status":true}%
+----
+--
+====
+
+. Test connectivity by issuing a GET request for a list of your current Flink jobs:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[]%  //empty array
+----
+--
+====
+
+Now that you've connected {product_name} and Flink, you can create your Flink job.
+
+== What's next?
+
+* xref:create.adoc[]
+* xref:manage.adoc[]
+* xref:index.adoc[]

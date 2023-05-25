@@ -1,0 +1,135 @@
+= Manage Flink jobs
+
+== Check a Flink job's status
+Issue a GET request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT/$JOB_NAME`:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -v -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" $ENDPOINT/$JOB_NAME
+----
+--
+
+Result::
++
+--
+[source,json]
+----
+{
+  "specs": {
+    "name": "j-flink-tenant-zicjos",
+    "outputTable": "output",
+    "selectQuery": "select input.name from flink.input as input",
+    "createTableSpecs": [
+      {
+        "tableName": "input",
+        "columns": [
+          "name string"
+        ],
+        "topic": "flink-tenant/flink/persons",
+        "format": "json"
+      }
+    ],
+    "parallelism": 1
+  },
+  "status": {
+    "state": "RECONCILING",
+    "error": "{\"type\":\"org.apache.flink.kubernetes.operator.exception.DeploymentFailedException\",\"message\":\"back-off 5m0s restarting failed container=flink-main-container pod=j-flink-tenant-zicjos-84c46c749-pmbfw_fl-flink-tenant(bcaf73fd-0db7-4a5d-897b-63acad0822c3)\",\"additionalMetadata\":{\"reason\":\"CrashLoopBackOff\"},\"throwableList\":[]}",
+    "lifecycleState": "DEPLOYED"
+  }
+}
+----
+--
+====
+
+Aww, it failed! Let's see what happened with the logs.
+
+== View a Flink job's logs
+
+To tail a Flink job's logs:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+no default tenant admin role is defined
+----
+--
+====
+
+To tail a Flink function worker's logs:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+no default tenant admin role is defined
+----
+--
+====
+
+== Delete a Flink job
+
+To delete the job we queried above (`j-flink-tenant-zicjos`), issue a DELETE request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT/j-flink-tenant-zicjos`:
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+curl -v -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X DELETE $ENDPOINT/$JOB_NAME
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+> DELETE /flink/api/jobs/flink-tenant/j-flink-tenant-zicjos HTTP/1.1
+> Host: pulsar-aws-useast2.api.dev.streaming.datastax.com
+> User-Agent: curl/7.79.1
+> Accept: */*
+> Content-Type: application/json
+> Authorization: Bearer AstraCS:xxxx
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+----
+--
+====
+
+== What's next?
+
+* xref:connect.adoc[]
+* xref:create.adoc[]
+* xref:index.adoc[]

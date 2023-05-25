@@ -1,0 +1,223 @@
+= Create a Flink job
+
+A Flink *job* is a collection of one or more Flink applications that are submitted to a Flink cluster for execution. In a Flink job, data is typically ingested from various sources such as Kafka, HDFS, or databases. The data is then processed using Flink's high-level APIs or low-level operators, which provide a wide range of transformations and operations for data manipulation, filtering, aggregation, and analytics.
+
+Overall, a Flink job enables you to process and analyze large-scale data sets efficiently, with low-latency and high throughput, making it suitable for various use cases such as real-time analytics, event-driven applications, data pipelines, and ETL (Extract, Transform, Load) processes.
+
+A little more setup is required to create a Flink job.
+
+It is VERY important that on the Pulsar side (in {product_name}, in this case) you have pre-created both the input and output topics, and that all the topics have a schema that is compatible with the Flink table schema (in this case, a JSON schema).
+
+. First, add more environment variables to complete this example:
++
+[source,bash]
+----
+PULSAR_CLIENT_CONF=$PULSAR_HOME/conf/clienf.conf
+INPUT_TOPIC=flink-tenant/flink/persons
+OUTPUT_TOPIC=flink-tenant/flink/persons-output
+PULSAR_HOME=$(pwd)
+ADMINCMD=$PULSAR_HOME/bin/pulsar-admin
+CLIENTCMD=$PULSAR_HOME/bin/pulsar-client
+$ADMINCMD topics delete-partitioned-topic $INPUT_TOPIC
+$ADMINCMD topics delete-partitioned-topic $OUTPUT_TOPIC
+$ADMINCMD topics create-partitioned-topic -p 2 $INPUT_TOPIC
+$ADMINCMD topics create-partitioned-topic -p 2 $OUTPUT_TOPIC
+----
+
+. Produce data to set a JSON schema on the "persons" (`$INPUT_TOPIC`) and "persons-output" (`$OUTPUT_TOPIC`) topics.
+First, we'll produce messages to the "persons" (`$INPUT_TOPIC`) topic:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$CLIENTCMD produce -k family-1 -m "{\"name\":\"giovanni\"}","{\"name\":\"enrico\"}","{\"name\":\"giovanni\"}" -vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}'  $INPUT_TOPIC
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+...
+2023-05-24T17:35:21,391-0400 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 3 messages successfully produced
+----
+--
+====
++
+.. We produced three messages with JSON schema to the "persons" (`$INPUT_TOPIC) topic. Let's confirm our schema looks as expected:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$ADMINCMD schemas get $INPUT_TOPIC
+----
+--
+
+Result::
++
+--
+[source,json]
+----
+{
+  "version": 0,
+  "schemaInfo": {
+    "name": "persons",
+    "schema": {
+      "type": "record",
+      "namespace": "com.example",
+      "name": "Person",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    "type": "JSON",
+    "timestamp": 1684964118894,
+    "properties": {}
+  }
+}
+----
+--
+====
+
+.. Now, we'll produce messages to the "persons-output" (`$OUTPUT_TOPIC`) topic:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$CLIENTCMD produce -m "{\"name\":\"init\"}" -vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}' $OUTPUT_TOPIC
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+...
+2023-05-24T17:55:34,707-0400 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
+----
+--
+====
++
+.. We produced a message with JSON schema to the "persons-output" (`$OUTPUT_TOPIC) topic. Let's confirm our schema looks as expected:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+$ADMINCMD schemas get $OUTPUT_TOPIC
+----
+--
+
+Result::
++
+--
+[source,json]
+----
+{
+  "version": 0,
+  "schemaInfo": {
+    "name": "persons-output",
+    "schema": {
+      "type": "record",
+      "namespace": "com.example",
+      "name": "Person",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    "type": "JSON",
+    "timestamp": 1684965332419,
+    "properties": {}
+  }
+}
+----
+--
+====
++
+. Now that you have set up your environment and created two topics with JSON schemas, you can create the Flink job.
+Creating a Flink job consists of creating the JSON payload that defines the Flink job, and then POSTing that JSON payload to the {product_name} endpoint.
++
+[NOTE]
+====
+This example uses the jq command-line JSON processor to format the JSON payload. For more, see https://stedolan.github.io/jq/[jq^]{external-link-icon}.
+====
++
+This example creates a Flink job that reads from the "persons" topic and writes to the "persons-output" topic, and POSTs the JSON to the {product_name} endpoint.
++
+The JSON payload contains the definition of the Flink job:
+
+* create the tables involved in the query (`"tableName": "input"`)
+* specifying the output table (`"outputTable": "output"`)
+* specifies the query (`"selectQuery": "select input.name from flink.input as input"`)
+
+The POST request to the jobs/$tenant endpoint creates the actual Flink job.
+[tabs]
+====
+Console::
++
+--
+[source,bash]
+----
+cat > create-job-persons.json << EndOfMessage
+{
+  "parallelism": 1,
+  "outputTable": "output",
+  "createTableSpecs": [
+{
+ "tableName": "input",
+ "format": "json",
+ "topic": "$INPUT_TOPIC",
+ "columns": ["name string"]
+}
+],
+  "selectQuery": "select input.name from flink.input as input"
+}
+EndOfMessage
+cat create-job-persons.json | jq
+endpoint="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant"
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X POST  --data @create-job-persons.json $ENDPOINT -v -o
+----
+--
+
+Result::
++
+--
+[source,]
+----
+{"specs":{"name":"j-flink-tenant-vwnrwv","outputTable":"output","selectQuery":"select input.name from flink.input as input","createTableSpecs":[{"tableName":"input","columns":["name string"],"topic":"flink-tenant/flink/persons","format":"json"}],"parallelism":1},"status":{"lifecycleState":"CREATED"}}%
+----
+--
+====
+
+Nice, you've created a Flink job! Next we'll check its status, view its logs, and delete it.
+
+== What's next?
+
+* xref:manage.adoc[]
+* xref:connect.adoc[]
+* xref:create.adoc[]
+* xref:index.adoc[]
+
