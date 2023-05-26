@@ -120,7 +120,17 @@ Result::
 --
 [source,bash]
 ----
-no default tenant admin role is defined
+2023-05-26T16:18:34.831498931Z 2023-05-26 16:18:34,831 INFO  org.apache.flink.runtime.jobmaster.MiniDispatcherRestEndpoint [] - Shutting down rest endpoint.
+2023-05-26T16:18:35.245317915Z 2023-05-26 16:18:35,244 INFO  akka.remote.RemoteActorRefProvider$RemotingTerminator        [] - Shutting down remote daemon.
+2023-05-26T16:18:35.247440899Z 2023-05-26 16:18:35,247 INFO  akka.remote.RemoteActorRefProvider$RemotingTerminator        [] - Remote daemon shut down; proceeding with flushing remote transports.
+2023-05-26T16:18:35.252706981Z WARNING: An illegal reflective access operation has occurred
+2023-05-26T16:18:35.252794333Z WARNING: Illegal reflective access by org.jboss.netty.util.internal.ByteBufferUtil (file:/tmp/flink-rpc-akka_f43af027-e758-46fa-9ee5-bee1a0a16278.jar) to method java.nio.DirectByteBuffer.cleaner()
+2023-05-26T16:18:35.252817286Z WARNING: Please consider reporting this to the maintainers of org.jboss.netty.util.internal.ByteBufferUtil
+2023-05-26T16:18:35.252820857Z WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+2023-05-26T16:18:35.252824430Z WARNING: All illegal access operations will be denied in a future release
+2023-05-26T16:18:35.262710744Z 2023-05-26 16:18:35,261 INFO  akka.remote.RemoteActorRefProvider$RemotingTerminator        [] - Remoting shut down.
+2023-05-26T16:18:35.264677449Z 2023-05-26 16:18:35,264 INFO  akka.remote.RemoteActorRefProvider$RemotingTerminator        [] - Remoting shut down.
+* Connection #0 to host pulsar-aws-useast2.api.dev.streaming.datastax.com left intact
 ----
 --
 ====
