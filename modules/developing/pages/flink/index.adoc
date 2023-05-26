@@ -1,0 +1,17 @@
+= Apache Flink
+
+Apache Flink is an open source stream processing framework with powerful stream- and batch-processing capabilities.
+{product_name} offers a fully managed Apache Flink service enabling you to build and run streaming applications without having to manage the underlying infrastructure.
+
+Apache Flink offers a powerful set of capabilities for developers in the realm of data processing and analytics. With Flink, developers can efficiently process and analyze large-scale data sets in real-time or batch mode, enabling them to build robust and scalable data pipelines and streaming applications. Flink's rich set of APIs and operators provide extensive flexibility for data transformations, filtering, aggregation, and complex event processing. It offers seamless integration with various data sources and sinks, including popular systems like Kafka, HDFS, and databases, allowing developers to ingest and output data from different sources easily. Flink's distributed processing engine ensures high throughput and fault tolerance, with built-in mechanisms for handling failures and guaranteeing exactly-once semantics.
+
+For more on Apache Flink, see the https://nightlies.apache.org/flink/flink-docs-master/[Flink documentation].
+
+For more on getting started with {product_name}, see xref:getting-started:index.adoc[].
+
+Continue reading to learn how to get started with {product_name} and Apache Flink.
+
+* xref:flink/connect.adoc[]
+* xref:flink/create.adoc[]
+* xref:flink/manage.adoc[]
+

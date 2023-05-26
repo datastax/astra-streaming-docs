@@ -34,7 +34,7 @@ include::{astra-streaming-examples-repo}/pulsar-client/consume-message.sh[]
 The output should look similar to this:
 [source,shell,subs="attributes+"]
 ----
-include::{astra-streaming-examples-repo}/pulsar-client/consume-output.log[]
+include::{astra-streaming-examples-repo}/pulsar-client/consume-output.sh[]
 ----
 
 If you made it here then your produce & consume journey was successful. Congrats{emoji-tada}! Now it's time to take your skills further {emoji-rocket}{emoji-rocket}.

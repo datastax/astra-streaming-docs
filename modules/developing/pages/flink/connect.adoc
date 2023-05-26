@@ -1,0 +1,77 @@
+= Activate Flink in Astra Streaming
+
+[NOTE]
+====
+This guide is part of a series for building streaming applications with {product_name} and Apache Flink. The other guides in the series are:
+
+* xref:flink/index.adoc[]
+* xref:flink/create.adoc[]
+* xref:flink/manage.adoc[]
+
+You will need your flink endpoint address within Astra Streaming. If you don't have this, please contact the team at streaming@datastax.com or open a support ticket asking for this info.
+====
+
+== Pre-requisites
+
+For the following steps you will need to set a few environment variables:
+
+[source,bash]
+----
+ASTRA_TOKEN=AstraCS:XXXX
+TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
+----
+
+To connect, you'll need a Streaming tenant and a Pulsar token. For more, see xref:getting-started:index.adoc[].
+
+. Activate Flink in {product_name}
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ASTRA_TOKEN" \
+  -X POST \
+  "https://<FLINK_ENDPOINT_ADDRESS>/flink/$TENANT"
+----
+--
+
+Result::
++
+--
+[source,]
+----
+{ "status": true }
+----
+--
+====
+
+. Test connectivity of your current Flink instance by listing activated jobs
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ASTRA_TOKEN"  \
+  "https://<FLINK_ENDPOINT_ADDRESS>/flink/api/jobs/$TENANT"
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[]  //empty array
+----
+--
+====
+
+Now that you've connected {product_name} and Flink, you can xref:flink/create.adoc[create your Flink job].
