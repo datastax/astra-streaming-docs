@@ -21,9 +21,7 @@ For more, see xref:getting-started:index.adoc[].
 ----
 TOKEN=AstraCS:xxxx
 TENANT=flink-tenant
-PULSAR_CLIENT_CONF=$(realpath client.conf)
 PULSAR_TOKEN=eyXXXX
-ENDPOINT="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
 ----
 
 . Activate Flink in {product_name} with a POST request:
