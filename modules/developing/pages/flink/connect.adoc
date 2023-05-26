@@ -17,7 +17,7 @@ For the following steps you will need to set a few environment variables:
 
 [source,bash]
 ----
-PULSAR_TOKEN=eyXXXX
+ASTRA_TOKEN=AstraCS:XXXX
 TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
 ----
 
@@ -33,7 +33,7 @@ Curl::
 [source,bash]
 ----
 curl -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  -H "Authorization: Bearer $ASTRA_TOKEN" \
   -X POST \
   "https://<FLINK_ENDPOINT_ADDRESS>/flink/$TENANT"
 ----

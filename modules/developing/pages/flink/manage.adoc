@@ -21,12 +21,12 @@ Curl::
 --
 [source,bash]
 ----
-PULSAR_TOKEN=eyXXXX
+ASTRA_TOKEN=AstraCS:XXXX
 TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
 
 curl -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $PULSAR_TOKEN" \
-  "https://<FLINK_ENDPOINT_ADDRESS>/flink/api/jobs/$TENANT_NAME"
+  -H "Authorization: Bearer $ASTRA_TOKEN" \
+  https://<FLINK_ENDPOINT_ADDRESS>/flink/api/jobs/$TENANT_NAME
 ----
 --
 
@@ -50,12 +50,12 @@ Curl::
 --
 [source,bash]
 ----
-PULSAR_TOKEN=eyXXXX
+ASTRA_TOKEN=AstraCS:XXXX
 TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
 JOB_NAME=j-flink-tenant-zicjos
 
 curl -v -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  -H "Authorization: Bearer $ASTRA_TOKEN" \
   "https://<FLINK_ENDPOINT_ADDRESS>/flink/api/jobs/$TENANT_NAME/$JOB_NAME
 ----
 --
@@ -105,42 +105,13 @@ Curl::
 --
 [source,bash]
 ----
-PULSAR_TOKEN=eyXXXX
+ASTRA_TOKEN=AstraCS:XXXX
 TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
 JOB_NAME=j-flink-tenant-zicjos
 
 curl -v -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  -H "Authorization: Bearer $ASTRA_TOKEN" \
   https://<FLINK_ENDPOINT_ADDRESS>/flink/logs/$TENANT_NAME/$JOB_NAME/jobmanager?tail=true
-----
---
-
-Result::
-+
---
-[source,bash]
-----
-no default tenant admin role is defined
-----
---
-====
-
-To see a Flink function worker logs:
-
-[tabs]
-====
-Curl::
-+
---
-[source,bash]
-----
-PULSAR_TOKEN=eyXXXX
-TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
-JOB_NAME=j-flink-tenant-zicjos
-
-curl -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $TOKEN" \
-  https://<FLINK_ENDPOINT_ADDRESS>/flink/logs/$TENANT_NAME/$JOB_NAME/jobmanager
 ----
 --
 
@@ -165,11 +136,11 @@ Curl::
 --
 [source,bash]
 ----
-PULSAR_TOKEN=eyXXXX
+ASTRA_TOKEN=AstraCS:XXXX
 JOB_NAME=j-flink-tenant-zicjos
 
 curl -v -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  -H "Authorization: Bearer $ASTRA_TOKEN" \
   -X DELETE \
   https://<FLINK_ENDPOINT_ADDRESS>/flink/$JOB_NAME
 ----
