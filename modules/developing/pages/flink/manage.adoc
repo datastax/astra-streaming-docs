@@ -130,6 +130,6 @@ Result::
 
 == What's next?
 
-* xref:connect.adoc[]
-* xref:create.adoc[]
-* xref:index.adoc[]
+* xref:flink/connect.adoc[]
+* xref:flink/create.adoc[]
+* xref:flink/index.adoc[]

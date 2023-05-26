@@ -216,8 +216,8 @@ Nice, you've created a Flink job! Next we'll check its status, view its logs, an
 
 == What's next?
 
-* xref:manage.adoc[]
-* xref:connect.adoc[]
-* xref:create.adoc[]
-* xref:index.adoc[]
+* xref:flink/manage.adoc[]
+* xref:flink/connect.adoc[]
+* xref:flink/create.adoc[]
+* xref:flink/index.adoc[]
 

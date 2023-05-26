@@ -71,6 +71,6 @@ Now that you've connected {product_name} and Flink, you can create your Flink jo
 
 == What's next?
 
-* xref:create.adoc[]
-* xref:manage.adoc[]
-* xref:index.adoc[]
+* xref:flink/create.adoc[]
+* xref:flink/manage.adoc[]
+* xref:flink/index.adoc[]
