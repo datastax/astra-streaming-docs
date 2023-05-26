@@ -1,4 +1,4 @@
-= Manage Flink jobs
+= Manage Flink jobs in Astra Streaming
 
 [NOTE]
 ====
@@ -7,10 +7,13 @@ This guide is part of a series for building streaming applications with {product
 * xref:flink/index.adoc[]
 * xref:flink/connect.adoc[]
 * xref:flink/create.adoc[]
+
+You will need your flink endpoint address within Astra Streaming. If you don't have this, please contact the team at streaming@datastax.com or open a support ticket asking for this info.
 ====
 
 == List current Flink jobs
-Issue a GET request for a list of your current Flink jobs:
+Issue a GET request for a list of your current Flink jobs
+
 [tabs]
 ====
 Curl::
@@ -18,10 +21,12 @@ Curl::
 --
 [source,bash]
 ----
-TOKEN=AstraCS:xxxx
-TENANT=flink-tenant
+PULSAR_TOKEN=eyXXXX
+TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
+
 curl -H "Content-Type: application/json" \
--H "Authorization: Bearer $TOKEN" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
+  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  "https://<FLINK_ENDPOINT_ADDRESS>/flink/api/jobs/$TENANT_NAME"
 ----
 --
 
@@ -30,13 +35,14 @@ Result::
 --
 [source,bash]
 ----
-[]%  //empty array
+[]  //empty array
 ----
 --
 ====
 
 == Check a Flink job's status
-Issue a GET request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT/$JOB_NAME`:
+Issue a GET request with the job name:
+
 [tabs]
 ====
 Curl::
@@ -44,12 +50,13 @@ Curl::
 --
 [source,bash]
 ----
-TOKEN=AstraCS:xxxx
-TENANT=flink-tenant
-ENDPOINT="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
-JOBNAME=j-flink-tenant-zicjos
+PULSAR_TOKEN=eyXXXX
+TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
+JOB_NAME=j-flink-tenant-zicjos
+
 curl -v -H "Content-Type: application/json" \
--H "Authorization: Bearer $TOKEN" $ENDPOINT/$JOB_NAME
+  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  "https://<FLINK_ENDPOINT_ADDRESS>/flink/api/jobs/$TENANT_NAME/$JOB_NAME
 ----
 --
 
@@ -90,6 +97,7 @@ Aww, it failed! Let's see what happened with the logs.
 == View a Flink job's logs
 
 To tail a Flink job's logs:
+
 [tabs]
 ====
 Curl::
@@ -97,12 +105,13 @@ Curl::
 --
 [source,bash]
 ----
-TOKEN=AstraCS:xxxx
-TENANT=flink-tenant
-JOBNAME=j-flink-tenant-zicjos
-ENDPOINT=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
-curl -H "Content-Type: application/json" \
--H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
+PULSAR_TOKEN=eyXXXX
+TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
+JOB_NAME=j-flink-tenant-zicjos
+
+curl -v -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  https://<FLINK_ENDPOINT_ADDRESS>/flink/logs/$TENANT_NAME/$JOB_NAME/jobmanager?tail=true
 ----
 --
 
@@ -116,7 +125,8 @@ no default tenant admin role is defined
 --
 ====
 
-To tail a Flink function worker's logs:
+To see a Flink function worker logs:
+
 [tabs]
 ====
 Curl::
@@ -124,12 +134,13 @@ Curl::
 --
 [source,bash]
 ----
-TOKEN=AstraCS:xxxx
-TENANT=flink-tenant
-JOBNAME=j-flink-tenant-zicjos
-ENDPOINT=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+PULSAR_TOKEN=eyXXXX
+TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
+JOB_NAME=j-flink-tenant-zicjos
+
 curl -H "Content-Type: application/json" \
--H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
+  -H "Authorization: Bearer $TOKEN" \
+  https://<FLINK_ENDPOINT_ADDRESS>/flink/logs/$TENANT_NAME/$JOB_NAME/jobmanager
 ----
 --
 
@@ -145,7 +156,8 @@ no default tenant admin role is defined
 
 == Delete a Flink job
 
-To delete the job we queried above (`j-flink-tenant-zicjos`), issue a DELETE request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT/j-flink-tenant-zicjos`:
+To delete a Flink job:
+
 [tabs]
 ====
 Curl::
@@ -153,11 +165,13 @@ Curl::
 --
 [source,bash]
 ----
-TOKEN=AstraCS:xxxx
-JOBNAME=j-flink-tenant-zicjos
-ENDPOINT=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+PULSAR_TOKEN=eyXXXX
+JOB_NAME=j-flink-tenant-zicjos
+
 curl -v -H "Content-Type: application/json" \
--H "Authorization: Bearer $TOKEN" -X DELETE $ENDPOINT/$JOB_NAME
+  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  -X DELETE \
+  https://<FLINK_ENDPOINT_ADDRESS>/flink/$JOB_NAME
 ----
 --
 
@@ -166,15 +180,7 @@ Result::
 --
 [source,bash]
 ----
-> DELETE /flink/api/jobs/flink-tenant/j-flink-tenant-zicjos HTTP/1.1
-> Host: pulsar-aws-useast2.api.dev.streaming.datastax.com
-> User-Agent: curl/7.79.1
-> Accept: */*
-> Content-Type: application/json
-> Authorization: Bearer AstraCS:xxxx
->
-* Mark bundle as not supporting multiuse
-< HTTP/1.1 200 OK
+200 success
 ----
 --
 ====

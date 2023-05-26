@@ -1,4 +1,4 @@
-= Create a Flink job
+= Create a Flink job in Astra Streaming
 
 [NOTE]
 ====
@@ -7,229 +7,231 @@ This guide is part of a series for building streaming applications with {product
 * xref:flink/index.adoc[]
 * xref:flink/connect.adoc[]
 * xref:flink/manage.adoc[]
+
+You will need your flink endpoint address within Astra Streaming. If you don't have this, please contact the team at streaming@datastax.com or open a support ticket asking for this info.
 ====
 
 A Flink *job* is a collection of one or more Flink applications that are submitted to a Flink cluster for execution. In a Flink job, data is typically ingested from various sources such as Kafka, HDFS, or databases. The data is then processed using Flink's high-level APIs or low-level operators, which provide a wide range of transformations and operations for data manipulation, filtering, aggregation, and analytics.
 
 Overall, a Flink job enables you to process and analyze large-scale data sets efficiently, with low-latency and high throughput, making it suitable for various use cases such as real-time analytics, event-driven applications, data pipelines, and ETL (Extract, Transform, Load) processes.
 
-A little more setup is required to create a Flink job.
+It is important that you have pre-created both the input and output topics in Pulsar before attempting to create a Flink job. Both topics must have a schema that is compatible with the Flink table schema. In the example below we will be using a simple JSON schema.
 
-It is VERY important that on the Pulsar side (in {product_name}, in this case) you have pre-created both the input and output topics, and that all the topics have a schema that is compatible with the Flink table schema (in this case, a JSON schema).
+== Pre-requisites
+For the following steps you will need these environment variables:
 
-. First, add more environment variables to complete this example:
-+
 [source,bash]
 ----
-TOKEN=AstraCS:xxxx
-TENANT=flink-tenant
 PULSAR_TOKEN=eyXXXX
-ENDPOINT="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
-INPUT_TOPIC=flink-tenant/flink/persons
-OUTPUT_TOPIC=flink-tenant/flink/persons-output
-PULSAR_HOME=$(pwd)
-ADMINCMD=$PULSAR_HOME/bin/pulsar-admin
-CLIENTCMD=$PULSAR_HOME/bin/pulsar-client
-$ADMINCMD topics delete-partitioned-topic $INPUT_TOPIC
-$ADMINCMD topics delete-partitioned-topic $OUTPUT_TOPIC
-$ADMINCMD topics create-partitioned-topic -p 2 $INPUT_TOPIC
-$ADMINCMD topics create-partitioned-topic -p 2 $OUTPUT_TOPIC
+TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
+FLINK_INPUT_TOPIC_NAME=fink-input-names
+FLINK_OUTPUT_TOPIC_NAME=fink-names-output
 ----
 
-. Produce data to set a JSON schema on the "persons" (`$INPUT_TOPIC`) and "persons-output" (`$OUTPUT_TOPIC`) topics.
-First, we'll produce messages to the "persons" (`$INPUT_TOPIC`) topic with the Pulsar client CLI:
+== Create the input topic
+
+. Create a new topic that will be the starting point of your Fink job
 +
 [tabs]
 ====
 Curl::
 +
 --
-[source,bash]
+[source, bash]
 ----
-$CLIENTCMD produce \
--k family-1 \
--m "{\"name\":\"giovanni\"}","{\"name\":\"enrico\"}","{\"name\":\"giovanni\"}" \
--vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}' $INPUT_TOPIC
+./bin/pulsar-admin topics create \
+  "persistent://$TENANT_NAME/flink/$FLINK_INPUT_TOPIC_NAME"
 ----
 --
 
 Result::
 +
 --
-[source,bash]
-----
-...
-org.apache.pulsar.client.cli.PulsarClientTool - 3 messages successfully produced
-----
+success
 --
 ====
-+
-.. We produced three messages with JSON schema to the "persons" (`$INPUT_TOPIC) topic. Let's confirm our schema looks as expected with the Pulsar admin CLI:
-+
-[tabs]
-====
-Curl::
-+
---
-[source,bash]
-----
-$ADMINCMD schemas get $INPUT_TOPIC
-----
---
 
-Result::
+. Create a new schema definition named 'input-names-schema.json'
 +
---
-[source,json]
+[source, json]
 ----
 {
-  "version": 0,
-  "schemaInfo": {
-    "name": "persons",
-    "schema": {
-      "type": "record",
-      "namespace": "com.example",
-      "name": "Person",
-      "fields": [
-        {
-          "name": "name",
-          "type": "string"
-        }
-      ]
-    },
-    "type": "JSON",
-    "timestamp": 1684964118894,
-    "properties": {}
-  }
+  "type": "JSON",
+  "schema": "{\"type\": \"record\",\"namespace\":\"com.example\",\"name\":\"Person\",\"fields\":[{\"name\":\"personName\",\"type\":\"string\"}]}",
+  "properties": {}
 }
 ----
---
-====
 
-.. Now, we'll produce messages to the "persons-output" (`$OUTPUT_TOPIC`) topic with the Pulsar client CLI:
+. Upload the schema definition to the topic
 +
 [tabs]
 ====
 Curl::
 +
 --
-[source,bash]
+[source, bash]
 ----
-$CLIENTCMD produce \
--m "{\"name\":\"init\"}" \
--vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}' $OUTPUT_TOPIC
+./bin/pulsar-admin schemas upload \
+  --filename input-names-schema.json \
+  "persistent://$TENANT_NAME/flink/$FLINK_INPUT_TOPIC_NAME"
 ----
 --
 
 Result::
 +
 --
-[source,bash]
-----
-...
-org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
-----
+success
 --
 ====
-+
-.. We produced a message with JSON schema to the "persons-output" (`$OUTPUT_TOPIC) topic. Let's confirm our schema looks as expected with the Pulsar admin CLI:
+
+== Create the output topic
+
+. Create a new topic that will get the output of your Flink job
 +
 [tabs]
 ====
 Curl::
 +
 --
-[source,bash]
+[source, bash]
 ----
-$ADMINCMD schemas get $OUTPUT_TOPIC
+./bin/pulsar-admin topics create \
+  "persistent://$TENANT_NAME/flink/$FLINK_OUTPUT_TOPIC_NAME"
 ----
 --
 
 Result::
 +
 --
-[source,json]
+success
+--
+====
+
+. Create a new schema definition named 'output-names-schema.json'
++
+[source, json]
 ----
 {
-  "version": 0,
-  "schemaInfo": {
-    "name": "persons-output",
-    "schema": {
-      "type": "record",
-      "namespace": "com.example",
-      "name": "Person",
-      "fields": [
-        {
-          "name": "name",
-          "type": "string"
-        }
-      ]
-    },
-    "type": "JSON",
-    "timestamp": 1684965332419,
-    "properties": {}
-  }
+  "type": "JSON",
+  "schema": "{\"type\": \"record\",\"namespace\":\"com.example\",\"name\":\"Person\",\"fields\":[{\"name\":\"personName\",\"type\":\"string\"}]}",
+  "properties": {}
 }
 ----
---
-====
-+
-. Now that you have set up your environment and created two topics with JSON schemas, you can create the Flink job.
-Creating a Flink job consists of creating the JSON payload that defines the Flink job, and then POSTing that JSON payload to the {product_name} endpoint.
-+
-[NOTE]
-====
-This example uses the jq command-line JSON processor to format the JSON payload. For more, see https://stedolan.github.io/jq/[jq^]{external-link-icon}.
-====
-+
-This example creates a Flink job that reads from the "persons" topic and writes to the "persons-output" topic, and POSTs the JSON to the {product_name} endpoint.
-+
-The JSON payload contains the definition of the Flink job:
 
-* create the tables involved in the query (`"tableName": "input"`)
-* specifying the output table (`"outputTable": "output"`)
-* specifies the query (`"selectQuery": "select input.name from flink.input as input"`)
-
-This query tells Flink to watch the input.name column on the flink.input table for new data, and when new data is written, to write that data to the output table.
-
-The POST request to the jobs/$tenant endpoint creates the actual Flink job.
+. Upload the schema definition to the topic
++
 [tabs]
 ====
-Console::
+Curl::
 +
 --
-[source,bash]
+[source, bash]
 ----
-cat > create-job-persons.json << EndOfMessage
+./bin/pulsar-admin schemas upload \
+  --filename output-names-schema.json \
+  "persistent://$TENANT_NAME/flink/$FLINK_OUTPUT_TOPIC_NAME"
+----
+--
+
+Result::
++
+--
+success
+--
+====
+
+== Validate topic configuration
+
+To ensure your topics are configured correctly, run the following commands and observe the successful output.
+
+[tabs]
+====
+Curl::
++
+--
+[source, bash]
+----
+./bin/pulsar-admin schemas get \
+  "persistent://$TENANT_NAME/flink/$FLINK_INPUT_TOPIC_NAME"
+
+./bin/pulsar-admin schemas get \
+  "persistent://$TENANT_NAME/flink/$FLINK_OUTPUT_TOPIC_NAME"
+----
+--
+
+Result::
++
+--
+(JSON output of both schema definitions)
+--
+====
+
+You should get a JSON output of the schema definition just created. This confirms the topics are ready to be a part of your flink job.
+
+== Create the Flink job
+
+. Create the job definition file and name it 'persons-flink-job.json'. Don't forget to replace the tenant name with your tenant name and the input topic name with the topic name set in the environment variables.
++
+[source, json]
+----
 {
   "parallelism": 1,
-  "outputTable": "output",
+  "outputTable": "person-names-output",
   "createTableSpecs": [
-{
- "tableName": "input",
- "format": "json",
- "topic": "$INPUT_TOPIC",
- "columns": ["name string"]
+    {
+     "tableName": "namesInput",
+     "format": "json",
+     "topic": "<YOUR_ASTRA_STREAMING_TENANT_NAME>/flink/<FLINK_INPUT_TOPIC_NAME>",
+     "columns": ["personName string"]
+    }
+  ],
+  "selectQuery": "select input.personName from flink.namesInput as input"
 }
-],
-  "selectQuery": "select input.name from flink.input as input"
-}
-EndOfMessage
-cat create-job-persons.json | jq
-endpoint="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$tenant"
-curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X POST  --data @create-job-persons.json $ENDPOINT -v -o
+----
+
+. Upload the definition and activate the job. Don't forget to replace the flink endpoint address with your assigned value and the tenant name with your tenant name.
++
+[tabs]
+====
+Curl::
++
+--
+[source, bash]
+----
+curl -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $PULSAR_TOKEN" \
+  -X POST \
+  -d @persons-flink-job.json \
+  https://<FLINK_ENDPOINT_ADDRESS>/flink/api/jobs/$TENANT_NAME
 ----
 --
 
 Result::
 +
 --
-[source,]
+[source, json]
 ----
-{"specs":{"name":"j-flink-tenant-vwnrwv","outputTable":"output","selectQuery":"select input.name from flink.input as input","createTableSpecs":[{"tableName":"input","columns":["name string"],"topic":"flink-tenant/flink/persons","format":"json"}],"parallelism":1},"status":{"lifecycleState":"CREATED"}}%
+{
+  "specs": {
+    "name": "j-flink-tenant-vwnrwv",
+    "outputTable": "person-names-output",
+    "selectQuery": "select input.personName from flink.namesInput as input",
+    "createTableSpecs": [
+      {
+        "tableName": "namesInput",
+        "columns": ["personName string"],
+        "topic": ".../flink/$FLINK_INPUT_TOPIC_NAME",
+        "format": "json"
+      }
+    ],
+    "parallelism": 1
+  },
+  "status": {
+    "lifecycleState": "CREATED"
+  }
+}
 ----
 --
 ====
 
-Nice, you've created a Flink job! Next we'll check its status, view its logs, and manage it in xref:flink/manage.adoc[].
-
+Nice! You've created a Flink job! Next we'll check its status, view its logs, and manage it in xref:flink/manage.adoc[].

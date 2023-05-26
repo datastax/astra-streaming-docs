@@ -6,6 +6,10 @@
 ** xref:astream-functions.adoc[]
 ** xref:astream-kafka.adoc[]
 ** xref:astream-rabbit.adoc[]
+** xref:flink/index.adoc[]
+*** xref:flink/connect.adoc[Activate the service]
+*** xref:flink/create.adoc[Create a Flink job]
+*** xref:flink/manage.adoc[Manage Flink jobs]
 
 ** Producing and consuming messages
 *** xref:produce-consume-astra-portal.adoc[Astra Portal]
