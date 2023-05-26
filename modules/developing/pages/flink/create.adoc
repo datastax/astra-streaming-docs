@@ -30,7 +30,7 @@ FLINK_OUTPUT_TOPIC_NAME=flink-names-output
 
 == Create the input topic
 
-. Create a new topic that will be the starting point of your Fink job
+. Create a new topic that will be the starting point of your Fink job:
 +
 [tabs]
 ====
