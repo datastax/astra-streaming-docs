@@ -24,8 +24,8 @@ For the following steps you will need these environment variables:
 ----
 ASTRA_TOKEN=AstraCS:XXXX
 TENANT_NAME=<YOUR_ASTRA_STREAMING_TENANT_NAME>
-FLINK_INPUT_TOPIC_NAME=fink-input-names
-FLINK_OUTPUT_TOPIC_NAME=fink-names-output
+FLINK_INPUT_TOPIC_NAME=flink-input-names
+FLINK_OUTPUT_TOPIC_NAME=flink-names-output
 ----
 
 == Create the input topic
@@ -86,7 +86,7 @@ success
 
 == Create the output topic
 
-. Create a new topic that will get the output of your Flink job
+. Create a new topic that will get the output of your Flink job:
 +
 [tabs]
 ====
@@ -159,11 +159,62 @@ Pulsar Admin::
 ----
 --
 
-Result::
+Input Topic Result::
 +
 --
-(JSON output of both schema definitions)
+[source,json]
+----
+{
+  "version": 0,
+  "schemaInfo": {
+    "name": "persons",
+    "schema": {
+      "type": "record",
+      "namespace": "com.example",
+      "name": "Person",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    "type": "JSON",
+    "timestamp": 1684964118894,
+    "properties": {}
+  }
+}
+----
 --
+
+Output Topic Result::
++
+--
+[source,json]
+----
+{
+  "version": 0,
+  "schemaInfo": {
+    "name": "persons-output",
+    "schema": {
+      "type": "record",
+      "namespace": "com.example",
+      "name": "Person",
+      "fields": [
+        {
+          "name": "personName",
+          "type": "string"
+        }
+      ]
+    },
+    "type": "JSON",
+    "timestamp": 1685120472299,
+    "properties": {}
+  }
+}
+----
+--
+
 ====
 
 You should get a JSON output of the schema definition just created. This confirms the topics are ready to be a part of your flink job.
