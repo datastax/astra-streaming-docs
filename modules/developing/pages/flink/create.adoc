@@ -15,7 +15,7 @@ A Flink *job* is a collection of one or more Flink applications that are submitt
 
 Overall, a Flink job enables you to process and analyze large-scale data sets efficiently, with low-latency and high throughput, making it suitable for various use cases such as real-time analytics, event-driven applications, data pipelines, and ETL (Extract, Transform, Load) processes.
 
-It is important that you have pre-created both the input and output topics in Pulsar before attempting to create a Flink job. Both topics must have a schema that is compatible with the Flink table schema. In the example below we will be using a simple JSON schema.
+It is important that you have pre-created both the input and output topics in Pulsar before attempting to create a Flink job. Both topics must have a schema that is compatible with the Flink table schema. In the example below we will be using a simple JSON schema. For more on supported data types in Flink, see https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/fault-tolerance/serialization/types_serialization/[Flink Data Types and Serialization].
 
 == Pre-requisites
 For the following steps you will need these environment variables:
