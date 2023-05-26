@@ -11,7 +11,6 @@ This guide is part of a series for building streaming applications with {product
 
 == List current Flink jobs
 Issue a GET request for a list of your current Flink jobs:
-+
 [tabs]
 ====
 Curl::
@@ -19,6 +18,8 @@ Curl::
 --
 [source,bash]
 ----
+TOKEN=AstraCS:xxxx
+TENANT=flink-tenant
 curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer $TOKEN" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
 ----
@@ -43,6 +44,10 @@ Curl::
 --
 [source,bash]
 ----
+TOKEN=AstraCS:xxxx
+TENANT=flink-tenant
+ENDPOINT="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
+JOBNAME=j-flink-tenant-zicjos
 curl -v -H "Content-Type: application/json" \
 -H "Authorization: Bearer $TOKEN" $ENDPOINT/$JOB_NAME
 ----
@@ -92,7 +97,10 @@ Curl::
 --
 [source,bash]
 ----
-endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+TOKEN=AstraCS:xxxx
+TENANT=flink-tenant
+JOBNAME=j-flink-tenant-zicjos
+ENDPOINT=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
 curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
 ----
@@ -116,7 +124,10 @@ Curl::
 --
 [source,bash]
 ----
-endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+TOKEN=AstraCS:xxxx
+TENANT=flink-tenant
+JOBNAME=j-flink-tenant-zicjos
+ENDPOINT=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
 curl -H "Content-Type: application/json" \
 -H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
 ----
@@ -142,7 +153,9 @@ Curl::
 --
 [source,bash]
 ----
-endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
+TOKEN=AstraCS:xxxx
+JOBNAME=j-flink-tenant-zicjos
+ENDPOINT=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
 curl -v -H "Content-Type: application/json" \
 -H "Authorization: Bearer $TOKEN" -X DELETE $ENDPOINT/$JOB_NAME
 ----
