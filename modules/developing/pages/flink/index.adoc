@@ -3,6 +3,13 @@
 Apache Flink is an open source stream processing framework with powerful stream- and batch-processing capabilities.
 {product_name} offers a fully managed Apache Flink service enabling you to build and run streaming applications without having to manage the underlying infrastructure.
 
+For more on Apache Flink, see the https://nightlies.apache.org/flink/flink-docs-master/[Flink documentation].
+
+For more on getting started with {product_name}, see xref:getting-started:index.adoc[].
+
+Continue reading to learn how to get started with {product_name} and Apache Flink.
+
 * xref:flink/connect.adoc[]
 * xref:flink/create.adoc[]
 * xref:flink/manage.adoc[]
+

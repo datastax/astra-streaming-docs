@@ -1,5 +1,39 @@
 = Manage Flink jobs
 
+[NOTE]
+====
+This guide is part of a series for building streaming applications with {product_name} and Apache Flink. The other guides in the series are:
+
+* xref:flink/index.adoc[]
+* xref:flink/connect.adoc[]
+* xref:flink/create.adoc[]
+====
+
+== List current Flink jobs
+Issue a GET request for a list of your current Flink jobs:
++
+[tabs]
+====
+Curl::
++
+--
+[source,bash]
+----
+curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer $TOKEN" "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+[]%  //empty array
+----
+--
+====
+
 == Check a Flink job's status
 Issue a GET request to `https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT/$JOB_NAME`:
 [tabs]
@@ -9,7 +43,8 @@ Curl::
 --
 [source,bash]
 ----
-curl -v -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" $ENDPOINT/$JOB_NAME
+curl -v -H "Content-Type: application/json" \
+-H "Authorization: Bearer $TOKEN" $ENDPOINT/$JOB_NAME
 ----
 --
 
@@ -58,7 +93,8 @@ Curl::
 [source,bash]
 ----
 endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
-curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
+curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
 ----
 --
 
@@ -81,7 +117,8 @@ Curl::
 [source,bash]
 ----
 endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
-curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
+curl -H "Content-Type: application/json" \
+-H "Authorization: Bearer $TOKEN" $ENDPOINT/logs/$TENANT/$JOB_NAME/jobmanager?tail=true
 ----
 --
 
@@ -106,7 +143,8 @@ Curl::
 [source,bash]
 ----
 endpoint=https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/
-curl -v -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X DELETE $ENDPOINT/$JOB_NAME
+curl -v -H "Content-Type: application/json" \
+-H "Authorization: Bearer $TOKEN" -X DELETE $ENDPOINT/$JOB_NAME
 ----
 --
 

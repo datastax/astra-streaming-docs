@@ -1,5 +1,14 @@
 = Create a Flink job
 
+[NOTE]
+====
+This guide is part of a series for building streaming applications with {product_name} and Apache Flink. The other guides in the series are:
+
+* xref:flink/index.adoc[]
+* xref:flink/connect.adoc[]
+* xref:flink/manage.adoc[]
+====
+
 A Flink *job* is a collection of one or more Flink applications that are submitted to a Flink cluster for execution. In a Flink job, data is typically ingested from various sources such as Kafka, HDFS, or databases. The data is then processed using Flink's high-level APIs or low-level operators, which provide a wide range of transformations and operations for data manipulation, filtering, aggregation, and analytics.
 
 Overall, a Flink job enables you to process and analyze large-scale data sets efficiently, with low-latency and high throughput, making it suitable for various use cases such as real-time analytics, event-driven applications, data pipelines, and ETL (Extract, Transform, Load) processes.
@@ -12,7 +21,10 @@ It is VERY important that on the Pulsar side (in {product_name}, in this case) y
 +
 [source,bash]
 ----
-PULSAR_CLIENT_CONF=$PULSAR_HOME/conf/clienf.conf
+TOKEN=AstraCS:xxxx
+TENANT=flink-tenant
+PULSAR_TOKEN=eyXXXX
+ENDPOINT="https://pulsar-aws-useast2.api.dev.streaming.datastax.com/flink/api/jobs/$TENANT"
 INPUT_TOPIC=flink-tenant/flink/persons
 OUTPUT_TOPIC=flink-tenant/flink/persons-output
 PULSAR_HOME=$(pwd)
@@ -25,7 +37,7 @@ $ADMINCMD topics create-partitioned-topic -p 2 $OUTPUT_TOPIC
 ----
 
 . Produce data to set a JSON schema on the "persons" (`$INPUT_TOPIC`) and "persons-output" (`$OUTPUT_TOPIC`) topics.
-First, we'll produce messages to the "persons" (`$INPUT_TOPIC`) topic:
+First, we'll produce messages to the "persons" (`$INPUT_TOPIC`) topic with the Pulsar client CLI:
 +
 [tabs]
 ====
@@ -34,7 +46,10 @@ Curl::
 --
 [source,bash]
 ----
-$CLIENTCMD produce -k family-1 -m "{\"name\":\"giovanni\"}","{\"name\":\"enrico\"}","{\"name\":\"giovanni\"}" -vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}'  $INPUT_TOPIC
+$CLIENTCMD produce \
+-k family-1 \
+-m "{\"name\":\"giovanni\"}","{\"name\":\"enrico\"}","{\"name\":\"giovanni\"}" \
+-vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}' $INPUT_TOPIC
 ----
 --
 
@@ -44,12 +59,12 @@ Result::
 [source,bash]
 ----
 ...
-2023-05-24T17:35:21,391-0400 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 3 messages successfully produced
+org.apache.pulsar.client.cli.PulsarClientTool - 3 messages successfully produced
 ----
 --
 ====
 +
-.. We produced three messages with JSON schema to the "persons" (`$INPUT_TOPIC) topic. Let's confirm our schema looks as expected:
+.. We produced three messages with JSON schema to the "persons" (`$INPUT_TOPIC) topic. Let's confirm our schema looks as expected with the Pulsar admin CLI:
 +
 [tabs]
 ====
@@ -91,7 +106,7 @@ Result::
 --
 ====
 
-.. Now, we'll produce messages to the "persons-output" (`$OUTPUT_TOPIC`) topic:
+.. Now, we'll produce messages to the "persons-output" (`$OUTPUT_TOPIC`) topic with the Pulsar client CLI:
 +
 [tabs]
 ====
@@ -100,7 +115,9 @@ Curl::
 --
 [source,bash]
 ----
-$CLIENTCMD produce -m "{\"name\":\"init\"}" -vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}' $OUTPUT_TOPIC
+$CLIENTCMD produce \
+-m "{\"name\":\"init\"}" \
+-vs 'json:{"type": "record","namespace":"com.example","name":"Person","fields":[{"name":"name","type":"string"}]}' $OUTPUT_TOPIC
 ----
 --
 
@@ -110,12 +127,12 @@ Result::
 [source,bash]
 ----
 ...
-2023-05-24T17:55:34,707-0400 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
+org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
 ----
 --
 ====
 +
-.. We produced a message with JSON schema to the "persons-output" (`$OUTPUT_TOPIC) topic. Let's confirm our schema looks as expected:
+.. We produced a message with JSON schema to the "persons-output" (`$OUTPUT_TOPIC) topic. Let's confirm our schema looks as expected with the Pulsar admin CLI:
 +
 [tabs]
 ====
@@ -173,6 +190,8 @@ The JSON payload contains the definition of the Flink job:
 * specifying the output table (`"outputTable": "output"`)
 * specifies the query (`"selectQuery": "select input.name from flink.input as input"`)
 
+This query tells Flink to watch the input.name column on the flink.input table for new data, and when new data is written, to write that data to the output table.
+
 The POST request to the jobs/$tenant endpoint creates the actual Flink job.
 [tabs]
 ====
@@ -212,12 +231,5 @@ Result::
 --
 ====
 
-Nice, you've created a Flink job! Next we'll check its status, view its logs, and delete it.
-
-== What's next?
-
-* xref:flink/manage.adoc[]
-* xref:flink/connect.adoc[]
-* xref:flink/create.adoc[]
-* xref:flink/index.adoc[]
+Nice, you've created a Flink job! Next we'll check its status, view its logs, and manage it in xref:flink/manage.adoc[].
 
