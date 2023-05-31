@@ -16,4 +16,4 @@
 ** xref:api.adoc[]
 
 * xref:streaming-learning:pulsar-io:connectors/index.adoc[IO Connectors]
-* xref:operations:astream-release-notes.adoc[]
+* xref:operations:astream-release-notes.adoc[Changelog]
