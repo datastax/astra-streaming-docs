@@ -5,6 +5,14 @@
 
 The {product_name} changelog provides information about new and improved features, known and resolved issues, and bug fixes.
 
+== 1 June 2023
+
+Added new {product_name} region:
+
+* AWS - eu-west-1 (Dublin, Ireland)
+
+For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+
 == 16 May 2023
 
 Added new {product_name} regions:
