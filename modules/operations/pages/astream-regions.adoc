@@ -22,8 +22,8 @@ Here are the regions {product_name} supports:
 | eu-central-1
 | Frankfurt, Germany
 
-// | eu-west-1
-// | Dublin, Ireland
+| eu-west-1
+| Dublin, Ireland
 
 | us-east-1
 | Northern Virginia, US
