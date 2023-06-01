@@ -1,0 +1,87 @@
+= GPT Schema Translator
+
+[NOTE]
+====
+The GPT Schema Translator is currently only available for the Astra DB Sink Connector.
+====
+
+== Overview
+
+Systems within streaming pipelines typically use different approaches for schema representations and data type definitions. This requires schemas within a pipeline to be mapped to each other, a process which is complicated, tedious, and error-prone.
+
+The GPT-based schema translator uses generative AI to automatically generate schema mappings from Astra Streaming (Pulsar topics) to the Astra DB sink connector (CQL tables).
+In Astra Streaming, schemas are associated with a Pulsar topic, and represented in either JSON or Avro.
+Astra DB represents schemas in CQL.
+
+The GPT-based schema translator will suggest a mapping from the schema in the Pulsar topic to the schema in the Astra DB table, using the domain-specific language (DSL) specified by the Astra DB Sink Connector.
+
+== Usage
+
+To use the GPT-based schema translator, create an AstraDB sink connector as you usually would. (If you're unsure about this, see the xref:streaming-learning-docs:pulsar-io:sinks/astra-db.adoc[Astra DB Sink Connector documentation].) Then, use the GPT-based schema translator to generate a schema mapping for the connector.
+
+Here are few examples to get started:
+
+* <<pulsar-topic-to-cql-table,>>
+* <<cql-table-to-avro,>>
+
+This example will provide a schema mapping for the Astra sink connector to get streaming data from Astra Streaming and write this data to an Astra DB table.
+
+[#pulsar-topic-to-cql-table]
+== Pulsar topic to CQL table
+Produce a mapping between a Pulsar Topic Schema and a Cassandra Table Schema.
+Build the payload for the request:
+[tabs]
+====
+CQL::
++
+--
+[source,cql]
+----
+payload = {
+    "context": "",
+    "topic_schema": example_schemas["pulsar_topic_schemas"]["person"],
+    "table_schema": example_schemas["cassandra_table_schemas"]["person"]
+}
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+result
+----
+--
+====
+
+
+
+[#cql-table-to-avro]
+== CQL table to AVRO
+Given a Cassandra Table Schema, output an AVRO or JSON schema and mapping.
+Build the payload for the request:
+[tabs]
+====
+CQL::
++
+--
+[source,cql]
+----
+payload = {
+    "context": "",
+    "table_schema": example_schemas["cassandra_table_schemas"]["click_stream"],
+    "output_type": "JSON"
+}
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+result
+----
+--
+====
