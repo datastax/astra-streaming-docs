@@ -23,12 +23,13 @@ Here are few examples to get started:
 
 * <<pulsar-topic-to-cql-table,>>
 * <<cql-table-to-avro,>>
+* <<no-schema,>>
 
 This example will provide a schema mapping for the Astra sink connector to get streaming data from Astra Streaming and write this data to an Astra DB table.
 
 [#pulsar-topic-to-cql-table]
 == Pulsar topic to CQL table
-Produce a mapping between a Pulsar Topic Schema and a Cassandra Table Schema.
+This example will produce a mapping between a Pulsar Topic Schema and a Cassandra Table Schema.
 Build the payload for the request:
 [tabs]
 ====
@@ -59,8 +60,35 @@ result
 
 [#cql-table-to-avro]
 == CQL table to AVRO
-Given a Cassandra Table Schema, output an AVRO or JSON schema and mapping.
+Given a Cassandra Table Schema, this example will output an AVRO or JSON schema and mapping.
 Build the payload for the request:
+[tabs]
+====
+CQL::
++
+--
+[source,cql]
+----
+payload = {
+    "context": "",
+    "table_schema": example_schemas["cassandra_table_schemas"]["click_stream"],
+    "output_type": "JSON"
+}
+----
+--
+
+Result::
++
+--
+[source,bash]
+----
+result
+----
+--
+====
+
+== No schema
+Even with no schema declared, the GPT-based schema translator can still provide a schema mapping.
 [tabs]
 ====
 CQL::
