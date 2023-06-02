@@ -30,19 +30,282 @@ This example will provide a schema mapping for the Astra sink connector to get s
 [#pulsar-topic-to-cql-table]
 == Pulsar topic to CQL table
 This example will produce a mapping between a Pulsar Topic Schema and a Cassandra Table Schema.
-Build the payload for the request:
+When schemas are available to the GPT-based schema translator, the button prompt will change to notify you to generate a mapping between the two schemas.
++
+image::two-schemas.png[]
++
 [tabs]
 ====
-CQL::
+Pulsar Topic Schema::
 +
 --
-[source,cql]
+[source,]
 ----
-payload = {
-    "context": "",
-    "topic_schema": example_schemas["pulsar_topic_schemas"]["person"],
-    "table_schema": example_schemas["cassandra_table_schemas"]["person"]
-}
+ "pulsar_topic_schemas": {
+        "person": {
+            "type": "record",
+            "name": "Person",
+            "namespace": "org.apache.pulsar.io.datagenerator",
+            "fields": [
+              {
+                "name": "address",
+                "type": [
+                  "null",
+                  {
+                    "type": "record",
+                    "name": "Address",
+                    "namespace": "org.apache.pulsar.io.datagenerator.Person",
+                    "fields": [
+                      {
+                        "name": "apartmentNumber",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      },
+                      {
+                        "name": "city",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      },
+                      {
+                        "name": "postalCode",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      },
+                      {
+                        "name": "street",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      },
+                      {
+                        "name": "streetNumber",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      }
+                    ]
+                  }
+                ],
+                "default": null
+              },
+              {
+                "name": "age",
+                "type": [
+                  "null",
+                  "int"
+                ],
+                "default": null
+              },
+              {
+                "name": "company",
+                "type": [
+                  "null",
+                  {
+                    "type": "record",
+                    "name": "Company",
+                    "namespace": "org.apache.pulsar.io.datagenerator.Person",
+                    "fields": [
+                      {
+                        "name": "domain",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      },
+                      {
+                        "name": "email",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      },
+                      {
+                        "name": "name",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      },
+                      {
+                        "name": "vatIdentificationNumber",
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "default": null
+                      }
+                    ]
+                  }
+                ],
+                "default": null
+              },
+              {
+                "name": "companyEmail",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "dateOfBirth",
+                "type": {
+                  "type": "long",
+                  "logicalType": "timestamp-millis"
+                }
+              },
+              {
+                "name": "email",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "firstName",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "lastName",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "middleName",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "nationalIdentificationNumber",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "nationalIdentityCardNumber",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "passportNumber",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "password",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "sex",
+                "type": [
+                  "null",
+                  {
+                    "type": "enum",
+                    "name": "Sex",
+                    "namespace": "org.apache.pulsar.io.datagenerator.Person",
+                    "symbols": [
+                      "MALE",
+                      "FEMALE"
+                    ]
+                  }
+                ],
+                "default": null
+              },
+              {
+                "name": "telephoneNumber",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              },
+              {
+                "name": "username",
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "default": null
+              }
+            ]
+          },
+----
+--
+
+CQL Schema::
++
+--
+[source,]
+----
+"cassandra_table_schemas": {
+        "person": {
+            "primaryKey": {
+              "partitionKey": [
+                "passportnumber"
+              ]
+            },
+            "columnDefinitions": [
+              {
+                "name": "passportnumber",
+                "typeDefinition": "text",
+                "static": false
+              },
+              {
+                "name": "age",
+                "typeDefinition": "varint",
+                "static": false
+              },
+              {
+                "name": "firstname",
+                "typeDefinition": "text",
+                "static": false
+              },
+              {
+                "name": "lastname",
+                "typeDefinition": "text",
+                "static": false
+              }
+            ]
+          },
 ----
 --
 
@@ -51,16 +314,14 @@ Result::
 --
 [source,bash]
 ----
-result
+passportnumber=value.passportNumber, age=value.age, firstname=value.firstName, lastname=value.lastName
 ----
 --
 ====
 
-
-
 [#cql-table-to-avro]
 == CQL table to AVRO
-Given a Cassandra Table Schema, this example will output an AVRO or JSON schema and mapping.
+Given a Cassandra table schema, this example will output an AVRO or JSON schema and mapping.
 Build the payload for the request:
 [tabs]
 ====
@@ -80,7 +341,7 @@ payload = {
 Result::
 +
 --
-[source,bash]
+[source,json]
 ----
 result
 ----
@@ -88,18 +349,43 @@ result
 ====
 
 == No schema
-Even with no schema declared, the GPT-based schema translator can still provide a schema mapping.
+Even with no schema declared, the GPT-based schema translator can still provide a schema mapping that mirrors the values of your table schema. +
+For example, starting with this schema on a CQL table:
 [tabs]
 ====
-CQL::
+CQL Table::
 +
 --
 [source,cql]
 ----
-payload = {
-    "context": "",
-    "table_schema": example_schemas["cassandra_table_schemas"]["click_stream"],
-    "output_type": "JSON"
+{
+  "primaryKey": {
+    "partitionKey": [
+      "passportnumber"
+    ]
+  },
+  "columnDefinitions": [
+    {
+      "name": "passportnumber",
+      "typeDefinition": "text",
+      "static": false
+    },
+    {
+      "name": "age",
+      "typeDefinition": "varint",
+      "static": false
+    },
+    {
+      "name": "firstname",
+      "typeDefinition": "text",
+      "static": false
+    },
+    {
+      "name": "lastname",
+      "typeDefinition": "text",
+      "static": false
+    }
+  ]
 }
 ----
 --
@@ -109,7 +395,43 @@ Result::
 --
 [source,bash]
 ----
-result
+passportnumber=value.passportnumber, age=value.age, firstname=value.firstname, lastname=value.lastname
 ----
 --
 ====
+
+// this is the schema from the cql table
+[source,cql]
+----
+{
+  "primaryKey": {
+    "partitionKey": [
+      "passportnumber"
+    ]
+  },
+  "columnDefinitions": [
+    {
+      "name": "passportnumber",
+      "typeDefinition": "text",
+      "static": false
+    },
+    {
+      "name": "age",
+      "typeDefinition": "varint",
+      "static": false
+    },
+    {
+      "name": "firstname",
+      "typeDefinition": "text",
+      "static": false
+    },
+    {
+      "name": "lastname",
+      "typeDefinition": "text",
+      "static": false
+    }
+  ]
+}
+----
+== What's next?
+
