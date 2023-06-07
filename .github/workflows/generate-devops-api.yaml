@@ -1,0 +1,60 @@
+name: Generate API References
+
+on:
+  workflow_dispatch:
+    inputs:
+      clientsRepoRef:
+        description: 'What (ref) branch to use for the DevOps API spec'
+        required: true
+        type: string
+        default: 'main'
+
+      clientsRepo:
+        description: 'What repo to use for the DevOps API spec'
+        required: true
+        type: string
+        default: 'datastax/astra-streaming-clients'
+
+jobs:
+  Generate-Specs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs
+        uses: actions/checkout@v2
+        with:
+          path: docs
+
+      - name: Checkout Astra Streaming Clients
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.inputs.clientsRepo }}
+          ref: ${{ github.event.inputs.clientsRepoRef }}
+          path: astra-streaming-clients
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install redocly
+        run: npm i -g @redocly/cli@latest
+
+      - name: Generate DevOps API docs
+        run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output modules/apis/pages/devops.html
+
+      - name: Generate Pulsar Admin API docs
+        run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output modules/apis/pages/pulsar-admin.html
+
+      - name: Create random string
+        run: echo RANDOM_STR=$(date +%s) >> $GITHUB_ENV
+
+      - name: Add, Commit, and Push
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: docs
+          author_name: "DataStax Docs Bot"
+          author_email: "docsbot@datastax.com"
+          new_branch: generated-api-docs-${{ env.RANDOM_STR }}
+          message: 'Automated generation of DevOps API docs'
+          push: true
