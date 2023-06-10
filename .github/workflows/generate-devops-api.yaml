@@ -30,7 +30,7 @@ jobs:
           repository: ${{ github.event.inputs.clientsRepo }}
           ref: ${{ github.event.inputs.clientsRepoRef }}
           path: astra-streaming-clients
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DATASTAX_GH_TOKEN }}
 
       - name: Install Node.js
         uses: actions/setup-node@v2
@@ -41,9 +41,11 @@ jobs:
         run: npm i -g @redocly/cli@latest
 
       - name: Generate DevOps API docs
+        continue-on-error: false
         run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output docs/modules/apis/pages/devops.html
 
       - name: Generate Pulsar Admin API docs
+        continue-on-error: false
         run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output docs/modules/apis/pages/pulsar-admin.html
 
       - name: Create random string
