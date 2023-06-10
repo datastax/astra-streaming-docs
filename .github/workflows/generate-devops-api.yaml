@@ -41,10 +41,10 @@ jobs:
         run: npm i -g @redocly/cli@latest
 
       - name: Generate DevOps API docs
-        run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output modules/apis/pages/devops.html
+        run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output docs/modules/apis/pages/devops.html
 
       - name: Generate Pulsar Admin API docs
-        run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output modules/apis/pages/pulsar-admin.html
+        run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output docs/modules/apis/pages/pulsar-admin.html
 
       - name: Create random string
         run: echo RANDOM_STR=$(date +%s) >> $GITHUB_ENV
