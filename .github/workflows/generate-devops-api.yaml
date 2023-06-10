@@ -42,11 +42,11 @@ jobs:
 
       - name: Generate DevOps API docs
         continue-on-error: false
-        run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output docs/modules/apis/pages/devops.html
+        run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output docs/modules/apis/attachments/devops.html
 
       - name: Generate Pulsar Admin API docs
         continue-on-error: false
-        run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output docs/modules/apis/pages/pulsar-admin.html
+        run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output docs/modules/apis/attachments/pulsar-admin.html
 
       - name: Create random string
         run: echo RANDOM_STR=$(date +%s) >> $GITHUB_ENV
