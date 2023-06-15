@@ -495,11 +495,6 @@ Notice that the `firstname` value becomes `firstName` because the Pulsar topic A
 == No schema on Pulsar topic
 Even with no schema declared in the Pulsar topic, the {gpt-schema-translator} can still provide a schema mapping that mirrors the values of your table schema. +
 For example, starting with this schema on a CQL table:
-[tabs]
-====
-CQL Table::
-+
---
 [source,cql]
 ----
 {
@@ -532,7 +527,6 @@ CQL Table::
   ]
 }
 ----
---
 
 The translator will notice you have no schema available in your topic, but that you have an available schema in your CQL table.
 The button prompt will change to "Generate Mapping" to let you know you can create a topic schema.
