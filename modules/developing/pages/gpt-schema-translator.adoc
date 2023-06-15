@@ -197,7 +197,7 @@ Great! Now, once your connector is created, messages will flow smoothly between 
 
 [#pulsar-topic-to-cql-table]
 == Pulsar topic with an AVRO schema to Cassandra table
-This example will produce a mapping between a Pulsar Topic in AVRO schema (JSON object) and a Cassandra table CQL schema.
+This example will produce a mapping between a Pulsar Topic in AVRO schema and a Cassandra table schema.
 Avro schema definitions are JSON records, so this example isn't radically different from the first, but this time, we'll use the DataGenerator source connector to generate data for the Pulsar topic, the Astra DB sink connector to write data to the Cassandra table, and the {gpt-schema-translator} to generate a schema mapping between the two as the messages are processed.
 
 * For more on creating the AstraDB sink connector, see the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[Astra DB Sink Connector documentation].
