@@ -193,7 +193,7 @@ id=key, file1=value.file1, file2=value.file2, file3=value.file3
 --
 ====
 
-Great! Now, once your connector is created, messages will flow smoothly between the two different schemas. Check in your {astra-ui} logs to see the data flowing into your table with no pesky error messages.
+Great! Now, once your connector is created, messages will flow smoothly between the two different schemas. Check in your {astra_ui} logs to see the data flowing into your table with no pesky error messages.
 
 [#pulsar-topic-to-cql-table]
 == Pulsar topic (AVRO) to CQL table
@@ -541,8 +541,6 @@ Click on this button to generate a schema for the Pulsar topic:
 ----
 passportnumber=value.passportnumber, age=value.age, firstname=value.firstname, lastname=value.lastname
 ----
---
-====
 
 == What's next?
 
