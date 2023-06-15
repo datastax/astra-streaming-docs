@@ -87,7 +87,7 @@ Pulsar JSON schema::
 --
 ====
 
-Now, imagine you want to sink this data onward to Elasticsearch, or to a Kafka topic - you must define a new schema mapping for each of these destinations! And as you add more complex data types like maps and nested data structures, schema management becomes more difficult. Schema management is tedious work that requires understanding rules across various domains and translating between them, but it is trivial work for the GPT-4 AI model.
+As you add more complex data types like maps and nested data structures, schema management becomes more difficult. Schema management is tedious work that requires understanding rules across various domains and translating between them, but it is trivial work for the GPT-4 AI model.
 
 The {gpt-schema-translator} uses generative AI to automatically generate schema mappings between Astra Streaming (Pulsar topics) and the Astra DB sink connector (Cassandra tables).
 
@@ -197,8 +197,8 @@ Great! Now, once your connector is created, messages will flow smoothly between 
 
 [#pulsar-topic-to-cql-table]
 == Pulsar topic with an AVRO schema to Cassandra table
-This example will produce a mapping between a Pulsar Topic in AVRO schema and a Cassandra table CQL schema.
-In this case, we'll use the DataGenerator source connector to generate data for the Pulsar topic, the Astra DB sink connector to write data to the Cassandra table, and the {gpt-schema-translator} to generate a schema mapping between the two.
+This example will produce a mapping between a Pulsar Topic in AVRO schema (JSON object) and a Cassandra table CQL schema.
+Avro schema definitions are JSON records, so this example isn't radically different from the first, but this time, we'll use the DataGenerator source connector to generate data for the Pulsar topic, the Astra DB sink connector to write data to the Cassandra table, and the {gpt-schema-translator} to generate a schema mapping between the two as the messages are processed.
 
 * For more on creating the AstraDB sink connector, see the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[Astra DB Sink Connector documentation].
 * For more on creating the DataGenerator source connector, see the xref:streaming-learning:pulsar-io:connectors/sources/data-generator.adoc[DataGenerator Connector documentation].
@@ -490,10 +490,10 @@ GPT examines the schemas and generates a mapping. The mapping is displayed in th
 passportnumber=value.passportNumber, age=value.age, firstname=value.firstName, lastname=value.lastName
 ----
 
-Notice that the `firstname` value becomes `firstName` because the Pulsar topic AVRO schema supersedes the Cassandra table schema.
+Notice that the `firstname` value becomes `firstName` because the Pulsar topic JSON schema supersedes the Cassandra table schema.
 
 == No schema on Pulsar topic
-Even with no schema declared in the Pulsar topic, the {gpt-schema-translator} can provide a schema mapping that mirrors the values of your Cassandra table schema. +
+Even with no schema declared in the Pulsar topic, the schema translator will still provide a schema mapping that mirrors the values of your Cassandra table schema, without using GPT. +
 For example, starting with this schema on a Cassandra table:
 [source,cql]
 ----
