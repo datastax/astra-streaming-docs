@@ -1,5 +1,6 @@
 * xref:astream-georeplication.adoc[Operations]
 ** xref:astream-georeplication.adoc[]
+** xref:gpt-schema-translator.adoc[]
 ** xref:astream-limits.adoc[]
 ** xref:astream-pricing.adoc[]
 ** xref:astream-regions.adoc[]
