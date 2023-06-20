@@ -50,8 +50,8 @@ Here are the regions {product_name} supports:
 // | eastus2
 // | Virginia, US
 
-// | westeurope
-// | Amsterdam, Netherlands
+| westeurope
+| Amsterdam, Netherlands
 
 | westus2
 | Washington (state), US
