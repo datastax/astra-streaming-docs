@@ -5,7 +5,7 @@
 
 The {product_name} changelog provides information about new and improved features, known and resolved issues, and bug fixes.
 
-== June 20 2023
+== 20 June 2023
 
 Added new {product_name} region:
 
