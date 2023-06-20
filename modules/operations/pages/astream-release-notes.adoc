@@ -5,6 +5,14 @@
 
 The {product_name} changelog provides information about new and improved features, known and resolved issues, and bug fixes.
 
+== June 20 2023
+
+Added new {product_name} region:
+
+* Azure - westeurope (Amsterdam, Netherlands)
+
+For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+
 == 1 June 2023
 
 Added new {product_name} region:
