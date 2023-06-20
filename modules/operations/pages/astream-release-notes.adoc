@@ -13,6 +13,10 @@ Added new {product_name} region:
 
 For more, see xref:operations:astream-regions.adoc[{product_name} regions].
 
+== 15 June 2023
+
+The xref:developing:gpt-schema-translator.adoc[GPT schema translator] is now available for the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[Astra DB Sink Connector], with support for additional connectors to come.
+
 == 1 June 2023
 
 Added new {product_name} region:
