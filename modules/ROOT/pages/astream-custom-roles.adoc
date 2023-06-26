@@ -3,7 +3,7 @@
 :page-aliases: docs@astra-streaming::astream-custom-roles.adoc
 :page-tag: astra-streaming,security,secure,pulsar
 
-Within *Organization Settings* > *User Management*, you can see the permissions for a specific role by hovering over the number in the *Roles* column of the table. This will show the permissions granted to the role.
+Within *Settings* > *Users*, you can see the permissions for a specific role by hovering over the number in the *Roles* column of the table. This will show the permissions granted to the role.
 
 image::ROOT:astream-roles.png[]
 
@@ -18,7 +18,7 @@ You can also create custom roles using the DevOps API.
 
 . From any page in https://astra.datastax.com[{product_name}], select the *Organizations* dropdown.
 . In the main dropdown, select the organization for which you want to add your custom role.
-. From your Organization page, select *Role Management*.
+. From *Settings* page, select *Roles*.
 . Select *Add Custom Role*.
 . Enter the name you want to use for your custom role. This name should help you easily identify when you want to assign this role to users.
 . Select the Organization, Keyspace, Table, and API permissions you want to assign to your custom role. 
@@ -35,9 +35,9 @@ To see your custom roles, select *Role Management* within your Organization. You
 
 == Edit user roles
 
-. From your Organization page, select *Role Management*.
+. From *Settings* page, select *Roles*.
 . Select *Edit Role* from the overflow menu for the custom role you want to update.
 . When editing the role, you can edit the name, permissions, database, and keyspace.
 . Once you have updated your permissions, select *Edit Role*.
 
-Your updated custom role will show up in *Role Management* within your Organization.
+Your updated custom role will show up in *Roles* within your Organization.
