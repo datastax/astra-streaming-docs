@@ -16,9 +16,9 @@ If the default roles don't meet your requirements, you can use custom roles that
 You can also create custom roles using the DevOps API.
 ====
 
-. From any page in https://astra.datastax.com[{product_name}], select the *Organizations* dropdown.
-. In the main dropdown, select the organization for which you want to add your custom role.
 . From your Organization page, select *Role Management*.
+. In the main dropdown, select the organization for which you want to add your custom role.
+. From *Settings* page, select *Roles*.
 . Select *Add Custom Role*.
 . Enter the name you want to use for your custom role. This name should help you easily identify when you want to assign this role to users.
 . Select the Organization, Keyspace, Table, and API permissions you want to assign to your custom role. 
