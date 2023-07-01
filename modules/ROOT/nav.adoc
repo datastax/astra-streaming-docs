@@ -11,9 +11,5 @@
 *** xref:astream-subscriptions-failover.adoc[Failover]
 *** xref:astream-subscriptions-keyshared.adoc[Key_shared]
 
-* xref:api.adoc[API Docs]
-** xref:astream-use-devops.adoc[]
-** xref:api.adoc[]
-
 * xref:streaming-learning:pulsar-io:connectors/index.adoc[IO Connectors]
 * xref:operations:astream-release-notes.adoc[Changelog]

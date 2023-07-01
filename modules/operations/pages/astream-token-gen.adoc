@@ -2,7 +2,7 @@
 
 There are *two* different tokens within Astra - the *Astra token* and the *Astra Streaming Pulsar token*.
 
-The <<astra-token, Astra token>> is used for authentication within {astra_ui} and the xref:ROOT:astream-use-devops.adoc[DevOps API].
+The <<astra-token, Astra token>> is used for authentication within {astra_ui} and the xref:apis:index.adoc[DevOps API].
 
 The <<pulsar-token, Pulsar token>> is a native Pulsar JSON Web Token (JWT) token that controls authentication to the Pulsar cluster.
 
