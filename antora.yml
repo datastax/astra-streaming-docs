@@ -38,3 +38,4 @@ nav:
   - modules/developing/nav.adoc
   - modules/operations/nav.adoc
   - modules/ROOT/nav.adoc
+  - modules/apis/nav.adoc

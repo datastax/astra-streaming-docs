@@ -46,4 +46,4 @@ For details about about the {product_name} limits, see xref:operations:astream-l
 == What's next?
 
 * Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.
-* Browse the xref:api.adoc[{product_name} API References].
+* Browse the xref:apis:index.adoc[{product_name} API References].

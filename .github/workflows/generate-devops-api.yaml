@@ -42,11 +42,11 @@ jobs:
 
       - name: Generate DevOps API docs
         continue-on-error: false
-        run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output docs/modules/apis/pages/devops.html
+        run: redocly build-docs astra-streaming-clients/specs/devops/swagger.yaml --output docs/modules/apis/attachments/devops.html
 
       - name: Generate Pulsar Admin API docs
         continue-on-error: false
-        run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output docs/modules/apis/pages/pulsar-admin.html
+        run: redocly build-docs astra-streaming-clients/specs/pulsar-admin/swagger.yaml --output docs/modules/apis/attachments/pulsar-admin.html
 
       - name: Create random string
         run: echo RANDOM_STR=$(date +%s) >> $GITHUB_ENV
@@ -54,9 +54,10 @@ jobs:
       - name: Add, Commit, and Push
         uses: EndBug/add-and-commit@v9
         with:
-          add: docs
-          author_name: "DataStax Docs Bot"
-          author_email: "docsbot@datastax.com"
+          cwd: ./docs
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
           new_branch: generated-api-docs-${{ env.RANDOM_STR }}
-          message: 'Automated generation of DevOps API docs'
+          message: 'Automated generation of API docs'
           push: true
+          

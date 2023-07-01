@@ -46,4 +46,4 @@ A *sink* feeds data from {product_name} to an external system, such as Cassandra
 == Next
 
 * xref:getting-started:index.adoc[Getting started with Astra Streaming]
-* Browse the xref:api.adoc[Astra API References]
+* Browse the xref:apis:index.adoc[]
