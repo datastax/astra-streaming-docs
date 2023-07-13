@@ -4,9 +4,9 @@
 
 A key feature of Apache Pulsar™ is how it handles geo-replication. While other pub-sub messaging systems require additional processes to mirror messages between data centers, Pulsar has multi-datacenter replication as an integrated feature.
 
-Pulsar's serving layer (brokers) and storage layer (bookies) are decoupled in Pulsar architecture, allowing seamless message replication across data centers in different regions. 
+Pulsar's serving layer (brokers) and storage layer (bookies) are decoupled in Pulsar architecture, allowing seamless message replication across data centers in different regions.
 
-Geo-replication typically provides redundancy in the event of datacenter outages, but can also be used for any application where Pulsar messages are produced and consumed across regions. 
+Geo-replication typically provides redundancy in the event of datacenter outages, but can also be used for any application where Pulsar messages are produced and consumed across regions.
 
 This doc provides:
 
@@ -22,51 +22,54 @@ If you're already familiar with Pulsar's messaging replication and asynchronous 
 [#overview]
 == Overview of message replication in Pulsar
 
-In Pulsar, cross-cluster message replication can be implemented with *synchronous* or *asynchronous* message replication, and with or without a global configuration store in ZooKeeper. 
+In Pulsar, cross-cluster message replication can be implemented with *synchronous* or *asynchronous* message replication, and with or without a global configuration store in ZooKeeper.
 
 {product_name} only supports *asynchronous* geo-replication without a global configuration store. This approach offers better performance and lower latency.
 
-In asynchronous geo-replication, each region has its own local Pulsar cluster. Messages published in a cluster of one region are automatically replicated asynchronously to remote clusters in other regions. This is achieved through Pulsar’s built-in geo-replication capability. 
+In asynchronous geo-replication, each region has its own local Pulsar cluster. Messages published in a cluster of one region are automatically replicated asynchronously to remote clusters in other regions. This is achieved through Pulsar’s built-in geo-replication capability.
 
 [#async]
 == Asynchronous geo-replication overview
 
-{product_name} only supports *asynchronous* geo-replication without a global configuration store. 
+{product_name} only supports *asynchronous* geo-replication without a global configuration store.
 
-An *asynchronous* geo-replication cluster consists of two or more independent Pulsar clusters running in different regions. 
+An *asynchronous* geo-replication cluster consists of two or more independent Pulsar clusters running in different regions.
 
-Each Pulsar cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another. 
+Each Pulsar cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
 
-When messages are produced on a Pulsar topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters. 
+When messages are produced on a Pulsar topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters.
 
-The message producer doesn't wait for confirmation from multiple Pulsar clusters. The producer receives a response immediately after the nearest cluster successfully persists the data. The data is then asynchronously replicated to the other Pulsar clusters in the background. 
+The message producer doesn't wait for confirmation from multiple Pulsar clusters. The producer receives a response immediately after the nearest cluster successfully persists the data. The data is then asynchronously replicated to the other Pulsar clusters in the background.
 
 To set up asynchronous geo-replication in {product_name}, see xref:astream-georeplication.adoc#astra-ui[].
 
 [#astra-ui]
 == Enable geo-replication in Astra Streaming
 
-Asynchronous geo-replication is enabled on a per-tenant basis and managed at the namespace level. 
+Asynchronous geo-replication is enabled on a per-tenant basis and managed at the namespace level.
 
-This means you can enable asynchronous geo-replication on topics where it is needed, while controlling which datasets are replicated by namespace. 
+This means you can enable asynchronous geo-replication on topics where it is needed, while controlling which datasets are replicated by namespace.
 
-To enable geo-replication in {product_name}, follow these steps: 
+To enable geo-replication in {product_name}, follow these steps:
 
-. In your {product_name} tenant, select **Namespaces and Topics** to list your tenant's current namespaces and topics. 
+. In your {product_name} tenant, select **Namespaces and Topics** to list your tenant's current namespaces and topics.
 
-. Select **Modify namespace** in the namespace you want to replicate *from*. 
+. Select **Modify namespace** in the namespace you want to replicate *from*.
 
-. Select Replication, and select **Add Region**. 
-
+. Select Replication, and select **Add Region**.
+[NOTE]
+====
+Before the next step, ensure you've created
+====
 . Select the **Cloud Provider** and **Region** you want to replicate *to*, and select **Create Replication**.
 
 . The new replication is created:
 
-* A new streaming tenant is replicated in the selected region and provider. 
+* A new streaming tenant is replicated in the selected region and provider.
 
-* The new replication's *Provider*, *Region*, and *Replication Direction* are listed in **Namespace Replication*. 
+* The new replication's *Provider*, *Region*, and *Replication Direction* are listed in **Namespace Replication*.
 
-* The **Replication direction** value can be **Replicate to**, **Replicate from**, or **Bidirectional**. 
+* The **Replication direction** value can be **Replicate to**, **Replicate from**, or **Bidirectional**.
 
 To control retention, backlog, and schema policies, visit the **Settings** tab.
 
@@ -76,7 +79,7 @@ To disable replication on a namespace, select **Disable Replication**.
 == Test georeplicated clusters
 
 . Verify your user token can access tenant metadata. +
-`allowedClusters` lists the clusters the tenant can be replicated to. 
+`allowedClusters` lists the clusters the tenant can be replicated to.
 +
 [tabs]
 ====
@@ -126,7 +129,7 @@ pulsar-aws-useast2-staging
 --
 ====
 
-. Create a Pulsar consumer with a subscription to the `<my-tenant>/<my-namespace>/<my-topic>` topic: 
+. Create a Pulsar consumer with a subscription to the `<my-tenant>/<my-namespace>/<my-topic>` topic:
 +
 [source,bash]
 ----
@@ -172,11 +175,11 @@ key:[null], properties:[], content:hello-from-pulsar
 [#replicated-subscriptions]
 == Replicated subscriptions
 
-The `isReplicated` value controls subscription behavior during replication. 
+The `isReplicated` value controls subscription behavior during replication.
 
-Subscriptions are created with `isReplicated=false` by default, and will not replicate when the cluster is replicated. 
+Subscriptions are created with `isReplicated=false` by default, and will not replicate when the cluster is replicated.
 
-. Specify `replicateSubscriptionState(true)` at subscription creation to replicate the subscription when the cluster is replicated. 
+. Specify `replicateSubscriptionState(true)` at subscription creation to replicate the subscription when the cluster is replicated.
 +
 [source,java]
 ----
