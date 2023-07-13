@@ -43,10 +43,10 @@ It is NOT required to execute the API requests.
 ====
 
 == List tenants with details
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -56,7 +56,6 @@ curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/tena
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -114,10 +113,10 @@ Result::
 ====
 
 == List Astra Streaming cloud providers
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -127,7 +126,6 @@ curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/prov
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -155,10 +153,10 @@ Result::
 ====
 
 == Create DevOps API
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -181,7 +179,6 @@ curl --fail --location --request POST 'https://api.astra.datastax.com/v2/streami
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -211,6 +208,8 @@ Result::
     "pulsarInstance": ""
 }
 ----
+--
+====
 
 [NOTE]
 ====
@@ -218,10 +217,10 @@ The output includes the "pulsarToken" which is the JWT token for this Pulsar ins
 ====
 
 == Delete a tenant
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -231,7 +230,6 @@ curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/te
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -248,10 +246,10 @@ For managing Astra Streaming Namespaces, we use the native https://pulsar.apache
 === List existing namespaces
 
 == Delete a tenant
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -261,7 +259,6 @@ curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/te
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -272,10 +269,10 @@ Error: 403 Forbidden: unable to delete replicated namespace
 ====
 
 == List Existing Namespaces:
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -285,7 +282,6 @@ curl --location --request GET “https://$WEB_SERVER_URL/admin/v2/namespaces/$TE
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -298,10 +294,10 @@ Result::
 ====
 
 == Create a Namespace
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -311,7 +307,6 @@ curl -sS --fail --location --request PUT --header "Authorization: Bearer $PULSAR
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -322,10 +317,10 @@ Output:  No reply means successful.
 
 
 == Delete a Namespace
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -335,7 +330,6 @@ curl -sS --fail --location --request DELETE --header "Authorization: Bearer $PUL
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -345,10 +339,10 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace Message Retention
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -358,7 +352,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -371,10 +364,10 @@ Result::
 ====
 
 == Set Namespace Message Retention
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -387,7 +380,6 @@ curl --location "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retenti
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -397,10 +389,10 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace BacklogQuota
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -410,7 +402,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -426,10 +417,10 @@ Result::
 ====
 
 == Set Namespace BacklogQuota Settings
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -444,7 +435,6 @@ curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -454,10 +444,10 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace Message TTL
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -467,7 +457,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -478,10 +467,10 @@ Output -  Return raw number, like:
 ====
 
 == Set Namespace Message TTL
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -491,7 +480,6 @@ curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -505,10 +493,10 @@ Output:  No reply means successful.
 ====
 Input parameter “topicType” should be either “non-partitioned” or “partitioned”.
 ====
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -521,7 +509,6 @@ curl -sS --fail --location --request POST --header "Authorization: Bearer $PULSA
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -531,10 +518,10 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace MaxConsumersPerTopic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -544,7 +531,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -555,10 +541,10 @@ Output -  Return raw number, like:
 ====
 
 == Set Namespace MaxConsumersPerTopic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -568,21 +554,19 @@ curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
-
 Output - 409 Forbidden (Contact Astra Streaming Support to increase Max)
 ----
 --
 ====
 
 == Get Namespace MaxTopicPerNamespace
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -592,7 +576,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -603,10 +586,10 @@ Output -  Return raw number, like:
 ====
 
 == Set Namespace MaxTopicPerNamespace
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -616,7 +599,6 @@ curl -sS --fail --location  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMES
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -627,10 +609,10 @@ Output -  Return raw number, like:
 ====
 
 == Topics DevOps APIs
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -640,7 +622,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -659,10 +640,10 @@ Result::
 ====
 
 == Create Non-partitioned Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -673,7 +654,6 @@ curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -683,20 +663,19 @@ Output:  No reply means successful.
 ====
 
 == Create Partitioned Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
-curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" --header "Authorization: Bearer $PULSAR_TOKEN"  --header "Content-Type: application/json" --data $NUM_OF_PARTITIONS
+curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" --header "Authorization: Bearer $PULSAR_TOKEN" --header "Content-Type: application/json" --data $NUM_OF_PARTITIONS
 ----
 --
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -706,10 +685,10 @@ Output:  No reply means successful.
 ====
 
 == Delete a Persistent Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -719,7 +698,6 @@ curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -729,10 +707,10 @@ Output:  No reply means successful.
 ====
 
 == Get InternalStats of Non-Partitioned Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -742,7 +720,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -780,10 +757,10 @@ Result::
 ====
 
 == Get Stats of All Topics
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -793,7 +770,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/stats/topics
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -911,16 +887,15 @@ Result::
         "backlogStorageByteSize": 1586,
         "msgBacklogNumber": 4,
         "updatedAt": "2023-04-25T16:00:24.252452735Z"
-    }
 ----
 --
 ====
 
 == Get Stats of Partitioned Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -929,7 +904,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1041,10 +1015,10 @@ Result::
 ====
 
 == Get Stats of Non-partition Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1054,7 +1028,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1095,10 +1068,10 @@ Result::
 ====
 
 == Get List of Subscriptions for a Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1108,7 +1081,6 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1125,10 +1097,10 @@ Result::
 ====
 "Replicated=true" can be set to “false” for non replicated subscriptions
 ====
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1138,7 +1110,6 @@ curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1148,10 +1119,10 @@ Output:  No reply means successful.
 ====
 
 == Delete a Subscription for a Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1161,7 +1132,6 @@ curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1171,10 +1141,10 @@ Output:  No reply means successful.
 ====
 
 == Clear a Subscription for a Topic
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1184,7 +1154,6 @@ curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/persistent/
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1196,10 +1165,10 @@ Output:  No reply means successful.
 == Geo-Replication DevOps APIs
 
 === Get Status of Geo-Replication
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1209,7 +1178,6 @@ curl --location --fail --request GET "https://api.astra.datastax.com/v2/streamin
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1261,10 +1229,10 @@ Result::
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
 ====
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1280,7 +1248,6 @@ curl --location --fail --request POST "https://api.astra.datastax.com/v2/streami
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1294,10 +1261,9 @@ Output:  No reply means successful.
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
 ====
-[tabs]
++
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1316,7 +1282,6 @@ curl --location --fail --request DELETE "https://api.astra.datastax.com/v2/strea
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1327,10 +1292,9 @@ Output:  No reply means successful.
 
 == Functions DevOps APIs
 === List Existing Functions in a Namespace
-[tabs]
++
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1340,7 +1304,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1352,10 +1315,9 @@ Result::
 ====
 
 === Get Status of a Function
-[tabs]
++
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1365,7 +1327,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1397,10 +1358,10 @@ Result::
 ====
 
 === Get Stats of a Function
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1410,7 +1371,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1454,10 +1414,10 @@ Result::
 ====
 
 === Get Function Details
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1468,7 +1428,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1548,10 +1507,10 @@ Result::
 ====
 
 == Start a Function
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1561,7 +1520,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1571,10 +1529,10 @@ Output:  No reply means successful.
 ====
 
 == Stop a Function
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1584,7 +1542,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1597,10 +1554,10 @@ Output:  No reply means successful.
 
 Output:  No reply means successful.
 == Restart a Function
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1610,7 +1567,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1626,10 +1582,10 @@ Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup
 ====
 Note - Required parameters {CLUSTER} is obtained from the “List Tenants with Details” API command.
 ====
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1639,7 +1595,6 @@ curl --location --request GET "https://api.astra.datastax.com/v2/streaming/tenan
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1656,10 +1611,10 @@ Result::
 ====
 
 == List Token String by ID
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1669,7 +1624,6 @@ curl --fail --location --request GET "https://api.astra.datastax.com/v2/streamin
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1686,10 +1640,10 @@ The new JWT Token will also be visible in the Astra UI for that Tenant and Clust
 ====
 Required parameters {CLUSTER} is  obtained from the “List Tenants with Details” API command.
 ====
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1699,7 +1653,6 @@ curl --fail --location --request POST "https://api.astra.datastax.com/v2/streami
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1715,10 +1668,10 @@ eyJhbGciOiJSUzI1NiIsI . . .
 Required parameters {CLUSTER} is obtained from the “List Tenants with Details” API command.
 List of {TOKENID} can be obtained from List Existing Tokens IDs.
 ====
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1728,7 +1681,6 @@ curl --fail --location --request DELETE "https://api.astra.datastax.com/v2/strea
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1741,10 +1693,10 @@ Output:  No reply means successful.
 Pulsar Sources and Sinks share a similar API structure for most methods.  As such, this guide will show both Source and Sink CURL examples together.
 
 === List Existing Sources in a Namespace
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1754,7 +1706,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1766,10 +1717,10 @@ Result::
 ====
 
 == List Existing Sinks in a Namespace
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1779,7 +1730,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$N
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1791,10 +1741,10 @@ Result::
 ====
 
 === Get Status of a Source
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1804,7 +1754,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1834,10 +1783,10 @@ Result::
 ====
 
 === Status of a Sink in a Namespace
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1847,7 +1796,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1877,10 +1825,10 @@ Result::
 ====
 
 == Get Source Connector Details
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1890,7 +1838,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -1933,10 +1880,10 @@ Result::
 ====
 
 === Get Sink Details
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -1946,7 +1893,6 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$N
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -2004,10 +1950,10 @@ Result::
 ====
 
 === Start a Source Connector
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -2017,7 +1963,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -2028,10 +1973,10 @@ Output:  No reply means successful.
 ====
 
 === Start a Sink
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -2041,7 +1986,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -2052,10 +1996,10 @@ Output:  No reply means successful.
 ====
 
 === Stop a Source Connector
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -2065,7 +2009,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -2076,10 +2019,10 @@ Output:  No reply means successful.
 ====
 
 === Stop a Sink Connector
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -2089,7 +2032,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -2100,25 +2042,22 @@ Output:  No reply means successful.
 ====
 
 == Create a Source Connector
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" --header "Authorization: Bearer $PULSAR_TOKEN" --form "sourceConfig=@mynetty-source-config.json;type=application/json"
-
 ----
 --
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
-
 Output:  No reply means successful.
 ----
 --
@@ -2126,7 +2065,7 @@ Output:  No reply means successful.
 
 In the example above, a configuration file is provided as input to CURL.
 The file is named "mynetty-source-config.json", which has the following context for the built-in “netty” source connector in Astra Streaming.
-[source,plain]
+[source,bash]
 ----
 Output:  No reply means successful.
 ----
@@ -2136,10 +2075,10 @@ The CURL parameter “@” indicates an input file.  When executing the CURL com
 ====
 
 === Delete a Source Connector
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -2149,7 +2088,6 @@ curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sources/$TENA
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -2159,10 +2097,10 @@ Output:  No reply means successful.
 ====
 
 === Create a Sink Connector
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -2172,7 +2110,6 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
@@ -2182,7 +2119,7 @@ Output:  No reply means successful.
 ====
 
 In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in “kafka” source connector in Astra Streaming.
-[source,plain]
+[source,bash]
 ----
 {
     "tenant": "testcreate",
@@ -2210,6 +2147,7 @@ In the example above, a configuration file is provided as input to CURL.  The fi
     "inputs": [ "persistent://testcreate/ns0/mytopic3" ]
 }
 ----
+
 [NOTE]
 ====
 The CURL parameter “@” indicates an input file.
@@ -2217,10 +2155,10 @@ When executing the CURL command, ensure the input file is accessible, and in the
 ====
 
 === Delete a Sink Connector
++
 [tabs]
 ====
 Curl::
-+
 --
 [source,bash]
 ----
@@ -2230,7 +2168,6 @@ curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT
 
 Result::
 +
-[%collapsible]
 --
 [source,bash]
 ----
