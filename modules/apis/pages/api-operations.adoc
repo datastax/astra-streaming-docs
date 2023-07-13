@@ -1218,8 +1218,6 @@ Result::
             "pulsarInstance": "prod0",
             "regionZone": ""
         }
-    }
-
 ----
 --
 ====
@@ -1261,6 +1259,7 @@ Output:  No reply means successful.
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
 ====
+
 +
 ====
 Curl::
@@ -1550,9 +1549,6 @@ Output:  No reply means successful.
 --
 ====
 
-
-
-Output:  No reply means successful.
 == Restart a Function
 +
 [tabs]
@@ -2145,7 +2141,6 @@ In the example above, a configuration file is provided as input to CURL.  The fi
       "topic": "mykafka-topic"
     },
     "inputs": [ "persistent://testcreate/ns0/mytopic3" ]
-}
 ----
 
 [NOTE]
