@@ -1069,7 +1069,7 @@ Result::
 === Create a Subscription for a Topic (Replicated)
 [NOTE]
 ====
-"Replicated=true" can be set to “false" for non replicated subscriptions
+"Replicated=true" can be set to “false" for non replicated subscriptions.
 ====
 [tabs]
 ====
@@ -1233,8 +1233,7 @@ Output:  No reply means successful.
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
 ====
-
-+
+[tabs]
 ====
 Curl::
 --
@@ -1266,7 +1265,7 @@ Output:  No reply means successful.
 == Functions DevOps APIs
 
 === List Existing Functions in a Namespace
-+
+[tabs]
 ====
 Curl::
 --
@@ -1289,7 +1288,7 @@ Result::
 ====
 
 === Get Status of a Function
-+
+[tabs]
 ====
 Curl::
 --
@@ -1551,7 +1550,7 @@ Output:  No reply means successful.
 Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup and obtain the Pulsar JWT Token string.  The TokenIDs are also listed in the Astra UI for that Tenant and Cluster.
 [NOTE]
 ====
-Note - Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
+Required parameter "CLUSTER" is obtained from the “List Tenants with Details" API command.
 ====
 [tabs]
 ====
@@ -1609,7 +1608,7 @@ Create a new Pulsar JWT Token.
 The new JWT Token will also be visible in the Astra UI for that Tenant and Cluster.
 [NOTE]
 ====
-Required parameters "CLUSTER" is  obtained from the “List Tenants with Details" API command.
+Required parameter "CLUSTER" is  obtained from the “List Tenants with Details" API command.
 ====
 [tabs]
 ====
@@ -1636,7 +1635,7 @@ eyJhbGciOiJSUzI1NiIsI . . .
 === Delete a JWT Token
 [NOTE]
 ====
-Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
+Required parameter "CLUSTER" is obtained from the “List Tenants with Details" API command.
 List of "TOKENID" can be obtained from List Existing Tokens IDs.
 ====
 [tabs]
