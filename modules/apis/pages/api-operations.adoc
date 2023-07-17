@@ -284,7 +284,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -306,7 +306,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -356,7 +356,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -411,7 +411,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -456,7 +456,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -485,7 +485,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -630,7 +630,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -652,7 +652,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -674,7 +674,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1087,7 +1087,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1109,7 +1109,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1131,7 +1131,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1223,7 +1223,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1233,7 +1233,8 @@ Output:  No reply means successful.
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
 ====
-[tabs]
+
++
 ====
 Curl::
 --
@@ -1257,7 +1258,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1265,7 +1266,7 @@ Output:  No reply means successful.
 == Functions DevOps APIs
 
 === List Existing Functions in a Namespace
-[tabs]
++
 ====
 Curl::
 --
@@ -1288,7 +1289,7 @@ Result::
 ====
 
 === Get Status of a Function
-[tabs]
++
 ====
 Curl::
 --
@@ -1496,7 +1497,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1518,7 +1519,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1540,7 +1541,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1550,7 +1551,7 @@ Output:  No reply means successful.
 Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup and obtain the Pulsar JWT Token string.  The TokenIDs are also listed in the Astra UI for that Tenant and Cluster.
 [NOTE]
 ====
-Required parameter "CLUSTER" is obtained from the “List Tenants with Details" API command.
+Note - Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
 ====
 [tabs]
 ====
@@ -1608,7 +1609,7 @@ Create a new Pulsar JWT Token.
 The new JWT Token will also be visible in the Astra UI for that Tenant and Cluster.
 [NOTE]
 ====
-Required parameter "CLUSTER" is  obtained from the “List Tenants with Details" API command.
+Required parameters "CLUSTER" is  obtained from the “List Tenants with Details" API command.
 ====
 [tabs]
 ====
@@ -1635,7 +1636,7 @@ eyJhbGciOiJSUzI1NiIsI . . .
 === Delete a JWT Token
 [NOTE]
 ====
-Required parameter "CLUSTER" is obtained from the “List Tenants with Details" API command.
+Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
 List of "TOKENID" can be obtained from List Existing Tokens IDs.
 ====
 [tabs]
@@ -1654,7 +1655,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1937,7 +1938,7 @@ Result::
 [source,plain]
 ----
 
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1960,7 +1961,7 @@ Result::
 [source,plain]
 ----
 
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -1983,7 +1984,7 @@ Result::
 [source,plain]
 ----
 
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -2006,7 +2007,7 @@ Result::
 [source,plain]
 ----
 
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -2028,7 +2029,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -2037,7 +2038,7 @@ In the example above, a configuration file is provided as input to CURL.
 The file is named "mynetty-source-config.json", which has the following context for the built-in “netty" source connector in Astra Streaming.
 [source,bash]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 [NOTE]
 ====
@@ -2061,7 +2062,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -2083,7 +2084,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
@@ -2140,7 +2141,7 @@ Result::
 --
 [source,plain]
 ----
-Output:  No reply means successful.
+Output: No reply means successful.
 ----
 --
 ====
