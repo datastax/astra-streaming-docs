@@ -1,4 +1,4 @@
-* xref:configure-pulsar-env.adoc[Developing]
+* Developing
 ** xref:gpt-schema-translator.adoc[]
 ** xref:configure-pulsar-env.adoc[]
 ** xref:using-curl.adoc[]
