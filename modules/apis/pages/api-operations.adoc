@@ -43,12 +43,12 @@ It is NOT required to execute the API requests.
 ====
 
 == List tenants with details
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/tenants' --header "Authorization: Bearer $ASTRA_ORG_TOKEN" | python3 -mjson.tool
 ----
@@ -57,7 +57,7 @@ curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/tena
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     {
@@ -107,18 +107,17 @@ Result::
         "pulsarInstance": "prod0"
     }
 ]
-
 ----
 --
 ====
 
 == List Astra Streaming cloud providers
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/providers' --header "Authorization: Bearer $ASTRA_ORG_TOKEN" | python3 -mjson.tool
 ----
@@ -127,7 +126,7 @@ curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/prov
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "aws": [
@@ -153,12 +152,12 @@ Result::
 ====
 
 == Create DevOps API
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --request POST 'https://api.astra.datastax.com/v2/streaming/tenants' --header 'Content-Type: application/json' --header "Authorization: Bearer $ASTRA_ORG_TOKEN" --data-raw '{
  	"cloudProvider": "aws",
@@ -170,6 +169,7 @@ curl --location --request POST 'https://api.astra.datastax.com/v2/streaming/tena
 --
 
 With file input::
++
 --
 [source,bash]
 ----
@@ -180,7 +180,7 @@ curl --fail --location --request POST 'https://api.astra.datastax.com/v2/streami
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "namespace": "default",
@@ -217,12 +217,12 @@ The output includes the "pulsarToken" which is the JWT token for this Pulsar ins
 ====
 
 == Delete a tenant
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/tenants/{tenant}/clusters/{cluster}' --header 'Content-Type: application/json' --header "Authorization: Bearer $ASTRA_ORG_TOKEN"
 ----
@@ -231,7 +231,7 @@ curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/te
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output: No reply means successful.
 Error: 403 Forbidden: unable to delete replicated namespace
@@ -246,12 +246,12 @@ For managing Astra Streaming Namespaces, we use the native https://pulsar.apache
 === List existing namespaces
 
 == Delete a tenant
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/tenants/{tenant}/clusters/{cluster}' --header 'Content-Type: application/json' --header "Authorization: Bearer $ASTRA_ORG_TOKEN"
 ----
@@ -260,7 +260,7 @@ curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/te
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output: No reply means successful.
 Error: 403 Forbidden: unable to delete replicated namespace
@@ -269,12 +269,12 @@ Error: 403 Forbidden: unable to delete replicated namespace
 ====
 
 == List Existing Namespaces:
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --request GET “https://$WEB_SERVER_URL/admin/v2/namespaces/$TENANT” --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -283,7 +283,7 @@ curl --location --request GET “https://$WEB_SERVER_URL/admin/v2/namespaces/$TE
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     "mytenant/default",
@@ -294,12 +294,12 @@ Result::
 ====
 
 == Create a Namespace
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request PUT --header "Authorization: Bearer $PULSAR_TOKEN" "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE"
 ----
@@ -308,7 +308,7 @@ curl -sS --fail --location --request PUT --header "Authorization: Bearer $PULSAR
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -317,12 +317,12 @@ Output:  No reply means successful.
 
 
 == Delete a Namespace
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request DELETE --header "Authorization: Bearer $PULSAR_TOKEN" "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE"
 ----
@@ -331,7 +331,7 @@ curl -sS --fail --location --request DELETE --header "Authorization: Bearer $PUL
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -339,12 +339,12 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace Message Retention
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retention" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -353,7 +353,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "retentionTimeInMinutes": 0,
@@ -364,12 +364,12 @@ Result::
 ====
 
 == Set Namespace Message Retention
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retention" --header 'Content-Type: application/json' --header "Authorization: Bearer $PULSAR_TOKEN" --data '{
     "retentionTimeInMinutes": 360,
@@ -381,7 +381,7 @@ curl --location "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retenti
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -389,12 +389,12 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace BacklogQuota
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuotaMap" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -403,7 +403,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "destination_storage": {
@@ -417,12 +417,12 @@ Result::
 ====
 
 == Set Namespace BacklogQuota Settings
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuota" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data '{
 "limit": -1,
@@ -436,7 +436,7 @@ curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -444,12 +444,12 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace Message TTL
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -458,7 +458,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output -  Return raw number, like:
 3600
@@ -467,12 +467,12 @@ Output -  Return raw number, like:
 ====
 
 == Set Namespace Message TTL
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data 3600
 ----
@@ -481,7 +481,7 @@ curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -493,12 +493,12 @@ Output:  No reply means successful.
 ====
 Input parameter “topicType” should be either “non-partitioned” or “partitioned”.
 ====
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request POST --header "Authorization: Bearer $PULSAR_TOKEN"  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/autoTopicCreation" --header 'Content-Type: application/json' --data '{
   "allowAutoTopicCreation": false,
@@ -510,7 +510,7 @@ curl -sS --fail --location --request POST --header "Authorization: Bearer $PULSA
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -518,12 +518,12 @@ Output:  No reply means successful.
 ====
 
 == Get Namespace MaxConsumersPerTopic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxConsumersPerTopic" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -532,7 +532,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output -  Return raw number, like:
 50
@@ -541,12 +541,12 @@ Output -  Return raw number, like:
 ====
 
 == Set Namespace MaxConsumersPerTopic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxConsumersPerTopic" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data 100
 ----
@@ -555,7 +555,7 @@ curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output - 409 Forbidden (Contact Astra Streaming Support to increase Max)
 ----
@@ -563,12 +563,12 @@ Output - 409 Forbidden (Contact Astra Streaming Support to increase Max)
 ====
 
 == Get Namespace MaxTopicPerNamespace
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -577,7 +577,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output -  Return raw number, like:
 50
@@ -586,12 +586,12 @@ Output -  Return raw number, like:
 ====
 
 == Set Namespace MaxTopicPerNamespace
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" --header 'Content-Type: application/json' --header "Authorization: Bearer $PULSAR_TOKEN" --data 1000
 ----
@@ -600,7 +600,7 @@ curl -sS --fail --location  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMES
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output -  Return raw number, like:
 50
@@ -609,12 +609,12 @@ Output -  Return raw number, like:
 ====
 
 == Topics DevOps APIs
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -623,7 +623,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     "persistent://testtenant/ns0/mytopic-partition-0",
@@ -640,12 +640,12 @@ Result::
 ====
 
 == Create Non-partitioned Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE
 /$TOPIC" --header "Authorization: Bearer $PULSAR_TOKEN"
@@ -655,7 +655,7 @@ curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -663,12 +663,12 @@ Output:  No reply means successful.
 ====
 
 == Create Partitioned Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" --header "Authorization: Bearer $PULSAR_TOKEN" --header "Content-Type: application/json" --data $NUM_OF_PARTITIONS
 ----
@@ -677,7 +677,7 @@ curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -685,12 +685,12 @@ Output:  No reply means successful.
 ====
 
 == Delete a Persistent Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -699,7 +699,7 @@ curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -707,12 +707,12 @@ Output:  No reply means successful.
 ====
 
 == Get InternalStats of Non-Partitioned Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/internalStats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -721,7 +721,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "entriesAddedCounter": 0,
@@ -757,12 +757,12 @@ Result::
 ====
 
 == Get Stats of All Topics
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/stats/topics/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -771,7 +771,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/stats/topics
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "persistent://testcreate/ns0/mytopic3": {
@@ -892,12 +892,12 @@ Result::
 ====
 
 == Get Stats of Partitioned Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitioned-stats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -906,7 +906,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "msgRateIn": 0.0,
@@ -1016,12 +1016,12 @@ Result::
 ====
 
 == Get Stats of Non-partition Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/stats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1030,7 +1030,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "msgRateIn": 0.0,
@@ -1069,12 +1069,12 @@ Result::
 ====
 
 == Get List of Subscriptions for a Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscriptions" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1083,7 +1083,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     "mysub",
@@ -1098,12 +1098,12 @@ Result::
 ====
 "Replicated=true" can be set to “false” for non replicated subscriptions
 ====
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION?replicated=true" --header "Authorization: Bearer $PULSAR_TOKEN"  --header "Content-Type: application/json"
 ----
@@ -1112,7 +1112,7 @@ curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1120,12 +1120,12 @@ Output:  No reply means successful.
 ====
 
 == Delete a Subscription for a Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -1134,7 +1134,7 @@ curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1142,12 +1142,12 @@ Output:  No reply means successful.
 ====
 
 == Clear a Subscription for a Topic
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION/skip_all" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -1156,7 +1156,7 @@ curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/persistent/
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1166,12 +1166,12 @@ Output:  No reply means successful.
 == Geo-Replication DevOps APIs
 
 === Get Status of Geo-Replication
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --fail --request GET "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE"  --header "Authorization: Bearer $ASTRA_ORG_TOKEN" | python3 -mjson.tool
 ----
@@ -1180,7 +1180,7 @@ curl --location --fail --request GET "https://api.astra.datastax.com/v2/streamin
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "pulsarInstance": "prod0",
@@ -1228,12 +1228,12 @@ Result::
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
 ====
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --fail --request POST "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE"  --header "Content-Type: application/json"  --header "Authorization: Bearer $ASTRA_ORG_TOKEN"  --data-raw '{
   "bidirection": true,
@@ -1248,7 +1248,7 @@ curl --location --fail --request POST "https://api.astra.datastax.com/v2/streami
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1283,7 +1283,7 @@ curl --location --fail --request DELETE "https://api.astra.datastax.com/v2/strea
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1305,7 +1305,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     "testfunction1"
@@ -1328,7 +1328,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "numInstances": 1,
@@ -1358,12 +1358,12 @@ Result::
 ====
 
 === Get Stats of a Function
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/stats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1372,7 +1372,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "receivedTotal": 0,
@@ -1414,12 +1414,12 @@ Result::
 ====
 
 === Get Function Details
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
@@ -1429,7 +1429,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "runtimeFlags": null,
@@ -1507,12 +1507,12 @@ Result::
 ====
 
 == Start a Function
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/start" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -1521,7 +1521,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1529,12 +1529,12 @@ Output:  No reply means successful.
 ====
 
 == Stop a Function
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/stop" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -1543,7 +1543,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1551,12 +1551,12 @@ Output:  No reply means successful.
 ====
 
 == Restart a Function
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/restart" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -1565,7 +1565,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1579,12 +1579,12 @@ Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup
 ====
 Note - Required parameters "CLUSTER" is obtained from the “List Tenants with Details” API command.
 ====
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --location --request GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" --header "Authorization: Bearer $ASTRA_ORG_TOKEN" --header "X-DataStax-Pulsar-Cluster: $CLUSTER" | python3 -mjson.tool
 ----
@@ -1593,7 +1593,7 @@ curl --location --request GET "https://api.astra.datastax.com/v2/streaming/tenan
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     {
@@ -1608,12 +1608,12 @@ Result::
 ====
 
 == List Token String by ID
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens/$TOKENID" --header "X-DataStax-Pulsar-Cluster: $CLUSTER" --header "Authorization: Bearer $ASTRA_ORG_TOKEN"
 ----
@@ -1622,7 +1622,7 @@ curl --fail --location --request GET "https://api.astra.datastax.com/v2/streamin
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output: Raw string JWT token
 eyJhbGciOiJSUzI1NiIsI . . .
@@ -1637,12 +1637,12 @@ The new JWT Token will also be visible in the Astra UI for that Tenant and Clust
 ====
 Required parameters "CLUSTER" is  obtained from the “List Tenants with Details” API command.
 ====
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" --header "X-DataStax-Pulsar-Cluster: $CLUSTER" --header "Authorization: Bearer $ASTRA_ORG_TOKEN"
 ----
@@ -1651,7 +1651,7 @@ curl --fail --location --request POST "https://api.astra.datastax.com/v2/streami
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output: new raw string JWT token
 eyJhbGciOiJSUzI1NiIsI . . .
@@ -1665,12 +1665,12 @@ eyJhbGciOiJSUzI1NiIsI . . .
 Required parameters "CLUSTER" is obtained from the “List Tenants with Details” API command.
 List of "TOKENID" can be obtained from List Existing Tokens IDs.
 ====
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request DELETE "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" --header "X-DataStax-Pulsar-Cluster: $CLUSTER" --header "Authorization: Bearer $ASTRA_ORG_TOKEN"
 ----
@@ -1679,7 +1679,7 @@ curl --fail --location --request DELETE "https://api.astra.datastax.com/v2/strea
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -1690,12 +1690,12 @@ Output:  No reply means successful.
 Pulsar Sources and Sinks share a similar API structure for most methods.  As such, this guide will show both Source and Sink CURL examples together.
 
 === List Existing Sources in a Namespace
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1704,7 +1704,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     "mysource1"
@@ -1714,12 +1714,12 @@ Result::
 ====
 
 == List Existing Sinks in a Namespace
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1728,7 +1728,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$N
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 [
     "mysink1"
@@ -1738,12 +1738,12 @@ Result::
 ====
 
 === Get Status of a Source
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/status" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1752,7 +1752,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "numInstances": 1,
@@ -1780,12 +1780,12 @@ Result::
 ====
 
 === Status of a Sink in a Namespace
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SINK/status" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1794,7 +1794,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "numInstances": 1,
@@ -1822,12 +1822,12 @@ Result::
 ====
 
 == Get Source Connector Details
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1836,7 +1836,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "archive": "builtin://netty",
@@ -1877,12 +1877,12 @@ Result::
 ====
 
 === Get Sink Details
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
@@ -1891,7 +1891,7 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$N
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 {
     "archive": "builtin://data-generator",
@@ -1947,12 +1947,12 @@ Result::
 ====
 
 === Start a Source Connector
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/start" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -1961,7 +1961,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 
 Output:  No reply means successful.
@@ -1970,12 +1970,12 @@ Output:  No reply means successful.
 ====
 
 === Start a Sink
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/start" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -1984,7 +1984,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 
 Output:  No reply means successful.
@@ -1993,12 +1993,12 @@ Output:  No reply means successful.
 ====
 
 === Stop a Source Connector
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/stop" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -2007,7 +2007,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 
 Output:  No reply means successful.
@@ -2016,12 +2016,12 @@ Output:  No reply means successful.
 ====
 
 === Stop a Sink Connector
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/stop" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -2030,7 +2030,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 
 Output:  No reply means successful.
@@ -2039,12 +2039,12 @@ Output:  No reply means successful.
 ====
 
 == Create a Source Connector
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" --header "Authorization: Bearer $PULSAR_TOKEN" --form "sourceConfig=@mynetty-source-config.json;type=application/json"
 ----
@@ -2053,7 +2053,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -2072,12 +2072,12 @@ The CURL parameter “@” indicates an input file.  When executing the CURL com
 ====
 
 === Delete a Source Connector
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -2086,7 +2086,7 @@ curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sources/$TENA
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -2094,12 +2094,12 @@ Output:  No reply means successful.
 ====
 
 === Create a Sink Connector
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" --header "Authorization: Bearer $PULSAR_TOKEN" --form "sinkConfig=@mykafka-sink-config.json;type=application/json"
 ----
@@ -2108,7 +2108,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
@@ -2151,12 +2151,12 @@ When executing the CURL command, ensure the input file is accessible, and in the
 ====
 
 === Delete a Sink Connector
-+
 [tabs]
 ====
 Curl::
++
 --
-[source,bash]
+[source,plain]
 ----
 curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
@@ -2165,7 +2165,7 @@ curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT
 Result::
 +
 --
-[source,bash]
+[source,plain]
 ----
 Output:  No reply means successful.
 ----
