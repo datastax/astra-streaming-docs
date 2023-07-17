@@ -14,7 +14,7 @@ Create an Astra Streaming Account
 Once an account has been established, you will need to set up a Role and Access Token for Streaming.  See the guide below on how to setup these items:
 Generate Astra Streaming Admin Token
 
-As noted in the guide above, save or download the new Astra Streaming Token values.  They will be needed in nearly all DevOps API calls, especially the “Token” value.
+As noted in the guide above, save or download the new Astra Streaming Token values.  They will be needed in nearly all DevOps API calls, especially the “Token" value.
 
 == Prerequisites
 
@@ -28,17 +28,17 @@ export NAMESPACE="<Namespace to create>"
 export TENANT="<Tenant of new Namespace>"
 export TOPIC="<name of topic>"
 export NUM_OF_PARTITIONS="<number of partitions>"
-export SUBSCRIPTION=”<name of subscription>”
+export SUBSCRIPTION="<name of subscription>"
 export INSTANCE="<tenant instance name>"
 export SOURCE="<source name>"
 export SINK="<sink name>"
-export FUNCTION=<function name>
-export TOKENID="<Token Id"
+export FUNCTION="<function name>"
+export TOKENID="<Token Id>"
 ----
 
 [NOTE]
 ====
-“python3 -mjson.tool” in the examples below is only used to format the output into JSON.
+“python3 -mjson.tool" in the examples below is only used to format the output into JSON.
 It is NOT required to execute the API requests.
 ====
 
@@ -234,7 +234,6 @@ Result::
 [source,plain]
 ----
 Output: No reply means successful.
-Error: 403 Forbidden: unable to delete replicated namespace
 ----
 --
 ====
@@ -243,9 +242,7 @@ Error: 403 Forbidden: unable to delete replicated namespace
 
 For managing Astra Streaming Namespaces, we use the native https://pulsar.apache.org/admin-rest-api/[Pulsar REST APIs]{external-link-icon}.  These are documented on the Apache Pulsar Docs for REST API.
 
-=== List existing namespaces
-
-== Delete a tenant
+=== List Existing Namespaces
 [tabs]
 ====
 Curl::
@@ -253,30 +250,7 @@ Curl::
 --
 [source,plain]
 ----
-curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/tenants/{tenant}/clusters/{cluster}' --header 'Content-Type: application/json' --header "Authorization: Bearer $ASTRA_ORG_TOKEN"
-----
---
-
-Result::
-+
---
-[source,plain]
-----
-Output: No reply means successful.
-Error: 403 Forbidden: unable to delete replicated namespace
-----
---
-====
-
-== List Existing Namespaces:
-[tabs]
-====
-Curl::
-+
---
-[source,plain]
-----
-curl --location --request GET “https://$WEB_SERVER_URL/admin/v2/namespaces/$TENANT” --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl --location --request GET “https://$WEB_SERVER_URL/admin/v2/namespaces/$TENANT" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
 --
 
@@ -293,7 +267,7 @@ Result::
 --
 ====
 
-== Create a Namespace
+=== Create a Namespace
 [tabs]
 ====
 Curl::
@@ -315,8 +289,7 @@ Output:  No reply means successful.
 --
 ====
 
-
-== Delete a Namespace
+=== Delete a Namespace
 [tabs]
 ====
 Curl::
@@ -338,7 +311,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Get Namespace Message Retention
+=== Get Namespace Message Retention
 [tabs]
 ====
 Curl::
@@ -363,7 +336,7 @@ Result::
 --
 ====
 
-== Set Namespace Message Retention
+=== Set Namespace Message Retention
 [tabs]
 ====
 Curl::
@@ -388,7 +361,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Get Namespace BacklogQuota
+=== Get Namespace BacklogQuota
 [tabs]
 ====
 Curl::
@@ -416,7 +389,7 @@ Result::
 --
 ====
 
-== Set Namespace BacklogQuota Settings
+=== Set Namespace BacklogQuota Settings
 [tabs]
 ====
 Curl::
@@ -443,7 +416,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Get Namespace Message TTL
+=== Get Namespace Message TTL
 [tabs]
 ====
 Curl::
@@ -460,13 +433,13 @@ Result::
 --
 [source,plain]
 ----
-Output -  Return raw number, like:
+Output - Return raw number, like:
 3600
 ----
 --
 ====
 
-== Set Namespace Message TTL
+=== Set Namespace Message TTL
 [tabs]
 ====
 Curl::
@@ -488,10 +461,10 @@ Output:  No reply means successful.
 --
 ====
 
-== Set AutoTopicCreation True/False on Namespace
+=== Set AutoTopicCreation True/False on Namespace
 [NOTE]
 ====
-Input parameter “topicType” should be either “non-partitioned” or “partitioned”.
+Input parameter “topicType" should be either “non-partitioned" or “partitioned".
 ====
 [tabs]
 ====
@@ -517,7 +490,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Get Namespace MaxConsumersPerTopic
+=== Get Namespace MaxConsumersPerTopic
 [tabs]
 ====
 Curl::
@@ -534,13 +507,13 @@ Result::
 --
 [source,plain]
 ----
-Output -  Return raw number, like:
+Output - Return raw number, like:
 50
 ----
 --
 ====
 
-== Set Namespace MaxConsumersPerTopic
+=== Set Namespace MaxConsumersPerTopic
 [tabs]
 ====
 Curl::
@@ -562,7 +535,7 @@ Output - 409 Forbidden (Contact Astra Streaming Support to increase Max)
 --
 ====
 
-== Get Namespace MaxTopicPerNamespace
+=== Get Namespace MaxTopicPerNamespace
 [tabs]
 ====
 Curl::
@@ -579,13 +552,13 @@ Result::
 --
 [source,plain]
 ----
-Output -  Return raw number, like:
+Output - Return raw number, like:
 50
 ----
 --
 ====
 
-== Set Namespace MaxTopicPerNamespace
+=== Set Namespace MaxTopicPerNamespace
 [tabs]
 ====
 Curl::
@@ -602,7 +575,7 @@ Result::
 --
 [source,plain]
 ----
-Output -  Return raw number, like:
+Output - Return raw number, like:
 50
 ----
 --
@@ -639,7 +612,7 @@ Result::
 --
 ====
 
-== Create Non-partitioned Topic
+=== Create Non-partitioned Topic
 [tabs]
 ====
 Curl::
@@ -662,7 +635,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Create Partitioned Topic
+=== Create Partitioned Topic
 [tabs]
 ====
 Curl::
@@ -684,7 +657,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Delete a Persistent Topic
+=== Delete a Persistent Topic
 [tabs]
 ====
 Curl::
@@ -706,7 +679,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Get InternalStats of Non-Partitioned Topic
+=== Get InternalStats of Non-Partitioned Topic
 [tabs]
 ====
 Curl::
@@ -756,7 +729,7 @@ Result::
 --
 ====
 
-== Get Stats of All Topics
+=== Get Stats of All Topics
 [tabs]
 ====
 Curl::
@@ -891,7 +864,7 @@ Result::
 --
 ====
 
-== Get Stats of Partitioned Topic
+=== Get Stats of Partitioned Topic
 [tabs]
 ====
 Curl::
@@ -1015,7 +988,7 @@ Result::
 --
 ====
 
-== Get Stats of Non-partition Topic
+=== Get Stats of Non-partition Topic
 [tabs]
 ====
 Curl::
@@ -1068,7 +1041,7 @@ Result::
 --
 ====
 
-== Get List of Subscriptions for a Topic
+=== Get List of Subscriptions for a Topic
 [tabs]
 ====
 Curl::
@@ -1093,10 +1066,10 @@ Result::
 --
 ====
 
-== Create a Subscription for a Topic (Replicated)
+=== Create a Subscription for a Topic (Replicated)
 [NOTE]
 ====
-"Replicated=true" can be set to “false” for non replicated subscriptions
+"Replicated=true" can be set to “false" for non replicated subscriptions
 ====
 [tabs]
 ====
@@ -1119,7 +1092,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Delete a Subscription for a Topic
+=== Delete a Subscription for a Topic
 [tabs]
 ====
 Curl::
@@ -1141,7 +1114,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Clear a Subscription for a Topic
+=== Clear a Subscription for a Topic
 [tabs]
 ====
 Curl::
@@ -1223,7 +1196,7 @@ Result::
 --
 ====
 
-== Create Geo-Replication between Namespaces
+=== Create Geo-Replication between Namespaces
 [NOTE]
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
@@ -1255,7 +1228,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Delete Geo-Replication between Namespaces
+=== Delete Geo-Replication between Namespaces
 [NOTE]
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
@@ -1291,6 +1264,7 @@ Output:  No reply means successful.
 ====
 
 == Functions DevOps APIs
+
 === List Existing Functions in a Namespace
 +
 ====
@@ -1506,7 +1480,7 @@ Result::
 --
 ====
 
-== Start a Function
+=== Start a Function
 [tabs]
 ====
 Curl::
@@ -1528,7 +1502,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Stop a Function
+=== Stop a Function
 [tabs]
 ====
 Curl::
@@ -1550,7 +1524,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Restart a Function
+=== Restart a Function
 [tabs]
 ====
 Curl::
@@ -1573,11 +1547,11 @@ Output:  No reply means successful.
 ====
 
 == Astra Streaming JWT Token DevOps APIs
-=== nList Existing Tokens IDs
+=== List Existing Tokens IDs
 Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup and obtain the Pulsar JWT Token string.  The TokenIDs are also listed in the Astra UI for that Tenant and Cluster.
 [NOTE]
 ====
-Note - Required parameters "CLUSTER" is obtained from the “List Tenants with Details” API command.
+Note - Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
 ====
 [tabs]
 ====
@@ -1607,7 +1581,7 @@ Result::
 --
 ====
 
-== List Token String by ID
+=== List Token String by ID
 [tabs]
 ====
 Curl::
@@ -1630,12 +1604,12 @@ eyJhbGciOiJSUzI1NiIsI . . .
 --
 ====
 
-== Create a JWT Token
+=== Create a JWT Token
 Create a new Pulsar JWT Token.
 The new JWT Token will also be visible in the Astra UI for that Tenant and Cluster.
 [NOTE]
 ====
-Required parameters "CLUSTER" is  obtained from the “List Tenants with Details” API command.
+Required parameters "CLUSTER" is  obtained from the “List Tenants with Details" API command.
 ====
 [tabs]
 ====
@@ -1659,10 +1633,10 @@ eyJhbGciOiJSUzI1NiIsI . . .
 --
 ====
 
-== Delete a JWT Token
+=== Delete a JWT Token
 [NOTE]
 ====
-Required parameters "CLUSTER" is obtained from the “List Tenants with Details” API command.
+Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
 List of "TOKENID" can be obtained from List Existing Tokens IDs.
 ====
 [tabs]
@@ -1713,7 +1687,7 @@ Result::
 --
 ====
 
-== List Existing Sinks in a Namespace
+=== List Existing Sinks in a Namespace
 [tabs]
 ====
 Curl::
@@ -1821,7 +1795,7 @@ Result::
 --
 ====
 
-== Get Source Connector Details
+=== Get Source Connector Details
 [tabs]
 ====
 Curl::
@@ -2038,7 +2012,7 @@ Output:  No reply means successful.
 --
 ====
 
-== Create a Source Connector
+=== Create a Source Connector
 [tabs]
 ====
 Curl::
@@ -2061,14 +2035,14 @@ Output:  No reply means successful.
 ====
 
 In the example above, a configuration file is provided as input to CURL.
-The file is named "mynetty-source-config.json", which has the following context for the built-in “netty” source connector in Astra Streaming.
+The file is named "mynetty-source-config.json", which has the following context for the built-in “netty" source connector in Astra Streaming.
 [source,bash]
 ----
 Output:  No reply means successful.
 ----
 [NOTE]
 ====
-The CURL parameter “@” indicates an input file.  When executing the CURL command, ensure the input file is accessible, and in the proper directory for reading.
+The CURL parameter “@" indicates an input file.  When executing the CURL command, ensure the input file is accessible, and in the proper directory for reading.
 ====
 
 === Delete a Source Connector
@@ -2115,7 +2089,7 @@ Output:  No reply means successful.
 --
 ====
 
-In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in “kafka” source connector in Astra Streaming.
+In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in “kafka" source connector in Astra Streaming.
 [source,bash]
 ----
 {
@@ -2146,7 +2120,7 @@ In the example above, a configuration file is provided as input to CURL.  The fi
 
 [NOTE]
 ====
-The CURL parameter “@” indicates an input file.
+The CURL parameter “@" indicates an input file.
 When executing the CURL command, ensure the input file is accessible, and in the proper directory for reading.
 ====
 
