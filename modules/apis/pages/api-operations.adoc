@@ -1233,10 +1233,10 @@ Output: No reply means successful.
 ====
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
 ====
-
-+
+[tabs]
 ====
 Curl::
++
 --
 [source,bash]
 ----
@@ -1266,9 +1266,10 @@ Output: No reply means successful.
 == Functions DevOps APIs
 
 === List Existing Functions in a Namespace
-+
+[tabs]
 ====
 Curl::
++
 --
 [source,bash]
 ----
@@ -1289,9 +1290,10 @@ Result::
 ====
 
 === Get Status of a Function
-+
+[tabs]
 ====
 Curl::
++
 --
 [source,bash]
 ----
