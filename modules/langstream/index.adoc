@@ -1,0 +1,22 @@
+= Getting Started with LangStream
+
+The LangStream project combines the intelligence of large language models with the agility of streaming processing, to create powerful processing applications.
+An application in LangStream can watch a message topic and process data through multiple steps to output some useful generative AI results. Say you have a goal of creating a chatbot that can stay up-to-date with some dataset that is constantly changing. As someone interacts with the bot, they are offered educated meaningful answers that help them navigate a workflow.
+
+== Features
+
+* Connect to popular event streaming platforms like Apache Kafka and Apache Pulsar*
+* Leverage LLMs like ChatGPT, inference APIs like HuggingFace, vector databases like AstraDB, and chaining agents like LangChain with our included agents, no code required
+* Create your own real-time AI application pipelines with simple, declarative YAML files, or use our visual editor
+
+== Enable LangStream
+
+To use LangStream, xref:getting-started:index.html[create an Astra Streaming tenant] in the GCP us-east-1 region. More regions will be available soon.
+
+Your tenant will be created with a default namespace, which is a logical grouping of topics. You can create additional namespaces to organize your topics.
+
+Your tenant will be listed in the LangStream tab. Select *Enable* to enable LangStream for your tenant.
++
+image:enable-langstream.png[Enable LangStream]
+
+Under the hood, this is enabling the xref:starlight-for-kafka-docs:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
