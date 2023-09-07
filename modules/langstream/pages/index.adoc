@@ -199,6 +199,27 @@ image::app-deployed.png[App deployed]
 
 image::app-map.png[App map]
 
+== LangStream CLI connection values
+
+If you're running into issues, try updating the values in your local cli.yaml to match the values in your Astra Streaming tenant.
+
+[source,plain]
+----
+webServiceUrl: "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream"
+apiGatewayUrl: "wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/"
+tenant: "langstream-tenant"
+token: "AstraCS:BBJb..."
+----
+
+If you get lost along the way, here are the default values:
+[source,plain]
+----
+webServiceUrl: "http://localhost:8090"
+apiGatewayUrl: "ws://localhost:8091"
+tenant: "default"
+token: null`
+----
+
 == Check connection to Astra
 
 In the LangStream CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
