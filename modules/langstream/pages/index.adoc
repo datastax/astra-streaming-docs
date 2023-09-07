@@ -1,28 +1,26 @@
 = Getting Started with LangStream
 
 The LangStream project combines the intelligence of large language models with the agility of streaming processing, to create powerful processing applications.
-An application in LangStream can watch a message topic and process data through multiple steps to output some useful generative AI results. Say you have a goal of creating a chatbot that can stay up-to-date with some dataset that is constantly changing. As someone interacts with the bot, they are offered educated meaningful answers that help them navigate a workflow.
 
-== Features
+This guide will help you connect your LangStream application to Astra Streaming.
 
-* Connect to popular event streaming platforms like Apache Kafka and Apache Pulsar*
-* Leverage LLMs like ChatGPT, inference APIs like HuggingFace, vector databases like AstraDB, and chaining agents like LangChain with our included agents, no code required
-* Create your own real-time AI application pipelines with simple, declarative YAML files, or use our visual editor
+For the LangStream project repository, see https://github.com/LangStream/langstream[GitHub^]{external-link-icon}.
+
+== Install LangStream
+
+Use the https://docs.langstream.ai/get-started[LangStream quickstart^]{external-link-icon} to install LangStream locally with Helm.
 
 == Enable LangStream in Astra
 
-To use LangStream, xref:getting-started:index.html[create an Astra Streaming tenant] in the GCP us-east-1 region. More regions will be available soon.
+xref:getting-started:index.adoc[Create an Astra Streaming tenant] in the GCP us-east-1 region. More regions will be available soon.
 
 Your tenant will be created with a default namespace, which is a logical grouping of topics. You can create additional namespaces to organize your topics.
 
 Your tenant will be listed in the LangStream tab. Select *Enable* to enable LangStream for your tenant.
+
 image::enable-langstream.png[Enable LangStream]
 
 Under the hood, this is enabling the xref:starlight-for-kafka-docs:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
-
-== Install LangStream locally
-
-Use the https://docs.langstream.ai/get-started[LangStream quickstart^]{external-link-icon}.
 
 == Build a LangStream Application
 
@@ -55,10 +53,7 @@ Next, you will populate the YAML files to connect your application to your Astra
 
 Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
 The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
-The secrets are stored in the secrets.yaml file, which you'll populate in the next step.
-.instance.yaml
-[%collapsible]
-====
+The secrets for tokens and passwords are stored in the secrets.yaml file, which you'll populate in the next step.
 [source,yaml]
 ----
 instance:
@@ -75,16 +70,12 @@ instance:
   computeCluster:
     type: "kubernetes"
 ----
-====
 
 Secrets.yaml contains auth information for connecting to other services.
 These values are referenced with https://mustache.github.io/mustache.5.html[Mustache templating^]{external-link-icon} - for example, the Astra tenant name is referenced in instance.yaml with `'{{ secrets.astra-token.tenant }}'`.
 The pulsar-token is the Astra Streaming token, which is generated when you create a tenant.
 The Azure access key and URL are found in your Azure deployment.
 For more on finding secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
-.secrets.yaml
-[%collapsible]
-====
 [source,yaml]
 ----
 secrets:
@@ -100,13 +91,9 @@ secrets:
       access-key: 783f...
       url: https://company-openai-dev.openai.azure.com/
 ----
-====
 
 Pipeline.yaml contains the chain of agents that makes up your program, and the input and output topics that they communicate with.
 For more on building pipelines, see https://docs.langstream.ai/building-applications/pipelines[Pipelines^]{external-link-icon}.
-.pipeline.yaml
-[%collapsible]
-====
 [source,yaml]
 ----
 pipeline:
@@ -125,13 +112,9 @@ pipeline:
         - role: user
           content: "You are a helpful assistant. Below you can fine a question from the user. Please try to help them the best way you can.\n\n{{% value.question}}"
 ----
-====
 
 Gateways.yaml contains API gateways for communicating with your application.
 For more on gateways, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
-.gateways.yaml
-[%collapsible]
-====
 [source,yaml]
 ----
 gateways:
@@ -156,13 +139,9 @@ gateways:
           - key: langstream-client-session-id
             valueFromParameters: sessionId
 ----
-====
 
 Configuration.yaml contains additional configuration and resources for your application.
 For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration^]{external-link-icon}.
-.configuration.yaml
-[%collapsible]
-====
 [source,yaml]
 ----
 configuration:
@@ -175,7 +154,6 @@ configuration:
         provider: azure
   dependencies: []
 ----
-====
 
 Remember to save all your yaml files.
 
