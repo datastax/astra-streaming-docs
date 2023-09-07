@@ -16,8 +16,7 @@ To use LangStream, xref:getting-started:index.html[create an Astra Streaming ten
 Your tenant will be created with a default namespace, which is a logical grouping of topics. You can create additional namespaces to organize your topics.
 
 Your tenant will be listed in the LangStream tab. Select *Enable* to enable LangStream for your tenant.
-+
-image:enable-langstream.png[Enable LangStream]
+image::enable-langstream.png[Enable LangStream]
 
 Under the hood, this is enabling the xref:starlight-for-kafka-docs:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
 
@@ -241,7 +240,7 @@ You:
 ...
 ----
 
-image:websocket-chat.png[Websocket chat]
+image::websocket-chat.png[Websocket chat]
 
 Your gateway connection is confirmed, and you can send messages to your application.
 This sample-app also produces messages to the consume-history gateway to provide more context to the AI model.
