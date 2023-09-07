@@ -45,6 +45,7 @@ The example YAMLs below will connect your application to your Astra Streaming te
 Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
 The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
 The secrets are stored in the secrets.yaml file, which we'll populate in the next step.
+.instance.yaml
 [%collapsible]
 ====
 [source,yaml]
@@ -70,6 +71,7 @@ These values are referenced with Mustache templating - for example, the Astra te
 The pulsar-token is the Astra Streaming token, which is generated when you create a tenant.
 The Azure access key and URL are found in your Azure deployment.
 For more on finding secrets, see xref:https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
+.secrets.yaml
 [%collapsible]
 ====
 [source,yaml]
@@ -91,6 +93,7 @@ secrets:
 
 Pipeline.yaml contains the chain of agents that makes up your program, and the input and output topics that they communicate with.
 For more on building pipelines, see
+.pipeline.yaml
 [%collapsible]
 ====
 [source,yaml]
@@ -130,6 +133,7 @@ pipeline:
 ====
 
 Gateways.yaml contains API gateways for communicating with your application.
+.gateways.yaml
 [%collapsible]
 ====
 [source,yaml]
@@ -159,6 +163,7 @@ gateways:
 ====
 
 Configuration.yaml contains additional configuration and resources for your application.
+.configuration.yaml
 [%collapsible]
 ====
 [source,yaml]
