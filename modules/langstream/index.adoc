@@ -9,7 +9,7 @@ An application in LangStream can watch a message topic and process data through 
 * Leverage LLMs like ChatGPT, inference APIs like HuggingFace, vector databases like AstraDB, and chaining agents like LangChain with our included agents, no code required
 * Create your own real-time AI application pipelines with simple, declarative YAML files, or use our visual editor
 
-== Enable LangStream
+== Enable LangStream in Astra
 
 To use LangStream, xref:getting-started:index.html[create an Astra Streaming tenant] in the GCP us-east-1 region. More regions will be available soon.
 
@@ -19,6 +19,10 @@ Your tenant will be listed in the LangStream tab. Select *Enable* to enable Lang
 image::enable-langstream.png[Enable LangStream]
 
 Under the hood, this is enabling the xref:starlight-for-kafka-docs:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
+
+== Install LangStream locally
+
+Use the https://docs.langstream.ai/get-started[LangStream quickstart^]{external-link-icon}.
 
 == Build a LangStream Application
 
@@ -36,14 +40,22 @@ The application folder structure looks like this:
 |- secrets.yaml
 ----
 
-Populate the YAML files with information about your application, including the pipeline, gateways, and configuration.
-The example YAMLs below will connect your application to your Astra Streaming tenant.
+Here's a shortcut:
+[source,shell]
+----
+mkdir sample-app && cd sample-app
+touch configuration.yaml instance.yaml secrets.yaml
+mkdir application && cd application
+touch pipeline.yaml gateways.yaml
+----
+
+Next, you will populate the YAML files to connect your application to your Astra Streaming tenant.
 
 == Populate YAML files
 
 Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
 The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
-The secrets are stored in the secrets.yaml file, which we'll populate in the next step.
+The secrets are stored in the secrets.yaml file, which you'll populate in the next step.
 .instance.yaml
 [%collapsible]
 ====
@@ -66,10 +78,10 @@ instance:
 ====
 
 Secrets.yaml contains auth information for connecting to other services.
-These values are referenced with Mustache templating - for example, the Astra tenant name is referenced in instance.yaml with `'{{ secrets.astra-token.tenant }}'`.
+These values are referenced with https://mustache.github.io/mustache.5.html[Mustache templating^]{external-link-icon} - for example, the Astra tenant name is referenced in instance.yaml with `'{{ secrets.astra-token.tenant }}'`.
 The pulsar-token is the Astra Streaming token, which is generated when you create a tenant.
 The Azure access key and URL are found in your Azure deployment.
-For more on finding secrets, see xref:https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
+For more on finding secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
 .secrets.yaml
 [%collapsible]
 ====
@@ -91,40 +103,24 @@ secrets:
 ====
 
 Pipeline.yaml contains the chain of agents that makes up your program, and the input and output topics that they communicate with.
-For more on building pipelines, see
+For more on building pipelines, see https://docs.langstream.ai/building-applications/pipelines[Pipelines^]{external-link-icon}.
 .pipeline.yaml
 [%collapsible]
 ====
 [source,yaml]
 ----
 pipeline:
-  - name: "convert-to-json"
-    type: "document-to-json"
-    input: "input-topic"
-    configuration:
-      text-field: "question"
   - name: "ai-chat-completions"
     type: "ai-chat-completions"
     output: "history-topic"
     configuration:
-      model: "gpt-35-turbo" # This needs to be set to the model deployment name, not the base name
-      # on the log-topic we add a field with the answer
+      model: "gpt-35-turbo"
       completion-field: "value.answer"
-      # we are also logging the prompt we sent to the LLM
       log-field: "value.prompt"
-      # here we configure the streaming behavior
-      # as soon as the LLM answers with a chunk we send it to the answers-topic
       stream-to-topic: "output-topic"
-      # on the streaming answer we send the answer as whole message
-      # the 'value' syntax is used to refer to the whole value of the message
       stream-response-completion-field: "value"
-      # we want to stream the answer as soon as we have 20 chunks
-      # in order to reduce latency for the first message the agent sends the first message
-      # with 1 chunk, then with 2 chunks....up to the min-chunks-per-message value
-      # eventually we want to send bigger messages to reduce the overhead of each message on the topic
       min-chunks-per-message: 20
-      # you can turn off the streaming behavior by setting this to false
-      stream: true
+      stream: false
       messages:
         - role: user
           content: "You are a helpful assistant. Below you can fine a question from the user. Please try to help them the best way you can.\n\n{{% value.question}}"
@@ -132,6 +128,7 @@ pipeline:
 ====
 
 Gateways.yaml contains API gateways for communicating with your application.
+For more on gateways, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
 .gateways.yaml
 [%collapsible]
 ====
@@ -162,6 +159,7 @@ gateways:
 ====
 
 Configuration.yaml contains additional configuration and resources for your application.
+For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration^]{external-link-icon}.
 .configuration.yaml
 [%collapsible]
 ====
@@ -179,7 +177,7 @@ configuration:
 ----
 ====
 
-Save all your yaml files.
+Remember to save all your yaml files.
 
 == Deploy the LangStream application on Astra
 
