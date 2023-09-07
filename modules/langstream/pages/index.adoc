@@ -20,7 +20,7 @@ Your tenant will be listed in the LangStream tab. Select *Enable* to enable Lang
 
 image::enable-langstream.png[Enable LangStream]
 
-Under the hood, this is enabling the xref:starlight-for-kafka-docs:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
+Under the hood, this is enabling the xref:starlight-for-kafka:ROOT:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
 
 == Build a LangStream Application
 
