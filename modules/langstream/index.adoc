@@ -127,7 +127,7 @@ pipeline:
       stream: true
       messages:
         - role: user
-          content: "You are an helpful assistant. Below you can fine a question from the user. Please try to help them the best way you can.\n\n{{% value.question}}"
+          content: "You are a helpful assistant. Below you can fine a question from the user. Please try to help them the best way you can.\n\n{{% value.question}}"
 ----
 ====
 
@@ -208,12 +208,20 @@ app packaged
 deploying application: sample-app (0 KB)
 application sample-app deployed
 ID               STREAMING        COMPUTE          STATUS           EXECUTORS        REPLICAS
-sample-app       kafka            kubernetes       DEPLOYING        0/0
+sample-app       kafka            kubernetes       DEPLOYED         1/1              1/1
 ----
 --
 ====
 
 Ensure your app is running - a Kubernetes pod should be deployed with your application, and STATUS will change to DEPLOYED.
+
+Your application should be listed in your LangStream tenant:
+
+image::app-deployed.png[App deployed]
+
+... and you should see a map of your application in the LangStream UI:
+
+image::app-map.png[App map]
 
 == Check connection to Astra
 
@@ -225,7 +233,7 @@ This command will connect to your tenant and consume from the output-topic and p
 ----
 
 In Astra Streaming, confirm that your application is connected to your tenant.
-Select the Websocket tab of your LangStream-enabled tenant, and choose to consume output-topic and to produce to input-topic.
+Select the Websocket tab of your LangStream-enabled tenant, and choose to consume from output-topic and to produce to input-topic.
 If the Websocket tab is not visible, you may need to refresh the page or try opening it in Incognito mode.
 Send a message to your application, and confirm that it is received by the Astra websocket:
 [source,plain]
