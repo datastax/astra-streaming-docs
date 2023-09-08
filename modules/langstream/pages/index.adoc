@@ -52,7 +52,6 @@ Next, you will populate the YAML files to connect your application to your Astra
 == Populate YAML files
 
 Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
-The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
 The secrets for tokens and passwords are stored in the secrets.yaml file, which you'll populate in the next step.
 [source,yaml]
 ----
@@ -78,7 +77,7 @@ You can either export the secrets or replace the values in secrets.yaml with the
 export OPEN_AI_URL=https://company-openai-dev.openai.azure.com/
 export OPEN_AI_ACCESS_KEY=your-openai-access-key
 export OPEN_AI_EMBEDDINGS_MODEL=text-embedding-ada-002
-export OPEN_AI_CHAT_COMPLETIONS_MODEL=openai
+export OPEN_AI_CHAT_COMPLETIONS_MODEL=gpt-35-turbo
 export OPEN_AI_PROVIDER=azure
 export KAFKA_USERNAME=langstream-tenant
 export KAFKA_PASSWORD=eyJhb...
@@ -89,7 +88,7 @@ export ASTRA_TOKEN=AstraCS:...
 ----
 These values are referenced with https://mustache.github.io/mustache.5.html[Mustache templating^]{external-link-icon} - for example, the Kafka username is referenced in instance.yaml with `'{{{ secrets.kafka.username }}}'`.
 The Astra client-id, token, and secret are generated in the Astra UI.
-The kafka-username is the tenant name, and the kafka-password is the Astra Streaming token.
+The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
 The Azure access key and URL are found in your Azure OpenAI deployment.
 For more on finding secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
 [source,yaml]
@@ -264,7 +263,11 @@ image::app-map.png[App map]
 
 == LangStream CLI connection values
 
-If you're running into issues, try updating the values in your local cli.yaml to match the values in your Astra Streaming tenant.
+If you're running into issues, ensure the values in your CLI profile to match the values in your Astra Streaming tenant.
+
+If you're unsure of the profile name, try `default`.
+
+`langstream profiles get <my-profile> -o=json` displays the current values.
 
 [source,plain]
 ----
@@ -274,22 +277,27 @@ tenant: "langstream-tenant"
 token: "AstraCS:..."
 ----
 
+To update these values, use `langstream profiles update <my-profile> --command-option="value"`.
+[cols="2,3", options="header"]
+|===
+| Command Option   | Description
+| --set-current    | Set this profile as current
+| --web-service-url| webServiceUrl of the profile
+| --api-gateway-url| apiGatewayUrl of the profile
+| --tenant         | tenant of the profile
+| --token          | token of the profile
+|===
+
 If you get lost along the way, here are the default values:
 [source,plain]
 ----
 webServiceUrl: "http://localhost:8090"
 apiGatewayUrl: "ws://localhost:8091"
 tenant: "default"
-token: null`
+token: null
 ----
 
-Ensure the CLI is using the values from cli.yaml:
-[source,plain]
-----
-LANGSTREAM_CLI_CONFIG=./conf/cli.yaml
-----
-
-If you're having trouble finding the values for your tenant, issue a curl call to it to find the values:
+Isue a curl call to it to find the connection values for your tenant:
 The `X-DataStax-Current-Org` value is the client-id associated with the Pulsar token.
 [tabs]
 ====
@@ -320,7 +328,7 @@ Result::
 --
 ====
 
-Ensure the values returned from the curl call match the values in your cli.yaml.
+Ensure the values returned from the curl call match the values in your LangStream CLI profile.
 
 == Check connection to Astra
 
@@ -338,8 +346,8 @@ Send a message to your application, and confirm that it is received by the Astra
 [source,plain]
 ----
 ./bin/langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
-Connected to ws://localhost:8091/v1/consume/default/sample-app/consume-output?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&option:position=latest
-Connected to ws://localhost:8091/v1/produce/default/sample-app/produce-input?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&
+Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-output?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&option:position=latest
+Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/produce-input?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&
 
 You:
 > Hi Astra, it's me, K8s. How are you?
@@ -368,7 +376,7 @@ Result::
 --
 [source,plain]
 ----
-Connected to ws://localhost:8091/v1/consume/default/sample-app/consume-history?&&
+Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-history?&&
 {"record":{"key":null,"value":"Hi K8s, it's me, Astra.","headers":{}},"offset":"eyJvZmZzZXRzIjp7IjAiOiIxIn19"}
 ----
 --
