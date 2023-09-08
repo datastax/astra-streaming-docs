@@ -72,19 +72,20 @@ instance:
 ----
 
 Secrets.yaml contains auth information for connecting to other services.
-If you're looking to just run an example application quickly, you can use bash-like export syntax for secrets.
+You can either export the secrets or replace the values in secrets.yaml with the actual values.
 [source,shell]
 ----
-export OPEN_AI_URL=https://datastax-openai-dev.openai.azure.com/
-export OPEN_AI_ACCESS_KEY=783fe7bc013149f2a197ce3a4ef54531
-export OPEN_AI_EMBEDDINGS_MODEL=gpt-35-turbo
+export OPEN_AI_URL=https://company-openai-dev.openai.azure.com/
+export OPEN_AI_ACCESS_KEY=your-openai-access-key
+export OPEN_AI_EMBEDDINGS_MODEL=text-embedding-ada-002
 export OPEN_AI_CHAT_COMPLETIONS_MODEL=openai
 export OPEN_AI_PROVIDER=azure
-export kafka_username=langstream-tenant
-export kafka_password=eyJhb...
-export kafka_bootstrap_servers=kafka-gcp-useast1.streaming.datastax.com:9093
-export astra_client_id=xxxx
-export astra_token=AstraCS:...
+export KAFKA_USERNAME=langstream-tenant
+export KAFKA_PASSWORD=eyJhb...
+export KAFKA_BOOTSTRAP_SERVERS=kafka-gcp-useast1.streaming.datastax.com:9093
+export KAFKA_TENANT=langstream-tenant
+export ASTRA_CLIENT_ID=xxxx
+export ASTRA_TOKEN=AstraCS:...
 ----
 These values are referenced with https://mustache.github.io/mustache.5.html[Mustache templating^]{external-link-icon} - for example, the Kafka username is referenced in instance.yaml with `'{{{ secrets.kafka.username }}}'`.
 The Astra client-id, token, and secret are generated in the Astra UI.
@@ -267,10 +268,10 @@ If you're running into issues, try updating the values in your local cli.yaml to
 
 [source,plain]
 ----
-webServiceUrl: "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream"
+webServiceUrl: "https://api.streaming.datastax.com/langstream"
 apiGatewayUrl: "wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/"
 tenant: "langstream-tenant"
-token: "AstraCS:BBJb..."
+token: "AstraCS:..."
 ----
 
 If you get lost along the way, here are the default values:
