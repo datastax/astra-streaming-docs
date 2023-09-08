@@ -220,6 +220,45 @@ tenant: "default"
 token: null`
 ----
 
+Ensure the CLI is using the values from cli.yaml:
+[source,plain]
+----
+LANGSTREAM_CLI_CONFIG=./conf/cli.yaml
+----
+
+If you're having trouble finding the values for your tenant, issue a curl call to it to find the values:
+The `X-DataStax-Current-Org` value is the client-id associated with the Pulsar token.
+[tabs]
+====
+curl::
++
+--
+[source,plain]
+----
+curl --location --request POST 'https://api.streaming.datastax.com/langstream/langstream-tenant' \
+--header 'X-DataStax-Current-Org:BBJbfIZPeTgrffXGHPUPJZsq' \
+--header 'X-DataStax-Pulsar-Cluster: pulsar-gcp-useast1' \
+--header 'Authorization: Bearer eyG...'
+----
+--
+
+Result::
++
+--
+[source,plain]
+----
+{
+		"status":true,
+		"webServiceUrl":"https://api.streaming.datastax.com/langstream",
+		"apiGatewayUrl":"wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
+		"tenant":"langstream-tenant",
+		"token":"{astra token}"}
+----
+--
+====
+
+Ensure the values returned from the curl call match the values in your cli.yaml.
+
 == Check connection to Astra
 
 In the LangStream CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
