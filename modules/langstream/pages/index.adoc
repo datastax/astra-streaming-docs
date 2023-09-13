@@ -1,0 +1,385 @@
+= Getting Started with LangStream
+
+The LangStream project combines the intelligence of large language models with the agility of streaming processing, to create powerful processing applications.
+
+This guide will help you connect your LangStream application to Astra Streaming.
+
+For the LangStream project repository, see https://github.com/LangStream/langstream[GitHub^]{external-link-icon}.
+
+== Install LangStream
+
+Use the https://docs.langstream.ai/get-started[LangStream quickstart^]{external-link-icon} to install LangStream locally with Helm.
+
+== Enable LangStream in Astra
+
+xref:getting-started:index.adoc[Create an Astra Streaming tenant] in the GCP us-east-1 region. More regions will be available soon.
+
+Your tenant will be created with a default namespace, which is a logical grouping of topics. You can create additional namespaces to organize your topics.
+
+Your tenant will be listed in the LangStream tab. Select *Enable* to enable LangStream for your tenant.
+
+image::enable-langstream.png[Enable LangStream]
+
+Under the hood, this is enabling the xref:starlight-for-kafka:ROOT:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
+
+== Build a LangStream Application
+
+Build a LangStream application by creating YAML files to describe the application.
+The application folder structure looks like this:
+
+[source,shell]
+----
+|- sample-app
+|- application
+    |- pipeline.yaml
+    |- gateways.yaml
+|- instance.yaml
+|- configuration.yaml
+|- secrets.yaml (optional)
+----
+
+Here's a shortcut:
+[source,shell]
+----
+mkdir sample-app && cd sample-app
+touch configuration.yaml instance.yaml secrets.yaml
+mkdir application && cd application
+touch pipeline.yaml gateways.yaml
+----
+
+Next, you will populate the YAML files to connect your application to your Astra Streaming tenant.
+
+== Populate YAML files
+
+Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
+The secrets for tokens and passwords are stored in the secrets.yaml file, which you'll populate in the next step.
+[source,yaml]
+----
+instance:
+  streamingCluster:
+    type: "kafka"
+    configuration:
+      admin:
+        bootstrap.servers: "{{{ secrets.kafka.bootstrap.servers }}}"
+        security.protocol: SASL_SSL
+        sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='{{{ secrets.kafka.username }}}' password='{{{ secrets.kafka.password }}}';"
+        sasl.mechanism: PLAIN
+        session.timeout.ms: "45000"
+
+  computeCluster:
+    type: "kubernetes"
+----
+
+Secrets.yaml contains auth information for connecting to other services.
+
+These values are referenced with https://mustache.github.io/mustache.5.html[Mustache templating^]{external-link-icon} - for example, the Kafka username is referenced in instance.yaml with `'{{{ secrets.kafka.username }}}'`.
+The Astra client-id, token, and secret are generated in the Astra UI.
+The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
+The Azure access key and URL are found in your Azure OpenAI deployment.
+For more on finding secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
+[source,yaml]
+----
+secrets:
+  - id: kafka
+    data:
+      username: "${KAFKA_USERNAME:-}"
+      password: "${KAFKA_PASSWORD:-}"
+      tenant: "${KAFKA_TENANT:-}"
+      bootstrap.servers: "${KAFKA_BOOTSTRAP_SERVERS:-}"
+  - id: open-ai
+    data:
+      access-key: "${OPEN_AI_ACCESS_KEY:-}"
+      url: "${OPEN_AI_URL:-}"
+      provider: "${OPEN_AI_PROVIDER:-azure}"
+      embeddings-model: "${OPEN_AI_EMBEDDINGS_MODEL:-text-embedding-ada-002}"
+      chat-completions-model: "${OPEN_AI_CHAT_COMPLETIONS_MODEL:-gpt-35-turbo}"
+  - id: astra
+    data:
+      clientId: ${ASTRA_CLIENT_ID:-}
+      secret: ${ASTRA_SECRET:-}
+      token: ${ASTRA_TOKEN:-}
+----
+
+You can either replace the values in secrets.yaml with the actual values, or export the secrets as below:
+[source,shell]
+----
+export OPEN_AI_URL=https://company-openai-dev.openai.azure.com/
+export OPEN_AI_ACCESS_KEY=your-openai-access-key
+export OPEN_AI_EMBEDDINGS_MODEL=text-embedding-ada-002
+export OPEN_AI_CHAT_COMPLETIONS_MODEL=gpt-35-turbo
+export OPEN_AI_PROVIDER=azure
+export KAFKA_USERNAME=langstream-tenant
+export KAFKA_PASSWORD=eyJhb...
+export KAFKA_BOOTSTRAP_SERVERS=kafka-gcp-useast1.streaming.datastax.com:9093
+export KAFKA_TENANT=langstream-tenant
+export ASTRA_CLIENT_ID=xxxx
+export ASTRA_TOKEN=AstraCS:...
+----
+
+Pipeline.yaml contains the chain of agents that makes up your program, and the input and output topics that they communicate with.
+For more on building pipelines, see https://docs.langstream.ai/building-applications/pipelines[Pipelines^]{external-link-icon}.
+[source,yaml]
+----
+topics:
+  - name: "input-topic"
+    creation-mode: create-if-not-exists
+  - name: "output-topic"
+    creation-mode: create-if-not-exists
+  - name: "history-topic"
+    creation-mode: create-if-not-exists
+pipeline:
+  - name: "convert-to-json"
+    type: "document-to-json"
+    input: "input-topic"
+    configuration:
+      text-field: "question"
+  - name: "ai-chat-completions"
+    type: "ai-chat-completions"
+    output: "history-topic"
+    configuration:
+      model: "{{{secrets.open-ai.chat-completions-model}}}"
+      completion-field: "value.answer"
+      log-field: "value.prompt"
+      stream-to-topic: "output-topic"
+      stream-response-completion-field: "value"
+      min-chunks-per-message: 20
+      stream: true
+      messages:
+        - role: user
+          content: "You are a helpful assistant. Below you can find a question from the user. Please try to help them the best way you can.\n\n{{% value.question}}"
+----
+
+Gateways.yaml contains API gateways for communicating with your application.
+For more on gateways, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
+[source,yaml]
+----
+gateways:
+  - id: produce-input
+    type: produce
+    topic: input-topic
+    parameters:
+      - sessionId
+    produceOptions:
+      headers:
+        - key: langstream-client-session-id
+          valueFromParameters: sessionId
+
+  - id: consume-output
+    type: consume
+    topic: output-topic
+    parameters:
+      - sessionId
+    consumeOptions:
+      filters:
+        headers:
+          - key: langstream-client-session-id
+            valueFromParameters: sessionId
+
+  - id: consume-history
+    type: consume
+    topic: history-topic
+
+  - id: produce-input-auth
+    type: produce
+    topic: input-topic
+    authentication:
+      provider: google
+      configuration:
+        clientId: "{{ secrets.google.client-id }}"
+    produceOptions:
+      headers:
+        - key: langstream-client-user-id
+          valueFromAuthentication: subject
+
+  - id: consume-output-auth
+    type: consume
+    topic: output-topic
+    authentication:
+      provider: google
+      configuration:
+        clientId: "{{ secrets.google.client-id }}"
+    consumeOptions:
+      filters:
+        headers:
+          - key: langstream-client-user-id
+            valueFromAuthentication: subject
+----
+
+Configuration.yaml contains additional configuration and resources for your application.
+For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration^]{external-link-icon}.
+[source,yaml]
+----
+configuration:
+  resources:
+    - type: "open-ai-configuration"
+      name: "OpenAI Azure configuration"
+      configuration:
+        url: "{{ secrets.open-ai.url }}"
+        access-key: "{{ secrets.open-ai.access-key }}"
+        provider: "{{ secrets.open-ai.provider }}"
+----
+
+Remember to save all your yaml files.
+
+== Deploy the LangStream application on Astra
+
+To deploy the application, run the following commands from the root of your application folder.
+The first command deploys the application, and the second command gets the status of the application.
+For more on the LangStream CLI commands, see https://docs.langstream.ai/installation/langstream-cli[LangStream CLI^]{external-link-icon}.
+[tabs]
+====
+LangStream CLI::
++
+--
+[source,plain]
+----
+langstream apps deploy sample-app -app ./application -i ./instance.yaml -s ./secrets.yaml
+langstream apps get sample-app
+----
+--
+
+Result::
++
+--
+[source,plain]
+----
+packaging app: /Users/mendon.kissling/sample-app/./application
+app packaged
+deploying application: sample-app (0 KB)
+application sample-app deployed
+ID               STREAMING        COMPUTE          STATUS           EXECUTORS        REPLICAS
+sample-app       kafka            kubernetes       DEPLOYED         1/1              1/1
+----
+--
+====
+
+Ensure your app is running - a Kubernetes pod should be deployed with your application, and STATUS will change to DEPLOYED.
+
+Your application should be listed in your LangStream tenant:
+
+image::app-deployed.png[App deployed]
+
+You should see a map of your application in the LangStream UI:
+
+image::app-map.png[App map]
+
+== LangStream CLI connection values
+
+If you're running into issues, ensure the values in your CLI profile to match the values in your Astra Streaming tenant.
+
+If you're unsure of the profile name, try `default`.
+
+`langstream profiles get <my-profile> -o=json` displays the current values.
+
+[source,plain]
+----
+webServiceUrl: "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream"
+apiGatewayUrl: "wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/"
+tenant: "langstream-tenant"
+token: "AstraCS:..."
+----
+
+To update these values, use `langstream profiles update <my-profile> --command-option="value"`.
+[cols="2,3", options="header"]
+|===
+| Command Option   | Description
+| --set-current    | Set this profile as current
+| --web-service-url| webServiceUrl of the profile
+| --api-gateway-url| apiGatewayUrl of the profile
+| --tenant         | tenant of the profile
+| --token          | token of the profile
+|===
+
+If you get lost along the way, here are the default values:
+[source,plain]
+----
+webServiceUrl: "http://localhost:8090"
+apiGatewayUrl: "ws://localhost:8091"
+tenant: "default"
+token: null
+----
+
+Issue a curl call to the your LangStream tenant to find the connection values for your tenant:
+The `X-DataStax-Current-Org` value is the client-id associated with the Pulsar token.
+[tabs]
+====
+curl::
++
+--
+[source,plain]
+----
+curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/langstream-tenant' \
+--header 'X-DataStax-Current-Org:BBJbfIZPeTgrffXGHPUPJZsq' \
+--header 'X-DataStax-Pulsar-Cluster: pulsar-gcp-useast1' \
+--header 'Authorization: Bearer eyG...'
+----
+--
+
+Result::
++
+--
+[source,plain]
+----
+{
+		"status":true,
+		"webServiceUrl":"https://api.streaming.datastax.com/langstream",
+		"apiGatewayUrl":"wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
+		"tenant":"langstream-tenant",
+		"token":"{astra token}"}
+----
+--
+====
+
+Ensure the values returned from the curl call match the values in your LangStream CLI profile.
+
+== Check connection to Astra
+
+In the LangStream CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
+This command will connect to your tenant and consume from the output-topic and produce to the input-topic.
+[source,plain]
+----
+./bin/langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
+----
+
+In Astra Streaming, confirm that your application is connected to your tenant.
+Select the Websocket tab of your LangStream-enabled tenant, and choose to consume from output-topic and to produce to input-topic.
+If the Websocket tab is not visible, you may need to refresh the page or try opening it in Incognito mode.
+Send a message to your application, and confirm that it is received by the Astra websocket:
+[source,plain]
+----
+./bin/langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
+Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-output?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&option:position=latest
+Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/produce-input?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&
+
+You:
+> Hi Astra, it's me, K8s. How are you?
+..✅
+...
+----
+
+image::websocket-chat.png[Websocket chat]
+
+Your gateway connection is confirmed, and you can send messages to your application.
+This sample-app also produces messages to the consume-history gateway to provide more context to the AI model.
+To consume from this gateway, run the following command:
+[tabs]
+====
+LangStream CLI::
++
+--
+[source,plain]
+----
+./bin/langstream gateway consume sample-app consume-history
+----
+--
+
+Result::
++
+--
+[source,plain]
+----
+Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-history?&&
+{"record":{"key":null,"value":"Hi K8s, it's me, Astra.","headers":{}},"offset":"eyJvZmZzZXRzIjp7IjAiOiIxIn19"}
+----
+--
+====
