@@ -257,7 +257,7 @@ Your application should be listed in your LangStream tenant:
 
 image::app-deployed.png[App deployed]
 
-... and you should see a map of your application in the LangStream UI:
+You should see a map of your application in the LangStream UI:
 
 image::app-map.png[App map]
 
@@ -297,7 +297,7 @@ tenant: "default"
 token: null
 ----
 
-Isue a curl call to it to find the connection values for your tenant:
+Issue a curl call to the your LangStream tenant to find the connection values for your tenant:
 The `X-DataStax-Current-Org` value is the client-id associated with the Pulsar token.
 [tabs]
 ====
@@ -306,7 +306,7 @@ curl::
 --
 [source,plain]
 ----
-curl --location --request POST 'https://api.streaming.datastax.com/langstream/langstream-tenant' \
+curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/langstream-tenant' \
 --header 'X-DataStax-Current-Org:BBJbfIZPeTgrffXGHPUPJZsq' \
 --header 'X-DataStax-Pulsar-Cluster: pulsar-gcp-useast1' \
 --header 'Authorization: Bearer eyG...'
