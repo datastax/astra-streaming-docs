@@ -54,6 +54,7 @@ Next, you will populate the YAML files to connect your application to your Astra
 
 Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
 The secrets for tokens and passwords are stored in the secrets.yaml file, which you'll populate in the next step.
+An instance.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
 [source,yaml]
 ----
 instance:
@@ -84,8 +85,9 @@ export ASTRA_TOKEN=...
 
 When you go to production, you should create a dedicated secrets.yaml file for each environment.
 The Astra client-id, token, and secret are generated in the Astra UI.
-The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
+The values for the Kafka bootstrap server are found in your Astra Streaming tenant or in the Starlight for Kafka ssl.properties file.
 The Azure access key and URL are found in your Azure OpenAI deployment.
+A secrets.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
 For more on finding secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
 [source,yaml]
 ----
@@ -166,7 +168,7 @@ pipeline:
 ----
 
 Gateways.yaml contains API gateways for communicating with your application.
-For more on gateways, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
+For more on gateways and authentication, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
 [source,yaml]
 ----
 gateways:
@@ -239,6 +241,7 @@ gateways:
 ----
 
 Configuration.yaml contains additional configuration and resources for your application.
+A configuration.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
 For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration^]{external-link-icon}.
 [source,yaml]
 ----
@@ -278,7 +281,7 @@ Result::
 ----
 packaging app: /Users/mendon.kissling/sample-app/./application
 app packaged
-deploying application: sample-app (0 KB)
+deploying application: sample-app (1 KB)
 application sample-app deployed
 ID               STREAMING        COMPUTE          STATUS           EXECUTORS        REPLICAS
 sample-app       kafka            kubernetes       DEPLOYED         1/1              1/1
@@ -296,20 +299,23 @@ You should see a map of your application in the LangStream UI:
 
 image::app-map.png[App map]
 
+To get logs for your application, use `langstream apps logs <my-application>`.
+
 == LangStream CLI connection values
 
-If you're running into issues, ensure the values in your CLI profile to match the values in your Astra Streaming tenant.
+If you're running into issues, ensure the values in your CLI profile match the values in your Astra Streaming tenant.
 
-If you're unsure of the profile name, try `default`.
-
-`langstream profiles get <my-profile> -o=json` displays the current values.
+If you're unsure of the profile name, use `langstream profiles list`, then `langstream profiles get <my-profile> -o=json` to display the current values.
 
 [source,plain]
 ----
-webServiceUrl: "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream"
-apiGatewayUrl: "wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/"
-tenant: "langstream-tenant"
-token: "AstraCS:..."
+{
+  "webServiceUrl" : "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/langstream",
+  "apiGatewayUrl" : "wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway/",
+  "tenant" : "langstream-tenant",
+  "token" : "AstraCS:...",
+  "name" : "astra-langstream-tenant"
+}
 ----
 
 To update these values, use `langstream profiles update <my-profile> --command-option="value"`.
@@ -323,7 +329,7 @@ To update these values, use `langstream profiles update <my-profile> --command-o
 | --token          | token of the profile
 |===
 
-If you get lost along the way, here are the default values:
+If you get lost along the way, here are the default profile values:
 [source,plain]
 ----
 webServiceUrl: "http://localhost:8090"
@@ -333,7 +339,7 @@ token: null
 ----
 
 Issue a curl call to the your LangStream tenant to find the connection values for your tenant:
-The `X-DataStax-Current-Org` value is the client-id associated with the Pulsar token.
+The `X-DataStax-Current-Org` value is the client-id associated with the Astra token, and can be found in the Astra UI.
 [tabs]
 ====
 curl::
@@ -341,10 +347,10 @@ curl::
 --
 [source,plain]
 ----
-curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/langstream-tenant' \
---header 'X-DataStax-Current-Org:BBJbfIZPeTgrffXGHPUPJZsq' \
---header 'X-DataStax-Pulsar-Cluster: pulsar-gcp-useast1' \
---header 'Authorization: Bearer eyG...'
+curl --location --request POST 'https://pulsar-aws-useast2.api.dev.streaming.datastax.com/langstream/langstream-tenant' \
+--header 'X-DataStax-Current-Org:lzAiCLsTMKruZZZUxieNgYhe' \
+--header 'X-DataStax-Pulsar-Cluster: astradev-aws' \
+--header 'Authorization: Bearer AstraCS:
 ----
 --
 
@@ -354,11 +360,11 @@ Result::
 [source,plain]
 ----
 {
-		"status":true,
-		"webServiceUrl":"https://api.streaming.datastax.com/langstream",
-		"apiGatewayUrl":"wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
-		"tenant":"langstream-tenant",
-		"token":"{astra token}"}
+  "status":true,
+  "webServiceUrl":"https://pulsar-aws-useast2.api.dev.streaming.datastax.com/langstream",
+  "apiGatewayUrl":"wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway/",
+  "tenant":"langstream-tenant",
+  "token":"{astra token}"}%
 ----
 --
 ====
@@ -371,7 +377,7 @@ In the LangStream CLI, run the following command to open a gateway connection to
 This command will connect to your tenant and consume from the output-topic and produce to the input-topic.
 [source,plain]
 ----
-./bin/langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
+langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
 ----
 
 In Astra Streaming, confirm that your application is connected to your tenant.
@@ -380,9 +386,9 @@ If the Websocket tab is not visible, you may need to refresh the page or try ope
 Send a message to your application, and confirm that it is received by the Astra websocket:
 [source,plain]
 ----
-./bin/langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
-Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-output?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&option:position=latest
-Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/produce-input?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&
+langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
+Connected to wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
+Connected to wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway//v1/produce/langstream-tenant/sample-app/produce-input?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 
 You:
 > Hi Astra, it's me, K8s. How are you?
@@ -402,7 +408,7 @@ LangStream CLI::
 --
 [source,plain]
 ----
-./bin/langstream gateway consume sample-app consume-history
+langstream gateway consume sample-app consume-history -p sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 ----
 --
 
@@ -411,7 +417,7 @@ Result::
 --
 [source,plain]
 ----
-Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-history?&&
+Connected to wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-history?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 {"record":{"key":null,"value":"Hi K8s, it's me, Astra.","headers":{}},"offset":"eyJvZmZzZXRzIjp7IjAiOiIxIn19"}
 ----
 --
