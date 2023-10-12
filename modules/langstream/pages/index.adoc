@@ -29,24 +29,25 @@ The application folder structure looks like this:
 
 [source,shell]
 ----
-|- sample-app
-|- application
-    |- pipeline.yaml
-    |- gateways.yaml
+|- project-folder
+    |- application
+        |- pipeline.yaml
+        |- gateways.yaml
+        |- configuration.yaml
+|- secrets.yaml
 |- instance.yaml
-|- configuration.yaml
-|- secrets.yaml (optional)
 ----
 
 Here's a shortcut:
 [source,shell]
 ----
-mkdir sample-app && cd sample-app
-touch configuration.yaml instance.yaml secrets.yaml
+mkdir project-folder && cd project-folder
+touch secrets.yaml instance.yaml
 mkdir application && cd application
-touch pipeline.yaml gateways.yaml
+touch pipeline.yaml gateways.yaml configuration.yaml
 ----
 
+The instance.yaml and secrets.yaml files cannot be in the "application" directory, because it is passed as a zip at runtime.
 Next, you will populate the YAML files to connect your application to your Astra Streaming tenant.
 
 == Populate YAML files
@@ -60,9 +61,9 @@ instance:
     type: "kafka"
     configuration:
       admin:
-        bootstrap.servers: "{{{ secrets.kafka.bootstrap.servers }}}"
-        security.protocol: SASL_SSL
-        sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='{{{ secrets.kafka.username }}}' password='{{{ secrets.kafka.password }}}';"
+        bootstrap.servers: "${ secrets.kafka.bootstrapServers }"
+        security.protocol: "${ secrets.kafka.securityProtocol }"
+        sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='${ secrets.kafka.username }' password='${ secrets.kafka.password }';"
         sasl.mechanism: PLAIN
         session.timeout.ms: "45000"
 
@@ -71,8 +72,17 @@ instance:
 ----
 
 Secrets.yaml contains auth information for connecting to other services.
+Secret values can be modified directly in secrets.yaml, or you can pass your secrets as environment variables. The secrets.yaml resolves these environment variables.
 
-These values are referenced with https://mustache.github.io/mustache.5.html[Mustache templating^]{external-link-icon} - for example, the Kafka username is referenced in instance.yaml with `'{{{ secrets.kafka.username }}}'`.
+[source,bash]
+----
+export ASTRA_CLIENT_ID=...
+export ASTRA_SECRET=...
+export ASTRA_DATABASE=...
+export ASTRA_TOKEN=...
+----
+
+When you go to production, you should create a dedicated secrets.yaml file for each environment.
 The Astra client-id, token, and secret are generated in the Astra UI.
 The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
 The Azure access key and URL are found in your Azure OpenAI deployment.
@@ -80,12 +90,14 @@ For more on finding secrets, see https://docs.langstream.ai/building-application
 [source,yaml]
 ----
 secrets:
-  - id: kafka
+  - id: astra
     data:
-      username: "${KAFKA_USERNAME:-}"
-      password: "${KAFKA_PASSWORD:-}"
-      tenant: "${KAFKA_TENANT:-}"
-      bootstrap.servers: "${KAFKA_BOOTSTRAP_SERVERS:-}"
+      clientId: ${ASTRA_CLIENT_ID:-}
+      secret: ${ASTRA_SECRET:-}
+      token: ${ASTRA_TOKEN:-}
+      database: ${ASTRA_DATABASE:-}
+      secureBundle: ${ASTRA_SECURE_BUNDLE:-}
+      environment: ${ASTRA_ENVIRONMENT:-PROD}
   - id: open-ai
     data:
       access-key: "${OPEN_AI_ACCESS_KEY:-}"
@@ -93,14 +105,9 @@ secrets:
       provider: "${OPEN_AI_PROVIDER:-azure}"
       embeddings-model: "${OPEN_AI_EMBEDDINGS_MODEL:-text-embedding-ada-002}"
       chat-completions-model: "${OPEN_AI_CHAT_COMPLETIONS_MODEL:-gpt-35-turbo}"
-  - id: astra
-    data:
-      clientId: ${ASTRA_CLIENT_ID:-}
-      secret: ${ASTRA_SECRET:-}
-      token: ${ASTRA_TOKEN:-}
 ----
 
-You can either replace the values in secrets.yaml with the actual values, or export the secrets as below:
+You can either replace the values in secrets.yaml with the actual values, use a .env file, or export the secrets as below:
 [source,shell]
 ----
 export OPEN_AI_URL=https://company-openai-dev.openai.azure.com/
@@ -137,16 +144,25 @@ pipeline:
     type: "ai-chat-completions"
     output: "history-topic"
     configuration:
-      model: "{{{secrets.open-ai.chat-completions-model}}}"
+      model: "${secrets.open-ai.chat-completions-model}" # This needs to be set to the model deployment name, not the base name
+      # on the log-topic we add a field with the answer
       completion-field: "value.answer"
+      # we are also logging the prompt we sent to the LLM
       log-field: "value.prompt"
+      # here we configure the streaming behavior
+      # as soon as the LLM answers with a chunk we send it to the answers-topic
       stream-to-topic: "output-topic"
+      # on the streaming answer we send the answer as whole message
+      # the 'value' syntax is used to refer to the whole value of the message
       stream-response-completion-field: "value"
-      min-chunks-per-message: 20
-      stream: true
+      # we want to stream the answer as soon as we have 10 chunks
+      # in order to reduce latency for the first message the agent sends the first message
+      # with 1 chunk, then with 2 chunks....up to the min-chunks-per-message value
+      # eventually we want to send bigger messages to reduce the overhead of each message on the topic
+      min-chunks-per-message: 10
       messages:
         - role: user
-          content: "You are a helpful assistant. Below you can find a question from the user. Please try to help them the best way you can.\n\n{{% value.question}}"
+          content: "You are a helpful assistant. Below you can find a question from the user. Please try to help them the best way you can.\n\n{{ value.question}}"
 ----
 
 Gateways.yaml contains API gateways for communicating with your application.
@@ -159,50 +175,67 @@ gateways:
     topic: input-topic
     parameters:
       - sessionId
-    produceOptions:
+    produce-options:
       headers:
         - key: langstream-client-session-id
-          valueFromParameters: sessionId
+          value-from-parameters: sessionId
+
+  - id: chat
+    type: chat
+    chat-options:
+      answers-topic: output-topic
+      questions-topic: input-topic
 
   - id: consume-output
     type: consume
     topic: output-topic
     parameters:
       - sessionId
-    consumeOptions:
+    consume-options:
       filters:
         headers:
           - key: langstream-client-session-id
-            valueFromParameters: sessionId
+            value-from-parameters: sessionId
 
   - id: consume-history
     type: consume
     topic: history-topic
+    parameters:
+      - sessionId
+    consume-options:
+      filters:
+        headers:
+          - key: langstream-client-session-id
+            value-from-parameters: sessionId
 
   - id: produce-input-auth
     type: produce
     topic: input-topic
+    parameters:
+      - sessionId
     authentication:
       provider: google
       configuration:
-        clientId: "{{ secrets.google.client-id }}"
-    produceOptions:
+        clientId: "${secrets.google.client-id}"
+    produce-options:
       headers:
         - key: langstream-client-user-id
-          valueFromAuthentication: subject
+          value-from-authentication: subject
 
   - id: consume-output-auth
     type: consume
     topic: output-topic
+    parameters:
+      - sessionId
     authentication:
       provider: google
       configuration:
-        clientId: "{{ secrets.google.client-id }}"
-    consumeOptions:
+        clientId: "${secrets.google.client-id}"
+    consume-options:
       filters:
         headers:
           - key: langstream-client-user-id
-            valueFromAuthentication: subject
+            value-from-authentication: subject
 ----
 
 Configuration.yaml contains additional configuration and resources for your application.
@@ -214,9 +247,9 @@ configuration:
     - type: "open-ai-configuration"
       name: "OpenAI Azure configuration"
       configuration:
-        url: "{{ secrets.open-ai.url }}"
-        access-key: "{{ secrets.open-ai.access-key }}"
-        provider: "{{ secrets.open-ai.provider }}"
+        url: "${secrets.open-ai.url}"
+        access-key: "${secrets.open-ai.access-key}"
+        provider: "${secrets.open-ai.provider}"
 ----
 
 Remember to save all your yaml files.
