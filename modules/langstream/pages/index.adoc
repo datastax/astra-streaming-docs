@@ -22,6 +22,12 @@ image::enable-langstream.png[Enable LangStream]
 
 Under the hood, this is enabling the xref:starlight-for-kafka:ROOT:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
 
+Select the *Generate LangStream Command* button to generate a CLI configuration file for your tenant.
+
+Run the generated command in your local environment to connect your tenant to the LangStream CLI.
+
+For more on the LangStream CLI, see https://docs.langstream.ai/installation/langstream-cli[LangStream CLI^]{external-link-icon}.
+
 == Build a LangStream Application
 
 Build a LangStream application by creating YAML files to describe the application.
@@ -29,30 +35,32 @@ The application folder structure looks like this:
 
 [source,shell]
 ----
-|- sample-app
-|- application
-    |- pipeline.yaml
-    |- gateways.yaml
+|- project-folder
+    |- application
+        |- pipeline.yaml
+        |- gateways.yaml
+        |- configuration.yaml
+|- secrets.yaml
 |- instance.yaml
-|- configuration.yaml
-|- secrets.yaml (optional)
 ----
 
 Here's a shortcut:
 [source,shell]
 ----
-mkdir sample-app && cd sample-app
-touch configuration.yaml instance.yaml secrets.yaml
+mkdir project-folder && cd project-folder
+touch secrets.yaml instance.yaml
 mkdir application && cd application
-touch pipeline.yaml gateways.yaml
+touch pipeline.yaml gateways.yaml configuration.yaml
 ----
 
+The instance.yaml and secrets.yaml files cannot be in the "application" directory, because the application directory is passed as a zip at runtime.
 Next, you will populate the YAML files to connect your application to your Astra Streaming tenant.
 
 == Populate YAML files
 
 Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
 The secrets for tokens and passwords are stored in the secrets.yaml file, which you'll populate in the next step.
+An instance.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
 [source,yaml]
 ----
 instance:
@@ -60,9 +68,9 @@ instance:
     type: "kafka"
     configuration:
       admin:
-        bootstrap.servers: "{{{ secrets.kafka.bootstrap.servers }}}"
-        security.protocol: SASL_SSL
-        sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='{{{ secrets.kafka.username }}}' password='{{{ secrets.kafka.password }}}';"
+        bootstrap.servers: "${ secrets.kafka.bootstrapServers }"
+        security.protocol: "${ secrets.kafka.securityProtocol }"
+        sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='${ secrets.kafka.username }' password='${ secrets.kafka.password }';"
         sasl.mechanism: PLAIN
         session.timeout.ms: "45000"
 
@@ -71,21 +79,33 @@ instance:
 ----
 
 Secrets.yaml contains auth information for connecting to other services.
+Secret values can be modified directly in secrets.yaml, or you can pass your secrets as environment variables. The secrets.yaml resolves these environment variables.
 
-These values are referenced with https://mustache.github.io/mustache.5.html[Mustache templating^]{external-link-icon} - for example, the Kafka username is referenced in instance.yaml with `'{{{ secrets.kafka.username }}}'`.
+[source,bash]
+----
+export ASTRA_CLIENT_ID=...
+export ASTRA_SECRET=...
+export ASTRA_DATABASE=...
+export ASTRA_TOKEN=...
+----
+
+When you go to production, you should create a dedicated secrets.yaml file for each environment.
 The Astra client-id, token, and secret are generated in the Astra UI.
-The values for the Kafka bootstrap server are found in your Astra Streaming tenant, in the Starlight for Kafka ssl.properties file.
+The values for the Kafka bootstrap server are found in your Astra Streaming tenant or in the Starlight for Kafka ssl.properties file.
 The Azure access key and URL are found in your Azure OpenAI deployment.
+A secrets.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
 For more on finding secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
 [source,yaml]
 ----
 secrets:
-  - id: kafka
+  - id: astra
     data:
-      username: "${KAFKA_USERNAME:-}"
-      password: "${KAFKA_PASSWORD:-}"
-      tenant: "${KAFKA_TENANT:-}"
-      bootstrap.servers: "${KAFKA_BOOTSTRAP_SERVERS:-}"
+      clientId: ${ASTRA_CLIENT_ID:-}
+      secret: ${ASTRA_SECRET:-}
+      token: ${ASTRA_TOKEN:-}
+      database: ${ASTRA_DATABASE:-}
+      secureBundle: ${ASTRA_SECURE_BUNDLE:-}
+      environment: ${ASTRA_ENVIRONMENT:-PROD}
   - id: open-ai
     data:
       access-key: "${OPEN_AI_ACCESS_KEY:-}"
@@ -93,14 +113,9 @@ secrets:
       provider: "${OPEN_AI_PROVIDER:-azure}"
       embeddings-model: "${OPEN_AI_EMBEDDINGS_MODEL:-text-embedding-ada-002}"
       chat-completions-model: "${OPEN_AI_CHAT_COMPLETIONS_MODEL:-gpt-35-turbo}"
-  - id: astra
-    data:
-      clientId: ${ASTRA_CLIENT_ID:-}
-      secret: ${ASTRA_SECRET:-}
-      token: ${ASTRA_TOKEN:-}
 ----
 
-You can either replace the values in secrets.yaml with the actual values, or export the secrets as below:
+You can either replace the values in secrets.yaml with the actual values, use a .env file, or export the secrets as below:
 [source,shell]
 ----
 export OPEN_AI_URL=https://company-openai-dev.openai.azure.com/
@@ -137,20 +152,29 @@ pipeline:
     type: "ai-chat-completions"
     output: "history-topic"
     configuration:
-      model: "{{{secrets.open-ai.chat-completions-model}}}"
+      model: "${secrets.open-ai.chat-completions-model}" # This needs to be set to the model deployment name, not the base name
+      # on the log-topic we add a field with the answer
       completion-field: "value.answer"
+      # we are also logging the prompt we sent to the LLM
       log-field: "value.prompt"
+      # here we configure the streaming behavior
+      # as soon as the LLM answers with a chunk we send it to the answers-topic
       stream-to-topic: "output-topic"
+      # on the streaming answer we send the answer as whole message
+      # the 'value' syntax is used to refer to the whole value of the message
       stream-response-completion-field: "value"
-      min-chunks-per-message: 20
-      stream: true
+      # we want to stream the answer as soon as we have 10 chunks
+      # in order to reduce latency for the first message the agent sends the first message
+      # with 1 chunk, then with 2 chunks....up to the min-chunks-per-message value
+      # eventually we want to send bigger messages to reduce the overhead of each message on the topic
+      min-chunks-per-message: 10
       messages:
         - role: user
-          content: "You are a helpful assistant. Below you can find a question from the user. Please try to help them the best way you can.\n\n{{% value.question}}"
+          content: "You are a helpful assistant. Below you can find a question from the user. Please try to help them the best way you can.\n\n{{ value.question}}"
 ----
 
 Gateways.yaml contains API gateways for communicating with your application.
-For more on gateways, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
+For more on gateways and authentication, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
 [source,yaml]
 ----
 gateways:
@@ -159,53 +183,71 @@ gateways:
     topic: input-topic
     parameters:
       - sessionId
-    produceOptions:
+    produce-options:
       headers:
         - key: langstream-client-session-id
-          valueFromParameters: sessionId
+          value-from-parameters: sessionId
+
+  - id: chat
+    type: chat
+    chat-options:
+      answers-topic: output-topic
+      questions-topic: input-topic
 
   - id: consume-output
     type: consume
     topic: output-topic
     parameters:
       - sessionId
-    consumeOptions:
+    consume-options:
       filters:
         headers:
           - key: langstream-client-session-id
-            valueFromParameters: sessionId
+            value-from-parameters: sessionId
 
   - id: consume-history
     type: consume
     topic: history-topic
+    parameters:
+      - sessionId
+    consume-options:
+      filters:
+        headers:
+          - key: langstream-client-session-id
+            value-from-parameters: sessionId
 
   - id: produce-input-auth
     type: produce
     topic: input-topic
+    parameters:
+      - sessionId
     authentication:
       provider: google
       configuration:
-        clientId: "{{ secrets.google.client-id }}"
-    produceOptions:
+        clientId: "${secrets.google.client-id}"
+    produce-options:
       headers:
         - key: langstream-client-user-id
-          valueFromAuthentication: subject
+          value-from-authentication: subject
 
   - id: consume-output-auth
     type: consume
     topic: output-topic
+    parameters:
+      - sessionId
     authentication:
       provider: google
       configuration:
-        clientId: "{{ secrets.google.client-id }}"
-    consumeOptions:
+        clientId: "${secrets.google.client-id}"
+    consume-options:
       filters:
         headers:
           - key: langstream-client-user-id
-            valueFromAuthentication: subject
+            value-from-authentication: subject
 ----
 
 Configuration.yaml contains additional configuration and resources for your application.
+A configuration.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
 For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration^]{external-link-icon}.
 [source,yaml]
 ----
@@ -214,9 +256,9 @@ configuration:
     - type: "open-ai-configuration"
       name: "OpenAI Azure configuration"
       configuration:
-        url: "{{ secrets.open-ai.url }}"
-        access-key: "{{ secrets.open-ai.access-key }}"
-        provider: "{{ secrets.open-ai.provider }}"
+        url: "${secrets.open-ai.url}"
+        access-key: "${secrets.open-ai.access-key}"
+        provider: "${secrets.open-ai.provider}"
 ----
 
 Remember to save all your yaml files.
@@ -245,7 +287,7 @@ Result::
 ----
 packaging app: /Users/mendon.kissling/sample-app/./application
 app packaged
-deploying application: sample-app (0 KB)
+deploying application: sample-app (1 KB)
 application sample-app deployed
 ID               STREAMING        COMPUTE          STATUS           EXECUTORS        REPLICAS
 sample-app       kafka            kubernetes       DEPLOYED         1/1              1/1
@@ -263,23 +305,26 @@ You should see a map of your application in the LangStream UI:
 
 image::app-map.png[App map]
 
+To get logs for your application, use `langstream apps logs <my-application>`.
+
 == LangStream CLI connection values
 
-If you're running into issues, ensure the values in your CLI profile to match the values in your Astra Streaming tenant.
+If you're running into issues, ensure the values in your CLI profile match the values in your Astra Streaming tenant.
 
-If you're unsure of the profile name, try `default`.
-
-`langstream profiles get <my-profile> -o=json` displays the current values.
+If you're unsure of the profile name, use `langstream profiles list`, then `langstream profiles get <my-profile> -o=json` to display the current values.
 
 [source,plain]
 ----
-webServiceUrl: "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream"
-apiGatewayUrl: "wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/"
-tenant: "langstream-tenant"
-token: "AstraCS:..."
+{
+  "webServiceUrl" : "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream",
+  "apiGatewayUrl" : "wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
+  "tenant" : "langstream-tenant",
+  "token" : "AstraCS:<token>",
+  "name" : "astra-langstream-tenant"
+}
 ----
 
-To update these values, use `langstream profiles update <my-profile> --command-option="value"`.
+To update these values, use `langstream profiles update astra-langstream-tenant --command-option="value"`.
 [cols="2,3", options="header"]
 |===
 | Command Option   | Description
@@ -290,7 +335,7 @@ To update these values, use `langstream profiles update <my-profile> --command-o
 | --token          | token of the profile
 |===
 
-If you get lost along the way, here are the default values:
+If you get lost along the way, here are the default profile values:
 [source,plain]
 ----
 webServiceUrl: "http://localhost:8090"
@@ -300,7 +345,7 @@ token: null
 ----
 
 Issue a curl call to the your LangStream tenant to find the connection values for your tenant:
-The `X-DataStax-Current-Org` value is the client-id associated with the Pulsar token.
+The `X-DataStax-Current-Org` value is the client-id associated with the Astra token, and can be found in the Astra UI.
 [tabs]
 ====
 curl::
@@ -309,9 +354,9 @@ curl::
 [source,plain]
 ----
 curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/langstream-tenant' \
---header 'X-DataStax-Current-Org:BBJbfIZPeTgrffXGHPUPJZsq' \
+--header 'X-DataStax-Current-Org:lzAiCLsTMKruZZZUxieNgYhe' \
 --header 'X-DataStax-Pulsar-Cluster: pulsar-gcp-useast1' \
---header 'Authorization: Bearer eyG...'
+--header 'Authorization: Bearer AstraCS:'
 ----
 --
 
@@ -321,11 +366,11 @@ Result::
 [source,plain]
 ----
 {
-		"status":true,
-		"webServiceUrl":"https://api.streaming.datastax.com/langstream",
-		"apiGatewayUrl":"wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
-		"tenant":"langstream-tenant",
-		"token":"{astra token}"}
+  "status":true,
+  "webServiceUrl":"https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream",
+  "apiGatewayUrl":"wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
+  "tenant":"langstream-tenant",
+  "token":"{astra token}"}%
 ----
 --
 ====
@@ -338,7 +383,7 @@ In the LangStream CLI, run the following command to open a gateway connection to
 This command will connect to your tenant and consume from the output-topic and produce to the input-topic.
 [source,plain]
 ----
-./bin/langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
+langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
 ----
 
 In Astra Streaming, confirm that your application is connected to your tenant.
@@ -347,9 +392,9 @@ If the Websocket tab is not visible, you may need to refresh the page or try ope
 Send a message to your application, and confirm that it is received by the Astra websocket:
 [source,plain]
 ----
-./bin/langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
-Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-output?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&option:position=latest
-Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/produce-input?&param:sessionId=103021E6-1341-4DE8-ACA3-13E2B3DA0586&
+langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/produce/langstream-tenant/sample-app/produce-input?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 
 You:
 > Hi Astra, it's me, K8s. How are you?
@@ -369,7 +414,7 @@ LangStream CLI::
 --
 [source,plain]
 ----
-./bin/langstream gateway consume sample-app consume-history
+langstream gateway consume sample-app consume-history -p sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 ----
 --
 
@@ -378,7 +423,7 @@ Result::
 --
 [source,plain]
 ----
-Connected to wss://prometheus-gcp-useast1.streaming.datastax.com/langstream-api-gateway/sample-app/consume-history?&&
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-history?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 {"record":{"key":null,"value":"Hi K8s, it's me, Astra.","headers":{}},"offset":"eyJvZmZzZXRzIjp7IjAiOiIxIn19"}
 ----
 --
