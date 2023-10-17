@@ -344,7 +344,7 @@ tenant: "default"
 token: null
 ----
 
-Issue a curl call to the your LangStream tenant to find the connection values for your tenant:
+Issue a curl call to your LangStream tenant to find the connection values for your tenant.
 The `X-DataStax-Current-Org` value is the client-id associated with the Astra token, and can be found in the Astra UI.
 [tabs]
 ====
