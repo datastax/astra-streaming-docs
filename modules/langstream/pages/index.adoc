@@ -22,6 +22,12 @@ image::enable-langstream.png[Enable LangStream]
 
 Under the hood, this is enabling the xref:starlight-for-kafka:ROOT:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
 
+Select the *Generate LangStream Command* button to generate a CLI configuration file for your tenant.
+
+Run the generated command in your local environment to connect your tenant to the LangStream CLI.
+
+For more on the LangStream CLI, see https://docs.langstream.ai/installation/langstream-cli[LangStream CLI^]{external-link-icon}.
+
 == Build a LangStream Application
 
 Build a LangStream application by creating YAML files to describe the application.
@@ -47,7 +53,7 @@ mkdir application && cd application
 touch pipeline.yaml gateways.yaml configuration.yaml
 ----
 
-The instance.yaml and secrets.yaml files cannot be in the "application" directory, because it is passed as a zip at runtime.
+The instance.yaml and secrets.yaml files cannot be in the "application" directory, because the application directory is passed as a zip at runtime.
 Next, you will populate the YAML files to connect your application to your Astra Streaming tenant.
 
 == Populate YAML files
@@ -310,15 +316,15 @@ If you're unsure of the profile name, use `langstream profiles list`, then `lang
 [source,plain]
 ----
 {
-  "webServiceUrl" : "https://pulsar-aws-useast2.api.dev.streaming.datastax.com/langstream",
-  "apiGatewayUrl" : "wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway/",
+  "webServiceUrl" : "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream",
+  "apiGatewayUrl" : "wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
   "tenant" : "langstream-tenant",
-  "token" : "AstraCS:...",
+  "token" : "AstraCS:<token>",
   "name" : "astra-langstream-tenant"
 }
 ----
 
-To update these values, use `langstream profiles update <my-profile> --command-option="value"`.
+To update these values, use `langstream profiles update astra-langstream-tenant --command-option="value"`.
 [cols="2,3", options="header"]
 |===
 | Command Option   | Description
@@ -347,10 +353,10 @@ curl::
 --
 [source,plain]
 ----
-curl --location --request POST 'https://pulsar-aws-useast2.api.dev.streaming.datastax.com/langstream/langstream-tenant' \
+curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/langstream-tenant' \
 --header 'X-DataStax-Current-Org:lzAiCLsTMKruZZZUxieNgYhe' \
---header 'X-DataStax-Pulsar-Cluster: astradev-aws' \
---header 'Authorization: Bearer AstraCS:
+--header 'X-DataStax-Pulsar-Cluster: pulsar-gcp-useast1' \
+--header 'Authorization: Bearer AstraCS:'
 ----
 --
 
@@ -361,8 +367,8 @@ Result::
 ----
 {
   "status":true,
-  "webServiceUrl":"https://pulsar-aws-useast2.api.dev.streaming.datastax.com/langstream",
-  "apiGatewayUrl":"wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway/",
+  "webServiceUrl":"https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream",
+  "apiGatewayUrl":"wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
   "tenant":"langstream-tenant",
   "token":"{astra token}"}%
 ----
@@ -387,8 +393,8 @@ Send a message to your application, and confirm that it is received by the Astra
 [source,plain]
 ----
 langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
-Connected to wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
-Connected to wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway//v1/produce/langstream-tenant/sample-app/produce-input?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/produce/langstream-tenant/sample-app/produce-input?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 
 You:
 > Hi Astra, it's me, K8s. How are you?
@@ -417,7 +423,7 @@ Result::
 --
 [source,plain]
 ----
-Connected to wss://lsgwy-aws-useast2.dev.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-history?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-history?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 {"record":{"key":null,"value":"Hi K8s, it's me, Astra.","headers":{}},"offset":"eyJvZmZzZXRzIjp7IjAiOiIxIn19"}
 ----
 --
