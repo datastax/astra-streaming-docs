@@ -110,6 +110,7 @@ The following `pulsar-admin` commands don't work with {product_name},
 either because they're not applicable in a cloud environment or they would cause
 issues with privacy or data integrity:
 
+* `bookies`
 * `brokers`
 * `broker-stats`
 * `clusters`
