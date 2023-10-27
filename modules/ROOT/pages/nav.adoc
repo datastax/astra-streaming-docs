@@ -1,5 +1,4 @@
 ** xref:astream-custom-roles.adoc[]
-** xref:astream-dedicated-cluster.adoc[]
 ** xref:astream-faq.adoc[]
 ** xref:astream-org-permissions.adoc[]
 ** xref:astream-subscriptions-exclusive.adoc[]
