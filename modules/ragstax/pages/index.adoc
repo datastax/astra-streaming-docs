@@ -1,12 +1,14 @@
-= Getting Started with LangStream
+= Getting Started with RagStax
 
-The LangStream project combines the intelligence of large language models with the agility of streaming processing, to create powerful processing applications.
+The RagStax project combines the intelligence of large language models with the agility of streaming processing, to create powerful processing applications.
 
-This guide will help you connect your LangStream application to Astra Streaming.
+This guide will help you connect your RagStax application to Astra Streaming.
+
+RagStax is built with the LangStream framework, which is a set of tools for building Generative AI streaming applications.
 
 For the LangStream project repository, see https://github.com/LangStream/langstream[GitHub^]{external-link-icon}.
 
-== Install LangStream
+== Install RagStax
 
 Use the https://docs.langstream.ai/get-started[LangStream quickstart^]{external-link-icon} to install LangStream locally with Helm.
 
