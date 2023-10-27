@@ -1,38 +1,38 @@
-= Getting Started with RagStax
+= Getting Started with {langstream}
 
-The RagStax project combines the intelligence of large language models with the agility of streaming processing, to create powerful processing applications.
+The {langstream} project combines the intelligence of large language models with the agility of streaming processing, to create powerful processing applications.
 
-This guide will help you connect your RagStax application to Astra Streaming.
+This guide will help you build and deploy a {langstream} application to Astra Streaming.
 
-RagStax is built with the LangStream framework, which is a set of tools for building Generative AI streaming applications.
+{langstream} is built with the LangStream framework, which is a set of tools for building Generative AI streaming applications.
 
 For the LangStream project repository, see https://github.com/LangStream/langstream[GitHub^]{external-link-icon}.
 
-== Install RagStax
+== Install {langstream}
 
 Use the https://docs.langstream.ai/get-started[LangStream quickstart^]{external-link-icon} to install LangStream locally with Helm.
 
-== Enable LangStream in Astra
+== Enable {langstream} in Astra
 
 xref:getting-started:index.adoc[Create an Astra Streaming tenant] in the GCP us-east-1 region. More regions will be available soon.
 
 Your tenant will be created with a default namespace, which is a logical grouping of topics. You can create additional namespaces to organize your topics.
 
-Your tenant will be listed in the LangStream tab. Select *Enable* to enable LangStream for your tenant.
+Your tenant will be listed in the {langstream} tab. Select *Enable* to enable {langstream} for your tenant.
 
-image::enable-langstream.png[Enable LangStream]
+image::enable-langstream.png[Enable {langstream}]
 
 Under the hood, this is enabling the xref:starlight-for-kafka:ROOT:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
 
-Select the *Generate LangStream Command* button to generate a CLI configuration file for your tenant.
+Select the *Generate {langstream} Command* button to generate a CLI configuration file for your tenant.
 
-Run the generated command in your local environment to connect your tenant to the LangStream CLI.
+Run the generated command in your local environment to connect your tenant to the {langstream} CLI.
 
-For more on the LangStream CLI, see https://docs.langstream.ai/installation/langstream-cli[LangStream CLI^]{external-link-icon}.
+For more on the {langstream} CLI, see https://docs.langstream.ai/installation/langstream-cli[{langstream} CLI^]{external-link-icon}.
 
-== Build a LangStream Application
+== Build a {langstream} Application
 
-Build a LangStream application by creating YAML files to describe the application.
+Build a {langstream} application by creating YAML files to describe the application.
 The application folder structure looks like this:
 
 [source,shell]
@@ -128,7 +128,7 @@ export OPEN_AI_PROVIDER=azure
 export KAFKA_USERNAME=langstream-tenant
 export KAFKA_PASSWORD=eyJhb...
 export KAFKA_BOOTSTRAP_SERVERS=kafka-gcp-useast1.streaming.datastax.com:9093
-export KAFKA_TENANT=langstream-tenant
+export KAFKA_TENANT=ragstax-tenant
 export ASTRA_CLIENT_ID=xxxx
 export ASTRA_TOKEN=AstraCS:...
 ----
@@ -265,14 +265,14 @@ configuration:
 
 Remember to save all your yaml files.
 
-== Deploy the LangStream application on Astra
+== Deploy the {langstream} application on Astra
 
 To deploy the application, run the following commands from the root of your application folder.
 The first command deploys the application, and the second command gets the status of the application.
-For more on the LangStream CLI commands, see https://docs.langstream.ai/installation/langstream-cli[LangStream CLI^]{external-link-icon}.
+For more on the {langstream} CLI commands, see https://docs.langstream.ai/installation/langstream-cli[{langstream} CLI^]{external-link-icon}.
 [tabs]
 ====
-LangStream CLI::
+{langstream} CLI::
 +
 --
 [source,plain]
@@ -299,17 +299,17 @@ sample-app       kafka            kubernetes       DEPLOYED         1/1         
 
 Ensure your app is running - a Kubernetes pod should be deployed with your application, and STATUS will change to DEPLOYED.
 
-Your application should be listed in your LangStream tenant:
+Your application should be listed in your {langstream} tenant:
 
 image::app-deployed.png[App deployed]
 
-You should see a map of your application in the LangStream UI:
+You should see a map of your application in the {langstream} UI:
 
 image::app-map.png[App map]
 
 To get logs for your application, use `langstream apps logs <my-application>`.
 
-== LangStream CLI connection values
+== {langstream} CLI connection values
 
 If you're running into issues, ensure the values in your CLI profile match the values in your Astra Streaming tenant.
 
@@ -320,9 +320,9 @@ If you're unsure of the profile name, use `langstream profiles list`, then `lang
 {
   "webServiceUrl" : "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream",
   "apiGatewayUrl" : "wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway/",
-  "tenant" : "langstream-tenant",
+  "tenant" : "ragstax-tenant",
   "token" : "AstraCS:<token>",
-  "name" : "astra-langstream-tenant"
+  "name" : "astra-ragstax-tenant"
 }
 ----
 
@@ -346,7 +346,7 @@ tenant: "default"
 token: null
 ----
 
-Issue a curl call to your LangStream tenant to find the connection values for your tenant.
+Issue a curl call to your {langstream} tenant to find the connection values for your tenant.
 The `X-DataStax-Current-Org` value is the client-id associated with the Astra token, and can be found in the Astra UI.
 [tabs]
 ====
@@ -377,11 +377,11 @@ Result::
 --
 ====
 
-Ensure the values returned from the curl call match the values in your LangStream CLI profile.
+Ensure the values returned from the curl call match the values in your {langstream} CLI profile.
 
 == Check connection to Astra
 
-In the LangStream CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
+In the {langstream} CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
 This command will connect to your tenant and consume from the output-topic and produce to the input-topic.
 [source,plain]
 ----
@@ -389,7 +389,7 @@ langstream gateway chat sample-app -cg consume-output -pg produce-input -p sessi
 ----
 
 In Astra Streaming, confirm that your application is connected to your tenant.
-Select the Websocket tab of your LangStream-enabled tenant, and choose to consume from output-topic and to produce to input-topic.
+Select the Websocket tab of your {langstream}-enabled tenant, and choose to consume from output-topic and to produce to input-topic.
 If the Websocket tab is not visible, you may need to refresh the page or try opening it in Incognito mode.
 Send a message to your application, and confirm that it is received by the Astra websocket:
 [source,plain]
@@ -411,7 +411,7 @@ This sample-app also produces messages to the consume-history gateway to provide
 To consume from this gateway, run the following command:
 [tabs]
 ====
-LangStream CLI::
+{langstream} CLI::
 +
 --
 [source,plain]
