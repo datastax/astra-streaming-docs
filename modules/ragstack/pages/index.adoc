@@ -27,7 +27,7 @@ Your tenant will be created with a default namespace, which is a logical groupin
 
 Your tenant will be listed in the {langstream} tab. Select *Enable* to enable {langstream} for your tenant.
 
-image::enable-ragstack.png[Enable {langstream}]
+image::enable.png[Enable {langstream}]
 
 Under the hood, this is enabling the xref:starlight-for-kafka:ROOT:index.adoc[Starlight for Kafka] API for your tenant to connect to your Kafka cluster.
 
@@ -350,7 +350,7 @@ You should see a map of your application in the {langstream} UI:
 
 image::app-map.png[App map]
 
-To get logs for your application, use `ragstack apps logs <my-application>`.
+Hmm, this application has an Error. To get logs, use `ragstack apps logs <my-application>`.
 
 == {langstream} CLI connection values
 
@@ -398,7 +398,7 @@ curl::
 --
 [source,plain]
 ----
-curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/langstream-tenant' \
+curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/ragstack-tenant' \
 --header 'X-DataStax-Current-Org:lzAiCLsTMKruZZZUxieNgYhe' \
 --header 'X-DataStax-Pulsar-Cluster: pulsar-gcp-useast1' \
 --header 'Authorization: Bearer AstraCS:<token value>'
@@ -438,8 +438,8 @@ Send a message to your application, and confirm that it is received by the Astra
 [source,plain]
 ----
 ragstack gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
-Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
-Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/produce/langstream-tenant/sample-app/produce-input?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/ragstack-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/produce/ragstack-tenant/sample-app/produce-input?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 
 You:
 > Hi Astra, it's me, K8s. How are you?
@@ -468,7 +468,7 @@ Result::
 --
 [source,plain]
 ----
-Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/langstream-tenant/sample-app/consume-history?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
+Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/ragstack-tenant/sample-app/consume-history?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 {"record":{"key":null,"value":"Hi K8s, it's me, Astra.","headers":{}},"offset":"eyJvZmZzZXRzIjp7IjAiOiIxIn19"}
 ----
 --
