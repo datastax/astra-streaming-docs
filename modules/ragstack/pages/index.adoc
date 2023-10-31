@@ -13,8 +13,8 @@ For the LangStream project repository, see https://github.com/LangStream/langstr
 Install the {langstream} CLI:
 [source,bash]
 ----
-brew tap LangStream/langstream
-brew install langstream
+brew tap ragstack/ragstack
+brew install ragstack
 ----
 
 For more on the {langstream} CLI, see https://docs.langstream.ai/installation/langstream-cli[{langstream} CLI^]{external-link-icon}.
