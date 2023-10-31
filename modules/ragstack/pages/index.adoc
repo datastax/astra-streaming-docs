@@ -56,6 +56,7 @@ profile astra-rs-tenant created
 profile astra-rs-tenant set as current
 ----
 --
+====
 
 The configuration values will look something like this.
 [source,plain]
