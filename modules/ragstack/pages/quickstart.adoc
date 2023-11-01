@@ -3,14 +3,17 @@
 The {ragstack} project combines the intelligence of large language models with the agility of stream processing to create powerful Generative AI applications.
 
 This guide will help you build and deploy a {ragstack} application to Astra Streaming.
-
+[IMPORTANT]
+====
+*Private preview feature*
+{ragstack} is available only in a *private preview*. This feature is not intended for production use, has not been certified for production workloads, and might contain bugs and other functional issues. There is no guarantee that a preview feature will ever become generally available.If you are interested in participating in the private preview, contact us at mailto:Astra-PM@datastax.com[Astra-PM@datastax.com,RAGSstack private preview,I am interested in the RAGStack private preview.]. We will contact you with more information.
+====
 == Install {ragstack} CLI
 
 Install the {ragstack} CLI:
 [source,bash]
 ----
-brew tap ragstack/ragstack
-brew install ragstack
+brew install datastax/ragstack/ragstack
 ----
 
 For more on the {ragstack} CLI, see https://docs.langstream.ai/installation/langstream-cli[{ragstack} CLI^]{external-link-icon}.
