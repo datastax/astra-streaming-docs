@@ -29,6 +29,7 @@ asciidoc:
     streaming_signup_url: 'https://astra.datastax.com/streaming'
     login_url: 'https://astra.datastax.com'
     langstream: 'RAGStack'
+    ragstack: 'RAGStack'
 
     emoji-tada: "&#127881;"
     emoji-rocket: "&#128640;"
