@@ -158,9 +158,12 @@ secrets:
       provider: "${OPEN_AI_PROVIDER:-azure}"
       embeddings-model: "${OPEN_AI_EMBEDDINGS_MODEL:-text-embedding-ada-002}"
       chat-completions-model: "${OPEN_AI_CHAT_COMPLETIONS_MODEL:-gpt-35-turbo}"
+  - id: google
+    data:
+      client-id: "${GOOGLE_CLIENT_ID:-}"
 ----
 
-You can either replace the values in secrets.yaml with the actual values, use a .env file, or export the secrets as below:
+You can either replace the values in secrets.yaml with the actual values, use a `.env` file, or export the secrets as below:
 [source,shell]
 ----
 export OPEN_AI_URL=https://company-openai-dev.openai.azure.com/
@@ -174,7 +177,12 @@ export KAFKA_BOOTSTRAP_SERVERS=kafka-gcp-useast1.streaming.datastax.com:9093
 export KAFKA_TENANT=rs-tenant
 export ASTRA_CLIENT_ID=xxxx
 export ASTRA_TOKEN=AstraCS:...
+export GOOGLE_CLIENT_ID=xxxx.apps.googleusercontent.com
 ----
+[NOTE]
+====
+For more on creating a Google client ID, see https://developers.google.com/identity/protocols/oauth2#serviceaccount[Google Service Account^]{external-link-icon}.
+====
 
 Pipeline.yaml contains the chain of agents that makes up your program, and the input and output topics that they communicate with.
 For more on building pipelines, see https://docs.langstream.ai/building-applications/pipelines[Pipelines^]{external-link-icon}.
