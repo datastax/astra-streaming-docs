@@ -20,7 +20,7 @@ For more on the {ragstack} CLI, see https://docs.langstream.ai/installation/lang
 
 == Enable {ragstack} in Astra
 
-xref:getting-started:index.adoc[Create an Astra Streaming tenant] in the GCP us-east-1 region. More regions will be available soon.
+xref:getting-started:index.adoc[Create an Astra Streaming tenant] in the GCP `us-east-1` region.
 
 Your tenant will be created with a default namespace, which is a logical grouping of topics.
 

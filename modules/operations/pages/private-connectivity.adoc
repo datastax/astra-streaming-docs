@@ -16,28 +16,29 @@ If you have multiple tenants, they can have different VPCs. The different VPCs w
 The traffic on different private end point connections is isolated until it reaches our load balancer.
 
 The private link service pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
+
 [#inbound]
 .Inbound private link service endpoints
 [cols=2*,options=header]
 |===
-|Service
-|Endpoint pattern
+|Service |Endpoint pattern
 
 |Pulsar Messaging
-|pulsar-azure-eastus.private.streaming.datastax.com:6651
+|`pulsar-azure-eastus.private.streaming.datastax.com:6651`
 
 |Kafka Messaging
-|kafka-azure-eastus.private.streaming.datastax.com:9093
+|`kafka-azure-eastus.private.streaming.datastax.com:9093`
 
 |RabbitMQ Messaging
-|rabbitmq-azure-eastus.private.streaming.datastax.com
+|`rabbitmq-azure-eastus.private.streaming.datastax.com`
 
 |Prometheus Metrics
-|prometheus-azure-eastus.private.streaming.datastax.com
+|`prometheus-azure-eastus.private.streaming.datastax.com`
 |===
+
 [#outbound]
 == Outbound traffic
-{product_name} also supports private outbound traffic (i.e. {product_name} → Your private endpoint) on a case-by-case basis.
+{product_name} also supports private outbound traffic (from {product_name} to your private endpoint) on a case-by-case basis.
 
 The outbound traffic pattern creates a private endpoint in {product_name} that connects to your private link service. We open a port on the tenant's firewall (firewalls are per tenant) so connectors and functions (running in a dedicated namespace on our cluster) can connect to your private network.
 
@@ -46,13 +47,12 @@ To open an outbound private endpoint, open {support_url}[a support ticket] and i
 == Cloud provider credentials
 For more on connecting to your cloud provider, see your cloud provider's documentation.
 Each cloud provider will require different credentials to connect to the private endpoint.
+
 [#credentials]
 .Cloud providers
 [cols=3*,options=header]
 |===
-|Cloud provider
-|Credentials required
-|Documentation
+|Cloud provider |Credentials required |Documentation
 
 |AWS
 |AWS account number(s)
@@ -65,6 +65,4 @@ Each cloud provider will require different credentials to connect to the private
 |GCP
 |GCP project id(s)
 |https://console.cloud.google.com/net-services/psc/[GCP Private Service Connect]
-
 |===
-

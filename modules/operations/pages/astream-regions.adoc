@@ -5,78 +5,75 @@
 
 When creating a tenant, select a region for your tenant. Choose a region that is geographically close to your users to optimize performance.
 
-Here are the regions {product_name} supports:
+Here are the regions that {product_name} supports:
 
 == AWS
 [cols=2*,options=header]
 |===
-|Region
-|Location
+|Region |Location
 
-| ap-south-1
-| Mumbai, India
+|`ap-south-1`
+|Mumbai, India
 
-| ap-southeast-1
-| Singapore
+|`ap-southeast-1`
+|Singapore
 
-| eu-central-1
-| Frankfurt, Germany
+|`eu-central-1`
+|Frankfurt, Germany
 
-| eu-west-1
-| Dublin, Ireland
+|`eu-west-1`
+|Dublin, Ireland
 
-| us-east-1
-| Northern Virginia, US
+|`us-east-1`
+|Virginia, US
 
-| us-east-2
-| Ohio, US
+|`us-east-2`
+|Ohio, US
 
-| us-west-2
-| Oregon, US
+|`us-west-2`
+|Oregon, US
 |===
 
 == Azure
 [cols=2*,options=header]
 |===
-|Region
-|Location
+|Region |Location
 
-| australiaeast
-| New South Wales, Australia
+|`australiaeast`
+|New South Wales, Australia
 
-| eastus
-| Virginia, US
+|`eastus`
+|Virginia, US
 
-// | eastus2
-// | Virginia, US
+// |`eastus2`
+// |Virginia, US
 
-| westeurope
-| Amsterdam, Netherlands
+|`westeurope`
+|Amsterdam, Netherlands
 
-| westus2
-| Washington (state), US
+|`westus2`
+|Washington (state), US
 |===
 
 == Google Cloud
 [cols=2*,options=header]
 |===
-|Region
-|Location
+|Region |Location
 
-| australia-southeast1
-| Sydney, Australia, APAC
+|`australia-southeast1`
+|Sydney, Australia, APAC
 
-| europe-west1
-| Saint-Ghislain, Belgium, Europe
+|`europe-west1`
+|Saint-Ghislain, Belgium, Europe
 
-| us-central1
-| Council Bluffs, Iowa, US
+|`us-central1`
+|Council Bluffs, Iowa, US
 
-| us-east1
-| Moncks Corner, South Carolina, US
+|`us-east1`
+|Moncks Corner, South Carolina, US
 
-| us-east4
-| Ashburn, Virginia, US
+|`us-east4`
+|Ashburn, Virginia, US
 
 |===
 
