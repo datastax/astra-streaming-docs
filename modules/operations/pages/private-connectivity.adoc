@@ -54,7 +54,8 @@ Each cloud provider will require different credentials to connect to the private
 [cols=3*,options=header]
 |===
 |Cloud provider
-|Credentials required |Documentation
+|Credentials required
+|Documentation
 
 |AWS
 |AWS account number(s)

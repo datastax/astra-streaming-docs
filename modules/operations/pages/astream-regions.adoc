@@ -14,25 +14,25 @@ Here are the regions that {product_name} supports:
 |Location
 
 |`ap-south-1`
-|Mumbai, India
+|Mumbai
 
 |`ap-southeast-1`
 |Singapore
 
 |`eu-central-1`
-|Frankfurt, Germany
+|Frankfurt
 
 |`eu-west-1`
-|Dublin, Ireland
+|Ireland
 
 |`us-east-1`
-|Virginia, US
+|Virginia
 
 |`us-east-2`
-|Ohio, US
+|Ohio
 
 |`us-west-2`
-|Oregon, US
+|Oregon
 |===
 
 == Azure
@@ -42,19 +42,19 @@ Here are the regions that {product_name} supports:
 |Location
 
 |`australiaeast`
-|New South Wales, Australia
+|New South Wales
 
 |`eastus`
-|Virginia, US
+|Virginia
 
 // |`eastus2`
-// |Virginia, US
+// |Virginia
 
 |`westeurope`
-|Amsterdam, Netherlands
+|Netherlands
 
 |`westus2`
-|Washington (state), US
+|Washington
 |===
 
 == Google Cloud
@@ -64,19 +64,19 @@ Here are the regions that {product_name} supports:
 |Location
 
 |`australia-southeast1`
-|Sydney, Australia, APAC
+|Sydney, Australia
 
 |`europe-west1`
-|Saint-Ghislain, Belgium, Europe
+|St. Ghislain, Belgium
 
 |`us-central1`
-|Council Bluffs, Iowa, US
+|Council Bluffs, Iowa
 
 |`us-east1`
-|Moncks Corner, South Carolina, US
+|Moncks Corner, South Carolina
 
 |`us-east4`
-|Ashburn, Virginia, US
+|Ashburn, Virginia
 
 |===
 
