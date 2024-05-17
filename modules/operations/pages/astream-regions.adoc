@@ -10,7 +10,8 @@ Here are the regions that {product_name} supports:
 == AWS
 [cols=2*,options=header]
 |===
-|Region |Location
+|Region
+|Location
 
 |`ap-south-1`
 |Mumbai, India
@@ -37,7 +38,8 @@ Here are the regions that {product_name} supports:
 == Azure
 [cols=2*,options=header]
 |===
-|Region |Location
+|Region
+|Location
 
 |`australiaeast`
 |New South Wales, Australia
@@ -58,7 +60,8 @@ Here are the regions that {product_name} supports:
 == Google Cloud
 [cols=2*,options=header]
 |===
-|Region |Location
+|Region
+|Location
 
 |`australia-southeast1`
 |Sydney, Australia, APAC
