@@ -1,2 +1,3 @@
-* xref:index.adoc[]
-** xref:api-operations.adoc[API Operations]
+* API references
+** xref:index.adoc[API references overview]
+** xref:api-operations.adoc[API operations]
