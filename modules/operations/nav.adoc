@@ -1,13 +1,15 @@
-* xref:astream-georeplication.adoc[Operations]
+* Operations
 ** xref:astream-georeplication.adoc[]
 ** xref:astream-limits.adoc[]
 ** xref:astream-pricing.adoc[]
 ** xref:astream-regions.adoc[]
-** xref:monitoring/index.adoc[]
+** Monitoring streaming tentants
+*** xref:monitoring/index.adoc[Monitoring overview]
 *** xref:astream-scrape-metrics.adoc[]
 *** xref:monitoring/integration.adoc[]
 *** xref:monitoring/new-relic.adoc[]
-*** xref:monitoring/metrics.adoc[]
+*** Grafana dashboards
+**** xref:monitoring/metrics.adoc[]
 **** xref:monitoring/overview-dashboard.adoc[]
 **** xref:monitoring/namespace-dashboard.adoc[]
 **** xref:monitoring/topic-dashboard.adoc[]
