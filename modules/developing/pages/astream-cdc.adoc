@@ -10,15 +10,11 @@
 CDC connectors are only available for {db-serverless} deployments.
 ====
 
-You can use the Change Data Capture (CDC) connector to:
+CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
 
-* Process data by client applications.
-* Send data to downstream systems.
-* Capture changes in real time, de-duplicate changes, and stream the clean set of changed data into {astra_stream}.
+{product_name} processes data changes via a Pulsar topic. By design, the Change Data Capture (CDC) component is simple, with a 1:1 correspondence between the table and a single Pulsar topic.
 
-{astra_stream} processes data changes via a Pulsar topic. By design, the Change Data Capture (CDC) component is simple, with a 1:1 correspondence between the table and a single Pulsar topic.
-
-This guide provides an end-to-end workflow to create a CDC connector for your {db-serverless} deployment and send change data to an Elasticsearch sink.
+This doc will show you how to create a CDC connector for your Astra DB deployment and send change data to an Elasticsearch sink.
 
 [NOTE]
 ====
@@ -169,9 +165,8 @@ CDC for {db-serverless} databases has the following limitations:
 You need the following items to complete this procedure:
 
 * An active {url-astra}[Astra account^].
-* A xref:databases:create-database.adoc#create-a-serverless-non-vector-database[{db-serverless} database] created in the {link-astra-portal}.
-* A xref:drivers:secure-connect-bundle.adoc#download-the-secure-connect-bundle[secure connect bundle] downloaded from the {link-astra-portal}.
-* A xref:administration:manage-database-access.adoc#create-keyspace-permission[keyspace] created in the {link-astra-portal}.
+* An https://docs.datastax.com/en/astra-db-serverless/databases/create-database.html#create-a-serverless-non-vector-database[{db-serverless} database] created in the {link-astra-portal}.
+* An https://docs.datastax.com/en/astra-db-serverless/databases/manage-keyspaces.html[keyspace] created in the {link-astra-portal}.
 * An active https://cloud.elastic.co/login[Elasticsearch] account.
 * An Elasticsearch endpoint, index name, and API key retrieved from your https://cloud.elastic.co/[Elasticsearch Deployment].
 
@@ -188,7 +183,7 @@ At the bottom of the Welcome page, select *View Streaming*.
 [NOTE]
 ====
 {astra_stream} CDC can only be used in a region that supports both {astra_stream} and {db-serverless} databases.
-See https://docs.datastax.com/en/streaming/astra-streaming/operations/astream-regions.html[Regions] for more information.
+See xref:operations:astream-regions.adoc[] for more information.
 ====
 
 [[create-table]]
@@ -203,7 +198,7 @@ See https://docs.datastax.com/en/streaming/astra-streaming/operations/astream-re
 ----
 CREATE TABLE IF NOT EXISTS *KEYSPACE_NAME*.*TABLE_NAME* (key text PRIMARY KEY, c1 text);
 ----
-
++
 . Confirm that your table was created:
 +
 [source,sql,subs="verbatim,quotes"]
@@ -211,26 +206,21 @@ CREATE TABLE IF NOT EXISTS *KEYSPACE_NAME*.*TABLE_NAME* (key text PRIMARY KEY, c
 select * from *KEYSPACE_NAME*.*TABLE_NAME*;
 ----
 +
-.Result:
-[%collapsible]
-====
+Result:
++
 [source,sql,subs="verbatim,quotes"]
 ----
-token@cqlsh> select * from *KEYSPACE_NAME*.*TABLE_NAME*;
-
  key | c1
 -----+----
 
 (0 rows)
-token@cqlsh>
 ----
-====
 
 You have now created a table and confirmed that the table exists in your {db-serverless} database.
 
 == Connect to CDC for {db-serverless} databases
 
-Complete the following steps after you have created a xref:databases:change-data-capture.adoc#create-tenant[tenant] and a xref:databases:change-data-capture.adoc#create-table[table].
+Complete the following steps after you have created a <<create-tenant,streaming tenant>> and a <<create-table,table>>.
 
 . Select *Databases* from the main navigation.
 . Select the name of the active database that you would like to use.
@@ -244,6 +234,8 @@ Enabling CDC creates a new `astracdc` namespace with two new topics, `data-` and
 The `log-` topic consumes schema changes, processes them, and then writes clean data to the `data-` topic.
 The `log-` topic is for CDC functionality and should not be used.
 The `data-` topic is used to consume CDC data in {astra_stream}.
+
+For more information, see <<increase-partitions,Increase the CDC data-topic Partitions>>.
 
 == Connect Elasticsearch sink
 
@@ -291,8 +283,8 @@ INSERT INTO *KEYSPACE_NAME*.*TABLE_NAME* (key,c1) VALUES ('32b','bob3123b');
 select * from *KEYSPACE_NAME*.*TABLE_NAME*;
 ----
 +
-.Result:
-[%collapsible]
+Result:
++
 ====
 [source,sql]
 ----
@@ -302,7 +294,6 @@ select * from *KEYSPACE_NAME*.*TABLE_NAME*;
  32b | bob3123b
 
 (2 rows)
-token@cqlsh>
 ----
 ====
 
@@ -377,6 +368,120 @@ At this point you have successfully:
 * Created a tenant, topic, and table.
 * Connected your {db-serverless} database to CDC.
 * Connected Elasicsearch sink to your CDC and verified that messages are sent and received successfully.
+
+[[increase-partitions]]
+== Increase the CDC data-topic Partitions
+
+After enabling CDC, 3 data and 3 log partitions are created under the `astracdc` namespace.
+Increasing the number of partitions will create new partitions, but existing data will remain in the old partitions.
+New messages will be distributed across the new partitions.
+
+. Confirm the current state of the topic before making changes.
++
+[source,bash]
+----
+bin/pulsar-admin topics list-partitioned-topics astracdc
+----
++
+Result:
++
+[source,bash]
+----
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-1
+persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-0
+persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-0
+persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-1
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
+----
++
+. Use the `update-partitioned-topic` command to change the number of partitions for a specified topic.
++
+[source,bash]
+----
+bin/pulsar-admin topics update-partitioned-topic ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1 --partitions 10
+----
++
+Here, we are increasing the number of partitions to 10.
+You can only increase the number of partitions. Decreasing is not supported due to potential data loss and message ordering issues.
++
+. Verify the update.
++
+[source,bash]
+----
+bin/pulsar-admin topics list ten01/astracdc
+----
++
+Result:
++
+[source,bash]
+----
+persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
+persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-0
+persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-1
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-9
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-8
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-7
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-6
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-1
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-0
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-5
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-4
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-3
+persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
+----
++
+. Check the topic to confirm it has been updated to have 10 partitions.
++
+[source,bash]
+----
+bin/pulsar-admin topics partitioned-stats persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1
+----
++
+Result:
++
+[%collapsible%open]
+====
+[source,json]
+----
+{
+  "msgRateIn" : 0.0,
+  "msgThroughputIn" : 0.0,
+  "msgRateOut" : 0.0,
+  "msgThroughputOut" : 0.0,
+  "bytesInCounter" : 0,
+  "msgInCounter" : 0,
+  "bytesOutCounter" : 0,
+  "msgOutCounter" : 0,
+  "averageMsgSize" : 0.0,
+  "msgChunkPublished" : false,
+  "storageSize" : 0,
+  "backlogSize" : 0,
+  "publishRateLimitedTimes" : 0,
+  "earliestMsgPublishTimeInBacklogs" : 0,
+  "offloadedStorageSize" : 0,
+  "lastOffloadLedgerId" : 0,
+  "lastOffloadSuccessTimeStamp" : 0,
+  "lastOffloadFailureTimeStamp" : 0,
+  "publishers" : [ ],
+  "waitingPublishers" : 0,
+  "subscriptions" : { },
+  "replication" : { },
+  "nonContiguousDeletedMessagesRanges" : 0,
+  "nonContiguousDeletedMessagesRangesSerializedSize" : 0,
+  "compaction" : {
+    "lastCompactionRemovedEventCount" : 0,
+    "lastCompactionSucceedTimestamp" : 0,
+    "lastCompactionFailedTimestamp" : 0,
+    "lastCompactionDurationTimeInMills" : 0
+  },
+  "metadata" : {
+    "partitions" : 10
+  },
+  "partitions" : { }
+}
+----
+====
 
 == Resources
 
