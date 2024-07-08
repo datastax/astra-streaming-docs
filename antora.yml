@@ -30,6 +30,9 @@ asciidoc:
     login_url: 'https://astra.datastax.com'
     langstream: 'RAGStack'
     ragstack: 'RAGStack'
+    db-serverless: 'Astra DB Serverless'
+    url-astra: 'https://astra.datastax.com'
+    link-astra-portal: '{url-astra}[{astra_ui}^]'
 
     emoji-tada: "&#127881;"
     emoji-rocket: "&#128640;"
