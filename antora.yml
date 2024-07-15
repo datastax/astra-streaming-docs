@@ -33,7 +33,7 @@ asciidoc:
     db-serverless: 'Astra DB Serverless'
     url-astra: 'https://astra.datastax.com'
     link-astra-portal: '{url-astra}[{astra_ui}^]'
-
+    astra_cli: 'Astra CLI'
     emoji-tada: "&#127881;"
     emoji-rocket: "&#128640;"
     emoji-smile: "&#128512"
