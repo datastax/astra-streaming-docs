@@ -11,7 +11,7 @@ This guide details the necessary steps to getting set up and validating the conn
 == Choosing a compatible version
 
 Pulsar is distributed as a single artifact.
-The Pulsar https://pulsar.apache.org/download/[download page^]{external-link-icon} offers the latest version, as well as older releases.
+The Pulsar https://pulsar.apache.org/download/[download page] offers the latest version, as well as older releases.
 
 Astra Streaming is currently compatible with Pulsar {pulsar_version}.
 Locate the latest patch version matching the major.minor version and download the binaries.
@@ -85,7 +85,7 @@ With your Astra Streaming tenant's configuration in place, you can use any of th
 With the Pulsar folder in place and the correct client configuration saved, the next step is to validate everything.
 Run each command to validate binary conf.
 
-TIP: For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's CLI docs^]{external-link-icon}.
+TIP: For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's CLI docs].
 
 List all tenants:
 [source,shell,subs="attributes+"]

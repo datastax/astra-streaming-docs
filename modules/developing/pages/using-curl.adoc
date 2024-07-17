@@ -9,7 +9,7 @@ When you create a tenant in Astra Streaming, all supporting APIs are enabled.
 To interact with your Astra Streaming tenant you will need two pieces of information: a token and the service URL.
 This guide will show you how to gather that information and test your connection.
 
-TIP: The https://pulsar.apache.org/docs/2.10.x/reference-rest-api-overview/[Pulsar documentation^]{external-link-icon} has a full reference for each API supported in a cluster. +
+TIP: The https://pulsar.apache.org/docs/2.10.x/reference-rest-api-overview/[Pulsar documentation]} has a full reference for each API supported in a cluster. +
 This reference will be helpful as you look to automate certain actions in your Astra Streaming tenant.
 
 == Finding your tenant's web service URL
@@ -46,7 +46,7 @@ Most APIs use *tokens* to authenticate a request, and Pulsar follows this same p
 
 [NOTE]
 ====
-Don't confuse your Pulsar token with your Astra token - the concept is the same, but it's a different authentication. xref:operations:astream-token-gen.adoc[More details are here,window="_blank"].
+Don't confuse your Pulsar token with your Astra token - the concept is the same, but it's a different authentication. xref:operations:astream-token-gen.adoc[More details are here].
 ====
 
 To create a new Pulsar token in your Astra Streaming tenant, navigate to the "Settings" tab in the Astra portal.

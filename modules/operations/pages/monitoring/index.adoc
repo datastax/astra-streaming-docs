@@ -1,16 +1,16 @@
 = Monitoring Streaming Tenants
 
-Because Astra Streaming is a software-as-a-service product, not all Apache Pulsar metrics (https://pulsar.apache.org/docs/reference-metrics/[Pulsar Metrics Reference^]{external-link-icon}) are exposed for external integration purposes. At a high level, Astra Streaming only exposes metrics that are related to namespaces. Other metrics that are not directly namespace related are not exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
+Because Astra Streaming is a software-as-a-service product, not all Apache Pulsar metrics (https://pulsar.apache.org/docs/reference-metrics/[Pulsar Metrics Reference]) are exposed for external integration purposes. At a high level, Astra Streaming only exposes metrics that are related to namespaces. Other metrics that are not directly namespace related are not exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
 
-In the following sections, we’ll explore each of the Astra Streaming metrics categories that are available for external integration, and recommended metrics for external integration.
+In the following sections, we'll explore each of the Astra Streaming metrics categories that are available for external integration, and recommended metrics for external integration.
 
 == Pulsar raw metrics
 
 For a complete Pulsar metrics reference, see:
 
-* https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics[Namespace metrics^]{external-link-icon}
+* https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics[Namespace metrics]
 
-* https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics^]{external-link-icon}
+* https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]
 
 For a complete Astra Streaming metrics reference, see xref:monitoring/metrics.adoc[].
 
@@ -69,7 +69,7 @@ include::example$sink-connector-metrics.csv[]
 
 == Aggregate Astra Streaming Metrics
 
-Each externally exposed raw Astra Streaming metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product_name} user’s perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
+Each externally exposed raw Astra Streaming metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product_name} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
 
 Below is an example of a raw metric for the Pulsar message backlog (pulsar_msg_backlog) scraped from an Astra Streaming cluster located in the GCP US Central region:
 
@@ -84,52 +84,52 @@ pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="bro
 To make raw metrics like this useful for end users, we recommend the following guidelines when aggregating raw metrics:
 
 . Aggregate metrics to at least the parent topic level, instead of at the partition level. In Pulsar, end user applications only deal with messages at the parent topic level (but internally, Pulsar is handling message processing at the partition level).
-. Exclude reported metrics that are associated with Astra Streaming’s system namespaces and topics. These namespaces and topics normally have a name starting with ++__++ (two underscores). For example, when Pulsar’s Kafka protocol handler is enabled (via S4K integration), a system namespace ++__kafka++ is created with one system topic within called ++__transaction_producer_state++.
-Do NOT aggregate metrics with the Astra Streaming PAYG option, since one cluster may be shared among multiple organizations. For more, see xref:astream-limits.adoc[Cluster Limits].
+. Exclude reported metrics that are associated with Astra Streaming's system namespaces and topics. These namespaces and topics normally have a name starting with ++__++ (two underscores). For example, when Pulsar's Kafka protocol handler is enabled (via S4K integration), a system namespace ++__kafka++ is created with one system topic within called ++__transaction_producer_state++.
+Do NOT aggregate metrics with the Astra Streaming *Pay As You Go* option, since one cluster may be shared among multiple organizations. For more, see xref:astream-limits.adoc[Cluster Limits].
 
 === PromQL query patterns
 
-Prometheus provides a powerful but easy-to-use query language called PromQL for selecting and aggregating time series data in real time. PromQL syntax is beyond this document's scope, but the https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus documentation^]{external-link-icon} is a great place to start.
+Prometheus provides a powerful but easy-to-use query language called PromQL for selecting and aggregating time series data in real time. PromQL syntax is beyond this document's scope, but the https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus documentation] is a great place to start.
 
-In the rest of this section, we’ll recommend some PromQL query patterns for aggregating raw Astra Streaming metrics.
+In the rest of this section, we'll recommend some PromQL query patterns for aggregating raw Astra Streaming metrics.
 These examples use one Astra Streaming raw metric, pulsar_msg_backlog, as an example for illustrative purposes.
 We aggregate messages at the parent topic level or above, and exclude system topics per our recommendations above.
 We filter out system messages with the pattern +{topic !~ ".*__.*"}+.
 This PromQL pattern filters out messages when their topic labels do not include +__+.
 This works because Pulsar system topics usually have ++__++ as the topic or namespace name prefix (e.g. persistent://<tenant>/++__++kafka/__consumer_offsets_partition_0).
-This pattern assumes that the user applications don’t also have namespaces and topics with +__+ as part of the names, or they will be filtered as well.
+This pattern assumes that the user applications don't also have namespaces and topics with +__+ as part of the names, or they will be filtered as well.
 
 Pattern 1: Get the total message backlog of a specific parent topic, excluding system topics.
-"$ptopic” is a (Grafana dashboard) variable that represents a specific parent topic.
+"$ptopic" is a (Grafana dashboard) variable that represents a specific parent topic.
 [source,psql]
 ----
 sum(pulsar_msg_backlog{topic=~$ptopic, topic !~ ".*__.*"})
 ----
 
 Pattern 2: Get the total message backlog of a specific namespace, excluding system topics.
-“$namespace” is a (Grafana dashboard) variable that represents a specific namespace.
+"$namespace" is a (Grafana dashboard) variable that represents a specific namespace.
 [source,psql]
 ----
-sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})
+sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
 Pattern 3: Get the total message backlog of a tenant, excluding system topics.
-"$tenant” is a (Grafana dashboard) variable that represents a specific tenant.
+"$tenant" is a (Grafana dashboard) variable that represents a specific tenant.
 [source,psql]
 ----
-sum(pulsar_msg_backlog{namespace=~”$tenant.+”, topic !~ ".*__.*"})
+sum(pulsar_msg_backlog{namespace=~"$tenant.+"", topic !~ ".*__.*"})
 ----
 
 Pattern 4: Get the total message backlog of each topic within a specific namespace, excluding system topics.
 [source,psql]
 ----
-sum by(topic) (pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})
+sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
 Pattern 5: Get the top 10 message backlog by topic within a specific namespace, excluding system topics.
 [source,psql]
 ----
-topk by(topic) (10, sum(pulsar_msg_backlog{namespace=~”$namespace”, topic !~ ".*__.*"})
+topk by(topic) (10, sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
 == Metrics to be alerted
@@ -151,7 +151,7 @@ A simple way to trigger an alert on these metrics is to set a threshold which tr
 A better approach is calculating the metrics' increase rate over a period of time (e.g. 1 hour) and setting a threshold on the rate of increase.
 For example, if the average message backlog increase rate exceeds a threshold, an alert is triggered.
 
-The actual threshold values for these metrics is highly dependent on each application’s workload and requirements, but the values should be relatively large positive numbers, e.g. several hundreds or several thousands.
+The actual threshold values for these metrics is highly dependent on each application's workload and requirements, but the values should be relatively large positive numbers, e.g. several hundreds or several thousands.
 Otherwise, they may trigger too many false alarms.
 
 == What's next?

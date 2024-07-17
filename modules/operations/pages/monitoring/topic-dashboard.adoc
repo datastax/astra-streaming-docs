@@ -1,6 +1,6 @@
 = Topic dashboard
 
-The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-topic.json[topic dashboard^]{external-link-icon} aggregates metrics at the topic level. In the variable section, you can choose a cluster, tenant, and namespace, and topic.
+The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-dashboards/as-topic.json[topic dashboard] aggregates metrics at the topic level. In the variable section, you can choose a cluster, tenant, and namespace, and topic.
 This dashboard analyzes metrics at the parent topic level, not at the partition level.
 
 == Topic overview

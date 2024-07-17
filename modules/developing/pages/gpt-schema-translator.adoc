@@ -94,7 +94,7 @@ The {gpt-schema-translator} uses generative AI to automatically generate schema 
 == Prerequisites
 
 * An Astra Streaming cluster with a topic created. For more information, see the xref:getting-started:index.adoc[Getting Started] documentation.
-* An Astra database with a keyspace and table created. For more, see the https://docs.datastax.com/en/astra-serverless/docs/[Astra DB documentation^]{external-link-icon}.
+* An Astra database with a keyspace and table created. For more, see the https://docs.datastax.com/en/astra-serverless/docs/[Astra DB documentation].
 
 == Usage
 

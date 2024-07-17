@@ -240,7 +240,7 @@ Output: No reply means successful.
 
 == Namespace DevOps APIs
 
-For managing Astra Streaming Namespaces, we use the native https://pulsar.apache.org/admin-rest-api/[Pulsar REST APIs]{external-link-icon}.  These are documented on the Apache Pulsar Docs for REST API.
+For managing Astra Streaming Namespaces, we use the native https://pulsar.apache.org/admin-rest-api/[Pulsar REST APIs].  These are documented on the Apache Pulsar Docs for REST API.
 
 === List Existing Namespaces
 [tabs]

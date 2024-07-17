@@ -3,5 +3,5 @@
 :page-tag: astra-streaming,planner,plan,pulsar
 :page-aliases: docs@astra-streaming::astream-pricing.adoc
 
-For information on *pricing* for {product_name}, see https://www.datastax.com/products/astra-streaming/pricing[Astra Streaming pricing^]{external-link-icon}.
+For information on *pricing* for {product_name}, see https://www.datastax.com/products/astra-streaming/pricing[Astra Streaming pricing].
 

@@ -104,6 +104,6 @@ video::Qy2ZlelLjXg[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445p
 
 == What's next?
 
-* {kafka_for_astra} is based on the DataStax https://github.com/datastax/starlight-for-kafka[Starlight for Kafka^] project.
+* {kafka_for_astra} is based on the DataStax https://github.com/datastax/starlight-for-kafka[Starlight for Kafka] project.
 
 * Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.
