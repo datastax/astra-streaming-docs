@@ -6,7 +6,7 @@ This article is a continuation of xref:monitoring/index.adoc[]. Please read that
 ====
 
 DataStax has built Grafana dashboards around core message processing for the exposed Astra Streaming metrics.
-The dashboards can be found https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[on GitHub^]{external-link-icon}.
+The dashboards can be found https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[on GitHub].
 
 Dashboards are available for scraping metrics at Pulsar's tenant, namespace, and topic levels:
 

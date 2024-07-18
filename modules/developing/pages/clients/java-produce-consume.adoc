@@ -8,14 +8,14 @@
 
 You will need the following prerequisites in place to complete this guide:
 
-* JRE 8 installed (https://sdkman.io/[install now^,title=Install java]{external-link-icon})
-* (https://maven.apache.org/install.html[Maven^,title=Maven]{external-link-icon}) or (https://gradle.org/install/[Gradle^,title=Gradle]{external-link-icon}) installed
+* JRE 8 installed (https://sdkman.io/[install now,title=Install java])
+* (https://maven.apache.org/install.html[Maven,title=Maven]) or (https://gradle.org/install/[Gradle,title=Gradle]) installed
 * A working Pulsar topic (get started xref:getting-started:index.adoc[here] if you don't have a topic)
 * A basic text editor or IDE
 
 [TIP]
 ====
-Visit our https://github.com/datastax/astra-streaming-examples[examples repo^]{external-link-icon} to see the complete source of this example.
+Visit our https://github.com/datastax/astra-streaming-examples[examples repo] to see the complete source of this example.
 ====
 
 == Create a project

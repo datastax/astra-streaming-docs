@@ -16,7 +16,7 @@ Install the {ragstack} CLI:
 brew install datastax/ragstack/ragstack
 ----
 
-For more on the {ragstack} CLI, see https://docs.langstream.ai/installation/langstream-cli[{ragstack} CLI^]{external-link-icon}.
+For more on the {ragstack} CLI, see https://docs.langstream.ai/installation/langstream-cli[{ragstack} CLI].
 
 == Enable {ragstack} in Astra
 
@@ -139,7 +139,7 @@ The values for the Kafka bootstrap server are found in your Astra Streaming tena
 The Azure access key and URL are found in your Azure OpenAI deployment.
 A secrets.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
 Paste it into your secrets.yaml file to authorize your application to your tenant.
-For more on finding values for secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets^]{external-link-icon}.
+For more on finding values for secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets].
 [source,yaml]
 ----
 secrets:
@@ -181,11 +181,11 @@ export GOOGLE_CLIENT_ID=xxxx.apps.googleusercontent.com
 ----
 [NOTE]
 ====
-For more on creating a Google client ID, see https://developers.google.com/identity/protocols/oauth2#serviceaccount[Google Service Account^]{external-link-icon}.
+For more on creating a Google client ID, see https://developers.google.com/identity/protocols/oauth2#serviceaccount[Google Service Account].
 ====
 
 Pipeline.yaml contains the chain of agents that makes up your program, and the input and output topics that they communicate with.
-For more on building pipelines, see https://docs.langstream.ai/building-applications/pipelines[Pipelines^]{external-link-icon}.
+For more on building pipelines, see https://docs.langstream.ai/building-applications/pipelines[Pipelines].
 [source,yaml]
 ----
 topics:
@@ -227,7 +227,7 @@ pipeline:
 ----
 
 Gateways.yaml contains API gateways for communicating with your application.
-For more on gateways and authentication, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways^]{external-link-icon}.
+For more on gateways and authentication, see https://docs.langstream.ai/building-applications/api-gateways[API Gateways].
 [source,yaml]
 ----
 gateways:
@@ -301,7 +301,7 @@ gateways:
 
 Configuration.yaml contains additional configuration and resources for your application.
 A configuration.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant (under AstraDB).
-For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration^]{external-link-icon}.
+For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration].
 [source,yaml]
 ----
 configuration:
@@ -320,7 +320,7 @@ Remember to save all your yaml files.
 
 To deploy the application, run the following commands from the root of your application folder.
 The first command deploys the application from the YAML files you created above, and the second command gets the status of the application.
-For more on {ragstack} CLI commands, see https://docs.langstream.ai/installation/langstream-cli[{ragstack} CLI^]{external-link-icon}.
+For more on {ragstack} CLI commands, see https://docs.langstream.ai/installation/langstream-cli[{ragstack} CLI].
 [tabs]
 ====
 {ragstack} CLI::
@@ -486,5 +486,5 @@ Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gatew
 
 {ragstack} is built with the LangStream framework, which is a set of tools for building Generative AI streaming applications.
 
-For more, see https://github.com/LangStream/langstream[GitHub^]{external-link-icon}.
+For more, see https://github.com/LangStream/langstream[GitHub].
 

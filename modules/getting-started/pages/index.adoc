@@ -40,7 +40,7 @@ image:astream-create-account.png[Create Astra account]
 
 Think of a tenant in Astra Streaming as your safe space to work.
 It is a portion of DataStax's managed Apache Pulsar that is only yours.
-Learn more about the concept of tenancy in the https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar docs^]{external-link-icon}.
+Learn more about the concept of tenancy in the https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar docs].
 
 The steps in the below tabs will guide you through creating a Streaming Tenant.
 You'll use this tenant to create namespaces, topics, functions, and pretty much everything else.
@@ -79,7 +79,7 @@ Astra CLI::
 +
 --
 {astra_cli} is a set of commands for creating and managing all Astra resources.
-For more, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation, window="_blank"]{external-link-icon}.
+For more, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation].
 
 . Set the required variables, replacing <rand> with a few random numbers or letters.
 Optionally you can choose a different cloud provider and region. Use `astra streaming list-regions` to see values.
@@ -110,7 +110,7 @@ A namespace is a logical grouping of message topics.
 Tenants usually have many namespaces.
 What is contained within namespace is limited only by your imagination.
 It could be an environment (dev, stage, prod) or by application (catalog, cart, user) or whatever logical grouping makes sense to you.
-Learn more about namespaces in the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar docs^]{external-link-icon}.
+Learn more about namespaces in the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar docs].
 
 [NOTE]
 ====
@@ -146,7 +146,7 @@ a|image:namespace-listing.png[Namespaces in Astra Streaming]
 Pulsar Admin::
 +
 --
-Not sure about this? Learn more about xref:developing:configure-pulsar-env.adoc[configuring your local environment for Astra Streaming,window="_blank"]{external-link-icon}.
+Not sure about this? Learn more about xref:developing:configure-pulsar-env.adoc[configuring your local environment for Astra Streaming].
 
 . Set the required variables.
 +
@@ -167,7 +167,7 @@ include::{astra-streaming-examples-repo}/pulsar-admin/create-namespace.sh[]
 Curl::
 +
 --
-Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here,window="_blank"]{external-link-icon}.
+Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here].
 
 . Set the required variables.
 +
@@ -196,7 +196,7 @@ The name of the topic usually loosely defines the criteria, and more advanced ch
 Topics are where others can "listen" for new messages.
 Consumers subscribe to topics to "listen" for messages, and functions and connectors can also "listen" for messages and automate workflows.
 In Pulsar, topic addresses look like a URL (ie: persistent://tenant/namespace/topic).
-Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar docs^]{external-link-icon}.
+Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar docs].
 
 [tabs]
 ====
@@ -206,7 +206,7 @@ Astra Portal::
 . In the *Namespace And Topics* tab, locate the namespace created above and click its *Add Topic* button.
 . Provide a name for the topic like "my-topic".
 It must start with a lowercase letter, be alphanumeric, and can contain hyphens.
-. Leave the choice of persistence and partitioning alone for now - those can be a part of https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[future learning^]{external-link-icon} :).
+. Leave the choice of persistence and partitioning alone for now - those can be a part of https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[future learning].
 +
 [width=75%]
 |===
@@ -245,7 +245,7 @@ include::{astra-streaming-examples-repo}/pulsar-admin/create-topic.sh[]
 Curl::
 +
 --
-Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here,window="_blank"]{external-link-icon}.
+Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here].
 
 . Set the required variables.
 +
