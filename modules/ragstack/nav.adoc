@@ -1,3 +1,0 @@
-* RAGStack
-** xref:index.adoc[]
-** xref:quickstart.adoc[]

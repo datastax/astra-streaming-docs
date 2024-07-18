@@ -28,8 +28,6 @@ asciidoc:
     external-link-icon: '&#x2197;'
     streaming_signup_url: 'https://astra.datastax.com/streaming'
     login_url: 'https://astra.datastax.com'
-    langstream: 'RAGStack'
-    ragstack: 'RAGStack'
     db-serverless: 'Astra DB Serverless'
     url-astra: 'https://astra.datastax.com'
     link-astra-portal: '{url-astra}[{astra_ui}^]'
