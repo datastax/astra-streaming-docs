@@ -1,7 +1,6 @@
 = Configuring your local environment for Astra Streaming
 :navtitle: Using Pulsar binaries with Astra Streaming
 :description: This guide will provide the necessary steps to download a compatible Pulsar artifact and configure the binaries for use with Astra Streaming.
-:title: A guide to configuring Pulsar binaries with Astra Streaming
 
 Did we mention that Astra Streaming is running Apache Pulsar™?
 

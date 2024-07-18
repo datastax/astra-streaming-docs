@@ -1,5 +1,4 @@
 = Key_Shared subscriptions in Pulsar
-:page-aliases: docs@astra-streaming::astream-subscriptions-keyshared.adoc
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
 *Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
@@ -9,7 +8,7 @@ Pulsar's xref:astream-subscriptions-shared.adoc[shared subscription] model trade
 *Keys* are generated with *hashing*, which converts arbitrary values like "topic-name" or JSON blobs into fixed integer values. These hashed values are then assigned to subscribed consumers in one of two ways:
 
 * *Auto hash* - uses *consistent hashing* to balance range values across available consumers, without requiring manual setup of hash ranges.
-* *Sticky hash* - the client manually assigns consumer range values. All hashes within a configured range go to one consumer. 
+* *Sticky hash* - the client manually assigns consumer range values. All hashes within a configured range go to one consumer.
 
 This document explains how to use Pulsar's Key_Shared subscription model to manage your topic consumption.
 
@@ -19,28 +18,28 @@ include::partial$subscription-prereq.adoc[]
 == Key_Shared subscription example
 
 To try out a Pulsar Key_Shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`. +
-You must also tell Pulsar what `keySharedPolicy` this subscription will use. The example below uses the auto-hashing `keySharedPolicy`. 
+You must also tell Pulsar what `keySharedPolicy` this subscription will use. The example below uses the auto-hashing `keySharedPolicy`.
 
 [source,java]
 ----
 pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
-    .topic("persistent://" 
-        + conf.getTenantName() + "/" 
-        + conf.getNamespace() + "/" 
+    .topic("persistent://"
+        + conf.getTenantName() + "/"
+        + conf.getNamespace() + "/"
         + conf.getTopicName())
     .startMessageIdInclusive()
     .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
     .subscriptionName("SimplePulsarConsumer")
     .subscriptionType(SubscriptionType.Key_Shared)
     .keySharedPolicy(KeySharedPolicy.autoSplitHashRange())
-    .subscribe();  
+    .subscribe();
 ----
 
-Running multiple consumers with auto-hashing balances the messaging load across all available consumers. 
+Running multiple consumers with auto-hashing balances the messaging load across all available consumers.
 
 === Manually set stickyHashRange
 
-You can manually set a hash range with `KeySharedPolicy.stickyHashRange()`. 
+You can manually set a hash range with `KeySharedPolicy.stickyHashRange()`.
 
 To test out sticky hashed Key_Shared subscriptions, you need to first import some additional classes.
 
@@ -67,9 +66,9 @@ import org.apache.pulsar.client.api.HashingScheme;
 ----
 pulsarProducer = pulsarClient
     .newProducer(Schema.JSON(DemoBean.class))
-    .topic("persistent://" 
-                + conf.getTenantName() + "/" 
-                + conf.getNamespace() + "/" 
+    .topic("persistent://"
+                + conf.getTenantName() + "/"
+                + conf.getNamespace() + "/"
                 + conf.getTopicName())
     .batcherBuilder(BatcherBuilder.KEY_BASED)
     .hashingScheme(HashingScheme.JavaStringHash)
@@ -94,7 +93,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
 ----
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages. 
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
 +
 [source,bash]
 ----
@@ -104,7 +103,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 57467766 sent
 ----
 
-. The consumer begins receiving messages. 
+. The consumer begins receiving messages.
 +
 [source,bash]
 ----
@@ -112,7 +111,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":41791865,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 ----
 
-. Open a new terminal window and try to run `SimplePulsarConsumer.java`. 
+. Open a new terminal window and try to run `SimplePulsarConsumer.java`.
 +
 [source,bash]
 ----
@@ -136,7 +135,7 @@ video::_49wlA53L_8[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445p
 
 == What's next?
 
-For more on subscriptions, see: 
+For more on subscriptions, see:
 
 * xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
 * xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]

@@ -1,7 +1,5 @@
 = Starlight for Kafka
-
 :page-tag: starlight-kafka,dev,admin,pulsar,kafka
-:page-aliases: docs@astra-streaming::astream-kafka.adoc
 
 {kafka_for_astra} brings native Apache Kafka® protocol support to Apache Pulsar®, enabling migration of existing Kafka applications and services to Pulsar without modifying the code. Kafka applications can now leverage Pulsar’s powerful features, such as:
 
@@ -18,13 +16,13 @@ This document will help you get started producing and consuming Kafka messages o
 
 :page-tag: starlight-kafka,quickstart,install,admin,dev,pulsar,kafka
 
-. To start connecting {kafka_for_astra}, select *Kafka* in the {product_name} *Connect* tab. 
+. To start connecting {kafka_for_astra}, select *Kafka* in the {product_name} *Connect* tab.
 
 . When the popup appears, confirm you want to enable Kafka on your tenant.
 +
 [NOTE]
 ====
-You will not be able to remove the Kafka namespaces created on your tenant with this step. 
+You will not be able to remove the Kafka namespaces created on your tenant with this step.
 You must remove the tenant itself to remove these namespaces.
 ====
 

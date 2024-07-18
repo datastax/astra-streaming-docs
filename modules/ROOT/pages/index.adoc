@@ -1,8 +1,6 @@
 = What is DataStax {product_name}?
-:slug: what-is-datastax-astra-streaming
-:page-aliases: docs@astra-streaming::index.adoc
-:page-tag: astra-streaming,planner,admin,dev,pulsar
 :navtitle: Astra Streaming
+:page-tag: astra-streaming,planner,admin,dev,pulsar
 
 {product_name} is a cloud native data streaming and event stream processing
 service tightly integrated into the {astra_ui} and powered by Apache Pulsar™.

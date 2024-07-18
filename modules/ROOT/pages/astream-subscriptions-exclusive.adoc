@@ -1,5 +1,4 @@
 = Exclusive subscriptions in Pulsar
-:page-aliases: docs@astra-streaming::astream-subscriptions-exclusive.adoc
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
 *Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
@@ -18,9 +17,9 @@ This example uses the `pulsarConsumer` object in `SimplePulsarConsumer.java` bel
 [source,java]
 ----
 pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
-    .topic("persistent://" 
-            + conf.getTenantName() + "/" 
-            + conf.getNamespace() + "/" 
+    .topic("persistent://"
+            + conf.getTenantName() + "/"
+            + conf.getNamespace() + "/"
             + conf.getTopicName())
     .startMessageIdInclusive()
     .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
@@ -32,7 +31,7 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
 ====
 Pulsar creates an exclusive subscription by default when no `subscriptionType` is declared.
 ====
- 
+
 . Open the `pulsar-subscription-example` repo in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages. +
 The confirmation message and a cursor appear to indicate the consumer is ready.
 +
@@ -43,7 +42,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
 ----
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages. 
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
 +
 [source,bash]
 ----
@@ -52,7 +51,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 68306175 sent
 ----
 
-. The consumer begins consuming the produced messages. 
+. The consumer begins consuming the produced messages.
 +
 [source,bash]
 ----
@@ -61,7 +60,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":68306175,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 ----
 
-. Open a new terminal window and try to run `SimplePulsarConsumer.java`. 
+. Open a new terminal window and try to run `SimplePulsarConsumer.java`.
 +
 [source,bash]
 ----

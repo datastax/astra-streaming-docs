@@ -1,10 +1,6 @@
 = API References
-:slug: astream-api
 :description: Astra provides APIs to manage both DB and Streaming instances
-:keywords: datastax astra
-:meta-description: Astra provides APIs to manage both DB and Streaming instances
 :page-tag: astra-streaming,dev,develop,pulsar
-:page-aliases: docs@astra-streaming::api.adoc, astra-streaming-docs::api.adoc, astra-streaming-docs::astream-use-devops.adoc
 
 Management of Pulsar tenants and its resources are seperated into 2 APIs. The DevOps API is used to manage higher level objects associated with your account. The Pulsar Admin API is used to manage specific resources such as namespaces, topics, and subscriptions within a specific tenant.
 

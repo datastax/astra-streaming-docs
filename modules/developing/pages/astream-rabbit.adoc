@@ -1,7 +1,5 @@
 = {starlight_rabbitmq}
-
 :page-tag: starlight-rabbitmq,quickstart,admin,dev,pulsar
-:page-aliases: docs@astra-streaming::astream-rabbit.adoc
 
 {starlight_rabbitmq} brings native RabbitMQ® protocol support to Apache Pulsar®, enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code. RabbitMQ applications can now leverage Pulsar’s powerful features, such as:
 
@@ -24,7 +22,7 @@ Get started producing and consuming RabbitMQ messages on a Pulsar cluster.
 
 == {starlight_rabbitmq} Quickstart
 
-. To start connecting {starlight_rabbitmq}, select *RabbitMQ* in the {product_name} *Connect* tab. 
+. To start connecting {starlight_rabbitmq}, select *RabbitMQ* in the {product_name} *Connect* tab.
 
 . When the popup appears, confirm you want to enable RabbitMQ on your tenant.
 +
@@ -40,7 +38,7 @@ A new `rabbitmq` namespace is created in your {product_name} tenant for RabbitMQ
 A new configuration file is generated in the *Connect* tab that looks like this:
 +
 ----
-username: 
+username:
 password: token:***
 host: rabbitmq-azure-us-west-2.dev.streaming.datastax.com
 port: 5671
@@ -53,7 +51,7 @@ You're now ready to connect RabbitMQ and Pulsar.
 
 == Test connection
 
-We'll use a Python script to create a connection between RabbitMQ and your Pulsar tenant, establish a message queue named `queuename`, print ten messages, and close the connection. 
+We'll use a Python script to create a connection between RabbitMQ and your Pulsar tenant, establish a message queue named `queuename`, print ten messages, and close the connection.
 
 . Create a file called `connect-test.py` and paste the below Python code into it:
 +
@@ -97,14 +95,14 @@ connection.close()
 * `virtual_host`
 * `token`
 * `host`
-* `port` 
+* `port`
 
-. Save `connect-test.py` with the new values. 
+. Save `connect-test.py` with the new values.
 . Run `connect-test.py` with `python3 connect-test.py`. It should return:
 +
 [source,bash]
 ----
-python3 connect-test.py 
+python3 connect-test.py
 connection success
 started a channel
  sent one

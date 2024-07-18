@@ -1,7 +1,5 @@
 = {product_name} Functions
-
 :page-tag: astra-streaming,dev,develop,pulsar,java,python
-:page-aliases: docs@astra-streaming::astream-functions.adoc
 
 Functions are lightweight compute processes that enable you to process each message received on a topic. You can apply custom logic to that message, transforming or enriching it, and then output it to a different topic.
 

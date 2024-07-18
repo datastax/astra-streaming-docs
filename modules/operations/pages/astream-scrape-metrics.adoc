@@ -1,26 +1,25 @@
 = Scrape {product_name} metrics with Prometheus
-:page-aliases: docs@astra-streaming::astream-scrape-metrics.adoc
 
-Prometheus collects system metrics by scraping targets at intervals. These metrics are used to monitor deployments, generate alerts, and diagnose problems. 
+Prometheus collects system metrics by scraping targets at intervals. These metrics are used to monitor deployments, generate alerts, and diagnose problems.
 
-This doc will show you how to scrape an {product_name} tenant with Prometheus. 
+This doc will show you how to scrape an {product_name} tenant with Prometheus.
 
 *Prerequisites:* +
 
 * Astra Streaming tenant +
-* Docker installed locally 
+* Docker installed locally
 
 == Get configuration file from {product_name}
 
-. To start connecting your {product_name} tenant with Prometheus, select *Prometheus* in the {product_name} *Connect* tab. 
+. To start connecting your {product_name} tenant with Prometheus, select *Prometheus* in the {product_name} *Connect* tab.
 
 . A new configuration file will be generated in the *Connect* tab that looks like this:
 +
 [source,yaml]
 ----
 global:
-  scrape_interval: 60s 
-  evaluation_interval: 60s 
+  scrape_interval: 60s
+  evaluation_interval: 60s
 
 scrape_configs:
   - job_name: "astra-pulsar-metrics"
@@ -37,14 +36,14 @@ scrape_configs:
 This example `prometheus.yml` will scrape `+https://prometheus-aws-useast2.dev.streaming.datastax.com/pulsarmetrics/tenant-1+` every 60 seconds with the supplied Pulsar token. +
 The `job_name` is added as a label to any timeseries scraped with this configuration.
 +
-. Copy and paste the configuration code, or download it as a `.yml` file (it will be called `prometheus.yml`). 
+. Copy and paste the configuration code, or download it as a `.yml` file (it will be called `prometheus.yml`).
 
 == Build Prometheus with custom yml file
 
 Prometheus runs with a `prometheus.yml` file found either locally or in a Docker container. For this example, we'll tell Docker to run Prometheus from our downloaded `prometheus.yml` file.
 
 . Pull the Prometheus Docker image with `docker pull prom/prometheus`.
-. Bind-mount your modified `prometheus.yml` file by running the Prometheus Docker container with a modified path in the `-v` argument. 
+. Bind-mount your modified `prometheus.yml` file by running the Prometheus Docker container with a modified path in the `-v` argument.
 +
 [source,docker]
 ----
@@ -68,7 +67,6 @@ If you encounter a `mounts denied` permissions error, ensure your local director
 ====
 
 == Scrape with Prometheus
-:page-aliases: docs@astra-streaming::astream-scrape-metrics.adoc
 
 . Open your Prometheus dashboard at `localhost:9090`. In the *Status -> Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
 . Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product_name} cluster.
@@ -115,7 +113,7 @@ pulsar_topics_count{app="pulsar",cluster="pulsar-aws-useast1",component="broker"
 
 == Metrics exposed by {product_name}
 
-Here's a list of Prometheus metrics exposed by {product_name}. 
+Here's a list of Prometheus metrics exposed by {product_name}.
 
 [NOTE]
 ====

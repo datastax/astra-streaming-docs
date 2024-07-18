@@ -1,7 +1,5 @@
 = Producing and consuming messages using the Java pulsar client with Astra Streaming
 :description: This is a guide to create a simple producer and consumer using Pulsar's java client.
-:title: Java pulsar client on Astra Streaming
-:page-aliases: docs@astra-streaming::astream-java-eg.adoc,astra-streaming:ROOT:astream-java-eg.adoc
 :page-tag: astra-streaming,dev,develop,pulsar,java
 
 == Prerequisites

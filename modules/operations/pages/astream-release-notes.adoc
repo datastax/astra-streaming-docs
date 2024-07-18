@@ -1,7 +1,5 @@
 = {product_name} Changelog
-:slug: changelog
 :page-tag: astra-streaming,admin,dev,pulsar
-:page-aliases: docs@astra-streaming::astream-release-notes.adoc
 
 The {product_name} changelog provides information about new and improved features, known and resolved issues, and bug fixes.
 
