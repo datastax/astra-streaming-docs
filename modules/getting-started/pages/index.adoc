@@ -22,7 +22,7 @@ You will need the following to complete this guide:
 
 == Create your Astra account
 
-. Navigate to the {streaming_signup_url}[Astra portal sign in page^]{external-link-icon}.
+. Navigate to the {streaming_signup_url}[Astra portal sign in page^].
 +
 image:astream-login.png[Login to Astra]
 
@@ -34,7 +34,7 @@ image:astream-create-account.png[Create Astra account]
 
 . You should receive an email from DataStax verifying your address - click the button within.
 
-. If you aren't automatically signed in, visit the {login_url}[Astra sign in page^]{external-link-icon} and use your new account creds.
+. If you aren't automatically signed in, visit the {login_url}[Astra sign in page^] and use your new account creds.
 
 == Your first streaming tenant
 
