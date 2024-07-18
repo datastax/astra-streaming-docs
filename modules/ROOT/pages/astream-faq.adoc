@@ -1,4 +1,5 @@
 = {product_name} FAQs
+:navtitle: FAQs
 :page-tag: astra-streaming,dev,admin,planner,plan,pulsar
 
 == How do I sign up for the {product_name}?

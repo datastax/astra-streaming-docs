@@ -1,5 +1,6 @@
 = Producing and consuming messages using the C# pulsar client on Astra Streaming
-:description: This is a guide to create a simple producer and consumer using Pulsar's c# client.
+:navtitle: C#
+:description: This is a guide to create a simple producer and consumer using Pulsar's C# client.
 
 == Prerequisites
 

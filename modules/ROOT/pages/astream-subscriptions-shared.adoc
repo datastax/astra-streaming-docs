@@ -1,4 +1,5 @@
 = Shared subscriptions in Pulsar
+:navtitle: Shared
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
 *Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +

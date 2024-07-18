@@ -1,4 +1,5 @@
 = API Operations
+:navtitle: API operations
 
 This Astra Streaming workbook is a comprehensive guide that provides detailed examples and  practices for managing the Astra Streaming platform using the DevOps APIs.  It provides details on the most commonly used APIs for managing Astra Streaming and Pulsar instances.  These details include required parameters and the expected output from the API.  The workbook is designed to fill the gap between detailed API reference docs and HowTo guides.  The result is to help customers in operating and managing Astra Streaming and provide guidance on how to use DevOps API to automate many common tasks.
 
@@ -173,7 +174,7 @@ With file input::
 --
 [source,bash]
 ----
-curl --fail --location --request POST 'https://api.astra.datastax.com/v2/streaming/tenants' --header 'Content-Type: application/json' --header "Authorization: Bearer $ASTRA_ORG_TOKEN" --data "@mytenant-config.json" | python3 -mjson.tool 
+curl --fail --location --request POST 'https://api.astra.datastax.com/v2/streaming/tenants' --header 'Content-Type: application/json' --header "Authorization: Bearer $ASTRA_ORG_TOKEN" --data "@mytenant-config.json" | python3 -mjson.tool
 ----
 --
 

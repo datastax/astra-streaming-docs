@@ -1,13 +1,16 @@
-* Guides and Examples
-** xref:astream-faq.adoc[FAQs]
-** Manage permissions
-*** xref:astream-org-permissions.adoc[]
-*** xref:astream-custom-roles.adoc[]
-** Pulsar subscriptions
-*** xref:astream-subscriptions.adoc[Pulsar subscriptions overview]
-*** xref:astream-subscriptions-exclusive.adoc[Exclusive]
-*** xref:astream-subscriptions-shared.adoc[Shared]
-*** xref:astream-subscriptions-failover.adoc[Failover]
-*** xref:astream-subscriptions-keyshared.adoc[Key_shared]
+.Guides and examples
+* xref:astream-faq.adoc[]
+* Manage permissions
+** xref:astream-org-permissions.adoc[]
+** xref:astream-custom-roles.adoc[]
+* Pulsar subscriptions
+** xref:astream-subscriptions.adoc[]
+** xref:astream-subscriptions-exclusive.adoc[]
+** xref:astream-subscriptions-shared.adoc[]
+** xref:astream-subscriptions-failover.adoc[]
+** xref:astream-subscriptions-keyshared.adoc[]
+
+//
+
 * xref:streaming-learning:pulsar-io:connectors/index.adoc[IO Connectors]
 * xref:operations:astream-release-notes.adoc[Changelog]

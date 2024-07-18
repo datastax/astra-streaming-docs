@@ -1,4 +1,5 @@
 = API References
+:navtitle: API references overview
 :description: Astra provides APIs to manage both DB and Streaming instances
 :page-tag: astra-streaming,dev,develop,pulsar
 

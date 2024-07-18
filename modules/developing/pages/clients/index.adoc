@@ -1,4 +1,5 @@
-= Producing and consuming messages on Astra Streaming with pulsar clients
+= Producing and consuming messages on Astra Streaming with Pulsar clients
+:navtitle: Pulsar clients
 :description: Use any of the Pulsar Clients to interact with your Astra Streaming topics.
 
 {product_name} is powered by http://pulsar.apache.org/[Apache Pulsar].
