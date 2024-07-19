@@ -28,7 +28,8 @@ We’ll create a ZIP file in the proper format, then use the pulsar-admin comman
 We’ll pass a “create function" configuration file (a .yaml file) as a parameter to pulsar-admin, which defines the Pulsar Function options and parameters.
 
 Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folder looks like this:
-[source,plain]
+
+[source,console]
 ----
 /my-python-function
    python-code/my-python-function.zip
@@ -38,7 +39,7 @@ Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpython
 
 . To deploy a ZIP, first create the proper ZIP file directory structure. That file format/layout looks like this:
 +
-[source,python]
+[source,shell]
 ----
 mkdir my-python-function
 mkdir my-python-function/python-code
@@ -81,7 +82,7 @@ zip -r ../my-python-function.zip .
 
 . Ensure your package has the ZIP file at the root of the file structure:
 +
-[source,plain]
+[source,shell]
 ----
 python-code ls -al
 deps
@@ -115,7 +116,7 @@ userConfig:
 . Use pulsar-admin to deploy the Python ZIP to Astra Streaming or Pulsar.
 The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
 +
-[source,console]
+[source,bash]
 ----
 bin/pulsar-admin functions create --function-config-file </absolute/path/to/your/python/func-create-config.yml>
 ----
@@ -327,7 +328,7 @@ You can also add functions using the Pulsar CLI. We will create a new Python fun
 
 . Create the following Python function in `testfunction.py`:
 +
-[source, python]
+[source,python]
 ----
 from pulsar import Function
 
@@ -341,7 +342,7 @@ class ExclamationFunction(Function):
 +
 . Deploy `testfunction.py` to your Pulsar cluster using the Pulsar CLI:
 +
-[source, bash]
+[source,bash]
 ----
 $ ./pulsar-admin functions create \
   --py /full/path/to/testfunction.py \
@@ -378,7 +379,7 @@ Send a test value with Pulsar CLI's `trigger` to test a function you've set up.
 
 . Listen for messages on the output topic:
 +
-[source, bash]
+[source,bash]
 ----
 $ ./pulsar-client consume persistent://<tenant-name>/default/<topic-name> \
   --subscription-name my-subscription \
@@ -387,7 +388,7 @@ $ ./pulsar-client consume persistent://<tenant-name>/default/<topic-name> \
 +
 . Test your exclamation function with `trigger`:
 +
-[source, bash]
+[source,bash]
 ----
 $ ./pulsar-admin functions trigger \
   --name exclamation \

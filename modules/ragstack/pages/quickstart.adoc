@@ -40,7 +40,7 @@ Run the generated command in your local environment to connect your tenant to th
 {ragstack} CLI::
 +
 --
-[source,plain]
+[source,shell]
 ----
 ragstack profiles import astra-rs-tenant --inline 'base64:...' --set-current -u
 ----
@@ -49,7 +49,7 @@ ragstack profiles import astra-rs-tenant --inline 'base64:...' --set-current -u
 Result::
 +
 --
-[source,plain]
+[source,console]
 ----
 profile astra-rs-tenant created
 profile astra-rs-tenant set as current
@@ -58,7 +58,7 @@ profile astra-rs-tenant set as current
 ====
 
 The configuration values will look something like this.
-[source,plain]
+[source,console]
 ----
 tenant: rs-tenant
 webServiceUrl: https://pulsar-gcp-useast1.api.streaming.datastax.com/ragstack
@@ -326,7 +326,7 @@ For more on {ragstack} CLI commands, see https://docs.langstream.ai/installation
 {ragstack} CLI::
 +
 --
-[source,plain]
+[source,shell]
 ----
 ragstack apps deploy sample-app -app ./application -i ./instance.yaml -s ./secrets.yaml
 ragstack apps get sample-app
@@ -336,7 +336,7 @@ ragstack apps get sample-app
 Result::
 +
 --
-[source,plain]
+[source,console]
 ----
 packaging app: /Users/mendon.kissling/sample-app/./application
 app packaged
@@ -366,7 +366,7 @@ If you're running into issues, ensure the values in your CLI profile match the v
 
 If you're unsure of the profile name, use `ragstack profiles list`, then `ragstack profiles get <my-profile> -o=json` to display the current values.
 
-[source,plain]
+[source,json]
 ----
 {
   "webServiceUrl" : "https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream",
@@ -389,7 +389,7 @@ To update these values, use `ragstack profiles update astra-ragstack-tenant --co
 |===
 
 If you get lost along the way, here are the default profile values:
-[source,plain]
+[source,console]
 ----
 webServiceUrl: "http://localhost:8090"
 apiGatewayUrl: "ws://localhost:8091"
@@ -404,7 +404,7 @@ The `X-DataStax-Current-Org` value is the client-id associated with the Astra to
 curl::
 +
 --
-[source,plain]
+[source,curl]
 ----
 curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datastax.com/langstream/ragstack-tenant' \
 --header 'X-DataStax-Current-Org:lzAiCLsTMKruZZZUxieNgYhe' \
@@ -416,7 +416,7 @@ curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datasta
 Result::
 +
 --
-[source,plain]
+[source,console]
 ----
 {
   "status":true,
@@ -434,7 +434,7 @@ Ensure the values returned from the curl call match the values in your {ragstack
 
 In the {ragstack} CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
 This command will connect to your tenant and consume from the output-topic and produce to the input-topic.
-[source,plain]
+[source,shell]
 ----
 ragstack gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
 ----
@@ -443,7 +443,7 @@ In Astra Streaming, confirm that your application is connected to your tenant.
 Select the Websocket tab of your {ragstack}-enabled tenant, and choose to consume from output-topic and to produce to input-topic.
 If the Websocket tab is not visible, you may need to refresh the page or try opening it in Incognito mode.
 Send a message to your application, and confirm that it is received by the Astra websocket:
-[source,plain]
+[source,shell]
 ----
 ragstack gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
 Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/ragstack-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
@@ -465,7 +465,7 @@ To consume from this gateway, run the following command:
 {ragstack} CLI::
 +
 --
-[source,plain]
+[source,shell]
 ----
 ragstack gateway consume sample-app consume-history -p sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 ----
@@ -474,7 +474,7 @@ ragstack gateway consume sample-app consume-history -p sessionId=F85E4665-BE00-4
 Result::
 +
 --
-[source,plain]
+[source,console]
 ----
 Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/ragstack-tenant/sample-app/consume-history?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 {"record":{"key":null,"value":"Hi K8s, it's me, Astra.","headers":{}},"offset":"eyJvZmZzZXRzIjp7IjAiOiIxIn19"}

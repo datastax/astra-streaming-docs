@@ -90,7 +90,7 @@ bin/pulsar-admin tenants get <tenant>
 Result::
 +
 --
-[source,plaintext]
+[source,json]
 ----
 {
   "adminRoles" : [ "client;838cbf7f-0331-46da-b559-ef1c2209b875;Z2VvcmVwbGljYXRlZC10ZW5hbnQ=;68fc51728f", "client;838cbf7f-0331-46da-b559-ef1c2209b875;Z2VvcmVwbGljYXRlZC10ZW5hbnQ=;25599ee732", "client;838cbf7f-0331-46da-b559-ef1c2209b875;Z2VvcmVwbGljYXRlZC10ZW5hbnQ=", "838cbf7f-0331-46da-b559-ef1c2209b875;Z2VvcmVwbGljYXRlZC10ZW5hbnQ=" ],
@@ -116,7 +116,7 @@ bin/pulsar-admin namespaces get-clusters <tenant>/<namespace>
 Result::
 +
 --
-[source,plaintext]
+[source,json]
 ----
 pulsar-aws-useast1-staging
 pulsar-aws-useast2-staging
@@ -140,7 +140,7 @@ bin/pulsar-client produce <my-tenant>/<my-namespace>/<my-topic> --messages "hell
 
 . Your consumer will acknowledge receipt of the messages:
 +
-[source,plaintext]
+[source,console]
 ----
 ----- got message -----
 key:[null], properties:[], content:hello-from-pulsar
@@ -201,7 +201,7 @@ bin/pulsar-admin topics stats persistent://<my-tenant>/<my-namespace>/<my-topic>
 Result::
 +
 --
-[source,plaintext]
+[source,json]
 ----
 {
   "msgRateIn" : 0.0,

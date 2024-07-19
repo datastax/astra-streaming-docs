@@ -54,7 +54,7 @@ You could instead modify the values in the "application.properties" file in the 
 .Spring application properties
 [%collapsible]
 ====
-[source,plain]
+[source,yaml]
 ----
 include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/resources/application.properties[]
 ----
