@@ -1,11 +1,11 @@
 = {starlight_rabbitmq}
 :page-tag: starlight-rabbitmq,quickstart,admin,dev,pulsar
 
-{starlight_rabbitmq} brings native RabbitMQ® protocol support to Apache Pulsar®, enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code. RabbitMQ applications can now leverage Pulsar’s powerful features, such as:
+{starlight_rabbitmq} brings native RabbitMQ(R) protocol support to Apache Pulsar(R), enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code. RabbitMQ applications can now leverage Pulsar’s powerful features, such as:
 
 * *Consistent metadata store*
 +
-{starlight_rabbitmq} uses Apache ZooKeeper™, so existing Zookeeper configuration stores can store {starlight_rabbitmq} metadata.
+{starlight_rabbitmq} uses Apache ZooKeeper(TM), so existing Zookeeper configuration stores can store {starlight_rabbitmq} metadata.
 * *Security and authentication*
 +
 {starlight_rabbitmq} connects to brokers that have TLS, authentication, and/or authorization enabled, because it uses the same `AuthenticationService` as Pulsar.
