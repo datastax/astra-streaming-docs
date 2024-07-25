@@ -1,13 +1,9 @@
 = Getting started with Astra Streaming
-:description:
 :navtitle: Get started
-:title: Getting started with Astra Streaming
-:slug: astra-streaming-quick-start
 :page-tag: astra-streaming,planner,quickstart,pulsar
-:page-aliases: docs@astra-streaming::astream-quick-start.adoc
 
 Astra Streaming is a cloud native data streaming and event stream processing
-service tightly integrated into the {astra_ui} and powered by Apache Pulsar™.
+service tightly integrated into the {astra_ui} and powered by Apache Pulsar(TM).
 Using Astra Streaming, customers can quickly create Pulsar instances,
 manage their clusters, scale across cloud regions, and manage Pulsar resources
 such as topics, connectors, functions and subscriptions.
@@ -22,7 +18,7 @@ You will need the following to complete this guide:
 
 == Create your Astra account
 
-. Navigate to the {streaming_signup_url}[Astra portal sign in page^]{external-link-icon}.
+. Navigate to the {streaming_signup_url}[Astra portal sign in page^].
 +
 image:astream-login.png[Login to Astra]
 
@@ -34,7 +30,7 @@ image:astream-create-account.png[Create Astra account]
 
 . You should receive an email from DataStax verifying your address - click the button within.
 
-. If you aren't automatically signed in, visit the {login_url}[Astra sign in page^]{external-link-icon} and use your new account creds.
+. If you aren't automatically signed in, visit the {login_url}[Astra sign in page^] and use your new account creds.
 
 == Your first streaming tenant
 

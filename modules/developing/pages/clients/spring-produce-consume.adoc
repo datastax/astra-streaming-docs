@@ -1,6 +1,6 @@
 = Producing and consuming messages using the Java pulsar client with Astra Streaming and Spring
+:navtitle: Spring
 :description: This is a guide to create a simple producer and consumer using Pulsar's java client with Spring.
-:title: Java pulsar client on Astra Streaming with Spring
 :page-tag: astra-streaming,dev,develop,pulsar,java
 
 == Prerequisites
@@ -54,7 +54,7 @@ You could instead modify the values in the "application.properties" file in the 
 .Spring application properties
 [%collapsible]
 ====
-[source,plain]
+[source,yaml]
 ----
 include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/resources/application.properties[]
 ----

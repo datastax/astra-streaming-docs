@@ -1,7 +1,6 @@
 = Producing and consuming messages using the Golang pulsar client on Astra Streaming
+:navtitle: Golang
 :description: This is a guide to create a simple producer and consumer using Pulsar's golang client.
-:title: Golang pulsar client on Astra Streaming
-:page-aliases: docs@astra-streaming::astream-golang-eg.adoc,astra-streaming:ROOT:astream-golang-eg.adoc
 :page-tag: astra-streaming,dev,develop,pulsar,go
 
 == Prerequisites

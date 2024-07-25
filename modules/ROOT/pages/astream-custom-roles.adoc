@@ -1,6 +1,4 @@
 = Manage custom roles
-:slug: manage-custom-user-roles
-:page-aliases: docs@astra-streaming::astream-custom-roles.adoc
 :page-tag: astra-streaming,security,secure,pulsar
 
 Within *Settings* > *Users*, you can see the permissions for a specific role by hovering over the number in the *Roles* column of the table. This will show the permissions granted to the role.
@@ -21,7 +19,7 @@ You can also create custom roles using the DevOps API.
 . From *Settings* page, select *Roles*.
 . Select *Add Custom Role*.
 . Enter the name you want to use for your custom role. This name should help you easily identify when you want to assign this role to users.
-. Select the Organization, Keyspace, Table, and API permissions you want to assign to your custom role. 
+. Select the Organization, Keyspace, Table, and API permissions you want to assign to your custom role.
 +
 [NOTE]
 ====

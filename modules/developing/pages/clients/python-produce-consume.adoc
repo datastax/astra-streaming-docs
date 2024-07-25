@@ -1,7 +1,6 @@
 = Producing and consuming messages using the python pulsar client on Astra Streaming
+:navtitle: Python
 :description: This is a guide to create a simple producer and consumer using Pulsar's python client.
-:title: Python pulsar client on Astra Streaming
-:page-aliases: docs@astra-streaming::astream-python-eg.adoc,astra-streaming:ROOT:astream-python-eg.adoc
 :page-tag: astra-streaming,dev,develop,python,pulsar
 
 == Prerequisites

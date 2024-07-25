@@ -1,7 +1,6 @@
 = Restful requests using curl with Astra Streaming
 :navtitle: Using curl with Astra Streaming
 :description: This guide will provide the necessary steps to configure curl calls for use with Astra Streaming.
-:title: A guide to using curl with Astra Streaming
 
 Pulsar offers a RESTful API for administrative tasks.
 When you create a tenant in Astra Streaming, all supporting APIs are enabled.

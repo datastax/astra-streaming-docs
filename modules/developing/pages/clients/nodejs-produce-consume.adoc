@@ -1,7 +1,6 @@
 = Producing and consuming messages using the Node.js Pulsar client on Astra Streaming
+:navtitle: Node.js
 :description: This is a guide to create a simple producer and consumer using Pulsar's Node.js client.
-:title: Node.js Pulsar client on Astra Streaming
-:page-aliases: docs@astra-streaming::astream-nodejs-eg.adoc, astra-streaming:ROOT:astream-nodejs-eg.adoc
 :page-tag: astra-streaming,connect,dev,develop,nodejs,pulsar
 
 == Prerequisites
