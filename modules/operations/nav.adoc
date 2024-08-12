@@ -8,6 +8,7 @@
 ** xref:astream-scrape-metrics.adoc[]
 ** xref:monitoring/integration.adoc[]
 ** xref:monitoring/new-relic.adoc[]
+** xref:monitoring/stream-audit-logs.adoc[]
 ** Grafana dashboards
 *** xref:monitoring/metrics.adoc[]
 *** xref:monitoring/overview-dashboard.adoc[]
