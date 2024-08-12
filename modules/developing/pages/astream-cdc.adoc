@@ -220,11 +220,10 @@ Complete the following steps after you have created a <<create-tenant,streaming 
 
 . Select *Databases* from the main navigation.
 . Select the name of the active database that you would like to use.
-. In your database dashboard, select the *CDC* tab.
-. Select *Enable CDC*.
+. Click the *CDC* tab.
+. Click *Enable CDC*.
 . Complete the fields to select a tenant, select a keyspace, and select the name of the table you created.
-. Select *Enable CDC*.
-Once created, your CDC connector appears under the Change Data Capture (CDC) tab in your database dashboard.
+. Click *Enable CDC*.
 
 Enabling CDC creates a new `astracdc` namespace with two new topics, `data-` and `log-`.
 The `log-` topic consumes schema changes, processes them, and then writes clean data to the `data-` topic.
@@ -237,7 +236,7 @@ For more information, see <<increase-partitions,Increase the CDC data-topic Part
 
 Connect an Elasticsearch sink to CDC that consumes messages from the `data-` topic and sends them to your Elasticsearch deployment.
 
-. In your active database dashboard, select the *CDC* tab.
+. Go to your database's *CDC* tab.
 . Under *Change Data Capture*, select the name of the CDC-enabled table you would like to use.
 You should still be in the CDC tab after selecting a name, but the header becomes *CDC for `TABLE_NAME`* with a green *Active* icon next to it.
 . Select *Add Elastic Search Sink* to select your settings.
@@ -263,7 +262,7 @@ You can confirm that your new sink was created in the *Sinks* tab.
 
 Let's process some changes with CDC.
 
-. In your active database dashboard, select the *CQL Console* tab.
+. Go to your database's *CQL Console* tab.
 . Modify the table you created.
 +
 [source,sql,subs="verbatim,quotes"]
