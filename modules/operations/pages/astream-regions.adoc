@@ -1,7 +1,5 @@
 = {product_name} Regions
-:slug: astra-streaming-regions
 :page-tag: astra-streaming,admin,manage,pulsar
-:page-aliases: docs@astra-streaming::astream-regions.adoc
 
 When creating a tenant, select a region for your tenant. Choose a region that is geographically close to your users to optimize performance.
 

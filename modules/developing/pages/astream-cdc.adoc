@@ -1,9 +1,5 @@
 = Create a Change Data Capture (CDC) connector
-:slug: astram-cdc
 :description: CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data
-:keywords: datastax astra, change data capture, cdc, astra db
-:meta-description: CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data
-:page-aliases: docs@astra-streaming::astream-cdc.adoc
 
 [IMPORTANT]
 ====

@@ -1,11 +1,11 @@
 = Shared subscriptions in Pulsar
-:page-aliases: docs@astra-streaming::astream-subscriptions-shared.adoc
+:navtitle: Shared
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
 *Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
 
 A *shared* subscription allows *multiple consumers* to consume messages from a *single topic* in round-robin fashion. +
-More consumers in a shared subscription can increase your Pulsar deployment's rate of message consumption, but at the cost of losing message ordering guarantees and acknowledgement schemes. 
+More consumers in a shared subscription can increase your Pulsar deployment's rate of message consumption, but at the cost of losing message ordering guarantees and acknowledgement schemes.
 
 This document explains how to use Pulsar's shared subscription model to manage your topic consumption.
 
@@ -14,14 +14,14 @@ include::partial$subscription-prereq.adoc[]
 [#example]
 == Shared subscription example
 
-To try out a Pulsar shared subscription, add `.subscriptionType(SubscriptionType.Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`. 
+To try out a Pulsar shared subscription, add `.subscriptionType(SubscriptionType.Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`.
 
 [source,java]
 ----
 pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
-    .topic("persistent://" 
-        + conf.getTenantName() + "/" 
-        + conf.getNamespace() + "/" 
+    .topic("persistent://"
+        + conf.getTenantName() + "/"
+        + conf.getNamespace() + "/"
         + conf.getTopicName())
     .startMessageIdInclusive()
     .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
@@ -40,7 +40,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
 ----
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages. 
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
 +
 [source,bash]
 ----
@@ -51,7 +51,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 51277375 sent
 ----
 
-. The consumer begins receiving messages. 
+. The consumer begins receiving messages.
 +
 [source,bash]
 ----
@@ -75,7 +75,7 @@ Since this test uses shared subscriptions, you can attach multiple consumers to 
 
 == Shared subscription video
 
-Follow along with this video from our *Five Minutes About Pulsar* series to see shared subscriptions in action. 
+Follow along with this video from our *Five Minutes About Pulsar* series to see shared subscriptions in action.
 
 video::mmukXqGsauA[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 

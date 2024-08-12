@@ -1,4 +1,5 @@
 = Monitoring Streaming Tenants
+:navtitle: Monitoring overview
 
 Because Astra Streaming is a software-as-a-service product, not all Apache Pulsar metrics (https://pulsar.apache.org/docs/reference-metrics/[Pulsar Metrics Reference]) are exposed for external integration purposes. At a high level, Astra Streaming only exposes metrics that are related to namespaces. Other metrics that are not directly namespace related are not exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
 

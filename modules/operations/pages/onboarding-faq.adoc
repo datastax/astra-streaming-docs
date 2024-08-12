@@ -1,8 +1,7 @@
 = Astra Streaming Enrollment FAQ
-:slug: enrollment-faq
-:page-tag: astra-streaming,onboarding,Orientation
 :navtitle: Enrollment FAQ
 :description: These are the most common questions we receive about getting started with Astra Streaming.
+:page-tag: astra-streaming,onboarding,Orientation
 
 When considering Astra Streaming for your production workloads, you might have questions about what options are available for connecting and consuming your serverless clusters.
 This page answers the most common questions we receive about enrollment, and we hope that this FAQ will help you navigate the enrollment process smoothly and successfully.

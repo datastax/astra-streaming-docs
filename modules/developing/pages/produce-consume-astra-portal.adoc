@@ -1,5 +1,5 @@
 = Producing and consuming messages using the Astra Portal
-:title: Try me with Astra Portal
+:navtitle: Astra Portal
 :description: Use this guide to create and consume a topic message using the Astra Streaming Portal.
 
 This guide assumes you have completed the xref:getting-started:index.adoc[Astra Streaming quickstart].

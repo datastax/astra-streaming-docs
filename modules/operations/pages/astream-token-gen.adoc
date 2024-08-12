@@ -101,7 +101,7 @@ The API results will show the UUID for each role id.
 +
 . In the command-line interface associated with your environment, paste the following environment variable copied from token generation:
 +
-[source, shell]
+[source,shell]
 ----
 export ASTRA_DB_APPLICATION_TOKEN=<<REPLACE_WITH_YOUR_TOKEN>>
 ----

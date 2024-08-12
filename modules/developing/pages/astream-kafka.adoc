@@ -1,13 +1,11 @@
 = Starlight for Kafka
-
 :page-tag: starlight-kafka,dev,admin,pulsar,kafka
-:page-aliases: docs@astra-streaming::astream-kafka.adoc
 
-{kafka_for_astra} brings native Apache Kafka® protocol support to Apache Pulsar®, enabling migration of existing Kafka applications and services to Pulsar without modifying the code. Kafka applications can now leverage Pulsar’s powerful features, such as:
+{kafka_for_astra} brings native Apache Kafka(R) protocol support to Apache Pulsar(R), enabling migration of existing Kafka applications and services to Pulsar without modifying the code. Kafka applications can now leverage Pulsar’s powerful features, such as:
 
 * Streamlined operations with enterprise-grade multi-tenancy
 * Simplified operations with a rebalance-free architecture
-* Infinite event stream retention with Apache BookKeeper™ and tiered storage
+* Infinite event stream retention with Apache BookKeeper(TM) and tiered storage
 * Serverless event processing with xref:astream-functions.adoc[Pulsar Functions]
 
 By integrating two popular event streaming ecosystems, {kafka_for_astra} unlocks new use cases and reduces barriers for users adopting Pulsar. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {kafka_for_astra} to accelerate the development of real-time applications and services.
@@ -18,13 +16,13 @@ This document will help you get started producing and consuming Kafka messages o
 
 :page-tag: starlight-kafka,quickstart,install,admin,dev,pulsar,kafka
 
-. To start connecting {kafka_for_astra}, select *Kafka* in the {product_name} *Connect* tab. 
+. To start connecting {kafka_for_astra}, select *Kafka* in the {product_name} *Connect* tab.
 
 . When the popup appears, confirm you want to enable Kafka on your tenant.
 +
 [NOTE]
 ====
-You will not be able to remove the Kafka namespaces created on your tenant with this step. 
+You will not be able to remove the Kafka namespaces created on your tenant with this step.
 You must remove the tenant itself to remove these namespaces.
 ====
 
