@@ -1,8 +1,6 @@
-= Astra Audit Logging
+= Stream {astra_db} audit logs 
 
-Stream audit logs through {product_name} to an external system.
-
-This feature requires coordination with your DataStax representative.
+Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra_db} audit logs] through {product_name} to an external system.
 
 To enable audit logging, provide the **full name** of your {product_name} topic and the streaming tenant's `client.conf` file to DataStax.
 
