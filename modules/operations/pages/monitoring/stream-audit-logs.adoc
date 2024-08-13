@@ -17,4 +17,71 @@ Additional topics can help you organize audit logs by event type or other criter
 . In the {link-astra-portal}, go to **Streaming**, and then click your audit log streaming tenant.
 . On the *Connect* tab, click **Download client.conf**.
 . Send your topic's full address and the `client.conf` file to your DataStax representative. DataStax will complete the setup.
-.. Alternatively, POST your topic's full address and values from the `client.conf` file to the https://docs.datastax.com/en/astra-api-docs/_attachments/devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[Astra DevOps API telemetry endpoint].
+
+== Configure the audit log with the DevOps API
+
+You can configure audit log streaming using the Astra DevOps API instead of contacting your DataStax representative.
+
+To do this, send a POST request to the Astra DevOps API telemetry endpoint. Include your topic’s full address and values from the `client.conf` file in the request. You'll need an **Organization Administrator** token to use this API.
+
+. Create the audit log streaming configuration.
++
+[source,curl,subs="verbatim,quotes"]
+----
+curl --request POST \
+  --url 'https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer **APPLICATION_TOKEN**' \
+  --data '{
+  "pulsar": {
+    "endpoint": "pulsar+**BROKER_SERVICE_URL**",
+    "auth_strategy": "token",
+    "topic": "**TOPIC_FULL_NAME**",
+    "auth_name": "token",
+    "token": "**PULSAR_AUTHENTICATION_TOKEN**"
+  }
+}'
+----
++
+Response:
++
+[source,plain]
+----
+HTTP/1.1 202 Accepted
+----
++
+. Retrieve the audit log streaming configuration.
++
+[source,curl,subs="verbatim,quotes"]
+----
+curl --request GET \
+  --url 'https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer **APPLICATION_TOKEN**' \
+  --data '{
+  "pulsar": {
+    "endpoint": "pulsar+**BROKER_SERVICE_URL**",
+    "auth_strategy": "token",
+    "topic": "**TOPIC_FULL_NAME**",
+    "auth_name": "token",
+    "token": "**PULSAR_AUTHENTICATION_TOKEN**"
+  }
+}'
+----
++
+Response:
++
+[source,json]
+----
+{
+  "pulsar": {
+    "endpoint": "pulsar+ssl://pulsar-aws-useast2.streaming.datastax.com:6651",
+    "topic": "persistent://aws-us-east-2-mk-2/default/audit-log",
+    "auth_strategy": "token",
+    "token": "********",
+    "auth_name": "token"
+  }
+}
+----
+
+
