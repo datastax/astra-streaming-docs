@@ -4,36 +4,35 @@ Stream audit logs through {product_name} to an external system.
 
 This feature requires coordination with your DataStax representative.
 
-To enable audit logging, you will need to provide the **Full Name** of your {product_name} topic and the streaming tenant's `client.conf` file to DataStax.
+To enable audit logging, provide the **full name** of your {product_name} topic and the streaming tenant's `client.conf` file to DataStax.
 
-== Create an {product_name} topic for audit logging
+== Create a {product_name} Topic for Audit Logging
 
-If you already have an existing {product_name} topic you want to use for audit logging, skip to <<download-client-conf>>.
+If you already have an existing {product_name} topic for audit logging, skip to the section <<download-client-conf>>.
 
 . Log in to the Astra console using your credentials.
-. Select the appropriate organization for the streaming account you wish to use.
-. Click on **Streaming** from the left-hand menu.
+. Select the appropriate organization for the streaming account you want to use.
+. Click **Streaming** in the left-hand menu.
 . Select an existing tenant or xref:astra-streaming:getting-started:index.adoc[Create a Streaming Tenant].
-**The tenant must be located in AWS `useast2`.**
+**Note:** The tenant must be located in AWS `useast2`.
 . Create a namespace in the tenant.
 .. Select **Namespace and Topics** from the menu.
-.. Click on **Create Namespace**.
-.. Enter a name for your new namespace. In this example, we'll use `audit-logs`.
+.. Click **Create Namespace**.
+.. Enter a name for your new namespace. For example, `audit-logs`.
 . Create a topic in the namespace.
 .. Click **Add Topic** on the `audit-logs` namespace you just created.
-.. Choose a name for your new topic. In this example, we'll use `dev`.
-.. The default **Persistent** and **Non-partitioned** settings are fine.
-.. Click on the new topic from the **Namespace and Topics** screen.
-. Copy down the topic's **Full Name** value for your DataStax representative.
+.. Enter a name for your new topic. For example, `dev`.
+.. The default **Persistent** and **Non-partitioned** settings are acceptable.
+.. Click the new topic from the **Namespace and Topics** screen.
+. Record the topic's **full name** value for your DataStax representative.
 It will look like `persistent://aws-us-east-2-mk/audit-logs/dev`.
-.. Set up as many additional topics as you need, and record the **Full Name** of each.
+. Set up any additional topics as needed, and record the **full name** of each.
 
-[[download-client-conf]]
-== Download the client configuration file
+== Download the Client Configuration File
 
-. From your streaming tenant, click on the **Connect** tab, and then click the **Download client.conf** button.
+. From your streaming tenant, click the **Connect** tab, then click **Download client.conf**.
 . The `client.conf` file is downloaded to your local machine.
 
-== Send information to DataStax
+== Send Information to DataStax
 
-Send your full topic address and `client.conf` file to your DataStax representative, and DataStax will complete the setup.
+Send your topic's full address and the `client.conf` file to your DataStax representative. DataStax will complete the setup.
