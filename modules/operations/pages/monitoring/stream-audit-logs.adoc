@@ -2,9 +2,13 @@
 
 Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra_db} audit logs] through {product_name} to an external system.
 
-To enable audit log streaming, you must provide the **Full Name** of your {product_name} topic and the streaming tenant's `client.conf` file to {support_url}[{company} Support] or your account representative, or POST your configuration to the https://docs.datastax.com/en/astra-api-docs/_attachments/devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[Astra DevOps API telemetry endpoint].
+To enable audit log streaming, you must do one of the following:
+
+ * Provide the **Full Name** of your {product_name} topic and the streaming tenant's `client.conf` file to {support_url}[{company} Support] or your account representative.
+ * POST your configuration to the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[Astra DevOps API telemetry endpoint].
 
 == Create an {product_name} topic for audit logs
+
 Audit log streaming requires a streaming tenant in the AWS `us-east-2` region.
 You can create a new tenant with the xref:astra-streaming:getting-started:index.adoc[{product_name} quickstart] or use an existing {product_name} tenant.
 
@@ -13,18 +17,24 @@ You can create a new tenant with the xref:astra-streaming:getting-started:index.
 . Add a xref:astra-streaming:getting-started:index.adoc#add-a-namespace-to-hold-topics[namespace] and xref:astra-streaming:getting-started:index.adoc#a-topic-to-organize-messages[topic] to the tenant.
 . On the *Namespace and Topics* page, click the new topic, and then copy the topic's **Full Name**, such as `persistent://aws-us-east-2-mk/*NAMESPACE_NAME*/*TOPIC_NAME*`.
 . If necessary, create additional audit log topics, and then record the **Full Name** for each topic.
-Additional topics can help you organize audit logs by event type or other criteria.
+You can use topics to organize audit logs by event type or other criteria.
 . In the {link-astra-portal}, go to **Streaming**, and then click your audit log streaming tenant.
 . On the *Connect* tab, click **Download client.conf**.
-. Send your topic's full address and the `client.conf` file to your DataStax representative. DataStax will complete the setup.
+. To finalize the configuration, do one of the following:
++
+* Send your topic's full name and the `client.conf` file to {support_url}[{company} Support] or your account representative, and then {company} will complete the setup.
+* <<use-the-devops-api,Use the Astra DevOps API to complete the setup.>>
 
-== Configure the audit log with the DevOps API
+[#use-the-devops-api]
+== Configure audit log streaming with the DevOps API
 
-You can configure audit log streaming using the Astra DevOps API instead of contacting your DataStax representative.
+Ypu can use the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[Astra DevOps API telemetry endpoint] to configure audit log streaming instead of providing the configuration details to {company} Support.
 
-To do this, send a POST request to the Astra DevOps API telemetry endpoint. Include your topic’s full address and values from the `client.conf` file in the request. You'll need an **Organization Administrator** token to use this API.
+. In the {link-astra-portal}, create an application token with the **Organization Administrator** role, if you don't already have one.
 
-. Create the audit log streaming configuration.
+. To create the audit log streaming configuration, send a POST request with your topic’s full name and the required values from the tenant's `client.conf` file.
++
+The `auth_strategy` and other authentication details depend on your Pulsar configuration.
 +
 [source,curl,subs="verbatim,quotes"]
 ----
@@ -43,34 +53,26 @@ curl --request POST \
 }'
 ----
 +
-Response:
-+
+.Response
+[%collapsible]
+====
 [source,plain]
 ----
 HTTP/1.1 202 Accepted
 ----
-+
-. Retrieve the audit log streaming configuration.
+====
+. To retrieve and verify the audit log streaming configuration, send a GET request:
 +
 [source,curl,subs="verbatim,quotes"]
 ----
 curl --request GET \
   --url 'https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs' \
-  --header 'Accept: application/json' \
-  --header 'Authorization: Bearer **APPLICATION_TOKEN**' \
-  --data '{
-  "pulsar": {
-    "endpoint": "pulsar+**BROKER_SERVICE_URL**",
-    "auth_strategy": "token",
-    "topic": "**TOPIC_FULL_NAME**",
-    "auth_name": "token",
-    "token": "**PULSAR_AUTHENTICATION_TOKEN**"
-  }
-}'
+  --header 'Authorization: Bearer **APPLICATION_TOKEN**'
 ----
 +
-Response:
-+
+.Response
+[%collapsible]
+====
 [source,json]
 ----
 {
@@ -83,5 +85,7 @@ Response:
   }
 }
 ----
+====
 
+. To delete an audit log streaming configuration, xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/deleteTelemetryConfig[send a DELETE request].
 
