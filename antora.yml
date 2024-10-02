@@ -7,8 +7,8 @@ nav:
 - modules/getting-started/nav.adoc
 - modules/developing/nav.adoc
 - modules/operations/nav.adoc
-- modules/ROOT/nav.adoc
 - modules/apis/nav.adoc
+- modules/ROOT/nav.adoc
 
 asciidoc:
   attributes:

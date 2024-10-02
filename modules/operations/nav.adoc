@@ -16,4 +16,3 @@
 *** xref:monitoring/topic-dashboard.adoc[]
 * xref:astream-token-gen.adoc[]
 * xref:private-connectivity.adoc[]
-* xref:onboarding-faq.adoc[]

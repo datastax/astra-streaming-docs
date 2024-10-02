@@ -1,5 +1,4 @@
 .Guides and examples
-* xref:astream-faq.adoc[]
 * Manage permissions
 ** xref:astream-org-permissions.adoc[]
 ** xref:astream-custom-roles.adoc[]
@@ -12,5 +11,12 @@
 
 //
 
+.IO connectors
 * xref:streaming-learning:pulsar-io:connectors/index.adoc[IO Connectors]
-* xref:operations:astream-release-notes.adoc[Changelog]
+
+.Frequently asked questions
+* xref:astream-faq.adoc[]
+* xref:operations:onboarding-faq.adoc[]
+
+.Release notes
+* xref:operations:astream-release-notes.adoc[]
