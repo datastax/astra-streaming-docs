@@ -1,103 +1,181 @@
-= {product_name} Changelog
+= {product_name} release notes
 :page-tag: astra-streaming,admin,dev,pulsar
+:navtitle: Release notes
+:page-toclevels: 1
+:description: This page summarizes significant changes and updates to {product_name}.
+:new: New features and enhancements
+:security: Security updates
+:fix: Fixed issues
+:dep: Deprecated features
+:boilerplate: This release includes the following changes and updates:
 
-The {product_name} changelog provides information about new and improved features, known and resolved issues, and bug fixes.
+This page summarizes significant changes and updates to {product_name}.
 
-== 20 June 2023
+== June 20, 2023
 
-Added new {product_name} region:
+{boilerplate}
 
-* Azure - `westeurope` (Amsterdam, Netherlands)
+=== {new}
 
-For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+* Added support for the Azure `westeurope` (Amsterdam, Netherlands) region.
 
-== 15 June 2023
+== June 15, 2023
 
-The xref:developing:gpt-schema-translator.adoc[GPT schema translator] is now available for the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[Astra DB Sink Connector], with support for additional connectors to come.
+{boilerplate}
 
-== 1 June 2023
+=== {new}
 
-Added new {product_name} region:
+* The xref:developing:gpt-schema-translator.adoc[GPT schema translator] is now available for the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[Astra DB Sink Connector].
 
-* AWS - `eu-west-1` (Dublin, Ireland)
+== June 1, 2023
 
-For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+{boilerplate}
 
-== 16 May 2023
+=== {new}
 
-Added new {product_name} regions:
+* Added support for the AWS `eu-west-1` (Dublin, Ireland) region.
 
-* AWS - `ap-south-1`
-* AWS - `ap-southeast-1`
-* AWS - `eu-central-1`
+== May 16, 2023
 
-For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+{boilerplate}
 
-== 3 May 2023
+=== {new}
 
-https://spring.io/[Spring Boot] support is here!
-You can now use everyone's favorite Java framework to build your {product_name} applications.
-For more, see xref:developing:clients/spring-produce-consume.adoc[Spring Boot for {product_name}].
+* Added support for the following regions:
++
+** AWS `ap-south-1`
+** AWS `ap-southeast-1`
+** AWS `eu-central-1`
 
-== 17 April 2023
+== May 3, 2023
 
-Custom functions can now only be created by *qualified organizations*.
-A *qualified organization* is an organization on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a payment method on file.
-Upgrade your organization to a qualified organization by:
+{boilerplate}
 
-* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[Plan Options].
-* Contacting our sales team to see how we can help.
-* Opening {support_url}[a support ticket].
+=== {new}
 
-Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
+* Added support for https://spring.io/[Spring Boot].
+You can now use this Java framework to build your {product_name} applications.
+For more information, see xref:developing:clients/spring-produce-consume.adoc[Spring Boot for {product_name}].
 
-// == 2 December 2022
+== April 17, 2023
 
-// {product_name} now supports https://pulsar.apache.org/docs/next/txn-how[Pulsar transactions].
+{boilerplate}
 
-== 27 February 2023
+=== {new}
 
-*Welcome Home* is now generally available, which includes UI improvements and https://astra.datastax.com/integrations[data integrations].
+* Custom functions can now only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a payment method on file.
++
+Organizations on the Free plan can still use xref:streaming-learning:functions:index.adoc[transform functions].
 
-== 21 November 2022
+== February 27, 2023
 
-Added support for serverless Azure `australiaeast` (New South Wales, Australia) region. For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+{boilerplate}
 
-== 11 November 2022
+=== {new}
 
-{product_name} now supports xref:streaming-learning:functions:index.adoc[transform functions].
+* Launched a refreshed {astra_ui}.
 
-== 16 September 2022
+== Previous releases
 
-{product_name} now supports xref:operations:astream-georeplication.adoc[geo-replication].
+.2022 release notes
+[%collapsible]
+====
+[discrete]
+=== November 21, 2022
 
-== 7 June 2022
+{boilerplate}
 
-{product_name} now supports xref:operations:astream-scrape-metrics.adoc[scraping metrics with Prometheus].
+[discrete]
+==== {new}
 
-== 28 April 2022
+* Added support for the Azure `australiaeast` (New South Wales, Australia) region.
 
-xref:developing:astream-rabbit.adoc[{starlight_rabbitmq}] is now available. {starlight_rabbitmq} brings native RabbitMQ(R) protocol support to Apache Pulsar(TM), enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code.
+[discrete]
+=== November 11, 2022
 
-== 19 April 2022
+{boilerplate}
 
-xref:developing:astream-kafka.adoc[{kafka_for_astra}] is now available. {kafka_for_astra} brings native Apache Kafka(R) protocol support to Apache Pulsar.
+[discrete]
+==== {new}
 
-== 24 March 2022
-xref:developing:astream-cdc.adoc[CDC for Astra DB] is now available. CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
+* {product_name} now supports xref:streaming-learning:functions:index.adoc[transform functions].
 
-== 31 January 2022: General Availability
-* Added support for serverless Google Cloud `us-central1` (Council Bluffs, Iowa) region. For more, see xref:operations:astream-regions.adoc[{product_name} regions].
+[discrete]
+=== November 16, 2022
+
+{boilerplate}
+
+[discrete]
+==== {new}
+
+* {product_name} now supports xref:operations:astream-georeplication.adoc[geo-replication].
+
+[discrete]
+=== June 7, 2022
+
+{boilerplate}
+
+[discrete]
+==== {new}
+
+* {product_name} now supports xref:operations:astream-scrape-metrics.adoc[scraping metrics with Prometheus].
+
+[discrete]
+=== April 28, 2022
+
+{boilerplate}
+
+[discrete]
+==== {new}
+
+* xref:developing:astream-rabbit.adoc[{starlight_rabbitmq}] is now available, bringing built-in RabbitMQ(R) protocol support to Apache Pulsar(TM), enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code.
+
+[discrete]
+=== April 19, 2022
+
+{boilerplate}
+
+[discrete]
+==== {new}
+
+* xref:developing:astream-kafka.adoc[{kafka_for_astra}] is now available, bringing built-in Apache Kafka(R) protocol support to Apache Pulsar.
+
+[discrete]
+=== March 24, 2022
+
+{boilerplate}
+
+[discrete]
+==== {new}
+
+* xref:developing:astream-cdc.adoc[CDC for Astra DB] is now available, which automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
+
+[discrete]
+=== January 31, 2022
+
+{boilerplate}
+
+[discrete]
+==== {new}
+
+* {product_name} is now generally available.
+* Added support for the Google Cloud `us-central1` (Council Bluffs, Iowa) region.
 * xref:operations:astream-token-gen.adoc[Pulsar tokens] simplify connecting to your streaming instances.
 * Enabled xref:operations:astream-pricing.adoc[billing].
+====
 
-== 20 December 2021
+.2021 release notes
+[%collapsible]
+====
+[discrete]
+=== December 20, 2021
 
-Security upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105.
+{boilerplate}
 
-== Public Preview
+[discrete]
+==== {security}
 
-The Public Preview of {product_name} brings the ability to quickly create Apache Pulsar(TM) instances, manage your clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
+* Security upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105.
 
-Instead of listing the features included in this release, learn about what {product_name} is, and then get started with data and event streaming.
-If you have questions, review the xref:ROOT:astream-faq.adoc[FAQ] for answers.
+* The public preview of {product_name} brings the ability to quickly create Apache Pulsar(TM) instances, manage your clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
+====
