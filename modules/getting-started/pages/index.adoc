@@ -103,16 +103,15 @@ include::{astra-streaming-examples-repo}/astra-cli/create-tenant.sh[]
 
 A namespace exists within a tenant.
 A namespace is a logical grouping of message topics.
+
+{astra_stream} automatically create a `default` namespaces when you create a tenant.
+You can use the default namespace or create new ones.
+
 Tenants usually have many namespaces.
 What is contained within namespace is limited only by your imagination.
 It could be an environment (dev, stage, prod) or by application (catalog, cart, user) or whatever logical grouping makes sense to you.
-Learn more about namespaces in the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar docs].
 
-[NOTE]
-====
-Astra Streaming automatically created a namespace named "default" when you created your tenant.
-If you would like to use the default namespace instead of creating a new namespace, that's perfectly fine.
-====
+Learn more about namespaces in the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar docs].
 
 [tabs]
 ====

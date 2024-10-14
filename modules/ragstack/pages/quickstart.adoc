@@ -3,11 +3,13 @@
 The {ragstack} project combines the intelligence of large language models with the agility of stream processing to create powerful Generative AI applications.
 
 This guide will help you build and deploy a {ragstack} application to Astra Streaming.
+
 [IMPORTANT]
 ====
 *Private preview feature*
 {ragstack} is available only in a *private preview*. This feature is not intended for production use, has not been certified for production workloads, and might contain bugs and other functional issues. There is no guarantee that a preview feature will ever become generally available.If you are interested in participating in the private preview, contact us at mailto:Astra-PM@datastax.com[Astra-PM@datastax.com,RAGSstack private preview,I am interested in the RAGStack private preview.]. We will contact you with more information.
 ====
+
 == Install {ragstack} CLI
 
 Install the {ragstack} CLI:
@@ -67,11 +69,10 @@ token: AstraCS:...
 ----
 
 Your tenant is now connected to the {ragstack} CLI.
-[NOTE]
-====
+
 You can also establish a connection by including the configuration values from the Astra Streaming Connect tab in your {ragstack} application's instance.yaml file.
-See << instance >> for an example.
-====
+See <<instance>> for an example.
+
 == Build a {ragstack} Application
 
 Build a {ragstack} application by creating YAML files to describe the application.
@@ -164,6 +165,7 @@ secrets:
 ----
 
 You can either replace the values in secrets.yaml with the actual values, use a `.env` file, or export the secrets as below:
+
 [source,shell]
 ----
 export OPEN_AI_URL=https://company-openai-dev.openai.azure.com/
@@ -179,10 +181,8 @@ export ASTRA_CLIENT_ID=xxxx
 export ASTRA_TOKEN=AstraCS:...
 export GOOGLE_CLIENT_ID=xxxx.apps.googleusercontent.com
 ----
-[NOTE]
-====
-For more on creating a Google client ID, see https://developers.google.com/identity/protocols/oauth2#serviceaccount[Google Service Account].
-====
+
+For more information about creating a Google client ID, see https://developers.google.com/identity/protocols/oauth2#serviceaccount[Google Service Account].
 
 Pipeline.yaml contains the chain of agents that makes up your program, and the input and output topics that they communicate with.
 For more on building pipelines, see https://docs.langstream.ai/building-applications/pipelines[Pipelines].

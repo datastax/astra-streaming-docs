@@ -19,8 +19,8 @@ As noted in the guide above, save or download the new Astra Streaming Token valu
 
 == Prerequisites
 
-Export the following environmental variables to your path.
-
+* Export the following environmental variables to your path:
++
 [source,bash]
 ----
 export PULSAR_TOKEN="<Pulsar JWT Token>"
@@ -37,13 +37,11 @@ export FUNCTION="<function name>"
 export TOKENID="<Token Id>"
 ----
 
-[NOTE]
-====
-“python3 -mjson.tool" in the examples below is only used to format the output into JSON.
-It is NOT required to execute the API requests.
-====
+* (Optional) The following examples use `python3 -mjson.tool` to format the output into JSON.
+This is not required to execute the API requests.
 
 == List tenants with details
+
 [tabs]
 ====
 Curl::
@@ -181,6 +179,8 @@ curl --fail --location --request POST 'https://api.astra.datastax.com/v2/streami
 Result::
 +
 --
+The output includes the "pulsarToken" which is the JWT token for this Pulsar instance.
+
 [source,console]
 ----
 {
@@ -212,12 +212,8 @@ Result::
 --
 ====
 
-[NOTE]
-====
-The output includes the "pulsarToken" which is the JWT token for this Pulsar instance.
-====
-
 == Delete a tenant
+
 [tabs]
 ====
 Curl::
@@ -463,10 +459,9 @@ Output: No reply means successful.
 ====
 
 === Set AutoTopicCreation True/False on Namespace
-[NOTE]
-====
+
 Input parameter “topicType" should be either “non-partitioned" or “partitioned".
-====
+
 [tabs]
 ====
 Curl::
@@ -1068,10 +1063,9 @@ Result::
 ====
 
 === Create a Subscription for a Topic (Replicated)
-[NOTE]
-====
+
 "Replicated=true" can be set to “false" for non replicated subscriptions.
-====
+
 [tabs]
 ====
 Curl::
@@ -1198,10 +1192,9 @@ Result::
 ====
 
 === Create Geo-Replication between Namespaces
-[NOTE]
-====
+
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
-====
+
 [tabs]
 ====
 Curl::
@@ -1230,10 +1223,9 @@ Output: No reply means successful.
 ====
 
 === Delete Geo-Replication between Namespaces
-[NOTE]
-====
+
 The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
-====
+
 [tabs]
 ====
 Curl::
@@ -1552,10 +1544,9 @@ Output: No reply means successful.
 == Astra Streaming JWT Token DevOps APIs
 === List Existing Tokens IDs
 Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup and obtain the Pulsar JWT Token string.  The TokenIDs are also listed in the Astra UI for that Tenant and Cluster.
-[NOTE]
-====
-Note - Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
-====
+
+Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
+
 [tabs]
 ====
 Curl::
@@ -1610,10 +1601,9 @@ eyJhbGciOiJSUzI1NiIsI . . .
 === Create a JWT Token
 Create a new Pulsar JWT Token.
 The new JWT Token will also be visible in the Astra UI for that Tenant and Cluster.
-[NOTE]
-====
+
 Required parameters "CLUSTER" is  obtained from the “List Tenants with Details" API command.
-====
+
 [tabs]
 ====
 Curl::
@@ -1637,11 +1627,10 @@ eyJhbGciOiJSUzI1NiIsI . . .
 ====
 
 === Delete a JWT Token
-[NOTE]
-====
+
 Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
 List of "TOKENID" can be obtained from List Existing Tokens IDs.
-====
+
 [tabs]
 ====
 Curl::
@@ -2039,13 +2028,16 @@ Output: No reply means successful.
 
 In the example above, a configuration file is provided as input to CURL.
 The file is named "mynetty-source-config.json", which has the following context for the built-in “netty" source connector in Astra Streaming.
+
 [source,bash]
 ----
 Output: No reply means successful.
 ----
-[NOTE]
+
+[TIP]
 ====
-The CURL parameter “@" indicates an input file.  When executing the CURL command, ensure the input file is accessible, and in the proper directory for reading.
+The curl parameter `@` indicates an input file.
+When executing the curl command, ensure the input file is accessible and in the proper directory for reading.
 ====
 
 === Delete a Source Connector
@@ -2093,6 +2085,7 @@ Output: No reply means successful.
 ====
 
 In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in “kafka" source connector in Astra Streaming.
+
 [source,bash]
 ----
 {
@@ -2121,10 +2114,10 @@ In the example above, a configuration file is provided as input to CURL.  The fi
     "inputs": [ "persistent://testcreate/ns0/mytopic3" ]
 ----
 
-[NOTE]
+[TIP]
 ====
-The CURL parameter “@" indicates an input file.
-When executing the CURL command, ensure the input file is accessible, and in the proper directory for reading.
+The curl parameter `@` indicates an input file.
+When executing the curl command, ensure the input file is accessible and in the proper directory for reading.
 ====
 
 === Delete a Sink Connector

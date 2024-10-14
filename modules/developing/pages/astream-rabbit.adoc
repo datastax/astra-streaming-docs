@@ -3,18 +3,10 @@
 
 {starlight_rabbitmq} brings native RabbitMQ(R) protocol support to Apache Pulsar(R), enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code. RabbitMQ applications can now leverage Pulsar’s powerful features, such as:
 
-* *Consistent metadata store*
-+
-{starlight_rabbitmq} uses Apache ZooKeeper(TM), so existing Zookeeper configuration stores can store {starlight_rabbitmq} metadata.
-* *Security and authentication*
-+
-{starlight_rabbitmq} connects to brokers that have TLS, authentication, and/or authorization enabled, because it uses the same `AuthenticationService` as Pulsar.
-* *Clustering*
-+
-Launch multiple stateless {starlight_rabbitmq} instances simultaneously for scalability and high availability.
-* *Multi-tenancy*
-+
-{starlight_rabbitmq} offers support for multi-tenancy, mapping an AMQP virtual host to a Pulsar tenant and namespace.
+* *Consistent metadata store*: {starlight_rabbitmq} uses Apache ZooKeeper(TM), so existing Zookeeper configuration stores can store {starlight_rabbitmq} metadata.
+* *Security and authentication*: {starlight_rabbitmq} connects to brokers that have TLS, authentication, and/or authorization enabled, because it uses the same `AuthenticationService` as Pulsar.
+* *Clustering*: Launch multiple stateless {starlight_rabbitmq} instances simultaneously for scalability and high availability.
+* *Multi-tenancy*: {starlight_rabbitmq} offers support for multi-tenancy, mapping an AMQP virtual host to a Pulsar tenant and namespace.
 
 By integrating two popular event streaming ecosystems, {starlight_rabbitmq} unlocks new use cases and reduces barriers for users adopting Pulsar. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {starlight_rabbitmq} to accelerate the development of real-time applications and services.
 
@@ -26,9 +18,10 @@ Get started producing and consuming RabbitMQ messages on a Pulsar cluster.
 
 . When the popup appears, confirm you want to enable RabbitMQ on your tenant.
 +
-[NOTE]
+[IMPORTANT]
 ====
-You will not be able to remove the RabbitMQ namespace created on your tenant with this step.
+You can't remove the RabbitMQ namespace created on your tenant with this step.
+You must remove the tenant itself to remove this namespace.
 ====
 
 . Select *Enable RabbitMQ*.

@@ -81,15 +81,17 @@ With your Astra Streaming tenant's configuration in place, you can use any of th
 With the Pulsar folder in place and the correct client configuration saved, the next step is to validate everything.
 Run each command to validate binary conf.
 
-TIP: For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's CLI docs].
+For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's CLI docs].
 
 List all tenants:
+
 [source,shell,subs="attributes+"]
 ----
 ./bin/pulsar-admin tenants list
 ----
 
 Produce a message:
+
 [source,shell,subs="attributes+"]
 ----
 ./bin/pulsar-client produce <REPLACE_ME_WITH_TENANT_NAME>/default/<REPLACE_ME_WITH_TOPIC_NAME> --messages "Hi there" --num-produce 1

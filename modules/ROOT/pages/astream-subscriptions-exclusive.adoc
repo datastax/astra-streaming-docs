@@ -29,9 +29,9 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .subscribe();
 ----
 
-[NOTE]
+[IMPORTANT]
 ====
-Pulsar creates an exclusive subscription by default when no `subscriptionType` is declared.
+Pulsar creates an exclusive subscription by default if you don't delcare a `subscriptionType`.
 ====
 
 . Open the `pulsar-subscription-example` repo in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages.

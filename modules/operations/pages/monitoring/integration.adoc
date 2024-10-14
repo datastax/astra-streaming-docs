@@ -1,10 +1,5 @@
 = External Prometheus and Grafana Integration
 
-[NOTE]
-====
-This article is a continuation of xref:monitoring/index.adoc[]. Please read that article first to understand the fundamentals of what resources are being used.
-====
-
 Astra Streaming exposes some of the Pulsar metrics through Prometheus endpoints.
 The Prometheus configuration information to scrape Astra Streaming metrics into an external Prometheus server is found in the Astra streaming UI.
 This document will show you how to set up a Prometheus server in a Kubernetes cluster and configure it to scrape Astra streaming metrics.
@@ -30,9 +25,10 @@ For more on downloading the Prometheus configuration from the Astra Streaming UI
    - targets: ['prometheus-gcp-uscentral1.streaming.datastax.com']
 ----
 +
-[NOTE]
+[IMPORTANT]
 ====
-DO NOT add other Prometheus configurations like scrape_interval or evaluation_interval yet. They will be added in later steps when configuring the Helm chart.
+Do _not_ add other Prometheus configurations, like `scrape_interval` or `evaluation_interval` yet.
+These are added later when configuring the Helm chart.
 ====
 
 . Create a K8s secret named astra-msgenrich with the above configuration file and apply it.
@@ -97,6 +93,7 @@ To fix this issue, go to the {astra_ui} and create a new JWT token (preferably w
 
 == See also
 
-* For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
-* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].
+* xref:monitoring/index.adoc[]
+* xref:monitoring/metrics.adoc[]
+* xref:monitoring/new-relic.adoc[]
 

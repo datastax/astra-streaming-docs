@@ -19,16 +19,10 @@ Visit our https://github.com/datastax/astra-streaming-examples[examples repo] to
 
 == Setup environment
 
-Before we get started with the app, a little pre-work needs to be done.
-
+Install the C++ Pulsar library dependency.
 The Node.js Pulsar client npm package depends on the C++ Pulsar library.
 
-[NOTE]
-====
-Pulsar Node client versions 1.8 and greater do not require installation of the C++ Pulsar library dependency.
-====
-
-Install the C++ Pulsar library dependency.
+Pulsar Node client versions 1.8 and later do not require installation of the C++ Pulsar library dependency.
 
 [tabs]
 ====

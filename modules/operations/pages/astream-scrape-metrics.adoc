@@ -63,14 +63,14 @@ ts=2022-05-10T20:40:30.877Z caller=main.go:1199 level=info msg="Completed loadin
 ts=2022-05-10T20:40:30.877Z caller=main.go:930 level=info msg="Server is ready to receive web requests."
 ----
 +
-[NOTE]
+[TIP]
 ====
-If you encounter a `mounts denied` permissions error, ensure your local directory is shared with Docker in File Sharing -> Resources.
+If you get a `mounts denied` permissions error, in Docker, go to *File Sharing > Resources*, and then make sure your local directory is shared with Docker.
 ====
 
 == Scrape with Prometheus
 
-. Open your Prometheus dashboard at `localhost:9090`. In the *Status -> Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
+. Open your Prometheus dashboard at `localhost:9090`. In the *Status > Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
 
 . Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product_name} cluster.
 
@@ -128,10 +128,8 @@ The following Prometheus metrics are exposed by {product_name}:
 * https://pulsar.apache.org/docs/reference-metrics/#pulsar-functions[Pulsar Functions metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#connectors[Connector metrics]
 
-[NOTE]
-====
-Cluster operational metrics are *not* exposed to individual cluster tenants. A tenant can only access its own metrics on the *broker* or *function worker* pods.
-====
+Cluster operational metrics are *not* exposed to individual cluster tenants.
+A tenant can only access its own metrics on the *broker* or *function worker* pods.
 
 == See also
 

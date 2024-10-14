@@ -20,9 +20,9 @@ This document will help you get started producing and consuming Kafka messages o
 
 . When the popup appears, confirm you want to enable Kafka on your tenant.
 +
-[NOTE]
+[IMPORTANT]
 ====
-You will not be able to remove the Kafka namespaces created on your tenant with this step.
+You can't remove the Kafka namespaces created on your tenant with this step.
 You must remove the tenant itself to remove these namespaces.
 ====
 
@@ -55,10 +55,7 @@ You're now ready to connect Kafka and Pulsar.
 +
 image::astream-create-kafka-topic.png[Create Kafka Topic]
 +
-[NOTE]
-====
 This example uses tools included with the https://kafka.apache.org/downloads[Apache Kafka tarball].
-====
 
 . Move the `ssl.properties` file you downloaded to your `Kafka_2.13-3.1.0/config` folder. These values are required for SSL encryption. For this example, the values are:
 +

@@ -3,7 +3,10 @@
 
 [IMPORTANT]
 ====
-CDC connectors are only available for {db-serverless} deployments.
+* CDC connectors are only available for {db-serverless} deployments.
+
+* Enabling CDC for {db-serverless} databases increases costs based on your {astra_stream} usage.
+See https://www.datastax.com/pricing/astra-streaming[{astra_stream} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
 ====
 
 CDC for Astra DB automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
@@ -11,12 +14,6 @@ CDC for Astra DB automatically captures changes in real time, de-duplicates the 
 {product_name} processes data changes via a Pulsar topic. By design, the Change Data Capture (CDC) component is simple, with a 1:1 correspondence between the table and a single Pulsar topic.
 
 This doc will show you how to create a CDC connector for your Astra DB deployment and send change data to an Elasticsearch sink.
-
-[NOTE]
-====
-Enabling CDC for {db-serverless} databases increases costs based on your {astra_stream} usage.
-See https://www.datastax.com/pricing/astra-streaming[{astra_stream} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
-====
 
 == Supported data structures
 
@@ -168,18 +165,18 @@ You need the following items to complete this procedure:
 [[create-tenant]]
 == Create a streaming tenant
 
-. Log into the {link-astra-portal}.
-At the bottom of the Welcome page, select *View Streaming*.
+. In the {link-astra-portal} navigation menu, click *Streaming*.
+
 . Select *Create Tenant*.
+
 . Enter a name for your new streaming tenant.
+
 . Select a provider and region.
-. Select *Create Tenant*.
 +
-[NOTE]
-====
 {astra_stream} CDC can only be used in a region that supports both {astra_stream} and {db-serverless} databases.
 See xref:operations:astream-regions.adoc[] for more information.
-====
+
+. Select *Create Tenant*.
 
 [[create-table]]
 == Create a table

@@ -3,10 +3,8 @@
 
 DataStax {product_name} includes guardrails and limits to ensure good practices, foster availability, and promote optimal configurations for your databases.
 
-[NOTE]
-====
-The below limits are for Pay As You Go clusters. These limits may be changed on <<Dedicated clusters,dedicated clusters>> if necessary. {support_url}[Contact Support] to change the limits on a dedicated cluster.
-====
+The below limits are for Pay As You Go clusters.
+These limits can be different on <<Dedicated clusters,dedicated clusters>>.
 
 == {product_name} guardrails
 
@@ -77,18 +75,11 @@ The default settings are:
 * CPU: 0.25 core
 * RAM: 500MB
 
-[NOTE]
-====
-Custom functions can only be created by *qualified organizations*.
-A *qualified organization* is an organization on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a payment method on file.
-Upgrade your organization to a qualified organization by:
+=== Custom functions
 
-* Enrolling in the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan in the {astra_ui} with a payment method. For more, see https://docs.datastax.com/en/astra-serverless/docs/plan/plan-options.html[Plan Options].
-* Contacting our sales team to see how we can help.
-* Opening {support_url}[a support ticket].
+Custom functions can only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* plan] with a payment method on file.
 
-Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[transform functions].
-====
+Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions].
 
 == Non-changeable configurations
 
@@ -170,12 +161,11 @@ These namespace policies are initially provisioned in the default settings by {p
 
 |===
 
-[NOTE]
-====
+=== Pod label limit
+
 The total characters of tenant name, namespace name, and function name cannot exceed 54 characters.
 This is a Kubernetes restriction based on a pod label's maximum size of 63 characters.
 You can read more about Kubernetes pod naming restrictions https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set[here].
-====
 
 == {product_name} topic and namespace actions
 
