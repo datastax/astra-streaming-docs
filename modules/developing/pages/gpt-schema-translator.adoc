@@ -493,8 +493,11 @@ passportnumber=value.passportNumber, age=value.age, firstname=value.firstName, l
 Notice that the `firstname` value becomes `firstName` because the Pulsar topic JSON schema supersedes the Cassandra table schema.
 
 == No schema on Pulsar topic
-Even with no schema declared in the Pulsar topic, the schema translator will still provide a schema mapping that mirrors the values of your Cassandra table schema, without using GPT. +
-For example, starting with this schema on a Cassandra table:
+
+If you don't declare a schema in the Pulsar topic, the schema translator provides a default schema mapping that mirrors the values of your Cassandra table schema, without using GPT.
+
+For example, assuming you have the following schema on a Cassandra table:
+
 [source,cql]
 ----
 {
@@ -528,13 +531,15 @@ For example, starting with this schema on a Cassandra table:
 }
 ----
 
-Since you have an available schema in your Cassandra table, the button prompt will change to "Generate Mapping" to let you know you can create a topic schema from the Cassandra table schema.
-Click on this button to generate a schema for the Pulsar topic from your Cassandra table schema.
+Since you have an available schema in your Cassandra table, you can click *Generate Mapping* to create a Pulsar topic schema from the Cassandra table schema:
+
 [source,bash]
 ----
 passportnumber=value.passportnumber, age=value.age, firstname=value.firstname, lastname=value.lastname
 ----
 
-== What's next?
+If there is no *Generate Mapping* button, then this function isn't available.
 
-For more on managing schema, see xref:streaming-learning:use-cases-architectures:change-data-capture/index.adoc[].
+== See also
+
+* xref:streaming-learning:use-cases-architectures:change-data-capture/index.adoc[]

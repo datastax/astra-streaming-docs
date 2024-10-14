@@ -2,10 +2,12 @@
 :navtitle: Failover
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-*Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
+_Subscriptions_*_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
 
-If an xref:astream-subscriptions-exclusive.adoc[exclusive] consumer fails, the topic backlog balloons with stale, unacknowledged messages. Pulsar solves this problem with *failover* subscriptions. +
-In *failover* subscriptions, Pulsar designates one *primary* consumer and multiple *standby* consumers. If the primary consumer disconnects, the standby consumers begin consuming the subsequent unacknowledged messages. +
+If an xref:astream-subscriptions-exclusive.adoc[exclusive] consumer fails, the topic backlog balloons with stale, unacknowledged messages.
+Pulsar solves this problem with failover subscriptions.
+In _failover subscriptions_, Pulsar designates one primary consumer and multiple standby consumers.
+If the primary consumer disconnects, the standby consumers begin consuming the subsequent unacknowledged messages.
 
 This document explains how to use Pulsar's failover subscription model to manage your topic consumption.
 
@@ -30,8 +32,8 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .subscribe();
 ----
 
-. Open `pulsar-subscription-example` in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages. +
-This is the *primary* consumer. +
+. Open `pulsar-subscription-example` in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages.
+This is the primary consumer.
 The confirmation message and a cursor appear to indicate the consumer is ready.
 +
 [source,bash]
@@ -55,7 +57,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 
 . The primary consumer begins consuming messages.
 +
-[source,bash]
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":50585599,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":98055337,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
@@ -66,7 +68,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 
 . Return to the *primary* consumer and `Ctrl+C` to stop it. The *backup* consumer begins consuming right where the first consumer left off.
 +
-[source,bash]
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":73260535,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":42372149,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
@@ -80,9 +82,7 @@ Follow along with this video from our *Five Minutes About Pulsar* series to see 
 
 video::ckB87OLs5eM[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 
-== What's next?
-
-For more on subscriptions, see: 
+== See also
 
 * xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
 * xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]

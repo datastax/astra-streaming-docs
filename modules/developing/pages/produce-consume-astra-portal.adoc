@@ -35,7 +35,8 @@ Type the message "Hi there" in the *Send message* box and click the "Send" butto
 a|image:test-message-input.png[Send message in Astra Streaming]
 |===
 
-A message will be produced (ie: sent) to your selected topic and the consumer will consume (ie: retrieve) the message. +
+A message will be produced (ie: sent) to your selected topic and the consumer will consume (ie: retrieve) the message.
+
 The result is a chat style write and read.
 
 [width=80%]
@@ -43,10 +44,11 @@ The result is a chat style write and read.
 a|image:try-me-test-message.png[Test message in Astra Streaming]
 |===
 
-{emoji-tada} Congratulations! You have sent and received your first message. +
+{emoji-tada} Congratulations! You have sent and received your first message.
+
 Now it's time to take your skills further {emoji-rocket}.
 
-== What's next?
+== See also
 
-xref:astream-functions.adoc[] +
-xref:astream-cdc.adoc[]
+* xref:astream-functions.adoc[]
+* xref:astream-cdc.adoc[]

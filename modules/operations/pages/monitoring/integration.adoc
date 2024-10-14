@@ -95,7 +95,7 @@ One common issue that we see when integrating Astra Streaming metrics into an ex
 
 To fix this issue, go to the {astra_ui} and create a new JWT token (preferably with no expiration date). Get the new token value and repeat the above procedure. For more, see xref:astream-token-gen.adoc[].
 
-== What's next?
+== See also
 
 * For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
 * To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].

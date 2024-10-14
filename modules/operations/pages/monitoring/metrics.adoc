@@ -14,7 +14,7 @@ Dashboards are available for scraping metrics at Pulsar's tenant, namespace, and
 * xref:monitoring/namespace-dashboard.adoc[Namespace Dashboard]
 * xref:monitoring/topic-dashboard.adoc[Topic Dashboard]
 
-== What's next?
+== See also
 
 * To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
 * To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].

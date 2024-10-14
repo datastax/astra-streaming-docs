@@ -24,8 +24,8 @@ Unqualified orgs can still use xref:streaming-learning:functions:index.adoc[tran
 
 Astra Streaming supports Python-based Pulsar Functions.
 These functions can be packaged in a ZIP file and deployed to {product_name} or Pulsar. The same ZIP file can be deployed to either environment.
-We’ll create a ZIP file in the proper format, then use the pulsar-admin command to deploy the ZIP.
-We’ll pass a “create function" configuration file (a .yaml file) as a parameter to pulsar-admin, which defines the Pulsar Function options and parameters.
+We'll create a ZIP file in the proper format, then use the pulsar-admin command to deploy the ZIP.
+We'll pass a create function YAML configuration file as a parameter to pulsar-admin, which defines the Pulsar Function options and parameters.
 
 Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folder looks like this:
 
@@ -92,10 +92,9 @@ src
 
 === Deploy a Python function with configuration file
 
-. Create a deployment configuration file. In this example we'll call this file “func-create-config.yaml”.
-This file will be passed to the pulsar-admin create function command. +
-The contents of the YAML file should be:
+. Create a deployment configuration file with contents similar to the following `func-create-config.yaml` example:
 +
+.func-create-config.yaml
 [source,yaml]
 ----
 py: </absolute/path/to/my/testpythonfunction.zip>
@@ -112,6 +111,8 @@ logTopic:
 userConfig:
  logging_level: ERROR
 ----
++
+This file will be passed to the pulsar-admin create function command.
 
 . Use pulsar-admin to deploy the Python ZIP to Astra Streaming or Pulsar.
 The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
@@ -121,7 +122,7 @@ The command below assumes you've properly configured the client.conf file for pu
 bin/pulsar-admin functions create --function-config-file </absolute/path/to/your/python/func-create-config.yml>
 ----
 
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
 
 .. You can also use the pulsar-admin command to list your functions:
 +
@@ -135,8 +136,8 @@ bin/pulsar-admin functions list --tenant <mytenant> --namespace <my-namespace>
 Astra Streaming supports Java-based Pulsar Functions which are packaged in a JAR file.
 The JAR can be deployed to Astra Streaming or Pulsar. The same JAR file can be deployed to either environment.
 
-We’ll create a JAR file using Maven, then use the pulsar-admin command to deploy the JAR.
-We’ll pass a "create function" configuration file (a .yaml file) as a parameter to pulsar-admin, which defines the Pulsar function options and parameters.
+We'll create a JAR file using Maven, then use the pulsar-admin command to deploy the JAR.
+We'll pass a create function YAML configuration file as a parameter to pulsar-admin, which defines the Pulsar function options and parameters.
 
 . To deploy a JAR, first create the proper JAR with the Java code of the Pulsar Function.
 An example pom.xml file is shown below:
@@ -232,10 +233,9 @@ Result::
 --
 ====
 
-. Create a deployment configuration file. In this example we'll call this file “func-create-config.yaml”.
-This file will be passed to the pulsar-admin create function command. +
-The contents of the YAML file should be:
+. Create a deployment configuration file with contents similar to the following `func-create-config.yaml` example:
 +
+.func-create-config.yaml
 [source,yaml]
 ----
 jar: </absolute/path/to/my/testpythonfunction.jar>
@@ -253,9 +253,11 @@ userConfig:
   logging_level: ERROR
 ----
 +
+This file will be passed to the pulsar-admin create function command.
++
 [NOTE]
 ====
-Astra Streaming requires the “inputs” topic to have a message schema defined before deploying the function. Otherwise, deployment errors may occur. Use the {astra_ui} to define the message schema for a topic.
+Astra Streaming requires the `inputs` topic to have a message schema defined before deploying the function. Otherwise, deployment errors may occur. Use the {astra_ui} to define the message schema for a topic.
 ====
 +
 . Use pulsar-admin to deploy your new JAR to Astra Streaming or Pulsar.
@@ -266,7 +268,7 @@ The command below assumes you've properly configured the client.conf file for pu
 bin/pulsar-admin functions create --function-config-file  </absolute/path/to/your/javajar/func-create-config.yml>
 ----
 
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the “Functions” tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
 
 .. You can also use the pulsar-admin command to list your functions:
 +
@@ -373,7 +375,7 @@ Upgrade your organization to a qualified organization by:
 
 == Testing Your Function
 
-Triggering a function is a convenient way to test that the function is working. When you trigger a function, you are publishing a message on the function’s input topic, which triggers the function to run. If the function has an output topic and the function returns data to the output topic, that data is displayed.
+Triggering a function is a convenient way to test that the function is working. When you trigger a function, you are publishing a message on the function's input topic, which triggers the function to run. If the function has an output topic and the function returns data to the output topic, that data is displayed.
 
 Send a test value with Pulsar CLI's `trigger` to test a function you've set up.
 

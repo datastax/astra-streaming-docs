@@ -101,9 +101,9 @@ The API results will show the UUID for each role id.
 +
 . In the command-line interface associated with your environment, paste the following environment variable copied from token generation:
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
-export ASTRA_DB_APPLICATION_TOKEN=<<REPLACE_WITH_YOUR_TOKEN>>
+export ASTRA_DB_APPLICATION_TOKEN=**APPLICATION_TOKEN**
 ----
 
 [#astra-token-ui]
@@ -123,9 +123,9 @@ After you navigate away from the page, you won't be able to download your _Clien
 +
 . In the command-line interface associated with your environment, paste the following environment variable copied from token generation:
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
-export ASTRA_DB_APPLICATION_TOKEN=<<REPLACE_WITH_YOUR_TOKEN>>
+export ASTRA_DB_APPLICATION_TOKEN=**APPLICATION_TOKEN**
 ----
 +
 . You can now execute DevOps API commands from your terminal to your database.
@@ -157,12 +157,12 @@ Download your Pulsar connection info as detailed https://docs.datastax.com/en/as
 
 In the command-line interface associated with your environment, paste the following environment variables copied for {product_name}:
 
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
-export TENANT=<replace-me>
-export INPUT_TOPIC=<replace-me>
+export TENANT=**TENANT_NAME**
+export INPUT_TOPIC=**INPUT_TOPIC_NAME**
 export NAMESPACE=default
-export BEARER_TOKEN=<Pulsar-token>
+export BEARER_TOKEN=**PULSAR_TOKEN**
 ----
 
 You can now execute Pulsar admin commands from your terminal to your database.
@@ -237,6 +237,6 @@ curl --request GET \
 ----
 |===
 
-== What's next?
+== See also
 
-Use your new token to start streaming with the xref:getting-started:index.adoc[].
+* *xref:getting-started:index.adoc[]

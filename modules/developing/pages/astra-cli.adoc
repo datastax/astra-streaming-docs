@@ -70,9 +70,7 @@ Result::
 --
 ====
 
-== What's next?
+== See also
 
-* See the {astra_cli} https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation].
-
-* See the https://awesome-astra.github.io/docs/pages/astra/astra-cli/[Astra CLI install instructions].
+* https://docs.datastax.com/en/astra-cli/docs/0.2/[{astra_cli} documentation]
 

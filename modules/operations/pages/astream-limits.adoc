@@ -30,15 +30,18 @@ Guardrails are initially provisioned in the default settings by {product_name} a
 |5MB (default)
 
 |Max throughput per topic for consumer
-|5000 messages/s, 25MB/s +
+|5000 messages per second, 25MB per second
+
 Max throughput for a *non-partitioned topic* or a *single partition of a partitioned topic*.
 
 |Max throughput per topic for producer
-|5000 messages/s, 25MB/s +
+|5000 messages per second, 25MB per second
+
 *Multiple producers* to a *non-partitioned topic* or a *single partition of a partitioned topic* can produce a *combined* 5000 messages per second maximum.
 
 |Max throughput per subscription
-|5000 messages/s, 25MB/s +
+|5000 messages per second, 25MB per second
+
 *Multiple subscriptions* from a *non-partitioned topic* or a *single partition of a partitioned topic* can dispatch a *combined* 5000 messages per second maximum.
 
 |Auto topic creation
@@ -73,7 +76,7 @@ Functions and connector resources are set in the control plane per pod resource 
 The default settings are:
 
 * CPU: 0.25 core
-* RAM: 500 MB
+* RAM: 500MB
 
 [NOTE]
 ====
@@ -141,7 +144,7 @@ These namespace policies are initially provisioned in the default settings by {p
 |Yes
 
 |Backlog size
-|5 GB, minimum setting is -1, which disables backlog size quota enforcement
+|5GB, minimum setting is -1, which disables backlog size quota enforcement
 |Yes
 
 |Backlog Quota Retention Policy
@@ -172,7 +175,7 @@ These namespace policies are initially provisioned in the default settings by {p
 
 [NOTE]
 ====
-The total characters of tenant name + namespace name + function name cannot exceed 54 characters.
+The total characters of tenant name, namespace name, and function name cannot exceed 54 characters.
 This is a Kubernetes restriction based on a pod label's maximum size of 63 characters.
 You can read more about Kubernetes pod naming restrictions https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set[here].
 ====

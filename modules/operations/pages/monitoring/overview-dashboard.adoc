@@ -48,8 +48,6 @@ Messaging displays the time series metrics chart summarized at the tenant level.
 |Top 10 topics of the tenant by message storage size
 |===
 
-== What's next?
+== See also
 
 Dashboards are available for scraping metrics at Pulsar's xref:monitoring/overview-dashboard.adoc[tenant], xref:monitoring/namespace-dashboard.adoc[namespace], and xref:monitoring/topic-dashboard.adoc[topic] levels.
-
-

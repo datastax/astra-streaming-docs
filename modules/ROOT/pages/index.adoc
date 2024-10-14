@@ -41,7 +41,7 @@ always up to date by leveraging the event stream processing capabilities of {pro
 
 For details about about the {product_name} limits, see xref:operations:astream-limits.adoc[{product_name} Limits].
 
-== What's next?
+== See also
 
-* Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.
-* Browse the xref:apis:index.adoc[{product_name} API References].
+* xref:getting-started:index.adoc[]
+* xref:apis:index.adoc[]

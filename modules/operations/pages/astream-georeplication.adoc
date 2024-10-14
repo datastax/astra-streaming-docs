@@ -73,23 +73,15 @@ To disable replication on a namespace, select **Disable Replication**.
 [#test]
 == Test georeplicated clusters
 
-. Verify your user token can access tenant metadata. +
-`allowedClusters` lists the clusters the tenant can be replicated to.
+. Verify your user token can access tenant metadata.
 +
-[tabs]
-====
-Command::
-+
---
 [source,bash]
 ----
 bin/pulsar-admin tenants get <tenant>
 ----
---
 +
-Result::
+In the result, the `allowedClusters` are the clusters the tenant can be replicated to:
 +
---
 [source,json]
 ----
 {
@@ -97,8 +89,6 @@ Result::
   "allowedClusters" : [ "pulsar-gcp-useast4-staging", "pulsar-aws-useast1-staging", "pulsar-gcp-useast1-staging", "pulsar-azure-westus2-staging", "pulsar-aws-useast2-staging" ]
 }
 ----
---
-====
 
 . Verify your `pulsar-admin` can view the replicated clusters for your namespace.
 +
@@ -297,6 +287,6 @@ Result::
 
 include::partial$georeplication-monitoring.adoc[]
 
-== What's next?
+== See also
 
-For more on multiregion georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[Pulsar docs].
+For more on multiregion georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[Pulsar documentation].

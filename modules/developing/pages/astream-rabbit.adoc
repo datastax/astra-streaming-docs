@@ -156,13 +156,12 @@ You should see new topics called `amq.default.__queuename` and `amq.default_rout
 |not used
 |Name of the header
 |channel.exchange_declare(exchange='header_logs', exchange_type='headers')
-channel.basic_publish(exchange='header_logs',
+channel.basic_publish(exchange='header_logs'),
 
 |===
 
-== What's Next?
+== See also
 
-* {starlight_rabbitmq} is based on the DataStax https://github.com/datastax/starlight-for-rabbitmq[Starlight for RabbitMQ] project.
-* Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.
-* For using Kafka with {product_name}, see xref:astream-kafka.adoc[Starlight for Kafka].
-
+* https://github.com/datastax/starlight-for-rabbitmq[{company} Starlight for RabbitMQ project]
+* xref:getting-started:index.adoc[]
+* xref:astream-kafka.adoc[Starlight for Kafka]

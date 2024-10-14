@@ -49,6 +49,6 @@ Geo-replication displays the time series metrics chart summarized at the namespa
 |Total (outgoing) message replication backlog from the namespace divided by remote clusters
 |===
 
-== What's next?
+== See also
 
 Dashboards are available for scraping metrics at Pulsar's xref:monitoring/overview-dashboard.adoc[tenant], xref:monitoring/namespace-dashboard.adoc[namespace], and xref:monitoring/topic-dashboard.adoc[topic] levels.

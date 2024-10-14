@@ -24,6 +24,6 @@ DataStax has been busy helping our customers through the pains of RAG implementa
 * Advanced RAG techniques - use advanced patterns like Chain of Thought and Multi-Query RAG
 * Future-proof - as new techniques are discovered, {ragstack} offers enterprise users an upgrade path to always be on the cutting edge of AI.
 
-== What's next?
+== See also
 
-xref:quickstart.adoc[]
+* xref:quickstart.adoc[]

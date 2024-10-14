@@ -2,10 +2,12 @@
 :navtitle: Key_Shared
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-*Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
+*Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
 
-Pulsar's xref:astream-subscriptions-shared.adoc[shared subscription] model trades an increased message processing rate for ordering guarantees. In a round-robin delivery, there's no way for the broker to know which messages are going to which consumer. +
-*Key_Shared* subscriptions allow multiple consumers to subscribe to a topic, but with additional metadata in the form of *keys* which link messages to specific consumers. +
+Pulsar's xref:astream-subscriptions-shared.adoc[shared subscription] model trades an increased message processing rate for ordering guarantees. In a round-robin delivery, there's no way for the broker to know which messages are going to which consumer.
+
+*Key_Shared* subscriptions allow multiple consumers to subscribe to a topic, but with additional metadata in the form of *keys* which link messages to specific consumers.
+
 *Keys* are generated with *hashing*, which converts arbitrary values like "topic-name" or JSON blobs into fixed integer values. These hashed values are then assigned to subscribed consumers in one of two ways:
 
 * *Auto hash* - uses *consistent hashing* to balance range values across available consumers, without requiring manual setup of hash ranges.
@@ -18,8 +20,10 @@ include::partial$subscription-prereq.adoc[]
 [#example]
 == Key_Shared subscription example
 
-To try out a Pulsar Key_Shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`. +
-You must also tell Pulsar what `keySharedPolicy` this subscription will use. The example below uses the auto-hashing `keySharedPolicy`.
+To try out a Pulsar Key_Shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`.
+
+You must also tell Pulsar what `keySharedPolicy` this subscription will use.
+The example below uses the auto-hashing `keySharedPolicy`.
 
 [source,java]
 ----
@@ -84,7 +88,7 @@ pulsarProducer = pulsarClient
 .keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(0,65535)))
 ----
 
-. Open `pulsar-examples` in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages. +
+. Open `pulsar-examples` in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages.
 The confirmation message and a cursor appear to indicate the consumer is ready.
 +
 [source,bash]
@@ -106,7 +110,7 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 
 . The consumer begins receiving messages.
 +
-[source,bash]
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":55794190,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":41791865,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
@@ -134,9 +138,7 @@ Follow along with this video from our *Five Minutes About Pulsar* series to see 
 
 video::_49wlA53L_8[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 
-== What's next?
-
-For more on subscriptions, see:
+== See also
 
 * xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
 * xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]

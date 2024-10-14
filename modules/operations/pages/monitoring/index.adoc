@@ -155,7 +155,7 @@ For example, if the average message backlog increase rate exceeds a threshold, a
 The actual threshold values for these metrics is highly dependent on each application's workload and requirements, but the values should be relatively large positive numbers, e.g. several hundreds or several thousands.
 Otherwise, they may trigger too many false alarms.
 
-== What's next?
+== See also
 
 * For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
 * To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].

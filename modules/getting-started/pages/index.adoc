@@ -271,13 +271,15 @@ Choose the right one for your needs (they all end up doing the same thing).
 
 [cols=3*,frame=none,grid=none]
 |===
-|
-xref:developing:produce-consume-astra-portal.adoc[Astra Portal] +
+a|xref:developing:produce-consume-astra-portal.adoc[Astra Portal]
+
 [.small]##Using Astra Streaming's "Try Me" feature in the UI##
-|
-xref:developing:produce-consume-pulsar-client.adoc[Pulsar Client] +
+
+a|xref:developing:produce-consume-pulsar-client.adoc[Pulsar Client]
+
 [.small]##Use the cli provided within Pulsar to interact with the topic##
-|
-xref:developing:clients/index.adoc[Runtime Clients] +
+
+a|xref:developing:clients/index.adoc[Runtime Clients]
+
 [.small]##Create a client application that interacts with Pulsar (C#, Java, Python, etc)##
 |===

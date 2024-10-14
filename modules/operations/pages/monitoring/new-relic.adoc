@@ -60,7 +60,7 @@ The top section of this configuration is for scraping Astra Streaming metrics (a
 .Pulsar message backlog metrics in New Relic
 image::pulsar-namespace-metrics.png[Metrics,align="center"]
 
-== What's next?
+== See also
 
 * For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
 * To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].

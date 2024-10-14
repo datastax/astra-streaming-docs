@@ -27,8 +27,7 @@ A *dedicated environment* is your own private Pulsar cluster with the additional
 Sign in to Astra just as you would with a *Pay As You Go* streaming account.
 When you create new tenants, additional options are available for deploying to your private cluster(s).
 There are less limits in *dedicated environments* than in *Pay As You Go* - it's your cluster, after all.
-Finally, billing for a dedicated cluster is unique to each customer. +
-mailto:streaming@datastax.com[Contact the team] to learn more.
+Finally, billing for a dedicated cluster is unique to each customer.
 
 TIP: In a *Pay As You Go* environment, you can create tenants in any of the xref:astream-regions.adoc[supported regions], while *dedicated environments* are open to almost any public cloud region.
 ====

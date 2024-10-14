@@ -112,7 +112,7 @@ Message received: Hello World
 ====
 . Remember to check in your {product_name} instance to see the message you sent to the newly created subscription "my-subscription".
 
-== What's next?
+== See also
 
 * xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astream-functions.adoc[]

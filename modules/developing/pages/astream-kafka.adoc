@@ -100,8 +100,7 @@ Follow along with this video from our *Five Minutes About Pulsar* series to migr
 
 video::Qy2ZlelLjXg[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 
-== What's next?
+== See also
 
-* {kafka_for_astra} is based on the DataStax https://github.com/datastax/starlight-for-kafka[Starlight for Kafka] project.
-
-* Follow our xref:getting-started:index.adoc[simple guide] to get started with Astra now.
+* https://github.com/datastax/starlight-for-kafka[{company} Starlight for Kafka project]
+* xref:getting-started:index.adoc[]

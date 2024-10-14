@@ -4,9 +4,9 @@ Prometheus collects system metrics by scraping targets at intervals. These metri
 
 This doc will show you how to scrape an {product_name} tenant with Prometheus.
 
-*Prerequisites:* +
+== Prerequisites
 
-* Astra Streaming tenant +
+* Astra Streaming tenant
 * Docker installed locally
 
 == Get configuration file from {product_name}
@@ -33,9 +33,10 @@ scrape_configs:
       - targets: [https://prometheus-aws-useast2.dev.streaming.datastax.com/pulsarmetrics/tenant-1]
 ----
 +
-This example `prometheus.yml` will scrape `+https://prometheus-aws-useast2.dev.streaming.datastax.com/pulsarmetrics/tenant-1+` every 60 seconds with the supplied Pulsar token. +
-The `job_name` is added as a label to any timeseries scraped with this configuration.
+This example `prometheus.yml` will scrape `\https://prometheus-aws-useast2.dev.streaming.datastax.com/pulsarmetrics/tenant-1` every 60 seconds with the supplied Pulsar token.
 +
+The `job_name` is added as a label to any timeseries scraped with this configuration.
+
 . Copy and paste the configuration code, or download it as a `.yml` file (it will be called `prometheus.yml`).
 
 == Build Prometheus with custom yml file
@@ -43,6 +44,7 @@ The `job_name` is added as a label to any timeseries scraped with this configura
 Prometheus runs with a `prometheus.yml` file found either locally or in a Docker container. For this example, we'll tell Docker to run Prometheus from our downloaded `prometheus.yml` file.
 
 . Pull the Prometheus Docker image with `docker pull prom/prometheus`.
+
 . Bind-mount your modified `prometheus.yml` file by running the Prometheus Docker container with a modified path in the `-v` argument.
 +
 [source,docker]
@@ -69,8 +71,11 @@ If you encounter a `mounts denied` permissions error, ensure your local director
 == Scrape with Prometheus
 
 . Open your Prometheus dashboard at `localhost:9090`. In the *Status -> Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
+
 . Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product_name} cluster.
+
 . Produce a few messages in your tenant with the Pulsar CLI or the {product_name} Websocket.
+
 . Your Prometheus graph displays the number of incoming Pulsar messages with each 60 second scrape.
 +
 image::astream-prometheus-graph.png[Scraping {product_name} with Prometheus]
@@ -79,8 +84,9 @@ You're scraping your {product_name} tenant with Prometheus!
 
 == Content encoding
 
-{product_name} supports content encoding with either `gzip` or `deflate`. +
-With the example from above still running, use a `curl` request to decompress your Prometheus scrape data.
+{product_name} supports content encoding with either `gzip` or `deflate`.
+
+With the example from above still running, use a `curl` request to decompress your Prometheus scrape data:
 
 [tabs]
 ====
@@ -103,7 +109,7 @@ include::example$curl_gzip.sh[]
 --
 ====
 
-*Deflate* or *Gzip* will extract your scraped metrics in a format like below:
+*Deflate* or *Gzip* will extract your scraped metrics in a format such as the following:
 
 [source,console]
 ----
@@ -113,12 +119,7 @@ pulsar_topics_count{app="pulsar",cluster="pulsar-aws-useast1",component="broker"
 
 == Metrics exposed by {product_name}
 
-Here's a list of Prometheus metrics exposed by {product_name}.
-
-[NOTE]
-====
-Cluster operational metrics are *not* exposed to individual cluster tenants. A tenant can only access its own metrics on the *broker* or *function worker* pods.
-====
+The following Prometheus metrics are exposed by {product_name}:
 
 * https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics[Namespace metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]
@@ -127,9 +128,14 @@ Cluster operational metrics are *not* exposed to individual cluster tenants. A t
 * https://pulsar.apache.org/docs/reference-metrics/#pulsar-functions[Pulsar Functions metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#connectors[Connector metrics]
 
-== What's next?
+[NOTE]
+====
+Cluster operational metrics are *not* exposed to individual cluster tenants. A tenant can only access its own metrics on the *broker* or *function worker* pods.
+====
 
-* For more on monitoring Astra Streaming with Prometheus and Grafana, see xref:monitoring/index.adoc[].
-* Follow our xref:getting-started:index.adoc[getting started guide] to get started with Astra now.
-* For more on Prometheus, see the https://prometheus.io/docs/introduction/overview/[Prometheus docs].
+== See also
+
+* xref:monitoring/index.adoc[]
+* xref:getting-started:index.adoc[]
+* https://prometheus.io/docs/introduction/overview/[Prometheus documentation]
 

@@ -378,6 +378,7 @@ If you're unsure of the profile name, use `ragstack profiles list`, then `ragsta
 ----
 
 To update these values, use `ragstack profiles update astra-ragstack-tenant --command-option="value"`.
+
 [cols="2,3", options="header"]
 |===
 | Command Option   | Description
@@ -389,6 +390,7 @@ To update these values, use `ragstack profiles update astra-ragstack-tenant --co
 |===
 
 If you get lost along the way, here are the default profile values:
+
 [source,console]
 ----
 webServiceUrl: "http://localhost:8090"
@@ -399,6 +401,7 @@ token: null
 
 Issue a curl call to your {ragstack} tenant to find the connection values for your tenant.
 The `X-DataStax-Current-Org` value is the client-id associated with the Astra token, and can be found in the Astra UI.
+
 [tabs]
 ====
 curl::
@@ -434,6 +437,7 @@ Ensure the values returned from the curl call match the values in your {ragstack
 
 In the {ragstack} CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
 This command will connect to your tenant and consume from the output-topic and produce to the input-topic.
+
 [source,shell]
 ----
 ragstack gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
@@ -443,7 +447,8 @@ In Astra Streaming, confirm that your application is connected to your tenant.
 Select the Websocket tab of your {ragstack}-enabled tenant, and choose to consume from output-topic and to produce to input-topic.
 If the Websocket tab is not visible, you may need to refresh the page or try opening it in Incognito mode.
 Send a message to your application, and confirm that it is received by the Astra websocket:
-[source,shell]
+
+[source,console]
 ----
 ragstack gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
 Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gateway//v1/consume/ragstack-tenant/sample-app/consume-output?param:sessionId=F85E4665-BE00-4513-A5C5-E59B42646490&option:position=latest
@@ -460,12 +465,13 @@ image::websocket-chat.png[Websocket chat]
 Your gateway connection is confirmed, and you can send messages to your application.
 This sample-app also produces messages to the consume-history gateway to provide more context to the AI model.
 To consume from this gateway, run the following command:
+
 [tabs]
 ====
 {ragstack} CLI::
 +
 --
-[source,shell]
+[source,console]
 ----
 ragstack gateway consume sample-app consume-history -p sessionId=F85E4665-BE00-4513-A5C5-E59B42646490
 ----
@@ -482,9 +488,6 @@ Connected to wss://lsgwy-gcp-useast1.streaming.datastax.com/langstream-api-gatew
 --
 ====
 
-== What's next?
+== See also
 
-{ragstack} is built with the LangStream framework, which is a set of tools for building Generative AI streaming applications.
-
-For more, see https://github.com/LangStream/langstream[GitHub].
-
+{ragstack} is built with the https://github.com/LangStream/langstream[LangStream framework], which is a set of tools for building Generative AI streaming applications.
