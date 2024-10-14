@@ -83,7 +83,7 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleP
 Notice there are a few variables waiting for replacement values.
 You can find those values here:
 
-include::partial$client-variables-table.adoc[]
+include::developing:partial$client-variables-table.adoc[]
 
 == Create a producer
 

@@ -11,7 +11,7 @@ If the primary consumer disconnects, the standby consumers begin consuming the s
 
 This document explains how to use Pulsar's failover subscription model to manage your topic consumption.
 
-include::partial$subscription-prereq.adoc[]
+include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Failover subscription example

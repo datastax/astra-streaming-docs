@@ -22,10 +22,9 @@ See https://www.datastax.com/pricing/astra-streaming[{astra_stream} pricing] and
 
 The following data types and corresponding AVRO or logical types are supported for CDC for {db-serverless} databases:
 
-[cols=2]
+[cols="1,1"]
 |===
-| Data type
-| AVRO type
+| Data type | AVRO type
 
 | ascii
 | string

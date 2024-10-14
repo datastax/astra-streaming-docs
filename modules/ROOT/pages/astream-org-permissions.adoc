@@ -3,93 +3,88 @@
 
 Default and xref:astream-custom-roles.adoc[custom roles] allow admins to manage unique permissions for users based on your organization and database requirements.
 
-You can manage roles using the {astra_ui} or the https://docs.datastax.com/en/astra/docs/manage/devops/devops-roles.html[DevOps API].
+You can manage roles using the {astra_ui} or the {astra_db} DevOps API.
+For more information, see https://docs.datastax.com/en/astra/docs/user-permissions.html[Astra DB User Permissions].
 
 == {product_name} Organization permissions
 
-[cols=3*,options=header]
+[cols="1,1,1"]
 |===
-|Console name
-|Description
-|DevOps API parameter
+|Console name |Description |DevOps API parameter
 
 |Read Audits
 |Enables read and download audits.
-|org-audits-read
+|`org-audits-read`
 
 |Write IP Access List
 |Create or modify an access list using the DevOps API or the Astra console.
-|accesslist-write
+|`accesslist-write`
 
 |Delete Custom Role
 |Delete of custom role.
-|org-role-delete
+|`org-role-delete`
 
 |Manage Streaming
 |Create a Streaming Service using the DevOps API or the Astra console.
-|org-stream-manage
+|`org-stream-manage`
 
 |Write Organization
 |Create new organizations or delete an existing organization. Hides manage org and org settings.
-|org-write
+|`org-write`
 
 |Read Billing
 |Enables links and access to billing details page.
-|org-billing-read
+|`org-billing-read`
 
 |Read IP Access List
 |Enables links and access to access list page.
-|accesslist-read
+|`accesslist-read`
 
 |Read User
 |Access to viewing users of an organization.
-|org-user-read
+|`org-user-read`
 
 |Read Organization
 |View organization in the Astra console.
-|org-read
+|`org-read`
 
 |Read Custom Role
 |See a custom role and its associated permissions.
-|org-role-read
+|`org-role-read`
 
 |Read External Auth
 |See security settings related to external authentication providers.
-|org-external-auth-read
+|`org-external-auth-read`
 
 |Read Token
 |Read token details.
-|org-token-read
+|`org-token-read`
 
 |Delete Custom Role
 |Delete of custom role.
-|org-role-delete
+|`org-role-delete`
 
 |Notification Write
 |Enable or disable notifications in organization notification settings.
 |org-notification-write
 |Write Billing
 |Enables links and ability to add or edit billing payment info.
-|org-billing-write
+|`org-billing-write`
 
 |Write User
 |Add, create, or remove a user using the DevOps API or the Astra console.
-|org-user-write
+|`org-user-write`
 
 |Write Custom Role
 |Create custom role.
-|org-role-write
+|`org-role-write`
 
 |Write External Auth
 |Update security settings related to external auth providers.
-|org-external-auth-write
+|`org-external-auth-write`
 
 |Write Token
 |Create application token.
-|org-token-write
+|`org-token-write`
 
 |===
-
-== Astra DB Permissions
-
-For documentation about Astra DB user permissions, see https://docs.datastax.com/en/astra/docs/user-permissions.html[Astra DB User Permissions].

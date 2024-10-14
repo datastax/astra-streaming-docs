@@ -9,44 +9,29 @@ The following steps will use the "Try Me" feature of the Astra Portal to interac
 
 == Select the producer and consumer topics
 
-Navigate to the "Try Me" tab
+. Navigate to the "Try Me" tab.
++
+image:try-me-tab.png[Try me tab in Astra Streaming]
 
-|===
-a|image:try-me-tab.png[Try me tab in Astra Streaming]
-|===
-
-Choose the appropriate namespace and topic.
+. Choose the appropriate namespace and topic.
 In this example, the name for both the producer and consumer is the same.
 Leave the rest of the settings as default.
-
-[width=70%]
-|===
-a|image:config-try-me.png[Config try me in Astra Streaming]
-|===
++
+image:config-try-me.png[Config try me in Astra Streaming]
 
 == Connect and send a message
 
-Click the "Connect" button to open a websocket connection in your browser with this topic.
+. Click *Connect* to open a websocket connection in your browser with this topic.
 
-Type the message "Hi there" in the *Send message* box and click the "Send" button.
+. In *Send message*, type a message, and then click *Send*.
++
+image:test-message-input.png[Send message in Astra Streaming]
 
-[width=80%]
-|===
-a|image:test-message-input.png[Send message in Astra Streaming]
-|===
 
-A message will be produced (ie: sent) to your selected topic and the consumer will consume (ie: retrieve) the message.
-
+A message is produced (sent) to your selected topic, and then the consumer consumes (retrieves) the message.
 The result is a chat style write and read.
 
-[width=80%]
-|===
-a|image:try-me-test-message.png[Test message in Astra Streaming]
-|===
-
-{emoji-tada} Congratulations! You have sent and received your first message.
-
-Now it's time to take your skills further {emoji-rocket}.
+image:try-me-test-message.png[Test message in Astra Streaming]
 
 == See also
 

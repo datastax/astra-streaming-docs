@@ -379,14 +379,24 @@ If you're unsure of the profile name, use `ragstack profiles list`, then `ragsta
 
 To update these values, use `ragstack profiles update astra-ragstack-tenant --command-option="value"`.
 
-[cols="2,3", options="header"]
+[cols="1,1"]
 |===
-| Command Option   | Description
-| --set-current    | Set this profile as current
-| --web-service-url| webServiceUrl of the profile
-| --api-gateway-url| apiGatewayUrl of the profile
-| --tenant         | tenant of the profile
-| --token          | token of the profile
+| Command Option | Description
+
+| `--set-current`
+| Set this profile as current
+
+| `--web-service-url`
+| webServiceUrl of the profile
+
+| `--api-gateway-url`
+| apiGatewayUrl of the profile
+
+| `--tenant`
+| tenant of the profile
+
+| `--token`
+| token of the profile
 |===
 
 If you get lost along the way, here are the default profile values:

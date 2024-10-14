@@ -15,7 +15,7 @@ Pulsar's xref:astream-subscriptions-shared.adoc[shared subscription] model trade
 
 This document explains how to use Pulsar's Key_Shared subscription model to manage your topic consumption.
 
-include::partial$subscription-prereq.adoc[]
+include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Key_Shared subscription example

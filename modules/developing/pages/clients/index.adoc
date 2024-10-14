@@ -7,30 +7,11 @@
 To connect to your service, use the open-source client APIs provided by the Apache Pulsar project.
 Astra Streaming is running Pulsar version {pulsar_version}. You should use this API version or higher.
 
-Below is a list of popular Pulsar client runtimes.
-Visit each guide to create a simple message producer and consumer in your Astra Streaming tenant.
+Popular Pulsar clients include the following:
 
-== Pulsar Clients
-
-[cols="^1,^1,^1,^1,^1,^1", grid=none,frame=none]
-|===
-| xref:clients/csharp-produce-consume.adoc[image:csharp-icon.png[]]
-
-xref:clients/csharp-produce-consume.adoc[C#]
-| xref:clients/golang-produce-consume.adoc[image:golang-icon.png[]]
-
-xref:clients/golang-produce-consume.adoc[Golang]
-| xref:clients/java-produce-consume.adoc[image:java-icon.png[]]
-
-xref:clients/java-produce-consume.adoc[Java]
-| xref:clients/nodejs-produce-consume.adoc[image:node-icon.png[]]
-
-xref:clients/nodejs-produce-consume.adoc[Node.js]
-| xref:clients/python-produce-consume.adoc[image:python-icon.png[]]
-
-xref:clients/python-produce-consume.adoc[Python]
-
-| xref:clients/spring-produce-consume.adoc[image:spring-boot-icon.png[]]
-
-xref:clients/spring-produce-consume.adoc[Spring Boot]
-|===
+* xref:clients/csharp-produce-consume.adoc[image:csharp-icon.png[] C#]
+* xref:clients/golang-produce-consume.adoc[image:golang-icon.png[] Golang]
+* xref:clients/java-produce-consume.adoc[image:java-icon.png[] Java]
+* xref:clients/nodejs-produce-consume.adoc[image:node-icon.png[] Node.js]
+* xref:clients/python-produce-consume.adoc[image:python-icon.png[] Python]
+* xref:clients/spring-produce-consume.adoc[image:spring-boot-icon.png[] Spring Boot]

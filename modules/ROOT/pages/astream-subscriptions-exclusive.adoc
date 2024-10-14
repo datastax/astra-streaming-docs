@@ -8,7 +8,7 @@ An _exclusive* subscription_ describes a basic publish-subscribe pattern where a
 
 This document explains how to use Pulsar's exclusive subscription model to manage your topic consumption.
 
-include::partial$subscription-prereq.adoc[]
+include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Exclusive subscription example

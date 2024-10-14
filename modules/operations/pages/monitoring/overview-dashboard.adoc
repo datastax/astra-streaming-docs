@@ -5,48 +5,41 @@ The https://github.com/datastax/astra-streaming-examples/blob/master/grafana-das
 == Tenant overview
 Overview displays the aggregated total metrics values summarized at the tenant level. The following metrics are included:
 
-.Tenant overview
-[cols=1*]
-|===
-|Total number of namespaces
-|Total number of topics
-|Total number of producers
-|Total number of consumers
-|Total number of subscriptions
-|Total message storage size (logical) - before replication
-|Total message storage size -  after replication
-|Total message size offloaded to a tiered storage
-|Total message backlog
-|Total message replication backlog
-|Total hourly incoming message number
-|Total hourly incoming message average size
-|===
+* Total number of namespaces
+* Total number of topics
+* Total number of producers
+* Total number of consumers
+* Total number of subscriptions
+* Total message storage size (logical) - before replication
+* Total message storage size -  after replication
+* Total message size offloaded to a tiered storage
+* Total message backlog
+* Total message replication backlog
+* Total hourly incoming message number
+* Total hourly incoming message average size
 
 == Messaging
+
 Messaging displays the time series metrics chart summarized at the tenant level. The following metrics are included:
 
-.Messaging
-[cols=1*]
-|===
-|Total incoming message rate (msg/s) of the tenant divided by namespaces
-|Total outgoing message rate (msg/s) of the tenant divided by namespaces
-|Total incoming message throughput (byte/s) of the tenant divided by namespaces
-|Total outgoing message throughput (byte/s) of the tenant divided by namespaces
-|Total message backlog of the tenant divided by namespaces
-|Total message storage size of the tenant divided by namespaces
-|Total Message replication backlog rate (msg/s) divided of the tenant divided by remote clusters
-|Total Producer/Consumer/Subscription count of the tenant
-|Total unacknowledged messages of the tenant divided by namespaces
-|Total message drop rate of the tenant divided by namespaces
-|Total incoming message replication rate (msg/s) of the tenant divided by remote clusters
-|Total outgoing message replication rate (msg/s) of the tenant divided by remote clusters
-|Total incoming message replication throughput (byte/s) of the tenant divided by remote clusters
-|Total outgoing message replication throughput (byte/s) of the tenant divided by remote clusters
-|Top 10 topics of the tenant by message backlog
-|Top 10 topics of the tenant by message replication backlog
-|Top 10 topics of the tenant by unacknowledged message
-|Top 10 topics of the tenant by message storage size
-|===
+* Total incoming message rate (msg/s) of the tenant divided by namespaces
+* Total outgoing message rate (msg/s) of the tenant divided by namespaces
+* Total incoming message throughput (byte/s) of the tenant divided by namespaces
+* Total outgoing message throughput (byte/s) of the tenant divided by namespaces
+* Total message backlog of the tenant divided by namespaces
+* Total message storage size of the tenant divided by namespaces
+* Total Message replication backlog rate (msg/s) divided of the tenant divided by remote clusters
+* Total Producer/Consumer/Subscription count of the tenant
+* Total unacknowledged messages of the tenant divided by namespaces
+* Total message drop rate of the tenant divided by namespaces
+* Total incoming message replication rate (msg/s) of the tenant divided by remote clusters
+* Total outgoing message replication rate (msg/s) of the tenant divided by remote clusters
+* Total incoming message replication throughput (byte/s) of the tenant divided by remote clusters
+* Total outgoing message replication throughput (byte/s) of the tenant divided by remote clusters
+* Top 10 topics of the tenant by message backlog
+* Top 10 topics of the tenant by message replication backlog
+* Top 10 topics of the tenant by unacknowledged message
+* Top 10 topics of the tenant by message storage size
 
 == See also
 

@@ -10,12 +10,12 @@ The below limits are for Pay As You Go clusters. These limits may be changed on 
 
 == {product_name} guardrails
 
-Guardrails are initially provisioned in the default settings by {product_name} and cannot be changed directly by users. If you need assistance, open {support_url}[a support ticket].
+Guardrails are initially provisioned in the default settings by {product_name}.
+You can't change these guardrails.
 
-[cols=2*]
+[cols="1,1"]
 |===
-|*Guardrail*
-|*Limit*
+|Guardrail |Limit
 
 |Number of tenants per organization*
 |10
@@ -66,9 +66,8 @@ Max throughput for a *non-partitioned topic* or a *single partition of a partiti
 |Not set
 |===
 
-_*These guardrails cannot be changed._
-
-_**Max message size can be changed on dedicated clusters, but not serverless clusters. If you need assistance, open {support_url}[a support ticket]._
+Max message size can be changed for Classic databases, but not Serverless databases.
+If you need assistance, contact {support_url}[{company} Support].
 
 == Function and connector resource limits
 
@@ -125,11 +124,9 @@ For more on `pulsar-admin`, see the Apache Pulsar https://pulsar.apache.org/docs
 
 These namespace policies are initially provisioned in the default settings by {product_name} and _can_ be changed by users.
 
-[cols=3*]
+[cols="1,1,1"]
 |===
-|*Policy*
-|*Default Setting*
-|*Exposed by UI?*
+|Policy |Default Setting |Available in the {astra_ui}
 
 |Max retention time
 |Disabled/no data retention by default
@@ -184,11 +181,9 @@ You can read more about Kubernetes pod naming restrictions https://kubernetes.io
 
 These topic and namespace actions are initially provisioned in the default settings by {product_name} and can be performed by users.
 
-[cols=3*]
+[cols="1,1,1"]
 |===
-|*Allowed Action*
-|*Default Setting*
-|*Exposed by UI?*
+|Allowed Action |Default Setting |Available in the {astra_ui}
 
 |Terminate topic
 |Enabled
@@ -228,10 +223,9 @@ These topic and namespace actions are initially provisioned in the default setti
 
 Message throughput, rate, and message max size can be customized on dedicated clusters. If you need assistance, open {support_url}[a support ticket].
 
-[cols=2*]
+[cols="1,1"]
 |===
-|*Guardrail*
-|*Limit*
+|Guardrail |Limit
 
 |Number of tenants per organization
 |No limit

@@ -1,25 +1,30 @@
-[cols="^1,2"]
+[cols="1,1,3"]
 |===
-.^|serviceUrl
-|This is the URL for connecting to the Pulsar cluster. 
+|Parameter |Definition |Where to find the value
 
-In the Astra Portal, navigate to the "Connect" tab of your streaming tenant. In the "Details" area you will find the "Broker Service URL".
+|`serviceUrl`
+|The URL to connect to the Pulsar cluster
+|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Connect* tab.
+In the *Details* section, get the *Broker Service URL*.
 
-.^|pulsarToken
-|This is the token used for Pulsar cluster authentications.
+|`pulsarToken`
+|The token for Pulsar cluster authentication
+|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Settings* tab.
+Click *Create Token* to generate a Pulsar token.
 
-In the Astra Portal, navigate to the "Settings" tab of your streaming tenant. Select "Create Token". A new token will be generated and available to copy.
+|`tenantName`
+|The name of your streaming tenant
+|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant.
+In the *Details* section, get the *Name*.
 
-.^|tenantName
-|The name of your streaming tenant.
+|`namespace`
+|The segmented area for certain topics in your streaming tenant
+|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Namespace and Topics* tab.
+Choose the target namespace from the list of namespaces.
 
-In the Astra Portal, navigate to your streaming tenant. In the "Details" area you will find the "Name".
-
-.^|namespace
-|Within your streaming tenant, this is the segmented area for certain topics. 
-
-In the Astra Portal, navigate to the "Namespace And Topics" tab of your streaming tenant to see a list of namespaces.
-
-.^|topicName
-|Expanding the above chosen namespace will list the topics within. This value is just the topic name (not the "Full Name").
+|`topicName`
+|Topic name (not the full name)
+|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Namespace and Topics* tab.
+Expand the target namespace in the list of namespaces to view the names of the topics within.
+Do _not_ use the *Full Name*.
 |===

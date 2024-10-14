@@ -43,7 +43,7 @@ This is NOT a complete code snippet: it imports the required packages, establish
 Notice there are a few variables that are waiting for replacement values.
 You can find those values here:
 
-include::partial$client-variables-table.adoc[]
+include::developing:partial$client-variables-table.adoc[]
 
 == Create a producer
 

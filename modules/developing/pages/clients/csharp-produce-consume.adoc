@@ -41,7 +41,7 @@ include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleP
 
 There are a few values that you'll need to fill in:
 
-include::partial$client-variables-table.adoc[]
+include::developing:partial$client-variables-table.adoc[]
 
 == The producer
 

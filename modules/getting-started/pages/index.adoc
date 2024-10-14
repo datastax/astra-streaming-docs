@@ -263,23 +263,10 @@ include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
 --
 ====
 
-== Putting your topic to work
+== Next steps
 
-Now that you have a topic created, it's time to produce and consume messages in your new message topic.
-There are several different ways to accomplish this.
-Choose the right one for your needs (they all end up doing the same thing).
+Your new topic is ready to produce and consume messages.
+There are several different ways to do this:
 
-[cols=3*,frame=none,grid=none]
-|===
-a|xref:developing:produce-consume-astra-portal.adoc[Astra Portal]
-
-[.small]##Using Astra Streaming's "Try Me" feature in the UI##
-
-a|xref:developing:produce-consume-pulsar-client.adoc[Pulsar Client]
-
-[.small]##Use the cli provided within Pulsar to interact with the topic##
-
-a|xref:developing:clients/index.adoc[Runtime Clients]
-
-[.small]##Create a client application that interacts with Pulsar (C#, Java, Python, etc)##
-|===
+* xref:developing:produce-consume-astra-portal.adoc[Astra Portal]: Use Astra Streaming's "Try Me" feature in the {astra_ui}.* xref:developing:produce-consume-pulsar-client.adoc[Pulsar Client]: Use the Pulsar CLI to interact with the topic.
+* xref:developing:clients/index.adoc[Runtime Clients]: Create a client application that interacts with Pulsar.

@@ -10,7 +10,7 @@ More consumers in a shared subscription can increase your Pulsar deployment's ra
 
 This document explains how to use Pulsar's shared subscription model to manage your topic consumption.
 
-include::partial$subscription-prereq.adoc[]
+include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Shared subscription example

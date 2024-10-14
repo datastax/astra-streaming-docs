@@ -123,40 +123,37 @@ You should see new topics called `amq.default.__queuename` and `amq.default_rout
 
 == RabbitMQ exchanges and Pulsar topics
 
-{starlight_rabbitmq} maps the RabbitMQ concept of exchanges to the Pulsar concept of topics. This table shows how those concepts are mapped and used:
+{starlight_rabbitmq} maps RabbitMQ _exchanges_ to Pulsar _topics_, as described in the following table:
 
-[cols=4*,options=header]
+[cols="1,1,1,1"]
 |===
-|*Exchange*
-|*Routing key*
-|*Pulsar topic name*
-|*Code example*
+|Exchange |Routing key |Pulsar topic name |Usage example
 
-|amp.direct
+|`amp.direct`
 |used
-|amq.direct.__{routing key}
-|channel.basic_publish(exchange='amp.direct',
+|`amq.direct.__{routing key}`
+|`channel.basic_publish(exchange='amp.direct',`
 
-|amp.default or empty string
+|`amp.default` or empty string
 |used
-|amq.default.__{routing key}
-|channel.basic_publish(exchange=",
+|`amq.default.__{routing key}`
+|`channel.basic_publish(exchange="),`
 
-|amp.match
+|`amp.match`
 |not used
-|amp.match
-|channel.basic_publish(exchange=amp.match,
+|`amp.match`
+|`channel.basic_publish(exchange=amp.match),`
 
-|amp.fanout
+|`amp.fanout`
 |not used
-|amp.fanout
-|channel.basic_publish(exchange='amp.fanout',
+|`amp.fanout`
+|`channel.basic_publish(exchange='amp.fanout'),`
 
-|headers
+|`headers`
 |not used
 |Name of the header
-|channel.exchange_declare(exchange='header_logs', exchange_type='headers')
-channel.basic_publish(exchange='header_logs'),
+|`channel.exchange_declare(exchange='header_logs', exchange_type='headers')
+channel.basic_publish(exchange='header_logs'),`
 
 |===
 

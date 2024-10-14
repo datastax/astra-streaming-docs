@@ -285,7 +285,7 @@ Result::
 
 {product_name} exposes the following topic-level replication metrics, which can be viewed in the **Overview** tab of the Namespaces and Topics page.
 
-include::partial$georeplication-monitoring.adoc[]
+include::operations:partial$georeplication-monitoring.adoc[]
 
 == See also
 

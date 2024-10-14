@@ -52,15 +52,11 @@ Astra Portal::
 --
 . Navigate to the "Connect" tab in the Astra Streaming portal.
 +
-|===
-a|image:connect-tab.png[Connect tab in Astra Streaming]
-|===
+image:connect-tab.png[Connect tab in Astra Streaming]
 
 . Locate the "Download client.conf" button and click to download the conf file.
 +
-|===
-a|image:download-client.png[Download pulsar client conf in Astra Streaming]
-|===
+image:download-client.png[Download pulsar client conf in Astra Streaming]
 
 . Save the file in the "/conf" folder of the Pulsar folder.
 This will overwrite the default client.conf already in the /conf folder.
@@ -69,13 +65,14 @@ This will overwrite the default client.conf already in the /conf folder.
 
 With your Astra Streaming tenant's configuration in place, you can use any of the binaries to interact with a Pulsar cluster.
 
+[cols="1,3"]
 |===
 |Binary |Uses
 
-| ./bin/pulsar-admin
+| `./bin/pulsar-admin`
 | Administrative commands to manage namespaces, topics, functions, connectors, etc.
 
-| ./bin/pulsar-client
+| `./bin/pulsar-client`
 | Interactive commands for producing and consuming messages.
 |===
 

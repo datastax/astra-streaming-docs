@@ -136,7 +136,8 @@ topk by(topic) (10, sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*
 == Metrics to be alerted
 Most of the exposed Astra Streaming metrics are for informational purposes only and in most cases the metrics values are just reflecting the application workload characteristics. For example, message rate or throughput are common examples of such metrics.
 
-There are, however, several metrics that need special attention when we see an increasing number of their values. Among the exposed Astra Streaming metrics, these metrics are:
+There are, however, several metrics that need special attention when we see an increasing number of their values. Among the exposed Astra Streaming metrics, these metrics are as follows:
+
 .Metrics for alerting
 [%header,format=csv,cols="2,2,1,3"]
 |===
@@ -157,7 +158,7 @@ Otherwise, they may trigger too many false alarms.
 
 == See also
 
-* For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
-* To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
-* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].
+* xref:monitoring/metrics.adoc[]
+* xref:monitoring/integration.adoc[]
+* xref:monitoring/new-relic.adoc[]
 
