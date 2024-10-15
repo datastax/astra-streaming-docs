@@ -63,20 +63,20 @@ This is the only time you will be able to copy it.
 
 . Set your environment variables:
 +
-[source,shell,subs="attributes+"]
+[source,shell,subs="+quotes"]
 ----
-PULSAR_TOKEN="<REPLACE-ME-WITH-TOKEN>"
-WEB_SERVICE_URL="<REPLACE-ME-WITH-URL>"
+PULSAR_TOKEN="**PULSAR_TOKEN**"
+WEB_SERVICE_URL="**TENANT_WEB_SERVICE_URL**"
 ----
 
 . Run a curl command.
 The following example lists built-in sink connectors.
 +
-[source,shell,subs="attributes+"]
+[source,curl]
 ----
-curl -sS --fail --location --request GET \
-  -H "Authorization: $PULSAR_TOKEN" \
-  "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks"
+curl -sS --location -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+--header "Authorization: $PULSAR_TOKEN" \
+--header "Content-Type: application/json"
 ----
 +
 The default response is a single JSON string.

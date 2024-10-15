@@ -24,37 +24,36 @@ You can't remove the RabbitMQ namespace created on your tenant with this step.
 You must remove the tenant itself to remove this namespace.
 ====
 
-. Select *Enable RabbitMQ*.
+. Select *Enable RabbitMQ* to create a `rabbitmq` namespace in your {product} tenant for RabbitMQ functionality, as well as a configuration file.
+
+. Save the configuration to a `rabbitmq.conf` file:
 +
-A new `rabbitmq` namespace is created in your {product} tenant for RabbitMQ functionality.
-+
-A new configuration file is generated in the *Connect* tab that looks like this:
-+
+.rabbitmq.conf
+[source,plain,subs="+quotes"]
 ----
-username:
+username: **TENANT_NAME**
 password: token:***
-host: rabbitmq-azure-us-west-2.dev.streaming.datastax.com
+host: rabbitmq-azure-us-west-2.streaming.datastax.com
 port: 5671
 virtual_host: azure/rabbitmq
 ----
-
-. Copy and paste the code or download it as a configuration file (it will be called `rabbitmq.conf`).
-
-You're now ready to connect RabbitMQ and Pulsar.
-
-== Test connection
-
-We'll use a Python script to create a connection between RabbitMQ and your Pulsar tenant, establish a message queue named `queuename`, print ten messages, and close the connection.
-
-. Create a file called `connect-test.py` and paste the below Python code into it:
 +
-[source,python]
+The configuration details depend on your {product} tenant configuration.
+
+== Connect RabbitMQ and Pulsar
+
+This example uses a Python script to create a connection between RabbitMQ and your Pulsar tenant, establish a message queue named `queuename`, print ten messages, and then close the connection.
+
+. Create a `connect-test.py` file containing the following code:
++
+.connect-test.py
+[source,python,subs="+quotes"]
 ----
 import ssl
 import pika
 
-virtual_host = "{your_tenant_name}/rabbitmq"
-token = "{pulsar_token}"
+virtual_host = "**VIRTUAL_HOST**"
+token = "**TOKEN**"
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 context.verify_mode = ssl.CERT_NONE
@@ -64,9 +63,9 @@ ssl_options = pika.SSLOptions(context)
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(
     virtual_host=virtual_host,
-    host="{your_host_name}",
+    host="**HOST_NAME**",
     ssl_options=ssl_options,
-    port=5671,
+    port=**PORT**,
     credentials=pika.PlainCredentials("", token)))
 print("connection success")
 
@@ -83,19 +82,27 @@ for x in range(10):
 
 connection.close()
 ----
-
-. Replace the following values in `connect-test.py` with values from your downloaded `rabbitmq.conf` file:
-* `virtual_host`
-* `token`
-* `host`
-* `port`
-
-. Save `connect-test.py` with the new values.
-. Run `connect-test.py` with `python3 connect-test.py`. It should return:
 +
-[source,bash]
+Replace the following with values from your downloaded `rabbitmq.conf` file:
++
+* `**VIRTUAL_HOST**`
+* `**TOKEN**`
+* `**HOST_NAME**`
+* `**PORT**`
+
+. Save the `connect-test.py` file.
+
+. Run `connect-test.py`:
++
+[source,shell]
 ----
 python3 connect-test.py
+----
+
+. Make sure the result is similar to the following:
++
+[source,console]
+----
 connection success
 started a channel
  sent one
@@ -110,9 +117,10 @@ started a channel
  sent one
 ----
 
-. Navigate to your `rabbitmq` namespace dashboard in {product} and monitor your activity.
-
-You should see new topics called `amq.default.__queuename` and `amq.default_routingkey` that were created by the Python script above, and an increasing amount of traffic and messages. Your RabbitMQ messages are being published to a Pulsar topic.
+. Navigate to your `rabbitmq` namespace dashboard in {product}, and then monitor your activity.
++
+If configured correctly, you should have new topics called `amq.default.__queuename` and `amq.default_routingkey` that were created by the Python script, as well as an increasing amount of traffic and messages.
+Your RabbitMQ messages are being published to a Pulsar topic.
 
 == RabbitMQ exchanges and Pulsar topics
 

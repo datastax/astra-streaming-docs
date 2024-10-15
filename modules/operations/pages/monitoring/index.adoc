@@ -73,81 +73,100 @@ The following table gives the list of recommended source connector metrics as a 
 include::example$sink-connector-metrics.csv[]
 |===
 
+[#aggregate-astra-streaming-metrics]
 == Aggregate {product} Metrics
+
+[IMPORTANT]
+====
+Do _not_ aggregate metrics if you are on the *Pay As You Go* {product} plan because one cluster can be shared among multiple organizations.
+For more information, see xref:astream-limits.adoc[].
+====
 
 Each externally exposed raw {product} metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
 
-Below is an example of a raw metric for the Pulsar message backlog (pulsar_msg_backlog) scraped from an {product} cluster located in the GCP US Central region:
+The following example shows some raw metrics for a Pulsar message backlog (`pulsar_msg_backlog`) scraped from an {product} cluster in the Google Cloud `us-central1` region:
 
-.Show raw metric for Pulsar message backlog:
-[%collapsible]
-====
+[source,console]
+----
 ....
-pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="broker", controller_revision_hash="pulsar-gcp-uscentral1-broker-<hash>f", exported_instance="<ip>:<port>", exported_job="broker", helm_release_name="astraproduction-gcp-pulsar-uscentral1", instance="prometheus-gcp-uscentral1.streaming.datastax.com:443", job="astra-pulsar-metrics-msgenrich", kubernetes_namespace="pulsar", kubernetes_pod_name="pulsar-gcp-uscentral1-broker-3", namespace="msgenrich/testns", prometheus="pulsar/astraproduction-gcp-pulsar-prometheus", prometheus_replica="prometheus-astraproduction-gcp-pulsar-prometheus-0", pulsar_cluster_dns="gcp-uscentral1.streaming.datastax.com", release="astraproduction-gcp-pulsar-uscentral1", statefulset_kubernetes_io_pod_name="pulsar-gcp-uscentral1-broker-3", topic="persistent://msgenrich/testns/raw-partition-0"}
+pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="broker", controller_revision_hash="pulsar-gcp-uscentral1-broker-<hash>f", exported_instance="<ip>:<port>", exported_job="broker", helm_release_name="astraproduction-gcp-pulsar-uscentral1", instance="prometheus-gcp-uscentral1.streaming.datastax.com:443", job="astra-pulsar-metrics-demo", kubernetes_namespace="pulsar", kubernetes_pod_name="pulsar-gcp-uscentral1-broker-3", namespace="demo/testns", prometheus="pulsar/astraproduction-gcp-pulsar-prometheus", prometheus_replica="prometheus-astraproduction-gcp-pulsar-prometheus-0", pulsar_cluster_dns="gcp-uscentral1.streaming.datastax.com", release="astraproduction-gcp-pulsar-uscentral1", statefulset_kubernetes_io_pod_name="pulsar-gcp-uscentral1-broker-3", topic="persistent://demo/testns/raw-partition-0"}
 ....
-====
+----
 
-{company} recommends the following guidelines for aggregating raw metrics:
+To transform raw metrics into a usable state, {company} recommends the following:
 
 * Aggregate metrics at the parent topic level, at minimum, instead of at the partition level.
 In Pulsar, end user applications only deal with messages at the parent topic level; however, internally, Pulsar handles message processing at the partition level.
 
-* Exclude reported metrics that are associated with {product}'s system namespaces and topics, which are usually prefixed by two underscores (++__++).
-For example, enabling Pulsar's Kafka protocol handler through S4K integration, creates a system namespace called ++__kafka++ that has one system topic called ++__transaction_producer_state++.
-
-* Do _not_ aggregate metrics if you are on the *Pay As You Go* {product} plan because one cluster can be shared among multiple organizations.
-For more information, see xref:astream-limits.adoc[].
+* Exclude reported metrics that are associated with {product}'s system namespaces and topics, which are usually prefixed by two underscores (`__`).
+For example, enabling Pulsar's Kafka protocol handler through S4K integration, creates a system namespace called `__kafka` that has one system topic called `\__transaction_producer_state`.
 
 === PromQL query patterns
 
-Prometheus provides a powerful but easy-to-use query language called PromQL for selecting and aggregating time series data in real time. PromQL syntax is beyond this document's scope, but the https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus documentation] is a great place to start.
+PromQL is Prometheus's simple and powerful query language that you can use to select and aggregate time series data in real time.
+For more information, see the https://prometheus.io/docs/prometheus/latest/querying/basics/[PromQL documentation].
 
-In the rest of this section, we'll recommend some PromQL query patterns for aggregating raw {product} metrics.
-These examples use one {product} raw metric, pulsar_msg_backlog, as an example for illustrative purposes.
-We aggregate messages at the parent topic level or above, and exclude system topics per our recommendations above.
-We filter out system messages with the pattern +{topic !~ ".*__.*"}+.
-This PromQL pattern filters out messages when their topic labels do not include +__+.
-This works because Pulsar system topics usually have ++__++ as the topic or namespace name prefix (e.g. persistent://<tenant>/++__++kafka/__consumer_offsets_partition_0).
-This pattern assumes that the user applications don't also have namespaces and topics with +__+ as part of the names, or they will be filtered as well.
+{company} recommends the following PromQL query patterns for aggregating raw {product} metrics.
+These examples use the `pulsar_msg_backlog` raw metric to demonstrate the patterns.
+Additionally, in accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, these patterns aggregate messages at the parent topic level or higher and they exclude system topics (with the PromQL statement `{topic !~ ".*__.*"}`).
 
-Pattern 1: Get the total message backlog of a specific parent topic, excluding system topics.
-"$ptopic" is a (Grafana dashboard) variable that represents a specific parent topic.
-[source,psql]
+//TODO: Check the styles of double underscore and query filters
+
+.About the system topics filter
+[%collapsible]
+====
+The PromQL pattern `{topic !~ ".*__.*"}` filters out messages with topic labels that do not include two consecutive underscores.
+This works because Pulsar system topics and namespaces are usually prefixed by two underscores, such as `persistent://<tenant>/__kafka/__consumer_offsets_partition_0`.
+However, this pattern assumes that your applications' namespace and topic names don't contain double underscores.
+If they do, they are also filtered.
+====
+
+==== Get the total message backlog of a specific parent topic, excluding system topics
+
+`$ptopic` is a Grafana dashboard variable that represents a specific parent topic.
+
+[source,pgsql]
 ----
 sum(pulsar_msg_backlog{topic=~$ptopic, topic !~ ".*__.*"})
 ----
 
-Pattern 2: Get the total message backlog of a specific namespace, excluding system topics.
-"$namespace" is a (Grafana dashboard) variable that represents a specific namespace.
-[source,psql]
+==== Get the total message backlog of a specific namespace, excluding system topics
+
+`$namespace` is a Grafana dashboard variable that represents a specific namespace.
+
+[source,pgsql]
 ----
 sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
-Pattern 3: Get the total message backlog of a tenant, excluding system topics.
-"$tenant" is a (Grafana dashboard) variable that represents a specific tenant.
-[source,psql]
+==== Get the total message backlog of a tenant, excluding system topics
+
+`$tenant` is a (Grafana dashboard) variable that represents a specific tenant.
+
+[source,pgsql]
 ----
 sum(pulsar_msg_backlog{namespace=~"$tenant.+"", topic !~ ".*__.*"})
 ----
 
-Pattern 4: Get the total message backlog of each topic within a specific namespace, excluding system topics.
-[source,psql]
+==== Get the total message backlog of each topic within a specific namespace, excluding system topics
+
+[source,pgsql]
 ----
 sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
-Pattern 5: Get the top 10 message backlog by topic within a specific namespace, excluding system topics.
-[source,psql]
+==== Get the top 10 message backlog by topic within a specific namespace, excluding system topics
+
+[source,pssql]
 ----
-topk by(topic) (10, sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
+topk (10, sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"}))
 ----
 
-== Metrics to be alerted
+== Metrics alerts
 
-Most of the exposed {product} metrics are for informational purposes only and in most cases the metrics values are just reflecting the application workload characteristics. For example, message rate or throughput are common examples of such metrics.
+Most of the exposed {product} metrics reflect generic application workload characteristics, such as message rate or throughput, and they are for informational purposes only.
 
-There are, however, several metrics that need special attention when we see an increasing number of their values. Among the exposed {product} metrics, these metrics are as follows:
+However, {company} recommends that you monitor the following metrics for unexpected increases:
 
 .Metrics for alerting
 [%header,format=csv,cols="2,2,1,3"]
@@ -156,16 +175,18 @@ include::example$alert-metrics.csv[]
 |===
 
 === Alerting rules
-In a perfect world, these metrics should always stay at 0, but in reality, these metrics will increase when the application workload becomes heavier.
-If your system is behaving correctly, these metrics should go down when the application workload drops.
 
-A simple way to trigger an alert on these metrics is to set a threshold which triggers an alert when the metric exceeds it. However, this will probably cause false alarms during workload spikes.
+In a perfect world, these metrics would always be `0`.
+In reality, these metrics will increase when an application's workload increases, and then return to normal when the workload decreases.
 
-A better approach is calculating the metrics' increase rate over a period of time (e.g. 1 hour) and setting a threshold on the rate of increase.
-For example, if the average message backlog increase rate exceeds a threshold, an alert is triggered.
+You can set an alert threshold to be notified when these metrics exceed normal capacity, but this can cause false alarms during expected workload spikes.
 
-The actual threshold values for these metrics is highly dependent on each application's workload and requirements, but the values should be relatively large positive numbers, e.g. several hundreds or several thousands.
-Otherwise, they may trigger too many false alarms.
+Alternatively, you can calculate the metrics' increase rate over a period of time, such as one hour, and then set a threshold based on the rate of increase.
+For example, if the average message backlog increase rate exceeds the given threshold, an alert is triggered.
+
+Thresholds for these metrics depends on your application's routine workloads and requirements.
+Generally, these values are large positive numbers, ranging in the several hundreds or several thousands.
+If your receive too many false alarms, adjust the alert threshold to a higher value.
 
 == See also
 

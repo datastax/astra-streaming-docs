@@ -9,13 +9,14 @@ This doc will show you how to scrape an {product} tenant with Prometheus.
 * {product} tenant
 * Docker installed locally
 
-== Get configuration file from {product}
+== Get the configuration file from {product}
 
-. To start connecting your {product} tenant with Prometheus, select *Prometheus* in the {product} *Connect* tab.
+. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
-. A new configuration file will be generated in the *Connect* tab that looks like this:
+. On the *Connect* tab, click *Prometheus* to generate a new configuration file:
 +
-[source,yaml]
+.prometheus.yml
+[source,yaml,subs="+quotes"]
 ----
 global:
   scrape_interval: 60s
@@ -25,68 +26,74 @@ scrape_configs:
   - job_name: "astra-pulsar-metrics"
 
     scheme: 'https'
-    metrics_path: '/pulsarmetrics/tenant-1'
+    metrics_path: '/pulsarmetrics/**TENANT_NAME**'
     authorization:
-      credentials: '<pulsar-token>'
+      credentials: '**PULSAR_TOKEN**'
 
     static_configs:
-      - targets: [https://prometheus-aws-useast2.dev.streaming.datastax.com/pulsarmetrics/tenant-1]
+      - targets: [https://prometheus-**PROVIDER**-**REGION**.streaming.datastax.com/pulsarmetrics/**TENANT_NAME**]
 ----
 +
-This example `prometheus.yml` will scrape `\https://prometheus-aws-useast2.dev.streaming.datastax.com/pulsarmetrics/tenant-1` every 60 seconds with the supplied Pulsar token.
-+
+The default `prometheus.yml` scrapes the `target` tenant every 60 seconds, and it uses the specified `**PULSAR_TOKEN**` for authentication.
 The `job_name` is added as a label to any timeseries scraped with this configuration.
 
-. Copy and paste the configuration code, or download it as a `.yml` file (it will be called `prometheus.yml`).
+. Copy the configuration YAML or download the `prometheus.yml` file.
 
-== Build Prometheus with custom yml file
+== Build Prometheus
 
-Prometheus runs with a `prometheus.yml` file found either locally or in a Docker container. For this example, we'll tell Docker to run Prometheus from our downloaded `prometheus.yml` file.
+Prometheus runs with a `prometheus.yml` file available locally or in a Docker container.
+This example uses Docker.
 
-. Pull the Prometheus Docker image with `docker pull prom/prometheus`.
-
-. Bind-mount your modified `prometheus.yml` file by running the Prometheus Docker container with a modified path in the `-v` argument.
+. Pull the Prometheus Docker image:
 +
-[source,docker]
+[source,shell]
+----
+docker pull prom/prometheus
+----
+
+. Bind-mount your modified `prometheus.yml` file by running the Prometheus Docker container with a modified path in the `-v` argument:
++
+[source,shell]
 ----
 docker run \
     -p 9090:9090 \
-    -v /<your-path>/prometheus.yml:/etc/prometheus/prometheus.yml \
+    -v /**PATH_TO_PROMETHEUS_YAML**:/etc/prometheus/prometheus.yml \
     prom/prometheus
 ----
 
-. If you receive output similar to below, you're ready to scrape with Prometheus.
+. Make sure the response is similar to the following example.
+This indicates that Prometheus is ready to scrape your {product} tenant:
 +
-[source,docker]
+[source,console]
 ----
 ts=2022-05-10T20:40:30.877Z caller=main.go:1199 level=info msg="Completed loading of configuration file" filename=/etc/prometheus/prometheus.yml totalDuration=2.75025ms db_storage=584ns remote_storage=708ns web_handler=167ns query_engine=416ns scrape=262.125µs scrape_sd=12.208µs notify=667ns notify_sd=792ns rules=1.042µs tracing=2.959µs
 ts=2022-05-10T20:40:30.877Z caller=main.go:930 level=info msg="Server is ready to receive web requests."
 ----
 +
-[TIP]
-====
-If you get a `mounts denied` permissions error, in Docker, go to *File Sharing > Resources*, and then make sure your local directory is shared with Docker.
-====
+If you get a `mounts denied` permissions error, make sure your local directory is shared with Docker.
+In Docker Desktop, click *File Sharing*, click *Resources*, and then make sure your local directory is listed.
 
 == Scrape with Prometheus
 
-. Open your Prometheus dashboard at `localhost:9090`. In the *Status > Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
+. Navigate to your Prometheus dashboard at `localhost:9090`.
 
-. Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product} cluster.
+. Click *Status*, select *Targets*, and then make sure your `status_config.targets` endpoint's status is *UP*.
 
-. Produce a few messages in your tenant with the Pulsar CLI or the {product} Websocket.
+. Navigate to `http://localhost:9090/graph`, and click the *Graph* tab.
 
-. Your Prometheus graph displays the number of incoming Pulsar messages with each 60 second scrape.
+. In the *Expression* field, enter `pulsar_in_messages_total`, and then click *Execute*.
+Prometheus now shows the total incoming Pulsar messages for your {product} cluster.
+
+. To test the integration, produce a few messages in your tenant with the Pulsar CLI or the {product} Websocket.
+Make sure your Prometheus graph displays the number of incoming Pulsar messages with each 60 second scrape:
 +
 image::astream-prometheus-graph.png[Scraping {product} with Prometheus]
-
-You're scraping your {product} tenant with Prometheus!
 
 == Content encoding
 
 {product} supports content encoding with either `gzip` or `deflate`.
 
-With the example from above still running, use a `curl` request to decompress your Prometheus scrape data:
+With your Prometheus scrape container running, you can use curl commands to decompress your Prometheus scrape data:
 
 [tabs]
 ======
@@ -109,7 +116,7 @@ include::example$curl_gzip.sh[]
 --
 ======
 
-*Deflate* or *Gzip* will extract your scraped metrics in a format such as the following:
+Deflate or Gzip will extract your scraped metrics in a format such as the following:
 
 [source,console]
 ----
@@ -128,8 +135,8 @@ The following Prometheus metrics are exposed by {product}:
 * https://pulsar.apache.org/docs/reference-metrics/#pulsar-functions[Pulsar Functions metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#connectors[Connector metrics]
 
-Cluster operational metrics are *not* exposed to individual cluster tenants.
-A tenant can only access its own metrics on the *broker* or *function worker* pods.
+Cluster operational metrics are _not_ exposed to individual cluster tenants.
+A tenant can only access its own metrics on the broker pod or function worker pod.
 
 == See also
 

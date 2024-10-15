@@ -1,30 +1,28 @@
-= Key_Shared subscriptions in Pulsar
+= Key shared subscriptions in Pulsar
 :navtitle: Key_Shared
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-*Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
+_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
 
-Pulsar's xref:astream-subscriptions-shared.adoc[shared subscription] model trades an increased message processing rate for ordering guarantees. In a round-robin delivery, there's no way for the broker to know which messages are going to which consumer.
+Pulsar's xref:astream-subscriptions-shared.adoc[shared subscription] model enables increased message processing rate, but risks losing message ordering guarantees.
+In a round-robin delivery, there's no way for the broker to know which messages are going to which consumer.
 
-*Key_Shared* subscriptions allow multiple consumers to subscribe to a topic, but with additional metadata in the form of *keys* which link messages to specific consumers.
+_Key shared subscriptions_ allow multiple consumers to subscribe to a topic, and provide additional metadata in the form of _keys_ that link messages to specific consumers.
+Keys are generated with hashing that converts arbitrary values like `topic-name` or JSON blobs into fixed integer values, and then the hashed values are assigned to subscribed consumers in one of two ways:
 
-*Keys* are generated with *hashing*, which converts arbitrary values like "topic-name" or JSON blobs into fixed integer values. These hashed values are then assigned to subscribed consumers in one of two ways:
+* *Auto hash*: Uses _consistent hashing_ to balance range values across available consumers without requiring manual setup of hash ranges.
+* *Sticky hash*: The client manually assigns consumer range values, and then all hashes within a configured range go to one consumer.
 
-* *Auto hash* - uses *consistent hashing* to balance range values across available consumers, without requiring manual setup of hash ranges.
-* *Sticky hash* - the client manually assigns consumer range values. All hashes within a configured range go to one consumer.
-
-This document explains how to use Pulsar's Key_Shared subscription model to manage your topic consumption.
+This page explains how to use Pulsar's key shared subscription model to manage your topic consumption.
 
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
-== Key_Shared subscription example
+== Key shared subscription example
 
-To try out a Pulsar Key_Shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`.
+To try out a Pulsar key shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
 
-You must also tell Pulsar what `keySharedPolicy` this subscription will use.
-The example below uses the auto-hashing `keySharedPolicy`.
-
+.SimplePulsarConsumer.java
 [source,java]
 ----
 pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
@@ -40,16 +38,20 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .subscribe();
 ----
 
+=== keySharedPolicy
+
+The `keySharedPolicy` defines the how hashed values are assigned to subscribed consumers.
+
+The above example used `autoSplitHashRange`, which is an auto-hashing policy.
 Running multiple consumers with auto-hashing balances the messaging load across all available consumers.
 
-=== Manually set stickyHashRange
+If you want to manually set a hash range, use `KeySharedPolicy.stickyHashRange()`.
 
-You can manually set a hash range with `KeySharedPolicy.stickyHashRange()`.
+==== Test sticky hashed key shared subscriptions
 
-To test out sticky hashed Key_Shared subscriptions, you need to first import some additional classes.
-
-. Add the following classes to `SimplePulsarConsumer.java`:
+. To test out sticky hashed key shared subscriptions, import the following additional classes:
 +
+.SimplePulsarConsumer.java
 [source,java]
 ----
 import org.apache.pulsar.client.api.Range;
@@ -59,14 +61,16 @@ import org.apache.pulsar.client.api.SubscriptionType;
 
 . Add the following classes to `SimplePulsarProducer.java`:
 +
+.SimplePulsarProducer.java
 [source,java]
 ----
 import org.apache.pulsar.client.api.BatcherBuilder;
 import org.apache.pulsar.client.api.HashingScheme;
 ----
 
-. Modify the `pulsarProducer` in `SimplePulsarProducer.java` to use the `JavaStringHash` hashing scheme.
+. In `SimplePulsarProducer.java`, modify the `pulsarProducer` to use the `JavaStringHash` hashing scheme:
 +
+.SimplePulsarProducer.java
 [source,java]
 ----
 pulsarProducer = pulsarClient
@@ -80,45 +84,54 @@ pulsarProducer = pulsarClient
     .create();
 ----
 
-. Modify the `pulsarConsumer` in `SimplePulsarConsumer.java` to use sticky hashing. This example sets all possible hashes (0-65535) on this subscription to this consumer.
+. In `SimplePulsarConsumer.java`, modify the `pulsarConsumer` to use sticky hashing.
+This example sets all possible hashes (`0-65535`) on this subscription to one consumer.
 +
+.SimplePulsarConsumer.java
 [source,java]
 ----
 .subscriptionType(SubscriptionType.Key_Shared)
 .keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(0,65535)))
 ----
 
-. Open `pulsar-examples` in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages.
-The confirmation message and a cursor appear to indicate the consumer is ready.
+. In the `pulsar-examples` project, run `SimplePulsarConsumer.java` to begin consuming messages.
 +
-[source,bash]
+The confirmation message and a cursor appear to indicate the consumer is ready:
++
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
 ...
 [pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
 ----
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
 +
-[source,bash]
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 55794190 sent
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 41791865 sent
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 74840732 sent
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 57467766 sent
 ----
-
-. The consumer begins receiving messages.
 +
+In the `SimplePulsarConsumer` terminal, the consumer begins receiving messages:
++
+.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":55794190,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":41791865,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 ----
 
-. Open a new terminal window and try to run `SimplePulsarConsumer.java`.
+. In a new terminal window, try to run a new instance of `SimplePulsarConsumer.java`.
 +
-[source,bash]
+The new consumer can't subscribe to the topic because the `SimplePulsarConsumer` configuration reserved the entire hash range for the first consumer:
++
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - SimplePulsarProducer has been stopped.
@@ -130,11 +143,12 @@ Caused by: org.apache.pulsar.client.api.PulsarClientException$ConsumerAssignExce
 	at com.datastax.pulsar.SimplePulsarConsumer.main(SimplePulsarConsumer.java:47)
 ----
 
-The new consumer can't subscribe to the topic because you reserved the entire hash range for the first consumer.
+. To run multiple consumers with sticky hashing, modify the `SimplePulsarConsumer.java` configuration to split the hash range between consumers.
+Then, you can launch multiple instances of `SimplePulsarConsumer.java` to consume messages from different hash ranges.
 
-== Key_Shared subscription video
+== Key shared subscription video
 
-Follow along with this video from our *Five Minutes About Pulsar* series to see Key_Shared subscriptions in action.
+Follow along with this video from our *Five Minutes About Pulsar* series to see key shared subscriptions in action:
 
 video::_49wlA53L_8[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 

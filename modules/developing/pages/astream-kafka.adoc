@@ -26,39 +26,41 @@ You can't remove the Kafka namespaces created on your tenant with this step.
 You must remove the tenant itself to remove these namespaces.
 ====
 
-. Select *Enable Kafka*.
-+
-Three new namespaces are created in your {product} tenant:
+. Select *Enable Kafka* to create a configuration file and the following three namespaces in your {product} tenant:
 +
 * `kafka` for producing and consuming messages
 * `+__kafka+` for functionality
 * `+__kafka_unlimited+` for storing metadata
+
+. Save the configuration to a `ssl.properties` file:
 +
-A new configuration file will be generated in the *Connect* tab that looks like this:
-+
+.ssl.properties
+[source,plain,subs="+quotes"]
 ----
-username: <tenant-name>
+username: **TENANT_NAME**
 password: token:******
 bootstrap.servers: kafka-aws-useast2.streaming.datastax.com:9093
 schema.registry.url: https://kafka-aws-useast2.streaming.datastax.com:8081
 security.protocol: SASL_SSL
 sasl.mechanism: PLAIN
 ----
-
-. Copy and paste the code or download it as a config file (it will be called `ssl.properties`).
-
-You're now ready to connect Kafka and Pulsar.
-
-== Example: Hello Pulsar
-
-. Create a new topic in the newly created `kafka` namespace. For this example, we created `test-topic` within the `kafka` namespace on the `tenant-1` tenant.
 +
-image::astream-create-kafka-topic.png[Create Kafka Topic]
-+
+The configuration details depend on your {product} tenant configuration.
+
+== Connect Kafka and Pulsar
+
 This example uses tools included with the https://kafka.apache.org/downloads[Apache Kafka tarball].
 
-. Move the `ssl.properties` file you downloaded to your `Kafka_2.13-3.1.0/config` folder. These values are required for SSL encryption. For this example, the values are:
+. Create a new topic in your `kafka` namespace.
+This example creates a topic named `test-topic` in the `kafka` namespace on a tenant named `tenant-1`.
 +
+image::astream-create-kafka-topic.png[Create Kafka Topic]
+
+. Move your `ssl.properties` file to your `Kafka_2.13-3.1.0/config` folder.
+These values are required for SSL encryption.
+For this example, the values are as follows:
++
+[source,plain]
 ----
 bootstrap.servers=kafka-aws-useast2.streaming.datastax.com:9093
 security.protocol=SASL_SSL
@@ -67,33 +69,38 @@ sasl.mechanism=PLAIN
 session.timeout.ms=45000
 ----
 
-. Change directory to Kafka.
-. Create a Kafka producer to produce messages on `tenant-1/kafka/test-topic`.
+. In the `Kafka` directory, create a Kafka producer to produce messages on `tenant-1/kafka/test-topic`.
 +
-Once the producer is ready, it accepts standard input from the user.
-+
-[source,bash]
+[source,shell]
 ----
-$ bin/kafka-console-producer --broker-list kafka-aws-useast2.streaming.datastax.com:9093 --topic tenant-1/kafka/test-topic --producer.config config/ssl.properties
+bin/kafka-console-producer --broker-list kafka-aws-useast2.streaming.datastax.com:9093 --topic tenant-1/kafka/test-topic --producer.config config/ssl.properties
+----
++
+Once the producer is ready, it accepts standard input from the user:
++
+.Result
+[source,console]
+----
 >hello pulsar
 ----
+
 . In a new terminal window, create a Kafka consumer to consume messages from the beginning of `tenant-1/kafka/test-topic`:
 +
-[source,bash]
+[source,shell]
 ----
-$ bin/kafka-console-consumer --bootstrap-server kafka-aws-useast2.streaming.datastax.com:9093 --topic tenant-1/kafka/test-topic --consumer.config config/ssl.properties --from-beginning
+bin/kafka-console-consumer --bootstrap-server kafka-aws-useast2.streaming.datastax.com:9093 --topic tenant-1/kafka/test-topic --consumer.config config/ssl.properties --from-beginning
 hello pulsar
 ----
 
-. Send as many messages as you'd like, then return to your `kafka` namespace dashboard in {product} and monitor your activity.
-
-Your Kafka messages are being produced and consumed in a Pulsar cluster!
-
+. Send a few messages, and then return to your `kafka` namespace dashboard in {product} to monitor your activity.
++
+Your Kafka messages are being produced and consumed in a Pulsar cluster:
++
 image::astream-kafka-monitor.png[Monitor Kafka Activity]
 
 == Starlight for Kafka video
 
-Follow along with this video from our *Five Minutes About Pulsar* series to migrate from Kafka to Pulsar.
+Follow along with this video from our *Five Minutes About Pulsar* series to migrate from Kafka to Pulsar:
 
 video::Qy2ZlelLjXg[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 

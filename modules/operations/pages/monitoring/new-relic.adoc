@@ -1,20 +1,6 @@
 = New Relic Integration
 
-There are three ways to integrate external Prometheus data into New Relic:
-
-* https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#Agent[Prometheus Agent for Kubernetes]
-* https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#OpenMetrics[Prometheus OpenMetrics integration for Docker]
-* https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration]
-
-Only the third option is relevant to {product}.
-
-Typically, this option requires modifying the configuration of the Prometheus server that {product} relies on.
-However, this isn't possible because {product} is a managed service.
-
-Instead, you can xref:monitoring/integration.adoc[install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
-
-.External Prometheus server for New Relic integration
-image::monitoring-map.png[Map,align="center"]
+While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic[send external Prometheus data to New Relic], one the https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration] option is relevant to {product}.
 
 == Prerequisites
 
@@ -22,56 +8,59 @@ image::monitoring-map.png[Map,align="center"]
 * https://docs.newrelic.com/[Set up a New Relic account.]
 * Save your new relic license key locally.
 
+== Prepare the extra Prometheus server
+
+* xref:monitoring/integration.adoc[Install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
+
+This is required because {product} is a managed service, and you can't modify the {product} Prometheus server as required by the New Relic Prometheus write integration.
+
 == Configure New Relic
+
+Configure the `remoteWrite` integration on your local Prometheus server.
+For more information, see https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/install-configure-remote-write/set-your-prometheus-remote-write-integration/[Set up your Prometheus remote write integration].
+
+This example uses a local Prometheus server installed in a local Docker Desktop Kubernetes cluster.
+Your `remoteWrite` configuration depends on your Prometheus server setup.
 
 . In your New Relic account, click *Add Data*.
 
 . Under *Open source monitoring*, select *Prometheus Remote Write Integration*.
 
 . Enter the name of your local Prometheus server, such as `prometheus-docker-desktop`, and then click *Generate URL*.
-This generates the endpoint URLs required to configure a `remote_write integration` on your local Prometheus server.
+This generates the endpoint URLs required to configure a `remote_write` integration on your local Prometheus server.
 
-. Configure and restart your local Prometheus server.
-For this example, the local Prometheus server is installed in a local Docker Desktop Kubernetes cluster; therefore, the installation and configuration method are related to Kubernetes.
-
-.. Create a K8s secret that corresponds to the New Relic license key that you received when setting up the account:
+. Create a Kubernetes secret with your New Relic license key:
 +
-[source,bash]
+[source,shell,subs="+quotes"]
 ----
-kubectl create secret generic nr-license-key --from-literal=value=<license_key_value>
+kubectl create secret generic nr-license-key --from-literal=value=**LICENSE_KEY**
 ----
 
-.. Modify the Prometheus configuration in the kube-prometheus-stack Helm chart file, such as `custom-values.yaml`:
+. In your extra Prometheus server's `custom-values.yaml` file, add the `remoteWrite` configuration to send local Prometheus metrics to New Relic through `remote_write`:
 +
-[source,yaml]
+.custom-values.yaml
+[source,yaml,subs="+quotes"]
 ----
 prometheus:
    prometheusSpec:
       scrapeInterval: 60s
       evaluationInterval: 15s
       additionalScrapeConfigsSecret:
-      enabled: true
-         name: astra-msgenrich
-         key: astra-msgenrich.yml
+         enabled: true
+         name: *SECRET_NAME*
+         key: *CONFIG_YAML*
 
       remoteWrite:
-        - url: https://metric-api.newrelic.com/prometheus/v1/write?prometheus_server=prometheus-docker-desktop
-           authorization:
-              credentials:
-                 key: value
-                 name: nr-license-key
+        - url: https://metric-api.newrelic.com/prometheus/v1/write?prometheus_server=**CLUSTER_NAME**
+          authorization:
+            credentials:
+              key: value
+              name: nr-license-key
 ----
-+
-The first lines of this configuration are for scraping {product} metrics (as described in xref:monitoring/integration.adoc[]).
-The `remoteWrite` section is for sending local Prometheus metrics to New Relic through `remote_write`.
 
 . Restart your local Prometheus server.
 
-. In your New Relic account, confirm the configuration.
-If everything is set up correctly, you should see {product} metrics in New Relic.
-In the following screenshot, the New Relic *Data Browsing* page has Pulsar message backlog metrics.
-
-image::pulsar-namespace-metrics.png[Metrics,align="center"]
+. In your New Relic account, go to the *Remote Write Dashboard* to confirm that {product} metrics are visible in New Relic.
 
 == See also
 
