@@ -45,11 +45,6 @@ The executables in bin use the configurations in conf to run commands.
 Each tenant you create in Astra Streaming comes with its own custom configuration (for SSO, endpoints, etc).
 You will need to download the tenant configuration from Astra Streaming and overwrite the `./conf/client.conf` file.
 
-[tabs]
-====
-Astra Portal::
-+
---
 . Navigate to the "Connect" tab in the Astra Streaming portal.
 +
 image:connect-tab.png[Connect tab in Astra Streaming]
@@ -60,8 +55,6 @@ image:download-client.png[Download pulsar client conf in Astra Streaming]
 
 . Save the file in the "/conf" folder of the Pulsar folder.
 This will overwrite the default client.conf already in the /conf folder.
---
-====
 
 With your Astra Streaming tenant's configuration in place, you can use any of the binaries to interact with a Pulsar cluster.
 

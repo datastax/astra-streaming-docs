@@ -90,28 +90,21 @@ In the result, the `allowedClusters` are the clusters the tenant can be replicat
 }
 ----
 
-. Verify your `pulsar-admin` can view the replicated clusters for your namespace.
+. Verify your `pulsar-admin` can view the replicated clusters for your namespace:
 +
-[tabs]
-====
-Command::
-+
---
 [source,bash]
 ----
 bin/pulsar-admin namespaces get-clusters <tenant>/<namespace>
 ----
---
 +
-Result::
-+
---
+.Result
+[%collapsible]
+====
 [source,json]
 ----
 pulsar-aws-useast1-staging
 pulsar-aws-useast2-staging
 ----
---
 ====
 
 . Create a Pulsar consumer with a subscription to the `<my-tenant>/<my-namespace>/<my-topic>` topic:
@@ -175,22 +168,15 @@ Consumer<String> consumer = pulsarClient.newConsumer(Schema.STRING)
         .subscribe();
 ----
 
-. Check topic stats. `isReplicated` is now `true` for this subscription.
+. Check topic stats:
 +
-[tabs]
-====
-Command::
-+
---
 [source,bash]
 ----
 bin/pulsar-admin topics stats persistent://<my-tenant>/<my-namespace>/<my-topic>
 ----
---
 +
-Result::
+`isReplicated` is now `true` for this subscription:
 +
---
 [source,json]
 ----
 {
@@ -277,8 +263,6 @@ Result::
   }
 }
 ----
---
-====
 
 [#monitor]
 == Monitor replicated clusters

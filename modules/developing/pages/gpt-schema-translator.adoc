@@ -5,7 +5,7 @@ This requires schemas within a pipeline to be mapped to each other, a process wh
 For example, to send data from a CDC-enabled Cassandra (C*) table to a Pulsar topic, you must define a schema mapping between the C* table and the Pulsar topic, represented below:
 
 [tabs]
-====
+======
 Cassandra table schema::
 +
 --
@@ -81,7 +81,7 @@ Pulsar JSON schema::
 }
 ----
 --
-====
+======
 
 As you add more complex data types like maps and nested data structures, schema management becomes more difficult. Schema management is tedious work that requires understanding rules across various domains and translating between them, but it is trivial work for the GPT-4 AI model.
 
@@ -104,7 +104,7 @@ image::two-schemas.png[Schema mapping,320,240]
 To generate a schema mapping, click the "Generate Mapping With GPT" button. This will generate a schema mapping.
 
 [tabs]
-====
+======
 Cassandra table schema::
 +
 --
@@ -189,7 +189,7 @@ Generated schema mapping::
 id=key, file1=value.file1, file2=value.file2, file3=value.file3
 ----
 --
-====
+======
 
 Great! Now, once your connector is created, messages will flow smoothly between the two different schemas. Check in your {astra_ui} logs to see the data flowing into your table with no pesky error messages.
 

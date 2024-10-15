@@ -27,11 +27,6 @@ The Astra token can be generated with the <<DevOps API, DevOps API>> or the <<as
 . Once you have authenticated your service account, you can create and revoke tokens with the https://docs.datastax.com/en/astra/docs/_attachments/devopsv2.html[DevOps API].
 . Get all clients within the organization:
 +
-[tabs]
-====
-Curl::
-+
---
 [source,shell]
 ----
 curl --request GET \
@@ -39,11 +34,10 @@ curl --request GET \
  --header 'Accept: application/json' \
  --header 'Authorization: Bearer <application_token>'
 ----
---
 +
-Result::
-+
---
+.Response
+[%collapsible]
+====
 [source,json]
 ----
 {"clients":[
@@ -55,16 +49,10 @@ Result::
 		"generatedOn":"2021-04-28T18:49:11.323Z"}
 ]}
 ----
---
 ====
 
 . Create an application token for a specific client:
 +
-[tabs]
-====
-Curl::
-+
---
 [source,shell]
 ----
 curl --request POST \
@@ -73,11 +61,10 @@ curl --request POST \
  --header 'Authorization: Bearer <application_token>' \
  --data '{"roles": ["<roleId>"]}'
 ----
---
 +
-Result::
-+
---
+.Response
+[%collapsible]
+====
 [source,json]
 ----
 {
@@ -89,7 +76,6 @@ Result::
   "generatedOn":"2021-04-30T19:38:26.147847107Z"
 }
 ----
---
 ====
 +
 [TIP]
@@ -98,7 +84,7 @@ For the `roleId`, provide the relevant role's `id` UUID value from a prior `GET`
 https://docs.datastax.com/en/astra-serverless/docs/manage/devops/devops-roles.html#_creating_a_new_role[Getting existing roles in your organization].
 The API results will show the UUID for each role id.
 ====
-+
+
 . In the command-line interface associated with your environment, paste the following environment variable copied from token generation:
 +
 [source,shell,subs="+quotes"]
@@ -110,46 +96,49 @@ export ASTRA_DB_APPLICATION_TOKEN=**APPLICATION_TOKEN**
 === Generate Astra token in Astra Portal
 
 . From any page in {astra_ui}, select the *Organizations* dropdown.
+
 . In the main dropdown, select *Organization Settings*.
+
 . From your Organization page, select *Token Management*.
+
 . Select the role you want to attach to your token. The permissions for your selected role will be displayed.
+
 . Select *Generate Token*. {product_name} will generate your token and display the _Client ID_, _Client Secret_, and _Token_.
+
 . Download your _Client ID_, _Client Secret_, and _Token_.
 +
 [IMPORTANT]
 ====
 After you navigate away from the page, you won't be able to download your _Client ID_, _Client Secret_, and _Token_ again.
 ====
-+
+
 . In the command-line interface associated with your environment, paste the following environment variable copied from token generation:
 +
 [source,shell,subs="+quotes"]
 ----
 export ASTRA_DB_APPLICATION_TOKEN=**APPLICATION_TOKEN**
 ----
-+
-. You can now execute DevOps API commands from your terminal to your database.
+
+You can now execute DevOps API commands from your terminal to your database.
 
 === Delete Astra token
 
 If you need to limit access to your database, you can delete a token.
 
 . Select the overflow menu for the token you want to delete.
+
 . Select *Delete* to delete that token.
+
 . If necessary, generate a new token for the same user role.
 
 [#pulsar-token]
 == Generate Pulsar token
 
 To generate, copy, or delete Astra Streaming Pulsar tokens within your streaming tenant, visit the **Token Management** section of your streaming tenant's **Settings** page.
-
-Select **Create Token** to generate a Pulsar token for this streaming tenant.
+Select **Create Token** to generate a Pulsar token for this streaming tenant, and then copy the Pulsar token and store it securely.
 
 Token duration ranges from 7 days to never expiring.
-
 If you choose a token with an expiration, ensure you replace your token with a new, valid Pulsar token before the expiration date.
-
-Select the **clipboard** icon to copy a Pulsar token to your clipboard.
 
 === Set environment variables
 

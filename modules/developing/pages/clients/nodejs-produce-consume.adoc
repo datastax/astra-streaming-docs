@@ -25,8 +25,8 @@ The Node.js Pulsar client npm package depends on the C++ Pulsar library.
 Pulsar Node client versions 1.8 and later do not require installation of the C++ Pulsar library dependency.
 
 [tabs]
-====
-Ubuntu-based deb::
+======
+Ubuntu-based Debian::
 +
 --
 [source,shell]
@@ -34,7 +34,8 @@ Ubuntu-based deb::
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-project.sh[tag=prep-env]
 ----
 --
-Centos/RHEL based rpm::
+
+Centos/RHEL-based rpm::
 +
 --
 [source,shell]
@@ -48,7 +49,7 @@ sudo rpm -i ./apache-pulsar-client-devel-2.10.2-1.x86_64.rpm
 sudo ldconfig
 ----
 --
-====
+======
 
 == Create a project
 

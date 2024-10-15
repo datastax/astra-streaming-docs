@@ -20,22 +20,16 @@ The advantage for you: {astra_cli} makes it possible to submit commands instead 
 
 Here are two quick {astra_cli} command examples to demonstrate how Astra CLI manages resources across {astra_db} databases and {astra_stream} tenants from your local terminal.
 
-Let's create an {astra_db} database named `demo` from the command line:
-
-[tabs]
-====
-Astra CLI::
+. Create an {astra_db} database named `demo` from the command line:
 +
---
 [source,bash,subs="attributes+"]
 ----
 astra db create demo -k ks2 --if-not-exist --wait
 ----
---
-
-Result::
 +
---
+.Result
+[%collapsible]
+====
 [source,bash,subs="attributes+"]
 ----
 [INFO]  Database 'demo' does not exist. Creating database 'demo' with keyspace 'ks2'
@@ -44,30 +38,22 @@ Result::
 [INFO]  Database 'demo' has status 'ACTIVE' (took 103513 millis)
 [OK]    Database 'demo' is ready.
 ----
---
 ====
 
-Now let's create a Pulsar tenant:
-
-[tabs]
-====
-Astra CLI::
+Create a Pulsar tenant:
 +
---
 [source,bash,subs="attributes+"]
 ----
 astra streaming create new-tenant-from-cli
 ----
---
-
-Result::
 +
---
+.Result
+[%collapsible]
+====
 [source,bash,subs="attributes+"]
 ----
 [OK]    Tenant 'new-tenant-from-cli' has being created.
 ----
---
 ====
 
 == See also

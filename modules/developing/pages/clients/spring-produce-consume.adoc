@@ -59,23 +59,18 @@ You could instead modify the values in the "application.properties" file in the 
 include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/resources/application.properties[]
 ----
 ====
+
 . Change directory to the project root and run the following command to compile the project:
 +
-[tabs]
-====
-Maven::
-+
---
 [source,bash]
 ----
 mvn clean compile
 ----
---
-
-Result::
 +
---
-[source,bash]
+.Result
+[%collapsible]
+====
+[source,console]
 ----
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
@@ -84,33 +79,27 @@ Result::
 [INFO] Finished at: 2023-05-09T15:36:33-04:00
 [INFO] ------------------------------------------------------------------------
 ----
---
 ====
 +
-. Maven has compiled your Java application with the Pulsar client dependency.
-You can now run the project and send a message to your {product_name} cluster.
+Maven has compiled your Java application with the Pulsar client dependency.
+
+. Run the project and send a message to your {product_name} cluster:
 +
-[tabs]
-====
-Maven::
-+
---
 [source,bash]
 ----
 mvn spring-boot:run
 ----
---
-
-Result::
 +
---
-[source,bash]
+.Result
+[%collapsible]
+====
+[source,console]
 ----
 Message received: Hello World
 ----
---
 ====
-. Remember to check in your {product_name} instance to see the message you sent to the newly created subscription "my-subscription".
+
+Remember to check in your {product_name} instance to see the message you sent to the newly created subscription, "my-subscription".
 
 == See also
 

@@ -199,22 +199,16 @@ An example pom.xml file is shown below:
 ----
 ====
 
-. Package the JAR file with Maven.
+. Package the JAR file with Maven:
 +
-[tabs]
-====
-Maven::
-+
---
 [source,bash]
 ----
 mvn package
 ----
---
-
-Result::
 +
---
+.Result
+[%collapsible]
+====
 [source,bash]
 ----
 [INFO] ------------------------------------------------------------------------
@@ -224,7 +218,6 @@ Result::
 [INFO] Finished at: 2023-05-16T16:19:05-04:00
 [INFO] ------------------------------------------------------------------------
 ----
---
 ====
 
 . Create a deployment configuration file with contents similar to the following `func-create-config.yaml` example:

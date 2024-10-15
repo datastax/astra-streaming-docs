@@ -89,7 +89,7 @@ You're scraping your {product_name} tenant with Prometheus!
 With the example from above still running, use a `curl` request to decompress your Prometheus scrape data:
 
 [tabs]
-====
+======
 Deflate::
 +
 --
@@ -107,7 +107,7 @@ Gzip::
 include::example$curl_gzip.sh[]
 ----
 --
-====
+======
 
 *Deflate* or *Gzip* will extract your scraped metrics in a format such as the following:
 

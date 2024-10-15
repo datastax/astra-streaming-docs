@@ -43,46 +43,41 @@ You'll use this tenant to create namespaces, topics, functions, and pretty much 
 The only difference between the tabs is how your tenant is created - they all have the same result.
 
 [tabs]
-====
-Astra Portal::
+======
+{astra_ui}::
 +
 --
-. Once signed in, click the "Create a Stream" button on the portal home page.
-+
-|===
-a|image:home-quick-access.png[Create a stream in Astra Streaming]
-|===
+. In the {astra_ui} navigation menu, click *Streaming*.
 
-. Name your Streaming Tenant something memorable like "my-stream-<rand>".
-Replace `<rand>` with random letters or numbers - all tenant names in Astra Streaming must be unique.
-Choose your preferred cloud provider and region.
-For your first example tenant, the region doesn't really matter (it's all free).
-+
-|===
-a|image:create-a-stream.png[Create a new tenant in Astra Streaming]
-|===
+. Click *Create a Tenant*.
 
-. Click the "Create Tenant" button.
+. Name your Streaming Tenant something memorable like `my-stream-**RANDOM_UUID**`.
+All tenant names in Astra Streaming must be unique.
 
-. You will be directed to the quickstart page for your new tenant.
+. Choose your preferred cloud provider and region.
+For your first example tenant, the region doesn't really matter.
 +
-|===
-a|image:new-tenant-quickstart.png[New tenant quickstart in Astra Streaming]
-|===
+image:create-a-stream.png[Create a new tenant in Astra Streaming]
+
+. Click *Create Tenant*.
+You are directed to the quickstart page for your new tenant.
++
+image:new-tenant-quickstart.png[New tenant quickstart in Astra Streaming]
 --
 
-Astra CLI::
+{astra_cli}::
 +
 --
 {astra_cli} is a set of commands for creating and managing all Astra resources.
-For more, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation].
+For more information, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation].
 
-. Set the required variables, replacing <rand> with a few random numbers or letters.
-Optionally you can choose a different cloud provider and region. Use `astra streaming list-regions` to see values.
+. Set the required variables, replacing `**RANDOM_UUID**` with a few random numbers or letters.
+Optionally, you can choose a different cloud provider and region.
+Use `astra streaming list-regions` to see available values.
 +
 [source,shell]
 ----
-TENANT="my-stream-<rand>"
+TENANT="my-stream-**RANDOM_UUID**"
 CLOUD_PROVIDER_STREAMING="gcp"
 CLOUD_REGION_STREAMING="uscentral-1"
 ----
@@ -93,11 +88,10 @@ CLOUD_REGION_STREAMING="uscentral-1"
 ----
 include::{astra-streaming-examples-repo}/astra-cli/create-tenant.sh[]
 ----
-
-. Within the newly created tenant, you're ready to create a namespace.
-
 --
-====
+======
+
+Next, create a namespace in your new tenant.
 
 == A namespace to hold topics
 
@@ -114,36 +108,27 @@ It could be an environment (dev, stage, prod) or by application (catalog, cart, 
 Learn more about namespaces in the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar docs].
 
 [tabs]
-====
-Astra Portal::
+======
+{astra_ui}::
 +
 --
 . Navigate to the "Namespace And Topics" tab.
 +
-|===
-a|image:namespace-tab.png[Namespace tab in Astra Streaming]
-|===
+image:namespace-tab.png[Namespace tab in Astra Streaming]
 
 . Click the "Create Namespace" button, and give your namespace a super original name like "my-namespace".
 +
-[width=75%]
-|===
-a|image:create-namespace.png[Create namespace in Astra Streaming]
-|===
+image:create-namespace.png[Create namespace in Astra Streaming]
 
 . Click "Create" to create the namespace.
 +
-|===
-a|image:namespace-listing.png[Namespaces in Astra Streaming]
-|===
+image:namespace-listing.png[Namespaces in Astra Streaming]
 --
 
 Pulsar Admin::
 +
 --
-Not sure about this? Learn more about xref:developing:configure-pulsar-env.adoc[configuring your local environment for Astra Streaming].
-
-. Set the required variables.
+. Set the required variables:
 +
 [source,shell]
 ----
@@ -151,7 +136,7 @@ NAMESPACE="my-namespace"
 # TENANT="my-stream-<rand>" # set previously
 ----
 
-. Run the following script to create a new namespace.
+. Run the following script to create a new namespace:
 +
 [source,shell]
 ----
@@ -159,12 +144,10 @@ include::{astra-streaming-examples-repo}/pulsar-admin/create-namespace.sh[]
 ----
 --
 
-Curl::
+curl::
 +
 --
-Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here].
-
-. Set the required variables.
+. Set the required variables:
 +
 [source,shell]
 ----
@@ -174,14 +157,14 @@ NAMESPACE="my-namespace"
 # TENANT="my-stream-<rand>" # set previously
 ----
 
-. Run the following script to create a new namespace.
+. Run the following script to create a new namespace:
 +
 [source,shell]
 ----
 include::{astra-streaming-examples-repo}/curl/create-namespace.sh[]
 ----
 --
-====
+======
 
 == A topic to organize messages
 
@@ -194,8 +177,8 @@ In Pulsar, topic addresses look like a URL (ie: persistent://tenant/namespace/to
 Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar docs].
 
 [tabs]
-====
-Astra Portal::
+======
+{astra_ui}::
 +
 --
 . In the *Namespace And Topics* tab, locate the namespace created above and click its *Add Topic* button.
@@ -203,24 +186,19 @@ Astra Portal::
 It must start with a lowercase letter, be alphanumeric, and can contain hyphens.
 . Leave the choice of persistence and partitioning alone for now - those can be a part of https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[future learning].
 +
-[width=75%]
-|===
-a|image:add-topic.png[Add topic in Astra Streaming]
-|===
+image:add-topic.png[Add topic in Astra Streaming]
 
 . Click the *Add Topic* button to create the topic within the namespace.
 +
-|===
-a|image:topic-listing.png[Topic listing in Astra Streaming]
-|===
+image:topic-listing.png[Topic listing in Astra Streaming]
 --
 
 Pulsar Admin::
 +
 --
-Not sure about this? Learn more about connecting to Astra Streaming with the pulsar-admin CLI xref:developing:configure-pulsar-env.adoc[here].
+To learn more about connecting to Astra Streaming with the pulsar-admin CLI, see xref:developing:configure-pulsar-env.adoc[].
 
-. Set the required variables.
+. Set the required variables:
 +
 [source,shell]
 ----
@@ -229,7 +207,7 @@ TOPIC="my-topic"
 # TENANT="my-stream-<rand>" # set previously
 ----
 
-. Run the following script to create a new topic.
+. Run the following script to create a new topic:
 +
 [source,shell]
 ----
@@ -237,12 +215,12 @@ include::{astra-streaming-examples-repo}/pulsar-admin/create-topic.sh[]
 ----
 --
 
-Curl::
+curl::
 +
 --
-Not sure about this? Learn more about interacting with Astra Streaming through curl xref:developing:using-curl.adoc[here].
+To learn more about interacting with Astra Streaming through HTTP, see xref:developing:using-curl.adoc[].
 
-. Set the required variables.
+. Set the required variables:
 +
 [source,shell]
 ----
@@ -253,14 +231,14 @@ TOPIC="my-topic"
 # TENANT="my-stream-<rand>" # set previously
 ----
 
-. Run the following script to create a new topic.
+. Run the following script to create a new topic:
 +
 [source,shell]
 ----
 include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
 ----
 --
-====
+======
 
 == Next steps
 
