@@ -1,24 +1,24 @@
 = {astra_cli}
 
-The {company} Astra Command-Line Interface ({astra_cli}) is a set of commands for creating and managing Astra resources.
-{astra_cli} commands are available for {astra_db} and {astra_stream}.
+The {astra_cli} is a set of commands for creating and managing {astra_db} resources.
+{astra_cli} commands are available for {astra_db} and {product}.
 They're designed to get you working quickly, with an emphasis on automation.
 
-{astra_cli} provides a one-stop shop for managing your Astra resources through scripts or commands in your local terminal.
+{astra_cli} provides a one-stop shop for managing your {astra_db} resources through scripts or commands in your local terminal.
 The wide variety of capabilities include:
 
-* Creation and management of {astra_db} and {astra_stream} artifacts
+* Creation and management of {astra_db} and {product} artifacts
 * Querying & data loading
 * Organization and user management
 * Security and token configuration
 
 The advantage for you: {astra_cli} makes it possible to submit commands instead of *or in addition to* using {astra_ui} and {company} API calls.
 
-{astra_cli} features are provided especially for operators, Site Reliability Engineers (SREs), and developers who want the option of using commands when working with {astra_db} databases and {astra_stream} tenants.
+{astra_cli} features are provided especially for operators, Site Reliability Engineers (SREs), and developers who want the option of using commands when working with {astra_db} databases and {product} tenants.
 
 == Two quick examples
 
-Here are two quick {astra_cli} command examples to demonstrate how Astra CLI manages resources across {astra_db} databases and {astra_stream} tenants from your local terminal.
+Here are two quick {astra_cli} command examples to demonstrate how {astra_cli} manages resources across {astra_db} databases and {product} tenants from your local terminal.
 
 . Create an {astra_db} database named `demo` from the command line:
 +

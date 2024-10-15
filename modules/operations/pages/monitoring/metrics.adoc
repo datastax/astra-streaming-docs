@@ -1,7 +1,8 @@
-= Grafana dashboards for Astra Streaming metrics
+= Grafana dashboards for {product} metrics
 
-DataStax has built Grafana dashboards around core message processing for the exposed Astra Streaming metrics.
-The dashboards can be found https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[on GitHub].
+{company} offers Grafana dashboards for core message processing for exposed {product} metrics.
+
+You can get the dashboards from the https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[{product} Examples repository].
 
 Dashboards are available for scraping metrics at Pulsar's tenant, namespace, and topic levels:
 

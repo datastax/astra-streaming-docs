@@ -1,19 +1,19 @@
-= Stream {astra_db} audit logs 
+= Stream {astra_db} audit logs
 
-Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra_db} audit logs] through {product_name} to an external system.
+Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra_db} audit logs] through {product} to an external system.
 
 To enable audit log streaming, you must do one of the following:
 
- * Provide the **Full Name** of your {product_name} topic and the streaming tenant's `client.conf` file to {support_url}[{company} Support] or your account representative.
- * POST your configuration to the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[Astra DevOps API telemetry endpoint].
+ * Provide the **Full Name** of your {product} topic and the streaming tenant's `client.conf` file to {support_url}[{company} Support] or your account representative.
+ * POST your configuration to the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[{astra_db} DevOps API telemetry endpoint].
 
-== Create an {product_name} topic for audit logs
+== Create an {product} topic for audit logs
 
 Audit log streaming requires a streaming tenant in the AWS `us-east-2` region.
-You can create a new tenant with the xref:astra-streaming:getting-started:index.adoc[{product_name} quickstart] or use an existing {product_name} tenant.
+You can create a new tenant with the xref:astra-streaming:getting-started:index.adoc[{product} quickstart] or use an existing {product} tenant.
 
 . In the {link-astra-portal}, go to **Streaming**.
-. Select an existing tenant or xref:astra-streaming:getting-started:index.adoc#your-first-streaming-tenant[Create a Streaming Tenant] in AWS `us-east-2`.
+. Select an existing tenant or xref:astra-streaming:getting-started:index.adoc#your-first-streaming-tenant[Create a streaming tenant] in AWS `us-east-2`.
 . Add a xref:astra-streaming:getting-started:index.adoc#add-a-namespace-to-hold-topics[namespace] and xref:astra-streaming:getting-started:index.adoc#a-topic-to-organize-messages[topic] to the tenant.
 . On the *Namespace and Topics* page, click the new topic, and then copy the topic's **Full Name**, such as `persistent://aws-us-east-2-mk/*NAMESPACE_NAME*/*TOPIC_NAME*`.
 . If necessary, create additional audit log topics, and then record the **Full Name** for each topic.
@@ -23,12 +23,12 @@ You can use topics to organize audit logs by event type or other criteria.
 . To finalize the configuration, do one of the following:
 +
 * Send your topic's full name and the `client.conf` file to {support_url}[{company} Support] or your account representative, and then {company} will complete the setup.
-* <<use-the-devops-api,Use the Astra DevOps API to complete the setup.>>
+* <<use-the-devops-api,Use the {astra_db} DevOps API to complete the setup.>>
 
 [#use-the-devops-api]
 == Configure audit log streaming with the DevOps API
 
-You can use the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[Astra DevOps API telemetry endpoint] to configure audit log streaming instead of providing the configuration details to {company} Support.
+You can use the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[{astra_db} DevOps API telemetry endpoint] to configure audit log streaming instead of providing the configuration details to {company} Support.
 
 . In the {link-astra-portal}, create an application token with the **Organization Administrator** role, if you don't already have one.
 

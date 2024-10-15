@@ -26,7 +26,7 @@ In the {astra_ui} or {astra_db} DevOps API, you can create custom roles.
 +
 [IMPORTANT]
 ====
-If you want users with this role to be able to see the {product_name} user interface, make sure you select _Manage Streaming_ permissions.
+If you want users with this role to be able to see the {product} user interface, make sure you select _Manage Streaming_ permissions.
 ====
 
 . If you want to apply your selected permissions to specific databases or keyspaces, toggle the switch to not apply the permissions to all databases in an organization. Then select the specific databases or keyspaces to which you want to apply the permissions.

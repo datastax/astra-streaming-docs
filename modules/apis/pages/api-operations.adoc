@@ -1,24 +1,15 @@
-= API Operations
-:navtitle: API operations
+= API operations
 
-This Astra Streaming workbook is a comprehensive guide that provides detailed examples and  practices for managing the Astra Streaming platform using the DevOps APIs.  It provides details on the most commonly used APIs for managing Astra Streaming and Pulsar instances.  These details include required parameters and the expected output from the API.  The workbook is designed to fill the gap between detailed API reference docs and HowTo guides.  The result is to help customers in operating and managing Astra Streaming and provide guidance on how to use DevOps API to automate many common tasks.
+This {product} workbook is a comprehensive guide that provides detailed examples and  practices for managing the {product} platform using the DevOps APIs.  It provides details on the most commonly used APIs for managing {product} and Pulsar instances.  These details include required parameters and the expected output from the API.  The workbook is designed to fill the gap between detailed API reference docs and HowTo guides.  The result is to help customers in operating and managing {product} and provide guidance on how to use DevOps API to automate many common tasks.
 
 The workbook covers a wide range of topics, including provisioning of resources, monitoring, and troubleshooting. It provides instructions for various operations, such as creating a new tenant, namespace, topics, geo-replication, and access tokens, to setting up monitoring and alerting, and troubleshooting common issues.
 
-Overall, this Astra Streaming Workbook is a valuable resource for customers who want to leverage the benefits of Astra Streaming and manage their streaming environment effectively with DevOps APIs. By following the best practices and guidelines outlined in the workbook, customers can ensure that their streaming applications are secure, performant, and reliable.
+Overall, this {product} Workbook is a valuable resource for customers who want to leverage the benefits of {product} and manage their streaming environment effectively with DevOps APIs. By following the best practices and guidelines outlined in the workbook, customers can ensure that their streaming applications are secure, performant, and reliable.
 
 == Prerequisites
 
-To get started using Astra Streaming DevOps APIs, you will need an active Astra Streaming account.  You can setup this account by following the guide below:
-Create an Astra Streaming Account
-
-Once an account has been established, you will need to set up a Role and Access Token for Streaming.  See the guide below on how to setup these items:
-Generate Astra Streaming Admin Token
-
-As noted in the guide above, save or download the new Astra Streaming Token values.  They will be needed in nearly all DevOps API calls, especially the “Token" value.
-
-== Prerequisites
-
+* An active {astra_db} account
+* An application token and Pulsar token for {product}
 * Export the following environmental variables to your path:
 +
 [source,bash]
@@ -103,7 +94,7 @@ curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/tena
 ----
 ====
 
-== List Astra Streaming cloud providers
+== List {product} cloud providers
 
 [source,curl]
 ----
@@ -205,7 +196,7 @@ No response indicates success.
 
 == Namespace DevOps APIs
 
-For managing Astra Streaming Namespaces, we use the native https://pulsar.apache.org/admin-rest-api/[Pulsar REST APIs].  These are documented on the Apache Pulsar Docs for REST API.
+For managing {product} Namespaces, we use the native https://pulsar.apache.org/admin-rest-api/[Pulsar REST APIs].  These are documented on the Apache Pulsar Docs for REST API.
 
 === List Existing Namespaces
 
@@ -891,7 +882,7 @@ curl --location --fail --request GET "https://api.astra.datastax.com/v2/streamin
 
 === Create Geo-Replication between Namespaces
 
-The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
+The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of {product} sections of this guide.
 
 [source,curl]
 ----
@@ -908,7 +899,7 @@ No response indicates success.
 
 === Delete Geo-Replication between Namespaces
 
-The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of Astra Streaming sections of this guide.
+The JSON input parameters can be obtained from List Tenants with Details and Get a list cloud providers of {product} sections of this guide.
 
 [source,bash]
 ----
@@ -1149,11 +1140,11 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 
 No response indicates success.
 
-== Astra Streaming JWT Token DevOps APIs
+== {product} JWT Token DevOps APIs
 
 === List Existing Tokens IDs
 
-Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup and obtain the Pulsar JWT Token string.  The TokenIDs are also listed in the Astra UI for that Tenant and Cluster.
+Get a list of Token IDs for your Cluster.  With the TokenID, you can then lookup and obtain the Pulsar JWT Token string.  The TokenIDs are also listed in the {astra_ui} for that Tenant and Cluster.
 
 Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
 
@@ -1198,7 +1189,7 @@ eyJhbGciOiJSUzI1NiIsI . . .
 === Create a JWT Token
 
 Create a new Pulsar JWT Token.
-The new JWT Token will also be visible in the Astra UI for that Tenant and Cluster.
+The new JWT Token will also be visible in the {astra_ui} for that Tenant and Cluster.
 
 Required parameters "CLUSTER" is  obtained from the “List Tenants with Details" API command.
 
@@ -1504,7 +1495,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT
 No response indicates success.
 
 In the example above, a configuration file is provided as input to CURL.
-The file is named "mynetty-source-config.json", which has the following context for the built-in “netty" source connector in Astra Streaming.
+The file is named "mynetty-source-config.json", which has the following context for the built-in “netty" source connector in {product}.
 
 [TIP]
 ====
@@ -1530,7 +1521,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 
 No response indicates success.
 
-In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in “kafka" source connector in Astra Streaming.
+In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in “kafka" source connector in {product}.
 
 [source,json]
 ----

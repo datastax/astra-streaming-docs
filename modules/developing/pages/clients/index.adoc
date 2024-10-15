@@ -1,11 +1,11 @@
-= Producing and consuming messages on Astra Streaming with Pulsar clients
+= Producing and consuming messages on {product} with Pulsar clients
 :navtitle: Pulsar clients
-:description: Use any of the Pulsar Clients to interact with your Astra Streaming topics.
+:description: Use any of the Pulsar Clients to interact with your {product} topics.
 
-{product_name} is powered by http://pulsar.apache.org/[Apache Pulsar].
+{product} is powered by http://pulsar.apache.org/[Apache Pulsar].
 
 To connect to your service, use the open-source client APIs provided by the Apache Pulsar project.
-Astra Streaming is running Pulsar version {pulsar_version}. You should use this API version or higher.
+{product} is running Pulsar version {pulsar_version}. You should use this API version or higher.
 
 Popular Pulsar clients include the following:
 

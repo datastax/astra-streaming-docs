@@ -2,12 +2,11 @@
 
 The {ragstack} project combines the intelligence of large language models with the agility of stream processing to create powerful Generative AI applications.
 
-This guide will help you build and deploy a {ragstack} application to Astra Streaming.
+This guide will help you build and deploy a {ragstack} application to {product}.
 
 [IMPORTANT]
 ====
-*Private preview feature*
-{ragstack} is available only in a *private preview*. This feature is not intended for production use, has not been certified for production workloads, and might contain bugs and other functional issues. There is no guarantee that a preview feature will ever become generally available.If you are interested in participating in the private preview, contact us at mailto:Astra-PM@datastax.com[Astra-PM@datastax.com,RAGSstack private preview,I am interested in the RAGStack private preview.]. We will contact you with more information.
+{ragstack} is available only to qualified participants. This feature is not intended for production use, has not been certified for production workloads, and might contain bugs and other functional issues. There is no guarantee that a preview feature will ever become generally available.
 ====
 
 == Install {ragstack} CLI
@@ -20,9 +19,9 @@ brew install datastax/ragstack/ragstack
 
 For more on the {ragstack} CLI, see https://docs.langstream.ai/installation/langstream-cli[{ragstack} CLI].
 
-== Enable {ragstack} in Astra
+== Enable {ragstack} in {astra_db}
 
-xref:getting-started:index.adoc[Create an Astra Streaming tenant] in the GCP `us-east-1` region.
+xref:getting-started:index.adoc[Create an {product} tenant] in the GCP `us-east-1` region.
 
 Your tenant will be created with a default namespace, which is a logical grouping of topics.
 
@@ -65,7 +64,7 @@ token: AstraCS:...
 
 Your tenant is now connected to the {ragstack} CLI.
 
-You can also establish a connection by including the configuration values from the Astra Streaming Connect tab in your {ragstack} application's instance.yaml file.
+You can also establish a connection by including the configuration values from the {product} Connect tab in your {ragstack} application's instance.yaml file.
 See <<instance>> for an example.
 
 == Build a {ragstack} Application
@@ -94,13 +93,17 @@ touch pipeline.yaml gateways.yaml configuration.yaml
 ----
 
 The instance.yaml and secrets.yaml files cannot be in the "application" directory, because the application directory is passed as a zip at runtime.
-Next, you will populate the YAML files to connect your application to your Astra Streaming tenant.
+Next, you will populate the YAML files to connect your application to your {product} tenant.
 
 == Populate YAML files
+
 [#instance]
 Instance.yaml declares the application's processing infrastructure, including where streaming and compute take place.
+
 The secrets for tokens and passwords are stored in the secrets.yaml file, which you'll populate in the next step.
-An instance.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant. Paste it into your instance.yaml file to connect your application to your tenant.
+An instance.yaml file can be downloaded from the Connect tab of your {product} tenant. Paste it into your instance.yaml file to connect your application to your tenant.
+
+.instance.yaml
 [source,yaml]
 ----
 instance:
@@ -121,21 +124,26 @@ instance:
 Secrets.yaml contains auth information for connecting to other services.
 Secret values can be modified directly in secrets.yaml, or you can pass your secrets as environment variables or in a .env file. The secrets.yaml resolves these environment variables.
 
+..env
 [source,bash]
 ----
-export ASTRA_CLIENT_ID=...
-export ASTRA_SECRET=...
-export ASTRA_DATABASE=...
-export ASTRA_TOKEN=...
+export ASTRA_CLIENT_ID=
+export ASTRA_SECRET=
+export ASTRA_DATABASE=
+export ASTRA_TOKEN=
 ----
 
 When you go to production, you should create a dedicated secrets.yaml file for each environment.
-The Astra client-id, token, and secret are found in the Astra UI.
-The values for the Kafka bootstrap server are found in your Astra Streaming tenant or in the Starlight for Kafka ssl.properties file.
+
+You can get the `clientId`, `clientSecret`, and `token` by creating an {astra_db} application token in the {astra_ui}.
+The values for the Kafka bootstrap server are found in your {product} tenant or in the Starlight for Kafka ssl.properties file.
 The Azure access key and URL are found in your Azure OpenAI deployment.
-A secrets.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant.
+
+A secrets.yaml file can be downloaded from the *Connect* tab of your {product} tenant.
 Paste it into your secrets.yaml file to authorize your application to your tenant.
 For more on finding values for secrets, see https://docs.langstream.ai/building-applications/secrets.html[Secrets].
+
+.secrets.yaml
 [source,yaml]
 ----
 secrets:
@@ -297,7 +305,7 @@ gateways:
 ----
 
 Configuration.yaml contains additional configuration and resources for your application.
-A configuration.yaml file can be downloaded from the Connect tab of your Astra Streaming tenant (under AstraDB).
+A configuration.yaml file can be downloaded from the Connect tab of your {product} tenant (under {astra_db}).
 For more on configuration, see https://docs.langstream.ai/building-applications/configuration[Configuration].
 
 [source,yaml]
@@ -314,7 +322,7 @@ configuration:
 
 Remember to save all your yaml files.
 
-== Deploy the {ragstack} application on Astra
+== Deploy the {ragstack} application on {astra_db}
 
 . To deploy the application, run the following commands from the root of your application folder.
 The first command deploys the application from the YAML files you created above, and the second command gets the status of the application.
@@ -359,7 +367,7 @@ To get logs, run `ragstack apps logs **APP_NAME**`.
 
 == {ragstack} CLI connection values
 
-If you encounter an error or problem, make sure the values in your CLI profile match the values in your Astra Streaming tenant.
+If you encounter an error or problem, make sure the values in your CLI profile match the values in your {product} tenant.
 
 If you're unsure of the profile name, run `ragstack profiles list`, and then run `ragstack profiles get **PROFILE_NAME** -o=json`.
 For example:
@@ -410,7 +418,7 @@ The default profile values are as follows:
 ----
 
 Issue a curl call to your {ragstack} tenant to find the connection values for your tenant.
-The `X-DataStax-Current-Org` value is the client-id associated with the Astra token, and can be found in the Astra UI.
+The `X-DataStax-Current-Org` value is the client-id associated with the {astra_db} token, and can be found in the {astra_ui}.
 
 [source,curl]
 ----
@@ -436,9 +444,9 @@ curl --location --request POST 'https://pulsar-gcp-useast1.api.streaming.datasta
 
 Ensure the values returned from the curl call match the values in your {ragstack} CLI profile.
 
-== Check connection to Astra
+== Check connection to {astra_db}
 
-In the {ragstack} CLI, run the following command to open a gateway connection to your Astra Streaming tenant.
+In the {ragstack} CLI, run the following command to open a gateway connection to your {product} tenant.
 This command will connect to your tenant and consume from the output-topic and produce to the input-topic.
 
 [source,shell]
@@ -446,10 +454,10 @@ This command will connect to your tenant and consume from the output-topic and p
 ragstack gateway chat sample-app -cg consume-output -pg produce-input -p sessionId=$(uuidgen)
 ----
 
-In Astra Streaming, confirm that your application is connected to your tenant.
+In {product}, confirm that your application is connected to your tenant.
 Select the Websocket tab of your {ragstack}-enabled tenant, and choose to consume from output-topic and to produce to input-topic.
 If the Websocket tab is not visible, you may need to refresh the page or try opening it in Incognito mode.
-Send a message to your application, and confirm that it is received by the Astra websocket:
+Send a message to your application, and confirm that it is received by the {astra_db} websocket:
 
 [source,console]
 ----

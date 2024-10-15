@@ -1,8 +1,8 @@
-= Producing and consuming messages with the Pulsar Client on Astra Streaming
+= Producing and consuming messages with the Pulsar Client on {product}
 :navtitle: Pulsar CLI
-:description: Use this guide to interact with your Astra Streaming tenant via the pulsar-client cli.
+:description: Use this guide to interact with your {product} tenant via the pulsar-client cli.
 
-This guide assumes you have completed the xref:getting-started:index.adoc[Astra Streaming quickstart] and you have xref:developing:configure-pulsar-env.adoc[set up your Pulsar binaries] to work with your tenant.
+This guide assumes you have completed the xref:getting-started:index.adoc[{product} quickstart] and you have xref:developing:configure-pulsar-env.adoc[set up your Pulsar binaries] to work with your tenant.
 
 Now it's time to produce and consume messages in your new streaming tenant.
 

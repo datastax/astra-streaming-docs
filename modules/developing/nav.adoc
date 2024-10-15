@@ -1,3 +1,5 @@
+* xref:ROOT:index.adoc[]
+
 .Developing
 * xref:gpt-schema-translator.adoc[]
 * xref:configure-pulsar-env.adoc[]

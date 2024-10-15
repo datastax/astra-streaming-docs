@@ -4,9 +4,9 @@
 Default and xref:astream-custom-roles.adoc[custom roles] allow admins to manage unique permissions for users based on your organization and database requirements.
 
 You can manage roles using the {astra_ui} or the {astra_db} DevOps API.
-For more information, see https://docs.datastax.com/en/astra/docs/user-permissions.html[Astra DB User Permissions].
+For more information, see https://docs.datastax.com/en/astra/docs/user-permissions.html[{astra_db} User Permissions].
 
-== {product_name} Organization permissions
+== {product} Organization permissions
 
 [cols="1,1,1"]
 |===
@@ -17,7 +17,7 @@ For more information, see https://docs.datastax.com/en/astra/docs/user-permissio
 |`org-audits-read`
 
 |Write IP Access List
-|Create or modify an access list using the DevOps API or the Astra console.
+|Create or modify an access list using the DevOps API or the {astra_ui}.
 |`accesslist-write`
 
 |Delete Custom Role
@@ -25,7 +25,7 @@ For more information, see https://docs.datastax.com/en/astra/docs/user-permissio
 |`org-role-delete`
 
 |Manage Streaming
-|Create a Streaming Service using the DevOps API or the Astra console.
+|Create an {product} Service using the DevOps API or the {astra_ui}.
 |`org-stream-manage`
 
 |Write Organization
@@ -45,7 +45,7 @@ For more information, see https://docs.datastax.com/en/astra/docs/user-permissio
 |`org-user-read`
 
 |Read Organization
-|View organization in the Astra console.
+|View organization in the {astra_ui}.
 |`org-read`
 
 |Read Custom Role
@@ -72,7 +72,7 @@ For more information, see https://docs.datastax.com/en/astra/docs/user-permissio
 |`org-billing-write`
 
 |Write User
-|Add, create, or remove a user using the DevOps API or the Astra console.
+|Add, create, or remove a user using the DevOps API or the {astra_ui}.
 |`org-user-write`
 
 |Write Custom Role

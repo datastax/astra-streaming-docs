@@ -1,16 +1,16 @@
 == Prerequisites
 
-To run this example, you'll need:
+This example requires the following:
 
 * https://maven.apache.org/install.html[Apache Maven]
 
 * https://openjdk.java.net/install/[Java OpenJDK 11]
 
-* A configured Astra Streaming instance with at least *one streaming tenant* and *one topic*. See the https://docs.datastax.com/en/astra-streaming/docs/astream-quick-start.html[Astra Streaming quick start] for instructions. 
+* {product} access with at least one streaming tenant and one topic
 
-* A local clone of the https://github.com/datastax/pulsar-subscription-example[DataStax Pulsar Subscription Example repository]
+* A local clone of the https://github.com/datastax/pulsar-subscription-example[{company} Pulsar Subscription Example repository]
 
-* Modify the `src/main/resources/application.properties` in the `pulsar-subscription-example` repo to connect to your Astra Streaming cluster, as below:
+* In the `pulsar-subscription-example` repo, navigate to `src/main/resources`, and then edit `application.properties` to connect to your {product} cluster:
 +
 [source,bash]
 ----

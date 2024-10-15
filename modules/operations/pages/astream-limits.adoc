@@ -1,14 +1,14 @@
-= {product_name} Limits
+= {product} limits
 :page-tag: astra-streaming,admin,manage,pulsar
 
-DataStax {product_name} includes guardrails and limits to ensure good practices, foster availability, and promote optimal configurations for your databases.
+{product} includes guardrails and limits to ensure good practices, foster availability, and promote optimal configurations for your databases.
 
-The below limits are for Pay As You Go clusters.
-These limits can be different on <<Dedicated clusters,dedicated clusters>>.
+The below limits are for *Pay As You Go* {product} plans.
+These limits can be different on the <<Dedicated clusters,*Dedicated Clusters* plan>>.
 
-== {product_name} guardrails
+== {product} guardrails
 
-Guardrails are initially provisioned in the default settings by {product_name}.
+Guardrails are initially provisioned in the default settings by {product}.
 You can't change these guardrails.
 
 [cols="1,1"]
@@ -77,7 +77,7 @@ The default settings are:
 
 === Custom functions
 
-Custom functions can only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* plan] with a payment method on file.
+Custom functions can only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
 
 Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions].
 
@@ -97,7 +97,7 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 
 == Pulsar-admin CLI limits
 
-The following `pulsar-admin` commands don't work with {product_name},
+The following `pulsar-admin` commands don't work with {product},
 either because they're not applicable in a cloud environment or they would cause
 issues with privacy or data integrity:
 
@@ -111,9 +111,9 @@ issues with privacy or data integrity:
 
 For more on `pulsar-admin`, see the Apache Pulsar https://pulsar.apache.org/docs/pulsar-admin/[documentation].
 
-== {product_name} namespace policies
+== {product} namespace policies
 
-These namespace policies are initially provisioned in the default settings by {product_name} and _can_ be changed by users.
+These namespace policies are initially provisioned in the default settings by {product} and _can_ be changed by users.
 
 [cols="1,1,1"]
 |===
@@ -167,9 +167,9 @@ The total characters of tenant name, namespace name, and function name cannot ex
 This is a Kubernetes restriction based on a pod label's maximum size of 63 characters.
 You can read more about Kubernetes pod naming restrictions https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set[here].
 
-== {product_name} topic and namespace actions
+== {product} topic and namespace actions
 
-These topic and namespace actions are initially provisioned in the default settings by {product_name} and can be performed by users.
+These topic and namespace actions are initially provisioned in the default settings by {product} and can be performed by users.
 
 [cols="1,1,1"]
 |===

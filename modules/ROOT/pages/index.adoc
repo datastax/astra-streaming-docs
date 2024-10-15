@@ -1,45 +1,45 @@
-= What is DataStax {product_name}?
-:navtitle: Astra Streaming
+= Introduction to {product}?
+:navtitle: Intro to {product}
 :page-tag: astra-streaming,planner,admin,dev,pulsar
 
-{product_name} is a cloud native data streaming and event stream processing
+{product} is a cloud native data streaming and event stream processing
 service tightly integrated into the {astra_ui} and powered by Apache Pulsar(TM).
-Using {product_name}, customers can quickly create Pulsar instances,
+Using {product}, customers can quickly create Pulsar instances,
 manage their clusters, scale across cloud regions, and manage Pulsar resources
 such as topics, connectors, functions and subscriptions.
 
-{product_name} takes advantage of the core capabilities built into Astra such
+{product} takes advantage of the core capabilities built into {astra_db} such
 as SSO, IAM and billing.
-Existing Astra customers can augment their existing database capabilities
+Existing {astra_db} customers can augment their existing database capabilities
 with pub/sub and streaming to address a wider range of use cases right away.
 
-With {product_name}, customers now have powerful capabilities to help drive key
+With {product}, customers now have powerful capabilities to help drive key
 business and technical outcomes including:
 
 *Real Time Processing*:: Legacy batch processing jobs result in stale data that
 can slow down an entire business.
-With {product_name}, customers can capture event data and data changes in real-time,
+With {product}, customers can capture event data and data changes in real-time,
 process that data and take action to create a more responsive, nimble organization.
 
 *Data Science & Machine Learning*:: Today, every business is a data business.
-{product_name} allows event data to be stored as a persistent event log which
+{product} allows event data to be stored as a persistent event log which
 can be retained indefinitely and played back to refine ML data models or
 offloaded to a data lake or other storage for further analysis in the future.
 
-*Modernized Event Driven Architectures*:: {product_name} provides a unified
+*Modernized Event Driven Architectures*:: {product} provides a unified
 messaging platform that addresses streaming, pub/sub and queuing use cases with
 low latency and at massive scale. Organizations that are struggling to make
-their legacy messaging technologies keep up will find {product_name} to be a
+their legacy messaging technologies keep up will find {product} to be a
 frictionless path to modernization.
 
 *Faster Access to Data*:: No one has patience for slow loading web pages or mobile apps.
-By combining {product_name} with Astra DB, customers can create read-optimized
-views of data that can be quickly read from Astra DB and ensure that data is
-always up to date by leveraging the event stream processing capabilities of {product_name}.
+By combining {product} with {astra_db}, customers can create read-optimized
+views of data that can be quickly read from {astra_db} and ensure that data is
+always up to date by leveraging the event stream processing capabilities of {product}.
 
-== {product_name} limits
+== {product} limits
 
-For details about about the {product_name} limits, see xref:operations:astream-limits.adoc[{product_name} Limits].
+For details about about the {product} limits, see xref:operations:astream-limits.adoc[{product} Limits].
 
 == See also
 

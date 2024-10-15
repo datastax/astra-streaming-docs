@@ -1,4 +1,4 @@
-= Producing and consuming messages using the Java pulsar client with Astra Streaming and Spring
+= Producing and consuming messages using the Java pulsar client with {product} and Spring
 :navtitle: Spring
 :description: This is a guide to create a simple producer and consumer using Pulsar's java client with Spring.
 :page-tag: astra-streaming,dev,develop,pulsar,java
@@ -38,7 +38,7 @@ include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/ja
 ----
 ====
 
-. Replace the values in your Java application with values from the Connect tab of your {product_name} instance.
+. Replace the values in your Java application with values from the Connect tab of your {product} instance.
 +
 [source,java]
 ----
@@ -49,7 +49,7 @@ include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/ja
 	private static final String topicName = "clue-sensors";
 ----
 +
-You could instead modify the values in the "application.properties" file in the /resources folder, which is a better practice for production applications. The Connect tab in Astra Streaming has a link to download a properties file with the values your application needs to connect to your {product_name} instance.
+You could instead modify the values in the "application.properties" file in the /resources folder, which is a better practice for production applications. The Connect tab in {product} has a link to download a properties file with the values your application needs to connect to your {product} instance.
 +
 .Spring application properties
 [%collapsible]
@@ -83,7 +83,7 @@ mvn clean compile
 +
 Maven has compiled your Java application with the Pulsar client dependency.
 
-. Run the project and send a message to your {product_name} cluster:
+. Run the project and send a message to your {product} cluster:
 +
 [source,bash]
 ----
@@ -99,7 +99,7 @@ Message received: Hello World
 ----
 ====
 
-Remember to check in your {product_name} instance to see the message you sent to the newly created subscription, "my-subscription".
+Remember to check in your {product} instance to see the message you sent to the newly created subscription, "my-subscription".
 
 == See also
 

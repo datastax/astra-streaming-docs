@@ -1,4 +1,4 @@
-= Producing and consuming messages using the Java pulsar client with Astra Streaming
+= Producing and consuming messages using the Java pulsar client with {product}
 :navtitle: Java
 :description: This is a guide to create a simple producer and consumer using Pulsar's java client.
 :page-tag: astra-streaming,dev,develop,pulsar,java
@@ -74,7 +74,7 @@ You may also need to specify the versions on pom.xml as well.
 Let's set up the main Java class and have some fun!
 
 Open the "src/main/java/org/example/App.java" file in your favorite text editor or IDE.
-Clear the contents of the file and add the following to bring in needed dependencies, create a client instance, and configure it to use your Astra Streaming tenant.
+Clear the contents of the file and add the following to bring in needed dependencies, create a client instance, and configure it to use your {product} tenant.
 
 [source,java]
 ----

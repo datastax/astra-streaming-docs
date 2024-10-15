@@ -15,21 +15,21 @@ This doc provides:
 * xref:astream-georeplication.adoc#replicated-subscriptions[]
 * xref:astream-georeplication.adoc#monitor[]
 
-If you're already familiar with Pulsar's messaging replication and asynchronous geo-replication, skip ahead to xref:astream-georeplication.adoc#astra-ui[enabling geo-replication in Astra Streaming].
+If you're already familiar with Pulsar's messaging replication and asynchronous geo-replication, skip ahead to xref:astream-georeplication.adoc#astra-ui[enabling geo-replication in {product}].
 
 [#overview]
 == Overview of message replication in Pulsar
 
 In Pulsar, cross-cluster message replication can be implemented with *synchronous* or *asynchronous* message replication, and with or without a global configuration store in ZooKeeper.
 
-{product_name} only supports *asynchronous* geo-replication without a global configuration store. This approach offers better performance and lower latency.
+{product} only supports *asynchronous* geo-replication without a global configuration store. This approach offers better performance and lower latency.
 
 In asynchronous geo-replication, each region has its own local Pulsar cluster. Messages published in a cluster of one region are automatically replicated asynchronously to remote clusters in other regions. This is achieved through Pulsar’s built-in geo-replication capability.
 
 [#async]
 == Asynchronous geo-replication overview
 
-{product_name} only supports *asynchronous* geo-replication without a global configuration store.
+{product} only supports *asynchronous* geo-replication without a global configuration store.
 
 An *asynchronous* geo-replication cluster consists of two or more independent Pulsar clusters running in different regions.
 
@@ -39,18 +39,18 @@ When messages are produced on a Pulsar topic, they are first persisted to the lo
 
 The message producer doesn't wait for confirmation from multiple Pulsar clusters. The producer receives a response immediately after the nearest cluster successfully persists the data. The data is then asynchronously replicated to the other Pulsar clusters in the background.
 
-To set up asynchronous geo-replication in {product_name}, see xref:astream-georeplication.adoc#astra-ui[].
+To set up asynchronous geo-replication in {product}, see xref:astream-georeplication.adoc#astra-ui[].
 
 [#astra-ui]
-== Enable geo-replication in Astra Streaming
+== Enable geo-replication in {product}
 
 Asynchronous geo-replication is enabled on a per-tenant basis and managed at the namespace level.
 
 This means you can enable asynchronous geo-replication on topics where it is needed, while controlling which datasets are replicated by namespace.
 
-To enable geo-replication in {product_name}, follow these steps:
+To enable geo-replication in {product}, follow these steps:
 
-. In your {product_name} tenant, select **Namespaces and Topics** to list your tenant's current namespaces and topics.
+. In your {product} tenant, select **Namespaces and Topics** to list your tenant's current namespaces and topics.
 
 . Select **Modify namespace** in the namespace you want to replicate *from*.
 
@@ -147,7 +147,7 @@ key:[null], properties:[], content:hello-from-pulsar
 key:[null], properties:[], content:hello-from-pulsar
 ----
 
-. Navigate to the **Namespaces and Topics** tab in your geo-replicated {product_name} clusters. +
+. Navigate to the **Namespaces and Topics** tab in your geo-replicated {product} clusters. +
 `persistent://<my-tenant>/<my-namespace>/<my-topic>` should be visible and showing traffic across all regions.
 
 [#replicated-subscriptions]
@@ -267,7 +267,7 @@ bin/pulsar-admin topics stats persistent://<my-tenant>/<my-namespace>/<my-topic>
 [#monitor]
 == Monitor replicated clusters
 
-{product_name} exposes the following topic-level replication metrics, which can be viewed in the **Overview** tab of the Namespaces and Topics page.
+{product} exposes the following topic-level replication metrics, which can be viewed in the **Overview** tab of the Namespaces and Topics page.
 
 include::operations:partial$georeplication-monitoring.adoc[]
 

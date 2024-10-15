@@ -1,17 +1,17 @@
-= Scrape {product_name} metrics with Prometheus
+= Scrape {product} metrics with Prometheus
 
 Prometheus collects system metrics by scraping targets at intervals. These metrics are used to monitor deployments, generate alerts, and diagnose problems.
 
-This doc will show you how to scrape an {product_name} tenant with Prometheus.
+This doc will show you how to scrape an {product} tenant with Prometheus.
 
 == Prerequisites
 
-* Astra Streaming tenant
+* {product} tenant
 * Docker installed locally
 
-== Get configuration file from {product_name}
+== Get configuration file from {product}
 
-. To start connecting your {product_name} tenant with Prometheus, select *Prometheus* in the {product_name} *Connect* tab.
+. To start connecting your {product} tenant with Prometheus, select *Prometheus* in the {product} *Connect* tab.
 
 . A new configuration file will be generated in the *Connect* tab that looks like this:
 +
@@ -72,19 +72,19 @@ If you get a `mounts denied` permissions error, in Docker, go to *File Sharing >
 
 . Open your Prometheus dashboard at `localhost:9090`. In the *Status > Targets* window, you should see the endpoint targeted in `static_configs` in an *UP* state.
 
-. Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product_name} cluster.
+. Navigate to the *Graph* window. Enter `pulsar_in_messages_total` in the *Expression* field and select *Execute*. Prometheus will now display total incoming Pulsar messages to your {product} cluster.
 
-. Produce a few messages in your tenant with the Pulsar CLI or the {product_name} Websocket.
+. Produce a few messages in your tenant with the Pulsar CLI or the {product} Websocket.
 
 . Your Prometheus graph displays the number of incoming Pulsar messages with each 60 second scrape.
 +
-image::astream-prometheus-graph.png[Scraping {product_name} with Prometheus]
+image::astream-prometheus-graph.png[Scraping {product} with Prometheus]
 
-You're scraping your {product_name} tenant with Prometheus!
+You're scraping your {product} tenant with Prometheus!
 
 == Content encoding
 
-{product_name} supports content encoding with either `gzip` or `deflate`.
+{product} supports content encoding with either `gzip` or `deflate`.
 
 With the example from above still running, use a `curl` request to decompress your Prometheus scrape data:
 
@@ -117,9 +117,9 @@ include::example$curl_gzip.sh[]
 pulsar_topics_count{app="pulsar",cluster="pulsar-aws-useast1",component="broker",controller_revision_hash="pulsar-aws-useast1-broker-7444bf6f64",instance="192.168.2.120:8080",job="broker",kubernetes_namespace="pulsar",kubernetes_pod_name="pulsar-aws-useast1-broker-1",namespace="mk-tenant/default",release="astraproduction-aws-useast1-pulsar",statefulset_kubernetes_io_pod_name="pulsar-aws-useast1-broker-1",prometheus="pulsar/astraproduction-aws-useast-prometheus",prometheus_replica="prometheus-astraproduction-aws-useast-prometheus-0"} 1 1654550685678
 ----
 
-== Metrics exposed by {product_name}
+== Metrics exposed by {product}
 
-The following Prometheus metrics are exposed by {product_name}:
+The following Prometheus metrics are exposed by {product}:
 
 * https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics[Namespace metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]

@@ -1,5 +1,5 @@
-= {product_name} Pricing
+= {product} Pricing
 :page-tag: astra-streaming,planner,plan,pulsar
 
-For information on *pricing* for {product_name}, see https://www.datastax.com/products/astra-streaming/pricing[Astra Streaming pricing].
+For information on pricing for {product}, see https://www.datastax.com/products/astra-streaming/pricing[{product} pricing].
 

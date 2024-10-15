@@ -1,8 +1,8 @@
-= Configuring your local environment for Astra Streaming
-:navtitle: Using Pulsar binaries with Astra Streaming
-:description: This guide will provide the necessary steps to download a compatible Pulsar artifact and configure the binaries for use with Astra Streaming.
+= Configuring your local environment for {product}
+:navtitle: Using Pulsar binaries with {product}
+:description: This guide will provide the necessary steps to download a compatible Pulsar artifact and configure the binaries for use with {product}.
 
-Did we mention that Astra Streaming is running Apache Pulsar(TM)?
+Did we mention that {product} is running Apache Pulsar(TM)?
 
 All the benefits you enjoy with the open source Pulsar project can also be used on our platform.
 This guide details the necessary steps to getting set up and validating the connection.
@@ -12,7 +12,7 @@ This guide details the necessary steps to getting set up and validating the conn
 Pulsar is distributed as a single artifact.
 The Pulsar https://pulsar.apache.org/download/[download page] offers the latest version, as well as older releases.
 
-Astra Streaming is currently compatible with Pulsar {pulsar_version}.
+{product} is currently compatible with Pulsar {pulsar_version}.
 Locate the latest patch version matching the major.minor version and download the binaries.
 
 [source,shell,subs="attributes+"]
@@ -37,26 +37,26 @@ tar xvfz apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 You will see most Pulsar commands prefixed with "./bin".
 That means you have `cd apache-pulsar-$PULSAR_VERSION` and are running commands from there.
 
-== Configuring your binaries for Astra Streaming
+== Configuring your binaries for {product}
 
 The Pulsar folder contains quite a few files and folders, but two most important are `./conf` and `./bin`.
 
 The executables in bin use the configurations in conf to run commands.
-Each tenant you create in Astra Streaming comes with its own custom configuration (for SSO, endpoints, etc).
-You will need to download the tenant configuration from Astra Streaming and overwrite the `./conf/client.conf` file.
+Each tenant you create in {product} comes with its own custom configuration (for SSO, endpoints, etc).
+You will need to download the tenant configuration from {product} and overwrite the `./conf/client.conf` file.
 
-. Navigate to the "Connect" tab in the Astra Streaming portal.
+. Navigate to the "Connect" tab in the {product} portal.
 +
-image:connect-tab.png[Connect tab in Astra Streaming]
+image:connect-tab.png[Connect tab in {product}]
 
 . Locate the "Download client.conf" button and click to download the conf file.
 +
-image:download-client.png[Download pulsar client conf in Astra Streaming]
+image:download-client.png[Download pulsar client conf in {product}]
 
 . Save the file in the "/conf" folder of the Pulsar folder.
 This will overwrite the default client.conf already in the /conf folder.
 
-With your Astra Streaming tenant's configuration in place, you can use any of the binaries to interact with a Pulsar cluster.
+With your {product} tenant's configuration in place, you can use any of the binaries to interact with a Pulsar cluster.
 
 [cols="1,3"]
 |===

@@ -1,18 +1,21 @@
 = External Prometheus and Grafana Integration
 
-Astra Streaming exposes some of the Pulsar metrics through Prometheus endpoints.
-The Prometheus configuration information to scrape Astra Streaming metrics into an external Prometheus server is found in the Astra streaming UI.
-This document will show you how to set up a Prometheus server in a Kubernetes cluster and configure it to scrape Astra streaming metrics.
+{product} exposes some of the Pulsar metrics through Prometheus endpoints.
+The Prometheus configuration information to scrape {product} metrics into an external Prometheus server is found in the {astra_ui}.
+
+This page explains how to set up a Prometheus server in a Kubernetes cluster and configure it to scrape {product} metrics.
 
 == Prerequisites
-* A Kubernetes cluster.
+
+* An {astra_db} account
+* A Kubernetes cluster
 
 == Configure and deploy Prometheus
 
 In this example, we use the https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack[Prometheus Community Kubernetes Helm Charts] to set up a Prometheus server and a Grafana server in a K8s cluster.
 
-. Create a configuration yaml file (e.g. astra-msgenrich.yml) using the Astra Streaming Prometheus configuration from the UI.
-For more on downloading the Prometheus configuration from the Astra Streaming UI, see https://docs.datastax.com/en/streaming/astra-streaming/operations/astream-scrape-metrics.html[Scrape metrics from Astra Streaming].
+. Create a configuration yaml file (e.g. astra-msgenrich.yml) using the {product} Prometheus configuration from the {astra_ui}.
+For more on downloading the Prometheus configuration from the {astra_ui}, see https://docs.datastax.com/en/streaming/astra-streaming/operations/astream-scrape-metrics.html[Scrape metrics from {product}].
 +
 [source,yaml]
 ----
@@ -80,14 +83,15 @@ kubectl rollout status daemonset \
 
 == Verify the integration
 
-The Astra Streaming metrics should now be integrated with an external Prometheus server. Double check by visiting the external Prometheus server UI.
+The {product} metrics should now be integrated with an external Prometheus server. Double check by visiting the external Prometheus server UI.
 
 The status of the additional scrape job 'astra-pulsar-metrics-msgenrich' should be in the UP state. If not, there are issues in the previous configuration procedures.
 
 image::scrape-status.png[]
 
 === 401 Unauthorized Issue
-One common issue that we see when integrating Astra Streaming metrics into an external Prometheus server is the additional scrape job returning a 401 Unauthorized error. This is most likely because the JWT token we used in the previous steps has expired.
+
+One common issue that we see when integrating {product} metrics into an external Prometheus server is the additional scrape job returning a 401 Unauthorized error. This is most likely because the JWT token we used in the previous steps has expired.
 
 To fix this issue, go to the {astra_ui} and create a new JWT token (preferably with no expiration date). Get the new token value and repeat the above procedure. For more, see xref:astream-token-gen.adoc[].
 

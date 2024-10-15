@@ -1,23 +1,23 @@
-= {product_name} Functions
+= {product} Functions
 :page-tag: astra-streaming,dev,develop,pulsar,java,python
 
 Functions are lightweight compute processes that enable you to process each message received on a topic. You can apply custom logic to that message, transforming or enriching it, and then output it to a different topic.
 
-Functions run inside {product_name} and are therefore serverless. You write the code for your function in Java, Python, or Go, then upload the code. It will be automatically run for each message published to the specified input topic.
+Functions run inside {product} and are therefore serverless. You write the code for your function in Java, Python, or Go, then upload the code. It will be automatically run for each message published to the specified input topic.
 
 Functions are implemented using Apache Pulsar(R) functions. See https://pulsar.apache.org/docs/en/functions-overview/[Pulsar Functions overview] for more information about Pulsar functions.
 
 [TIP]
 ====
-Custom functions can only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise*] plan with a payment method on file.
+Custom functions can only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
 
 Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions].
 ====
 
 == Deploy Python functions in a ZIP file
 
-Astra Streaming supports Python-based Pulsar Functions.
-These functions can be packaged in a ZIP file and deployed to {product_name} or Pulsar. The same ZIP file can be deployed to either environment.
+{product} supports Python-based Pulsar Functions.
+These functions can be packaged in a ZIP file and deployed to {product} or Pulsar. The same ZIP file can be deployed to either environment.
 We'll create a ZIP file in the proper format, then use the pulsar-admin command to deploy the ZIP.
 We'll pass a create function YAML configuration file as a parameter to pulsar-admin, which defines the Pulsar Function options and parameters.
 
@@ -108,7 +108,7 @@ userConfig:
 +
 This file will be passed to the pulsar-admin create function command.
 
-. Use pulsar-admin to deploy the Python ZIP to Astra Streaming or Pulsar.
+. Use pulsar-admin to deploy the Python ZIP to {product} or Pulsar.
 The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
 +
 [source,bash]
@@ -116,7 +116,7 @@ The command below assumes you've properly configured the client.conf file for pu
 bin/pulsar-admin functions create --function-config-file </absolute/path/to/your/python/func-create-config.yml>
 ----
 
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product}.
 
 .. You can also use the pulsar-admin command to list your functions:
 +
@@ -127,8 +127,8 @@ bin/pulsar-admin functions list --tenant <mytenant> --namespace <my-namespace>
 
 == Deploy Java functions in a JAR file
 
-Astra Streaming supports Java-based Pulsar Functions which are packaged in a JAR file.
-The JAR can be deployed to Astra Streaming or Pulsar. The same JAR file can be deployed to either environment.
+{product} supports Java-based Pulsar Functions which are packaged in a JAR file.
+The JAR can be deployed to {product} or Pulsar. The same JAR file can be deployed to either environment.
 
 We'll create a JAR file using Maven, then use the pulsar-admin command to deploy the JAR.
 We'll pass a create function YAML configuration file as a parameter to pulsar-admin, which defines the Pulsar function options and parameters.
@@ -244,12 +244,12 @@ This file will be passed to the pulsar-admin create function command.
 +
 [IMPORTANT]
 ====
-Astra Streaming requires the `inputs` topic to have a message schema defined before deploying the function.
+{product} requires the `inputs` topic to have a message schema defined before deploying the function.
 Otherwise, deployment errors may occur.
 Use the {astra_ui} to define the message schema for a topic.
 ====
 +
-. Use pulsar-admin to deploy your new JAR to Astra Streaming or Pulsar.
+. Use pulsar-admin to deploy your new JAR to {product} or Pulsar.
 The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
 +
 [source,bash]
@@ -257,7 +257,7 @@ The command below assumes you've properly configured the client.conf file for pu
 bin/pulsar-admin functions create --function-config-file  </absolute/path/to/your/javajar/func-create-config.yml>
 ----
 
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product_name}.
+. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product}.
 
 .. You can also use the pulsar-admin command to list your functions:
 +
@@ -266,9 +266,9 @@ bin/pulsar-admin functions create --function-config-file  </absolute/path/to/you
 bin/pulsar-admin functions list --tenant <mytenant> --namespace <my-namespace>
 ----
 
-== Add functions in {product_name} dashboard
+== Add functions in {product} dashboard
 
-Add functions in the Functions tab of the Astra Streaming dashboard.
+Add functions in the Functions tab of the {product} dashboard.
 
 . Select *Create Function* to get started.
 . Choose your function name and namespace.
@@ -277,7 +277,7 @@ image::astream-name-function.png[Function and Namespace]
 
 . Select the file you want to pull the function from and which function you want to use within that file.
 
-Astra generates a list of acceptable classes. Python and Java functions are added a little differently from each other.
+{astra_db} generates a list of acceptable classes. Python and Java functions are added a little differently from each other.
 
 Python functions are added by loading a Python file (.py) or a zipped Python file (.zip). When adding Python files, the Class Name is specified as the name of the Python file without the extension plus the class you want to execute.
 
@@ -351,7 +351,7 @@ You will see "Created Successfully!" if the function is set up and ready to acce
 +
 [TIP]
 ====
-If you receive a 402 error with "Reason: only qualified organizations can create functions", this means your organization needs to be upgraded to the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise*] plan with a payment method on file.
+If you receive a 402 error with "Reason: only qualified organizations can create functions", this means your organization needs to be upgraded to the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
 ====
 
 . Use `./pulsar-admin functions list --tenant <tenant-name>` to list the functions in your tenant and confirm your new function was created.
@@ -439,4 +439,4 @@ video::OCqxcNK0HEo[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445p
 
 == Next
 
-Learn more about developing functions for {product_name} and Pulsar https://pulsar.apache.org/docs/en/functions-develop/[here].
+Learn more about developing functions for {product} and Pulsar https://pulsar.apache.org/docs/en/functions-develop/[here].

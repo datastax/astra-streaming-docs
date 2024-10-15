@@ -16,7 +16,7 @@ This document will help you get started producing and consuming Kafka messages o
 
 :page-tag: starlight-kafka,quickstart,install,admin,dev,pulsar,kafka
 
-. To start connecting {kafka_for_astra}, select *Kafka* in the {product_name} *Connect* tab.
+. To start connecting {kafka_for_astra}, select *Kafka* in the {product} *Connect* tab.
 
 . When the popup appears, confirm you want to enable Kafka on your tenant.
 +
@@ -28,7 +28,7 @@ You must remove the tenant itself to remove these namespaces.
 
 . Select *Enable Kafka*.
 +
-Three new namespaces are created in your {product_name} tenant:
+Three new namespaces are created in your {product} tenant:
 +
 * `kafka` for producing and consuming messages
 * `+__kafka+` for functionality
@@ -85,7 +85,7 @@ $ bin/kafka-console-consumer --bootstrap-server kafka-aws-useast2.streaming.data
 hello pulsar
 ----
 
-. Send as many messages as you'd like, then return to your `kafka` namespace dashboard in {product_name} and monitor your activity.
+. Send as many messages as you'd like, then return to your `kafka` namespace dashboard in {product} and monitor your activity.
 
 Your Kafka messages are being produced and consumed in a Pulsar cluster!
 

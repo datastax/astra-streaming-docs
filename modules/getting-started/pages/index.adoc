@@ -1,14 +1,14 @@
-= Getting started with Astra Streaming
+= Getting started with {product}
 :navtitle: Get started
 :page-tag: astra-streaming,planner,quickstart,pulsar
 
-Astra Streaming is a cloud native data streaming and event stream processing
+{product} is a cloud native data streaming and event stream processing
 service tightly integrated into the {astra_ui} and powered by Apache Pulsar(TM).
-Using Astra Streaming, customers can quickly create Pulsar instances,
+Using {product}, customers can quickly create Pulsar instances,
 manage their clusters, scale across cloud regions, and manage Pulsar resources
 such as topics, connectors, functions and subscriptions.
 
-Follow this guide to create a new account in DataStax Astra, along with a Streaming Tenant running Apache Pulsar.
+Follow this guide to create a new account in {astra_db}, along with a streaming tenant running Apache Pulsar.
 
 == Prerequisites
 
@@ -16,29 +16,29 @@ You will need the following to complete this guide:
 
 * A working email address
 
-== Create your Astra account
+== Create your {astra_db} account
 
-. Navigate to the {streaming_signup_url}[Astra portal sign in page^].
+. Navigate to the {streaming_signup_url}[{astra_ui} sign in page^].
 +
-image:astream-login.png[Login to Astra]
+image:astream-login.png[Login to {astra_db}]
 
 . Click the "Sign Up" link (toward the bottom).
 
 . Provide your information along with a valid email.
 +
-image:astream-create-account.png[Create Astra account]
+image:astream-create-account.png[Create {astra_db} account]
 
-. You should receive an email from DataStax verifying your address - click the button within.
+. You should receive an email from {company} verifying your address - click the button within.
 
-. If you aren't automatically signed in, visit the {login_url}[Astra sign in page^] and use your new account creds.
+. If you aren't automatically signed in, visit the {login_url}[{astra_db} sign in page^] and use your new account creds.
 
 == Your first streaming tenant
 
-Think of a tenant in Astra Streaming as your safe space to work.
-It is a portion of DataStax's managed Apache Pulsar that is only yours.
+Think of a tenant in {product} as your safe space to work.
+It is a portion of {company}'s managed Apache Pulsar that is only yours.
 Learn more about the concept of tenancy in the https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar docs].
 
-The steps in the below tabs will guide you through creating a Streaming Tenant.
+The steps in the below tabs will guide you through creating a streaming tenant.
 You'll use this tenant to create namespaces, topics, functions, and pretty much everything else.
 The only difference between the tabs is how your tenant is created - they all have the same result.
 
@@ -51,24 +51,24 @@ The only difference between the tabs is how your tenant is created - they all ha
 
 . Click *Create a Tenant*.
 
-. Name your Streaming Tenant something memorable like `my-stream-**RANDOM_UUID**`.
-All tenant names in Astra Streaming must be unique.
+. Name your streaming tenant something memorable like `my-stream-**RANDOM_UUID**`.
+All tenant names in {product} must be unique.
 
 . Choose your preferred cloud provider and region.
 For your first example tenant, the region doesn't really matter.
 +
-image:create-a-stream.png[Create a new tenant in Astra Streaming]
+image:create-a-stream.png[Create a new tenant in {product}]
 
 . Click *Create Tenant*.
 You are directed to the quickstart page for your new tenant.
 +
-image:new-tenant-quickstart.png[New tenant quickstart in Astra Streaming]
+image:new-tenant-quickstart.png[New tenant quickstart in {product}]
 --
 
 {astra_cli}::
 +
 --
-{astra_cli} is a set of commands for creating and managing all Astra resources.
+{astra_cli} is a set of commands for creating and managing all {astra_db} resources.
 For more information, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation].
 
 . Set the required variables, replacing `**RANDOM_UUID**` with a few random numbers or letters.
@@ -98,7 +98,7 @@ Next, create a namespace in your new tenant.
 A namespace exists within a tenant.
 A namespace is a logical grouping of message topics.
 
-{astra_stream} automatically create a `default` namespaces when you create a tenant.
+{product} automatically create a `default` namespaces when you create a tenant.
 You can use the default namespace or create new ones.
 
 Tenants usually have many namespaces.
@@ -114,15 +114,15 @@ Learn more about namespaces in the https://pulsar.apache.org/docs/concepts-messa
 --
 . Navigate to the "Namespace And Topics" tab.
 +
-image:namespace-tab.png[Namespace tab in Astra Streaming]
+image:namespace-tab.png[Namespace tab in {product}]
 
 . Click the "Create Namespace" button, and give your namespace a super original name like "my-namespace".
 +
-image:create-namespace.png[Create namespace in Astra Streaming]
+image:create-namespace.png[Create namespace in {product}]
 
 . Click "Create" to create the namespace.
 +
-image:namespace-listing.png[Namespaces in Astra Streaming]
+image:namespace-listing.png[Namespaces in {product}]
 --
 
 Pulsar Admin::
@@ -186,17 +186,17 @@ Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging
 It must start with a lowercase letter, be alphanumeric, and can contain hyphens.
 . Leave the choice of persistence and partitioning alone for now - those can be a part of https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[future learning].
 +
-image:add-topic.png[Add topic in Astra Streaming]
+image:add-topic.png[Add topic in {product}]
 
 . Click the *Add Topic* button to create the topic within the namespace.
 +
-image:topic-listing.png[Topic listing in Astra Streaming]
+image:topic-listing.png[Topic listing in {product}]
 --
 
 Pulsar Admin::
 +
 --
-To learn more about connecting to Astra Streaming with the pulsar-admin CLI, see xref:developing:configure-pulsar-env.adoc[].
+To learn more about connecting to {product} with the pulsar-admin CLI, see xref:developing:configure-pulsar-env.adoc[].
 
 . Set the required variables:
 +
@@ -218,7 +218,7 @@ include::{astra-streaming-examples-repo}/pulsar-admin/create-topic.sh[]
 curl::
 +
 --
-To learn more about interacting with Astra Streaming through HTTP, see xref:developing:using-curl.adoc[].
+To learn more about interacting with {product} through HTTP, see xref:developing:using-curl.adoc[].
 
 . Set the required variables:
 +
@@ -245,5 +245,6 @@ include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
 Your new topic is ready to produce and consume messages.
 There are several different ways to do this:
 
-* xref:developing:produce-consume-astra-portal.adoc[Astra Portal]: Use Astra Streaming's "Try Me" feature in the {astra_ui}.* xref:developing:produce-consume-pulsar-client.adoc[Pulsar Client]: Use the Pulsar CLI to interact with the topic.
+* xref:developing:produce-consume-astra-portal.adoc[{astra_ui}]: Use {product}'s "Try Me" feature in the {astra_ui}.
+* xref:developing:produce-consume-pulsar-client.adoc[Pulsar Client]: Use the Pulsar CLI to interact with the topic.
 * xref:developing:clients/index.adoc[Runtime Clients]: Create a client application that interacts with Pulsar.

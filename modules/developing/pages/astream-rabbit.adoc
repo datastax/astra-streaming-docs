@@ -14,7 +14,7 @@ Get started producing and consuming RabbitMQ messages on a Pulsar cluster.
 
 == {starlight_rabbitmq} Quickstart
 
-. To start connecting {starlight_rabbitmq}, select *RabbitMQ* in the {product_name} *Connect* tab.
+. To start connecting {starlight_rabbitmq}, select *RabbitMQ* in the {product} *Connect* tab.
 
 . When the popup appears, confirm you want to enable RabbitMQ on your tenant.
 +
@@ -26,7 +26,7 @@ You must remove the tenant itself to remove this namespace.
 
 . Select *Enable RabbitMQ*.
 +
-A new `rabbitmq` namespace is created in your {product_name} tenant for RabbitMQ functionality.
+A new `rabbitmq` namespace is created in your {product} tenant for RabbitMQ functionality.
 +
 A new configuration file is generated in the *Connect* tab that looks like this:
 +
@@ -110,7 +110,7 @@ started a channel
  sent one
 ----
 
-. Navigate to your `rabbitmq` namespace dashboard in {product_name} and monitor your activity.
+. Navigate to your `rabbitmq` namespace dashboard in {product} and monitor your activity.
 
 You should see new topics called `amq.default.__queuename` and `amq.default_routingkey` that were created by the Python script above, and an increasing amount of traffic and messages. Your RabbitMQ messages are being published to a Pulsar topic.
 

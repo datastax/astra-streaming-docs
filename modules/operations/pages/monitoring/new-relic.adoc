@@ -6,12 +6,12 @@ There are three ways to integrate external Prometheus data into New Relic:
 * https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#OpenMetrics[Prometheus OpenMetrics integration for Docker]
 * https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration]
 
-Only the third option is relevant to Astra Streaming.
+Only the third option is relevant to {product}.
 
-Typically, this option requires modifying the configuration of the Prometheus server that Astra Streaming relies on.
-However, this isn't possible because {astra_stream} is a managed service.
+Typically, this option requires modifying the configuration of the Prometheus server that {product} relies on.
+However, this isn't possible because {product} is a managed service.
 
-Instead, you can xref:monitoring/integration.adoc[install an extra Prometheus server] to act as a bridge to forward scraped Astra Streaming metrics to New Relic.
+Instead, you can xref:monitoring/integration.adoc[install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
 
 .External Prometheus server for New Relic integration
 image::monitoring-map.png[Map,align="center"]
@@ -24,17 +24,24 @@ image::monitoring-map.png[Map,align="center"]
 
 == Configure New Relic
 
-. Log in the New Relic UI with your account.
-. Click “Add Data” and select “Prometheus Remote Write Integration” under the “Open source monitoring” category.
-. In the new window, supply the name of your local Prometheus server (e.g. prometheus-docker-desktop) and click “Generate URL”. This generates the URL endpoints required for configuring “remote_write integration” on your local Prometheus server.
-. Configure and restart your local Prometheus server. In this example, since the local Prometheus server is installed in a local docker-desktop K8s cluster, the installation and configuration method is K8s-oriented.
+. In your New Relic account, click *Add Data*.
+
+. Under *Open source monitoring*, select *Prometheus Remote Write Integration*.
+
+. Enter the name of your local Prometheus server, such as `prometheus-docker-desktop`, and then click *Generate URL*.
+This generates the endpoint URLs required to configure a `remote_write integration` on your local Prometheus server.
+
+. Configure and restart your local Prometheus server.
+For this example, the local Prometheus server is installed in a local Docker Desktop Kubernetes cluster; therefore, the installation and configuration method are related to Kubernetes.
+
 .. Create a K8s secret that corresponds to the New Relic license key that you received when setting up the account:
 +
 [source,bash]
 ----
 kubectl create secret generic nr-license-key --from-literal=value=<license_key_value>
 ----
-.. Modify the Prometheus configuration in the kube-prometheus-stack Helm chart file (e.g. custom-values.yaml).
+
+.. Modify the Prometheus configuration in the kube-prometheus-stack Helm chart file, such as `custom-values.yaml`:
 +
 [source,yaml]
 ----
@@ -52,17 +59,22 @@ prometheus:
            authorization:
               credentials:
                  key: value
-        	   name: nr-license-key
+                 name: nr-license-key
 ----
-The top section of this configuration is for scraping Astra Streaming metrics (as described in xref:monitoring/integration.adoc[]) and the bottom section is for sending local Prometheus metrics to New Relic via remote_write. The remote_write URL and authorization settings are described above.
-. Restart your local Prometheus server.
-. Return to the New Relic UI. If everything is set up correctly, you should see Astra Streaming metrics in New Relic UI. Below is a screenshot from New Relic data browsing UI in which we can see the Pulsar message backlog metrics are shown on the UI and aggregated by different Pulsar namespaces.
++
+The first lines of this configuration are for scraping {product} metrics (as described in xref:monitoring/integration.adoc[]).
+The `remoteWrite` section is for sending local Prometheus metrics to New Relic through `remote_write`.
 
-.Pulsar message backlog metrics in New Relic
+. Restart your local Prometheus server.
+
+. In your New Relic account, confirm the configuration.
+If everything is set up correctly, you should see {product} metrics in New Relic.
+In the following screenshot, the New Relic *Data Browsing* page has Pulsar message backlog metrics.
+
 image::pulsar-namespace-metrics.png[Metrics,align="center"]
 
 == See also
 
-* For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
-* To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
-* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].
+* For a list of exposed endpoints for {product} metrics, see xref:monitoring/metrics.adoc[].
+* To scrape {product} metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
+* To scrape {product} metrics into New Relic, see xref:monitoring/new-relic.adoc[].

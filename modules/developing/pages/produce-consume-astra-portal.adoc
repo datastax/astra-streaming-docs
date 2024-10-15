@@ -1,23 +1,23 @@
-= Producing and consuming messages using the Astra Portal
-:navtitle: Astra Portal
-:description: Use this guide to create and consume a topic message using the Astra Streaming Portal.
+= Producing and consuming messages using the {astra_ui}
+:navtitle: {astra_ui}
+:description: Use this guide to create and consume a topic message using the {astra_ui}.
 
-This guide assumes you have completed the xref:getting-started:index.adoc[Astra Streaming quickstart].
+This guide assumes you have completed the xref:getting-started:index.adoc[{product} quickstart].
 
 Now, it's time to produce and consume messages in your new streaming tenant.
-The following steps will use the "Try Me" feature of the Astra Portal to interact with an existing topic.
+The following steps will use the "Try Me" feature of the {astra_ui} to interact with an existing topic.
 
 == Select the producer and consumer topics
 
 . Navigate to the "Try Me" tab.
 +
-image:try-me-tab.png[Try me tab in Astra Streaming]
+image:try-me-tab.png[Try me tab in {product}]
 
 . Choose the appropriate namespace and topic.
 In this example, the name for both the producer and consumer is the same.
 Leave the rest of the settings as default.
 +
-image:config-try-me.png[Config try me in Astra Streaming]
+image:config-try-me.png[Config try me in {product}]
 
 == Connect and send a message
 
@@ -25,13 +25,13 @@ image:config-try-me.png[Config try me in Astra Streaming]
 
 . In *Send message*, type a message, and then click *Send*.
 +
-image:test-message-input.png[Send message in Astra Streaming]
+image:test-message-input.png[Send message in {product}]
 
 
 A message is produced (sent) to your selected topic, and then the consumer consumes (retrieves) the message.
 The result is a chat style write and read.
 
-image:try-me-test-message.png[Test message in Astra Streaming]
+image:try-me-test-message.png[Test message in {product}]
 
 == See also
 

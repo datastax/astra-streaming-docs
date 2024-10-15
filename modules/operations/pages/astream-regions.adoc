@@ -1,14 +1,14 @@
-= {product_name} Regions
+= {product} Regions
 :page-tag: astra-streaming,admin,manage,pulsar
 
 When creating a tenant, select a region for your tenant.
 Choose a region that is geographically close to your users to optimize performance.
 
-{product_name} supports AWS, Microsoft Azure, and Google Cloud regions.
+{product} supports AWS, Microsoft Azure, and Google Cloud regions.
 These regions are also supported by CDC for {astra_db}.
-{product_name} CDC can only be used in a region that supports both {product_name} and {astra_db}.
+{product} CDC can only be used in a region that supports both {product} and {astra_db}.
 
-ElasticSearch and Snowflake can be in different regions than {product_name}.
+ElasticSearch and Snowflake can be in different regions than {product}.
 
 == AWS
 
