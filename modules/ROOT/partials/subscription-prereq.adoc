@@ -12,11 +12,12 @@ This example requires the following:
 
 * In the `pulsar-subscription-example` repo, navigate to `src/main/resources`, and then edit `application.properties` to connect to your {product} cluster:
 +
-[source,bash]
+.application.properties
+[source,plain,subs="+quotes"]
 ----
-service_url={broker-service-url}
+service_url=**BROKER_SERVICE_URL**
 namespace=default
 tenant_name=my-tenant
-authentication_token={astra-auth-token}
+authentication_token=**ASTRA_DB_APPLICATION_TOKEN**
 topic_name=my-topic
 ----
