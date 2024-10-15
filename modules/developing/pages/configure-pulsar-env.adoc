@@ -1,93 +1,76 @@
-= Configuring your local environment for {product}
-:navtitle: Using Pulsar binaries with {product}
-:description: This guide will provide the necessary steps to download a compatible Pulsar artifact and configure the binaries for use with {product}.
+=  Use Pulsar binaries with {product}
+:navtitle: Configure the Pulsar CLI
+:description: Download a compatible Pulsar artifact and configure the binaries for use with {product}.
 
-Did we mention that {product} is running Apache Pulsar(TM)?
+{product} runs Apache Pulsar(TM).
+The benefits of OSS Pulsar are also available in {product}.
 
-All the benefits you enjoy with the open source Pulsar project can also be used on our platform.
-This guide details the necessary steps to getting set up and validating the connection.
+To get started, you must download a compatible Pulsar artifact, and then configure the binaries for use with {product}.
 
-== Choosing a compatible version
+== Download a compatible artifact
 
-Pulsar is distributed as a single artifact.
-The Pulsar https://pulsar.apache.org/download/[download page] offers the latest version, as well as older releases.
+{product} is compatible with Pulsar {pulsar_version}.
 
-{product} is currently compatible with Pulsar {pulsar_version}.
-Locate the latest patch version matching the major.minor version and download the binaries.
-
-[source,shell,subs="attributes+"]
+. Download the binaries for the https://pulsar.apache.org/download/[latest {pulsar_version} patch version]:
++
+[source,shell,subs="+quotes,+attributes"]
 ----
-PULSAR_VERSION="{pulsar_version}.??"
+PULSAR_VERSION="{pulsar_version}.**PATCH**"
 wget https://archive.apache.org/dist/pulsar/pulsar-$PULSAR_VERSION/apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 ----
 
-== Setting up your Pulsar folder
-
-With the artifact downloaded, the next step is to extract its contents.
-
-The following script will extract the tarball into a directory named for the pulsar version.
-This new directory is considered the "Pulsar folder".
-Pulsar guides typically assume you are working within this directory.
-
-[source,shell,subs="attributes+"]
+. Extract the downloaded artifact:
++
+[source,shell]
 ----
 tar xvfz apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 ----
-
-You will see most Pulsar commands prefixed with "./bin".
-That means you have `cd apache-pulsar-$PULSAR_VERSION` and are running commands from there.
-
-== Configuring your binaries for {product}
-
-The Pulsar folder contains quite a few files and folders, but two most important are `./conf` and `./bin`.
-
-The executables in bin use the configurations in conf to run commands.
-Each tenant you create in {product} comes with its own custom configuration (for SSO, endpoints, etc).
-You will need to download the tenant configuration from {product} and overwrite the `./conf/client.conf` file.
-
-. Navigate to the "Connect" tab in the {product} portal.
 +
-image:connect-tab.png[Connect tab in {product}]
+The resulting directory is named `apache-pulsar-**PULSAR_VERSON**`.
+This directory is known as the _Pulsar folder_.
+Pulsar guides assume you are working within this directory.
+Pulsar commands prefixed by `./bin` indicate the command is run from within the Pulsar folder.
 
-. Locate the "Download client.conf" button and click to download the conf file.
+== Configure binaries for {product}
+
+There are several files and folders in the Pulsar folder.
+The two most important folders are `/conf` and `/bin`.
+
+The executables in `/bin` use the configurations in `/conf` to run commands.
+
+Each tenant you create in {product} comes with its own custom configuration for SSO, endpoints, and so on.
+You must download the tenant configuration from {product}, and then overwrite the `./conf/client.conf` file.
+
+. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
+
+. Click the *Connect* tab, in the *Pulsar CLI* section, click *Download client.conf*.
+
+. Save the file in `apache-pulsar-**PULSAR_VERSION**/conf`.
+This overwrites the default `client.conf` in the `/conf` folder.
+
+. With your {product} tenant's configuration in place, use the binaries to interact with a Pulsar cluster:
 +
-image:download-client.png[Download pulsar client conf in {product}]
-
-. Save the file in the "/conf" folder of the Pulsar folder.
-This will overwrite the default client.conf already in the /conf folder.
-
-With your {product} tenant's configuration in place, you can use any of the binaries to interact with a Pulsar cluster.
-
-[cols="1,3"]
-|===
-|Binary |Uses
-
-| `./bin/pulsar-admin`
-| Administrative commands to manage namespaces, topics, functions, connectors, etc.
-
-| `./bin/pulsar-client`
-| Interactive commands for producing and consuming messages.
-|===
-
-== Validating your configuration and connection
-
-With the Pulsar folder in place and the correct client configuration saved, the next step is to validate everything.
-Run each command to validate binary conf.
-
+* `./bin/pulsar-admin`: Administrative commands to manage namespaces, topics, functions, connectors, and so on
+* `./bin/pulsar-client`: Interactive commands for producing and consuming messages
++
 For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's CLI docs].
 
-List all tenants:
+== Validate the connection
 
-[source,shell,subs="attributes+"]
+Run some commands to validate the binary configuration.
+
+. List all tenants:
++
+[source,shell]
 ----
 ./bin/pulsar-admin tenants list
 ----
 
-Produce a message:
-
-[source,shell,subs="attributes+"]
+. Produce a message:
++
+[source,shell,subs="+quotes"]
 ----
-./bin/pulsar-client produce <REPLACE_ME_WITH_TENANT_NAME>/default/<REPLACE_ME_WITH_TOPIC_NAME> --messages "Hi there" --num-produce 1
+./bin/pulsar-client produce **TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** --messages "Hi there" --num-produce 1
 ----
 
 == See also

@@ -13,7 +13,7 @@ CDC for {astra_db} automatically captures changes in real time, de-duplicates th
 
 {product} processes data changes via a Pulsar topic. By design, the Change Data Capture (CDC) component is simple, with a 1:1 correspondence between the table and a single Pulsar topic.
 
-This doc will show you how to create a CDC connector for your {astra_db} deployment and send change data to an Elasticsearch sink.
+This guide explains how to connect your {astra_db} database to CDC and send change data to an Elasticsearch sink.
 
 == Supported data structures
 
@@ -182,24 +182,28 @@ See xref:operations:astream-regions.adoc[] for more information.
 == Create a table
 
 . Select *Databases* from the main navigation.
+
 . Select the name of the active database that you would like to use.
+
 . Select the *CQL Console* tab.
+
 . Create a table with a primary key column using the following command. Edit the command to add your *`KEYSPACE_NAME`* and choose a *`TABLE_NAME`*.
 +
-[source,cql,subs="verbatim,quotes"]
+[source,cql,subs="+quotes"]
 ----
 CREATE TABLE IF NOT EXISTS *KEYSPACE_NAME*.*TABLE_NAME* (key text PRIMARY KEY, c1 text);
 ----
-+
+
 . Confirm that your table was created:
 +
-[source,sql,subs="verbatim,quotes"]
+[source,sql,subs="+quotes"]
 ----
 select * from *KEYSPACE_NAME*.*TABLE_NAME*;
 ----
 +
-Result:
-+
+.Result
+[%collapsible]
+====
 [source,sql,subs="verbatim,quotes"]
 ----
  key | c1
@@ -207,25 +211,26 @@ Result:
 
 (0 rows)
 ----
-
-You have now created a table and confirmed that the table exists in your {db-serverless} database.
+====
 
 == Connect to CDC for {db-serverless} databases
 
 Complete the following steps after you have created a <<create-tenant,streaming tenant>> and a <<create-table,table>>.
 
-. Select *Databases* from the main navigation.
-. Select the name of the active database that you would like to use.
+. In the {astra_ui}, go to your database.
+
 . Click the *CDC* tab.
-. Click *Enable CDC*.
-. Complete the fields to select a tenant, select a keyspace, and select the name of the table you created.
+
 . Click *Enable CDC*.
 
-Enabling CDC creates a new `astracdc` namespace with two new topics, `data-` and `log-`.
+. Select a tenant, keyspace, and table.
+
+. Click *Enable CDC*.
+
+Enabling CDC creates a new `astracdc` namespace with two new topics: `data-` and `log-`.
 The `log-` topic consumes schema changes, processes them, and then writes clean data to the `data-` topic.
-The `log-` topic is for CDC functionality and should not be used.
+The `log-` topic is for mandatory CDC functionality and should not be used.
 The `data-` topic is used to consume CDC data in {product}.
-
 For more information, see <<increase-partitions,Increase the CDC data-topic Partitions>>.
 
 == Connect Elasticsearch sink
@@ -233,51 +238,59 @@ For more information, see <<increase-partitions,Increase the CDC data-topic Part
 Connect an Elasticsearch sink to CDC that consumes messages from the `data-` topic and sends them to your Elasticsearch deployment.
 
 . Go to your database's *CDC* tab.
+
 . Under *Change Data Capture*, select the name of the CDC-enabled table you would like to use.
 You should still be in the CDC tab after selecting a name, but the header becomes *CDC for `TABLE_NAME`* with a green *Active* icon next to it.
+
 . Select *Add Elastic Search Sink* to select your settings.
+
 . Select the `astracdc` namespace.
+
 . Select *Elastic Search* for the sink type.
+
 . Enter a name for your sink.
+
 . Under *Connect Topics*, select a `data-` topic in the `astracdc` namespace for the input topic.
+
 . Complete *Sink-Specific Configuration* with the *Elasticsearch URL*, *Index name*, and *API key* found in your https://cloud.elastic.co/[Elasticsearch deployment portal].
 Leave username, password, and token blank.
 +
-Default values auto-populate. These values are recommended:
+Default values auto-populate.
+These values are recommended:
 +
 * `Ignore Record Key` as `false`
 * `Null Value Action` as `DELETE`
 * `Enable Schema` as `true`
-+
-. When the fields are completed, select *Create*.
 
-If creation is successful, `SINK_NAME created successfully` appears at the top of the screen.
-You can confirm that your new sink was created in the *Sinks* tab.
+. Click *Create*.
+
+. Confirm that your new sink was created on the *Sinks* tab.
 
 == Send messages
 
-Let's process some changes with CDC.
+Process some changes with CDC:
 
 . Go to your database's *CQL Console* tab.
-. Modify the table you created.
+
+. Modify the table you created:
 +
-[source,sql,subs="verbatim,quotes"]
+[source,cql,subs="+quotes"]
 ----
 INSERT INTO *KEYSPACE_NAME*.*TABLE_NAME* (key,c1) VALUES ('32a','bob3123');
 INSERT INTO *KEYSPACE_NAME*.*TABLE_NAME* (key,c1) VALUES ('32b','bob3123b');
 ----
+
+. Confirm the changes you made:
 +
-. Confirm the changes you've made:
-+
-[source,sql,subs="verbatim,quotes"]
+[source,cql,subs="+quotes"]
 ----
 select * from *KEYSPACE_NAME*.*TABLE_NAME*;
 ----
 +
-Result:
-+
+.Result
+[%collapsible]
 ====
-[source,sql]
+[source,console]
 ----
  key | c1
 -----+----------
@@ -292,19 +305,17 @@ Your processed changes in the resulting table verify that the messages sent succ
 
 == Confirm Elasticsearch receives change data
 
-Ensure that your new Elasticsearch sink receives data once it is connected.
+Send a `GET` request to your Elasticsearch deployment to confirm Elasticsearch is receiving changes from your database via CDC:
 
-. Issue a GET request to your Elasticsearch deployment to confirm Elasticsearch is receiving changes from your database via CDC.
-+
-[source,shell,subs="verbatim,quotes"]
+[source,curl,subs="+quotes"]
 ----
-curl -X POST "*ELASTIC_URL*/*INDEX_NAME*/_search?pretty"
-  -H "Authorization: ApiKey '*API_KEY*'"
+curl -sS --location -X POST "*ELASTIC_URL*/*INDEX_NAME*/_search?pretty"
+--header "Authorization: ApiKey '*API_KEY*'"
 ----
-+
-. A JSON response with your changes to the index is returned, confirming that {product} is sending your CDC changes to your Elasticsearch sink.
-+
-[source,json,subs="verbatim,quotes"]
+
+Make sure the response includes your changes to the index:
+
+[source,json,subs="+quotes"]
 ----
 {
   "took": 1,
@@ -352,14 +363,6 @@ curl -X POST "*ELASTIC_URL*/*INDEX_NAME*/_search?pretty"
 }
 ----
 
-== Outcomes
-
-At this point you have successfully:
-
-* Created a tenant, topic, and table.
-* Connected your {db-serverless} database to CDC.
-* Connected Elasicsearch sink to your CDC and verified that messages are sent and received successfully.
-
 [[increase-partitions]]
 == Increase the CDC data-topic Partitions
 
@@ -367,15 +370,16 @@ After enabling CDC, 3 data and 3 log partitions are created under the `astracdc`
 Increasing the number of partitions will create new partitions, but existing data will remain in the old partitions.
 New messages will be distributed across the new partitions.
 
-. Confirm the current state of the topic before making changes.
+. Confirm the current state of the topic before making changes:
 +
 [source,bash]
 ----
 bin/pulsar-admin topics list-partitioned-topics astracdc
 ----
 +
-Result:
-+
+.Result
+[%collapsible]
+====
 [source,bash]
 ----
 persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-1
@@ -385,26 +389,29 @@ persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table
 persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-1
 persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
 ----
-+
-. Use the `update-partitioned-topic` command to change the number of partitions for a specified topic.
+====
+
+. Use the `update-partitioned-topic` command to change the number of partitions for a specified topic:
 +
 [source,bash]
 ----
 bin/pulsar-admin topics update-partitioned-topic ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1 --partitions 10
 ----
 +
-Here, we are increasing the number of partitions to 10.
-You can only increase the number of partitions. Decreasing is not supported due to potential data loss and message ordering issues.
-+
-. Verify the update.
+This example increases the number of partitions to 10.
+You can only increase the number of partitions.
+Decreasing is not supported due to potential data loss and message ordering issues.
+
+. Verify the update:
 +
 [source,bash]
 ----
 bin/pulsar-admin topics list ten01/astracdc
 ----
 +
-Result:
-+
+.Result
+[%collapsible]
+====
 [source,bash]
 ----
 persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
@@ -421,17 +428,17 @@ persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.tabl
 persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-3
 persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
 ----
-+
-. Check the topic to confirm it has been updated to have 10 partitions.
+====
+
+. Check the topic to confirm it has been updated to have 10 partitions:
 +
 [source,bash]
 ----
 bin/pulsar-admin topics partitioned-stats persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1
 ----
 +
-Result:
-+
-[%collapsible%open]
+.Result
+[%collapsible]
 ====
 [source,json]
 ----
@@ -474,9 +481,7 @@ Result:
 ----
 ====
 
-== Resources
+== See also
 
-For more on {product}, see:
-
-* https://docs.datastax.com/en/streaming/astra-streaming/astream-faq.html[{product} FAQs]
-* https://docs.datastax.com/en/streaming/astra-streaming/developing/clients/index.html[Pulsar clients with {product}]
+* xref:ROOT:astream-faq.html[]
+* xref:developing:clients/index.html[]

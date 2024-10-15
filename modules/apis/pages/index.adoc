@@ -26,3 +26,9 @@ In {product}, clusters are a managed service.
 You manage only the tenants and resources within those tenants.
 
 Some OSS Pulsar Admin API endpoints aren't supported in the {product} Pulsar Admin API because they don't apply to the {product} managed service.
+
+== See also
+
+* xref:apis:api-operations.adoc[]
+* xref:developing:using-curl.adoc[]
+* https://pulsar.apache.org/docs/reference-rest-api-overview/[Pulsar REST APIs]

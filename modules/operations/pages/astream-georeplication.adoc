@@ -73,15 +73,16 @@ To disable replication on a namespace, select **Disable Replication**.
 [#test]
 == Test georeplicated clusters
 
-. Verify your user token can access tenant metadata.
+. Verify that your user token can access tenant metadata:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-admin tenants get <tenant>
+bin/pulsar-admin tenants get **TENANT_NAME**
 ----
 +
-In the result, the `allowedClusters` are the clusters the tenant can be replicated to:
+In the result, the `allowedClusters` are the clusters where you can replicate the tenant:
 +
+.Result
 [source,json]
 ----
 {
@@ -90,11 +91,11 @@ In the result, the `allowedClusters` are the clusters the tenant can be replicat
 }
 ----
 
-. Verify your `pulsar-admin` can view the replicated clusters for your namespace:
+. Verify your `pulsar-admin` can read replicated clusters for your namespace:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-admin namespaces get-clusters <tenant>/<namespace>
+bin/pulsar-admin namespaces get-clusters **TENANT_NAME**/**NAMESPACE_NAME**
 ----
 +
 .Result
@@ -107,22 +108,23 @@ pulsar-aws-useast2-staging
 ----
 ====
 
-. Create a Pulsar consumer with a subscription to the `<my-tenant>/<my-namespace>/<my-topic>` topic:
+. Create a Pulsar consumer with a subscription to a specified topic:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-client consume -s "subscription-test" <my-tenant>/<my-namespace>/<my-topic> -n 0
+bin/pulsar-client consume -s "subscription-test" **TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** -n 0
 ----
 
-. Create a Pulsar producer to produce messages to the `<my-tenant>/<my-namespace>/<my-topic>` topic:
+. Create a Pulsar producer to produce messages from a specific topic:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-client produce <my-tenant>/<my-namespace>/<my-topic> --messages "hello-from-pulsar" -n 10
+bin/pulsar-client produce **TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** --messages "hello-from-pulsar" -n 10
 ----
-
-. Your consumer will acknowledge receipt of the messages:
 +
+The consumer acknowledges the messages:
++
+.Result
 [source,console]
 ----
 ----- got message -----
@@ -147,17 +149,18 @@ key:[null], properties:[], content:hello-from-pulsar
 key:[null], properties:[], content:hello-from-pulsar
 ----
 
-. Navigate to the **Namespaces and Topics** tab in your geo-replicated {product} clusters. +
-`persistent://<my-tenant>/<my-namespace>/<my-topic>` should be visible and showing traffic across all regions.
+. In the {astra_ui}, go to your tenant's **Namespaces and Topics** tab.
+
+. Make sure `persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**` is visible and shows traffic across all regions.
 
 [#replicated-subscriptions]
 == Replicated subscriptions
 
 The `isReplicated` value controls subscription behavior during replication.
 
-Subscriptions are created with `isReplicated=false` by default, and will not replicate when the cluster is replicated.
+Subscriptions are created with `isReplicated=false` by default, which means they do not replicate when the cluster is replicated.
 
-. Specify `replicateSubscriptionState(true)` at subscription creation to replicate the subscription when the cluster is replicated.
+. Specify `replicateSubscriptionState(true)` at subscription creation to replicate the subscription when the cluster is replicated:
 +
 [source,java]
 ----
@@ -170,13 +173,16 @@ Consumer<String> consumer = pulsarClient.newConsumer(Schema.STRING)
 
 . Check topic stats:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-admin topics stats persistent://<my-tenant>/<my-namespace>/<my-topic>
+bin/pulsar-admin topics stats persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
 ----
 +
-`isReplicated` is now `true` for this subscription:
+In the configuration, `isReplicated` is now `true` for this subscription.
 +
+.config.json
+[%collapsible]
+====
 [source,json]
 ----
 {
@@ -248,7 +254,7 @@ bin/pulsar-admin topics stats persistent://<my-tenant>/<my-namespace>/<my-topic>
       "replicationDelayInSeconds" : 0,
       "inboundConnection" : "/192.168.98.62:40346",
       "inboundConnectedSince" : "2022-09-14T20:20:35.128325Z",
-      "outboundConnection" : "[id: 0xd3b42242, L:/192.168.71.231:42272 - R:pulsar-aws-useast2.staging.streaming.datastax.com/3.14.0.138:6651]",
+      "outboundConnection" : "[id: 0xd3b42242, L:/192.168.71.231:42272 - R:pulsar-aws-useast2.streaming.datastax.com/3.14.0.138:6651]",
       "outboundConnectedSince" : "2022-09-14T18:37:16.060159Z"
     }
   },
@@ -263,11 +269,12 @@ bin/pulsar-admin topics stats persistent://<my-tenant>/<my-namespace>/<my-topic>
   }
 }
 ----
+====
 
 [#monitor]
 == Monitor replicated clusters
 
-{product} exposes the following topic-level replication metrics, which can be viewed in the **Overview** tab of the Namespaces and Topics page.
+{product} exposes the following topic-level replication metrics, which can be viewed in the **Overview** section of **Namespaces and Topics** in the {astra_ui}:
 
 include::operations:partial$georeplication-monitoring.adoc[]
 

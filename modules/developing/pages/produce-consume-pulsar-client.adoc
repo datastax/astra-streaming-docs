@@ -1,43 +1,46 @@
-= Producing and consuming messages with the Pulsar Client on {product}
+= Produce and consume messages with the {product} Pulsar Client
 :navtitle: Pulsar CLI
-:description: Use this guide to interact with your {product} tenant via the pulsar-client cli.
+:description: Use the pulsar-client CLI to interact with your {product} tenants
 
-This guide assumes you have completed the xref:getting-started:index.adoc[{product} quickstart] and you have xref:developing:configure-pulsar-env.adoc[set up your Pulsar binaries] to work with your tenant.
+You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants.
 
-Now it's time to produce and consume messages in your new streaming tenant.
+. xref:getting-started:index.adoc[Create a {product} tenant.]
 
-Set the required variables. If you've just completed the quickstart, these values are already set.
+. xref:developing:configure-pulsar-env.adoc[Configure Pulsar binaries for {product}.]
 
-[source,shell,subs="attributes+"]
+. Set the following environment variables:
++
+[source,shell,subs="+quotes"]
 ----
 TOPIC="my-topic"
 NAMESPACE="my-namespace"
-TENANT="my-stream-<rand>" #replace <rand> with a few alphanumeric characters
+TENANT="my-stream-**RANDOM_UUID**"
 ----
++
+Replace **RANDOM_UUID** with any random letters and numbers to create a unique tenant name.
 
-Run the following script to create 1 new message.
-
+. Produce a message:
++
 [source,shell,subs="attributes+"]
 ----
 include::{astra-streaming-examples-repo}/pulsar-client/produce-message.sh[]
 ----
++
+Your topic now has a new, unacknowledged message.
 
-Now you have a new, unacknowledged message in your topic.
-
-Run the following script to create a consumer that retrieves and acknowledges that message.
-
+. Create a consumer to retrieve and acknowledge the message:
++
 [source,shell,subs="attributes+"]
 ----
 include::{astra-streaming-examples-repo}/pulsar-client/consume-message.sh[]
 ----
 
-The output should look similar to this:
+. Make sure the output includes your message:
++
 [source,shell,subs="attributes+"]
 ----
 include::{astra-streaming-examples-repo}/pulsar-client/consume-output.sh[]
 ----
-
-If you made it here then your produce & consume journey was successful. Congrats{emoji-tada}! Now it's time to take your skills further {emoji-rocket}{emoji-rocket}.
 
 == See also
 

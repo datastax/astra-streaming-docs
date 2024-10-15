@@ -1,63 +1,59 @@
-= Restful requests using curl with {product}
-:navtitle: Using curl with {product}
-:description: This guide will provide the necessary steps to configure curl calls for use with {product}.
+= {product} HTTP requests
+:navtitle: Form requests
+:description: Interact with {product} over HTTP, such as with curl commands.
 
-Pulsar offers a RESTful API for administrative tasks.
-When you create a tenant in {product}, all supporting APIs are enabled.
+You can use the xref:apis:index.adoc[{product} APIs] and https://pulsar.apache.org/docs/reference-rest-api-overview/[Pulsar REST APIs] to programmatically interact with your tenants and related {product} configurations.
+Each API supports different functionalities.
 
-To interact with your {product} tenant you will need two pieces of information: a token and the service URL.
-This guide will show you how to gather that information and test your connection.
+Depending on the API you use, you need certain information to form HTTP requests:
 
-[TIP]
-====
-The https://pulsar.apache.org/docs/2.10.x/reference-rest-api-overview/[Pulsar documentation] has a full reference for each API supported in a cluster.
-====
+* To use the {product} Pulsar Admin API and Pulsar REST APIs, you need the tenant's Web Service URL and Pulsar token.
+* To use the {product} DevOps API, you need an xref:operations:astream-token-gen.adoc[{astra_db} application token].
 
-This reference will be helpful as you look to automate certain actions in your {product} tenant.
-
-== Find your tenant's web service URL
-
-You send HTTP requests to your tenant's _Web Service URL_:
+== Get the tenant web service URL
 
 . In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
 . Click the *Connect* tab.
-+
-image:connect-tab.png[Connect tab in {product}]
 
 . In the *Details* section, locate the *Tenant Details*.
-Here you can find the essential information you need to communicate with your Pulsar tenant.
+Here you can find the essential information you need to communicate with your Pulsar tenant, including the *Web Service URL*.
 +
 image:tenant-details.png[Tenant details in {product}]
-
-. Copy the *Web Service URL*.
-
++
 [TIP]
 ====
-The *Web Service URL* is different from a Pulsar *Broker Service URL*.
+The *Web Service URL* is _not_ the same as the Pulsar *Broker Service URL*.
 
 Web Service URLs start with `http`.
 Broker Service URLs start with `pulsar(+ssl)`.
 ====
 
-== Retrieve your Pulsar token in {product}
+== Create a {product} Pulsar token
 
-You need a Pulsar token to authenticate requests.
-
+[IMPORTANT]
+====
 An xref:operations:astream-token-gen.adoc[{astra_db} application token] is _not_ the same as a Pulsar token.
+====
 
-. To create a new Pulsar token in your {product} tenant, navigate to the "Settings" tab in the {astra_ui}.
+To create a new Pulsar token for your {product} tenant, do the following:
+
+. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
+
+. Click the *Settings* tab.
+
+. Click *Create Token*.
+
+. Select a token lifetime.
 +
-image:settings-tab.png[Settings tab in {product}]
-
-. Click "Create Token" and choose the time to expire.
-Be smart about this choice - "Never Expire" isn't always the best option.
-A window will appear with the newly generated token - it's a long string of letters and numbers.
+Practice responsible credential management:
 +
-image:copy-token.png[Copy token in {product}]
+* Be aware of the security implications for tokens that never expire.
+* Consider how long you actually plan to use the token.
 
-. Click the clipboard icon to copy the token to your clipboard, and paste the token in a safe place.
-This is the only time you will be able to copy it.
+. Copy the generated token and store it securely.
++
+The token is shown only once.
 
 == Make a request
 

@@ -75,14 +75,14 @@ For more information, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[d
 Optionally, you can choose a different cloud provider and region.
 Use `astra streaming list-regions` to see available values.
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
 TENANT="my-stream-**RANDOM_UUID**"
 CLOUD_PROVIDER_STREAMING="gcp"
 CLOUD_REGION_STREAMING="uscentral-1"
 ----
 
-. Run the following script to create a new streaming tenant.
+. Run the following script to create a new streaming tenant:
 +
 [source,shell]
 ----
@@ -130,10 +130,10 @@ Pulsar Admin::
 --
 . Set the required variables:
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
-NAMESPACE="my-namespace"
-# TENANT="my-stream-<rand>" # set previously
+NAMESPACE="**NAMESPACE_NAME**"
+TENANT="my-stream-**RANDOM_UUID**" # set previously
 ----
 
 . Run the following script to create a new namespace:
@@ -149,12 +149,12 @@ curl::
 --
 . Set the required variables:
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
-PULSAR_TOKEN="<REPLACE-ME-WITH-TOKEN>"
-WEB_SERVICE_URL="<REPLACE-ME-WITH-URL>"
-NAMESPACE="my-namespace"
-# TENANT="my-stream-<rand>" # set previously
+PULSAR_TOKEN="**PULSAR_TOKEN**"
+WEB_SERVICE_URL="**TENANT_WEB_SERVICE_URL**"
+NAMESPACE="**NAMESPACE_NAME**"
+TENANT="my-stream-**RANDOM_UUID**" # set previously
 ----
 
 . Run the following script to create a new namespace:
@@ -182,13 +182,15 @@ Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging
 +
 --
 . In the *Namespace And Topics* tab, locate the namespace created above and click its *Add Topic* button.
+
 . Provide a name for the topic like "my-topic".
-It must start with a lowercase letter, be alphanumeric, and can contain hyphens.
-. Leave the choice of persistence and partitioning alone for now - those can be a part of https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[future learning].
+It must start with a lowercase letter, and it can contain only letters, numbers, and hyphens (`-`).
++
+Disregard https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[persistence and partitioning] for now.
 +
 image:add-topic.png[Add topic in {product}]
 
-. Click the *Add Topic* button to create the topic within the namespace.
+. Click *Add Topic* to create the topic within the namespace.
 +
 image:topic-listing.png[Topic listing in {product}]
 --
@@ -200,11 +202,11 @@ To learn more about connecting to {product} with the pulsar-admin CLI, see xref:
 
 . Set the required variables:
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
-TOPIC="my-topic"
-# NAMESPACE="my-namespace" # set previously
-# TENANT="my-stream-<rand>" # set previously
+TOPIC="**TOPIC_NAME**"
+NAMESPACE="**NAMESPACE_NAME**" # set previously
+TENANT="my-stream-**RANDOM_UUID**" # set previously
 ----
 
 . Run the following script to create a new topic:
@@ -222,13 +224,13 @@ To learn more about interacting with {product} through HTTP, see xref:developing
 
 . Set the required variables:
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
-TOPIC="my-topic"
-# PULSAR_TOKEN="<REPLACE-ME-WITH-TOKEN>" # set previously
-# WEB_SERVICE_URL="<REPLACE-ME-WITH-URL>" # set previously
-# NAMESPACE="my-namespace" # set previously
-# TENANT="my-stream-<rand>" # set previously
+TOPIC="**TOPIC_NAME**"
+PULSAR_TOKEN="**PULSAR_TOKEN**" # set previously
+WEB_SERVICE_URL="**TENANT_WEB_SERVICE_URL**" # set previously
+NAMESPACE="**NAMESPACE_NAME**" # set previously
+TENANT="my-stream-**RANDOM_UUID**" # set previously
 ----
 
 . Run the following script to create a new topic:
