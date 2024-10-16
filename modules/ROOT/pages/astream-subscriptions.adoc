@@ -31,7 +31,7 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.BYTES)
 * xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
 * xref:astream-subscriptions-shared.adoc[Shared subscriptions]
 * xref:astream-subscriptions-failover.adoc[Failover subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key_shared subscriptions]
+* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]
 
 == See also
 

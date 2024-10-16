@@ -12,7 +12,7 @@ Guardrails are provisioned in the default settings for {product}.
 You can't directly change these guardrails.
 For dedicated clusters, some guardrails can be changed by contacting {support_url}[{company} Support].
 
-[cols="1,1"]
+[cols="1,1,1"]
 |===
 |Guardrail |Limit |Comments
 
@@ -329,10 +329,10 @@ The following configurations can't be changed:
 * Data persistency (`En`, `Qw`, `Qa`)
 * `Managedledger` policy/deletion
 * Namespace bundle configurations:
-  * Bundle split
-  * Bundle level clear backlog
-  * Bundle level unload
-  * Bundle level subscribe and unsubscribe
+** Bundle split
+** Bundle level clear backlog
+** Bundle level unload
+** Bundle level subscribe and unsubscribe
 * Replication
 * Delayed delivery
 * Offload policy

@@ -1,10 +1,10 @@
 = {product} enrollment FAQ
 :navtitle: Enrollment FAQ
-:description: These are the most common questions we receive about getting started with {product}.
+:description: Common questions about getting started with {product}.
 :page-tag: astra-streaming,onboarding,Orientation
 
 When considering {product} for your production workloads, you might have questions about what options are available for connecting and consuming your serverless clusters.
-This page answers the most common questions we receive about enrollment.
+This page answers some common questions about getting started with {product}.
 
 == Why does {company} call {product} "serverless"?
 
@@ -75,16 +75,18 @@ xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more]
 
 === How do I separate messaging traffic?
 
-It is common to have a hierarchy of development environments which app changes are promoted through before reaching production.
+It is common to have a hierarchy of development environments through which you promote app changes before they reach production.
 The configurations of middleware and platforms supporting the app should be kept in parity to promote stability and fast iterations with low volatility.
 
 By Tenant::
-To support the hierarchy of development environments pattern, we recommend using Tenants to represent each development environment.
-This gives you the greatest flexibility to balance a separation of roles with consistent service configuration.
-All tokens created within a Tenant are limited to that Tenant.
+To support the hierarchy of development environments, {company} recommends creating separate tenants for each development environment.
+This gives you the greatest flexibility to balance separation of roles with consistent service configuration.
 +
-For example, start with a tenant named `Dev`` that development teams have access to (and create tokens from), then create other tenants named `Staging` and `Production`.
-Each Tenant has progressively less permissions to create tokens, but maintains parity between the three running environments.
+All tokens created within a tenant are limited to that tenant.
++
+For example, start with a tenant named `Dev` that your development teams can access and create tokens for, and then create other tenants named `Staging` and `Production`.
+At each level of the hierarchy, there are fewer users with access to the environment's tenant, which means fewer opportunities to create tokens that can programmatically access that tenant.
+Yet, you still maintain parity across the three environments.
 
 By Namespace::
 Alternatively, you might choose to separate development environments by namespace within your {product} tenant.

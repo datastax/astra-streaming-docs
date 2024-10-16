@@ -26,11 +26,6 @@ The values in your `config.yml` depend on your tenant configuration.
 .config.yml
 [source,yaml,subs="+quotes"]
 ----
-global:
-  scrape_interval: 60s
-  evaluation_interval: 60s
-
-scrape_configs:
   - job_name: "astra-pulsar-metrics-demo"
 
     scheme: 'https'
@@ -100,10 +95,8 @@ kubectl rollout status daemonset \
 
 . To confirm that {product} metrics are integrated with your external Prometheus server, go to your external Prometheus server UI.
 Make sure the additional scrape job is in `UP` status.
-If not, there are issues in the previous configuration procedures.
-
-== Troubleshoot 401 Unauthorized errors
-
+If not, review the configuration instructions and YAML examples to ensure your configuration is correct.
++
 If the additional scrape job returns a `401 Unauthorized` error, make sure your Pulsar JWT isn't expired.
 For more information, see xref:astream-token-gen.adoc[].
 

@@ -1,9 +1,11 @@
 = Monitor streaming tenants
 :navtitle: Monitoring overview
 
-Because {product} is a software-as-a-service product, not all Apache Pulsar metrics (https://pulsar.apache.org/docs/reference-metrics/[Pulsar Metrics Reference]) are exposed for external integration purposes. At a high level, {product} only exposes metrics that are related to namespaces. Other metrics that are not directly namespace related are not exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
+Because {product} is a managed SaaS offering, some https://pulsar.apache.org/docs/reference-metrics/[Apache Pulsar metrics] aren't exposed for external integration purposes.
+At a high level, {product} only exposes metrics related to namespaces.
+Metrics that are not directly related to namespaces aren't exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
 
-In the following sections, we'll explore each of the {product} metrics categories that are available for external integration, and recommended metrics for external integration.
+Additionally, of the exposed metrics, not all metrics are recommended for external integration.
 
 == Pulsar raw metrics
 
@@ -113,7 +115,12 @@ For more information, see the https://prometheus.io/docs/prometheus/latest/query
 
 {company} recommends the following PromQL query patterns for aggregating raw {product} metrics.
 The following examples use the `pulsar_msg_backlog` raw metric to demonstrate the patterns.
-Additionally, in accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, these patterns aggregate messages at the parent topic level or higher, and they use the following expression to exclude system topics:
+In accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, the example patterns aggregate messages at the parent topic level or higher and they exclude system topics.
+
+.Filter system topics
+[%collapsible]
+====
+You can use the following expression to filter system topics:
 
 [source,pgsql]
 ----
@@ -130,6 +137,7 @@ persistent://some_tenant/__kafka/__consumer_offsets_partition_0
 
 To use this expression, your applications' namespace and topic names don't contain double underscores.
 If they do, they will also be excluded by this filter.
+====
 
 ==== Get the total message backlog of a specific parent topic, excluding system topics
 
@@ -203,4 +211,3 @@ If your receive too many false alarms, adjust the alert threshold to a higher va
 * xref:monitoring/metrics.adoc[]
 * xref:monitoring/integration.adoc[]
 * xref:monitoring/new-relic.adoc[]
-

@@ -198,6 +198,7 @@ Must have 4 steps to maintain numbering.
 ////
 ======
 
+[start=5]
 . If you haven't done so already, xref:configure-pulsar-env.adoc[set up your environment for the Pulsar binaries].
 
 . Create a deployment configuration YAML file that defines the function metadata and associated topics:
@@ -262,7 +263,7 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 [TIP]
 ====
 If your Python function contains only a single script and no dependencies, you can deploy the `.py` file directly, without packaging it into a `.zip` file or creating a configuration file:
-+
+
 [source,bash,subs="+quotes"]
 ----
 $ ./pulsar-admin functions create \
@@ -306,16 +307,16 @@ See <<controlling-your-function,Controlling your function>> for more information
 Upload your own code::
 +
 --
-. Select *Upload my own code*.
+.. Select *Upload my own code*.
 
-. Select your function file:
+.. Select your function file:
 +
 * `.py`: A single, independent Python script
 * `.zip`: A Python script with dependencies
 * `.jar`: A Java function
 * `.go`: A Go function
 
-. Based on the uploaded file, select the specific class (function) to deploy.
+.. Based on the uploaded file, select the specific class (function) to deploy.
 +
 {astra_db} generates a list of acceptable classes detected in the code.
 A file can contain multiple classes, but only one is used per deployment.
@@ -332,7 +333,7 @@ image::astream-exclamation-function.png[Exclamation Function]
 Use {company} transform function::
 +
 --
-. Select *Use {company} transform function*.
+.. Select *Use {company} transform function*.
 
 This is the only function option available on the {product} *Free* plan.
 
@@ -395,7 +396,7 @@ The trigger sends the message string to the function.
 Your function should output the result of processing the message.
 
 [#controlling-your-function]
-=== Control functions
+=== Stop and start functions
 
 In the {astra_ui}, on your tenant's *Functions* tab, you can use *Function Controls* to start, stop, and restart functions.
 
@@ -408,7 +409,7 @@ image::astream-function-log.png[Function Log]
 
 If you specified a log topic when deploying your function, function logs also output to that topic.
 
-== Edit functions
+=== Edit functions
 
 . In the {astra_ui}, on your tenant's *Functions* tab, click *Update Function*.
 
@@ -422,7 +423,7 @@ If you specified a log topic when deploying your function, function logs also ou
 
 If you need to change any other function settings, you must delete and redeploy the function with the desired settings.
 
-== Delete functions
+=== Delete functions
 
 [IMPORTANT]
 ====

@@ -85,4 +85,4 @@ Caused by: org.apache.pulsar.client.api.PulsarClientException$ConsumerBusyExcept
 * xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
 * xref:astream-subscriptions-shared.adoc[Shared subscriptions]
 * xref:astream-subscriptions-failover.adoc[Failover subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key_shared subscriptions]
+* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]

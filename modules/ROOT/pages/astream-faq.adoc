@@ -12,11 +12,12 @@ See xref:operations:astream-pricing.adoc[].
 
 == Why is {product} based on Apache Pulsar?
 
-See our https://www.datastax.com/blog/four-reasons-why-apache-pulsar-essential-modern-data-stack[blog post] that explains why we are excited about Apache Pulsar and why we decided it was the best technology to base {product} on.
+For information about the decision to use Apache Pulsar, see https://www.datastax.com/blog/four-reasons-why-apache-pulsar-essential-modern-data-stack[Four Reasons Why Apache Pulsar is Essential to the Modern Data Stack].
 
-== What will happen to Kesque?
+== What happened to Kesque?
 
-{product} is based heavily on technology originally created as part of Kesque. With the launch of {product} we will begin the process of shutting down the Kesque service and migrating customers to the new {product} platform.
+{product} is based heavily on technology originally created as part of Kesque.
+With the launch of {product}, {company} began shutting down the Kesque service and migrated customers to {product}.
 
 == Who should use {product}?
 

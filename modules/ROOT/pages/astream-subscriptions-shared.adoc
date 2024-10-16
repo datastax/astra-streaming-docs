@@ -10,6 +10,14 @@ However, there is a risk of losing message ordering guarantees and acknowledgeme
 
 This page explains how you can use Pulsar's shared subscription model to manage your topic consumption.
 
+.Shared subscription video
+[%collapsible]
+====
+This video from the *Five Minutes About Pulsar* series demonstrates shared subscriptions:
+
+video::mmukXqGsauA[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+====
+
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
@@ -83,15 +91,9 @@ If you run this test with xref:astream-subscriptions-exclusive.adoc[exclusive su
 To continue testing the shared subscription configuration, you can continue running new instances of `SimplePulsarConsumer.java` in new temrinal windows.
 All the consumers subscribe to the topic and consume messages in a round-robin fashion.
 
-== Shared subscription video
-
-Follow along with this video from our *Five Minutes About Pulsar* series to see shared subscriptions in action:
-
-video::mmukXqGsauA[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
-
 == See also
 
 * xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
 * xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
 * xref:astream-subscriptions-failover.adoc[Failover subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key_shared subscriptions]
+* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]

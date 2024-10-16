@@ -1,5 +1,5 @@
 = Key shared subscriptions in Pulsar
-:navtitle: Key_Shared
+:navtitle: Key shared
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
 _Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
@@ -15,13 +15,21 @@ Keys are generated with hashing that converts arbitrary values like `topic-name`
 
 This page explains how to use Pulsar's key shared subscription model to manage your topic consumption.
 
+.Key shared subscription video
+[%collapsible]
+====
+This video from the *Five Minutes About Pulsar* series demonstrates key shared subscriptions:
+
+video::_49wlA53L_8[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+====
+
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Key shared subscription example
 
-To try out a Pulsar key shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
-
+. To try out a Pulsar key shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
++
 .SimplePulsarConsumer.java
 [source,java]
 ----
@@ -37,19 +45,15 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .keySharedPolicy(KeySharedPolicy.autoSplitHashRange())
     .subscribe();
 ----
-
-=== keySharedPolicy
-
++
 The `keySharedPolicy` defines the how hashed values are assigned to subscribed consumers.
++
+The above example uses `autoSplitHashRange`, which is an auto-hashing policy.
+Running multiple consumers with auto-hashing balances the messaging load across all available consumers, like a xref:astream-subscriptions-shared.adoc[shared subscription]
++
+If you want to manually set a hash range, use `KeySharedPolicy.stickyHashRange()`, as demonstrated in the following steps.
 
-The above example used `autoSplitHashRange`, which is an auto-hashing policy.
-Running multiple consumers with auto-hashing balances the messaging load across all available consumers.
-
-If you want to manually set a hash range, use `KeySharedPolicy.stickyHashRange()`.
-
-==== Test sticky hashed key shared subscriptions
-
-. To test out sticky hashed key shared subscriptions, import the following additional classes:
+. To use a sticky hashed key shared subscription, import the following classes to `SimplePulsarConsumer.java`:
 +
 .SimplePulsarConsumer.java
 [source,java]
@@ -143,14 +147,8 @@ Caused by: org.apache.pulsar.client.api.PulsarClientException$ConsumerAssignExce
 	at com.datastax.pulsar.SimplePulsarConsumer.main(SimplePulsarConsumer.java:47)
 ----
 
-. To run multiple consumers with sticky hashing, modify the `SimplePulsarConsumer.java` configuration to split the hash range between consumers.
+. To run multiple consumers with sticky hashing, modify the `SimplePulsarConsumer.java` configuration to split the hash range between consumers or use auto-hashing.
 Then, you can launch multiple instances of `SimplePulsarConsumer.java` to consume messages from different hash ranges.
-
-== Key shared subscription video
-
-Follow along with this video from our *Five Minutes About Pulsar* series to see key shared subscriptions in action:
-
-video::_49wlA53L_8[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
 
 == See also
 
