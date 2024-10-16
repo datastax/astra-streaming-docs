@@ -483,5 +483,5 @@ bin/pulsar-admin topics partitioned-stats persistent://ten01/astracdc/data-7e3a1
 
 == See also
 
-* xref:ROOT:astream-faq.html[]
-* xref:developing:clients/index.html[]
+* xref:ROOT:astream-faq.adoc[]
+* xref:developing:clients/index.adoc[]

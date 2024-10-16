@@ -43,7 +43,7 @@ See xref:ROOT:astream-org-permissions.adoc[].
 
 == What is the difference between {astra_db} application tokens and the Pulsar tokens?
 
-See xref:monitoring:astream-token-gen.adoc[].
+See xref:operations:astream-token-gen.adoc[].
 
 == What are the differences in geo-replication for shared and dedicated clusters?
 

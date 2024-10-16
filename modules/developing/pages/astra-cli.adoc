@@ -23,5 +23,4 @@ You can use {astra_cli} instead of or in addition to the {astra_ui} and {astra_d
 
 For more information, see the following:
 
-* xref:api-reference:databases.adoc[]
-* https://www.datastax.com/blog/introducing-cassandra-astra-cli[Accelerate your Cassandra development and automation with the {astra-cli}]
+* https://www.datastax.com/blog/introducing-cassandra-astra-cli[Accelerate your Cassandra development and automation with the {astra_cli}]

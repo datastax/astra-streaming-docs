@@ -55,7 +55,6 @@ For information about the Pulsar CLI or APIs, see xref:developing:configure-puls
 
 . Enter a namespace name, and then click *Create*.
 . Click "Create" to create the namespace.
---
 
 == Create a topic
 
