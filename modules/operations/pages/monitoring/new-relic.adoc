@@ -6,7 +6,7 @@ While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/p
 
 * Review xref:monitoring/index.adoc[].
 * https://docs.newrelic.com/[Set up a New Relic account.]
-* Save your new relic license key locally.
+* Save your New Relic license key locally.
 
 == Prepare the extra Prometheus server
 
