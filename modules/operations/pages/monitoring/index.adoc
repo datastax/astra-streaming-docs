@@ -1,4 +1,4 @@
-= Monitoring streaming tenants
+= Monitor streaming tenants
 :navtitle: Monitoring overview
 
 Because {product} is a software-as-a-service product, not all Apache Pulsar metrics (https://pulsar.apache.org/docs/reference-metrics/[Pulsar Metrics Reference]) are exposed for external integration purposes. At a high level, {product} only exposes metrics that are related to namespaces. Other metrics that are not directly namespace related are not exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
@@ -29,7 +29,7 @@ The following table lists recommended namespace and/or topic metrics as a starti
 include::example$namespace-topic-metrics.csv[]
 |===
 
-=== Replication Metrics
+=== Replication metrics
 
 When geo-replication is enabled for a particular namespace, a subset of namespace metrics is available specifically for geo-replication purposes. Below is the list of recommended geo-replication metrics as a starting point.
 
@@ -47,7 +47,7 @@ The following table gives the list of recommended subscription metrics as a star
 include::example$subscription-metrics.csv[]
 |===
 
-=== Function Metrics
+=== Function metrics
 
 The following table gives the list of recommended function metrics as a starting point. This is only relevant when Pulsar functions are deployed in {product}.
 
@@ -74,12 +74,12 @@ include::example$sink-connector-metrics.csv[]
 |===
 
 [#aggregate-astra-streaming-metrics]
-== Aggregate {product} Metrics
+== Aggregate {product} metrics
 
 [IMPORTANT]
 ====
-Do _not_ aggregate metrics if you are on the *Pay As You Go* {product} plan because one cluster can be shared among multiple organizations.
-For more information, see xref:astream-limits.adoc[].
+Do _not_ aggregate metrics on shared clusters because one cluster can be shared among multiple organizations.
+For more information, see xref:astream-limits.adoc[] and xref:operations:astream-pricing.adoc[].
 ====
 
 Each externally exposed raw {product} metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
@@ -109,8 +109,6 @@ For more information, see the https://prometheus.io/docs/prometheus/latest/query
 {company} recommends the following PromQL query patterns for aggregating raw {product} metrics.
 These examples use the `pulsar_msg_backlog` raw metric to demonstrate the patterns.
 Additionally, in accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, these patterns aggregate messages at the parent topic level or higher and they exclude system topics (with the PromQL statement `{topic !~ ".*__.*"}`).
-
-//TODO: Check the styles of double underscore and query filters
 
 .About the system topics filter
 [%collapsible]

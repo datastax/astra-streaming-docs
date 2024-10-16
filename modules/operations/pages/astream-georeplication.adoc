@@ -6,40 +6,22 @@ Pulsar's serving layer (brokers) and storage layer (bookies) are decoupled in Pu
 
 Geo-replication typically provides redundancy in the event of datacenter outages, but can also be used for any application where Pulsar messages are produced and consumed across regions.
 
-This doc provides:
-
-* xref:astream-georeplication.adoc#overview[]
-* xref:astream-georeplication.adoc#async[]
-* xref:astream-georeplication.adoc#astra-ui[]
-* xref:astream-georeplication.adoc#test[]
-* xref:astream-georeplication.adoc#replicated-subscriptions[]
-* xref:astream-georeplication.adoc#monitor[]
-
-If you're already familiar with Pulsar's messaging replication and asynchronous geo-replication, skip ahead to xref:astream-georeplication.adoc#astra-ui[enabling geo-replication in {product}].
-
 [#overview]
-== Overview of message replication in Pulsar
+== Message replication in Pulsar
 
-In Pulsar, cross-cluster message replication can be implemented with *synchronous* or *asynchronous* message replication, and with or without a global configuration store in ZooKeeper.
+In Pulsar, cross-cluster message replication can be implemented with _synchronous_ or _asynchronous_ message replication, and with or without a global configuration store in ZooKeeper.
 
-{product} only supports *asynchronous* geo-replication without a global configuration store. This approach offers better performance and lower latency.
+{product} supports only asynchronous geo-replication without a global configuration store.
+This approach offers better performance and lower latency.
 
-In asynchronous geo-replication, each region has its own local Pulsar cluster. Messages published in a cluster of one region are automatically replicated asynchronously to remote clusters in other regions. This is achieved through Pulsar’s built-in geo-replication capability.
+In asynchronous geo-replication, each region has its own local Pulsar cluster. Each Pulsar cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
 
-[#async]
-== Asynchronous geo-replication overview
+When messages are produced on a Pulsar topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters in other regions.
+This is achieved through Pulsar's built-in geo-replication capability.
 
-{product} only supports *asynchronous* geo-replication without a global configuration store.
-
-An *asynchronous* geo-replication cluster consists of two or more independent Pulsar clusters running in different regions.
-
-Each Pulsar cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
-
-When messages are produced on a Pulsar topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters.
-
-The message producer doesn't wait for confirmation from multiple Pulsar clusters. The producer receives a response immediately after the nearest cluster successfully persists the data. The data is then asynchronously replicated to the other Pulsar clusters in the background.
-
-To set up asynchronous geo-replication in {product}, see xref:astream-georeplication.adoc#astra-ui[].
+The message producer doesn't wait for confirmation from multiple Pulsar clusters.
+The producer receives a response immediately after the nearest cluster successfully persists the data.
+The data is then asynchronously replicated to the other Pulsar clusters in the background.
 
 [#astra-ui]
 == Enable geo-replication in {product}

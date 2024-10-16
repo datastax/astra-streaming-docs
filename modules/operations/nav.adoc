@@ -18,4 +18,3 @@
 ** xref:operations:astream-token-gen.adoc[]
 ** xref:operations:private-connectivity.adoc[]
 ** xref:ROOT:astream-org-permissions.adoc[]
-** xref:ROOT:astream-custom-roles.adoc[]

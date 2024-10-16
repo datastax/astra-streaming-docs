@@ -1,7 +1,9 @@
-= Producing and consuming messages using the Java pulsar client with {product}
+= Use the Java Pulsar client with {product}
 :navtitle: Java
-:description: This is a guide to create a simple producer and consumer using Pulsar's java client.
+:description: Produce and consume messages with the Java Pulsar client and {product}.
 :page-tag: astra-streaming,dev,develop,pulsar,java
+
+You can produce and consume messages with the Java Pulsar client and {product}.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 

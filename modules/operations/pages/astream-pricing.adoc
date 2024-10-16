@@ -1,5 +1,72 @@
-= {product} Pricing
+= {product} pricing
 :page-tag: astra-streaming,planner,plan,pulsar
 
-For information on pricing for {product}, see https://www.datastax.com/products/astra-streaming/pricing[{product} pricing].
+{product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra_db}.
 
+{product} offers three subscription plans, as well as pricing for dedicated clusters.
+A {product} subscription is associated with an {astra_db} organization, but {product} subscription plans are separate from {astra_db} organization subscription plans.
+
+For {product} plans and pricing details, see https://www.datastax.com/pricing/astra-streaming[{product} pricing].
+For information about {astra_db} plans, billing, and usage, see xref:astra-db-serverless:administration:subscription-plans.adoc[].
+
+== {product} subscription plans
+
+{product} subscription plans include *Free*, *Pay As You Go*, and *Annual*.
+
+The *Free* plan allows only one topic.
+It is meant for evaluation before upgrading to a paid plan.
+
+*Pay As You Go* and *Annual* plans realize the benefits of fully-managed SaaS offerings: You only pay for the resources you use to produce, process, and consume messages.
+These plans require a payment method on file.
+For metering details, see see https://www.datastax.com/pricing/astra-streaming[{product} pricing].
+
+By default, {product} plans use secure, shared Pulsar clusters.
+Your data and interaction with Pulsar are secured over a public internet connection.
+If desired, you can opt in to <<dedicated-clusters,dedicated clusters>>.
+
+[#dedicated-clusters]
+== Dedicated clusters
+
+If you prefer not to use shared clusters, you can opt for dedicated clusters.
+
+With dedicated clusters, you have your own private Pulsar cluster with all the benefits of {product} as a managed service.
+You sign in to {astra_db} and use {product} in the same way that you would on shared clusters.
+When you create a tenant, you have the option to deploy to your private cluster.
+This means that you can use both shared or dedicated clusters, depending on your tenants' use cases.
+
+Dedicated clusters are an addition to your base {product} subscription plan, and billing for dedicated clusters is unique to each customer.
+For information about dedicated cluster pricing and metering, see https://www.datastax.com/astra-streaming-dedicated-clusters[{product} Dedicated Clusters pricing].
+
+Like shared clusters, all connections for dedicated clusters in {product} are guarded by authentication, authorization, and secure (TLS) communications.
+By default, these connections are over the public internet.
+Additionally, dedicated clusters support xref:operations:private-connectivity.adoc[private connectivity].
+
+== Additional billed charges
+
+Regardless of your subscription plan or cluster type, additional customizations can impact your {product} billed charges.
+These include, but are not limited to, the following:
+
+* Message retention duration
+* Maximum message retention storage
+* Number of tenants
+* Region of tenant
+
+== Limits
+
+Regardless of your subscription plan or cluster type, {product} applies xref:astream-limits.adoc[guardrails and limits] on resource creation to ensure best practices, foster availability, and promote optimal configurations for your databases.
+
+Dedicated clusters have fewer limits than shared clusters.
+
+== Regions
+
+With shared clusters, you can create tenants in any of the xref:astream-regions.adoc[supported regions].
+
+Dedicated clusters are open to almost any public cloud region.
+For this reason, dedicated clusters offer more flexibility for xref:operations:astream-georeplication.adoc[geo-replication].
+If your preferred region isn't already available, you can contact your account representative or {support_url}[{company} Support] to request it.
+
+== See also
+
+* xref:operations:onboarding-faq.adoc[]
+* xref:ROOT:astream-org-permissions.adoc[]
+* xref:operations:monitoring/index.adoc#aggregate-astra-streaming-metrics[Aggregate {product} metrics]

@@ -1,4 +1,4 @@
-= Produce and consume messages with the {product} Pulsar Client
+= Use the {product} Pulsar Client
 :navtitle: Pulsar CLI
 :description: Use the pulsar-client CLI to interact with your {product} tenants
 

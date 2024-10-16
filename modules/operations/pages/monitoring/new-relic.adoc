@@ -1,4 +1,4 @@
-= New Relic Integration
+= Integrate with New Relic
 
 While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic[send external Prometheus data to New Relic], one the https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration] option is relevant to {product}.
 

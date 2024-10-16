@@ -63,8 +63,8 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 
 === {new}
 
-* Custom functions can only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
-Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions].
+* Custom functions require a xref:operations:astream-pricing.adoc[paid {product} plan].
+Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 
 == February 27, 2023
 

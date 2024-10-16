@@ -1,4 +1,5 @@
-= External Prometheus and Grafana Integration
+= Integrate with an external Prometheus and Grafana instance
+:navtitle: Integrate external Prometheus and Grafana
 
 {product} exposes some of the Pulsar metrics through Prometheus endpoints.
 The Prometheus configuration information to scrape {product} metrics into an external Prometheus server is found in the {astra_ui}.
@@ -103,7 +104,7 @@ If not, there are issues in the previous configuration procedures.
 
 == Troubleshoot 401 Unauthorized errors
 
-If the additional scrape job returns a 401 Unauthorized error, make sure your Pulsar JWT isn't expired.
+If the additional scrape job returns a `401 Unauthorized` error, make sure your Pulsar JWT isn't expired.
 For more information, see xref:astream-token-gen.adoc[].
 
 == See also

@@ -1,7 +1,9 @@
-= Producing and consuming messages using the Java pulsar client with {product} and Spring
+= Use the Java Pulsar client with {product} and Spring
 :navtitle: Spring
-:description: This is a guide to create a simple producer and consumer using Pulsar's java client with Spring.
+:description: Produce and consume messages with the Java Pulsar client, {product}, and Spring.
 :page-tag: astra-streaming,dev,develop,pulsar,java
+
+You can produce and consume messages with the Java Pulsar client, {product}, and Spring.
 
 == Prerequisites
 

@@ -1,4 +1,4 @@
-= {product} Regions
+= {product} regions
 :page-tag: astra-streaming,admin,manage,pulsar
 
 When creating a tenant, select a region for your tenant.

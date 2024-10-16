@@ -364,7 +364,7 @@ Make sure the response includes your changes to the index:
 ----
 
 [[increase-partitions]]
-== Increase the CDC data-topic Partitions
+== Increase the CDC data-topic partitions
 
 After enabling CDC, 3 data and 3 log partitions are created under the `astracdc` namespace.
 Increasing the number of partitions will create new partitions, but existing data will remain in the old partitions.

@@ -6,153 +6,104 @@
 When considering {product} for your production workloads, you might have questions about what options are available for connecting and consuming your serverless clusters.
 This page answers the most common questions we receive about enrollment.
 
-== {product} Environments
+== Why does {company} call {product} "serverless"?
 
-.What are the different ways I can use {product}?
-[%collapsible]
-====
-{product} offers three subscription plans, as well as pricing for *Dedicated Clusters* plans.
-For more information, see https://www.datastax.com/products/astra-streaming/pricing[{product} Pricing].
-
-If your {astra_db} organization is on the *Free* plan, you use the *Pay As You Go* streaming plan.
-When you provide a payment method, you only pay for resources used when messages are produced and consumed.
-
-In *Pay As You Go* streaming environments, your data and interaction with Pulsar are secured over a public internet connection, and there are limitations to how many resources you can create.
-For more information, see xref:astream-limits.adoc[].
-
-For *Dedicated Clusters* plans, you have your own private Pulsar cluster with the additional benefits of {product}.
-You sign in to {astra_db} as you would on any other plan.
-However, when you create new tenants, you have additional options to deploy to your private clusters.
-*Dedicated Clusters* plans have fewer limits than *Pay As You Go* plans, and billing for dedicated clusters is unique to each customer.
-
-Finally, with *Pay As You Go* plans, you can create tenants in any of the xref:astream-regions.adoc[supported regions].
-*Dedicated Clusters* are open to almost any public cloud region.
-====
-
-.Why does {company} call it "Serverless"?
-[%collapsible]
-====
-Running a production grade Pulsar cluster that can handle at-scale workloads is not a trivial task. It requires many (virtual) machines to be configured in a very particular way.
+Running a production grade Pulsar cluster that can handle at-scale workloads is not a trivial task.
+It requires many (virtual) machines to be configured in a very particular way.
 
 In traditional cloud environments, you would pay hourly for every machine whether they are being used for workloads or not, and you would carry the burden of maintaining the server infrastructure.
 
 Serverless removes those operational burdens, and you pay only for the resources you actually use.
-====
 
-== Cluster connections
+== What is the difference between shared and dedicated clusters for {product}?
 
-On a *Dedicated Clusters* plan, all connections in {product} are guarded by AuthN, AuthZ, and secure (TLS) communications.
-You can connect over the public internet or establish a private connection.
-To learn more about private connections, refer to your cloud provider's private link documentation:
+See xref:operations:astream-pricing.adoc[].
 
-* https://aws.amazon.com/privatelink/[AWS PrivateLink]
-* https://learn.microsoft.com/en-us/azure/private-link/private-link-overview[Azure Private Link]
-* https://cloud.google.com/vpc/docs/private-service-connect[GCP Private Service Connect]
+== Are connections to shared clusters less secure than dedicated clusters?
 
-On a *Pay As You Go* plan, you use a shared Pulsar cluster.
-Connections are secured over the public internet, but private links typically can't be established.
+Connections to both cluster types are secure.
+However, dedicated clusters offer the option for private connectivity.
 
-== User access
+For dedicated Pulsar clusters, all connections in {product} are guarded by authentication, authorization, and secure (TLS) communications.
+You can connect over the public internet or xref:operations:private-connectivity.adoc[establish a private connection].
 
-.Can I use my own single sign-on with {product}?
-[%collapsible]
-====
-*Pay As You Go* and *Enterprise* organization can use SSO to sign in to the {astra_ui}
-For more information, see https://docs.datastax.com/en/astra-serverless/docs/manage/org/configuring-sso.html[{astra_db} Serverless SSO documentation].
-====
+Shared Pulsar clusters also use a secure connection over the public internet.
+However, shared clusters don't support private links.
 
-.How do {astra_db} roles and permissions map to Pulsar roles and permissions?
-[%collapsible]
-====
-Pulsar has the concept of https://pulsar.apache.org/docs/security-authorization/[clients with role tokens]. Authentication in Pulsar is the process of verifying a provided (JWT) token, and authorization is the process of determining if the role claimed in that token is allowed to complete the requested action.
+For more information, see xref:operations:astream-pricing.adoc[].
 
-{product} uses the {company} version of Apache Pulsar (called xref:luna-streaming::index.adoc[Luna Streaming]).
-The https://github.com/datastax/pulsar[Luna project] is an open fork of the Pulsar project that maintains feature parity with OSS Pulsar. {product}, as a managed service, abstracts some features/options of Pulsar to ensure continuous, reliable service.
+== Does {product} support single-sign on?
 
-On a *Pay As You Go* plan, your {astra_db} organization has one or more tenants on a shared Pulsar cluster.
-Each of your tenants is secured by Pulsar AuthN & AuthZ models as well as your {astra_db} organization's AuthN and AuthZ.
-The shared cluster is created and administered by {product} administrators.
-Each tenant is assigned a custom role and permissions limited to that tenant only.
-All tokens created within a tenant are assigned roles similar to the assigning tenant.
-====
+If your {astra_db} organization is on the *Pay As You Go* and *Enterprise* {astra_db} subscription plan, your users can use SSO to sign in to the {astra_ui}.
+For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
-.What is the difference between the {astra_db} application token and the Pulsar token? Are they interchangeable?
-[%collapsible]
-====
+== How do {astra_db} roles and permissions map to Pulsar roles and permissions?
+
+See xref:ROOT:astream-org-permissions.adoc[].
+
+== What is the difference between {astra_db} application tokens and the Pulsar tokens?
+
 See xref:monitoring:astream-token-gen.adoc[].
-====
 
-== Data Migration and Geo-replication
+== What are the differences in geo-replication for shared and dedicated clusters?
 
-.What are the differences in geo-replication for Pay As You Go and Dedicated Clusters plan?
-[%collapsible]
-====
-Geo-replication is available to *Pay As You Go* and *Dedicated Clusters* {product} plans.
-Both can replicate to other clusters, but there are some differences.
+Geo-replication is available for both shared and dedicated clusters.
+Both cluster types can replicate to other clusters, but there are some differences:
 
-For *Pay As You Go* {product} plans, traffic between clusters is secured over the public internet, while dedicated clusters have the option for private communication.
+Connections::
+For shared clusters, traffic between clusters is secured over the public internet.
++
+Dedicated clusters can use either the default secure public internet connection or enable private links.
 
-*Pay As You Go* plans can replicate between any xref:astream-regions.adoc[supported region] of the same cloud provider.
-
-With *Dedicated Clusters*, you can use almost any region supported by your cloud provider, as well as across cloud providers.
+Regions::
+Shared clusters can replicate between any xref:astream-regions.adoc[supported region] of the same cloud provider.
++
+Dedicated clusters can use almost any region supported by your cloud provider, as well as across cloud providers.
 
 For more on geo-replication, see xref:astream-georeplication.adoc[].
-====
 
-.Can I migrate data from my existing Pulsar cluster to {product}?
-[%collapsible]
-====
+== Application development
+
+=== Can I migrate data from my existing Pulsar cluster to {product}?
+
 Unless you are starting a project from scratch, you likely have message data that needs to be brought over to your {product} tenants.
 For migration assistance, contact {support_url}[{company} Support].
 
 Every tenant in {product} comes with custom ports for Kafka and RabbitMQ workloads.
 {company} also offers a fully-compatible JMS implementation for your Java workloads.
 xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more]
-====
 
-== Application Development
+=== How do I separate messaging traffic?
 
-.How do I separate messaging traffic?
-[%collapsible]
-====
 It is common to have a hierarchy of development environments which app changes are promoted through before reaching production.
 The configurations of middleware and platforms supporting the app should be kept in parity to promote stability and fast iterations with low volatility.
 
-[discrete]
-==== By Tenant
+By Tenant::
 To support the hierarchy of development environments pattern, we recommend using Tenants to represent each development environment.
 This gives you the greatest flexibility to balance a separation of roles with consistent service configuration.
 All tokens created within a Tenant are limited to that Tenant.
-
++
 For example, start with a tenant named `Dev`` that development teams have access to (and create tokens from), then create other tenants named `Staging` and `Production`.
 Each Tenant has progressively less permissions to create tokens, but maintains parity between the three running environments.
 
-[discrete]
-==== By Namespace
+By Namespace::
 Alternatively, you might choose to separate development environments by namespace within your {product} tenant.
 While this doesn't offer as much flexibility as separation by tenant, it does offer a much simpler model to manage.
 Also, note that in this scheme you cannot limit access by namespace.
 All tokens would have access to all namespaces.
-====
 
-.Can we develop applications on open source Pulsar and then move to {product}?
-[%collapsible]
-====
-As mentioned previously, {product} is actively maintained to keep parity with the official https://pulsar.apache.org[Apache Pulsar project].
+=== Can I develop applications on open source Pulsar and then move to {product}?
+
+{product} is actively maintained to keep parity with the official https://pulsar.apache.org[Apache Pulsar project].
 The notable differences arise from accessibility and security.
 Naturally, you have less control in a managed, serverless cluster than you do in a cluster running in your own environment.
 Beyond those differences, the effort to develop locally and then move to {product} should not be significant, but it is recommended to develop directly in {product}.
-If you are trying to save costs, use the free tier of {product} and then switch when you are ready to stage your production services.
-====
+If you are trying to reduce costs, use the free tier of {product} and then switch when you are ready to stage your production services.
 
-.Can I use {product} with my existing Kafka or RabbitMQ applications?
-[%collapsible]
-====
+=== Can I use {product} with my existing Kafka or RabbitMQ applications?
+
 Yes, {product} offers a fully compatible Kafka and RabbitMQ implementation. This means you can use your existing Kafka or RabbitMQ applications with {product}. You can also use the {product} Kafka or RabbitMQ implementation with your existing Pulsar applications. {product} comes with custom ports for Kafka and RabbitMQ workloads. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
-====
 
-.Can I use {product} with my existing Java applications?
-[%collapsible]
-====
+=== Can I use {product} with my existing Java applications?
+
 Yes, {product} offers a fully compatible JMS implementation. This means you can use your existing JMS applications with {product}. You can also use the {product} JMS implementation with your existing Pulsar applications. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
-====

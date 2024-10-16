@@ -1,5 +1,4 @@
-= API References
-:navtitle: API references overview
+= {product} APIs
 :description: Learn about {product} APIs
 :page-tag: astra-streaming,dev,develop,pulsar
 

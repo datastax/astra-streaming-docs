@@ -1,7 +1,9 @@
-= Producing and consuming messages using the python pulsar client on {product}
+= Use the Python Pulsar client with {product}
 :navtitle: Python
-:description: This is a guide to create a simple producer and consumer using Pulsar's python client.
+:description: Use the Python Pulsar client with {product} to produce and consume messages.
 :page-tag: astra-streaming,dev,develop,python,pulsar
+
+You can use the Python Pulsar client with {product} to produce and consume messages.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 

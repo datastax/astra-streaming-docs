@@ -1,4 +1,4 @@
-= {product} Functions
+= {product} functions
 :page-tag: astra-streaming,dev,develop,pulsar,java,python
 
 Functions are lightweight compute processes that you can run on each message a topic receives.
@@ -19,9 +19,9 @@ video::OCqxcNK0HEo[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445p
 
 [IMPORTANT]
 ====
-Custom functions require a https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
+Custom functions require a xref:operations:astream-pricing.adoc[paid {product} plan].
 
-Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions].
+Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 ====
 
 [#create-an-archive]
@@ -255,7 +255,8 @@ bin/pulsar-admin functions create --function-config-file **PATH_TO_FUNCTION_CONF
 ====
 A response of `Created Successfully!` indicates the function is deployed and ready to accept messages.
 
-If the response is a 402 error with `Reason: only qualified organizations can create functions`, then your organization must be upgraded to the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
+If the response is `402 Payment Required` with `Reason: only qualified organizations can create functions`, then you must upgrade to a xref:operations:astream-pricing.adoc[paid {product} plan].
+Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 ====
 +
 [TIP]
@@ -333,7 +334,9 @@ Use {company} transform function::
 --
 . Select *Use {company} transform function*.
 
-This is the only function option available for organizations on the *Free* plan.
+This is the only function option available on the {product} *Free* plan.
+
+For more information, see xref:streaming-learning:functions:index.adoc[] and xref:operations:astream-pricing.adoc[].
 --
 ======
 

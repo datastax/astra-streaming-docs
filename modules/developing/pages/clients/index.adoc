@@ -1,4 +1,4 @@
-= Producing and consuming messages on {product} with Pulsar clients
+= Use Pulsar clients with {product}
 :navtitle: Pulsar clients
 :description: Use any of the Pulsar Clients to interact with your {product} topics.
 

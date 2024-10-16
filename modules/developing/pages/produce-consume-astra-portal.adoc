@@ -1,4 +1,4 @@
-= Producing and consuming messages using the {astra_ui}
+= Produce and consume messages in the {astra_ui}
 :navtitle: {astra_ui}
 :description: Use this guide to create and consume a topic message using the {astra_ui}.
 

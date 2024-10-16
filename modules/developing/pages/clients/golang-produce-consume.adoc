@@ -1,7 +1,9 @@
-= Producing and consuming messages using the Golang pulsar client on {product}
+= Use the Golang Pulsar client with {product}
 :navtitle: Golang
-:description: This is a guide to create a simple producer and consumer using Pulsar's golang client.
+:description: Produce and consume messages with the Golang Pulsar client and {product}.
 :page-tag: astra-streaming,dev,develop,pulsar,go
+
+You can produce and consume messages with the Golang Pulsar client and {product}.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 

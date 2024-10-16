@@ -1,21 +1,31 @@
 = Private connectivity
 
+[IMPORTANT]
+====
+Private links are available only for xref:operations:astream-pricing.adoc#dedicated-clusters[dedicated clusters].
+====
+
 To better protect your streaming connections, connect {product} to a private link service for <<inbound,inbound>> connectivity, or to a private endpoint for <<outbound,outbound>> connectivity.
 
 Private connections are only available within the same cloud provider and region as your {product} cluster.
 
-To open a private link service or private endpoint, open {support_url}[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
+== Enable private links
+
+To enable a private link service or private endpoint for {product}, contact {support_url}[{company} Support].
+Be prepared to provide the <<credentials,credentials>> required for your cloud provider.
 
 == Inbound traffic
 
-{product} supports inbound traffic (i.e. Your private endpoint → {product}).
+{product} supports inbound traffic flowing from your private endpoint to {product}.
+
 The first inbound traffic pattern describes Pulsar, Kafka, and RabbitMQ messaging traffic, as well as Prometheus metrics traffic, flowing from a user's private endpoint to {product}.
 
-You create a connection to our private link service, and we route traffic to your {product} cluster.
-If you have multiple tenants, they can have different VPCs. The different VPCs will have the same private FQDN with differing VNETs.
-The traffic on different private end point connections is isolated until it reaches our load balancer.
+You create a connection to the {company} private link service, and then {company} routes traffic to your {product} dedicated cluster.
+If you have multiple tenants, they can have different VPCs.
+Each VPC will have the same private FQDN with different VNETs.
+The traffic on separate private end point connections is isolated until it reaches the {company} load balancer.
 
-The private link service pattern is the same across cloud providers, but the hostname will vary depending on your cloud provider and region.
+The private link service pattern is the same across cloud providers, but the hostname depends on your cloud provider and region:
 
 [#inbound]
 .Inbound private link service endpoints
@@ -39,32 +49,32 @@ The private link service pattern is the same across cloud providers, but the hos
 [#outbound]
 == Outbound traffic
 
-{product} also supports private outbound traffic (from {product} to your private endpoint) on a case-by-case basis.
+On a case-by-case basis, {product} can support private outbound traffic flowing from {product} to your private endpoint.
 
-The outbound traffic pattern creates a private endpoint in {product} that connects to your private link service. We open a port on the tenant's firewall (firewalls are per tenant) so connectors and functions (running in a dedicated namespace on our cluster) can connect to your private network.
-
-To open an outbound private endpoint, open {support_url}[a support ticket] and include the <<credentials,credentials>> required for your cloud provider.
-
-== Cloud provider credentials
-
-For more on connecting to your cloud provider, see your cloud provider's documentation.
-Each cloud provider will require different credentials to connect to the private endpoint.
+The outbound traffic pattern creates a private endpoint in {product} that connects to your private link service.
+{company} opens a port on the tenant's firewall to allow connectors and functions running in a dedicated namespace on a {product} cluster to connect to your private network.
+Each tenant has its own firewall.
 
 [#credentials]
-.Cloud providers
+== Cloud provider credentials
+
+Each cloud provider requires specific credentials to connect to a private endpoint.
+For information about private link configuration and credentials, see your cloud provider's documentation.
+
+.Private link credentials and documentation
 [cols="1,1,3"]
 |===
 |Cloud provider |Credentials required |Documentation
 
 |AWS
-|AWS account number(s)
+|AWS account numbers
 |https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-service.html[AWS Private Link]
 
-|Azure
-|Azure subscription id(s)
-|https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip[Azure Portal]
+|Microsoft Azure
+|Azure subscription IDs
+|https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip[Azure Private Link]
 
-|GCP
-|GCP project id(s)
-|https://console.cloud.google.com/net-services/psc/[GCP Private Service Connect]
+|Google Cloud
+|GCP project IDs
+|https://console.cloud.google.com/net-services/psc/[Google Cloud Private Service Connect]
 |===
