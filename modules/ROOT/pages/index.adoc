@@ -36,12 +36,3 @@ frictionless path to modernization.
 By combining {product} with {astra_db}, customers can create read-optimized
 views of data that can be quickly read from {astra_db} and ensure that data is
 always up to date by leveraging the event stream processing capabilities of {product}.
-
-== {product} limits
-
-For details about about the {product} limits, see xref:operations:astream-limits.adoc[{product} Limits].
-
-== See also
-
-* xref:getting-started:index.adoc[]
-* xref:apis:index.adoc[]
