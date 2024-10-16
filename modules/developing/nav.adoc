@@ -1,4 +1,4 @@
-.Develop
+.Development
 * xref:configure-pulsar-env.adoc[]
 * xref:astream-functions.adoc[]
 * xref:astream-kafka.adoc[]
