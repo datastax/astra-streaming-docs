@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS *KEYSPACE_NAME*.*TABLE_NAME* (key text PRIMARY KEY, c
 
 . Confirm that your table was created:
 +
-[source,sql,subs="+quotes"]
+[source,cql,subs="+quotes"]
 ----
 select * from *KEYSPACE_NAME*.*TABLE_NAME*;
 ----
@@ -204,7 +204,7 @@ select * from *KEYSPACE_NAME*.*TABLE_NAME*;
 .Result
 [%collapsible]
 ====
-[source,sql,subs="verbatim,quotes"]
+[source,console,subs="verbatim,quotes"]
 ----
  key | c1
 -----+----
@@ -380,7 +380,7 @@ bin/pulsar-admin topics list-partitioned-topics astracdc
 .Result
 [%collapsible]
 ====
-[source,bash]
+[source,console]
 ----
 persistent://ten01/astracdc/data-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-1
 persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
@@ -412,7 +412,7 @@ bin/pulsar-admin topics list ten01/astracdc
 .Result
 [%collapsible]
 ====
-[source,bash]
+[source,console]
 ----
 persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-2
 persistent://ten01/astracdc/log-7e3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c-keysp.table1-partition-0

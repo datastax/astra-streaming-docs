@@ -36,24 +36,7 @@ Broker Service URLs start with `pulsar(+ssl)`.
 An xref:operations:astream-token-gen.adoc[{astra_db} application token] is _not_ the same as a Pulsar token.
 ====
 
-To create a new Pulsar token for your {product} tenant, do the following:
-
-. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
-
-. Click the *Settings* tab.
-
-. Click *Create Token*.
-
-. Select a token lifetime.
-+
-Practice responsible credential management:
-+
-* Be aware of the security implications for tokens that never expire.
-* Consider how long you actually plan to use the token.
-
-. Copy the generated token and store it securely.
-+
-The token is shown only once.
+For information about creating Pulsar tokens, see xref:operations:astream-token-gen.adoc[].
 
 == Make a request
 
@@ -74,9 +57,12 @@ curl -sS --location -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
 --header "Authorization: $PULSAR_TOKEN" \
 --header "Content-Type: application/json"
 ----
-+
+
+== Format responses
+
 The default response is a single JSON string.
-You can use modifications like ` | jq .` to format the output for easier reading.
+
+You can use modifications like ` | jq .` or ` | python3 -mjson.tool` to format the output for easier reading.
 
 == See also
 

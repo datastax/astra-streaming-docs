@@ -9,8 +9,7 @@ In the *Details* section, get the *Broker Service URL*.
 
 |`pulsarToken`
 |The token for Pulsar cluster authentication
-|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Settings* tab.
-Click *Create Token* to generate a Pulsar token.
+|For information about creating Pulsar tokens, see xref:operations:astream-token-gen.adoc[].
 
 |`tenantName`
 |The name of your streaming tenant

@@ -1,246 +1,89 @@
-= Getting started with {product}
+= {product} quickstart
 :navtitle: Get started
 :page-tag: astra-streaming,planner,quickstart,pulsar
 
-{product} is a cloud native data streaming and event stream processing
-service tightly integrated into the {astra_ui} and powered by Apache Pulsar(TM).
-Using {product}, customers can quickly create Pulsar instances,
-manage their clusters, scale across cloud regions, and manage Pulsar resources
-such as topics, connectors, functions and subscriptions.
+{product} is a serverless data streaming and event stream processing service integrated in the {astra_ui} and powered by Apache Pulsar(TM).
+Using {product}, you can create Pulsar instances, manage streaming clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
 
-Follow this guide to create a new account in {astra_db}, along with a streaming tenant running Apache Pulsar.
+This quickstart demonstrates how to create and use a streaming tenant running Apache Pulsar.
 
 == Prerequisites
 
-You will need the following to complete this guide:
+* Sign in or create an {login_url}[{astra_db} account^].
 
-* A working email address
+== Create a streaming tenant
 
-== Create your {astra_db} account
+A {product} tenant is a portion of {company}-managed Apache Pulsar that is only yours.
+Within tenants, you create namespaces, topics, functions, and more.
+To learn more about the concept of tenancy, see the https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar documentation].
 
-. Navigate to the {streaming_signup_url}[{astra_ui} sign in page^].
-+
-image:astream-login.png[Login to {astra_db}]
+You can create a tenant in the {astra_ui} or programmatically.
+For this quickstart, use the {astra_ui}.
 
-. Click the "Sign Up" link (toward the bottom).
-
-. Provide your information along with a valid email.
-+
-image:astream-create-account.png[Create {astra_db} account]
-
-. You should receive an email from {company} verifying your address - click the button within.
-
-. If you aren't automatically signed in, visit the {login_url}[{astra_db} sign in page^] and use your new account creds.
-
-== Your first streaming tenant
-
-Think of a tenant in {product} as your safe space to work.
-It is a portion of {company}'s managed Apache Pulsar that is only yours.
-Learn more about the concept of tenancy in the https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar docs].
-
-The steps in the below tabs will guide you through creating a streaming tenant.
-You'll use this tenant to create namespaces, topics, functions, and pretty much everything else.
-The only difference between the tabs is how your tenant is created - they all have the same result.
-
-[tabs]
-======
-{astra_ui}::
-+
---
 . In the {astra_ui} navigation menu, click *Streaming*.
 
 . Click *Create a Tenant*.
 
 . Name your streaming tenant something memorable like `my-stream-**RANDOM_UUID**`.
 All tenant names in {product} must be unique.
+`**RANDOM_UUID**` can be any string of letters and numbers, as long as it is unique.
 
 . Choose your preferred cloud provider and region.
-For your first example tenant, the region doesn't really matter.
-+
-image:create-a-stream.png[Create a new tenant in {product}]
+For this example tenant, the region doesn't really matter.
 
 . Click *Create Tenant*.
 You are directed to the quickstart page for your new tenant.
 +
 image:new-tenant-quickstart.png[New tenant quickstart in {product}]
---
 
-{astra_cli}::
-+
---
-{astra_cli} is a set of commands for creating and managing all {astra_db} resources.
-For more information, see the https://docs.datastax.com/en/astra-cli/docs/0.2/[documentation].
+== Create a namespace in your tenant
 
-. Set the required variables, replacing `**RANDOM_UUID**` with a few random numbers or letters.
-Optionally, you can choose a different cloud provider and region.
-Use `astra streaming list-regions` to see available values.
-+
-[source,shell,subs="+quotes"]
-----
-TENANT="my-stream-**RANDOM_UUID**"
-CLOUD_PROVIDER_STREAMING="gcp"
-CLOUD_REGION_STREAMING="uscentral-1"
-----
+Namespaces are logical groupings, such as environments or applications, for message topics within tenants.
 
-. Run the following script to create a new streaming tenant:
-+
-[source,shell]
-----
-include::{astra-streaming-examples-repo}/astra-cli/create-tenant.sh[]
-----
---
-======
-
-Next, create a namespace in your new tenant.
-
-== A namespace to hold topics
-
-A namespace exists within a tenant.
-A namespace is a logical grouping of message topics.
-
-{product} automatically create a `default` namespaces when you create a tenant.
-You can use the default namespace or create new ones.
-
+{product} automatically creates a `default` namespaces when you create a tenant.
+You can use the default namespace or create other namespaces.
 Tenants usually have many namespaces.
-What is contained within namespace is limited only by your imagination.
-It could be an environment (dev, stage, prod) or by application (catalog, cart, user) or whatever logical grouping makes sense to you.
+To learn more about namespaces, see the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar documentation].
 
-Learn more about namespaces in the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar docs].
+You can create namespaces in the {astra_ui} or programmatically.
+For this quickstart, use the {astra_ui}.
+For information about the Pulsar CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
 
-[tabs]
-======
-{astra_ui}::
-+
---
-. Navigate to the "Namespace And Topics" tab.
-+
-image:namespace-tab.png[Namespace tab in {product}]
+. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
-. Click the "Create Namespace" button, and give your namespace a super original name like "my-namespace".
-+
-image:create-namespace.png[Create namespace in {product}]
+. Click the *Namespace And Topics* tab, and then click *Create Namespace*.
 
+. Enter a namespace name, and then click *Create*.
 . Click "Create" to create the namespace.
-+
-image:namespace-listing.png[Namespaces in {product}]
 --
 
-Pulsar Admin::
-+
---
-. Set the required variables:
-+
-[source,shell,subs="+quotes"]
-----
-NAMESPACE="**NAMESPACE_NAME**"
-TENANT="my-stream-**RANDOM_UUID**" # set previously
-----
-
-. Run the following script to create a new namespace:
-+
-[source,shell]
-----
-include::{astra-streaming-examples-repo}/pulsar-admin/create-namespace.sh[]
-----
---
-
-curl::
-+
---
-. Set the required variables:
-+
-[source,shell,subs="+quotes"]
-----
-PULSAR_TOKEN="**PULSAR_TOKEN**"
-WEB_SERVICE_URL="**TENANT_WEB_SERVICE_URL**"
-NAMESPACE="**NAMESPACE_NAME**"
-TENANT="my-stream-**RANDOM_UUID**" # set previously
-----
-
-. Run the following script to create a new namespace:
-+
-[source,shell]
-----
-include::{astra-streaming-examples-repo}/curl/create-namespace.sh[]
-----
---
-======
-
-== A topic to organize messages
+== Create a topic
 
 Topics are the core construct of a messaging system.
 Topics provide a way to group messages matching certain criteria.
-The name of the topic usually loosely defines the criteria, and more advanced characteristics like schemas might be applied at the topic level as well.
-Topics are where others can "listen" for new messages.
-Consumers subscribe to topics to "listen" for messages, and functions and connectors can also "listen" for messages and automate workflows.
-In Pulsar, topic addresses look like a URL (ie: persistent://tenant/namespace/topic).
-Learn more about topics in the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar docs].
 
-[tabs]
-======
-{astra_ui}::
-+
---
-. In the *Namespace And Topics* tab, locate the namespace created above and click its *Add Topic* button.
+The name of the topic usually broadly defines the criteria.
+You can also apply more advanced characteristics, like schemas, at the topic level.
 
-. Provide a name for the topic like "my-topic".
-It must start with a lowercase letter, and it can contain only letters, numbers, and hyphens (`-`).
-+
-Disregard https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[persistence and partitioning] for now.
-+
-image:add-topic.png[Add topic in {product}]
+Topics are where other applications or services can "listen" for new messages.
+Consumers subscribe to topics to receive messages, and functions and connectors can listen for messages to trigger automated workflows.
 
-. Click *Add Topic* to create the topic within the namespace.
-+
-image:topic-listing.png[Topic listing in {product}]
---
+In Pulsar, topic addresses are formatted like URLs, such as `persistent://tenant/namespace/topic`.
+To learn more about topics, see the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar documentation].
 
-Pulsar Admin::
-+
---
-To learn more about connecting to {product} with the pulsar-admin CLI, see xref:developing:configure-pulsar-env.adoc[].
+As in the previous steps, you can create topics in the {astra_ui} or programmatically.
 
-. Set the required variables:
-+
-[source,shell,subs="+quotes"]
-----
-TOPIC="**TOPIC_NAME**"
-NAMESPACE="**NAMESPACE_NAME**" # set previously
-TENANT="my-stream-**RANDOM_UUID**" # set previously
-----
+. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
-. Run the following script to create a new topic:
-+
-[source,shell]
-----
-include::{astra-streaming-examples-repo}/pulsar-admin/create-topic.sh[]
-----
---
+. Click the *Namespace And Topics* tab.
 
-curl::
-+
---
-To learn more about interacting with {product} through HTTP, see xref:developing:using-curl.adoc[].
+. Locate a namespace where you want to create a topic, and then click *Add Topic*.
 
-. Set the required variables:
+. Enter a topic name, and then click *Add Topic*.
 +
-[source,shell,subs="+quotes"]
-----
-TOPIC="**TOPIC_NAME**"
-PULSAR_TOKEN="**PULSAR_TOKEN**" # set previously
-WEB_SERVICE_URL="**TENANT_WEB_SERVICE_URL**" # set previously
-NAMESPACE="**NAMESPACE_NAME**" # set previously
-TENANT="my-stream-**RANDOM_UUID**" # set previously
-----
-
-. Run the following script to create a new topic:
+Topic names must start with a lowercase letter, and they can contain only letters, numbers, and hyphens (`-`).
 +
-[source,shell]
-----
-include::{astra-streaming-examples-repo}/curl/create-topic.sh[]
-----
---
-======
+Disregard the https://pulsar.apache.org/docs/concepts-messaging/#partitioned-topics[*Persistent* and *Partitioned*] options for now.
 
 == Next steps
 

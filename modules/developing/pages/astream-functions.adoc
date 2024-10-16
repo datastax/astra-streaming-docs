@@ -1,29 +1,49 @@
 = {product} Functions
 :page-tag: astra-streaming,dev,develop,pulsar,java,python
 
-Functions are lightweight compute processes that enable you to process each message received on a topic. You can apply custom logic to that message, transforming or enriching it, and then output it to a different topic.
+Functions are lightweight compute processes that you can run on each message a topic receives.
+You can apply custom logic to a message, transforming or enriching it, and then output it to a different topic.
 
-Functions run inside {product} and are therefore serverless. You write the code for your function in Java, Python, or Go, then upload the code. It will be automatically run for each message published to the specified input topic.
+Functions run inside {product}, which makes them serverless.
+You write the code for your function in Java, Python, or Go, and then upload the code.
+It automatically runs for each message published to the specified input topic.
 
-Functions are implemented using Apache Pulsar(R) functions. See https://pulsar.apache.org/docs/en/functions-overview/[Pulsar Functions overview] for more information about Pulsar functions.
+Functions are implemented using https://pulsar.apache.org/docs/en/functions-overview/[Apache Pulsar(R) functions].
+See [Pulsar Functions overview] for more information about Pulsar functions.
 
-[TIP]
+.Pulsar functions video
+[%collapsible]
 ====
-Custom functions can only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
+video::OCqxcNK0HEo[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
+====
+
+[IMPORTANT]
+====
+Custom functions require a https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
 
 Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions].
 ====
 
-== Deploy Python functions in a ZIP file
+[#create-an-archive]
+== Deploy a function archive
 
-{product} supports Python-based Pulsar Functions.
-These functions can be packaged in a ZIP file and deployed to {product} or Pulsar. The same ZIP file can be deployed to either environment.
-We'll create a ZIP file in the proper format, then use the pulsar-admin command to deploy the ZIP.
-We'll pass a create function YAML configuration file as a parameter to pulsar-admin, which defines the Pulsar Function options and parameters.
+You can write Pulsar functions for {product} in Python, Java, or Go.
 
-Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpythonfunction.zip` folder looks like this:
+To deploy a function to {product} or Pulsar, you can package the project into an archive, including the function code and any dependencies.
+You can deploy the same archive to either environment.
 
-[source,console]
+This is recommended for complex functions with long scripts, multiple scripts, or many dependencies.
+You can also use this approach to deploy multiple function classes with a single package.
+
+[tabs]
+======
+Python functions::
++
+--
+To create a Python function, the `.zip` file must have the correct structure.
+For example, assuming a project named `testpythonfunction`, the extracted archive has the following structure:
+
+[source,plain]
 ----
 /my-python-function
    python-code/my-python-function.zip
@@ -31,19 +51,20 @@ Assuming the ZIP file is named `testpythonfunction.zip`, an unzipped `testpython
    python-code/src/my-python-function.py
 ----
 
-. To deploy a ZIP, first create the proper ZIP file directory structure. That file format/layout looks like this:
+. Prepare the directory structure:
 +
 [source,shell]
 ----
-mkdir my-python-function
-mkdir my-python-function/python-code
-mkdir my-python-function/python-code/deps/
-mkdir my-python-function/python-code/src/
+mkdir **FUNCTION_NAME**
+mkdir **FUNCTION_NAME**/python-code
+mkdir **FUNCTION_NAME**/python-code/deps/
+mkdir **FUNCTION_NAME**/python-code/src/
 
-touch my-python-function/python-code/src/my-python-function.py
+touch **FUNCTION_NAME**/python-code/src/**FUNCTION_NAME**.py
 ----
 
-. Add your code to my-python-function.py. For this example, we'll just use a basic exclamation function:
+. Write your function code in a `.py` file.
+This example adds an exclamation point to the end of any messages.
 +
 [source,python]
 ----
@@ -57,149 +78,95 @@ class ExclamationFunction(Function):
     return input + '!'
 ----
 
-. Add your dependencies to the /deps folder. For this example, we'll use the pulsar-client library.
+. Add dependencies to `/deps`.
+This example uses the `pulsar-client` library.
 +
-[source,bash]
+[source,shell]
 ----
 cd deps
 pip install pulsar-client==2.10.0
 ----
 
-. Run the following command to add my-pulsar-function.zip to the root of the file structure:
-+
-[source,bash]
-----
-cd deps
-zip -r ../my-python-function.zip .
-  adding: sh-1.12.14-py2.py3-none-any.whl (deflated 2%)
-----
-
-. Ensure your package has the ZIP file at the root of the file structure:
+. Create a `.zip` file at the root of the project:
 +
 [source,shell]
 ----
-python-code ls -al
-deps
-my-python-function.zip
-src
+cd deps
+zip -r ../my-python-function.zip .
 ----
+--
 
-=== Deploy a Python function with configuration file
-
-. Create a deployment configuration file with contents similar to the following `func-create-config.yaml` example:
+Java functions::
 +
-.func-create-config.yaml
-[source,yaml]
-----
-py: </absolute/path/to/my/testpythonfunction.zip>
-className: pythonfunc.ExclamationFunction
-parallelism: 1
-inputs:
- - persistent://mytenant/n0/t1
-output: persistent://mytenant/ns/t2
-autoAck: true
-tenant: mytenant
-namespace: ns0
-name: testpythonfunction
-logTopic:
-userConfig:
- logging_level: ERROR
-----
+--
+To deploy a Java function, you must create a `.jar` file.
+
+. Create a Java project for your function.
+
+. Declare dependencies in `pom.xml`:
 +
-This file will be passed to the pulsar-admin create function command.
-
-. Use pulsar-admin to deploy the Python ZIP to {product} or Pulsar.
-The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
-+
-[source,bash]
+.pom.xml
+[source,xml]
 ----
-bin/pulsar-admin functions create --function-config-file </absolute/path/to/your/python/func-create-config.yml>
-----
-
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product}.
-
-.. You can also use the pulsar-admin command to list your functions:
-+
-[source,bash]
-----
-bin/pulsar-admin functions list --tenant <mytenant> --namespace <my-namespace>
-----
-
-== Deploy Java functions in a JAR file
-
-{product} supports Java-based Pulsar Functions which are packaged in a JAR file.
-The JAR can be deployed to {product} or Pulsar. The same JAR file can be deployed to either environment.
-
-We'll create a JAR file using Maven, then use the pulsar-admin command to deploy the JAR.
-We'll pass a create function YAML configuration file as a parameter to pulsar-admin, which defines the Pulsar function options and parameters.
-
-. To deploy a JAR, first create the proper JAR with the Java code of the Pulsar Function.
-An example pom.xml file is shown below:
-+
-.Function pom.xml
-[%collapsible]
-====
-[source,pom]
-----
- <?xml version="1.0" encoding="UTF-8"?>
- <project xmlns="http://maven.apache.org/POM/4.0.0"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-     <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-     <groupId>java-function</groupId>
-     <artifactId>java-function</artifactId>
-     <version>1.0-SNAPSHOT</version>
+    <groupId>java-function</groupId>
+    <artifactId>java-function</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-     <dependencies>
-         <dependency>
-             <groupId>org.apache.pulsar</groupId>
-             <artifactId>pulsar-functions-api</artifactId>
-             <version>3.0.0</version>
-         </dependency>
-     </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.pulsar</groupId>
+            <artifactId>pulsar-functions-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+    </dependencies>
 
-     <build>
-         <plugins>
-             <plugin>
-                 <artifactId>maven-assembly-plugin</artifactId>
-                 <configuration>
-                     <appendAssemblyId>false</appendAssemblyId>
-                     <descriptorRefs>
-                         <descriptorRef>jar-with-dependencies</descriptorRef>
-                     </descriptorRefs>
-                     <archive>
-                     <manifest>
-                         <mainClass>org.example.test.ExclamationFunction</mainClass>
-                     </manifest>
-                 </archive>
-                 </configuration>
-                 <executions>
-                     <execution>
-                         <id>make-assembly</id>
-                         <phase>package</phase>
-                         <goals>
-                             <goal>assembly</goal>
-                         </goals>
-                     </execution>
-                 </executions>
-             </plugin>
-             <plugin>
-                 <groupId>org.apache.maven.plugins</groupId>
-                 <artifactId>maven-compiler-plugin</artifactId>
-                 <version>3.11.0</version>
-                 <configuration>
-                     <release>17</release>
-                 </configuration>
-             </plugin>
-         </plugins>
-     </build>
-
- </project>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                    <manifest>
+                        <mainClass>org.example.test.ExclamationFunction</mainClass>
+                    </manifest>
+                </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assembly</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
 ----
-====
 
-. Package the JAR file with Maven:
+. Write your function code in your project.
+
+. Package the `.jar` file with Maven:
 +
 [source,bash]
 ----
@@ -209,7 +176,7 @@ mvn package
 .Result
 [%collapsible]
 ====
-[source,bash]
+[source,console]
 ----
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
@@ -219,224 +186,248 @@ mvn package
 [INFO] ------------------------------------------------------------------------
 ----
 ====
+--
 
-. Create a deployment configuration file with contents similar to the following `func-create-config.yaml` example:
+////
+TODO:
+Go functions::
++
+--
+Must have 4 steps to maintain numbering.
+--
+////
+======
+
+. If you haven't done so already, xref:configure-pulsar-env.adoc[set up your environment for the Pulsar binaries].
+
+. Create a deployment configuration YAML file that defines the function metadata and associated topics:
 +
 .func-create-config.yaml
-[source,yaml]
+[source,yaml,subs="+quotes"]
 ----
-jar: </absolute/path/to/my/testpythonfunction.jar>
-className: com.example.pulsar.ExclamationFunction
+py: **PATH_TO_FUNCTION_ARCHIVE**
+className: **FILE_NAME**.**CLASS_NAME**
 parallelism: 1
 inputs:
-  - persistent://mytenant/n0/t1
-output: persistent://mytenant/ns/t2
+ - persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
+output: persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
 autoAck: true
-tenant: mytenant
-namespace: ns0
-name: testjarfunction
+tenant: **TENANT_NAME**
+namespace: **NAMESPACE_NAME**
+name: **DISPLAY_NAME**
 logTopic:
 userConfig:
-  logging_level: ERROR
+ logging_level: ERROR
 ----
 +
-This file will be passed to the pulsar-admin create function command.
+Replace the following:
++
+* `**PATH_TO_FUNCTION_ARCHIVE**`: The path to the function archive.
+
+* `**FILE_NAME**.**CLASS_NAME**`: The class to execute.
+An archive can contain multiple classes, but only one is used per deployment.
++
+** For Python scripts, the `className` is the Python filename (without the extension) and the class to execute, such as `pythonfunc.ExclamationFunction`.
+If there is no class in the file, the `className` is the filename without the extension, such as `pythonfunc`.
+** For Java scripts, the `className` is the path and the class to execute, such as `com.example.pulsar.ExclamationFunction`.
+
+* `**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**`: Define the tenant, namespace, and topic for both `input` (incoming messages passed to the function) and `output` (the results of the function).
 +
 [IMPORTANT]
 ====
-{product} requires the `inputs` topic to have a message schema defined before deploying the function.
-Otherwise, deployment errors may occur.
-Use the {astra_ui} to define the message schema for a topic.
+To avoid errors, make sure the `inputs` topic (declared in your configuration YAML file) has a defined message schema before you deploy the function.
+You can define a topic's message schema in the {astra_ui}.
 ====
 +
-. Use pulsar-admin to deploy your new JAR to {product} or Pulsar.
-The command below assumes you've properly configured the client.conf file for pulsar-admin commands against your Pulsar cluster. See the documentation xref:configure-pulsar-env.adoc[here] for more information.
+Optionally, you can declare a `logTopic` in the same way: `persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**`.
+
+* `**DISPLAY_NAME**`: The function display name in {product}, such as `testpythonfunction`.
+
+. Use `pulsar-admin` to deploy the function to {product} or Pulsar using your configuration file:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-admin functions create --function-config-file  </absolute/path/to/your/javajar/func-create-config.yml>
-----
-
-. Check results: Go to the {astra_ui} to see your newly deployed function listed under the *Functions* tab for your Tenant. See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product}.
-
-.. You can also use the pulsar-admin command to list your functions:
-+
-[source,bash]
-----
-bin/pulsar-admin functions list --tenant <mytenant> --namespace <my-namespace>
-----
-
-== Add functions in {product} dashboard
-
-Add functions in the Functions tab of the {product} dashboard.
-
-. Select *Create Function* to get started.
-. Choose your function name and namespace.
-+
-image::astream-name-function.png[Function and Namespace]
-
-. Select the file you want to pull the function from and which function you want to use within that file.
-
-{astra_db} generates a list of acceptable classes. Python and Java functions are added a little differently from each other.
-
-Python functions are added by loading a Python file (.py) or a zipped Python file (.zip). When adding Python files, the Class Name is specified as the name of the Python file without the extension plus the class you want to execute.
-
-For example, if the Python file is called `testfunction.py` and the class is `ExclamationFunction`, then the class name is `testfunction.ExclamationFunction`. The file can contain multiple classes, but only one is used. If there is no class in the Python file (when using a basic function, for example), specify the filename without the extension (ex. `function`).
-
-Java functions are added by loading a Java jar file (.jar). When adding Java files, you also need to specify the name of the class to execute as the function.
-
-image::astream-exclamation-function.png[Exclamation Function]
-[start=4]
-. Choose your input topics.
-+
-image::astream-io-topics.png[IO Topics]
-
-. Choose *Optional Destination Topics* for output and logging.
-+
-image::astream-optional-destination-topics.png[Optional Topics]
-
-. Choose *Advanced Options* and run at least one sink instance.
-+
-image::astream-advanced-config.png[Advanced Configuration]
-
-. Choose your *Processing Guarantee*. The default value is *ATLEAST_ONCE*. Processing Guarantee offers three options:
-+
-* *ATLEAST_ONCE*: Each message sent to the function can be processed more than once.
-* *ATMOST_ONCE*: The message sent to the function is processed at most once. Therefore, there is a chance that the message is not processed.
-* *EFFECTIVELY_ONCE*: Each message sent to the function will have one output associated with it.
-
-. Provide an *Option Configuration Key*. See the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[Pulsar Docs] for a list of configuration keys.
-+
-image::astream-provide-config-keys.png[Provide Config Key]
-
-. Select *Create*.
-
-You have created a function for this namespace. You can confirm your function was created in the *Functions* tab.
-
-== Add function with Pulsar CLI
-
-You can also add functions using the Pulsar CLI. We will create a new Python function to consume a message from one topic, add an exclamation point, and publish the results to another topic.
-
-. Create the following Python function in `testfunction.py`:
-+
-[source,python]
-----
-from pulsar import Function
-
-class ExclamationFunction(Function):
-  def __init__(self):
-    pass
-
-  def process(self, input, context):
-    return input + '!'
+bin/pulsar-admin functions create --function-config-file **PATH_TO_FUNCTION_CONFIG_YAML**
 ----
 +
-. Deploy `testfunction.py` to your Pulsar cluster using the Pulsar CLI:
-+
-[source,bash]
-----
-$ ./pulsar-admin functions create \
-  --py /full/path/to/testfunction.py \
-  --classname testfunction.ExclamationFunction \
-  --tenant <tenant-name> \
-  --namespace default \
-  --name exclamation \
-  --auto-ack true \
-  --inputs persistent://<tenant-name>/default/in \
-  --output persistent://<tenant-name>/default/out \
-  --log-topic persistent://<tenant-name>/default/log
-----
-+
-You will see "Created Successfully!" if the function is set up and ready to accept messages.
+.Result
+[%collapsible]
+====
+A response of `Created Successfully!` indicates the function is deployed and ready to accept messages.
+
+If the response is a 402 error with `Reason: only qualified organizations can create functions`, then your organization must be upgraded to the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
+====
 +
 [TIP]
 ====
-If you receive a 402 error with "Reason: only qualified organizations can create functions", this means your organization needs to be upgraded to the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[*Pay As You Go* or *Enterprise* {astra_db} plan].
+If your Python function contains only a single script and no dependencies, you can deploy the `.py` file directly, without packaging it into a `.zip` file or creating a configuration file:
++
+[source,bash,subs="+quotes"]
+----
+$ ./pulsar-admin functions create \
+  --py **PATH_TO_PYTHON_FILE** \
+  --classname **FILE_NAME**.**CLASS_NAME** \
+  --tenant **TENANT_NAME** \
+  --namespace **NAMESPACE_NAME** \
+  --name **DISPLAY_NAME** \
+  --auto-ack true \
+  --inputs persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
+  --output persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
+  --log-topic persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
+----
+
+If there is no class in the file, the `className` is only the filename without the extension.
 ====
 
-. Use `./pulsar-admin functions list --tenant <tenant-name>` to list the functions in your tenant and confirm your new function was created.
+. Verify the deployment:
++
+[source,bash,subs="+quotes"]
+----
+bin/pulsar-admin functions list --tenant **TENANT_NAME** --namespace **NAMESPACE_NAME**
+----
++
+You can also check the {astra_ui} to confirm the function is listed on the tenant's *Functions* tab.
++
+See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product}.
 
-== Testing Your Function
+== Deploy functions in the {astra_ui}
 
-Triggering a function is a convenient way to test that the function is working. When you trigger a function, you are publishing a message on the function's input topic, which triggers the function to run. If the function has an output topic and the function returns data to the output topic, that data is displayed.
+. In the {astra_ui} navigation menu, click *Streaming*, and then select a tenant.
 
-Send a test value with Pulsar CLI's `trigger` to test a function you've set up.
+. On the *Functions* tab, click *Create Function*.
 
-. Listen for messages on the output topic:
+. Enter a function name, and then select the namespace within the tenant.
+
+. Upload function code:
++
+[tabs]
+======
+Upload your own code::
++
+--
+. Select *Upload my own code*.
+
+. Select your function file:
++
+* `.py`: A single, independent Python script
+* `.zip`: A Python script with dependencies
+* `.jar`: A Java function
+* `.go`: A Go function
+
+. Based on the uploaded file, select the specific class (function) to deploy.
++
+{astra_db} generates a list of acceptable classes detected in the code.
+A file can contain multiple classes, but only one is used per deployment.
++
+For Python scripts, the class name is the Python filename (without the extension) and the class to execute.
+For example, if the Python file is called `testfunction.py` and the class is `ExclamationFunction`, then the class name is `testfunction.ExclamationFunction`.
+If there is no class in the Python file, the class name is the filename without the extension, such as `testfunction`.
++
+For Java scripts, the class name is the class to execute.
++
+image::astream-exclamation-function.png[Exclamation Function]
+--
+
+Use {company} transform function::
++
+--
+. Select *Use {company} transform function*.
+
+This is the only function option available for organizations on the *Free* plan.
+--
+======
+
+. Select input topics.
+
+. (Optional) Select output and log topics.
+
+. (Optional) Configure advanced settings:
++
+* *Instances*: Enter a number of sink instances to run.
+* *Processing Guarantee*: Select one of the following:
+** *ATLEAST_ONCE* (default): Each message sent to the function can be processed one or more times.
+** *ATMOST_ONCE*: Each message sent to the function is processed 0 or 1 times.
+This means there is a change that a message is not processed.
+** *EFFECTIVELY_ONCE*: Each message sent to the function has only one output associated with it.
+* *Timeout*: Set a timeout limit.
+* *Auto Acknowledge*: Enable or disable automatic message acknowledgement.
+
+. (Optional) Provide a config key, if required.
+For more information, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[Pulsar documentation].
+
+. Click *Create*.
+
+. Confirm your function was created on the *Functions* tab.
+
+== Manage deployed functions
+
+After you deploy a function, you can test, start, stop, monitor, edit, and delete it.
+
+=== Test functions
+
+To test the function, publish a message to the function's `input` topic or use `pulsar-admin functions trigger`.
+If the function produces output and it has an `output` topic, the output data is returned.
+
+. Listen for messages on the `output` topic:
 +
 [source,bash]
 ----
-$ ./pulsar-client consume persistent://<tenant-name>/default/<topic-name> \
+$ ./pulsar-client consume persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
   --subscription-name my-subscription \
   --num-messages 0 # Listen indefinitely
 ----
 +
-. Test your exclamation function with `trigger`:
+. Test your function:
 +
 [source,bash]
 ----
 $ ./pulsar-admin functions trigger \
-  --name exclamation \
-  --tenant <tenant-name> \
-  --namespace default \
-  --trigger-value "Hello world"
+  --name **FUNCTION_DISPLAY_NAME** \
+  --tenant **TENANT_NAME** \
+  --namespace **NAMESPACE_NAME** \
+  --trigger-value "**MESSAGE**"
 ----
 +
-The trigger sends the string `Hello world` to your exclamation function. Your function should output `Hello world!` to your consumed output.
+The trigger sends the message string to the function.
+Your function should output the result of processing the message.
 
 [#controlling-your-function]
-== Controlling Your Function
+=== Control functions
 
-You can start, stop, and restart your function by selecting it in the *Functions* dashboard.
+In the {astra_ui}, on your tenant's *Functions* tab, you can use *Function Controls* to start, stop, and restart functions.
 
-image::astream-function-controls.png[Function Controls]
+=== Monitor functions
 
-== Monitoring Your Function
-
-Functions produce logs to help you in debugging. To view your function's logs, open your function in the *Functions* dashboard.
+Functions produce logs to help you debug them.
+In the {astra_ui}, on your tenant's *Functions* tab, you can view, refresh, copy, and download your functions' logs.
 
 image::astream-function-log.png[Function Log]
 
-In the upper right corner of the function log are controls to *Refresh*, *Copy to Clipboard*, and *Save* your function log.
+If you specified a log topic when deploying your function, function logs also output to that topic.
 
-== Updating Your Function
+== Edit functions
 
-A function that is already running can be updated with new configuration. The following settings can be updated:
+. In the {astra_ui}, on your tenant's *Functions* tab, click *Update Function*.
 
+. Edit the following settings as needed, and then click *Update*.
++
 * Function code
 * Output topic
 * Log topic
 * Number of instances
 * Configuration keys
 
-If you need to update any other setting of the function, delete and then re-add the function.
+If you need to change any other function settings, you must delete and redeploy the function with the desired settings.
 
-To update your function, select your function in the *Functions* dashboard.
+== Delete functions
 
-image::astream-function-update.png[Update Function]
+[IMPORTANT]
+====
+Deleting a function is permanent.
+====
 
-. Select *Change File* to find your function locally and click *Open*.
-
-. Update your function's *Instances* and *Timeout*. When you're done, click *Update*.
-
-. An *Updates Submitted Successfully* flag will appear to let you know your function has been updated.
-
-== Deleting Your Function
-
-To delete a function, select the function to be deleted in the *Functions* dashboard.
-
-image::astream-delete-function.png[Delete Function]
+. In the {astra_ui}, on your tenant's *Functions* tab, select the function to delete.
 
 . Click *Delete*.
-. A popup will ask you to confirm deletion by entering the function's name and clicking *Delete*.
-. A *Function-name Deleted Successfully!* flag will appear to let you know you've deleted your function.
 
-== Pulsar functions video
-
-Follow along with this video from our *Five Minutes About Pulsar* series to see a Pulsar Python function in action.
-
-video::OCqxcNK0HEo[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
-
-== Next
-
-Learn more about developing functions for {product} and Pulsar https://pulsar.apache.org/docs/en/functions-develop/[here].
+. To confirm deletion, enter the function's name, and then click *Delete*.

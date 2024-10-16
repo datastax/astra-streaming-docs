@@ -11,21 +11,13 @@ The xref:astra-cli:ROOT:index.adoc[{astra_db} Command-Line Interface ({astra_cli
 
 {astra_cli} commands are available for {astra_db} and {astra_stream}.
 They're designed to get you working quickly, with an emphasis on automation.
-For example, the following command create a Pulsar tenant:
 
-[source,bash]
+For example, the following command creates a Pulsar tenant:
+
+[source,bash,subs="+quotes"]
 ----
-astra streaming create cli-tenant-demo
+astra streaming create **TENANT_NAME** --cloud **CLOUD_PROVIDER** --region **REGION_NAME** --plan **PLAN_TYPE** --namespace **TENANT_INITIAL_NAMESPACE_NAME**
 ----
-+
-.Result
-[%collapsible]
-====
-[source,console]
-----
-[OK]    Tenant 'cli-tenant-demo' has been created.
-----
-====
 
 You can use {astra_cli} instead of or in addition to the {astra_ui} and {astra_db} APIs.
 

@@ -79,17 +79,7 @@ All tokens created within a tenant are assigned roles similar to the assigning t
 .What is the difference between the {astra_db} application token and the Pulsar token? Are they interchangeable?
 [%collapsible]
 ====
-{astra_db} offers different layers of authentication based on the desired action.
-
-For actions related to your {astra_db} organization or the resources within, including users, roles, databases, and so on, you use an {astra_db} application token with the appropriate role.
-
-For actions specific to a Pulsar tenant, such as message namespaces, topics, and message metrics, you use a Pulsar JWT token.
-
-For more information, see the following:
-
-* xref:astra-streaming:developing:astra-cli.adoc[]
-* xref:astra-streaming:developing:using-curl.adoc[]
-* xref:astra-streaming:developing:configure-pulsar-env.adoc[]
+See xref:monitoring:astream-token-gen.adoc[].
 ====
 
 == Data Migration and Geo-replication

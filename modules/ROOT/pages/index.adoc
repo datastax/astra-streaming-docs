@@ -1,4 +1,4 @@
-= Introduction to {product}?
+= Introduction to {product}
 :navtitle: Intro to {product}
 :page-tag: astra-streaming,planner,admin,dev,pulsar
 

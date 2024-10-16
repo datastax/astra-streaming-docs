@@ -103,7 +103,7 @@ If not, there are issues in the previous configuration procedures.
 
 == Troubleshoot 401 Unauthorized errors
 
-If the additional scrape job returns a 401 Unauthorized error, make sure your Pulsar JWT token isn't expired.
+If the additional scrape job returns a 401 Unauthorized error, make sure your Pulsar JWT isn't expired.
 For more information, see xref:astream-token-gen.adoc[].
 
 == See also
