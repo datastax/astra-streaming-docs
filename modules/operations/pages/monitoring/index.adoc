@@ -98,8 +98,13 @@ To transform raw metrics into a usable state, {company} recommends the following
 * Aggregate metrics at the parent topic level, at minimum, instead of at the partition level.
 In Pulsar, end user applications only deal with messages at the parent topic level; however, internally, Pulsar handles message processing at the partition level.
 
-* Exclude reported metrics that are associated with {product}'s system namespaces and topics, which are usually prefixed by two underscores.
-For example, enabling Pulsar's Kafka protocol handler through S4K integration, creates a system namespace called `\__kafka` that has one system topic called `\__transaction_producer_state`.
+* Exclude reported metrics that are associated with {product}'s system namespaces and topics, which are usually prefixed by two underscores, such as:
++
+[source,plain]
+----
+__kafka
+__transaction_producer_state
+----
 
 === PromQL query patterns
 
@@ -107,17 +112,24 @@ PromQL is Prometheus's simple and powerful query language that you can use to se
 For more information, see the https://prometheus.io/docs/prometheus/latest/querying/basics/[PromQL documentation].
 
 {company} recommends the following PromQL query patterns for aggregating raw {product} metrics.
-These examples use the `pulsar_msg_backlog` raw metric to demonstrate the patterns.
-Additionally, in accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, these patterns aggregate messages at the parent topic level or higher and they exclude system topics (with the PromQL statement `{topic !~ ".\*__.*"}`).
+The following examples use the `pulsar_msg_backlog` raw metric to demonstrate the patterns.
+Additionally, in accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, these patterns aggregate messages at the parent topic level or higher, and they use the following expression to exclude system topics:
 
-.About the system topics filter
-[%collapsible]
-====
-The PromQL pattern `{topic !~ ".\*_\_.*"}` filters out messages with topic labels that do not include two consecutive underscores.
-This works because Pulsar system topics and namespaces are usually prefixed by two underscores, such as `persistent://**TENANT_NAME**/\__kafka/\__consumer_offsets_partition_0`.
-However, this pattern assumes that your applications' namespace and topic names don't contain double underscores.
-If they do, they are also filtered.
-====
+[source,pgsql]
+----
+{topic !~ ".*__.*"}`
+----
+
+This expression excludes messages with topic labels that include two consecutive underscores.
+This works because Pulsar system topics and namespaces are usually prefixed by two underscores, such as:
+
+[source,plain]
+----
+persistent://some_tenant/__kafka/__consumer_offsets_partition_0
+----
+
+To use this expression, your applications' namespace and topic names don't contain double underscores.
+If they do, they will also be excluded by this filter.
 
 ==== Get the total message backlog of a specific parent topic, excluding system topics
 
