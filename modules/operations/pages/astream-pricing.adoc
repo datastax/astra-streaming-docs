@@ -4,7 +4,7 @@
 {product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra_db}.
 
 {product} offers three subscription plans, as well as pricing for dedicated clusters.
-A {product} subscription is associated with an {astra_db} organization, but {product} subscription plans are separate from {astra_db} organization subscription plans.
+An {product} subscription is associated with an {astra_db} organization, but {product} subscription plans are separate from {astra_db} organization subscription plans.
 
 For {product} plans and pricing details, see https://www.datastax.com/pricing/astra-streaming[{product} pricing].
 For information about {astra_db} plans, billing, and usage, see xref:astra-db-serverless:administration:subscription-plans.adoc[].

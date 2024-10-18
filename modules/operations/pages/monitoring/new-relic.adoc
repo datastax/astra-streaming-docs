@@ -1,6 +1,6 @@
 = Integrate with New Relic
 
-While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic[send external Prometheus data to New Relic], one the https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration] option is relevant to {product}.
+While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic[send external Prometheus data to New Relic], only the https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/#remote-write[Prometheus remote write integration] option is relevant to {product}.
 
 == Prerequisites
 
@@ -10,7 +10,7 @@ While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/p
 
 == Prepare the extra Prometheus server
 
-* xref:monitoring/integration.adoc[Install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
+xref:monitoring/integration.adoc[Install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
 
 This is required because {product} is a managed service, and you can't modify the {product} Prometheus server as required by the New Relic Prometheus write integration.
 

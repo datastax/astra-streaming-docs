@@ -85,8 +85,8 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleP
 
 == Run the script
 
-* In your Python project directory, run the script:
-+
+In your Python project directory, run the script:
+
 [source,shell]
 ----
 python3 index.py

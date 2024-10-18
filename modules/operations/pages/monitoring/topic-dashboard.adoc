@@ -38,7 +38,7 @@ Subscription displays the time series metrics chart summarized at the subscripti
 * Total subscription delayed messages divided by individual subscriptions
 * Total subscription message dispatch rate (msg/s) divided by individual subscriptions
 * Total subscription message throughput rate (byte/s) divided by individual subscriptions
-* Total subscription message acknowledgement rate (msg/s) divided by individual subscriptions
+* Total subscription message acknowledgment rate (msg/s) divided by individual subscriptions
 * Total subscription message redelivery rate (msg/s) divided by individual subscriptions
 * Total subscription message expired rate (msg/s) divided by individual subscriptions
 * Total subscription message dropped rate (msg/s) divided by individual subscriptions

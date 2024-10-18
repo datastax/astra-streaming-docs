@@ -11,14 +11,6 @@ If the primary consumer disconnects, the standby consumers begin consuming the s
 
 This page explains how to use Pulsar's failover subscription model to manage your topic consumption.
 
-.Failover subscription video
-[%collapsible]
-====
-This video from the *Five Minutes About Pulsar* series demonstrates failover subscriptions:
-
-video::ckB87OLs5eM[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
-====
-
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
@@ -77,7 +69,7 @@ In the `SimplePulsarConsumer` terminal, the primary consumer begins consuming me
 ----
 
 . In a new terminal window, run a new instance of `SimplePulsarConsumer.java` as a backup consumer.
-The backup consumer subscribes to the topic, but does not immediately begin consuming messages.
+The backup consumer subscribes to the topic but does not immediately begin consuming messages.
 
 . In the primary `SimplePulsarConsumer` terminal, stop the process (`Ctrl+C`).
 In the second `SimplePulsarConsumer` terminal, the backup consumer begins consuming messages where the first consumer left off:

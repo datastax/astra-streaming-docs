@@ -11,12 +11,6 @@ It automatically runs for each message published to the specified input topic.
 Functions are implemented using https://pulsar.apache.org/docs/en/functions-overview/[Apache Pulsar(R) functions].
 See [Pulsar Functions overview] for more information about Pulsar functions.
 
-.Pulsar functions video
-[%collapsible]
-====
-video::OCqxcNK0HEo[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
-====
-
 [IMPORTANT]
 ====
 Custom functions require a xref:operations:astream-pricing.adoc[paid {product} plan].
@@ -229,7 +223,7 @@ Replace the following:
 An archive can contain multiple classes, but only one is used per deployment.
 +
 ** For Python scripts, the `className` is the Python filename (without the extension) and the class to execute, such as `pythonfunc.ExclamationFunction`.
-If there is no class in the file, the `className` is the filename without the extension, such as `pythonfunc`.
+If there isn't a class in the file, the `className` is the filename without the extension, such as `pythonfunc`.
 ** For Java scripts, the `className` is the path and the class to execute, such as `com.example.pulsar.ExclamationFunction`.
 
 * `**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**`: Define the tenant, namespace, and topic for both `input` (incoming messages passed to the function) and `output` (the results of the function).
@@ -278,7 +272,7 @@ $ ./pulsar-admin functions create \
   --log-topic persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
 ----
 
-If there is no class in the file, the `className` is only the filename without the extension.
+If there isn't a class in the file, the `className` is only the filename without the extension.
 ====
 
 . Verify the deployment:
@@ -323,7 +317,7 @@ A file can contain multiple classes, but only one is used per deployment.
 +
 For Python scripts, the class name is the Python filename (without the extension) and the class to execute.
 For example, if the Python file is called `testfunction.py` and the class is `ExclamationFunction`, then the class name is `testfunction.ExclamationFunction`.
-If there is no class in the Python file, the class name is the filename without the extension, such as `testfunction`.
+If there isn't a class in the Python file, the class name is the filename without the extension, such as `testfunction`.
 +
 For Java scripts, the class name is the class to execute.
 +
@@ -354,7 +348,7 @@ For more information, see xref:streaming-learning:functions:index.adoc[] and xre
 This means there is a change that a message is not processed.
 ** *EFFECTIVELY_ONCE*: Each message sent to the function has only one output associated with it.
 * *Timeout*: Set a timeout limit.
-* *Auto Acknowledge*: Enable or disable automatic message acknowledgement.
+* *Auto Acknowledge*: Enable or disable automatic message acknowledgment.
 
 . (Optional) Provide a config key, if required.
 For more information, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[Pulsar documentation].

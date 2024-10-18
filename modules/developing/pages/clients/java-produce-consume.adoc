@@ -138,8 +138,8 @@ include::{astra-streaming-examples-repo}/java/simple-producer-consumer/SimplePro
 
 == Run the script
 
-. Build and run the app:
-+
+Build and run the app:
+
 [source,shell]
 ----
 mvn clean package assembly:single

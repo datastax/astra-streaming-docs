@@ -16,7 +16,9 @@ For example, the following command creates a Pulsar tenant:
 
 [source,bash,subs="+quotes"]
 ----
-astra streaming create **TENANT_NAME** --cloud **CLOUD_PROVIDER** --region **REGION_NAME** --plan **PLAN_TYPE** --namespace **TENANT_INITIAL_NAMESPACE_NAME**
+astra streaming create **TENANT_NAME** \
+--cloud **CLOUD_PROVIDER** --region **REGION_NAME** \
+--plan **PLAN_TYPE** --namespace **TENANT_INITIAL_NAMESPACE_NAME**
 ----
 
 You can use {astra_cli} instead of or in addition to the {astra_ui} and {astra_db} APIs.

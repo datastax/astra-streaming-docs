@@ -38,9 +38,9 @@ For more information, see xref:developing:astream-cdc.adoc[].
 *Tenants* are an isolated administrative unit for which an authorization scheme can be set and a set of clusters can be defined.
 Each tenant can have multiple *namespaces*, a logical container for creating and managing a hierarchy of topics.
 A *topic* is a named channel for transmitting messages from producers to consumers.
-A *sink* feeds data from {product} to an external system, such as Cassandra or Elastic Search.
+A *sink* feeds data from {product} to an external system, such as {cassandra} or Elasticsearch.
 
 == See also
 
 * xref:getting-started:index.adoc[]
-* Browse the xref:apis:index.adoc[]
+* xref:apis:index.adoc[]

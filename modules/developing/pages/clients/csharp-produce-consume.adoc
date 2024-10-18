@@ -14,8 +14,8 @@ Go to the https://github.com/datastax/astra-streaming-examples[examples repo] fo
 
 == Create a console project
 
-* Create a new console project, and then add a reference to the https://www.nuget.org/packages/DotPulsar/[dotpulsar client]:
-+
+Create a new console project, and then add a reference to the https://www.nuget.org/packages/DotPulsar/[dotpulsar client]:
+
 [source,shell]
 ----
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/create-project.sh[]
@@ -49,7 +49,7 @@ Messages can also be in formats like JSON, byte, and AVRO.
 include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-producer]
 ----
 
-Asynchronously send a single message and wait for acknowledgment:
+. Asynchronously send a single message and wait for acknowledgment:
 +
 .Program.cs
 [source,csharp]
@@ -80,8 +80,8 @@ include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleP
 
 == Run the script
 
-* In your project directory, run the script:
-+
+In your project directory, run the script:
+
 [source,shell]
 ----
 dotnet run

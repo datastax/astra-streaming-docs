@@ -8,7 +8,7 @@ This page answers some common questions about getting started with {product}.
 
 == Why does {company} call {product} "serverless"?
 
-Running a production grade Pulsar cluster that can handle at-scale workloads is not a trivial task.
+Running a - Pulsar cluster that can handle at-scale workloads is not a trivial task.
 It requires many (virtual) machines to be configured in a very particular way.
 
 In traditional cloud environments, you would pay hourly for every machine whether they are being used for workloads or not, and you would carry the burden of maintaining the server infrastructure.
@@ -34,7 +34,7 @@ For more information, see xref:operations:astream-pricing.adoc[].
 
 == Does {product} support single-sign on?
 
-If your {astra_db} organization is on the *Pay As You Go* and *Enterprise* {astra_db} subscription plan, your users can use SSO to sign in to the {astra_ui}.
+If your {astra_db} organization is on the *Pay As You Go* or *Enterprise* {astra_db} subscription plan, your users can use SSO to sign in to the {astra_ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
 == How do {astra_db} roles and permissions map to Pulsar roles and permissions?
@@ -71,7 +71,7 @@ For migration assistance, contact {support_url}[{company} Support].
 
 Every tenant in {product} comes with custom ports for Kafka and RabbitMQ workloads.
 {company} also offers a fully-compatible JMS implementation for your Java workloads.
-xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more]
+For more information, see xref:streaming-learning:use-cases-architectures:starlight/index.adoc[].
 
 === How do I separate messaging traffic?
 
@@ -80,7 +80,7 @@ The configurations of middleware and platforms supporting the app should be kept
 
 By Tenant::
 To support the hierarchy of development environments, {company} recommends creating separate tenants for each development environment.
-This gives you the greatest flexibility to balance separation of roles with consistent service configuration.
+This gives you the greatest flexibility to balance the separation of roles with consistent service configuration.
 +
 All tokens created within a tenant are limited to that tenant.
 +
@@ -99,7 +99,7 @@ All tokens would have access to all namespaces.
 {product} is actively maintained to keep parity with the official https://pulsar.apache.org[Apache Pulsar project].
 The notable differences arise from accessibility and security.
 Naturally, you have less control in a managed, serverless cluster than you do in a cluster running in your own environment.
-Beyond those differences, the effort to develop locally and then move to {product} should not be significant, but it is recommended to develop directly in {product}.
+Beyond those differences, the effort to develop locally and then move to {product} should not be significant, but {company} recommends that you develop directly in {product}.
 If you are trying to reduce costs, use the free tier of {product} and then switch when you are ready to stage your production services.
 
 === Can I use {product} with my existing Kafka or RabbitMQ applications?

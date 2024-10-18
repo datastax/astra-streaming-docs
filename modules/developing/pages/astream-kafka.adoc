@@ -12,14 +12,6 @@ By integrating two popular event streaming ecosystems, {kafka_for_astra} unlocks
 
 This document will help you get started producing and consuming Kafka messages on a Pulsar cluster.
 
-.Starlight for Kafka video
-[%collapsible]
-====
-This video from the *Five Minutes About Pulsar* series explains how to migrate from Kafka to Pulsar:
-
-video::Qy2ZlelLjXg[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
-====
-
 == {kafka_for_astra} Quickstart
 
 :page-tag: starlight-kafka,quickstart,install,admin,dev,pulsar,kafka

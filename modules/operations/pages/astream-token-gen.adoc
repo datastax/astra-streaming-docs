@@ -95,4 +95,4 @@ curl -sS --location -X GET "https://api.astra.datastax.com/v2/stats/namespaces/*
 
 == See also
 
-* *xref:getting-started:index.adoc[]
+* xref:getting-started:index.adoc[]

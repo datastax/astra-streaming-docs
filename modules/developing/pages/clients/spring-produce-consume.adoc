@@ -29,7 +29,7 @@ image::spring-initializr.png[Spring Initializr]
 . Click *Generate Project*, download the zip file, and then extract it.
 
 . Navigate to `src/main/java`, and then open the `DemoApplication.java` file.
-This file contains the main method that will run your application with the dependencies specified.
+This file contains the main method that will run your application with the specified dependencies.
 +
 .DemoApplication.java
 [%collapsible]

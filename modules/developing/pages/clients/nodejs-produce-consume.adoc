@@ -17,10 +17,10 @@ Go to the https://github.com/datastax/astra-streaming-examples[examples repo] fo
 
 == Set up the environment
 
-. Install the C++ Pulsar library dependency required by the Node.js Pulsar client npm package.
-+
+Install the C++ Pulsar library dependency required by the Node.js Pulsar client npm package.
+
 Pulsar Node client versions 1.8 and later do not require installation of the C++ Pulsar library dependency.
-+
+
 [tabs]
 ======
 Ubuntu-based Debian::
@@ -50,7 +50,7 @@ sudo ldconfig
 
 == Create a project
 
-. In a terminal, run the following script to create a new Node.js project.
+In a terminal, run the following script to create a new Node.js project.
 If NPM asks for project values, use the automatically suggested defaults.
 
 [source,shell]
@@ -77,7 +77,7 @@ include::developing:partial$client-variables-table.adoc[]
 
 . Use the client to create a producer.
 +
-There are many configuation options for producers.
+There are many configuration options for producers.
 For this example, declare the topic where messages should go.
 +
 .index.js
@@ -112,7 +112,7 @@ At this point, the script produces a message that waits to be consumed and ackno
 include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-consumer]
 ----
 
-. Receive messages, write them to console, and acknowledge receipt with the broker:
+. Receive messages, write them to the console, and acknowledge receipt with the broker:
 +
 .index.js
 [source,javascript]
@@ -130,8 +130,8 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleP
 
 == Run the script
 
-* In your Node.js project, run the script:
-+
+In your Node.js project, run the script:
+
 [source,shell]
 ----
 node index.js

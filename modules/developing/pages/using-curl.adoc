@@ -1,5 +1,5 @@
-= {product} HTTP requests
-:navtitle: Form requests
+= Form {product} HTTP requests
+:navtitle: Form HTTP requests
 :description: Interact with {product} over HTTP, such as with curl commands.
 
 You can use the xref:apis:index.adoc[{product} APIs] and https://pulsar.apache.org/docs/reference-rest-api-overview/[Pulsar REST APIs] to programmatically interact with your tenants and related {product} configurations.
@@ -62,7 +62,7 @@ curl -sS --location -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
 
 The default response is a single JSON string.
 
-You can use modifications like ` | jq .` or ` | python3 -mjson.tool` to format the output for easier reading.
+You can use modifications like `| jq .` or `| python3 -mjson.tool` to format the output for easier reading.
 
 == See also
 

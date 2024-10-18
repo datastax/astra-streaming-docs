@@ -16,10 +16,17 @@ Go to the https://github.com/datastax/astra-streaming-examples[examples repo] fo
 == Create a project
 
 . Run the following script to create a project folder, change directory into it, and then initialize a new Go project:
-
++
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/go/simple-producer-consumer/create-project.sh[]
+sudo apt install -y golang-go
+mkdir SimpleProducerConsumer && cd SimpleProducerConsumer
+
+go mod init SimpleProducerConsumer
+
+touch main.go
+
+go get -u github.com/apache/pulsar-client-go
 ----
 +
 The new project includes a `main` file and the retrieved Pulsar client package.
@@ -81,8 +88,8 @@ include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProdu
 
 == Run the script
 
-* In your project directory, run your Go app:
-+
+In your project directory, run your Go app:
+
 [source,shell]
 ----
 go run main.go
