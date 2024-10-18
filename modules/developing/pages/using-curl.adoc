@@ -1,98 +1,70 @@
-= Restful requests using curl with Astra Streaming
-:navtitle: Using curl with Astra Streaming
-:description: This guide will provide the necessary steps to configure curl calls for use with Astra Streaming.
+= Form {product} HTTP requests
+:navtitle: Form HTTP requests
+:description: Interact with {product} over HTTP, such as with curl commands.
 
-Pulsar offers a RESTful API for administrative tasks.
-When you create a tenant in Astra Streaming, all supporting APIs are enabled.
+You can use the xref:apis:index.adoc[{product} APIs] and https://pulsar.apache.org/docs/reference-rest-api-overview/[Pulsar REST APIs] to programmatically interact with your tenants and related {product} configurations.
+Each API supports different functionalities.
 
-To interact with your Astra Streaming tenant you will need two pieces of information: a token and the service URL.
-This guide will show you how to gather that information and test your connection.
+Depending on the API you use, you need certain information to form HTTP requests:
 
-TIP: The https://pulsar.apache.org/docs/2.10.x/reference-rest-api-overview/[Pulsar documentation]} has a full reference for each API supported in a cluster. +
-This reference will be helpful as you look to automate certain actions in your Astra Streaming tenant.
+* To use the {product} Pulsar Admin API and Pulsar REST APIs, you need the tenant's Web Service URL and Pulsar token.
+* To use the {product} DevOps API, you need an xref:operations:astream-token-gen.adoc[{astra_db} application token].
 
-== Finding your tenant's web service URL
+== Get the tenant web service URL
 
-First, you need to know where to send your curl request. This is known as the "Web Service URL". +
+. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
-[NOTE]
+. Click the *Connect* tab.
+
+. In the *Details* section, locate the *Tenant Details*.
+Here you can find the essential information you need to communicate with your Pulsar tenant, including the *Web Service URL*.
++
+image:tenant-details.png[Tenant details in {product}]
++
+[TIP]
 ====
-Pulsar has other connection URLs, and it's easy to confuse them. +
-The easiest way to tell the difference is the protocol being used in the address:
+The *Web Service URL* is _not_ the same as the Pulsar *Broker Service URL*.
 
-**The Web Service URL starts with "http(s)", while the Broker Service URL starts with "pulsar(+ssl)".**
-====
-
-After you have signed in to your Astra account, navigate to the "Connect" tab in any of your streaming tenants.
-
-|===
-a|image:connect-tab.png[Connect tab in Astra Streaming]
-|===
-
-Choose the "Details" area of the page and find the section labeled "Tenant Details".
-This is a listing of all essential info you will need to communicate with your Pulsar tenant.
-
-|===
-a|image:tenant-details.png[Tenant details in Astra Streaming]
-|===
-
-Locate the value for the "Web Service URL" and copy the address to a safe place.
-
-== Retrieving your Pulsar token in Astra Streaming
-
-Next, you need an authentication token.
-Most APIs use *tokens* to authenticate a request, and Pulsar follows this same pattern.
-
-[NOTE]
-====
-Don't confuse your Pulsar token with your Astra token - the concept is the same, but it's a different authentication. xref:operations:astream-token-gen.adoc[More details are here].
+Web Service URLs start with `http`.
+Broker Service URLs start with `pulsar(+ssl)`.
 ====
 
-To create a new Pulsar token in your Astra Streaming tenant, navigate to the "Settings" tab in the Astra portal.
-|===
-a|image:settings-tab.png[Settings tab in Astra Streaming]
-|===
+== Create a {product} Pulsar token
 
-Click "Create Token" and choose the time to expire.
-Be smart about this choice - "Never Expire" isn't always the best option.
-A window will appear with the newly generated token - it's a long string of letters and numbers.
+[IMPORTANT]
+====
+An xref:operations:astream-token-gen.adoc[{astra_db} application token] is _not_ the same as a Pulsar token.
+====
 
-|===
-a|image:copy-token.png[Copy token in Astra Streaming]
-|===
+For information about creating Pulsar tokens, see xref:operations:astream-token-gen.adoc[].
 
-Click the clipboard icon to copy the token to your clipboard, and paste the token in a safe place.
-This is the only time you will be able to copy it.
+== Make a request
 
-== Example curl call
-
-You now have the two necessary ingredients to make RESTful calls to your Astra Streaming tenant. Let's put them to use!
-
-Set the required variables in a terminal window.
-
-[source,shell,subs="attributes+"]
+. Set your environment variables:
++
+[source,shell,subs="+quotes"]
 ----
-PULSAR_TOKEN="<REPLACE-ME-WITH-TOKEN>"
-WEB_SERVICE_URL="<REPLACE-ME-WITH-URL>"
+PULSAR_TOKEN="**PULSAR_TOKEN**"
+WEB_SERVICE_URL="**TENANT_WEB_SERVICE_URL**"
 ----
 
-Run the following curl command to list all the built-in sink connectors.
-
-[source,shell,subs="attributes+"]
+. Run a curl command.
+The following example lists built-in sink connectors.
++
+[source,curl]
 ----
-curl -sS --fail --location --request GET \
-  -H "Authorization: $PULSAR_TOKEN" \
-  "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks"
+curl -sS --location -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+--header "Authorization: $PULSAR_TOKEN" \
+--header "Content-Type: application/json"
 ----
 
-The output should be a very long JSON-formatted string containing details about all the sink connectors waiting for you to have fun with {emoji-smile}.
+== Format responses
 
-TIP: If your curl command doesn't go so smoothly, add `-v` to your call. +
-The `-v` is for verbose, and prints more detail about what problem has occurred.
+The default response is a single JSON string.
 
-== What's next?
+You can use modifications like `| jq .` or `| python3 -mjson.tool` to format the output for easier reading.
 
-Now it's time to put your tenant's API to use! Here are a few suggestions.
+== See also
 
 * xref:streaming-learning:pulsar-io:connectors/index.adoc[]
 * xref:developing:astream-functions.adoc[]

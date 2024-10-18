@@ -6,51 +6,33 @@ Pulsar's serving layer (brokers) and storage layer (bookies) are decoupled in Pu
 
 Geo-replication typically provides redundancy in the event of datacenter outages, but can also be used for any application where Pulsar messages are produced and consumed across regions.
 
-This doc provides:
-
-* xref:astream-georeplication.adoc#overview[]
-* xref:astream-georeplication.adoc#async[]
-* xref:astream-georeplication.adoc#astra-ui[]
-* xref:astream-georeplication.adoc#test[]
-* xref:astream-georeplication.adoc#replicated-subscriptions[]
-* xref:astream-georeplication.adoc#monitor[]
-
-If you're already familiar with Pulsar's messaging replication and asynchronous geo-replication, skip ahead to xref:astream-georeplication.adoc#astra-ui[enabling geo-replication in Astra Streaming].
-
 [#overview]
-== Overview of message replication in Pulsar
+== Message replication in Pulsar
 
-In Pulsar, cross-cluster message replication can be implemented with *synchronous* or *asynchronous* message replication, and with or without a global configuration store in ZooKeeper.
+In Pulsar, cross-cluster message replication can be implemented with _synchronous_ or _asynchronous_ message replication, and with or without a global configuration store in ZooKeeper.
 
-{product_name} only supports *asynchronous* geo-replication without a global configuration store. This approach offers better performance and lower latency.
+{product} supports only asynchronous geo-replication without a global configuration store.
+This approach offers better performance and lower latency.
 
-In asynchronous geo-replication, each region has its own local Pulsar cluster. Messages published in a cluster of one region are automatically replicated asynchronously to remote clusters in other regions. This is achieved through Pulsar’s built-in geo-replication capability.
+In asynchronous geo-replication, each region has its own local Pulsar cluster. Each Pulsar cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
 
-[#async]
-== Asynchronous geo-replication overview
+When messages are produced on a Pulsar topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters in other regions.
+This is achieved through Pulsar's built-in geo-replication capability.
 
-{product_name} only supports *asynchronous* geo-replication without a global configuration store.
-
-An *asynchronous* geo-replication cluster consists of two or more independent Pulsar clusters running in different regions.
-
-Each Pulsar cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
-
-When messages are produced on a Pulsar topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters.
-
-The message producer doesn't wait for confirmation from multiple Pulsar clusters. The producer receives a response immediately after the nearest cluster successfully persists the data. The data is then asynchronously replicated to the other Pulsar clusters in the background.
-
-To set up asynchronous geo-replication in {product_name}, see xref:astream-georeplication.adoc#astra-ui[].
+The message producer doesn't wait for confirmation from multiple Pulsar clusters.
+The producer receives a response immediately after the nearest cluster successfully persists the data.
+The data is then asynchronously replicated to the other Pulsar clusters in the background.
 
 [#astra-ui]
-== Enable geo-replication in Astra Streaming
+== Enable geo-replication in {product}
 
 Asynchronous geo-replication is enabled on a per-tenant basis and managed at the namespace level.
 
 This means you can enable asynchronous geo-replication on topics where it is needed, while controlling which datasets are replicated by namespace.
 
-To enable geo-replication in {product_name}, follow these steps:
+To enable geo-replication in {product}, follow these steps:
 
-. In your {product_name} tenant, select **Namespaces and Topics** to list your tenant's current namespaces and topics.
+. In your {product} tenant, select **Namespaces and Topics** to list your tenant's current namespaces and topics.
 
 . Select **Modify namespace** in the namespace you want to replicate *from*.
 
@@ -73,23 +55,16 @@ To disable replication on a namespace, select **Disable Replication**.
 [#test]
 == Test georeplicated clusters
 
-. Verify your user token can access tenant metadata. +
-`allowedClusters` lists the clusters the tenant can be replicated to.
+. Verify that your user token can access tenant metadata:
 +
-[tabs]
-====
-Command::
-+
---
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-admin tenants get <tenant>
+bin/pulsar-admin tenants get **TENANT_NAME**
 ----
---
 +
-Result::
+In the result, the `allowedClusters` are the clusters where you can replicate the tenant:
 +
---
+.Result
 [source,json]
 ----
 {
@@ -97,49 +72,41 @@ Result::
   "allowedClusters" : [ "pulsar-gcp-useast4-staging", "pulsar-aws-useast1-staging", "pulsar-gcp-useast1-staging", "pulsar-azure-westus2-staging", "pulsar-aws-useast2-staging" ]
 }
 ----
---
-====
 
-. Verify your `pulsar-admin` can view the replicated clusters for your namespace.
+. Verify your `pulsar-admin` can read replicated clusters for your namespace:
 +
-[tabs]
+[source,bash,subs="+quotes"]
+----
+bin/pulsar-admin namespaces get-clusters **TENANT_NAME**/**NAMESPACE_NAME**
+----
++
+.Result
+[%collapsible]
 ====
-Command::
-+
---
-[source,bash]
-----
-bin/pulsar-admin namespaces get-clusters <tenant>/<namespace>
-----
---
-+
-Result::
-+
---
 [source,json]
 ----
 pulsar-aws-useast1-staging
 pulsar-aws-useast2-staging
 ----
---
 ====
 
-. Create a Pulsar consumer with a subscription to the `<my-tenant>/<my-namespace>/<my-topic>` topic:
+. Create a Pulsar consumer with a subscription to a specified topic:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-client consume -s "subscription-test" <my-tenant>/<my-namespace>/<my-topic> -n 0
+bin/pulsar-client consume -s "subscription-test" **TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** -n 0
 ----
 
-. Create a Pulsar producer to produce messages to the `<my-tenant>/<my-namespace>/<my-topic>` topic:
+. Create a Pulsar producer to produce messages from a specific topic:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
-bin/pulsar-client produce <my-tenant>/<my-namespace>/<my-topic> --messages "hello-from-pulsar" -n 10
+bin/pulsar-client produce **TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** --messages "hello-from-pulsar" -n 10
 ----
-
-. Your consumer will acknowledge receipt of the messages:
 +
+The consumer acknowledges the messages:
++
+.Result
 [source,console]
 ----
 ----- got message -----
@@ -164,17 +131,18 @@ key:[null], properties:[], content:hello-from-pulsar
 key:[null], properties:[], content:hello-from-pulsar
 ----
 
-. Navigate to the **Namespaces and Topics** tab in your geo-replicated {product_name} clusters. +
-`persistent://<my-tenant>/<my-namespace>/<my-topic>` should be visible and showing traffic across all regions.
+. In the {astra_ui}, go to your tenant's **Namespaces and Topics** tab.
+
+. Make sure `persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**` is visible and shows traffic across all regions.
 
 [#replicated-subscriptions]
 == Replicated subscriptions
 
 The `isReplicated` value controls subscription behavior during replication.
 
-Subscriptions are created with `isReplicated=false` by default, and will not replicate when the cluster is replicated.
+Subscriptions are created with `isReplicated=false` by default, which means they do not replicate when the cluster is replicated.
 
-. Specify `replicateSubscriptionState(true)` at subscription creation to replicate the subscription when the cluster is replicated.
+. Specify `replicateSubscriptionState(true)` at subscription creation to replicate the subscription when the cluster is replicated:
 +
 [source,java]
 ----
@@ -185,22 +153,18 @@ Consumer<String> consumer = pulsarClient.newConsumer(Schema.STRING)
         .subscribe();
 ----
 
-. Check topic stats. `isReplicated` is now `true` for this subscription.
+. Check topic stats:
 +
-[tabs]
+[source,bash,subs="+quotes"]
+----
+bin/pulsar-admin topics stats persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
+----
++
+In the configuration, `isReplicated` is now `true` for this subscription.
++
+.config.json
+[%collapsible]
 ====
-Command::
-+
---
-[source,bash]
-----
-bin/pulsar-admin topics stats persistent://<my-tenant>/<my-namespace>/<my-topic>
-----
---
-+
-Result::
-+
---
 [source,json]
 ----
 {
@@ -272,7 +236,7 @@ Result::
       "replicationDelayInSeconds" : 0,
       "inboundConnection" : "/192.168.98.62:40346",
       "inboundConnectedSince" : "2022-09-14T20:20:35.128325Z",
-      "outboundConnection" : "[id: 0xd3b42242, L:/192.168.71.231:42272 - R:pulsar-aws-useast2.staging.streaming.datastax.com/3.14.0.138:6651]",
+      "outboundConnection" : "[id: 0xd3b42242, L:/192.168.71.231:42272 - R:pulsar-aws-useast2.streaming.datastax.com/3.14.0.138:6651]",
       "outboundConnectedSince" : "2022-09-14T18:37:16.060159Z"
     }
   },
@@ -287,16 +251,15 @@ Result::
   }
 }
 ----
---
 ====
 
 [#monitor]
 == Monitor replicated clusters
 
-{product_name} exposes the following topic-level replication metrics, which can be viewed in the **Overview** tab of the Namespaces and Topics page.
+{product} exposes the following topic-level replication metrics, which can be viewed in the **Overview** section of **Namespaces and Topics** in the {astra_ui}:
 
-include::partial$georeplication-monitoring.adoc[]
+include::operations:partial$georeplication-monitoring.adoc[]
 
-== What's next?
+== See also
 
-For more on multiregion georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[Pulsar docs].
+For more on multiregion georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[Pulsar documentation].

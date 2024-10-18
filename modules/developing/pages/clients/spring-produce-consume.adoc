@@ -1,35 +1,37 @@
-= Producing and consuming messages using the Java pulsar client with Astra Streaming and Spring
+= Use the Java Pulsar client with {product} and Spring
 :navtitle: Spring
-:description: This is a guide to create a simple producer and consumer using Pulsar's java client with Spring.
+:description: Produce and consume messages with the Java Pulsar client, {product}, and Spring.
 :page-tag: astra-streaming,dev,develop,pulsar,java
+
+You can produce and consume messages with the Java Pulsar client, {product}, and Spring.
+
+Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
 == Prerequisites
 
-You will need the following prerequisites in place to complete this guide:
+For this example, you need the following:
 
-* JRE 8 installed (https://sdkman.io/[install now,title=Install java])
-* (https://maven.apache.org/install.html[Maven,title=Maven]) or (https://gradle.org/install/[Gradle,title=Gradle]) installed
-* A working Pulsar topic (get started xref:getting-started:index.adoc[here] if you don't have a topic)
-* A basic text editor or IDE
-
-[TIP]
-====
-Visit our https://github.com/datastax/astra-streaming-examples[examples repo] to see the complete source of this example.
-====
+* JRE 8
+* https://maven.apache.org/install.html[Maven]
+* A Pulsar topic in {product}
+* A text editor or IDE
 
 == Create a Maven project in Spring Initializr
 
-Spring Initializr is a great tool to quickly create a project with the dependencies you need. Let's use it to create a project with the Pulsar client dependency.
+You can use Spring Initializr to quickly create a Java project with the required dependencies, including the Pulsar client dependency.
 
-. Go to https://start.spring.io/[Spring Initializr,title=Spring Initializr] to initalize a new project.
-. Select Maven, Java 17, a non-SNAPSHOT version of Spring Boot, and the Apache Pulsar dependency.
+. Go to https://start.spring.io/[Spring Initializr] to initialize a new project.
+
+. Select Maven, Java 17, a non-SNAPSHOT version of Spring Boot, and the Apache Pulsar dependency:
 +
 image::spring-initializr.png[Spring Initializr]
-. Select Generate Project and download the zip file.
-. Unzip the file and open the project in your IDE.
-In src/main/java/DemoApplication, you'll find the main method that will run your application, with the dependencies helpfully injected by Spring. This is where we'll add our code.
+
+. Click *Generate Project*, download the zip file, and then extract it.
+
+. Navigate to `src/main/java`, and then open the `DemoApplication.java` file.
+This file contains the main method that will run your application with the specified dependencies.
 +
-.Java application code
+.DemoApplication.java
 [%collapsible]
 ====
 [source,java]
@@ -38,18 +40,20 @@ include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/ja
 ----
 ====
 
-. Replace the values in your Java application with values from the Connect tab of your {product_name} instance.
+. Replace the following values in `DemoApplication.java` with values from your tenant's *Connect* tab in the {astra_ui}:
 +
-[source,java]
+.DemoApplication.java
+[source,java,subs="+quotes"]
 ----
-	private static final String serviceUrl = "pulsar+ssl://pulsar-aws-useast1.streaming.datastax.com:6651";
-	private static final String pulsarToken = "ey...";
-	private static final String tenantName = "homelab";
-	private static final String namespace = "default";
-	private static final String topicName = "clue-sensors";
+	private static final String serviceUrl = "pulsar+ssl://pulsar-**PROVIDER**-**REGION**.streaming.datastax.com:**PORT**";
+	private static final String pulsarToken = "**PULSAR_JTW_TOKEN**";
+	private static final String tenantName = "**TENANT_NAME**";
+	private static final String namespace = "**NAMESPACE_NAME**";
+	private static final String topicName = "**TOPIC_NAME**";
 ----
 +
-You could instead modify the values in the "application.properties" file in the /resources folder, which is a better practice for production applications. The Connect tab in Astra Streaming has a link to download a properties file with the values your application needs to connect to your {product_name} instance.
+You can also modify the values in the `application.properties` file in the `/resources` directory, which is recommended for production applications.
+On your tenant's *Connect* tab, you can download a properties file with the values your application needs to connect to your {product} instance.
 +
 .Spring application properties
 [%collapsible]
@@ -59,23 +63,18 @@ You could instead modify the values in the "application.properties" file in the 
 include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/resources/application.properties[]
 ----
 ====
-. Change directory to the project root and run the following command to compile the project:
+
+. From your project's root directory, compile the Java application with the Pulsar client dependency:
 +
-[tabs]
-====
-Maven::
-+
---
 [source,bash]
 ----
 mvn clean compile
 ----
---
-
-Result::
 +
---
-[source,bash]
+.Result
+[%collapsible]
+====
+[source,console]
 ----
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
@@ -84,35 +83,27 @@ Result::
 [INFO] Finished at: 2023-05-09T15:36:33-04:00
 [INFO] ------------------------------------------------------------------------
 ----
---
 ====
+
+. Run the project to send a message to your {product} cluster:
 +
-. Maven has compiled your Java application with the Pulsar client dependency.
-You can now run the project and send a message to your {product_name} cluster.
-+
-[tabs]
-====
-Maven::
-+
---
 [source,bash]
 ----
 mvn spring-boot:run
 ----
---
-
-Result::
 +
---
-[source,bash]
+.Result
+[%collapsible]
+====
+[source,console]
 ----
 Message received: Hello World
 ----
---
 ====
-. Remember to check in your {product_name} instance to see the message you sent to the newly created subscription "my-subscription".
 
-== What's next?
+. In the {astra_ui}, go to your tenant to verify that the message appears in the specified namespace and topic.
+
+== See also
 
 * xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astream-functions.adoc[]

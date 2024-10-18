@@ -1,9 +1,11 @@
-= Monitoring Streaming Tenants
+= Monitor streaming tenants
 :navtitle: Monitoring overview
 
-Because Astra Streaming is a software-as-a-service product, not all Apache Pulsar metrics (https://pulsar.apache.org/docs/reference-metrics/[Pulsar Metrics Reference]) are exposed for external integration purposes. At a high level, Astra Streaming only exposes metrics that are related to namespaces. Other metrics that are not directly namespace related are not exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
+Because {product} is a managed SaaS offering, some https://pulsar.apache.org/docs/reference-metrics/[Apache Pulsar metrics] aren't exposed for external integration purposes.
+At a high level, {product} only exposes metrics related to namespaces.
+Metrics that are not directly related to namespaces aren't exposed externally, such as the Bookkeeper ledger and journal metrics and Zookeeper metrics.
 
-In the following sections, we'll explore each of the Astra Streaming metrics categories that are available for external integration, and recommended metrics for external integration.
+Additionally, of the exposed metrics, not all metrics are recommended for external integration.
 
 == Pulsar raw metrics
 
@@ -13,12 +15,13 @@ For a complete Pulsar metrics reference, see:
 
 * https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]
 
-For a complete Astra Streaming metrics reference, see xref:monitoring/metrics.adoc[].
+For a complete {product} metrics reference, see xref:monitoring/metrics.adoc[].
 
-== {product_name} metrics
+== {product} metrics
 
 === Namespace and topic metrics
-Astra Streaming exposes both namespace and topic level metrics.
+
+{product} exposes both namespace and topic level metrics.
 Namespace metrics can always be inferred from corresponding topic metrics via metrics aggregation.
 
 The following table lists recommended namespace and/or topic metrics as a starting point.
@@ -28,7 +31,8 @@ The following table lists recommended namespace and/or topic metrics as a starti
 include::example$namespace-topic-metrics.csv[]
 |===
 
-=== Replication Metrics
+=== Replication metrics
+
 When geo-replication is enabled for a particular namespace, a subset of namespace metrics is available specifically for geo-replication purposes. Below is the list of recommended geo-replication metrics as a starting point.
 
 [%header,format=csv,cols="2,1,1,3"]
@@ -37,6 +41,7 @@ include::example$replication-metrics.csv[]
 |===
 
 === Subscription metrics
+
 The following table gives the list of recommended subscription metrics as a starting point.
 
 [%header,format=csv,cols="2,1,3"]
@@ -44,9 +49,9 @@ The following table gives the list of recommended subscription metrics as a star
 include::example$subscription-metrics.csv[]
 |===
 
-=== Function Metrics
+=== Function metrics
 
-The following table gives the list of recommended function metrics as a starting point. This is only relevant when Pulsar functions are deployed in Astra Streaming.
+The following table gives the list of recommended function metrics as a starting point. This is only relevant when Pulsar functions are deployed in {product}.
 
 [%header,format=csv,cols="2,1,3"]
 |===
@@ -54,7 +59,8 @@ include::example$function-metrics.csv[]
 |===
 
 === Source connector metrics
-The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar source connectors are deployed in Astra Streaming.
+
+The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar source connectors are deployed in {product}.
 
 [%header,format=csv,cols="2,1,3"]
 |===
@@ -62,81 +68,124 @@ include::example$source-connector-metrics.csv[]
 |===
 
 === Sink connector metrics
-The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar sink connectors are deployed in Astra Streaming.
+
+The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when Pulsar sink connectors are deployed in {product}.
 [%header,format=csv,cols="2,1,3"]
 |===
 include::example$sink-connector-metrics.csv[]
 |===
 
-== Aggregate Astra Streaming Metrics
+[#aggregate-astra-streaming-metrics]
+== Aggregate {product} metrics
 
-Each externally exposed raw Astra Streaming metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product_name} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
-
-Below is an example of a raw metric for the Pulsar message backlog (pulsar_msg_backlog) scraped from an Astra Streaming cluster located in the GCP US Central region:
-
-.Show raw metric for Pulsar message backlog:
-[%collapsible]
+[IMPORTANT]
 ====
-....
-pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="broker", controller_revision_hash="pulsar-gcp-uscentral1-broker-<hash>f", exported_instance="<ip>:<port>", exported_job="broker", helm_release_name="astraproduction-gcp-pulsar-uscentral1", instance="prometheus-gcp-uscentral1.streaming.datastax.com:443", job="astra-pulsar-metrics-msgenrich", kubernetes_namespace="pulsar", kubernetes_pod_name="pulsar-gcp-uscentral1-broker-3", namespace="msgenrich/testns", prometheus="pulsar/astraproduction-gcp-pulsar-prometheus", prometheus_replica="prometheus-astraproduction-gcp-pulsar-prometheus-0", pulsar_cluster_dns="gcp-uscentral1.streaming.datastax.com", release="astraproduction-gcp-pulsar-uscentral1", statefulset_kubernetes_io_pod_name="pulsar-gcp-uscentral1-broker-3", topic="persistent://msgenrich/testns/raw-partition-0"}
-....
+Do _not_ aggregate metrics on shared clusters because one cluster can be shared among multiple organizations.
+For more information, see xref:astream-limits.adoc[] and xref:operations:astream-pricing.adoc[].
 ====
 
-To make raw metrics like this useful for end users, we recommend the following guidelines when aggregating raw metrics:
+Each externally exposed raw {product} metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
 
-. Aggregate metrics to at least the parent topic level, instead of at the partition level. In Pulsar, end user applications only deal with messages at the parent topic level (but internally, Pulsar is handling message processing at the partition level).
-. Exclude reported metrics that are associated with Astra Streaming's system namespaces and topics. These namespaces and topics normally have a name starting with ++__++ (two underscores). For example, when Pulsar's Kafka protocol handler is enabled (via S4K integration), a system namespace ++__kafka++ is created with one system topic within called ++__transaction_producer_state++.
-Do NOT aggregate metrics with the Astra Streaming *Pay As You Go* option, since one cluster may be shared among multiple organizations. For more, see xref:astream-limits.adoc[Cluster Limits].
+The following example shows some raw metrics for a Pulsar message backlog (`pulsar_msg_backlog`) scraped from an {product} cluster in the Google Cloud `us-central1` region:
+
+[source,console]
+----
+....
+pulsar_msg_backlog{app="pulsar", cluster="pulsar-gcp-uscentral1", component="broker", controller_revision_hash="pulsar-gcp-uscentral1-broker-<hash>f", exported_instance="<ip>:<port>", exported_job="broker", helm_release_name="astraproduction-gcp-pulsar-uscentral1", instance="prometheus-gcp-uscentral1.streaming.datastax.com:443", job="astra-pulsar-metrics-demo", kubernetes_namespace="pulsar", kubernetes_pod_name="pulsar-gcp-uscentral1-broker-3", namespace="demo/testns", prometheus="pulsar/astraproduction-gcp-pulsar-prometheus", prometheus_replica="prometheus-astraproduction-gcp-pulsar-prometheus-0", pulsar_cluster_dns="gcp-uscentral1.streaming.datastax.com", release="astraproduction-gcp-pulsar-uscentral1", statefulset_kubernetes_io_pod_name="pulsar-gcp-uscentral1-broker-3", topic="persistent://demo/testns/raw-partition-0"}
+....
+----
+
+To transform raw metrics into a usable state, {company} recommends the following:
+
+* Aggregate metrics at the parent topic level, at minimum, instead of at the partition level.
+In Pulsar, end user applications only deal with messages at the parent topic level; however, internally, Pulsar handles message processing at the partition level.
+
+* Exclude reported metrics that are associated with {product}'s system namespaces and topics, which are usually prefixed by two underscores, such as:
++
+[source,plain]
+----
+__kafka
+__transaction_producer_state
+----
 
 === PromQL query patterns
 
-Prometheus provides a powerful but easy-to-use query language called PromQL for selecting and aggregating time series data in real time. PromQL syntax is beyond this document's scope, but the https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus documentation] is a great place to start.
+PromQL is Prometheus's simple and powerful query language that you can use to select and aggregate time series data in real time.
+For more information, see the https://prometheus.io/docs/prometheus/latest/querying/basics/[PromQL documentation].
 
-In the rest of this section, we'll recommend some PromQL query patterns for aggregating raw Astra Streaming metrics.
-These examples use one Astra Streaming raw metric, pulsar_msg_backlog, as an example for illustrative purposes.
-We aggregate messages at the parent topic level or above, and exclude system topics per our recommendations above.
-We filter out system messages with the pattern +{topic !~ ".*__.*"}+.
-This PromQL pattern filters out messages when their topic labels do not include +__+.
-This works because Pulsar system topics usually have ++__++ as the topic or namespace name prefix (e.g. persistent://<tenant>/++__++kafka/__consumer_offsets_partition_0).
-This pattern assumes that the user applications don't also have namespaces and topics with +__+ as part of the names, or they will be filtered as well.
+{company} recommends the following PromQL query patterns for aggregating raw {product} metrics.
+The following examples use the `pulsar_msg_backlog` raw metric to demonstrate the patterns.
+In accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, the example patterns aggregate messages at the parent topic level or higher and they exclude system topics.
 
-Pattern 1: Get the total message backlog of a specific parent topic, excluding system topics.
-"$ptopic" is a (Grafana dashboard) variable that represents a specific parent topic.
-[source,psql]
+.Filter system topics
+[%collapsible]
+====
+You can use the following expression to filter system topics:
+
+[source,pgsql]
+----
+{topic !~ ".*__.*"}`
+----
+
+This expression excludes messages with topic labels that include two consecutive underscores.
+This works because Pulsar system topics and namespaces are usually prefixed by two underscores, such as:
+
+[source,plain]
+----
+persistent://some_tenant/__kafka/__consumer_offsets_partition_0
+----
+
+To use this expression, your applications' namespace and topic names don't contain double underscores.
+If they do, they will also be excluded by this filter.
+====
+
+==== Get the total message backlog of a specific parent topic, excluding system topics
+
+`$ptopic` is a Grafana dashboard variable that represents a specific parent topic.
+
+[source,pgsql]
 ----
 sum(pulsar_msg_backlog{topic=~$ptopic, topic !~ ".*__.*"})
 ----
 
-Pattern 2: Get the total message backlog of a specific namespace, excluding system topics.
-"$namespace" is a (Grafana dashboard) variable that represents a specific namespace.
-[source,psql]
+==== Get the total message backlog of a specific namespace, excluding system topics
+
+`$namespace` is a Grafana dashboard variable that represents a specific namespace.
+
+[source,pgsql]
 ----
 sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
-Pattern 3: Get the total message backlog of a tenant, excluding system topics.
-"$tenant" is a (Grafana dashboard) variable that represents a specific tenant.
-[source,psql]
+==== Get the total message backlog of a tenant, excluding system topics
+
+`$tenant` is a (Grafana dashboard) variable that represents a specific tenant.
+
+[source,pgsql]
 ----
 sum(pulsar_msg_backlog{namespace=~"$tenant.+"", topic !~ ".*__.*"})
 ----
 
-Pattern 4: Get the total message backlog of each topic within a specific namespace, excluding system topics.
-[source,psql]
+==== Get the total message backlog of each topic within a specific namespace, excluding system topics
+
+[source,pgsql]
 ----
 sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
-Pattern 5: Get the top 10 message backlog by topic within a specific namespace, excluding system topics.
-[source,psql]
+==== Get the top 10 message backlog by topic within a specific namespace, excluding system topics
+
+[source,pssql]
 ----
-topk by(topic) (10, sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
+topk (10, sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"}))
 ----
 
-== Metrics to be alerted
-Most of the exposed Astra Streaming metrics are for informational purposes only and in most cases the metrics values are just reflecting the application workload characteristics. For example, message rate or throughput are common examples of such metrics.
+== Metrics alerts
 
-There are, however, several metrics that need special attention when we see an increasing number of their values. Among the exposed Astra Streaming metrics, these metrics are:
+Most of the exposed {product} metrics reflect generic application workload characteristics, such as message rate or throughput, and they are for informational purposes only.
+
+However, {company} recommends that you monitor the following metrics for unexpected increases:
+
 .Metrics for alerting
 [%header,format=csv,cols="2,2,1,3"]
 |===
@@ -144,20 +193,21 @@ include::example$alert-metrics.csv[]
 |===
 
 === Alerting rules
-In a perfect world, these metrics should always stay at 0, but in reality, these metrics will increase when the application workload becomes heavier.
-If your system is behaving correctly, these metrics should go down when the application workload drops.
 
-A simple way to trigger an alert on these metrics is to set a threshold which triggers an alert when the metric exceeds it. However, this will probably cause false alarms during workload spikes.
+In a perfect world, these metrics would always be `0`.
+In reality, these metrics will increase when an application's workload increases, and then return to normal when the workload decreases.
 
-A better approach is calculating the metrics' increase rate over a period of time (e.g. 1 hour) and setting a threshold on the rate of increase.
-For example, if the average message backlog increase rate exceeds a threshold, an alert is triggered.
+You can set an alert threshold to be notified when these metrics exceed normal capacity, but this can cause false alarms during expected workload spikes.
 
-The actual threshold values for these metrics is highly dependent on each application's workload and requirements, but the values should be relatively large positive numbers, e.g. several hundreds or several thousands.
-Otherwise, they may trigger too many false alarms.
+Alternatively, you can calculate the metrics' increase rate over a period of time, such as one hour, and then set a threshold based on the rate of increase.
+For example, if the average message backlog increase rate exceeds the given threshold, an alert is triggered.
 
-== What's next?
+Thresholds for these metrics depends on your application's routine workloads and requirements.
+Generally, these values are large positive numbers, ranging in the several hundreds or several thousands.
+If your receive too many false alarms, adjust the alert threshold to a higher value.
 
-* For a list of exposed endpoints for Astra Streaming metrics, see xref:monitoring/metrics.adoc[].
-* To scrape Astra Streaming metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
-* To scrape Astra Streaming metrics into New Relic, see xref:monitoring/new-relic.adoc[].
+== See also
 
+* xref:monitoring/metrics.adoc[]
+* xref:monitoring/integration.adoc[]
+* xref:monitoring/new-relic.adoc[]

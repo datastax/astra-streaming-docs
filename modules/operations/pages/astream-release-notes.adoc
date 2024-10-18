@@ -1,15 +1,15 @@
-= {product_name} release notes
+= {product} release notes
 :page-tag: astra-streaming,admin,dev,pulsar
 :navtitle: Release notes
 :page-toclevels: 1
-:description: This page summarizes significant changes and updates to {product_name}.
+:description: This page summarizes significant changes and updates to {product}.
 :new: New features and enhancements
 :security: Security updates
 :fix: Fixed issues
 :dep: Deprecated features
 :boilerplate: This release includes the following changes and updates:
 
-This page summarizes significant changes and updates to {product_name}.
+This page summarizes significant changes and updates to {product}.
 
 == June 20, 2023
 
@@ -25,7 +25,7 @@ This page summarizes significant changes and updates to {product_name}.
 
 === {new}
 
-* The xref:developing:gpt-schema-translator.adoc[GPT schema translator] is now available for the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[Astra DB Sink Connector].
+* The xref:developing:gpt-schema-translator.adoc[GPT schema translator] is now available for the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[{astra_db} Sink Connector].
 
 == June 1, 2023
 
@@ -54,8 +54,8 @@ This page summarizes significant changes and updates to {product_name}.
 === {new}
 
 * Added support for https://spring.io/[Spring Boot].
-You can now use this Java framework to build your {product_name} applications.
-For more information, see xref:developing:clients/spring-produce-consume.adoc[Spring Boot for {product_name}].
+You can now use this Java framework to build your {product} applications.
+For more information, see xref:developing:clients/spring-produce-consume.adoc[Spring Boot for {product}].
 
 == April 17, 2023
 
@@ -63,9 +63,8 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 
 === {new}
 
-* Custom functions can now only be created by organizations on the https://docs.datastax.com/en/astra-serverless/docs/manage/org/manage-billing.html#_pay_as_you_go_plans[Pay As You Go] plan with a payment method on file.
-+
-Organizations on the Free plan can still use xref:streaming-learning:functions:index.adoc[transform functions].
+* Custom functions require a xref:operations:astream-pricing.adoc[paid {product} plan].
+Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 
 == February 27, 2023
 
@@ -98,7 +97,7 @@ Organizations on the Free plan can still use xref:streaming-learning:functions:i
 [discrete]
 ==== {new}
 
-* {product_name} now supports xref:streaming-learning:functions:index.adoc[transform functions].
+* {product} now supports xref:streaming-learning:functions:index.adoc[transform functions].
 
 [discrete]
 === November 16, 2022
@@ -108,7 +107,7 @@ Organizations on the Free plan can still use xref:streaming-learning:functions:i
 [discrete]
 ==== {new}
 
-* {product_name} now supports xref:operations:astream-georeplication.adoc[geo-replication].
+* {product} now supports xref:operations:astream-georeplication.adoc[geo-replication].
 
 [discrete]
 === June 7, 2022
@@ -118,7 +117,7 @@ Organizations on the Free plan can still use xref:streaming-learning:functions:i
 [discrete]
 ==== {new}
 
-* {product_name} now supports xref:operations:astream-scrape-metrics.adoc[scraping metrics with Prometheus].
+* {product} now supports xref:operations:astream-scrape-metrics.adoc[scraping metrics with Prometheus].
 
 [discrete]
 === April 28, 2022
@@ -148,7 +147,7 @@ Organizations on the Free plan can still use xref:streaming-learning:functions:i
 [discrete]
 ==== {new}
 
-* xref:developing:astream-cdc.adoc[CDC for Astra DB] is now available, which automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product_name} where it can be processed by client applications or sent to downstream systems.
+* xref:developing:astream-cdc.adoc[CDC for {astra_db}] is now available, which automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product} where it can be processed by client applications or sent to downstream systems.
 
 [discrete]
 === January 31, 2022
@@ -158,7 +157,7 @@ Organizations on the Free plan can still use xref:streaming-learning:functions:i
 [discrete]
 ==== {new}
 
-* {product_name} is now generally available.
+* {product} is now generally available.
 * Added support for the Google Cloud `us-central1` (Council Bluffs, Iowa) region.
 * xref:operations:astream-token-gen.adoc[Pulsar tokens] simplify connecting to your streaming instances.
 * Enabled xref:operations:astream-pricing.adoc[billing].
@@ -177,5 +176,5 @@ Organizations on the Free plan can still use xref:streaming-learning:functions:i
 
 * Security upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105.
 
-* The public preview of {product_name} brings the ability to quickly create Apache Pulsar(TM) instances, manage your clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
+* The public preview of {product} brings the ability to quickly create Apache Pulsar(TM) instances, manage your clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
 ====

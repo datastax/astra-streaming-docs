@@ -2,19 +2,22 @@
 :navtitle: Exclusive
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-*Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
+_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
 
-An *exclusive* subscription describes a basic publish-subscribe pattern where a *single consumer* subscribes to a *single topic* and consumes from it. +
+An _exclusive subscription_ describes a basic publish-subscribe (pub-sub) pattern where a single consumer subscribes to a single topic and consumes from it.
 
-This document explains how to use Pulsar's exclusive subscription model to manage your topic consumption.
+This page explains how to use Pulsar's exclusive subscription model to manage your topic consumption.
 
-include::partial$subscription-prereq.adoc[]
+include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Exclusive subscription example
 
-This example uses the `pulsarConsumer` object in `SimplePulsarConsumer.java` below. +
-
+. To configure a Pulsar exclusive subscription, define a `pulsarConsumer` object in `SimplePulsarConsumer.java`, as you would for other subscription types.
+However, you don't need to declare a `subscriptionType`.
+Whereas other subscription types required you to declare a specific `subscriptionType`, Pulsar creates an exclusive subscription by default if you don't declare a `subscriptionType`.
++
+.SimplePulsarConsumer.java
 [source,java]
 ----
 pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
@@ -27,43 +30,47 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .subscriptionName("SimplePulsarConsumer")
     .subscribe();
 ----
-
-[NOTE]
-====
-Pulsar creates an exclusive subscription by default when no `subscriptionType` is declared.
-====
-
-. Open the `pulsar-subscription-example` repo in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages. +
-The confirmation message and a cursor appear to indicate the consumer is ready.
 +
-[source,bash]
+If you want to explicitly define an exclusive subscription, you can add `.subscriptionType(SubscriptionType.Exclusive)` to the consumer.
+
+. In the `pulsar-subscription-example` project, run `SimplePulsarConsumer.java` to begin consuming messages.
++
+The confirmation message and a cursor appear to indicate the consumer is ready:
++
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
 ...
 [pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
 ----
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
 +
-[source,bash]
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 93573631 sent
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 16931522 sent
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 68306175 sent
 ----
-
-. The consumer begins consuming the produced messages.
 +
-[source,bash]
+In the `SimplePulsarConsumer` terminal, the consumer begins consuming the produced messages:
++
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":93573631,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":16931522,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":68306175,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 ----
 
-. Open a new terminal window and try to run `SimplePulsarConsumer.java`.
+. In a new terminal window, try to run another instance of `SimplePulsarConsumer.java`.
 +
-[source,bash]
+The second consumer can't subscribe to the topic because the subscription is exclusive:
++
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
 ...
@@ -73,16 +80,9 @@ Exception in thread "main" java.lang.IllegalStateException: Cannot connect to pu
 Caused by: org.apache.pulsar.client.api.PulsarClientException$ConsumerBusyException: {"errorMsg":"Exclusive consumer is already connected","reqId":2964994443801550457, "remote":"<service_url>", "local":"/192.168.0.95:55777"}
 ----
 
-The second consumer can't subscribe to the topic because the subscription is *exclusive*. +
-
-In the example above, the consumer didn't declare a subscription type, so Pulsar created an exclusive subscription by default. +
-To explicitly define an exclusive subscription, add `.subscriptionType(SubscriptionType.Exclusive)` to the consumer.
-
-== What's next
-
-For more on subscriptions, see: 
+== See also
 
 * xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
 * xref:astream-subscriptions-shared.adoc[Shared subscriptions]
 * xref:astream-subscriptions-failover.adoc[Failover subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key_shared subscriptions]
+* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]

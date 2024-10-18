@@ -1,12 +1,9 @@
-.Developing
-* xref:gpt-schema-translator.adoc[]
+.Development
 * xref:configure-pulsar-env.adoc[]
-* xref:using-curl.adoc[]
-* xref:astra-cli.adoc[]
 * xref:astream-functions.adoc[]
 * xref:astream-kafka.adoc[]
 * xref:astream-rabbit.adoc[]
-* Producing and consuming messages
+* Produce and consume messages
 ** xref:produce-consume-astra-portal.adoc[]
 ** xref:produce-consume-pulsar-client.adoc[]
 ** Client applications
@@ -17,4 +14,13 @@
 *** xref:clients/golang-produce-consume.adoc[]
 *** xref:clients/nodejs-produce-consume.adoc[]
 *** xref:clients/spring-produce-consume.adoc[]
+** Pulsar subscriptions
+*** xref:ROOT:astream-subscriptions.adoc[]
+*** xref:ROOT:astream-subscriptions-exclusive.adoc[]
+*** xref:ROOT:astream-subscriptions-shared.adoc[]
+*** xref:ROOT:astream-subscriptions-failover.adoc[]
+*** xref:ROOT:astream-subscriptions-keyshared.adoc[]
+* xref:gpt-schema-translator.adoc[]
+* xref:astra-cli.adoc[]
 * xref:astream-cdc.adoc[]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors]

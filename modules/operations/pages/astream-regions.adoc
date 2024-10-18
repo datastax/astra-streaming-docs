@@ -1,15 +1,20 @@
-= {product_name} Regions
+= {product} regions
 :page-tag: astra-streaming,admin,manage,pulsar
 
-When creating a tenant, select a region for your tenant. Choose a region that is geographically close to your users to optimize performance.
+When creating a tenant, select a region for your tenant.
+Choose a region that is geographically close to your users to optimize performance.
 
-Here are the regions that {product_name} supports:
+{product} supports AWS, Microsoft Azure, and Google Cloud regions.
+These regions are also supported by CDC for {astra_db}.
+{product} CDC can only be used in a region that supports both {product} and {astra_db}.
+
+ElasticSearch and Snowflake can be in different regions than {product}.
 
 == AWS
-[cols=2*,options=header]
+
+[cols="1,1"]
 |===
-|Region
-|Location
+|Region |Location
 
 |`ap-south-1`
 |Mumbai
@@ -33,11 +38,11 @@ Here are the regions that {product_name} supports:
 |Oregon
 |===
 
-== Azure
-[cols=2*,options=header]
+== Microsoft Azure
+
+[cols="1,1"]
 |===
-|Region
-|Location
+|Region |Location
 
 |`australiaeast`
 |New South Wales
@@ -56,10 +61,10 @@ Here are the regions that {product_name} supports:
 |===
 
 == Google Cloud
-[cols=2*,options=header]
+
+[cols="1,1"]
 |===
-|Region
-|Location
+|Region |Location
 
 |`australia-southeast1`
 |Sydney, Australia
@@ -77,8 +82,3 @@ Here are the regions that {product_name} supports:
 |Ashburn, Virginia
 
 |===
-
-[NOTE]
-====
-These regions are also supported by CDC for Astra DB. {product_name} CDC can only be used in a region that supports both {product_name} and Astra DB. ElasticSearch and Snowflake can be in different regions than {product_name}.
-====

@@ -1,242 +1,98 @@
-= Manage Tokens
+= Manage tokens
 
-There are *two* different tokens within Astra - the *Astra token* and the *Astra Streaming Pulsar token*.
-
-The <<astra-token, Astra token>> is used for authentication within {astra_ui} and the xref:apis:index.adoc[DevOps API].
-
-The <<pulsar-token, Pulsar token>> is a native Pulsar JSON Web Token (JWT) token that controls authentication to the Pulsar cluster.
-
-== What's the difference?
-
-The Astra token is an access token. It is used to authenticate your service account in the DevOps API and {astra_ui}.
-
-The Astra Streaming Pulsar token is a JWT token. Astra forwards the token on to the Pulsar cluster, which verifies if the role in allowed.
-
-In general, actions related to your Astra Org (tenant management, members, org billing, usage metrics, etc.) use your Astra Token, and actions specific to a Pulsar tenant (message namespaces, topics, message metrics, etc.) use a Pulsar JWT token.
-
-For more, see https://docs.datastax.com/en/streaming/astra-streaming/operations/onboarding-faq.html#secure-sign-on-roles-and-permissions[SSO Roles and Permissions].
+{product} uses two types of tokens that you can generate in {astra_db}.
 
 [#astra-token]
-== Generate Astra token
+== {astra_db} application tokens
 
-The Astra token can be generated with the <<DevOps API, DevOps API>> or the <<astra-token-ui, UI>>.
+{astra_db} application tokens are access tokens for authentication to the {astra_ui} and the xref:apis:index.adoc[{product} DevOps API].
 
-=== DevOps API
+You need an application token for actions related to {astra_db} organizations and databases.
 
-. Create an application token to https://docs.datastax.com/en/astra/docs/_attachments/devopsv2.html[authenticate your service account] in the DevOps API.
-. Once you have authenticated your service account, you can create and revoke tokens with the https://docs.datastax.com/en/astra/docs/_attachments/devopsv2.html[DevOps API].
-. Get all clients within the organization:
-+
-[tabs]
-====
-Curl::
-+
---
-[source,shell]
-----
-curl --request GET \
- --url 'https://api.astra.datastax.com/v2/clientIdSecrets' \
- --header 'Accept: application/json' \
- --header 'Authorization: Bearer <application_token>'
-----
---
-+
-Result::
-+
---
-[source,json]
-----
-{"clients":[
-	{"clientId":"DkFtHKMhDQDuQtlExkSzwbya",
-		"roles":["21ef3576-0197-415a-b167-d510af12ecf0"],
-		"generatedOn":"2021-02-22T17:09:58.668Z"},
-	{"clientId":"eYSboCJaESiblJZnKZWMxROv",
-		"roles":["21ef3576-0197-415a-b167-d510af12ecf0"],
-		"generatedOn":"2021-04-28T18:49:11.323Z"}
-]}
-----
---
-====
-
-. Create an application token for a specific client:
-+
-[tabs]
-====
-Curl::
-+
---
-[source,shell]
-----
-curl --request POST \
- --url 'https://api.astra.datastax.com/v2/clientIdSecrets' \
- --header 'Accept: application/json' \
- --header 'Authorization: Bearer <application_token>' \
- --data '{"roles": ["<roleId>"]}'
-----
---
-+
-Result::
-+
---
-[source,json]
-----
-{
-  "clientId":"zjCEYwRGWocLfQJHBNQxvorr",
-  "secret":"SLR.cllL1YzfJDnl+YhUv5DMKlx8HaeMFTKjIJ4I6YdKB7w-K7U_+j-a9daWbbcp0uugXW,hb.3J2S0PPqDNhT6+oUiPYYaI+,xuwm2O97.ZpHcYvCsnlrTyl8w1pH-0",
-  "orgId":"dccb8c32-cc2a-4bea-bd95-47ab8eb20510",
-  "roles":["21ef3576-0197-415a-b167-d510af12ecf0"],
-  "token":"AstraCS:zjCEYwRGWocLfQJHBNQxvorr:8709074baaf63e746cc5de52891e3a5ca88c73ae1fb7336652e9b59b9e69eff2",
-  "generatedOn":"2021-04-30T19:38:26.147847107Z"
-}
-----
---
-====
-+
-[TIP]
-====
-For the `roleId`, provide the relevant role's `id` UUID value from a prior `GET` query, as shown in
-https://docs.datastax.com/en/astra-serverless/docs/manage/devops/devops-roles.html#_creating_a_new_role[Getting existing roles in your organization].
-The API results will show the UUID for each role id.
-====
-+
-. In the command-line interface associated with your environment, paste the following environment variable copied from token generation:
-+
-[source,shell]
-----
-export ASTRA_DB_APPLICATION_TOKEN=<<REPLACE_WITH_YOUR_TOKEN>>
-----
-
-[#astra-token-ui]
-=== Generate Astra token in Astra Portal
-
-. From any page in {astra_ui}, select the *Organizations* dropdown.
-. In the main dropdown, select *Organization Settings*.
-. From your Organization page, select *Token Management*.
-. Select the role you want to attach to your token. The permissions for your selected role will be displayed.
-. Select *Generate Token*. {product_name} will generate your token and display the _Client ID_, _Client Secret_, and _Token_.
-. Download your _Client ID_, _Client Secret_, and _Token_.
-+
-[IMPORTANT]
-====
-After you navigate away from the page, you won't be able to download your _Client ID_, _Client Secret_, and _Token_ again.
-====
-+
-. In the command-line interface associated with your environment, paste the following environment variable copied from token generation:
-+
-[source,shell]
-----
-export ASTRA_DB_APPLICATION_TOKEN=<<REPLACE_WITH_YOUR_TOKEN>>
-----
-+
-. You can now execute DevOps API commands from your terminal to your database.
-
-=== Delete Astra token
-
-If you need to limit access to your database, you can delete a token.
-
-. Select the overflow menu for the token you want to delete.
-. Select *Delete* to delete that token.
-. If necessary, generate a new token for the same user role.
+For information about creating and managing {astra_db} application tokens, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 
 [#pulsar-token]
-== Generate Pulsar token
+== {product} Pulsar tokens
 
-To generate, copy, or delete Astra Streaming Pulsar tokens within your streaming tenant, visit the **Token Management** section of your streaming tenant's **Settings** page.
+{product} Pulsar token are Pulsar https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} Pulsar cluster through the Pulsar CLI, runtime clients, or the Pulsar Admin API.
+If necessary, {astra_db} forwards the JWT to the Pulsar cluster for role verification.
 
-Select **Create Token** to generate a Pulsar token for this streaming tenant.
+You need a Pulsar JWT for actions related to Pulsar tenants, namespaces, messages, topics, and functions, as well as Pulsar CLI/API commands.
 
-Token duration ranges from 7 days to never expiring.
+You can generate, copy, or delete {product} Pulsar tokens for each of your {product} tenants:
 
-If you choose a token with an expiration, ensure you replace your token with a new, valid Pulsar token before the expiration date.
+. In the {astra_ui} navigation menu, click *Streaming*.
 
-Select the **clipboard** icon to copy a Pulsar token to your clipboard.
+. Select the tenant for which you want to manage tokens.
 
-=== Set environment variables
+. Click the *Settings* tab.
 
-Download your Pulsar connection info as detailed https://docs.datastax.com/en/astra-streaming/docs/astream-quick-start.html#download-connect-info[here].
+. In the *Token Management* section, click *Create Token*.
 
-In the command-line interface associated with your environment, paste the following environment variables copied for {product_name}:
+. Select a token expiration from 7 days to never.
++
+Practice responsible credential management:
++
+* Be aware of the security implications for tokens that never expire.
+* Consider how long you actually plan to use the token.
 
-[source,shell]
+. Copy the token and store it securely.
++
+The token is shown only once.
+
+. To delete a token, click *Delete*.
++
+Ensure you update your application with a new, valid Pulsar token before deletion.
+Applications using the deleted Pulsar token will no longer be able to connect to {product}.
+
+== Usage examples
+
+The following examples show how you can use the two tokens for different actions.
+
+=== Track monthly usage
+
+Use an {astra_db} application token to track monthly usage.
+For example:
+
+[source,curl,subs="+quotes"]
 ----
-export TENANT=<replace-me>
-export INPUT_TOPIC=<replace-me>
-export NAMESPACE=default
-export BEARER_TOKEN=<Pulsar-token>
-----
-
-You can now execute Pulsar admin commands from your terminal to your database.
-
-=== Delete Pulsar token
-
-Select the **trashcan** icon to delete a Pulsar token.
-
-Ensure you update your application with a new, valid Pulsar token before deletion. Applications using the deleted Pulsar token will no longer be able to connect to {product_name}.
-
-For more on JSON Web Tokens, see the https://jwt.io/introduction/[JWT documentation].
-
-== Which token should I use?
-
-The line between AstraDB and {product_name} tokens can be a little unclear.
-
-Think of `pulsar-admin` and the DevOps API as complementary tools with different scopes.
-
-Use `pulsar-admin` for interacting with your Pulsar clusters. Topics, namespaces, tenants, and their metrics fall under this scope.
-
-Use the DevOps API for org-wide Astra scope. Users, tenants, billing, and usage metrics fall under this scope.
-
-Some cases can use `pulsar-admin` **or** the DevOps API - we want the tools to be complementary, not restrictive, so do what works best for you!
-
-This section should help you choose which tool to use, and which token is required.
-
-[cols="2,2",options=header]
-|===
-|*Use case*
-|*Token*
-
-|Track monthly usage
-|Astra token
-
-2+a|Example
-[source,shell]
-----
-curl --request GET \
---url 'https://api.astra.datastax.com/v2/databases/<DATABASE_ID>' \
---header 'Accept: application/json' \
---header 'Authorization: Bearer <BEARER_TOKEN>'
+curl -sS --location -X GET "https://api.astra.datastax.com/v2/databases/**DATABASE_ID**" \
+--header "Accept: application/json" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**"
 ----
 
-|Monitor a topic's health
-|Pulsar token
+=== Monitor a topic's health
 
-2+a|Example
+Use a Pulsar token to monitor a topic's health.
+For example, the following command would authenticate through a Pulsar token declared in the `pulsar-admin` binary configuration:
+
 [source,shell]
 ----
 bin/pulsar-admin topics stats
 ----
 
-|Monitor a connector's health
-|Pulsar token
+=== Monitor a connector's health
 
-2+a|Example
+Use a Pulsar token to monitor a connector's health.
+For example:
+
 [source,shell]
 ----
 bin/pulsar-admin sinks status
 ----
 
-|Billing report by tenant
-|Astra token
+=== Billing report by tenant
 
-2+a|Example
-[source,shell]
+Use an {astra_db} application token to get tenant billing reports.
+For example:
+
+[source,curl,subs="+quotes"]
 ----
-curl --request GET \
---url https://api.astra.datastax.com/admin/v2/stats/namespaces/<tenant>
---header 'Accept: application/json' \
---header 'Authorization: Bearer <BEARER_TOKEN>'
+curl -sS --location -X GET "https://api.astra.datastax.com/v2/stats/namespaces/**TENANT_NAME**" \
+--header "Accept: application/json" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**"
 ----
-|===
 
-== What's next?
+== See also
 
-Use your new token to start streaming with the xref:getting-started:index.adoc[].
+* xref:getting-started:index.adoc[]

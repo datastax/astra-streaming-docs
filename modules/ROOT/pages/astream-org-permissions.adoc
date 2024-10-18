@@ -1,95 +1,59 @@
-= User permissions
+= Manage roles and permissions
 :page-tag: astra-streaming,security,secure,pulsar
 
-Default and xref:astream-custom-roles.adoc[custom roles] allow admins to manage unique permissions for users based on your organization and database requirements.
+You manage role-based access control (RBAC) for {product} through your {astra_db} organization.
+For information about {astra_db} RBAC, including default roles, custom roles, permissions, and user management, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
 
-You can manage roles using the {astra_ui} or the https://docs.datastax.com/en/astra/docs/manage/devops/devops-roles.html[DevOps API].
+== {product} permissions
 
-== {product_name} Organization permissions
+Permissions specific to {product} include the following:
 
-[cols=3*,options=header]
-|===
-|Console name
-|Description
-|DevOps API parameter
+* *Manage Streaming* (`org-stream-manage`): View, add, edit, or remove Astra Streaming configurations.
 
-|Read Audits
-|Enables read and download audits.
-|org-audits-read
+=== Default roles for {product}
 
-|Write IP Access List
-|Create or modify an access list using the DevOps API or the Astra console.
-|accesslist-write
+There are no default {astra_db} roles specifically scoped to {product}.
+However, the following default roles have the *Manage Streaming* permission:
 
-|Delete Custom Role
-|Delete of custom role.
-|org-role-delete
+* *Organization Administrator*
+* *Administrator Service Account*
+* *API Administrator Service Account*
+* *API Administrator User*
 
-|Manage Streaming
-|Create a Streaming Service using the DevOps API or the Astra console.
-|org-stream-manage
+For information about permissions assigned to default roles, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
 
-|Write Organization
-|Create new organizations or delete an existing organization. Hides manage org and org settings.
-|org-write
+=== Custom roles for {product}
 
-|Read Billing
-|Enables links and access to billing details page.
-|org-billing-read
+If you xref:astra-db-serverless:administration:manage-database-access.adoc#custom-roles[create custom roles] for {product}, those roles must have the following permissions, at minimum:
 
-|Read IP Access List
-|Enables links and access to access list page.
-|accesslist-read
+* *Manage Streaming* (`org-stream-manage`): View and manage {product} in the {astra_ui}.
+* *View DB* (`org-db-view`): View the {astra_ui} in general.
 
-|Read User
-|Access to viewing users of an organization.
-|org-user-read
+Additional permissions might be required, depending on the tasks the role needs to perform.
 
-|Read Organization
-|View organization in the Astra console.
-|org-read
+[TIP]
+====
+To control access to specific streaming tenants, you can set granular xref:astra-db-serverless:administration:manage-database-access.adoc#role-scopes[resource scopes] on custom roles.
+====
 
-|Read Custom Role
-|See a custom role and its associated permissions.
-|org-role-read
+== Authentication and authorization in Pulsar and {astra_db}
 
-|Read External Auth
-|See security settings related to external authentication providers.
-|org-external-auth-read
+Pulsar has the concept of https://pulsar.apache.org/docs/security-authorization/[clients with role tokens].
+In Pulsar, authentication is the process of verifying a provided token (JWT), and authorization is the process of determining if the role claimed in that token is allowed to complete the requested action.
 
-|Read Token
-|Read token details.
-|org-token-read
+{product} uses the {company} version of Apache Pulsar (xref:luna-streaming::index.adoc[Luna Streaming]).
+The https://github.com/datastax/pulsar[Luna project] is an open fork of the Pulsar project that maintains feature parity with OSS Pulsar. {product}, as a managed service, abstracts some features/options of Pulsar to ensure continuous, reliable service.
 
-|Delete Custom Role
-|Delete of custom role.
-|org-role-delete
+On a shared cluster, your {astra_db} organization has one or more tenants on a shared Pulsar cluster.
+Each of your tenants is secured by Pulsar authentication and authorization models, as well as your {astra_db} organization's authentication and authorization ({astra_db} RBAC).
 
-|Notification Write
-|Enable or disable notifications in organization notification settings.
-|org-notification-write
-|Write Billing
-|Enables links and ability to add or edit billing payment info.
-|org-billing-write
+{product} shared clusters are created and administered by {product} administrators.
+Each tenant is assigned a custom role and permissions limited to that tenant only.
+All tokens created within a tenant are assigned roles similar to the assigning tenant.
 
-|Write User
-|Add, create, or remove a user using the DevOps API or the Astra console.
-|org-user-write
+For programmatic access, you use {astra_db} application tokens or Pulsar JWT, depending on the operation you need to perform.
+For more information, see xref:operations:astream-token-gen.adoc[].
 
-|Write Custom Role
-|Create custom role.
-|org-role-write
+== See also
 
-|Write External Auth
-|Update security settings related to external auth providers.
-|org-external-auth-write
-
-|Write Token
-|Create application token.
-|org-token-write
-
-|===
-
-== Astra DB Permissions
-
-For documentation about Astra DB user permissions, see https://docs.datastax.com/en/astra/docs/user-permissions.html[Astra DB User Permissions].
+* xref:operations:astream-pricing.adoc[]

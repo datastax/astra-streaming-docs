@@ -1,110 +1,103 @@
-= Producing and consuming messages using the Golang pulsar client on Astra Streaming
+= Use the Golang Pulsar client with {product}
 :navtitle: Golang
-:description: This is a guide to create a simple producer and consumer using Pulsar's golang client.
+:description: Produce and consume messages with the Golang Pulsar client and {product}.
 :page-tag: astra-streaming,dev,develop,pulsar,go
+
+You can produce and consume messages with the Golang Pulsar client and {product}.
+
+Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
 == Prerequisites
 
-You will need the following prerequisites in place to complete this guide:
-
-* Golang version 1.15 and above
-* A working Pulsar topic (get started xref:getting-started:index.adoc[here] if you don't have a topic)
-* A basic text editor or IDE
-
-[TIP]
-====
-Visit our https://github.com/datastax/astra-streaming-examples[examples repo] to see the complete source of this example.
-====
+* Golang version 1.15 or later
+* A Pulsar topic in {product}
+* A text editor or IDE
 
 == Create a project
 
-Create a new GO project.
-
-Open a new terminal and run the following script to create a project folder, change directory into it, and initialize a new GO project.
-
+. Run the following script to create a project folder, change directory into it, and then initialize a new Go project:
++
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/go/simple-producer-consumer/create-project.sh[]
+sudo apt install -y golang-go
+mkdir SimpleProducerConsumer && cd SimpleProducerConsumer
+
+go mod init SimpleProducerConsumer
+
+touch main.go
+
+go get -u github.com/apache/pulsar-client-go
 ----
++
+The new project includes a `main` file and the retrieved Pulsar client package.
 
-Within the new project, a "main" file is created and the Pulsar client package is retrieved.
+== Write the script
 
-== Add the client
-
-Open the new "main.go" file in your editor and paste the following code within.
-
+. Open the `main.go` file, and then add the following code to import the required packages, establish an entry point for the application, and create a new instance of a Pulsar client:
++
+.main.go
 [source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-client]
 ----
++
+This code is incomplete.
+Your editor might show errors until you complete the next steps.
 
-This is NOT a complete code snippet: it imports the required packages, establishes an entry point for the application, and creates a new instance of a Pulsar client.
+. Provide values for the following variables:
++
+include::developing:partial$client-variables-table.adoc[]
 
-Notice there are a few variables that are waiting for replacement values.
-You can find those values here:
-
-include::partial$client-variables-table.adoc[]
-
-== Create a producer
-
-Use the client to create a producer.
-
-While the client contains directions for where to connect and how to authenticate, the producer has the full topic address where a message will be published.
-The full topic address includes the tenant, namespace, and topic names, as well as topic persistence.
-
-Paste the following code in "main.go".
-
+. Use the client to create a producer.
++
+.main.go
 [source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-producer]
 ----
++
+While the client contains directions for where to connect and how to authenticate, the producer has the full topic address where a message is published.
+The full topic address includes the tenant, namespace, and topic names, as well as topic persistence.
 
-Next step is to create a message to be sent. In our case we'll set the payload to something super memorable - "Hello World". And with a producer and message ready to go, we can asynchronously send.
-
-Paste the following code in "main.go".
-
+. Create a `Hello World` message and send it asynchronously:
++
+.main.go
 [source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=produce-message]
 ----
 
-== Create a consumer
-
-What's a message for if it never gets read, right? Let's create a new subscription instance from the client.
-
-Subscriptions are covered in more depth in xref:ROOT:astream-subscriptions.adoc[their own topic]{emoji-smile}, but for now, think of a consumer and a subscription as the same idea.
-
-A topic is set with a subscription name and an initial position.
-In this case our subscription will start with the "Earliest" unacknowledged message, which happens to be the first message in the topic.
-
-Add the following code to your "main.go" file.
-
+. Use the client to create a new xref:ROOT:astream-subscriptions.adoc[subscription instance] to receive the message:
++
+.main.go
 [source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=build-consumer]
 ----
++
+A topic is set with a subscription name and an initial position.
+In this example, the subscription starts with the `Earliest` unacknowledged message, which is also the first message in the topic.
 
-Add this code to your file to have the consumer receive and then acknowledge (or "ack") messages provided to the subscription.
-
+. Make the consumer receive and acknowledge (`ack`) messages provided to the subscription:
++
+.main.go
 [source,golang]
 ----
 include::{astra-streaming-examples-repo}/go/simple-producer-consumer/SimpleProducerConsumer/main.go[tag=receive-message]
 ----
 
-== Run the example
+== Run the script
 
-Your example GO application is complete. Here it is, your big moment!
-
-Return to the terminal in the same folder as the "main.go" file, and run the application.
+In your project directory, run your Go app:
 
 [source,shell]
 ----
 go run main.go
 ----
 
-If everything works as planned, you should see output similar to the following.
+Output such as the following indicates the script succeeded:
 
-[source,shell]
+[source,console]
 ----
 2023/01/04 13:43:00 Pulsar Producer
 2023/01/04 13:43:00 creating producer...
@@ -114,8 +107,6 @@ If everything works as planned, you should see output similar to the following.
 ----
 
 == Next steps
-
-Your messaging skills are progressing well! Let's continue learning.
 
 * xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astream-functions.adoc[]

@@ -14,7 +14,7 @@ asciidoc:
   attributes:
     pulsar_version: '2.10' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
     pulsar_full_version: '2.10.1'
-    product_name: 'Astra Streaming'
+    product: 'Astra Streaming'
     kafka_for_astra: 'Starlight for Kafka'
     starlight_rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'

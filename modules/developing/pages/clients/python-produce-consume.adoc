@@ -1,119 +1,106 @@
-= Producing and consuming messages using the python pulsar client on Astra Streaming
+= Use the Python Pulsar client with {product}
 :navtitle: Python
-:description: This is a guide to create a simple producer and consumer using Pulsar's python client.
+:description: Use the Python Pulsar client with {product} to produce and consume messages.
 :page-tag: astra-streaming,dev,develop,python,pulsar
+
+You can use the Python Pulsar client with {product} to produce and consume messages.
+
+Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
 == Prerequisites
 
-You will need the following prerequisites in place to complete this guide:
-
-* Linux Python versions 3.4 to 3.7 are supported
-* MacOS version 3.7 is supported
-* A working Pulsar topic (get started xref:getting-started:index.adoc[here] if you don't have a topic)
-* A basic text editor or IDE
-
-[TIP]
-====
-Visit our https://github.com/datastax/astra-streaming-examples[examples repo] to see the complete source of this example.
-====
+* A supported Python version:
+** For Linux, versions 3.4 to 3.7 are supported
+** For macOS, version 3.7 is supported
+* A Pulsar topic in {product}
+* A text editor or IDE
 
 == Create a project
 
-Create a folder, change directory into it, and start a new Python project.
+. Create a folder for a new Python project.
 
-Install the Pulsar client library with pip.
+. In your new directory, install the Pulsar client library with pip:
++
 [source,shell]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/create-project.sh[]
 ----
 
-== Add the client
+== Write the script
 
-Create a new Pulsar client instance with the topic URL and using token authentication.
-
-Open "index.py" in your favorite text editor or IDE and copy in the following code.
-
+. Create an `index.py` file containing the following code.
+This code creates a Pulsar client instance with the topic URL and token authentication.
++
+.index.py
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-client]
 ----
++
+This script is intentionally incomplete.
+Your IDE might show errors until you complete the next steps.
 
-*This isn't complete code (yet)*, so don't be alarmed if your editor shows errors.
+. Provide values for the following variables:
++
+include::developing:partial$client-variables-table.adoc[]
 
-Notice there are a few variables waiting for replacement values.
-You can find those values here:
-
-include::partial$client-variables-table.adoc[]
-
-== Create a producer
-
-Use the client to create a producer.
-
-Add the following code to "index.py".
-
+. Use the client to create a producer:
++
+.index.py
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-producer]
 ----
 
-Once the code above creates a producer, add this code to "index.py" to actually send the message.
-
+. Send a message:
++
+.index.py
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=produce-message]
 ----
 
-== Create a consumer
-
-Just like the producer, use the Python client instance to create a consumer subscription to the same topic we sent a message to.
-
-Add this code to "index.py".
-
+. Use the Python client instance to create a consumer subscription to the same topic that you sent a message to:
++
+.index.py
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-consumer]
 ----
 
-And now for the good stuff!
-Let's iterate through messages and write their data.
-
-Add this code to "index.py".
-
+. Iterate through messages and write their data:
++
+.index.py
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=consume-message]
 ----
 
-Finally, add a little clean-up.
-
+. Clean up:
++
 [source,python]
 ----
 include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=clean-up]
 ----
 
-== Run the example
+== Run the script
 
-Here it comes: your greatest Python creation yet!
+In your Python project directory, run the script:
 
-Return to the terminal where you created your Python project and run the following command.
-
-[source,python]
+[source,shell]
 ----
 python3 index.py
 ----
 
-There will likely be a lot of logging in the output, but look closely and you should see the following message.
+The output includes a lot of logs.
+`Received message` confirms that the script succeeded:
 
-[source,shell]
+[source,console]
 ----
 Received message 'Hello World' id='(422529,5,-1,0)'
 ----
 
-You did it{emoji-tada}!
-
 == Next steps
-
-You're one step closer to being a messaging ninja. Let's continue the learning with these guides.
 
 * xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astream-functions.adoc[]

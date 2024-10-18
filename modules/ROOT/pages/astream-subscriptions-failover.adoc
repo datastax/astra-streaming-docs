@@ -2,20 +2,23 @@
 :navtitle: Failover
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-*Subscriptions* in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data. +
+_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
 
-If an xref:astream-subscriptions-exclusive.adoc[exclusive] consumer fails, the topic backlog balloons with stale, unacknowledged messages. Pulsar solves this problem with *failover* subscriptions. +
-In *failover* subscriptions, Pulsar designates one *primary* consumer and multiple *standby* consumers. If the primary consumer disconnects, the standby consumers begin consuming the subsequent unacknowledged messages. +
+If an xref:astream-subscriptions-exclusive.adoc[exclusive] consumer fails, the topic backlog accumulates stale, unacknowledged messages.
+Pulsar solves this problem with failover subscriptions.
+In _failover subscriptions_, Pulsar designates one primary consumer and multiple standby consumers.
+If the primary consumer disconnects, the standby consumers begin consuming the subsequent unacknowledged messages.
 
-This document explains how to use Pulsar's failover subscription model to manage your topic consumption.
+This page explains how to use Pulsar's failover subscription model to manage your topic consumption.
 
-include::partial$subscription-prereq.adoc[]
+include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Failover subscription example
 
-To try out a Pulsar failover subscription, add `.subscriptionType(SubscriptionType.Failover)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`.
+To try out a Pulsar failover subscription, add `.subscriptionType(SubscriptionType.Failover)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
 
+.SimplePulsarConsumer.java
 [source,java]
 ----
 pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
@@ -30,20 +33,22 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .subscribe();
 ----
 
-. Open `pulsar-subscription-example` in the IDE of your choice and run `SimplePulsarConsumer.java` to begin consuming messages. +
-This is the *primary* consumer. +
-The confirmation message and a cursor appear to indicate the consumer is ready.
+. In the `pulsar-subscription-example` project, run `SimplePulsarConsumer.java` to begin consuming messages as the primary consumer.
 +
-[source,bash]
+The confirmation message and a cursor appear to indicate the consumer is ready:
++
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
 ...
 [pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
 ----
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
 +
-[source,bash]
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 50585599 sent
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 98055337 sent
@@ -52,39 +57,36 @@ The confirmation message and a cursor appear to indicate the consumer is ready.
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 73260535 sent
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 42372149 sent
 ----
-
-. The primary consumer begins consuming messages.
 +
-[source,bash]
+In the `SimplePulsarConsumer` terminal, the primary consumer begins consuming messages:
++
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":50585599,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":98055337,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":36327100,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 ----
 
-. Open a new terminal window and run `SimplePulsarConsumer.java`. This is the *backup* consumer. The backup consumer subscribes to the topic, but does not immediately begin consuming messages.
+. In a new terminal window, run a new instance of `SimplePulsarConsumer.java` as a backup consumer.
+The backup consumer subscribes to the topic but does not immediately begin consuming messages.
 
-. Return to the *primary* consumer and `Ctrl+C` to stop it. The *backup* consumer begins consuming right where the first consumer left off.
+. In the primary `SimplePulsarConsumer` terminal, stop the process (`Ctrl+C`).
+In the second `SimplePulsarConsumer` terminal, the backup consumer begins consuming messages where the first consumer left off:
 +
-[source,bash]
+.Result
+[source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":73260535,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":42372149,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
 ----
 
-. You can repeat this process with as many primary and backup consumers as you want- the next message is delivered to the subscribed failover consumers.
+You can configure as many backup consumers as you like.
+To test them, you can progressively end each `SimplePulsarConsumer` process, and then check that the next backup consumer has begun receiving messages.
 
-=== Failover subscription video
-
-Follow along with this video from our *Five Minutes About Pulsar* series to see failover subscriptions in action.
-
-video::ckB87OLs5eM[youtube, list=PL2g2h-wyI4SqeKH16czlcQ5x4Q_z-X7_m, height=445px,width=100%]
-
-== What's next?
-
-For more on subscriptions, see: 
+== See also
 
 * xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
 * xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
 * xref:astream-subscriptions-shared.adoc[Shared subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key_shared subscriptions]
+* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]

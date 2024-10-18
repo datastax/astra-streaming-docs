@@ -1,19 +1,33 @@
-= API References
-:navtitle: API references overview
-:description: Astra provides APIs to manage both DB and Streaming instances
+= {product} APIs
+:description: Learn about {product} APIs
 :page-tag: astra-streaming,dev,develop,pulsar
 
-Management of Pulsar tenants and its resources are seperated into 2 APIs. The DevOps API is used to manage higher level objects associated with your account. The Pulsar Admin API is used to manage specific resources such as namespaces, topics, and subscriptions within a specific tenant.
+You use two APIs to manage Pulsar tenants and their resources.
 
-xref:astra-streaming:apis:attachment$devops.html[{product_name} DevOps API,role=external]
+== {product} DevOps API
 
-The Astra Streaming DevOps API is used to manage change data capture (CDC) settings, Pulsar tenants, geo-replications, Pulsar stats, and Pulsar tokens. This API uses your Astra Org token for bearer authentication.
+Use the xref:astra-streaming:apis:attachment$devops.html[{product} DevOps API] to manage higher-level objects associated with your account, such as the change data capture (CDC) settings, Pulsar tenants, geo-replications, Pulsar stats, and Pulsar tokens.
 
-xref:astra-streaming:apis:attachment$pulsar-admin.html[{product_name} Pulsar Admin API,role=external]
+This API uses an {astra_db} application token for authentication.
 
-The Pulsar Admin API is used to manage Pulsar resources such as namespaces, topics, and subscriptions. This API uses your Pulsar token for bearer authentication.
+== {product} Pulsar Admin API
 
-[NOTE]
-The open source Pulsar project offers https://pulsar.apache.org/admin-rest-api[documentation about the Pulsar Admin API]. However, the Pulsar Admin API in Astra Streaming is slightly different. In OSS Pulsar you manage instances, the clusters within each instance, the tenants in the cluster, etc. +
- +
-However, in Astra Streaming clusters are provided to you as a managed service, so you manage the tenants and resources within those tenants. Some endpoints have not been implemented in the Astra Streaming Pulsar Admin API because they are not applicable to the managed service.
+Use the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} Pulsar Admin API] to manage specific resources within a specific tenant, such as namespaces, topics, and subscriptions.
+
+This API uses your Pulsar token for authentication.
+
+=== OSS Pulsar Admin API
+
+The https://pulsar.apache.org/admin-rest-api[open source Pulsar project's Pulsar Admin API] isn't the same as the {product} Pulsar Admin API.
+
+In OSS Pulsar you manage instances, the clusters within each instance, the tenants in the cluster, and so on.
+In {product}, clusters are a managed service.
+You manage only the tenants and resources within those tenants.
+
+Some OSS Pulsar Admin API endpoints aren't supported in the {product} Pulsar Admin API because they don't apply to the {product} managed service.
+
+== See also
+
+* xref:apis:api-operations.adoc[]
+* xref:developing:using-curl.adoc[]
+* https://pulsar.apache.org/docs/reference-rest-api-overview/[Pulsar REST APIs]
