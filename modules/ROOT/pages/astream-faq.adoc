@@ -30,7 +30,7 @@ And finally {product} offers a user-friendly interface and free tier to satisfy 
 
 == What is CDC for {astra_db}?
 
-Change Data Capture (CDC) for {astra_db} uses a Pulsar IO source connector that processes changes from the Cassandra Change Agent via a Pulsar topic.
+Change Data Capture (CDC) for {astra_db} uses a Pulsar IO source connector that processes changes from the Cassandra Change Agent through a Pulsar topic.
 For more information, see xref:developing:astream-cdc.adoc[].
 
 == What are tenants, namespaces, topics, and sinks?
