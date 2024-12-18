@@ -24,7 +24,7 @@ a|
 |This limit can't be changed for shared clusters.
 
 |Number of namespaces per tenant
-|All cluster: 10
+|All cluster: 20
 |
 
 |Number of topics per namespace
