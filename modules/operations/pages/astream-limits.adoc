@@ -24,7 +24,7 @@ a|
 |This limit can't be changed for shared clusters.
 
 |Number of namespaces per tenant
-|All cluster: 20
+|All clusters: 20
 |
 
 |Number of topics per namespace
@@ -61,6 +61,10 @@ If there are multiple subscriptions to a topic, they can dispatch a _combined ma
 
 |Auto topic creation
 |All clusters: Disabled
+|
+
+|Max number of partitions per topic
+|All clusters: 128
 |
 
 |Number of producers per topic
