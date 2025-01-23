@@ -1,16 +1,17 @@
 = {starlight_rabbitmq}
 :page-tag: starlight-rabbitmq,quickstart,admin,dev,pulsar
 
-{starlight_rabbitmq} brings native RabbitMQ(R) protocol support to Apache Pulsar(R), enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code. RabbitMQ applications can now leverage Pulsar’s powerful features, such as:
+{starlight_rabbitmq} brings native RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
+RabbitMQ applications can leverage {pulsar-short} features such as the following:
 
 * *Consistent metadata store*: {starlight_rabbitmq} uses Apache ZooKeeper(TM), so existing Zookeeper configuration stores can store {starlight_rabbitmq} metadata.
-* *Security and authentication*: {starlight_rabbitmq} connects to brokers that have TLS, authentication, and/or authorization enabled, because it uses the same `AuthenticationService` as Pulsar.
+* *Security and authentication*: {starlight_rabbitmq} connects to brokers that have TLS, authentication, and/or authorization enabled, because it uses the same `AuthenticationService` as {pulsar-short}.
 * *Clustering*: Launch multiple stateless {starlight_rabbitmq} instances simultaneously for scalability and high availability.
-* *Multi-tenancy*: {starlight_rabbitmq} offers support for multi-tenancy, mapping an AMQP virtual host to a Pulsar tenant and namespace.
+* *Multi-tenancy*: {starlight_rabbitmq} offers support for multi-tenancy, mapping an AMQP virtual host to a {pulsar-short} tenant and namespace.
 
-By integrating two popular event streaming ecosystems, {starlight_rabbitmq} unlocks new use cases and reduces barriers for users adopting Pulsar. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {starlight_rabbitmq} to accelerate the development of real-time applications and services.
+By integrating two popular event streaming ecosystems, {starlight_rabbitmq} unlocks new use cases and reduces barriers for users adopting {pulsar-short}. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {starlight_rabbitmq} to accelerate the development of real-time applications and services.
 
-Get started producing and consuming RabbitMQ messages on a Pulsar cluster.
+Get started producing and consuming RabbitMQ messages on a {pulsar-short} cluster.
 
 == {starlight_rabbitmq} Quickstart
 
@@ -40,9 +41,9 @@ virtual_host: azure/rabbitmq
 +
 The configuration details depend on your {product} tenant configuration.
 
-== Connect RabbitMQ and Pulsar
+== Connect RabbitMQ and {pulsar-short}
 
-This example uses a Python script to create a connection between RabbitMQ and your Pulsar tenant, establish a message queue named `queuename`, print ten messages, and then close the connection.
+This example uses a Python script to create a connection between RabbitMQ and your {pulsar-short} tenant, establish a message queue named `queuename`, print ten messages, and then close the connection.
 
 . Create a `connect-test.py` file containing the following code:
 +
@@ -120,15 +121,15 @@ started a channel
 . Navigate to your `rabbitmq` namespace dashboard in {product}, and then monitor your activity.
 +
 If configured correctly, you should have new topics called `amq.default.__queuename` and `amq.default_routingkey` that were created by the Python script, as well as an increasing amount of traffic and messages.
-Your RabbitMQ messages are being published to a Pulsar topic.
+Your RabbitMQ messages are being published to a {pulsar-short} topic.
 
-== RabbitMQ exchanges and Pulsar topics
+== RabbitMQ exchanges and {pulsar-short} topics
 
-{starlight_rabbitmq} maps RabbitMQ _exchanges_ to Pulsar _topics_, as described in the following table:
+{starlight_rabbitmq} maps RabbitMQ _exchanges_ to {pulsar-short} _topics_, as described in the following table:
 
 [cols="1,1,1,1"]
 |===
-|Exchange |Routing key |Pulsar topic name |Usage example
+|Exchange |Routing key |{pulsar-short} topic name |Usage example
 
 |`amp.direct`
 |used

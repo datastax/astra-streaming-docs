@@ -8,7 +8,7 @@ This example requires the following:
 
 * {product} access with at least one streaming tenant and one topic
 
-* A local clone of the https://github.com/datastax/pulsar-subscription-example[{company} Pulsar Subscription Example repository]
+* A local clone of the https://github.com/datastax/pulsar-subscription-example[{company} {pulsar-short} Subscription Example repository]
 
 * In the `pulsar-subscription-example` repo, navigate to `src/main/resources`, and then edit `application.properties` to connect to your {product} cluster:
 +

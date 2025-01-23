@@ -12,14 +12,14 @@ You need an application token for actions related to {astra_db} organizations an
 For information about creating and managing {astra_db} application tokens, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 
 [#pulsar-token]
-== {product} Pulsar tokens
+== {product} {pulsar-short} tokens
 
-{product} Pulsar token are Pulsar https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} Pulsar cluster through the Pulsar CLI, runtime clients, or the Pulsar Admin API.
-If necessary, {astra_db} forwards the JWT to the Pulsar cluster for role verification.
+{product} {pulsar-short} token are {pulsar-reg} https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} {pulsar-short} cluster through the {pulsar-short} CLI, runtime clients, or the {pulsar-short} Admin API.
+If necessary, {astra_db} forwards the JWT to the {pulsar-short} cluster for role verification.
 
-You need a Pulsar JWT for actions related to Pulsar tenants, namespaces, messages, topics, and functions, as well as Pulsar CLI/API commands.
+You need a {pulsar-short} JWT for actions related to {pulsar-short} tenants, namespaces, messages, topics, and functions, as well as {pulsar-short} CLI/API commands.
 
-You can generate, copy, or delete {product} Pulsar tokens for each of your {product} tenants:
+You can generate, copy, or delete {product} {pulsar-short} tokens for each of your {product} tenants:
 
 . In the {astra_ui} navigation menu, click *Streaming*.
 
@@ -42,8 +42,8 @@ The token is shown only once.
 
 . To delete a token, click *Delete*.
 +
-Ensure you update your application with a new, valid Pulsar token before deletion.
-Applications using the deleted Pulsar token will no longer be able to connect to {product}.
+Ensure you update your application with a new, valid {pulsar-short} token before deletion.
+Applications using the deleted {pulsar-short} token will no longer be able to connect to {product}.
 
 == Usage examples
 
@@ -63,8 +63,8 @@ curl -sS --location -X GET "https://api.astra.datastax.com/v2/databases/**DATABA
 
 === Monitor a topic's health
 
-Use a Pulsar token to monitor a topic's health.
-For example, the following command would authenticate through a Pulsar token declared in the `pulsar-admin` binary configuration:
+Use a {pulsar-short} token to monitor a topic's health.
+For example, the following command would authenticate through a {pulsar-short} token declared in the `pulsar-admin` binary configuration:
 
 [source,shell]
 ----
@@ -73,7 +73,7 @@ bin/pulsar-admin topics stats
 
 === Monitor a connector's health
 
-Use a Pulsar token to monitor a connector's health.
+Use a {pulsar-short} token to monitor a connector's health.
 For example:
 
 [source,shell]

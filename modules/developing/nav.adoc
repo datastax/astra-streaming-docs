@@ -14,7 +14,7 @@
 *** xref:clients/golang-produce-consume.adoc[]
 *** xref:clients/nodejs-produce-consume.adoc[]
 *** xref:clients/spring-produce-consume.adoc[]
-** Pulsar subscriptions
+** {pulsar-short} subscriptions
 *** xref:ROOT:astream-subscriptions.adoc[]
 *** xref:ROOT:astream-subscriptions-exclusive.adoc[]
 *** xref:ROOT:astream-subscriptions-shared.adoc[]

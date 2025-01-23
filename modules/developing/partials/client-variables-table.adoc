@@ -3,13 +3,13 @@
 |Parameter |Definition |Where to find the value
 
 |`serviceUrl`
-|The URL to connect to the Pulsar cluster
+|The URL to connect to the {pulsar-short} cluster
 |In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Connect* tab.
 In the *Details* section, get the *Broker Service URL*.
 
 |`pulsarToken`
-|The token for Pulsar cluster authentication
-|For information about creating Pulsar tokens, see xref:operations:astream-token-gen.adoc[].
+|The token for {pulsar-short} cluster authentication
+|For information about creating {pulsar-short} tokens, see xref:operations:astream-token-gen.adoc[].
 
 |`tenantName`
 |The name of your streaming tenant

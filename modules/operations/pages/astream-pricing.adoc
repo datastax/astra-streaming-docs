@@ -20,8 +20,8 @@ It is meant for evaluation before upgrading to a paid plan.
 These plans require a payment method on file.
 For metering details, see see https://www.datastax.com/pricing/astra-streaming[{product} pricing].
 
-By default, {product} plans use secure, shared Pulsar clusters.
-Your data and interaction with Pulsar are secured over a public internet connection.
+By default, {product} plans use secure, shared {pulsar-reg} clusters.
+Your data and interaction with {pulsar-short} are secured over a public internet connection.
 If desired, you can opt in to <<dedicated-clusters,dedicated clusters>>.
 
 [#dedicated-clusters]
@@ -29,7 +29,7 @@ If desired, you can opt in to <<dedicated-clusters,dedicated clusters>>.
 
 If you prefer not to use shared clusters, you can opt for dedicated clusters.
 
-With dedicated clusters, you have your own private Pulsar cluster with all the benefits of {product} as a managed service.
+With dedicated clusters, you have your own private {pulsar-short} cluster with all the benefits of {product} as a managed service.
 You sign in to {astra_db} and use {product} in the same way that you would on shared clusters.
 When you create a tenant, you have the option to deploy to your private cluster.
 This means that you can use both shared or dedicated clusters, depending on your tenants' use cases.

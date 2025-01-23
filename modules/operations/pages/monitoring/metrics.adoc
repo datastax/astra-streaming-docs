@@ -4,7 +4,7 @@
 
 You can get the dashboards from the https://github.com/datastax/astra-streaming-examples/tree/master/grafana-dashboards[{product} Examples repository].
 
-Dashboards are available for scraping metrics at Pulsar's tenant, namespace, and topic levels:
+Dashboards are available for scraping metrics at {pulsar-short}'s tenant, namespace, and topic levels:
 
 * xref:monitoring/overview-dashboard.adoc[Overview Dashboard]
 * xref:monitoring/namespace-dashboard.adoc[Namespace Dashboard]

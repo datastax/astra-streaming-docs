@@ -82,10 +82,10 @@ In Docker Desktop, click *File Sharing*, click *Resources*, and then make sure y
 . Navigate to `http://localhost:9090/graph`, and click the *Graph* tab.
 
 . In the *Expression* field, enter `pulsar_in_messages_total`, and then click *Execute*.
-Prometheus now shows the total incoming Pulsar messages for your {product} cluster.
+Prometheus now shows the total incoming {pulsar-reg} messages for your {product} cluster.
 
-. To test the integration, produce a few messages in your tenant with the Pulsar CLI or the {product} Websocket.
-Make sure your Prometheus graph displays the number of incoming Pulsar messages with each 60 second scrape:
+. To test the integration, produce a few messages in your tenant with the {pulsar-short} CLI or the {product} Websocket.
+Make sure your Prometheus graph displays the number of incoming {pulsar-short} messages with each 60 second scrape:
 +
 image::astream-prometheus-graph.png[Scraping {product} with Prometheus]
 

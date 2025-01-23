@@ -1,9 +1,9 @@
-= Use the Java Pulsar client with {product} and Spring
+= Use the Java {pulsar-short} client with {product} and Spring
 :navtitle: Spring
-:description: Produce and consume messages with the Java Pulsar client, {product}, and Spring.
+:description: Produce and consume messages with the Java {pulsar-short} client, {product}, and Spring.
 :page-tag: astra-streaming,dev,develop,pulsar,java
 
-You can produce and consume messages with the Java Pulsar client, {product}, and Spring.
+You can produce and consume messages with the Java {pulsar-short} client, {product}, and Spring.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
@@ -13,16 +13,16 @@ For this example, you need the following:
 
 * JRE 8
 * https://maven.apache.org/install.html[Maven]
-* A Pulsar topic in {product}
+* An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
 == Create a Maven project in Spring Initializr
 
-You can use Spring Initializr to quickly create a Java project with the required dependencies, including the Pulsar client dependency.
+You can use Spring Initializr to quickly create a Java project with the required dependencies, including the {pulsar-short} client dependency.
 
 . Go to https://start.spring.io/[Spring Initializr] to initialize a new project.
 
-. Select Maven, Java 17, a non-SNAPSHOT version of Spring Boot, and the Apache Pulsar dependency:
+. Select Maven, Java 17, a non-SNAPSHOT version of Spring Boot, and the {pulsar} dependency:
 +
 image::spring-initializr.png[Spring Initializr]
 
@@ -64,7 +64,7 @@ include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/re
 ----
 ====
 
-. From your project's root directory, compile the Java application with the Pulsar client dependency:
+. From your project's root directory, compile the Java application with the {pulsar-short} client dependency:
 +
 [source,bash]
 ----

@@ -1,21 +1,21 @@
-=  Use Pulsar binaries with {product}
-:navtitle: Configure the Pulsar CLI
-:description: Download a compatible Pulsar artifact and configure the binaries for use with {product}.
+=  Use {pulsar-reg} binaries with {product}
+:navtitle: Configure the {pulsar-short} CLI
+:description: Download a compatible {pulsar-short} artifact and configure the binaries for use with {product}.
 
-{product} runs Apache Pulsar(TM).
-The benefits of OSS Pulsar are also available in {product}.
+{product} runs a {company} version of {pulsar-reg}.
+The benefits of OSS {pulsar-short} are also available in {product}.
 
-To get started, you must download a compatible Pulsar artifact, and then configure the binaries for use with {product}.
+To get started, you must download a compatible {pulsar-short} artifact, and then configure the binaries for use with {product}.
 
 == Download a compatible artifact
 
-{product} is compatible with Pulsar {pulsar_version}.
+{product} is compatible with {pulsar-short} version {pulsar-version}.
 
-. Download the binaries for the https://pulsar.apache.org/download/[latest {pulsar_version} patch version]:
+. Download the binaries for the https://pulsar.apache.org/download/[latest {pulsar-version} patch release]:
 +
 [source,shell,subs="+quotes,+attributes"]
 ----
-PULSAR_VERSION="{pulsar_version}.**PATCH**"
+PULSAR_VERSION="{pulsar-version}.**PATCH**"
 wget https://archive.apache.org/dist/pulsar/pulsar-$PULSAR_VERSION/apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 ----
 
@@ -27,13 +27,13 @@ tar xvfz apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 ----
 +
 The resulting directory is named `apache-pulsar-**PULSAR_VERSON**`.
-This directory is known as the _Pulsar folder_.
-Pulsar guides assume you are working within this directory.
-Pulsar commands prefixed by `./bin` indicate the command is run from within the Pulsar folder.
+This directory is known as the _{pulsar-short} folder_.
+{pulsar-short} guides assume you are working within this directory.
+{pulsar-short} commands prefixed by `./bin` indicate the command is run from within the {pulsar-short} folder.
 
 == Configure binaries for {product}
 
-There are several files and folders in the Pulsar folder.
+There are several files and folders in the {pulsar-short} folder.
 The two most important folders are `/conf` and `/bin`.
 
 The executables in `/bin` use the configurations in `/conf` to run commands.
@@ -43,17 +43,17 @@ You must download the tenant configuration from {product}, and then overwrite th
 
 . In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
-. Click the *Connect* tab, in the *Pulsar CLI* section, click *Download client.conf*.
+. Click the *Connect* tab, in the *{pulsar-short} CLI* section, click *Download client.conf*.
 
 . Save the file in `apache-pulsar-**PULSAR_VERSION**/conf`.
 This overwrites the default `client.conf` in the `/conf` folder.
 
-. With your {product} tenant's configuration in place, use the binaries to interact with a Pulsar cluster:
+. With your {product} tenant's configuration in place, use the binaries to interact with a {pulsar-short} cluster:
 +
 * `./bin/pulsar-admin`: Administrative commands to manage namespaces, topics, functions, connectors, and so on
 * `./bin/pulsar-client`: Interactive commands for producing and consuming messages
 +
-For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[Pulsar's CLI docs].
+For a full reference of all commands within the CLI, see the https://pulsar.apache.org/docs/reference-cli-tools/[{pulsar-short} CLI documentation].
 
 == Validate the connection
 

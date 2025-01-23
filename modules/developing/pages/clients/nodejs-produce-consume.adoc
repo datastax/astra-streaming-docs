@@ -1,9 +1,9 @@
-= Use the Node.js Pulsar client with {product}
+= Use the Node.js {pulsar-short} client with {product}
 :navtitle: Node.js
-:description: Produce and consume messages with the Node.js Pulsar client and {product}.
+:description: Produce and consume messages with the Node.js {pulsar-short} client and {product}.
 :page-tag: astra-streaming,connect,dev,develop,nodejs,pulsar
 
-You can produce and consume messages with the Node.js Pulsar client and {product}.
+You can produce and consume messages with the Node.js {pulsar-short} client and {product}.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
@@ -12,14 +12,14 @@ Go to the https://github.com/datastax/astra-streaming-examples[examples repo] fo
 * `sudo` permission to install dependencies
 * Node.js version 10 or later
 * npm 6 or later
-* A Pulsar topic in {product}
+* An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
 == Set up the environment
 
-Install the C++ Pulsar library dependency required by the Node.js Pulsar client npm package.
+Install the {cpp} {pulsar-short} library dependency required by the Node.js {pulsar-short} client npm package.
 
-Pulsar Node client versions 1.8 and later do not require installation of the C++ Pulsar library dependency.
+{pulsar-short} Node client versions 1.8 and later do not require installation of the {cpp} {pulsar-short} library dependency.
 
 [tabs]
 ======

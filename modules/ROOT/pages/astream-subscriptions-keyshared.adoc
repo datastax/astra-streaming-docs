@@ -1,10 +1,10 @@
-= Key shared subscriptions in Pulsar
+= Key shared subscriptions in {pulsar-reg}
 :navtitle: Key shared
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
+_Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
-Pulsar's xref:astream-subscriptions-shared.adoc[shared subscription] model can increase the message processing rate, but it risks losing message ordering guarantees.
+{pulsar-short}'s xref:astream-subscriptions-shared.adoc[shared subscription] model can increase the message processing rate, but it risks losing message ordering guarantees.
 In a round-robin delivery, there's no way for the broker to know which messages are going to which consumer.
 
 _Key shared subscriptions_ allow multiple consumers to subscribe to a topic, and provide additional metadata in the form of _keys_ that link messages to specific consumers.
@@ -13,14 +13,14 @@ Keys are generated with hashing that converts arbitrary values like `topic-name`
 * *Auto hash*: Uses _consistent hashing_ to balance range values across available consumers without requiring manual setup of hash ranges.
 * *Sticky hash*: The client manually assigns consumer range values, and then all hashes within a configured range go to one consumer.
 
-This page explains how to use Pulsar's key shared subscription model to manage your topic consumption.
+This page explains how to use {pulsar-short}'s key shared subscription model to manage your topic consumption.
 
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Key shared subscription example
 
-. To try out a Pulsar key shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
+. To try out a {pulsar-short} key shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
 +
 .SimplePulsarConsumer.java
 [source,java]
@@ -144,7 +144,7 @@ Then, you can launch multiple instances of `SimplePulsarConsumer.java` to consum
 
 == See also
 
-* xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
-* xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
-* xref:astream-subscriptions-shared.adoc[Shared subscriptions]
-* xref:astream-subscriptions-failover.adoc[Failover subscriptions]
+* xref:astream-subscriptions.adoc[]
+* xref:astream-subscriptions-exclusive.adoc[]
+* xref:astream-subscriptions-shared.adoc[]
+* xref:astream-subscriptions-failover.adoc[]

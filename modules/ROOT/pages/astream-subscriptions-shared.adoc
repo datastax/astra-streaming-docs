@@ -1,21 +1,21 @@
-= Shared subscriptions in Pulsar
+= Shared subscriptions in {pulsar-reg}
 :navtitle: Shared
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
+_Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
 A _shared subscription_ allows multiple consumers to consume messages from a single topic in a round-robin fashion.
-More consumers in a shared subscription can increase your Pulsar deployment's rate of message consumption.
+More consumers in a shared subscription can increase your {pulsar-short} deployment's rate of message consumption.
 However, there is a risk of losing message ordering guarantees and acknowledgment schemes.
 
-This page explains how you can use Pulsar's shared subscription model to manage your topic consumption.
+This page explains how you can use {pulsar-short}'s shared subscription model to manage your topic consumption.
 
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Shared subscription example
 
-To try out a Pulsar shared subscription, add `.subscriptionType(SubscriptionType.Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
+To try out a {pulsar-short} shared subscription, add `.subscriptionType(SubscriptionType.Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
 
 .SimplePulsarConsumer.java
 [source,java]
@@ -85,7 +85,7 @@ All the consumers subscribe to the topic and consume messages in a round-robin f
 
 == See also
 
-* xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
-* xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
-* xref:astream-subscriptions-failover.adoc[Failover subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]
+* xref:astream-subscriptions.adoc[]
+* xref:astream-subscriptions-exclusive.adoc[]
+* xref:astream-subscriptions-failover.adoc[]
+* xref:astream-subscriptions-keyshared.adoc[]

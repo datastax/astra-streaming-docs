@@ -1,20 +1,19 @@
 = Starlight for Kafka
 :page-tag: starlight-kafka,dev,admin,pulsar,kafka
 
-{kafka_for_astra} brings native Apache Kafka(R) protocol support to Apache Pulsar(R), enabling migration of existing Kafka applications and services to Pulsar without modifying the code. Kafka applications can now leverage Pulsar’s powerful features, such as:
+{kafka_for_astra} brings native Apache Kafka(R) protocol support to {pulsar-reg}, enabling migration of existing Kafka applications and services to {pulsar-short} without modifying the code.
+Kafka applications can leverage {pulsar-short} features such as the following:
 
 * Streamlined operations with enterprise-grade multi-tenancy
 * Simplified operations with a rebalance-free architecture
 * Infinite event stream retention with Apache BookKeeper(TM) and tiered storage
-* Serverless event processing with xref:astream-functions.adoc[Pulsar Functions]
+* Serverless event processing with xref:astream-functions.adoc[{pulsar-short} Functions]
 
-By integrating two popular event streaming ecosystems, {kafka_for_astra} unlocks new use cases and reduces barriers for users adopting Pulsar. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {kafka_for_astra} to accelerate the development of real-time applications and services.
+By integrating two popular event streaming ecosystems, {kafka_for_astra} unlocks new use cases and reduces barriers for users adopting {pulsar-short}. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {kafka_for_astra} to accelerate the development of real-time applications and services.
 
-This document will help you get started producing and consuming Kafka messages on a Pulsar cluster.
+This document will help you get started producing and consuming Kafka messages on a {pulsar-short} cluster.
 
 == {kafka_for_astra} Quickstart
-
-:page-tag: starlight-kafka,quickstart,install,admin,dev,pulsar,kafka
 
 . To start connecting {kafka_for_astra}, select *Kafka* in the {product} *Connect* tab.
 
@@ -47,7 +46,7 @@ sasl.mechanism: PLAIN
 +
 The configuration details depend on your {product} tenant configuration.
 
-== Connect Kafka and Pulsar
+== Connect Kafka and {pulsar-short}
 
 This example uses tools included with the https://kafka.apache.org/downloads[Apache Kafka tarball].
 
@@ -94,7 +93,7 @@ hello pulsar
 
 . Send a few messages, and then return to your `kafka` namespace dashboard in {product} to monitor your activity.
 +
-Your Kafka messages are being produced and consumed in a Pulsar cluster:
+Your Kafka messages are being produced and consumed in a {pulsar-short} cluster:
 +
 image::astream-kafka-monitor.png[Monitor Kafka Activity]
 

@@ -1,15 +1,15 @@
-= Use the C# Pulsar client on {product}
+= Use the C# {pulsar-short} client on {product}
 :navtitle: C#
-:description: Produce and consume messages with the C# Pulsar client and {product}.
+:description: Produce and consume messages with the C# {pulsar-short} client and {product}.
 
-You can produce and consume messages with the C# Pulsar client and {product}.
+You can produce and consume messages with the C# {pulsar-short} client and {product}.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
 == Prerequisites
 
 * https://learn.microsoft.com/en-us/dotnet/core/install/[.NET 7 SDK]
-* A Pulsar topic in {product}
+* An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
 == Create a console project

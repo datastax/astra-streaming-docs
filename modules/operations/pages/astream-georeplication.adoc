@@ -1,27 +1,27 @@
 = Geo-replication
 
-A key feature of Apache Pulsar(TM) is how it handles geo-replication. While other pub-sub messaging systems require additional processes to mirror messages between data centers, Pulsar has multi-datacenter replication as an integrated feature.
+A key feature of {pulsar-reg} is how it handles geo-replication. While other pub-sub messaging systems require additional processes to mirror messages between data centers, {pulsar-short} has multi-datacenter replication as an integrated feature.
 
-Pulsar's serving layer (brokers) and storage layer (bookies) are decoupled in Pulsar architecture, allowing seamless message replication across data centers in different regions.
+{pulsar-short}'s serving layer (brokers) and storage layer (bookies) are decoupled in {pulsar-short} architecture, allowing seamless message replication across data centers in different regions.
 
-Geo-replication typically provides redundancy in the event of datacenter outages, but can also be used for any application where Pulsar messages are produced and consumed across regions.
+Geo-replication typically provides redundancy in the event of datacenter outages, but can also be used for any application where {pulsar-short} messages are produced and consumed across regions.
 
 [#overview]
-== Message replication in Pulsar
+== Message replication in {pulsar-short}
 
-In Pulsar, cross-cluster message replication can be implemented with _synchronous_ or _asynchronous_ message replication, and with or without a global configuration store in ZooKeeper.
+In {pulsar-short}, cross-cluster message replication can be implemented with _synchronous_ or _asynchronous_ message replication, and with or without a global configuration store in ZooKeeper.
 
 {product} supports only asynchronous geo-replication without a global configuration store.
 This approach offers better performance and lower latency.
 
-In asynchronous geo-replication, each region has its own local Pulsar cluster. Each Pulsar cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
+In asynchronous geo-replication, each region has its own local {pulsar-short} cluster. Each {pulsar-short} cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
 
-When messages are produced on a Pulsar topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters in other regions.
-This is achieved through Pulsar's built-in geo-replication capability.
+When messages are produced on a {pulsar-short} topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters in other regions.
+This is achieved through {pulsar-short}'s built-in geo-replication capability.
 
-The message producer doesn't wait for confirmation from multiple Pulsar clusters.
+The message producer doesn't wait for confirmation from multiple {pulsar-short} clusters.
 The producer receives a response immediately after the nearest cluster successfully persists the data.
-The data is then asynchronously replicated to the other Pulsar clusters in the background.
+The data is then asynchronously replicated to the other {pulsar-short} clusters in the background.
 
 [#astra-ui]
 == Enable geo-replication in {product}
@@ -90,14 +90,14 @@ pulsar-aws-useast2-staging
 ----
 ====
 
-. Create a Pulsar consumer with a subscription to a specified topic:
+. Create a {pulsar-short} consumer with a subscription to a specified topic:
 +
 [source,bash,subs="+quotes"]
 ----
 bin/pulsar-client consume -s "subscription-test" **TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** -n 0
 ----
 
-. Create a Pulsar producer to produce messages from a specific topic:
+. Create a {pulsar-short} producer to produce messages from a specific topic:
 +
 [source,bash,subs="+quotes"]
 ----
@@ -262,4 +262,4 @@ include::operations:partial$georeplication-monitoring.adoc[]
 
 == See also
 
-For more on multiregion georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[Pulsar documentation].
+For more on multiregion georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[{pulsar-short} documentation].

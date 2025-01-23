@@ -2,20 +2,20 @@
 :navtitle: Get started
 :page-tag: astra-streaming,planner,quickstart,pulsar
 
-{product} is a serverless data streaming and event stream processing service integrated in the {astra_ui} and powered by Apache Pulsar(TM).
-Using {product}, you can create Pulsar instances, manage streaming clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
+{product} is a serverless data streaming and event stream processing service integrated in the {astra_ui} and powered by {pulsar-reg}.
+Using {product}, you can create {pulsar-short} instances, manage streaming clusters, scale across cloud regions, and manage {pulsar-short} resources such as topics, connectors, functions and subscriptions.
 
-This quickstart demonstrates how to create and use a streaming tenant running Apache Pulsar.
+This quickstart demonstrates how to create and use a streaming tenant running {pulsar-short}.
 
 == Prerequisites
 
-* Sign in or create an {login_url}[{astra_db} account^].
+* Sign in or create an {url-astra}[{astra_db} account^].
 
 == Create a streaming tenant
 
-A {product} tenant is a portion of {company}-managed Apache Pulsar that is only yours.
+A {product} tenant is a portion of {company}-managed {pulsar} that is only yours.
 Within tenants, you create namespaces, topics, functions, and more.
-To learn more about the concept of tenancy, see the https://pulsar.apache.org/docs/concepts-multi-tenancy/[Pulsar documentation].
+To learn more about the concept of tenancy, see the https://pulsar.apache.org/docs/concepts-multi-tenancy/[{pulsar-short} documentation].
 
 You can create a tenant in the {astra_ui} or programmatically.
 For this quickstart, use the {astra_ui}.
@@ -43,11 +43,11 @@ Namespaces are logical groupings, such as environments or applications, for mess
 {product} automatically creates a `default` namespaces when you create a tenant.
 You can use the default namespace or create other namespaces.
 Tenants usually have many namespaces.
-To learn more about namespaces, see the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[Pulsar documentation].
+To learn more about namespaces, see the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[{pulsar-short} documentation].
 
 You can create namespaces in the {astra_ui} or programmatically.
 For this quickstart, use the {astra_ui}.
-For information about the Pulsar CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
+For information about the {pulsar-short} CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
 
 . In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
@@ -67,8 +67,8 @@ You can also apply more advanced characteristics, like schemas, at the topic lev
 Topics are where other applications or services can "listen" for new messages.
 Consumers subscribe to topics to receive messages, and functions and connectors can listen for messages to trigger automated workflows.
 
-In Pulsar, topic addresses are formatted like URLs, such as `persistent://tenant/namespace/topic`.
-To learn more about topics, see the https://pulsar.apache.org/docs/concepts-messaging/#topics[Pulsar documentation].
+In {pulsar-short}, topic addresses are formatted like URLs, such as `persistent://tenant/namespace/topic`.
+To learn more about topics, see the https://pulsar.apache.org/docs/concepts-messaging/#topics[{pulsar-short} documentation].
 
 As in the previous steps, you can create topics in the {astra_ui} or programmatically.
 
@@ -90,5 +90,5 @@ Your new topic is ready to produce and consume messages.
 There are several different ways to do this:
 
 * xref:developing:produce-consume-astra-portal.adoc[{astra_ui}]: Use {product}'s "Try Me" feature in the {astra_ui}.
-* xref:developing:produce-consume-pulsar-client.adoc[Pulsar Client]: Use the Pulsar CLI to interact with the topic.
-* xref:developing:clients/index.adoc[Runtime Clients]: Create a client application that interacts with Pulsar.
+* xref:developing:produce-consume-pulsar-client.adoc[{pulsar-short} Client]: Use the {pulsar-short} CLI to interact with the topic.
+* xref:developing:clients/index.adoc[Runtime Clients]: Create a client application that interacts with {pulsar-short}.
