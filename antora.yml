@@ -13,7 +13,6 @@ nav:
 asciidoc:
   attributes:
     product: 'Astra Streaming'
-    db-serverless-short: 'Serverless'
     pulsar: 'Apache Pulsar'
     pulsar-short: 'Pulsar'
     pulsar-reg: 'Apache Pulsar(TM)'
