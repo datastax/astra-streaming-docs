@@ -161,6 +161,6 @@ channel.basic_publish(exchange='header_logs'),`
 
 == See also
 
-* https://github.com/datastax/starlight-for-rabbitmq[{company} Starlight for RabbitMQ project]
+* https://github.com/datastax/starlight-for-rabbitmq[{company} {starlight_rabbitmq} project]
 * xref:getting-started:index.adoc[]
-* xref:astream-kafka.adoc[Starlight for Kafka]
+* xref:astream-kafka.adoc[{starlight_for_astra}]

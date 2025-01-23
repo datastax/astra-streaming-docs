@@ -13,7 +13,7 @@ It requires many (virtual) machines to be configured in a very particular way.
 
 In traditional cloud environments, you would pay hourly for every machine whether they are being used for workloads or not, and you would carry the burden of maintaining the server infrastructure.
 
-Serverless removes those operational burdens, and you pay only for the resources you actually use.
+{db-serverless-short} removes those operational burdens, and you pay only for the resources you actually use.
 
 == What is the difference between shared and dedicated clusters for {product}?
 

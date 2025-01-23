@@ -1,4 +1,4 @@
-= Starlight for Kafka
+= {starlight_for_astra}
 :page-tag: starlight-kafka,dev,admin,pulsar,kafka
 
 {kafka_for_astra} brings native Apache Kafka(R) protocol support to {pulsar-reg}, enabling migration of existing Kafka applications and services to {pulsar-short} without modifying the code.
@@ -99,5 +99,5 @@ image::astream-kafka-monitor.png[Monitor Kafka Activity]
 
 == See also
 
-* https://github.com/datastax/starlight-for-kafka[{company} Starlight for Kafka project]
+* https://github.com/datastax/starlight-for-kafka[{company} {starlight_for_astra} project]
 * xref:getting-started:index.adoc[]

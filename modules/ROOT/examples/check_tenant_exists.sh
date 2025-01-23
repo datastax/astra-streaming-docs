@@ -1,2 +1,2 @@
-curl --location --head '{base_url}{base_api}/tenants/test-llp' \
---header "Authorization: Bearer {bearer_token}"
+curl --location --head 'https://api.astra.datastax.com/v2/streaming/tenants/test-llp' \
+--header "Authorization: Bearer $BEARER_TOKEN"
