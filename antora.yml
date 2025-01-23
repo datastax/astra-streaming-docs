@@ -24,6 +24,7 @@ asciidoc:
     gpt-schema-translator: 'GPT schema translator'
     url-astra: 'https://astra.datastax.com'
     link-astra-portal: '{url-astra}[{astra_ui}^]'
+    astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'
 
     # LEGACY ATTRIBUTES - CONSIDER REMOVING
     langstream: 'RAGStack'
