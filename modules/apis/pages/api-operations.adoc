@@ -1,7 +1,11 @@
 = API operations
 
 //TODO: Needs more work and clean up of all source blocks.
-This {product} workbook is a comprehensive guide that provides detailed examples and  practices for managing the {product} platform using the DevOps APIs.  It provides details on the most commonly used APIs for managing {product} and Pulsar instances.  These details include required parameters and the expected output from the API.  The workbook is designed to fill the gap between detailed API reference docs and HowTo guides.  The result is to help customers in operating and managing {product} and provide guidance on how to use DevOps API to automate many common tasks.
+This {product} workbook is a comprehensive guide that provides detailed examples and  practices for managing the {product} platform using the DevOps APIs.
+It provides details on the most commonly used APIs for managing {product} and {pulsar-reg} instances.
+These details include required parameters and the expected output from the API.
+The workbook is designed to fill the gap between detailed API reference docs and HowTo guides.
+The result is to help customers in operating and managing {product} and provide guidance on how to use DevOps API to automate many common tasks.
 
 The workbook covers a wide range of topics, including provisioning of resources, monitoring, and troubleshooting. It provides instructions for various operations, such as creating a new tenant, namespace, topics, geo-replication, and access tokens, to setting up monitoring and alerting, and troubleshooting common issues.
 
@@ -163,7 +167,7 @@ curl --fail --location --request POST 'https://api.astra.datastax.com/v2/streami
 .Result
 [%collapsible]
 ====
-The output includes the "pulsarToken" which is the JWT for this Pulsar instance.
+The output includes the "pulsarToken" which is the JWT for this {pulsar-short} instance.
 
 [source,console]
 ----
@@ -204,9 +208,9 @@ curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/te
 
 No response indicates success.
 
-== Puslar API namespace operations
+== {pulsar-short} API namespace operations
 
-To manage {product} namespaces, use the https://pulsar.apache.org/admin-rest-api/[Pulsar REST APIs].
+To manage {product} namespaces, use the https://pulsar.apache.org/admin-rest-api/[{pulsar-short} REST APIs].
 
 === Get existing namespaces
 
@@ -386,7 +390,7 @@ curl -sS --fail --location  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMES
 
 The response is a number.
 
-== Pulsar Admin API topic operations
+== {pulsar-short} Admin API topic operations
 
 === Get topics in a namespace
 
@@ -932,7 +936,7 @@ curl --location --fail --request DELETE "https://api.astra.datastax.com/v2/strea
 
 No response indicates success.
 
-== Pulsar Admin API functions operations
+== {pulsar-short} Admin API functions operations
 
 === List existing functions in a namespace
 
@@ -1160,10 +1164,10 @@ No response indicates success.
 === List existing token IDs
 
 Get a list of Token IDs for your Cluster.
-With the TokenID, you can then lookup and obtain the Pulsar JWT string.
+With the TokenID, you can then lookup and obtain the {pulsar-short} JWT string.
 The TokenIDs are also listed in the {astra_ui} for that Tenant and Cluster.
 
-Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
+Required parameters "CLUSTER" is obtained from the "List Tenants with Details" API command.
 
 [source,curl]
 ----
@@ -1205,10 +1209,10 @@ eyJhbGciOiJSUzI1NiIsI . . .
 
 === Create a JWT
 
-Create a new Pulsar JWT.
+Create a new {pulsar-short} JWT.
 The new JWT will also be visible in the {astra_ui} for that Tenant and Cluster.
 
-Required parameters "CLUSTER" is  obtained from the “List Tenants with Details" API command.
+Required parameters "CLUSTER" is  obtained from the "List Tenants with Details" API command.
 
 [source,curl]
 ----
@@ -1237,9 +1241,9 @@ curl --fail --location --request DELETE "https://api.astra.datastax.com/v2/strea
 
 No response indicates success.
 
-== Pulsar Admin API IO connectors operations
+== {pulsar-short} Admin API IO connectors operations
 
-Pulsar Sources and Sinks share a similar API structure for most methods.
+{pulsar-short} Sources and Sinks share a similar API structure for most methods.
 
 === List existing sources in a namespace
 

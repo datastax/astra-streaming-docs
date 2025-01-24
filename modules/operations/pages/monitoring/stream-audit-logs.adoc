@@ -39,7 +39,7 @@ You can use the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Or
 
 . In the {link-astra-portal}, create an application token with the **Organization Administrator** role.
 
-. Create the audit log streaming configuration using the values from the tenant's `client.conf` file and your Pulsar configuration:
+. Create the audit log streaming configuration using the values from the tenant's `client.conf` file and your {pulsar-short} configuration:
 +
 [source,curl,subs="+quotes"]
 ----

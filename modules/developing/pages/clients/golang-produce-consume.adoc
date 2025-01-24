@@ -1,16 +1,16 @@
-= Use the Golang Pulsar client with {product}
+= Use the Golang {pulsar-short} client with {product}
 :navtitle: Golang
-:description: Produce and consume messages with the Golang Pulsar client and {product}.
+:description: Produce and consume messages with the Golang {pulsar-short} client and {product}.
 :page-tag: astra-streaming,dev,develop,pulsar,go
 
-You can produce and consume messages with the Golang Pulsar client and {product}.
+You can produce and consume messages with the Golang {pulsar-short} client and {product}.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
 == Prerequisites
 
 * Golang version 1.15 or later
-* A Pulsar topic in {product}
+* An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
 == Create a project
@@ -29,11 +29,11 @@ touch main.go
 go get -u github.com/apache/pulsar-client-go
 ----
 +
-The new project includes a `main` file and the retrieved Pulsar client package.
+The new project includes a `main` file and the retrieved {pulsar-short} client package.
 
 == Write the script
 
-. Open the `main.go` file, and then add the following code to import the required packages, establish an entry point for the application, and create a new instance of a Pulsar client:
+. Open the `main.go` file, and then add the following code to import the required packages, establish an entry point for the application, and create a new instance of a {pulsar-short} client:
 +
 .main.go
 [source,golang]

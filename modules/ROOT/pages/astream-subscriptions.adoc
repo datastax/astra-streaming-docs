@@ -1,8 +1,8 @@
-= Subscriptions in Pulsar
-:navtitle: Pulsar subscriptions overview
+= Subscriptions in {pulsar-reg}
+:navtitle: {pulsar-short} subscriptions overview
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
+_Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
 == Subscription metadata
 
@@ -14,7 +14,7 @@ This metadata includes:
 * Subscription type: The type of subscription being used
 * Subscription cursor: A representation of the consumer's current place in the subscribed topic log
 
-For example, the Pulsar consumer below has a `Shared` subscription to `my-topic` that starts at the `Earliest` cursor position in `my-subscription`:
+For example, the {pulsar-short} consumer below has a `Shared` subscription to `my-topic` that starts at the `Earliest` cursor position in `my-subscription`:
 
 [source,java]
 ----

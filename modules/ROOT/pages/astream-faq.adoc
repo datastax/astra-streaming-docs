@@ -10,9 +10,9 @@ See xref:getting-started:index.adoc[].
 
 See xref:operations:astream-pricing.adoc[].
 
-== Why is {product} based on Apache Pulsar?
+== Why is {product} based on {pulsar-reg}?
 
-For information about the decision to use Apache Pulsar, see https://www.datastax.com/blog/four-reasons-why-apache-pulsar-essential-modern-data-stack[Four Reasons Why Apache Pulsar is Essential to the Modern Data Stack].
+For information about the decision to use {pulsar}, see https://www.datastax.com/blog/four-reasons-why-apache-pulsar-essential-modern-data-stack[Four Reasons Why {pulsar} is Essential to the Modern Data Stack].
 
 == What happened to Kesque?
 
@@ -26,11 +26,11 @@ With the launch of {product}, {company} began shutting down the Kesque service a
 
 The pricing model also makes {product} accessible to mid market and small/medium business customers who need event stream processing capabilities to run core parts of their business.
 
-And finally {product} offers a user-friendly interface and free tier to satisfy the needs of individual developers and technologists who want to learn more about Apache Pulsar and data streaming in general.
+And finally {product} offers a user-friendly interface and free tier to satisfy the needs of individual developers and technologists who want to learn more about {pulsar} and data streaming in general.
 
 == What is CDC for {astra_db}?
 
-Change Data Capture (CDC) for {astra_db} uses a Pulsar IO source connector that processes changes from the Cassandra Change Agent through a Pulsar topic.
+Change Data Capture (CDC) for {astra_db} uses a {pulsar-short} IO source connector that processes changes from the Cassandra Change Agent through a {pulsar-short} topic.
 For more information, see xref:developing:astream-cdc.adoc[].
 
 == What are tenants, namespaces, topics, and sinks?

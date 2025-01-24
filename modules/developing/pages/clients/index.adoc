@@ -1,11 +1,11 @@
-= Use Pulsar clients with {product}
-:navtitle: Pulsar clients
-:description: Use any of the Pulsar Clients to interact with your {product} topics.
+= Use {pulsar-reg} clients with {product}
+:navtitle: {pulsar-short} clients
+:description: Use any of the {pulsar-short} Clients to interact with your {product} topics.
 
-{product} is powered by http://pulsar.apache.org/[Apache Pulsar].
+{product} is powered by http://pulsar.apache.org/[{pulsar-reg}].
 
-To connect to your service, use the open-source client APIs provided by the Apache Pulsar project.
-{product} is running Pulsar version {pulsar_version}. You should use this API version or higher.
+To connect to your service, use the open-source client APIs provided by the {pulsar} project.
+{product} is running {pulsar-short} version {pulsar-version}. You should use this API version or higher.
 
 For more information and examples, see the following:
 

@@ -36,22 +36,22 @@ Additional permissions might be required, depending on the tasks the role needs 
 To control access to specific streaming tenants, you can set granular xref:astra-db-serverless:administration:manage-database-access.adoc#role-scopes[resource scopes] on custom roles.
 ====
 
-== Authentication and authorization in Pulsar and {astra_db}
+== Authentication and authorization in {pulsar-reg} and {astra_db}
 
-Pulsar has the concept of https://pulsar.apache.org/docs/security-authorization/[clients with role tokens].
-In Pulsar, authentication is the process of verifying a provided token (JWT), and authorization is the process of determining if the role claimed in that token is allowed to complete the requested action.
+{pulsar-short} has the concept of https://pulsar.apache.org/docs/security-authorization/[clients with role tokens].
+In {pulsar-short}, authentication is the process of verifying a provided token (JWT), and authorization is the process of determining if the role claimed in that token is allowed to complete the requested action.
 
-{product} uses the {company} version of Apache Pulsar (xref:luna-streaming::index.adoc[Luna Streaming]).
-The https://github.com/datastax/pulsar[Luna project] is an open fork of the Pulsar project that maintains feature parity with OSS Pulsar. {product}, as a managed service, abstracts some features/options of Pulsar to ensure continuous, reliable service.
+{product} uses the {company} version of {pulsar} (xref:luna-streaming::index.adoc[Luna Streaming]).
+The https://github.com/datastax/pulsar[Luna project] is an open fork of the {pulsar-short} project that maintains feature parity with OSS {pulsar-short}. {product}, as a managed service, abstracts some features/options of {pulsar-short} to ensure continuous, reliable service.
 
-On a shared cluster, your {astra_db} organization has one or more tenants on a shared Pulsar cluster.
-Each of your tenants is secured by Pulsar authentication and authorization models, as well as your {astra_db} organization's authentication and authorization ({astra_db} RBAC).
+On a shared cluster, your {astra_db} organization has one or more tenants on a shared {pulsar-short} cluster.
+Each of your tenants is secured by {pulsar-short} authentication and authorization models, as well as your {astra_db} organization's authentication and authorization ({astra_db} RBAC).
 
 {product} shared clusters are created and administered by {product} administrators.
 Each tenant is assigned a custom role and permissions limited to that tenant only.
 All tokens created within a tenant are assigned roles similar to the assigning tenant.
 
-For programmatic access, you use {astra_db} application tokens or Pulsar JWT, depending on the operation you need to perform.
+For programmatic access, you use {astra_db} application tokens or {pulsar-short} JWT, depending on the operation you need to perform.
 For more information, see xref:operations:astream-token-gen.adoc[].
 
 == See also

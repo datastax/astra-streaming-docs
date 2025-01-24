@@ -1,9 +1,9 @@
-= Use the Python Pulsar client with {product}
+= Use the Python {pulsar-short} client with {product}
 :navtitle: Python
-:description: Use the Python Pulsar client with {product} to produce and consume messages.
+:description: Use the Python {pulsar-short} client with {product} to produce and consume messages.
 :page-tag: astra-streaming,dev,develop,python,pulsar
 
-You can use the Python Pulsar client with {product} to produce and consume messages.
+You can use the Python {pulsar-short} client with {product} to produce and consume messages.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
@@ -12,14 +12,14 @@ Go to the https://github.com/datastax/astra-streaming-examples[examples repo] fo
 * A supported Python version:
 ** For Linux, versions 3.4 to 3.7 are supported
 ** For macOS, version 3.7 is supported
-* A Pulsar topic in {product}
+* An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
 == Create a project
 
 . Create a folder for a new Python project.
 
-. In your new directory, install the Pulsar client library with pip:
+. In your new directory, install the {pulsar-short} client library with pip:
 +
 [source,shell]
 ----
@@ -29,7 +29,7 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/create-
 == Write the script
 
 . Create an `index.py` file containing the following code.
-This code creates a Pulsar client instance with the topic URL and token authentication.
+This code creates a {pulsar-short} client instance with the topic URL and token authentication.
 +
 .index.py
 [source,python]

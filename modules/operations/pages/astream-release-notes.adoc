@@ -127,7 +127,7 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 [discrete]
 ==== {new}
 
-* xref:developing:astream-rabbit.adoc[{starlight_rabbitmq}] is now available, bringing built-in RabbitMQ(R) protocol support to Apache Pulsar(TM), enabling migration of existing RabbitMQ applications and services to Pulsar without modifying the code.
+* xref:developing:astream-rabbit.adoc[{starlight_rabbitmq}] is now available, bringing built-in RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
 
 [discrete]
 === April 19, 2022
@@ -137,7 +137,7 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 [discrete]
 ==== {new}
 
-* xref:developing:astream-kafka.adoc[{kafka_for_astra}] is now available, bringing built-in Apache Kafka(R) protocol support to Apache Pulsar.
+* xref:developing:astream-kafka.adoc[{kafka_for_astra}] is now available, bringing built-in Apache Kafka(R) protocol support to {pulsar-short}.
 
 [discrete]
 === March 24, 2022
@@ -159,7 +159,7 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 
 * {product} is now generally available.
 * Added support for the Google Cloud `us-central1` (Council Bluffs, Iowa) region.
-* xref:operations:astream-token-gen.adoc[Pulsar tokens] simplify connecting to your streaming instances.
+* xref:operations:astream-token-gen.adoc[{pulsar-short} tokens] simplify connecting to your streaming instances.
 * Enabled xref:operations:astream-pricing.adoc[billing].
 ====
 
@@ -176,5 +176,5 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 
 * Security upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105.
 
-* The public preview of {product} brings the ability to quickly create Apache Pulsar(TM) instances, manage your clusters, scale across cloud regions, and manage Pulsar resources such as topics, connectors, functions and subscriptions.
+* The public preview of {product} brings the ability to quickly create {pulsar-reg} instances, manage your clusters, scale across cloud regions, and manage {pulsar-short} resources such as topics, connectors, functions and subscriptions.
 ====

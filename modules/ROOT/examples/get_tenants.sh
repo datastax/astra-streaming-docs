@@ -1,2 +1,2 @@
-curl --location --request GET '{base_url}{base_api}/tenants' \
---header "Authorization: Bearer {bearer_token}"
+curl --location --request GET 'https://api.astra.datastax.com/v2/streaming/tenants' \
+--header "Authorization: Bearer $BEARER_TOKEN"

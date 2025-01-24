@@ -1,9 +1,9 @@
-= Use the Java Pulsar client with {product}
+= Use the Java {pulsar-short} client with {product}
 :navtitle: Java
-:description: Produce and consume messages with the Java Pulsar client and {product}.
+:description: Produce and consume messages with the Java {pulsar-short} client and {product}.
 :page-tag: astra-streaming,dev,develop,pulsar,java
 
-You can produce and consume messages with the Java Pulsar client and {product}.
+You can produce and consume messages with the Java {pulsar-short} client and {product}.
 
 Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
 
@@ -13,7 +13,7 @@ For this example, you need the following:
 
 * JRE 8
 * https://maven.apache.org/install.html[Maven]
-* A Pulsar topic in {product}
+* An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
 == Create a project
@@ -25,7 +25,7 @@ For this example, you need the following:
 include::{astra-streaming-examples-repo}/java/simple-producer-consumer/create-project.sh[]
 ----
 
-. Add the Pulsar client dependency in `pom.xml`:
+. Add the {pulsar-short} client dependency in `pom.xml`:
 +
 .pom.xml
 [source,xml]

@@ -8,12 +8,12 @@ This page answers some common questions about getting started with {product}.
 
 == Why does {company} call {product} "serverless"?
 
-Running a - Pulsar cluster that can handle at-scale workloads is not a trivial task.
+Running a {pulsar-reg} cluster that can handle at-scale workloads is not a trivial task.
 It requires many (virtual) machines to be configured in a very particular way.
 
 In traditional cloud environments, you would pay hourly for every machine whether they are being used for workloads or not, and you would carry the burden of maintaining the server infrastructure.
 
-Serverless removes those operational burdens, and you pay only for the resources you actually use.
+A serverless environment removes those operational burdens, and you pay only for the resources you actually use.
 
 == What is the difference between shared and dedicated clusters for {product}?
 
@@ -24,10 +24,10 @@ See xref:operations:astream-pricing.adoc[].
 Connections to both cluster types are secure.
 However, dedicated clusters offer the option for private connectivity.
 
-For dedicated Pulsar clusters, all connections in {product} are guarded by authentication, authorization, and secure (TLS) communications.
+For dedicated {pulsar-short} clusters, all connections in {product} are guarded by authentication, authorization, and secure (TLS) communications.
 You can connect over the public internet or xref:operations:private-connectivity.adoc[establish a private connection].
 
-Shared Pulsar clusters also use a secure connection over the public internet.
+Shared {pulsar-short} clusters also use a secure connection over the public internet.
 However, shared clusters don't support private links.
 
 For more information, see xref:operations:astream-pricing.adoc[].
@@ -37,11 +37,11 @@ For more information, see xref:operations:astream-pricing.adoc[].
 If your {astra_db} organization is on the *Pay As You Go* or *Enterprise* {astra_db} subscription plan, your users can use SSO to sign in to the {astra_ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
-== How do {astra_db} roles and permissions map to Pulsar roles and permissions?
+== How do {astra_db} roles and permissions map to {pulsar-short} roles and permissions?
 
 See xref:ROOT:astream-org-permissions.adoc[].
 
-== What is the difference between {astra_db} application tokens and the Pulsar tokens?
+== What is the difference between {astra_db} application tokens and the {pulsar-short} tokens?
 
 See xref:operations:astream-token-gen.adoc[].
 
@@ -64,7 +64,7 @@ For more on geo-replication, see xref:astream-georeplication.adoc[].
 
 == Application development
 
-=== Can I migrate data from my existing Pulsar cluster to {product}?
+=== Can I migrate data from my existing {pulsar-short} cluster to {product}?
 
 Unless you are starting a project from scratch, you likely have message data that needs to be brought over to your {product} tenants.
 For migration assistance, contact {support_url}[{company} Support].
@@ -94,9 +94,9 @@ While this doesn't offer as much flexibility as separation by tenant, it does of
 Also, note that in this scheme you cannot limit access by namespace.
 All tokens would have access to all namespaces.
 
-=== Can I develop applications on open source Pulsar and then move to {product}?
+=== Can I develop applications on open source {pulsar-short} and then move to {product}?
 
-{product} is actively maintained to keep parity with the official https://pulsar.apache.org[Apache Pulsar project].
+{product} is actively maintained to keep parity with the official https://pulsar.apache.org[{pulsar} project].
 The notable differences arise from accessibility and security.
 Naturally, you have less control in a managed, serverless cluster than you do in a cluster running in your own environment.
 Beyond those differences, the effort to develop locally and then move to {product} should not be significant, but {company} recommends that you develop directly in {product}.
@@ -104,8 +104,8 @@ If you are trying to reduce costs, use the free tier of {product} and then switc
 
 === Can I use {product} with my existing Kafka or RabbitMQ applications?
 
-Yes, {product} offers a fully compatible Kafka and RabbitMQ implementation. This means you can use your existing Kafka or RabbitMQ applications with {product}. You can also use the {product} Kafka or RabbitMQ implementation with your existing Pulsar applications. {product} comes with custom ports for Kafka and RabbitMQ workloads. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+Yes, {product} offers a fully compatible Kafka and RabbitMQ implementation. This means you can use your existing Kafka or RabbitMQ applications with {product}. You can also use the {product} Kafka or RabbitMQ implementation with your existing {pulsar-short} applications. {product} comes with custom ports for Kafka and RabbitMQ workloads. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
 
 === Can I use {product} with my existing Java applications?
 
-Yes, {product} offers a fully compatible JMS implementation. This means you can use your existing JMS applications with {product}. You can also use the {product} JMS implementation with your existing Pulsar applications. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+Yes, {product} offers a fully compatible JMS implementation. This means you can use your existing JMS applications with {product}. You can also use the {product} JMS implementation with your existing {pulsar-short} applications. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.

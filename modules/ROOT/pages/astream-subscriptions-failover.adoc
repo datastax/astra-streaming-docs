@@ -1,22 +1,22 @@
-= Failover subscriptions in Pulsar
+= Failover subscriptions in {pulsar-reg}
 :navtitle: Failover
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
+_Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
 If an xref:astream-subscriptions-exclusive.adoc[exclusive] consumer fails, the topic backlog accumulates stale, unacknowledged messages.
-Pulsar solves this problem with failover subscriptions.
-In _failover subscriptions_, Pulsar designates one primary consumer and multiple standby consumers.
+{pulsar-short} solves this problem with failover subscriptions.
+In _failover subscriptions_, {pulsar-short} designates one primary consumer and multiple standby consumers.
 If the primary consumer disconnects, the standby consumers begin consuming the subsequent unacknowledged messages.
 
-This page explains how to use Pulsar's failover subscription model to manage your topic consumption.
+This page explains how to use {pulsar-short}'s failover subscription model to manage your topic consumption.
 
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Failover subscription example
 
-To try out a Pulsar failover subscription, add `.subscriptionType(SubscriptionType.Failover)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
+To try out a {pulsar-short} failover subscription, add `.subscriptionType(SubscriptionType.Failover)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
 
 .SimplePulsarConsumer.java
 [source,java]
@@ -86,7 +86,7 @@ To test them, you can progressively end each `SimplePulsarConsumer` process, and
 
 == See also
 
-* xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
-* xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
-* xref:astream-subscriptions-shared.adoc[Shared subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]
+* xref:astream-subscriptions.adoc[]
+* xref:astream-subscriptions-exclusive.adoc[]
+* xref:astream-subscriptions-shared.adoc[]
+* xref:astream-subscriptions-keyshared.adoc[]

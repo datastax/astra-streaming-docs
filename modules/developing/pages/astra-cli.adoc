@@ -12,7 +12,7 @@ The xref:astra-cli:ROOT:index.adoc[{astra_db} Command-Line Interface ({astra_cli
 {astra_cli} commands are available for {astra_db} and {astra_stream}.
 They're designed to get you working quickly, with an emphasis on automation.
 
-For example, the following command creates a Pulsar tenant:
+For example, the following command creates an {pulsar-reg} tenant:
 
 [source,bash,subs="+quotes"]
 ----

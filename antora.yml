@@ -12,24 +12,20 @@ nav:
 
 asciidoc:
   attributes:
-    pulsar_version: '2.10' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
-    pulsar_full_version: '2.10.1'
     product: 'Astra Streaming'
+    pulsar: 'Apache Pulsar'
+    pulsar-short: 'Pulsar'
+    pulsar-reg: 'Apache Pulsar(TM)'
+    pulsar-version: '2.10' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
+    pulsar-version-patch: '2.10.1'
     kafka_for_astra: 'Starlight for Kafka'
     starlight_rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
-    base_url: 'https://api.astra.datastax.com'
-    base_api: '/v2/streaming'
-    bearer_token: '$BEARER_TOKEN'
-    tenant_name_with_topics: 'llp-test'
-    cluster_name: 'astradev-aws'
-    tenant_name: 'testcreate'
-    topic_name: 'blah'
-    request_feature_access_email: 'astrastreaming@datastax.com'
-    streaming_signup_url: 'https://astra.datastax.com/streaming'
-    login_url: 'https://astra.datastax.com'
-    langstream: 'RAGStack'
-    ragstack: 'RAGStack'
-    db-serverless: 'Astra DB Serverless'
     url-astra: 'https://astra.datastax.com'
     link-astra-portal: '{url-astra}[{astra_ui}^]'
+    astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'
+
+    # LEGACY ATTRIBUTES - CONSIDER REMOVING
+    langstream: 'RAGStack'
+    ragstack: 'RAGStack'
+    streaming_signup_url: 'https://astra.datastax.com/streaming'

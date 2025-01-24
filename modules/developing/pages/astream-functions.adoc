@@ -8,8 +8,7 @@ Functions run inside {product}, which makes them serverless.
 You write the code for your function in Java, Python, or Go, and then upload the code.
 It automatically runs for each message published to the specified input topic.
 
-Functions are implemented using https://pulsar.apache.org/docs/en/functions-overview/[Apache Pulsar(R) functions].
-See [Pulsar Functions overview] for more information about Pulsar functions.
+Functions are implemented using https://pulsar.apache.org/docs/en/functions-overview/[{pulsar-reg} functions].
 
 [IMPORTANT]
 ====
@@ -21,9 +20,9 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 [#create-an-archive]
 == Deploy a function archive
 
-You can write Pulsar functions for {product} in Python, Java, or Go.
+You can write {pulsar-short} functions for {product} in Python, Java, or Go.
 
-To deploy a function to {product} or Pulsar, you can package the project into an archive, including the function code and any dependencies.
+To deploy a function to {product} or {pulsar-short}, you can package the project into an archive, including the function code and any dependencies.
 You can deploy the same archive to either environment.
 
 This is recommended for complex functions with long scripts, multiple scripts, or many dependencies.
@@ -193,7 +192,7 @@ Must have 4 steps to maintain numbering.
 ======
 
 [start=5]
-. If you haven't done so already, xref:configure-pulsar-env.adoc[set up your environment for the Pulsar binaries].
+. If you haven't done so already, xref:configure-pulsar-env.adoc[set up your environment for the {pulsar-short} binaries].
 
 . Create a deployment configuration YAML file that defines the function metadata and associated topics:
 +
@@ -238,7 +237,7 @@ Optionally, you can declare a `logTopic` in the same way: `persistent://**TENANT
 
 * `**DISPLAY_NAME**`: The function display name in {product}, such as `testpythonfunction`.
 
-. Use `pulsar-admin` to deploy the function to {product} or Pulsar using your configuration file:
+. Use `pulsar-admin` to deploy the function to {product} or {pulsar-short} using your configuration file:
 +
 [source,bash,subs="+quotes"]
 ----
@@ -351,7 +350,7 @@ This means there is a change that a message is not processed.
 * *Auto Acknowledge*: Enable or disable automatic message acknowledgment.
 
 . (Optional) Provide a config key, if required.
-For more information, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[Pulsar documentation].
+For more information, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[{pulsar-short} documentation].
 
 . Click *Create*.
 

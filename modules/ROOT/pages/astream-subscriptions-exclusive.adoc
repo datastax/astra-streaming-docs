@@ -1,21 +1,21 @@
-= Exclusive subscriptions in Pulsar
+= Exclusive subscriptions in {pulsar-reg}
 :navtitle: Exclusive
 :page-tag: pulsar-subscriptions,quickstart,admin,dev,pulsar
 
-_Subscriptions_ in Pulsar describe which consumers are consuming data from a topic and how they want to consume that data.
+_Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
 An _exclusive subscription_ describes a basic publish-subscribe (pub-sub) pattern where a single consumer subscribes to a single topic and consumes from it.
 
-This page explains how to use Pulsar's exclusive subscription model to manage your topic consumption.
+This page explains how to use {pulsar-short}'s exclusive subscription model to manage your topic consumption.
 
 include::ROOT:partial$subscription-prereq.adoc[]
 
 [#example]
 == Exclusive subscription example
 
-. To configure a Pulsar exclusive subscription, define a `pulsarConsumer` object in `SimplePulsarConsumer.java`, as you would for other subscription types.
+. To configure a {pulsar-short} exclusive subscription, define a `pulsarConsumer` object in `SimplePulsarConsumer.java`, as you would for other subscription types.
 However, you don't need to declare a `subscriptionType`.
-Whereas other subscription types required you to declare a specific `subscriptionType`, Pulsar creates an exclusive subscription by default if you don't declare a `subscriptionType`.
+Whereas other subscription types required you to declare a specific `subscriptionType`, {pulsar-short} creates an exclusive subscription by default if you don't declare a `subscriptionType`.
 +
 .SimplePulsarConsumer.java
 [source,java]
@@ -82,7 +82,7 @@ Caused by: org.apache.pulsar.client.api.PulsarClientException$ConsumerBusyExcept
 
 == See also
 
-* xref:astream-subscriptions.adoc[Subscriptions in Pulsar]
-* xref:astream-subscriptions-shared.adoc[Shared subscriptions]
-* xref:astream-subscriptions-failover.adoc[Failover subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]
+* xref:astream-subscriptions.adoc[]
+* xref:astream-subscriptions-shared.adoc[]
+* xref:astream-subscriptions-failover.adoc[]
+* xref:astream-subscriptions-keyshared.adoc[]

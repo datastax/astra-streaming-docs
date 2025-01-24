@@ -1,12 +1,12 @@
-= Use the {product} Pulsar Client
-:navtitle: Pulsar CLI
+= Use the {product} {pulsar-short} Client
+:navtitle: {pulsar-short} CLI
 :description: Use the pulsar-client CLI to interact with your {product} tenants
 
 You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants.
 
 . xref:getting-started:index.adoc[Create a {product} tenant.]
 
-. xref:developing:configure-pulsar-env.adoc[Configure Pulsar binaries for {product}.]
+. xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}.]
 
 . Set the following environment variables:
 +

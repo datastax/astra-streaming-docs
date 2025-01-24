@@ -1,9 +1,9 @@
-curl --location --request POST '{base_url}{base_api}/tenants?topic={topic_name}' \
+curl --location --request POST 'https://api.astra.datastax.com/v2/streaming/tenants?topic=blah' \
 --header 'Content-Type: application/json' \
---header "Authorization: Bearer {bearer_token}" \
+--header "Authorization: Bearer $BEARER_TOKEN" \
 --data-raw '{
     "cloudProvider": "aws",
     "cloudRegion": "useast2",
-    "tenantName": "{tenant_name}",
+    "tenantName": "testcreate",
     "userEmail": "joshua@example.com"
 }'

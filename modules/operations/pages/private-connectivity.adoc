@@ -18,7 +18,7 @@ Be prepared to provide the <<credentials,credentials>> required for your cloud p
 
 {product} supports inbound traffic flowing from your private endpoint to {product}.
 
-The first inbound traffic pattern describes Pulsar, Kafka, and RabbitMQ messaging traffic, as well as Prometheus metrics traffic, flowing from a user's private endpoint to {product}.
+The first inbound traffic pattern describes {pulsar-reg}, Apache Kafka(R), and RabbitMQ messaging traffic, as well as Prometheus metrics traffic, flowing from a user's private endpoint to {product}.
 
 You create a connection to the {company} private link service, and then {company} routes traffic to your {product} dedicated cluster.
 If you have multiple tenants, they can have different VPCs.
@@ -33,7 +33,7 @@ The private link service pattern is the same across cloud providers, but the hos
 |===
 |Service |Endpoint pattern
 
-|Pulsar Messaging
+|{pulsar-short} Messaging
 |`pulsar-azure-eastus.private.streaming.datastax.com:6651`
 
 |Kafka Messaging

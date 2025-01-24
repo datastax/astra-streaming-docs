@@ -301,9 +301,9 @@ You can perform these actions in the {astra_ui} or programmatically with a suffi
 
 == Function and connector resources
 
-A function instance is a unit used for scaling Pulsar functions or Pulsar IO connectors running on {product}.
-Each function instance is assigned a specific amount of CPU and memory which can be allocated to a Pulsar function.
-Each Pulsar function running on {product} has a minimum of one function instance allocated to it.
+A function instance is a unit used for scaling {pulsar-reg} functions or {pulsar-short} IO connectors running on {product}.
+Each function instance is assigned a specific amount of CPU and memory which can be allocated to a {pulsar-short} function.
+Each {pulsar-short} function running on {product} has a minimum of one function instance allocated to it.
 
 Functions and connector resources for function instances are set in the control plane based as resource limits.
 You can't customize these resources.

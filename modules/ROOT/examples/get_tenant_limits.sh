@@ -1,3 +1,3 @@
-curl --location --request GET '{base_url}{base_api}/tenants/{tenant_name_with_topics}/limits' \
---header 'X-DataStax-Pulsar-Cluster: {cluster_name}' \
---header "Authorization: Bearer {bearer_token}"
+curl --location --request GET 'https://api.astra.datastax.com/v2/streaming/tenants/llp-test/limits' \
+--header 'X-DataStax-Pulsar-Cluster: astradev-aws' \
+--header "Authorization: Bearer $BEARER_TOKEN"

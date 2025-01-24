@@ -17,7 +17,7 @@ for FILE in *;
  do
     if [[ "$FILE" != "test"* ]]
     then
-      gsed "s#{base_url}#$base_url#; s#{base_api}#$base_api#; s#{tenant_name}#$tenant_name#; s#{tenant_name_with_topics}#$tenant_name_with_topics#; s#{topic_name}#$topic_name#; s#{cluster_name}#$cluster_name#; s#{bearer_token}#$BEARER_TOKEN#;" $FILE > $FILE.tmp;
+      gsed "s#https://api.astra.datastax.com#$base_url#; s#/v2/streaming#$base_api#; s#testcreate#$tenant_name#; s#llp-test#$tenant_name_with_topics#; s#blah#$topic_name#; s#astradev-aws#$cluster_name#; s#$BEARER_TOKEN#$BEARER_TOKEN#;" $FILE > $FILE.tmp;
       chmod 755 $FILE.tmp;
     fi
 done
