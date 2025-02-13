@@ -19,7 +19,7 @@ asciidoc:
     astra-cli: 'Astra CLI'
     astra-ui: 'Astra Portal'
     astra-url: 'https://astra.datastax.com'
-    astra-ui-link: '{astra-url}[{astra-ui}^]
+    astra-ui-link: '{astra-url}[{astra-ui}^]'
     devops-api: 'DevOps API'
     cass: 'Apache Cassandra'
     cass-reg: 'Apache Cassandra(R)'
