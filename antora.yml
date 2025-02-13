@@ -21,7 +21,7 @@ asciidoc:
     astra-ui: 'Astra Portal'
     astra-url: 'https://astra.datastax.com'
     astra-ui-link: '{astra-url}[{astra-ui}^]
-    
+
     devops-api: 'DevOps API'
     pulsar: 'Apache Pulsar'
     pulsar-short: 'Pulsar'
@@ -32,8 +32,7 @@ asciidoc:
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
 
-    url-astra: 'https://astra.datastax.com'
-    link-astra-portal: '{url-astra}[{astra_ui}^]'
+    link-astra-portal: '{url-astra}[{astra-ui}^]'
     astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'
 
     # LEGACY ATTRIBUTES - CONSIDER REMOVING

@@ -1165,7 +1165,7 @@ No response indicates success.
 
 Get a list of Token IDs for your Cluster.
 With the TokenID, you can then lookup and obtain the {pulsar-short} JWT string.
-The TokenIDs are also listed in the {astra_ui} for that Tenant and Cluster.
+The TokenIDs are also listed in the {astra-ui} for that Tenant and Cluster.
 
 Required parameters "CLUSTER" is obtained from the "List Tenants with Details" API command.
 
@@ -1210,7 +1210,7 @@ eyJhbGciOiJSUzI1NiIsI . . .
 === Create a JWT
 
 Create a new {pulsar-short} JWT.
-The new JWT will also be visible in the {astra_ui} for that Tenant and Cluster.
+The new JWT will also be visible in the {astra-ui} for that Tenant and Cluster.
 
 Required parameters "CLUSTER" is  obtained from the "List Tenants with Details" API command.
 

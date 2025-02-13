@@ -104,7 +104,7 @@ These namespace policies are initially provisioned in the default settings for {
 
 [cols="1,1,1"]
 |===
-|Policy |Default Setting |Available in the {astra_ui}
+|Policy |Default Setting |Available in the {astra-ui}
 
 |Max retention time
 |Disabled/no data retention by default
@@ -259,11 +259,11 @@ The following is an example of a default namespace policy with limits set.
 == {product} topic and namespace actions
 
 These topic and namespace actions are provisioned in the default settings by {product}.
-You can perform these actions in the {astra_ui} or programmatically with a sufficiently authorized role or authentication token.
+You can perform these actions in the {astra-ui} or programmatically with a sufficiently authorized role or authentication token.
 
 [cols="1,1,1"]
 |===
-|Allowed Action |Default Setting |Available in the {astra_ui}
+|Allowed Action |Default Setting |Available in the {astra-ui}
 
 |Terminate topic
 |Enabled

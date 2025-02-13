@@ -5,7 +5,7 @@
 [#astra-token]
 == {astra-db} application tokens
 
-{astra-db} application tokens are access tokens for authentication to the {astra_ui} and the xref:apis:index.adoc[{product} {devops-api}].
+{astra-db} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{product} {devops-api}].
 
 You need an application token for actions related to {astra-db} organizations and databases.
 
@@ -21,7 +21,7 @@ You need a {pulsar-short} JWT for actions related to {pulsar-short} tenants, nam
 
 You can generate, copy, or delete {product} {pulsar-short} tokens for each of your {product} tenants:
 
-. In the {astra_ui} navigation menu, click *Streaming*.
+. In the {astra-ui} navigation menu, click *Streaming*.
 
 . Select the tenant for which you want to manage tokens.
 

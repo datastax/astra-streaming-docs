@@ -21,7 +21,7 @@ astra streaming create **TENANT_NAME** \
 --plan **PLAN_TYPE** --namespace **TENANT_INITIAL_NAMESPACE_NAME**
 ----
 
-You can use {astra-cli} instead of or in addition to the {astra_ui} and {astra-db} APIs.
+You can use {astra-cli} instead of or in addition to the {astra-ui} and {astra-db} APIs.
 
 For more information, see the following:
 

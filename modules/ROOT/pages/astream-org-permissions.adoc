@@ -27,8 +27,8 @@ For information about permissions assigned to default roles, see xref:astra-db-s
 
 If you xref:astra-db-serverless:administration:manage-database-access.adoc#custom-roles[create custom roles] for {product}, those roles must have the following permissions, at minimum:
 
-* *Manage Streaming* (`org-stream-manage`): View and manage {product} in the {astra_ui}.
-* *View DB* (`org-db-view`): View the {astra_ui} in general.
+* *Manage Streaming* (`org-stream-manage`): View and manage {product} in the {astra-ui}.
+* *View DB* (`org-db-view`): View the {astra-ui} in general.
 
 Additional permissions might be required, depending on the tasks the role needs to perform.
 

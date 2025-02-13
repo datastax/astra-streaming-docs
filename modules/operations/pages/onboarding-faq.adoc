@@ -34,7 +34,7 @@ For more information, see xref:operations:astream-pricing.adoc[].
 
 == Does {product} support single-sign on?
 
-If your {astra-db} organization is on the *Pay As You Go* or *Enterprise* {astra-db} subscription plan, your users can use SSO to sign in to the {astra_ui}.
+If your {astra-db} organization is on the *Pay As You Go* or *Enterprise* {astra-db} subscription plan, your users can use SSO to sign in to the {astra-ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
 == How do {astra-db} roles and permissions map to {pulsar-short} roles and permissions?

@@ -40,7 +40,7 @@ include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/ja
 ----
 ====
 
-. Replace the following values in `DemoApplication.java` with values from your tenant's *Connect* tab in the {astra_ui}:
+. Replace the following values in `DemoApplication.java` with values from your tenant's *Connect* tab in the {astra-ui}:
 +
 .DemoApplication.java
 [source,java,subs="+quotes"]
@@ -101,7 +101,7 @@ Message received: Hello World
 ----
 ====
 
-. In the {astra_ui}, go to your tenant to verify that the message appears in the specified namespace and topic.
+. In the {astra-ui}, go to your tenant to verify that the message appears in the specified namespace and topic.
 
 == See also
 

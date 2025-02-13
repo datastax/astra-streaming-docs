@@ -3,7 +3,7 @@
 :page-tag: astra-streaming,planner,admin,dev,pulsar
 
 {product} is a cloud native data streaming and event stream processing
-service tightly integrated into the {astra_ui} and powered by {pulsar-reg}.
+service tightly integrated into the {astra-ui} and powered by {pulsar-reg}.
 Using {product}, customers can quickly create {pulsar-short} instances,
 manage their clusters, scale across cloud regions, and manage {pulsar-short} resources
 such as topics, connectors, functions and subscriptions.

@@ -72,7 +72,7 @@ Organizations on the *Free* plan can use xref:streaming-learning:functions:index
 
 === {new}
 
-* Launched a refreshed {astra_ui}.
+* Launched a refreshed {astra-ui}.
 
 == Previous releases
 

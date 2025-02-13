@@ -4,7 +4,7 @@
 
 |`serviceUrl`
 |The URL to connect to the {pulsar-short} cluster
-|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Connect* tab.
+|In the {astra-ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Connect* tab.
 In the *Details* section, get the *Broker Service URL*.
 
 |`pulsarToken`
@@ -13,17 +13,17 @@ In the *Details* section, get the *Broker Service URL*.
 
 |`tenantName`
 |The name of your streaming tenant
-|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant.
+|In the {astra-ui} navigation menu, click *Streaming*, select your streaming tenant.
 In the *Details* section, get the *Name*.
 
 |`namespace`
 |The segmented area for certain topics in your streaming tenant
-|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Namespace and Topics* tab.
+|In the {astra-ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Namespace and Topics* tab.
 Choose the target namespace from the list of namespaces.
 
 |`topicName`
 |Topic name (not the full name)
-|In the {astra_ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Namespace and Topics* tab.
+|In the {astra-ui} navigation menu, click *Streaming*, select your streaming tenant, and then click the *Namespace and Topics* tab.
 Expand the target namespace in the list of namespaces to view the names of the topics within.
 Do _not_ use the *Full Name*.
 |===
