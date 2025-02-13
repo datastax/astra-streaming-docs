@@ -3,13 +3,11 @@
 {product} uses two types of tokens that you can generate in {astra-db}.
 
 [#astra-token]
-== {astra-db} application tokens
+== Application tokens
 
-{astra-db} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{product} {devops-api}].
+{astra-db} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{devops-api}s].
 
-You need an application token for actions related to {astra-db} organizations and databases.
-
-For information about creating and managing {astra-db} application tokens, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
+To create an {astra-db} application token, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 
 [#pulsar-token]
 == {product} {pulsar-short} tokens
@@ -44,6 +42,29 @@ The token is shown only once.
 +
 Ensure you update your application with a new, valid {pulsar-short} token before deletion.
 Applications using the deleted {pulsar-short} token will no longer be able to connect to {product}.
+
+== Set environment variables
+
+Create environment variables for your tenant's {pulsar-short} token and tenant web service URL:
+
+. Create a <<pulsar-token,{pulsar-short} token>>.
+
+. On your tenant's *Connect* tab, copy the *Web Service URL*.
+
+. Set environment variables:
++
+[source,shell,subs="attributes+"]
+----
+export WEB_SERVICE_URL=<replace-me>
+export ASTRA_STREAMING_TOKEN=<replace-me>
+----
+
+. Use these values to form curl commands:
++
+[source,shell,subs="attributes+"]
+----
+curl "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" -H "Authorization: $ASTRA_STREAMING_TOKEN"
+----
 
 == Usage examples
 

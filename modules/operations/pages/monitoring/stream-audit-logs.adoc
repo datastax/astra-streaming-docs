@@ -37,7 +37,7 @@ You can use topics to organize audit logs by event type or other criteria.
 
 You can use the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[{astra-db} {devops-api} telemetry endpoint] to configure audit log streaming instead of providing the configuration details to {company} Support.
 
-. In the {astra-ui-link}, create an application token with the **Organization Administrator** role.
+. In the {astra-ui-link}, create an {astra-db} application token with the **Organization Administrator** role.
 
 . Create the audit log streaming configuration using the values from the tenant's `client.conf` file and your {pulsar-short} configuration:
 +
