@@ -25,4 +25,4 @@ You can use {astra-cli} instead of or in addition to the {astra-ui} and {astra-d
 
 For more information, see the following:
 
-* https://www.datastax.com/blog/introducing-cassandra-astra-cli[Accelerate your Cassandra development and automation with the {astra-cli}]
+* https://www.datastax.com/blog/introducing-cassandra-astra-cli[Accelerate your {cass-short} development and automation with the {astra-cli}]

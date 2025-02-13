@@ -3,13 +3,13 @@
 Systems in streaming pipelines can use different representations for schema and data types.
 
 Schema mapping is required to align congruent types in a pipeline.
-For example, to send data from a CDC-enabled {cassandra} table to a {pulsar-reg} topic, you must define schema mapping between the Cassandra table and the {pulsar-short} topic.
+For example, to send data from a CDC-enabled {cass-reg} table to a {pulsar-reg} topic, you must define schema mapping between the {cass-short} table and the {pulsar-short} topic.
 If the schema includes more complex data types, like maps and nested data structures, schema management becomes more difficult.
 
 Schema management is a complicated, tedious, and error-prone tasks that requires you to understand and translate multiple sets of schema rules.
 
 Instead, you can use the {gpt-schema-translator} to save time and reduce schema mapping toil.
-This tool uses generative AI,based on the `GPT-4` model, to automatically generate schema mappings between {product} ({pulsar-short} topics) and the {astra-db} sink connector (Cassandra tables).
+This tool uses generative AI,based on the `GPT-4` model, to automatically generate schema mappings between {product} ({pulsar-short} topics) and the {astra-db} sink connector ({cass-short} tables).
 
 == Prerequisites
 
@@ -35,12 +35,12 @@ If this button isn't available, the GPT schema translator doesn't have an availa
 +
 image::two-schemas.png[Schema mapping,320,240]
 +
-.Cassandra-to-{pulsar-short} schema mapping example
+.{cass-short}-to-{pulsar-short} schema mapping example
 [%collapsible]
 ====
 [cols="1,1,1"]
 |===
-| Cassandra table schema | {pulsar-short} JSON schema | Generated mapping
+| {cass-short} table schema | {pulsar-short} JSON schema | Generated mapping
 
 a|
 [source,cql]
@@ -369,7 +369,7 @@ This example demonstrates how you can generates schema mapping in real time.
 ----
 ====
 
-. The {astra-db} sink connector writes data to the Cassandra table with a CQL schema.
+. The {astra-db} sink connector writes data to the {cass-short} table with a CQL schema.
 +
 .CQL schema example
 [%collapsible]
@@ -422,16 +422,16 @@ The {gpt-schema-translator} generates an AVRO-to-CQL schema mapping while messag
 passportnumber=value.passportNumber, age=value.age, firstname=value.firstName, lastname=value.lastName
 ----
 +
-Notice that the `firstname` value became `firstName` because the {pulsar-short} topic AVRO schema superseded the Cassandra table schema.
+Notice that the `firstname` value became `firstName` because the {pulsar-short} topic AVRO schema superseded the {cass-short} table schema.
 
 == No schema on {pulsar-short} topic
 
-If you don't declare a schema in the {pulsar-short} topic, the schema translator can generate a default schema mapping based on the values of your Cassandra table schema, without using GPT.
+If you don't declare a schema in the {pulsar-short} topic, the schema translator can generate a default schema mapping based on the values of your {cass-short} table schema, without using GPT.
 
-When you create the mapping in the {astra-ui}, you can click *Generate Mapping* to create a generic {pulsar-short} topic schema based on your Cassandra table schema.
+When you create the mapping in the {astra-ui}, you can click *Generate Mapping* to create a generic {pulsar-short} topic schema based on your {cass-short} table schema.
 If schema mapping isn't possible for the selected table and topic, the *Generate Mapping* button isn't available.
 
-For example, assume you have the following Cassandra table schema:
+For example, assume you have the following {cass-short} table schema:
 
 [source,cql]
 ----
@@ -466,7 +466,7 @@ For example, assume you have the following Cassandra table schema:
 }
 ----
 
-The schema translator would generate the following {pulsar-short} JSON schema mapping based on the given Cassandra table schema:
+The schema translator would generate the following {pulsar-short} JSON schema mapping based on the given {cass-short} table schema:
 
 [source,plain]
 ----
