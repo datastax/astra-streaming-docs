@@ -1,13 +1,13 @@
 = {product} pricing
 :page-tag: astra-streaming,planner,plan,pulsar
 
-{product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra_db}.
+{product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra-db}.
 
 {product} offers three subscription plans, as well as pricing for dedicated clusters.
-An {product} subscription is associated with an {astra_db} organization, but {product} subscription plans are separate from {astra_db} organization subscription plans.
+An {product} subscription is associated with an {astra-db} organization, but {product} subscription plans are separate from {astra-db} organization subscription plans.
 
 For {product} plans and pricing details, see https://www.datastax.com/pricing/astra-streaming[{product} pricing].
-For information about {astra_db} plans, billing, and usage, see xref:astra-db-serverless:administration:subscription-plans.adoc[].
+For information about {astra-db} plans, billing, and usage, see xref:astra-db-serverless:administration:subscription-plans.adoc[].
 
 == {product} subscription plans
 
@@ -30,7 +30,7 @@ If desired, you can opt in to <<dedicated-clusters,dedicated clusters>>.
 If you prefer not to use shared clusters, you can opt for dedicated clusters.
 
 With dedicated clusters, you have your own private {pulsar-short} cluster with all the benefits of {product} as a managed service.
-You sign in to {astra_db} and use {product} in the same way that you would on shared clusters.
+You sign in to {astra-db} and use {product} in the same way that you would on shared clusters.
 When you create a tenant, you have the option to deploy to your private cluster.
 This means that you can use both shared or dedicated clusters, depending on your tenants' use cases.
 
@@ -63,7 +63,7 @@ With shared clusters, you can create tenants in any of the xref:astream-regions.
 
 Dedicated clusters are open to almost any public cloud region.
 For this reason, dedicated clusters offer more flexibility for xref:operations:astream-georeplication.adoc[geo-replication].
-If your preferred region isn't already available, you can contact your account representative or {support_url}[{company} Support] to request it.
+If your preferred region isn't already available, you can contact your {company} account representative or {support_url}[{company} Support] to request it.
 
 == See also
 

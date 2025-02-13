@@ -311,7 +311,7 @@ Upload your own code::
 
 .. Based on the uploaded file, select the specific class (function) to deploy.
 +
-{astra_db} generates a list of acceptable classes detected in the code.
+{astra-db} generates a list of acceptable classes detected in the code.
 A file can contain multiple classes, but only one is used per deployment.
 +
 For Python scripts, the class name is the Python filename (without the extension) and the class to execute.

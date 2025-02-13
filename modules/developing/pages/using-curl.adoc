@@ -8,7 +8,7 @@ Each API supports different functionalities.
 Depending on the API you use, you need certain information to form HTTP requests:
 
 * To use the {product} {pulsar-short} Admin API and {pulsar-short} REST APIs, you need the tenant's Web Service URL and {pulsar-short} token.
-* To use the {product} DevOps API, you need an xref:operations:astream-token-gen.adoc[{astra_db} application token].
+* To use the {product} {devops-api}, you need an xref:operations:astream-token-gen.adoc[{astra-db} application token].
 
 == Get the tenant web service URL
 
@@ -33,7 +33,7 @@ Broker Service URLs start with `pulsar(+ssl)`.
 
 [IMPORTANT]
 ====
-An xref:operations:astream-token-gen.adoc[{astra_db} application token] is _not_ the same as a {pulsar-short} token.
+An xref:operations:astream-token-gen.adoc[{astra-db} application token] is _not_ the same as a {pulsar-short} token.
 ====
 
 For information about creating {pulsar-short} tokens, see xref:operations:astream-token-gen.adoc[].

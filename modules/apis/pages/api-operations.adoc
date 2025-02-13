@@ -1,19 +1,19 @@
 = API operations
 
 //TODO: Needs more work and clean up of all source blocks.
-This {product} workbook is a comprehensive guide that provides detailed examples and  practices for managing the {product} platform using the DevOps APIs.
+This {product} workbook is a comprehensive guide that provides detailed examples and practices for managing the {product} platform using the {devops-api}s.
 It provides details on the most commonly used APIs for managing {product} and {pulsar-reg} instances.
 These details include required parameters and the expected output from the API.
 The workbook is designed to fill the gap between detailed API reference docs and HowTo guides.
-The result is to help customers in operating and managing {product} and provide guidance on how to use DevOps API to automate many common tasks.
+The result is to help customers in operating and managing {product} and provide guidance on how to use {devops-api}s to automate many common tasks.
 
 The workbook covers a wide range of topics, including provisioning of resources, monitoring, and troubleshooting. It provides instructions for various operations, such as creating a new tenant, namespace, topics, geo-replication, and access tokens, to setting up monitoring and alerting, and troubleshooting common issues.
 
-Overall, this {product} Workbook is a valuable resource for customers who want to leverage the benefits of {product} and manage their streaming environment effectively with DevOps APIs. By following the best practices and guidelines outlined in the workbook, customers can ensure that their streaming applications are secure, performant, and reliable.
+Overall, this {product} Workbook is a valuable resource for customers who want to leverage the benefits of {product} and manage their streaming environment effectively with {devops-api}s. By following the best practices and guidelines outlined in the workbook, customers can ensure that their streaming applications are secure, performant, and reliable.
 
 == Prerequisites
 
-* An active {astra_db} account with access to {product}
+* An active {product-short} account with access to {product}
 * Credentials and values required to xref:developing:using-curl.adoc[form HTTP requests]
 
 === Set environment variables
@@ -42,9 +42,9 @@ The examples in this guide use environment variables for these values.
 Additionally, some examples in this guide use `python3 -mjson.tool` to format the JSON response.
 This is optional; it is not required to execute API requests.
 
-== {product} DevOps API tenant operations
+== {product} {devops-api} tenant operations
 
-The following examples demonstrate how to use the {product} DevOps API to manage {product} resources.
+The following examples demonstrate how to use the {product} {devops-api} to manage {product} resources.
 
 === Get tenant information
 
@@ -842,7 +842,7 @@ curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/persistent/
 
 No response indicates success.
 
-== {product} DevOps API geo-replication operations
+== {product} {devops-api} geo-replication operations
 
 === Get status of geo-replication
 
@@ -1159,7 +1159,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENA
 
 No response indicates success.
 
-== {product} DevOps API JWT operations
+== {product} {devops-api} JWT operations
 
 === List existing token IDs
 

@@ -1,21 +1,21 @@
 = Manage tokens
 
-{product} uses two types of tokens that you can generate in {astra_db}.
+{product} uses two types of tokens that you can generate in {astra-db}.
 
 [#astra-token]
-== {astra_db} application tokens
+== {astra-db} application tokens
 
-{astra_db} application tokens are access tokens for authentication to the {astra_ui} and the xref:apis:index.adoc[{product} DevOps API].
+{astra-db} application tokens are access tokens for authentication to the {astra_ui} and the xref:apis:index.adoc[{product} {devops-api}].
 
-You need an application token for actions related to {astra_db} organizations and databases.
+You need an application token for actions related to {astra-db} organizations and databases.
 
-For information about creating and managing {astra_db} application tokens, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
+For information about creating and managing {astra-db} application tokens, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 
 [#pulsar-token]
 == {product} {pulsar-short} tokens
 
 {product} {pulsar-short} token are {pulsar-reg} https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} {pulsar-short} cluster through the {pulsar-short} CLI, runtime clients, or the {pulsar-short} Admin API.
-If necessary, {astra_db} forwards the JWT to the {pulsar-short} cluster for role verification.
+If necessary, {astra-db} forwards the JWT to the {pulsar-short} cluster for role verification.
 
 You need a {pulsar-short} JWT for actions related to {pulsar-short} tenants, namespaces, messages, topics, and functions, as well as {pulsar-short} CLI/API commands.
 
@@ -51,7 +51,7 @@ The following examples show how you can use the two tokens for different actions
 
 === Track monthly usage
 
-Use an {astra_db} application token to track monthly usage.
+Use an {astra-db} application token to track monthly usage.
 For example:
 
 [source,curl,subs="+quotes"]
@@ -83,7 +83,7 @@ bin/pulsar-admin sinks status
 
 === Billing report by tenant
 
-Use an {astra_db} application token to get tenant billing reports.
+Use an {astra-db} application token to get tenant billing reports.
 For example:
 
 [source,curl,subs="+quotes"]

@@ -4,11 +4,11 @@
 
 You use two APIs to manage {pulsar-reg} tenants and their resources.
 
-== {product} DevOps API
+== {product} {devops-api}
 
-Use the xref:astra-streaming:apis:attachment$devops.html[{product} DevOps API] to manage higher-level objects associated with your account, such as the change data capture (CDC) settings, {pulsar-short} tenants, geo-replications, {pulsar-short} stats, and {pulsar-short} tokens.
+Use the xref:astra-streaming:apis:attachment$devops.html[{product} {devops-api}] to manage higher-level {product} objects associated with your {astra-db} organization, such as the change data capture (CDC) settings, {pulsar-short} tenants, geo-replications, {pulsar-short} stats, and {pulsar-short} tokens.
 
-This API uses an {astra_db} application token for authentication.
+This API uses an {astra-db} application token for authentication.
 
 == {product} {pulsar-short} Admin API
 

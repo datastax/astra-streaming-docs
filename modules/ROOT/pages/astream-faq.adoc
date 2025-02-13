@@ -28,9 +28,9 @@ The pricing model also makes {product} accessible to mid market and small/medium
 
 And finally {product} offers a user-friendly interface and free tier to satisfy the needs of individual developers and technologists who want to learn more about {pulsar} and data streaming in general.
 
-== What is CDC for {astra_db}?
+== What is CDC for {astra-db}?
 
-Change Data Capture (CDC) for {astra_db} uses a {pulsar-short} IO source connector that processes changes from the Cassandra Change Agent through a {pulsar-short} topic.
+Change Data Capture (CDC) for {astra-db} uses a {pulsar-short} IO source connector that processes changes from the Cassandra Change Agent through a {pulsar-short} topic.
 For more information, see xref:developing:astream-cdc.adoc[].
 
 == What are tenants, namespaces, topics, and sinks?

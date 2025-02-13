@@ -9,7 +9,7 @@ This quickstart demonstrates how to create and use a streaming tenant running {p
 
 == Prerequisites
 
-* Sign in or create an {url-astra}[{astra_db} account^].
+* An active {url-astra}[{product-short} account^]
 
 == Create a streaming tenant
 

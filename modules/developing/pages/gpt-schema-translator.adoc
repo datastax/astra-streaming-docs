@@ -9,19 +9,19 @@ If the schema includes more complex data types, like maps and nested data struct
 Schema management is a complicated, tedious, and error-prone tasks that requires you to understand and translate multiple sets of schema rules.
 
 Instead, you can use the {gpt-schema-translator} to save time and reduce schema mapping toil.
-This tool uses generative AI,based on the `GPT-4` model, to automatically generate schema mappings between {product} ({pulsar-short} topics) and the {astra_db} sink connector (Cassandra tables).
+This tool uses generative AI,based on the `GPT-4` model, to automatically generate schema mappings between {product} ({pulsar-short} topics) and the {astra-db} sink connector (Cassandra tables).
 
 == Prerequisites
 
 * An {product} tenant with a namespace and topic.
-* An {astra_db} database with a keyspace and table.
-* An xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[{astra_db} sink connector].
-The {gpt-schema-translator} is available for the {astra_db} sink connector only.
+* An {astra-db} database with a keyspace and table.
+* An xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[{astra-db} sink connector].
+The {gpt-schema-translator} is available for the {astra-db} sink connector only.
 
 == JSON-to-CQL mapping example
 
-This example uses a JSON schema for a {pulsar-short} topic, and a CQL schema for an {astra_db} table.
-The {gpt-schema-translator} generates a mapping between the two schemas that the {astra_db} sink connector can use to write data from the {pulsar-short} topic to the {astra_db} table.
+This example uses a JSON schema for a {pulsar-short} topic, and a CQL schema for an {astra-db} table.
+The {gpt-schema-translator} generates a mapping between the two schemas that the {astra-db} sink connector can use to write data from the {pulsar-short} topic to the {astra-db} table.
 
 . In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
 
@@ -123,7 +123,7 @@ id=key, file1=value.file1, file2=value.file2, file3=value.file3
 
 . Save the mapping configuration.
 
-. After configuring your {astra_db} sink connector for the given topic and table, messages should flow between the two schemas without error.
+. After configuring your {astra-db} sink connector for the given topic and table, messages should flow between the two schemas without error.
 You can check the {astra_ui} logs to confirm that the data is flowing into your table without errors.
 
 [#pulsar-topic-to-cql-table]
@@ -369,7 +369,7 @@ This example demonstrates how you can generates schema mapping in real time.
 ----
 ====
 
-. The {astra_db} sink connector writes data to the Cassandra table with a CQL schema.
+. The {astra-db} sink connector writes data to the Cassandra table with a CQL schema.
 +
 .CQL schema example
 [%collapsible]

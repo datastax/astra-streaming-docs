@@ -1,7 +1,7 @@
-= {kafka_for_astra}
+= {kafka-for-astra}
 :page-tag: starlight-kafka,dev,admin,pulsar,kafka
 
-{kafka_for_astra} brings native Apache Kafka(R) protocol support to {pulsar-reg}, enabling migration of existing Kafka applications and services to {pulsar-short} without modifying the code.
+{kafka-for-astra} brings native Apache Kafka(R) protocol support to {pulsar-reg}, enabling migration of existing Kafka applications and services to {pulsar-short} without modifying the code.
 Kafka applications can leverage {pulsar-short} features such as the following:
 
 * Streamlined operations with enterprise-grade multi-tenancy
@@ -9,13 +9,13 @@ Kafka applications can leverage {pulsar-short} features such as the following:
 * Infinite event stream retention with Apache BookKeeper(TM) and tiered storage
 * Serverless event processing with xref:astream-functions.adoc[{pulsar-short} Functions]
 
-By integrating two popular event streaming ecosystems, {kafka_for_astra} unlocks new use cases and reduces barriers for users adopting {pulsar-short}. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {kafka_for_astra} to accelerate the development of real-time applications and services.
+By integrating two popular event streaming ecosystems, {kafka-for-astra} unlocks new use cases and reduces barriers for users adopting {pulsar-short}. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {kafka-for-astra} to accelerate the development of real-time applications and services.
 
 This document will help you get started producing and consuming Kafka messages on a {pulsar-short} cluster.
 
-== {kafka_for_astra} Quickstart
+== {kafka-for-astra} Quickstart
 
-. To start connecting {kafka_for_astra}, select *Kafka* in the {product} *Connect* tab.
+. To start connecting {kafka-for-astra}, select *Kafka* in the {product} *Connect* tab.
 
 . When the popup appears, confirm you want to enable Kafka on your tenant.
 +
@@ -99,5 +99,5 @@ image::astream-kafka-monitor.png[Monitor Kafka Activity]
 
 == See also
 
-* https://github.com/datastax/starlight-for-kafka[{company} {kafka_for_astra} project]
+* https://github.com/datastax/starlight-for-kafka[{company} {kafka-for-astra} project]
 * xref:getting-started:index.adoc[]
