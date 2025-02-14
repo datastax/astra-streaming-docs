@@ -1,11 +1,11 @@
-= Produce and consume messages in the {astra_ui}
-:navtitle: {astra_ui}
-:description: Use this guide to create and consume a topic message using the {astra_ui}.
+= Produce and consume messages in the {astra-ui}
+:navtitle: {astra-ui}
+:description: Use this guide to create and consume a topic message using the {astra-ui}.
 
 This guide assumes you have completed the xref:getting-started:index.adoc[{product} quickstart].
 
 Now, it's time to produce and consume messages in your new streaming tenant.
-The following steps will use the "Try Me" feature of the {astra_ui} to interact with an existing topic.
+The following steps will use the "Try Me" feature of the {astra-ui} to interact with an existing topic.
 
 == Select the producer and consumer topics
 

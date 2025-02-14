@@ -131,7 +131,7 @@ key:[null], properties:[], content:hello-from-pulsar
 key:[null], properties:[], content:hello-from-pulsar
 ----
 
-. In the {astra_ui}, go to your tenant's **Namespaces and Topics** tab.
+. In the {astra-ui}, go to your tenant's **Namespaces and Topics** tab.
 
 . Make sure `persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**` is visible and shows traffic across all regions.
 
@@ -256,7 +256,7 @@ In the configuration, `isReplicated` is now `true` for this subscription.
 [#monitor]
 == Monitor replicated clusters
 
-{product} exposes the following topic-level replication metrics, which can be viewed in the **Overview** section of **Namespaces and Topics** in the {astra_ui}:
+{product} exposes the following topic-level replication metrics, which can be viewed in the **Overview** section of **Namespaces and Topics** in the {astra-ui}:
 
 include::operations:partial$georeplication-monitoring.adoc[]
 

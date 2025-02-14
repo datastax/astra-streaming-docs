@@ -5,8 +5,8 @@ When you create a tenant, you must choose a region for your tenant.
 {product} supports AWS, Microsoft Azure, and Google Cloud regions.
 For optimal performance, choose a region that is geographically close to your users.
 
-These regions also support CDC for {astra_db}.
-You can only use xref:developing:astream-cdc.adoc[CDC for {astra_db}] in regions that support both {product} and {astra_db}.
+These regions also support CDC for {astra-db}.
+You can only use xref:developing:astream-cdc.adoc[CDC for {astra-db}] in regions that support both {product} and {astra-db}.
 
 ElasticSearch and Snowflake can be in different regions than {product}.
 

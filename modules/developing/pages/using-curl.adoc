@@ -2,21 +2,21 @@
 :navtitle: Form HTTP requests
 :description: Interact with {product} over HTTP, such as with curl commands.
 
-You can use the xref:apis:index.adoc[{product} APIs] and https://pulsar.apache.org/docs/reference-rest-api-overview/[{pulsar-reg} REST APIs] to programmatically interact with your tenants and related {product} configurations.
+You can use the xref:apis:index.adoc[{devops-api}s] and https://pulsar.apache.org/docs/reference-rest-api-overview/[{pulsar-reg} REST APIs] to programmatically interact with your tenants and related {product} configurations.
 Each API supports different functionalities.
 
 Depending on the API you use, you need certain information to form HTTP requests:
 
 * To use the {product} {pulsar-short} Admin API and {pulsar-short} REST APIs, you need the tenant's Web Service URL and {pulsar-short} token.
-* To use the {product} DevOps API, you need an xref:operations:astream-token-gen.adoc[{astra_db} application token].
+* To use the {devops-api}s, you need an xref:operations:astream-token-gen.adoc[{astra-db} application token].
 
 == Get the tenant web service URL
 
-. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then select your tenant.
 
 . Click the *Connect* tab.
 
-. In the *Details* section, locate the *Tenant Details*.
+. Locate the *Tenant Details* section.
 Here you can find the essential information you need to communicate with your {pulsar-short} tenant, including the *Web Service URL*.
 +
 image:tenant-details.png[Tenant details in {product}]
@@ -33,7 +33,7 @@ Broker Service URLs start with `pulsar(+ssl)`.
 
 [IMPORTANT]
 ====
-An xref:operations:astream-token-gen.adoc[{astra_db} application token] is _not_ the same as a {pulsar-short} token.
+An xref:operations:astream-token-gen.adoc[{astra-db} application token] is _not_ the same as a {pulsar-short} token.
 ====
 
 For information about creating {pulsar-short} tokens, see xref:operations:astream-token-gen.adoc[].

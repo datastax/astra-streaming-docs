@@ -1,18 +1,18 @@
-= Stream {astra_db} audit logs
+= Stream {astra-db} audit logs
 
-Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra_db} audit logs] through {product} to an external system.
+Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra-db} audit logs] through {product} to an external system.
 
 To enable audit log streaming, you must do one of the following:
 
- * Provide the **Full Name** of your {product} topic and the streaming tenant's `client.conf` file to {support_url}[{company} Support] or your account representative.
- * POST your configuration to the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[{astra_db} DevOps API telemetry endpoint].
+ * Provide the **Full Name** of your {product} topic and the streaming tenant's `client.conf` file to {support_url}[{company} Support] or your {company} account representative.
+ * POST your configuration to the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[{astra-db} {devops-api} telemetry endpoint].
 
 == Create an {product} topic for audit logs
 
 Audit log streaming requires a streaming tenant in the AWS `us-east-2` region.
 You can create a new tenant with the xref:astra-streaming:getting-started:index.adoc[{product} quickstart] or use an existing {product} tenant.
 
-. In the {link-astra-portal}, go to **Streaming**.
+. In the {astra-ui-link}, go to **Streaming**.
 
 . Select an existing tenant or create a streaming tenant in AWS `us-east-2`, and then create a namespace and topic in the tenant.
 +
@@ -23,21 +23,21 @@ For more information about creating tenants, namespaces, and topics, see xref:as
 . If necessary, create additional audit log topics, and then record the **Full Name** for each topic.
 You can use topics to organize audit logs by event type or other criteria.
 
-. In the {link-astra-portal}, go to **Streaming**, and then click your audit log streaming tenant.
+. In the {astra-ui-link}, go to **Streaming**, and then click your audit log streaming tenant.
 
 . On the *Connect* tab, click **Download client.conf**.
 
 . To finalize the configuration, do one of the following:
 +
-* Send your topic's full name and the `client.conf` file to {support_url}[{company} Support] or your account representative, and then {company} will complete the setup.
-* <<use-the-devops-api,Use the {astra_db} DevOps API to complete the setup.>>
+* Send your topic's full name and the `client.conf` file to {support_url}[{company} Support] or your {company} account representative, and then {company} will complete the setup.
+* <<use-the-devops-api,Use the {astra-db} {devops-api} to complete the setup.>>
 
 [#use-the-devops-api]
-== Configure audit log streaming with the DevOps API
+== Configure audit log streaming with the {devops-api}
 
-You can use the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[{astra_db} DevOps API telemetry endpoint] to configure audit log streaming instead of providing the configuration details to {company} Support.
+You can use the xref:astra-api-docs:ROOT:attachment$devops-api/index.html#tag/Organization-Operations/operation/configureTelemetry[{astra-db} {devops-api} telemetry endpoint] to configure audit log streaming instead of providing the configuration details to {company} Support.
 
-. In the {link-astra-portal}, create an application token with the **Organization Administrator** role.
+. In the {astra-ui-link}, create an {astra-db} application token with the **Organization Administrator** role.
 
 . Create the audit log streaming configuration using the values from the tenant's `client.conf` file and your {pulsar-short} configuration:
 +
@@ -59,8 +59,8 @@ curl -sS --location -X POST "https://api.astra.datastax.com/v2/organizations/**O
 +
 Replace the following:
 +
-* `**ORG_ID**`: Your {astra_db} organization ID.
-* `**APPLICATION_TOKEN**`: Your {astra_db} application token.
+* `**ORG_ID**`: Your {astra-db} organization ID.
+* `**APPLICATION_TOKEN**`: Your {astra-db} application token.
 * `**BROKER_SERVICE_URL**`: The {product} broker service URL, such as `ssl://pulsar-aws-useast2.streaming.datastax.com:6651`.
 * `**TOPIC_FULL_NAME**`: The full name of the {product} topic where you want to stream audit logs.
 * The `auth_strategy` and other authentication details depend on your Pulsar configuration.

@@ -2,14 +2,14 @@
 :navtitle: Get started
 :page-tag: astra-streaming,planner,quickstart,pulsar
 
-{product} is a serverless data streaming and event stream processing service integrated in the {astra_ui} and powered by {pulsar-reg}.
+{product} is a serverless data streaming and event stream processing service integrated in the {astra-ui} and powered by {pulsar-reg}.
 Using {product}, you can create {pulsar-short} instances, manage streaming clusters, scale across cloud regions, and manage {pulsar-short} resources such as topics, connectors, functions and subscriptions.
 
 This quickstart demonstrates how to create and use a streaming tenant running {pulsar-short}.
 
 == Prerequisites
 
-* Sign in or create an {url-astra}[{astra_db} account^].
+* An active {astra-url}[{product-short} account^]
 
 == Create a streaming tenant
 
@@ -17,10 +17,10 @@ A {product} tenant is a portion of {company}-managed {pulsar} that is only yours
 Within tenants, you create namespaces, topics, functions, and more.
 To learn more about the concept of tenancy, see the https://pulsar.apache.org/docs/concepts-multi-tenancy/[{pulsar-short} documentation].
 
-You can create a tenant in the {astra_ui} or programmatically.
-For this quickstart, use the {astra_ui}.
+You can create a tenant in the {astra-ui} or programmatically.
+For this quickstart, use the {astra-ui}.
 
-. In the {astra_ui} navigation menu, click *Streaming*.
+. In the {astra-ui} navigation menu, click *Streaming*.
 
 . Click *Create a Tenant*.
 
@@ -45,11 +45,11 @@ You can use the default namespace or create other namespaces.
 Tenants usually have many namespaces.
 To learn more about namespaces, see the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[{pulsar-short} documentation].
 
-You can create namespaces in the {astra_ui} or programmatically.
-For this quickstart, use the {astra_ui}.
+You can create namespaces in the {astra-ui} or programmatically.
+For this quickstart, use the {astra-ui}.
 For information about the {pulsar-short} CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
 
-. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then select your tenant.
 
 . Click the *Namespace And Topics* tab, and then click *Create Namespace*.
 
@@ -70,9 +70,9 @@ Consumers subscribe to topics to receive messages, and functions and connectors 
 In {pulsar-short}, topic addresses are formatted like URLs, such as `persistent://tenant/namespace/topic`.
 To learn more about topics, see the https://pulsar.apache.org/docs/concepts-messaging/#topics[{pulsar-short} documentation].
 
-As in the previous steps, you can create topics in the {astra_ui} or programmatically.
+As in the previous steps, you can create topics in the {astra-ui} or programmatically.
 
-. In the {astra_ui} navigation menu, click *Streaming*, and then select your tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then select your tenant.
 
 . Click the *Namespace And Topics* tab.
 
@@ -89,6 +89,6 @@ Disregard the https://pulsar.apache.org/docs/concepts-messaging/#partitioned-top
 Your new topic is ready to produce and consume messages.
 There are several different ways to do this:
 
-* xref:developing:produce-consume-astra-portal.adoc[{astra_ui}]: Use {product}'s "Try Me" feature in the {astra_ui}.
+* xref:developing:produce-consume-astra-portal.adoc[{astra-ui}]: Use {product}'s "Try Me" feature in the {astra-ui}.
 * xref:developing:produce-consume-pulsar-client.adoc[{pulsar-short} Client]: Use the {pulsar-short} CLI to interact with the topic.
 * xref:developing:clients/index.adoc[Runtime Clients]: Create a client application that interacts with {pulsar-short}.

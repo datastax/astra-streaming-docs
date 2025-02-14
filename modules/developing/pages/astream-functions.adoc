@@ -230,7 +230,7 @@ If there isn't a class in the file, the `className` is the filename without the 
 [IMPORTANT]
 ====
 To avoid errors, make sure the `inputs` topic (declared in your configuration YAML file) has a defined message schema before you deploy the function.
-You can define a topic's message schema in the {astra_ui}.
+You can define a topic's message schema in the {astra-ui}.
 ====
 +
 Optionally, you can declare a `logTopic` in the same way: `persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**`.
@@ -281,13 +281,13 @@ If there isn't a class in the file, the `className` is only the filename without
 bin/pulsar-admin functions list --tenant **TENANT_NAME** --namespace **NAMESPACE_NAME**
 ----
 +
-You can also check the {astra_ui} to confirm the function is listed on the tenant's *Functions* tab.
+You can also check the {astra-ui} to confirm the function is listed on the tenant's *Functions* tab.
 +
 See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product}.
 
-== Deploy functions in the {astra_ui}
+== Deploy functions in the {astra-ui}
 
-. In the {astra_ui} navigation menu, click *Streaming*, and then select a tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then select a tenant.
 
 . On the *Functions* tab, click *Create Function*.
 
@@ -311,7 +311,7 @@ Upload your own code::
 
 .. Based on the uploaded file, select the specific class (function) to deploy.
 +
-{astra_db} generates a list of acceptable classes detected in the code.
+{astra-db} generates a list of acceptable classes detected in the code.
 A file can contain multiple classes, but only one is used per deployment.
 +
 For Python scripts, the class name is the Python filename (without the extension) and the class to execute.
@@ -391,12 +391,12 @@ Your function should output the result of processing the message.
 [#controlling-your-function]
 === Stop and start functions
 
-In the {astra_ui}, on your tenant's *Functions* tab, you can use *Function Controls* to start, stop, and restart functions.
+In the {astra-ui}, on your tenant's *Functions* tab, you can use *Function Controls* to start, stop, and restart functions.
 
 === Monitor functions
 
 Functions produce logs to help you debug them.
-In the {astra_ui}, on your tenant's *Functions* tab, you can view, refresh, copy, and download your functions' logs.
+In the {astra-ui}, on your tenant's *Functions* tab, you can view, refresh, copy, and download your functions' logs.
 
 image::astream-function-log.png[Function Log]
 
@@ -404,7 +404,7 @@ If you specified a log topic when deploying your function, function logs also ou
 
 === Edit functions
 
-. In the {astra_ui}, on your tenant's *Functions* tab, click *Update Function*.
+. In the {astra-ui}, on your tenant's *Functions* tab, click *Update Function*.
 
 . Edit the following settings as needed, and then click *Update*.
 +
@@ -423,7 +423,7 @@ If you need to change any other function settings, you must delete and redeploy 
 Deleting a function is permanent.
 ====
 
-. In the {astra_ui}, on your tenant's *Functions* tab, select the function to delete.
+. In the {astra-ui}, on your tenant's *Functions* tab, select the function to delete.
 
 . Click *Delete*.
 

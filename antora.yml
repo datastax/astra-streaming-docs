@@ -12,17 +12,26 @@ nav:
 
 asciidoc:
   attributes:
+    company: 'DataStax'
+    astra-db: 'Astra DB'
     product: 'Astra Streaming'
+    product-short: 'Astra'
+    astra-cli: 'Astra CLI'
+    astra-ui: 'Astra Portal'
+    astra-url: 'https://astra.datastax.com'
+    astra-ui-link: '{astra-url}[{astra-ui}^]'
+    devops-api: 'DevOps API'
+    cass: 'Apache Cassandra'
+    cass-reg: 'Apache Cassandra(R)'
+    cass-short: 'Cassandra'
     pulsar: 'Apache Pulsar'
     pulsar-short: 'Pulsar'
     pulsar-reg: 'Apache Pulsar(TM)'
     pulsar-version: '2.10' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
     pulsar-version-patch: '2.10.1'
-    kafka_for_astra: 'Starlight for Kafka'
-    starlight_rabbitmq: 'Starlight for RabbitMQ'
+    kafka-for-astra: 'Starlight for Kafka'
+    starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
-    url-astra: 'https://astra.datastax.com'
-    link-astra-portal: '{url-astra}[{astra_ui}^]'
     astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'
 
     # LEGACY ATTRIBUTES - CONSIDER REMOVING

@@ -2,20 +2,20 @@
 :navtitle: Integrate external Prometheus and Grafana
 
 {product} exposes some of the {pulsar-reg} metrics through Prometheus endpoints.
-The Prometheus configuration information to scrape {product} metrics into an external Prometheus server is found in the {astra_ui}.
+The Prometheus configuration information to scrape {product} metrics into an external Prometheus server is found in the {astra-ui}.
 
 This page explains how to set up a Prometheus server in a Kubernetes cluster and configure it to scrape {product} metrics.
 
 == Prerequisites
 
-* An {astra_db} account
+* An active {product-short} account
 * A Kubernetes cluster
 
 == Configure and deploy Prometheus
 
 This example uses the https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack[Prometheus Community Kubernetes Helm Charts] to set up a Prometheus server and a Grafana server in a Kubernetes cluster.
 
-. Download the {product} Prometheus configuration from the {astra_ui}.
+. Download the {product} Prometheus configuration from the {astra-ui}.
 For more information, see https://docs.datastax.com/en/streaming/astra-streaming/operations/astream-scrape-metrics.html[Scrape metrics from {product}].
 
 . Use the downloaded file to create a `config.yml`.
