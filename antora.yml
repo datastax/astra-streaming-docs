@@ -27,8 +27,8 @@ asciidoc:
     pulsar: 'Apache Pulsar'
     pulsar-short: 'Pulsar'
     pulsar-reg: 'Apache Pulsar(TM)'
-    pulsar-version: '2.10' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
-    pulsar-version-patch: '2.10.1'
+    pulsar-version: '3.1' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
+    pulsar-version-patch: '3.1.0'
     kafka-for-astra: 'Starlight for Kafka'
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
