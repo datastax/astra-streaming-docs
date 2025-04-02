@@ -1,10 +1,5 @@
 = Private connectivity
 
-[IMPORTANT]
-====
-Private links are available only for xref:operations:astream-pricing.adoc#dedicated-clusters[dedicated clusters].
-====
-
 To better protect your streaming connections, connect {product} to a private link service for <<inbound,inbound>> connectivity, or to a private endpoint for <<outbound,outbound>> connectivity.
 
 Private connections are only available within the same cloud provider and region as your {product} cluster.
