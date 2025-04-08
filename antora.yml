@@ -20,6 +20,7 @@ asciidoc:
     astra-ui: 'Astra Portal'
     astra-url: 'https://astra.datastax.com'
     astra-ui-link: '{astra-url}[{astra-ui}^]'
+    db-serverless-vector: 'Serverless (Vector)'
     devops-api: 'DevOps API'
     cass: 'Apache Cassandra'
     cass-reg: 'Apache Cassandra(R)'
