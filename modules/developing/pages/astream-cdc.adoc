@@ -1,14 +1,5 @@
-= Create a Change Data Capture (CDC) connector
-:description: CDC for {astra-db} automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data
+= Enable Change Data Capture for {astra-db}
+:navtitle: Enable Change Data Capture (CDC)
+:description: CDC for {astra-db} automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data to {product}.
 
-[IMPORTANT]
-====
-Enabling CDC for {astra-db} databases incurs billed charges based on your {product} usage.
-See https://www.datastax.com/pricing/astra-streaming[{product} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
-====
-
-CDC for {astra-db} automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product} where it can be processed by client applications or sent to downstream systems.
-
-{product} processes data changes via an {pulsar-reg} topic. By design, the Change Data Capture (CDC) component is simple, with a 1:1 correspondence between the table and a single {pulsar-short} topic.
-
-For instructions and more information about CDC for {astra-db}, see xref:astra-db-serverless:databases:change-data-capture.adoc[].
+include::common:streaming:partial$cdc/cdc-for-astra-db.adoc[]
