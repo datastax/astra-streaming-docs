@@ -4,7 +4,7 @@
 
 You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants.
 
-. xref:getting-started:index.adoc[Create a {product} tenant.]
+. xref:getting-started:index.adoc[Create an {product} tenant.]
 
 . xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}.]
 

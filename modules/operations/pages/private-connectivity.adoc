@@ -47,7 +47,7 @@ The private link service pattern is the same across cloud providers, but the hos
 On a case-by-case basis, {product} can support private outbound traffic flowing from {product} to your private endpoint.
 
 The outbound traffic pattern creates a private endpoint in {product} that connects to your private link service.
-{company} opens a port on the tenant's firewall to allow connectors and functions running in a dedicated namespace on a {product} cluster to connect to your private network.
+{company} opens a port on the tenant's firewall to allow connectors and functions running in a dedicated namespace on an {product} cluster to connect to your private network.
 Each tenant has its own firewall.
 
 [#credentials]
