@@ -22,6 +22,9 @@ ElasticSearch and Snowflake can be in different regions than {product}.
 |`ap-southeast-1`
 |Singapore
 
+// |`ap-southeast-2`
+// |Sydney
+
 |`eu-central-1`
 |Frankfurt
 
@@ -67,18 +70,21 @@ ElasticSearch and Snowflake can be in different regions than {product}.
 |Region |Location
 
 |`australia-southeast1`
-|Sydney, Australia
+|Sydney
 
 |`europe-west1`
-|St. Ghislain, Belgium
+|Belgium
+
+// |`europe-west3`
+// |Frankfurt
 
 |`us-central1`
-|Council Bluffs, Iowa
+|Iowa
 
 |`us-east1`
-|Moncks Corner, South Carolina
+|South Carolina
 
 |`us-east4`
-|Ashburn, Virginia
+|Virginia
 
 |===
