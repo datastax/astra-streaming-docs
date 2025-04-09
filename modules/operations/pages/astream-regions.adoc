@@ -1,16 +1,16 @@
 = {product} regions
 :page-tag: astra-streaming,admin,manage,pulsar
+:description: {product} is available in specific AWS, Microsoft Azure, and Google Cloud regions.
 
-When you create a tenant, you must choose a region for your tenant.
-{product} supports AWS, Microsoft Azure, and Google Cloud regions.
-For optimal performance, choose a region that is geographically close to your users.
+{product} is available in a subset of the xref:astra-db-serverless:databases:regions.adoc[{astra-db} regions], including AWS, Microsoft Azure, and Google Cloud regions.
 
-These regions also support CDC for {astra-db}.
-You can only use xref:developing:astream-cdc.adoc[CDC for {astra-db}] in regions that support both {product} and {astra-db}.
+{astra-stream} tenants are regionally isolated.
+The region you select when you create a tenant determines which databases that tenant can support.
+For example, to enable xref:developing:astream-cdc.adoc[CDC for {astra-db}], your tenant must be in the same region as the relevant database.
 
-ElasticSearch and Snowflake can be in different regions than {product}.
+Your ElasticSearch and Snowflake deployments can be in different regions than your {product} tenants.
 
-== AWS
+== AWS regions for {product}
 
 [cols="1,1"]
 |===
@@ -41,29 +41,7 @@ ElasticSearch and Snowflake can be in different regions than {product}.
 |Oregon
 |===
 
-== Microsoft Azure
-
-[cols="1,1"]
-|===
-|Region |Location
-
-|`australiaeast`
-|New South Wales
-
-|`eastus`
-|Virginia
-
-// |`eastus2`
-// |Virginia
-
-|`westeurope`
-|Netherlands
-
-|`westus2`
-|Washington
-|===
-
-== Google Cloud
+== Google Cloud regions for {product}
 
 [cols="1,1"]
 |===
@@ -88,3 +66,29 @@ ElasticSearch and Snowflake can be in different regions than {product}.
 |Virginia
 
 |===
+
+== Microsoft Azure regions for {product}
+
+[cols="1,1"]
+|===
+|Region |Location
+
+|`australiaeast`
+|New South Wales
+
+|`eastus`
+|Virginia
+
+// |`eastus2`
+// |Virginia
+
+|`westeurope`
+|Netherlands
+
+|`westus2`
+|Washington
+|===
+
+== Request a region
+
+If your preferred region isn't available, contact your {company} account representative or {support_url}[{company} Support].
