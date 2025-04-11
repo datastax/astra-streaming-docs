@@ -22,6 +22,7 @@ asciidoc:
     astra-ui-link: '{astra-url}[{astra-ui}^]'
     db-serverless-vector: 'Serverless (Vector)'
     devops-api: 'DevOps API'
+    devops-api-ref-url: 'xref:astra-api-docs:ROOT:attachment$devops-api/index.html'
     cass: 'Apache Cassandra'
     cass-reg: 'Apache Cassandra(R)'
     cass-short: 'Cassandra'
