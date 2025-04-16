@@ -13,7 +13,7 @@ This quickstart demonstrates how to create and use a streaming tenant running {p
 
 == Create a streaming tenant
 
-A {product} tenant is a portion of {company}-managed {pulsar} that is only yours.
+An {product} tenant is a portion of {company}-managed {pulsar} that is only yours.
 Within tenants, you create namespaces, topics, functions, and more.
 To learn more about the concept of tenancy, see the https://pulsar.apache.org/docs/concepts-multi-tenancy/[{pulsar-short} documentation].
 

@@ -84,7 +84,7 @@ Do _not_ aggregate metrics on shared clusters because one cluster can be shared 
 For more information, see xref:astream-limits.adoc[] and xref:operations:astream-pricing.adoc[].
 ====
 
-Each externally exposed raw {product} metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From a {product} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
+Each externally exposed raw {product} metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From an {product} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
 
 The following example shows some raw metrics for a {pulsar-short} message backlog (`pulsar_msg_backlog`) scraped from an {product} cluster in the Google Cloud `us-central1` region:
 

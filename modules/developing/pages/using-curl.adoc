@@ -29,7 +29,7 @@ Web Service URLs start with `http`.
 Broker Service URLs start with `pulsar(+ssl)`.
 ====
 
-== Create a {product} {pulsar-short} token
+== Create an {product} {pulsar-short} token
 
 [IMPORTANT]
 ====

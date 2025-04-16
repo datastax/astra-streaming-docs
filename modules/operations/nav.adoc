@@ -3,6 +3,7 @@
 * xref:operations:astream-pricing.adoc[]
 * xref:operations:astream-regions.adoc[]
 * xref:operations:astream-georeplication.adoc[]
+* xref:developing:astra-cli.adoc[]
 * Monitor streaming tenants
 ** xref:operations:monitoring/index.adoc[]
 ** xref:operations:astream-scrape-metrics.adoc[]

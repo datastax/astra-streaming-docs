@@ -20,7 +20,6 @@
 *** xref:ROOT:astream-subscriptions-shared.adoc[]
 *** xref:ROOT:astream-subscriptions-failover.adoc[]
 *** xref:ROOT:astream-subscriptions-keyshared.adoc[]
-* xref:gpt-schema-translator.adoc[]
-* xref:astra-cli.adoc[]
 * xref:astream-cdc.adoc[]
+* xref:gpt-schema-translator.adoc[]
 * xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors]
