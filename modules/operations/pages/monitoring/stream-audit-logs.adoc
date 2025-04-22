@@ -59,7 +59,7 @@ curl -sS --location -X POST "https://api.astra.datastax.com/v2/organizations/**O
 +
 Replace the following:
 +
-* `**ORG_ID**`: Your {aproduct-short} organization ID.
+* `**ORG_ID**`: Your {product-short} organization ID.
 * `**APPLICATION_TOKEN**`: Your {product-short} application token.
 * `**BROKER_SERVICE_URL**`: The {product} broker service URL, such as `ssl://pulsar-aws-useast2.streaming.datastax.com:6651`.
 * `**TOPIC_FULL_NAME**`: The full name of the {product} topic where you want to stream audit logs.
