@@ -14,7 +14,7 @@ You can create a new tenant with the xref:astra-streaming:getting-started:index.
 
 . In the {astra-ui-link} navigation menu, click **Streaming**.
 
-. Click the *Name* of an existing tenant or create a streaming tenant in AWS `us-east-2`, and then create a namespace and topic in the tenant.
+. Click the name of an existing tenant or create a streaming tenant in AWS `us-east-2`, and then create a namespace and topic in the tenant.
 +
 For more information about creating tenants, namespaces, and topics, see xref:astra-streaming:getting-started:index.adoc[].
 
@@ -23,7 +23,7 @@ For more information about creating tenants, namespaces, and topics, see xref:as
 . If necessary, create additional audit log topics, and then record the **Full Name** for each topic.
 You can use topics to organize audit logs by event type or other criteria.
 
-. In the {astra-ui-link} navigation menu, click **Streaming**, and then click the *Name* of your audit log streaming tenant.
+. In the {astra-ui-link} navigation menu, click **Streaming**, and then click the name of your audit log streaming tenant.
 
 . On the *Connect* tab, click **Download client.conf**.
 

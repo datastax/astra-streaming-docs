@@ -19,7 +19,7 @@ You need a {pulsar-short} JWT for actions related to {pulsar-short} tenants, nam
 
 You can generate, copy, or delete {product} {pulsar-short} tokens for each of your {product} tenants:
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then click the *Name* of the tenant for which you want to manage tokens.
+. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of the tenant for which you want to manage tokens.
 
 . Click the *Settings* tab.
 
