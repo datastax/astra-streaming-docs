@@ -2,4 +2,85 @@
 :navtitle: Enable Change Data Capture (CDC)
 :description: CDC for {astra-db} automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data to {product}.
 
-include::common:streaming:partial$cdc/cdc-for-astra-db.adoc[]
+
+include::common:streaming:partial$cdc-astra/intro.adoc[]
+
+== Supported data structures
+
+include::common:streaming:partial$cdc-astra/supported-data.adoc[]
+
+=== Static columns
+
+include::common:streaming:partial$cdc-astra/static-columns.adoc[]
+
+=== Unsupported data types
+
+include::common:streaming:partial$cdc-astra/unsupported-data.adoc[]
+
+=== AVRO interpretation
+
+include::common:streaming:partial$cdc-astra/avro-interpretation.adoc[]
+
+== CDC for {astra-db} limitations
+
+include::common:streaming:partial$cdc-astra/limitations.adoc[]
+
+== Configure CDC for {astra-db}
+
+include::common:streaming:partial$cdc-astra/configure-intro.adoc[]
+
+[#prerequisites]
+=== Prerequisites
+
+include::common:streaming:partial$cdc-astra/prerequisites.adoc[]
+
+[#create-tenant]
+=== Create a streaming tenant
+
+include::common:streaming:partial$cdc-astra/create-tenant.adoc[]
+
+[#create-table]
+=== Create a table
+
+include::common:streaming:partial$cdc-astra/create-table.adoc[]
+
+[#enable-cdc-on-a-table]
+=== Enable CDC on a table
+
+include::common:streaming:partial$cdc-astra/enable-cdc-on-table.adoc[]
+
+[#connect-a-sink]
+=== Connect a sink
+
+include::common:streaming:partial$cdc-astra/connect-sink.adoc[]
+
+=== Test the connection
+
+include::common:streaming:partial$cdc-astra/test-connection.adoc[]
+
+[#increase-partitions]
+== Increase CDC data topic partitions
+
+include::common:streaming:partial$cdc-astra/increase-partitions.adoc[]
+
+[#multi-region-cdc]
+== Enable CDC for multi-region databases
+
+include::common:streaming:partial$cdc-astra/enable-multiregion.adoc[]
+
+=== Reconcile multi-region writes
+
+include::common:streaming:partial$cdc-astra/reconcile-multiregion-writes.adoc[]
+
+[#get-cdc]
+== Check CDC status
+
+include::common:streaming:partial$cdc-astra/check-status.adoc[]
+
+== Disable CDC for a table
+
+include::common:streaming:partial$cdc-astra/disable.adoc[]
+
+== See also
+
+include::common:streaming:partial$cdc-astra/see-also.adoc[]
