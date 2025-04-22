@@ -2,14 +2,14 @@
 :navtitle: {astra-cli}
 :description: {astra-cli} provides a one-stop shop for managing your Astra resources through scripts or commands in your local terminal.
 
-The xref:astra-cli:ROOT:index.adoc[{astra-db} Command-Line Interface ({astra-cli})] is a set of commands you can use to create and manage {astra-db} and {product} resources:
+The xref:astra-cli:ROOT:index.adoc[{product-short} Command-Line Interface ({astra-cli})] is a set of commands you can use to create and manage {product-short} and {product} resources:
 
 * Creation and management of {astra-db} databases, {astra_stream} tenants, and their associated artifacts.
 * Querying and data loading.
 * Organization and user management.
 * Security and token configuration.
 
-{astra-cli} commands are available for {astra-db} and {astra_stream}.
+{astra-cli} commands are available for {product-short} and {astra_stream}.
 They're designed to get you working quickly, with an emphasis on automation.
 
 For example, the following command creates an {pulsar-reg} tenant:
@@ -21,7 +21,7 @@ astra streaming create **TENANT_NAME** \
 --plan **PLAN_TYPE** --namespace **TENANT_INITIAL_NAMESPACE_NAME**
 ----
 
-You can use {astra-cli} instead of or in addition to the {astra-ui} and {astra-db} APIs.
+You can use {astra-cli} instead of or in addition to the {astra-ui} and {product-short} APIs.
 
 For more information, see the following:
 

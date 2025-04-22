@@ -34,14 +34,14 @@ For more information, see xref:operations:astream-pricing.adoc[].
 
 == Does {product} support single-sign on?
 
-If your {astra-db} organization is on the *Pay As You Go* or *Enterprise* {astra-db} subscription plan, your users can use SSO to sign in to the {astra-ui}.
+If your {product-short} organization is on the *Pay As You Go* or *Enterprise* {product-short} subscription plan, your users can use SSO to sign in to the {astra-ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
-== How do {astra-db} roles and permissions map to {pulsar-short} roles and permissions?
+== How do {product-short} roles and permissions map to {pulsar-short} roles and permissions?
 
 See xref:ROOT:astream-org-permissions.adoc[].
 
-== What is the difference between {astra-db} application tokens and the {pulsar-short} tokens?
+== What is the difference between {product-short} application tokens and the {pulsar-short} tokens?
 
 See xref:operations:astream-token-gen.adoc[].
 

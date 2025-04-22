@@ -49,7 +49,7 @@ You can create namespaces in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
 For information about the {pulsar-short} CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then select your tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then click the *Name* of your tenant.
 
 . Click the *Namespace And Topics* tab, and then click *Create Namespace*.
 
@@ -72,11 +72,11 @@ To learn more about topics, see the https://pulsar.apache.org/docs/concepts-mess
 
 As in the previous steps, you can create topics in the {astra-ui} or programmatically.
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then select your tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then click the *Name* of your tenant.
 
 . Click the *Namespace And Topics* tab.
 
-. Locate a namespace where you want to create a topic, and then click *Add Topic*.
+. Find the namespace where you want to create a topic, and then click *Add Topic*.
 
 . Enter a topic name, and then click *Add Topic*.
 +

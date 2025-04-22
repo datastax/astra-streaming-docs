@@ -1,10 +1,10 @@
 = {product} pricing
 :page-tag: astra-streaming,planner,plan,pulsar
 
-{product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra-db}.
+{product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {product-short}.
 
 {product-short} offers three subscription plans with options for {product}, as well as pricing for Streaming Capacity Units.
-//An {product} subscription is associated with an {astra-db} organization, but {product} subscription plans are separate from {astra-db} organization subscription plans.
+//An {product} subscription is associated with an {product-short} organization, but {product} subscription plans are separate from {product-short} organization subscription plans.
 
 For {product-short} plans and pricing details, see https://www.datastax.com/pricing?product=astra-db[{product-short} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[].
 
@@ -37,7 +37,7 @@ Streaming Capacity Units are also known as _dedicated clusters_.
 If you prefer not to use shared clusters, you can opt for Streaming Capacity Units.
 
 With Streaming Capacity Units, you have your own private {pulsar-short} cluster with all the benefits of {product} as a managed service.
-You sign in to {astra-db} and use {product} in the same way that you would on shared clusters.
+You sign in to {product-short} and use {product} in the same way that you would on shared clusters.
 When you create a tenant, you have the option to deploy to your private cluster.
 This means that you can use both shared clusters and Streaming Capacity Units, depending on your tenants' use cases.
 
