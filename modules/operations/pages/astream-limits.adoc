@@ -4,13 +4,13 @@
 {product} includes guardrails and limits to ensure best practices, foster availability, and promote optimal configurations for your databases.
 
 Unless otherwise noted, the following limits apply to shared clusters.
-In general, xref:operations:astream-pricing.adoc#dedicated-clusters[dedicated clusters] have more relaxed limits than shared clusters, and some limits can be changed by contacting {support_url}[{company} Support].
+In general, xref:operations:astream-pricing.adoc#dedicated-clusters[Streaming Capacity Units] have more relaxed limits than shared clusters, and some limits can be changed by contacting {support_url}[{company} Support].
 
 == {product} guardrails
 
 Guardrails are provisioned in the default settings for {product}.
 You can't directly change these guardrails.
-For dedicated clusters, some guardrails can be changed by contacting {support_url}[{company} Support].
+For Streaming Capacity Units, some guardrails can be changed by contacting {support_url}[{company} Support].
 
 [cols="1,1,1"]
 |===
@@ -19,7 +19,7 @@ For dedicated clusters, some guardrails can be changed by contacting {support_ur
 |Number of tenants per organization
 a|
 * Shared clusters: 10
-* Dedicated clusters: Unlimited
+* Streaming Capacity Units: Unlimited
 
 |This limit can't be changed for shared clusters.
 
@@ -30,32 +30,32 @@ a|
 |Number of topics per namespace
 a|
 * Shared clusters: 100
-* Dedicated clusters: 5000
+* Streaming Capacity Units: 5000
 |
 
 |Max message size
 a|
 * Shared clusters: 5MB
-* Dedicated clusters: Customizable
+* Streaming Capacity Units: Customizable
 |
 
 |Max throughput per topic for consumers
 a|
 * Shared clusters: 5000 messages per second, 25MB per second
-* Dedicated clusters: Customizable
+* Streaming Capacity Units: Customizable
 |This limit applies to non-partitioned topics and individual partitions of partitioned topics.
 
 |Max throughput per topic for producers
 a|
 * Shared clusters: 5000 messages per second, 25MB per second
-* Dedicated clusters: Customizable
+* Streaming Capacity Units: Customizable
 |This limit applies to non-partitioned topics and individual partitions of partitioned topics, regardless of the number of producers to a topic.
 If there are multiple producers to a topic, they can produce a _combined maximum_ of 5000 messages per second.
 
 |Max throughput per topic for subscriptions
 a|
 * Shared clusters: 5000 messages per second, 25MB per second
-* Dedicated clusters: Customizable
+* Streaming Capacity Units: Customizable
 |This limit applies to non-partitioned topics and individual partitions of partitioned topics, regardless of the number of subscribers to a topic.
 If there are multiple subscriptions to a topic, they can dispatch a _combined maximum_ of 5000 messages per second.
 
@@ -70,19 +70,19 @@ If there are multiple subscriptions to a topic, they can dispatch a _combined ma
 |Number of producers per topic
 a|
 * Shared clusters: 50
-* Dedicated clusters: 500
+* Streaming Capacity Units: 500
 |
 
 |Number of consumers per topic
 a|
 * Shared clusters: 50
-* Dedicated clusters: 500
+* Streaming Capacity Units: 500
 |
 
 |Number of subscriptions per topic
 a|
 * Shared clusters: 50
-* Dedicated clusters: 500
+* Streaming Capacity Units: 500
 |
 
 |Max unacknowledged messages per consumer
@@ -314,12 +314,12 @@ The default settings are as follows:
 |===
 |Cluster type |CPU per instance |RAM per instance |Maximum function instances per namespace
 
-|Shared
+|Shared clusters
 |0.25 core
 |500MB
 |Varies by plan
 
-|Dedicated
+|Streaming Capacity Units (dedicated clusters)
 |0.50 core
 |1GB
 |5000

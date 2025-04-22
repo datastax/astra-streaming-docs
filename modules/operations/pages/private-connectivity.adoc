@@ -15,7 +15,7 @@ Be prepared to provide the <<credentials,credentials>> required for your cloud p
 
 The first inbound traffic pattern describes {pulsar-reg}, Apache Kafka(R), and RabbitMQ messaging traffic, as well as Prometheus metrics traffic, flowing from a user's private endpoint to {product}.
 
-You create a connection to the {company} private link service, and then {company} routes traffic to your {product} dedicated cluster.
+You create a connection to the {company} private link service, and then {company} routes traffic to your {product} Streaming Capacity Units.
 If you have multiple tenants, they can have different VPCs.
 Each VPC will have the same private FQDN with different VNETs.
 The traffic on separate private end point connections is isolated until it reaches the {company} load balancer.
