@@ -4,7 +4,7 @@
 
 {product} is available in a subset of the xref:astra-db-serverless:databases:regions.adoc[{astra-db} regions], including AWS, Microsoft Azure, and Google Cloud regions.
 
-{astra-stream} tenants are regionally isolated.
+{product} tenants are regionally isolated.
 The region you select when you create a tenant determines which databases that tenant can support.
 For example, to enable xref:developing:astream-cdc.adoc[CDC for {astra-db}], your tenant must be in the same region as the relevant database.
 
