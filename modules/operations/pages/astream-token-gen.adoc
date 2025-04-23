@@ -1,27 +1,25 @@
 = Manage tokens
 
-{product} uses two types of tokens that you can generate in {astra-db}.
+{product} uses two types of tokens that you can generate in {product-short}.
 
 [#astra-token]
 == Application tokens
 
-{astra-db} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{devops-api}s].
+{product-short} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{devops-api}s].
 
-To create an {astra-db} application token, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
+To create an {product-short} application token, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 
 [#pulsar-token]
 == {product} {pulsar-short} tokens
 
 {product} {pulsar-short} token are {pulsar-reg} https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} {pulsar-short} cluster through the {pulsar-short} CLI, runtime clients, or the {pulsar-short} Admin API.
-If necessary, {astra-db} forwards the JWT to the {pulsar-short} cluster for role verification.
+If necessary, {product-short} forwards the JWT to the {pulsar-short} cluster for role verification.
 
 You need a {pulsar-short} JWT for actions related to {pulsar-short} tenants, namespaces, messages, topics, and functions, as well as {pulsar-short} CLI/API commands.
 
 You can generate, copy, or delete {product} {pulsar-short} tokens for each of your {product} tenants:
 
-. In the {astra-ui} navigation menu, click *Streaming*.
-
-. Select the tenant for which you want to manage tokens.
+. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of the tenant for which you want to manage tokens.
 
 . Click the *Settings* tab.
 
@@ -72,7 +70,7 @@ The following examples show how you can use the two tokens for different actions
 
 === Track monthly usage
 
-Use an {astra-db} application token to track monthly usage.
+Use an {product-short} application token to track monthly usage.
 For example:
 
 [source,curl,subs="+quotes"]
@@ -104,7 +102,7 @@ bin/pulsar-admin sinks status
 
 === Billing report by tenant
 
-Use an {astra-db} application token to get tenant billing reports.
+Use an {product-short} application token to get tenant billing reports.
 For example:
 
 [source,curl,subs="+quotes"]

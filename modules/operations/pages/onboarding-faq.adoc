@@ -15,50 +15,50 @@ In traditional cloud environments, you would pay hourly for every machine whethe
 
 A serverless environment removes those operational burdens, and you pay only for the resources you actually use.
 
-== What is the difference between shared and dedicated clusters for {product}?
+== What is the difference between shared clusters and Streaming Capacity Units for {product}?
 
 See xref:operations:astream-pricing.adoc[].
 
-== Are connections to shared clusters less secure than dedicated clusters?
+== Are connections to shared clusters less secure than Streaming Capacity Units?
 
 Connections to both cluster types are secure.
-However, dedicated clusters offer the option for private connectivity.
+However, Streaming Capacity Units offer the option for private connectivity.
 
-For dedicated {pulsar-short} clusters, all connections in {product} are guarded by authentication, authorization, and secure (TLS) communications.
+For Streaming Capacity Units, all connections in {product} are guarded by authentication, authorization, and secure (TLS) communications.
 You can connect over the public internet or xref:operations:private-connectivity.adoc[establish a private connection].
 
-Shared {pulsar-short} clusters also use a secure connection over the public internet.
+Shared clusters also use a secure connection over the public internet.
 However, shared clusters don't support private links.
 
 For more information, see xref:operations:astream-pricing.adoc[].
 
 == Does {product} support single-sign on?
 
-If your {astra-db} organization is on the *Pay As You Go* or *Enterprise* {astra-db} subscription plan, your users can use SSO to sign in to the {astra-ui}.
+If your {product-short} organization is on the *Pay As You Go* or *Enterprise* {product-short} subscription plan, your users can use SSO to sign in to the {astra-ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
-== How do {astra-db} roles and permissions map to {pulsar-short} roles and permissions?
+== How do {product-short} roles and permissions map to {pulsar-short} roles and permissions?
 
 See xref:ROOT:astream-org-permissions.adoc[].
 
-== What is the difference between {astra-db} application tokens and the {pulsar-short} tokens?
+== What is the difference between {product-short} application tokens and the {pulsar-short} tokens?
 
 See xref:operations:astream-token-gen.adoc[].
 
-== What are the differences in geo-replication for shared and dedicated clusters?
+== What are the differences in geo-replication for shared clusters and Streaming Capacity Units?
 
-Geo-replication is available for both shared and dedicated clusters.
+Geo-replication is available for both shared clusters and Streaming Capacity Units.
 Both cluster types can replicate to other clusters, but there are some differences:
 
 Connections::
 For shared clusters, traffic between clusters is secured over the public internet.
 +
-Dedicated clusters can use either the default secure public internet connection or enable private links.
+Streaming Capacity Units can use either the default secure public internet connection or enable private links.
 
 Regions::
 Shared clusters can replicate between any xref:astream-regions.adoc[supported region] of the same cloud provider.
 +
-Dedicated clusters can use almost any region supported by your cloud provider, as well as across cloud providers.
+Streaming Capacity Units can use almost any region supported by your cloud provider, as well as across cloud providers.
 
 For more on geo-replication, see xref:astream-georeplication.adoc[].
 

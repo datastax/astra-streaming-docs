@@ -41,7 +41,7 @@ The executables in `/bin` use the configurations in `/conf` to run commands.
 Each tenant you create in {product} comes with its own custom configuration for SSO, endpoints, and so on.
 You must download the tenant configuration from {product}, and then overwrite the `./conf/client.conf` file.
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then select your tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of your tenant.
 
 . Click the *Connect* tab, in the *{pulsar-short} CLI* section, click *Download client.conf*.
 

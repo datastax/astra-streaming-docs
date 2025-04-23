@@ -12,7 +12,7 @@ Functions are implemented using https://pulsar.apache.org/docs/en/functions-over
 
 [IMPORTANT]
 ====
-Custom functions require a xref:operations:astream-pricing.adoc[paid {product} plan].
+Custom functions require a xref:operations:astream-pricing.adoc[paid {product-short} plan].
 
 Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 ====
@@ -249,7 +249,7 @@ bin/pulsar-admin functions create --function-config-file **PATH_TO_FUNCTION_CONF
 ====
 A response of `Created Successfully!` indicates the function is deployed and ready to accept messages.
 
-If the response is `402 Payment Required` with `Reason: only qualified organizations can create functions`, then you must upgrade to a xref:operations:astream-pricing.adoc[paid {product} plan].
+If the response is `402 Payment Required` with `Reason: only qualified organizations can create functions`, then you must upgrade to a xref:operations:astream-pricing.adoc[paid {product-short} plan].
 Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 ====
 +
@@ -287,7 +287,7 @@ See <<controlling-your-function,Controlling your function>> for more information
 
 == Deploy functions in the {astra-ui}
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then select a tenant.
+. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of the tenant where you want to deploy a function.
 
 . On the *Functions* tab, click *Create Function*.
 
@@ -311,7 +311,7 @@ Upload your own code::
 
 .. Based on the uploaded file, select the specific class (function) to deploy.
 +
-{astra-db} generates a list of acceptable classes detected in the code.
+{product-short} generates a list of acceptable classes detected in the code.
 A file can contain multiple classes, but only one is used per deployment.
 +
 For Python scripts, the class name is the Python filename (without the extension) and the class to execute.
@@ -336,9 +336,9 @@ For more information, see xref:streaming-learning:functions:index.adoc[] and xre
 
 . Select input topics.
 
-. (Optional) Select output and log topics.
+. Optional: Select output and log topics.
 
-. (Optional) Configure advanced settings:
+. Optional: Configure advanced settings.
 +
 * *Instances*: Enter a number of sink instances to run.
 * *Processing Guarantee*: Select one of the following:
@@ -349,7 +349,7 @@ This means there is a change that a message is not processed.
 * *Timeout*: Set a timeout limit.
 * *Auto Acknowledge*: Enable or disable automatic message acknowledgment.
 
-. (Optional) Provide a config key, if required.
+. Optional: Provide a config key, if required.
 For more information, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[{pulsar-short} documentation].
 
 . Click *Create*.
