@@ -89,11 +89,11 @@ For shared clusters, traffic between clusters is secured over the public interne
 Streaming Capacity Units can use either the default secure public internet connection or enable private links.
 
 Regions::
-Shared clusters can replicate between any xref:astream-regions.adoc[supported region] of the same cloud provider.
+Shared clusters can replicate between any xref:operations:astream-regions.adoc[supported region] of the same cloud provider.
 +
 Streaming Capacity Units can use almost any region supported by your cloud provider, as well as across cloud providers.
 
-For more on geo-replication, see xref:astream-georeplication.adoc[].
+For more on geo-replication, see xref:operations:astream-georeplication.adoc[].
 
 == Security and access control
 
