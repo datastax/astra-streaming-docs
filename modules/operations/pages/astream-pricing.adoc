@@ -74,6 +74,6 @@ If your preferred region isn't already available, you can contact your {company}
 
 == See also
 
-* xref:operations:onboarding-faq.adoc[]
+* xref:ROOT:astream-faq.adoc[]
 * xref:ROOT:astream-org-permissions.adoc[]
 * xref:operations:monitoring/index.adoc#aggregate-astra-streaming-metrics[Aggregate {product} metrics]
