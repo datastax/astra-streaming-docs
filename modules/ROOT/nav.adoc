@@ -1,6 +1,5 @@
 .Frequently asked questions
 * xref:ROOT:astream-faq.adoc[]
-* xref:operations:onboarding-faq.adoc[]
 
 .Release notes
 * xref:operations:astream-release-notes.adoc[]
