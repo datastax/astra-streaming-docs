@@ -1,75 +1,71 @@
-= Private connectivity
+= Private connectivity for {product}
+:navtitle: Private connectivity
 
-To better protect your streaming connections, connect {product} to a private link service for <<inbound,inbound>> connectivity, or to a private endpoint for <<outbound,outbound>> connectivity.
+By default, {product} shared clusters and Streaming Capacity Units use secure connections over the public internet.
 
-Private connections are only available within the same cloud provider and region as your {product} cluster.
+With Streaming Capacity Units, you have the option to connect your {product} clusters to a private link service for inbound connections or to a private endpoint for outbound connections.
 
-== Enable private links
+== Private connection requirements
 
-To enable a private link service or private endpoint for {product}, contact {support_url}[{company} Support].
-Be prepared to provide the <<credentials,credentials>> required for your cloud provider.
+* Private connections are only available for Streaming Capacity Units.
+This option isn't available for shared clusters.
 
-== Inbound traffic
+* Your private link service or private endpoint must exist in the same cloud provider and region as your {product} cluster.
++
+If you want to use private connections for multiple clusters or tenants, you must prepare at least one private link service or private endpoint in each applicable cloud provider and region.
 
-{product} supports inbound traffic flowing from your private endpoint to {product}.
+* {product} supports https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html[AWS Private Link], https://learn.microsoft.com/en-us/azure/private-link/private-link-overview[Microsoft Azure Private Link], and https://cloud.google.com/vpc/docs/private-service-connect[Google Cloud Private Service Connect].
 
-The first inbound traffic pattern describes {pulsar-reg}, Apache Kafka(R), and RabbitMQ messaging traffic, as well as Prometheus metrics traffic, flowing from a user's private endpoint to {product}.
+== Enable private connections
+
+To use a private link service or private endpoint for {product}, do the following:
+
+. Get the name of the {product} clusters where you want to enable private connectivity.
++
+In the {astra-ui-link}, click *Streaming*, and then find cluster names in the *Tenants* list.
+
+. Get your cloud provider resource identifier:
++
+* https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html[AWS Private Link]: AWS account numbers
+* https://learn.microsoft.com/en-us/azure/private-link/private-link-overview[Microsoft Azure Private Link]: Azure subscription IDs
+* https://cloud.google.com/vpc/docs/private-service-connect[Google Cloud Private Service Connect]: GCP project IDs
+
+. Contact {support_url}[{company} Support] to request private connectivity for {product}.
+
+=== Private connections for inbound traffic
+
+{product} supports private inbound traffic flowing from your private endpoint to {product}.
+Inbound traffic includes {pulsar-reg}, Apache Kafka(R), and RabbitMQ messaging traffic, as well as Prometheus metrics traffic.
 
 You create a connection to the {company} private link service, and then {company} routes traffic to your {product} Streaming Capacity Units.
+
 If you have multiple tenants, they can have different VPCs.
 Each VPC will have the same private FQDN with different VNETs.
 The traffic on separate private end point connections is isolated until it reaches the {company} load balancer.
 
-The private link service pattern is the same across cloud providers, but the hostname depends on your cloud provider and region:
+The private link service pattern is the same across cloud providers, but the hostname depends on your {product} cluster's cloud provider and region:
 
-[#inbound]
 .Inbound private link service endpoints
 [cols="1,3"]
 |===
 |Service |Endpoint pattern
 
-|{pulsar-short} Messaging
-|`pulsar-azure-eastus.private.streaming.datastax.com:6651`
+|{pulsar-short} messaging
+|`pulsar-**PROVIDER**-**REGION**.private.streaming.datastax.com:6651`
 
-|Kafka Messaging
-|`kafka-azure-eastus.private.streaming.datastax.com:9093`
+|Kafka messaging
+|`kafka-**PROVIDER**-**REGION**.private.streaming.datastax.com:9093`
 
-|RabbitMQ Messaging
-|`rabbitmq-azure-eastus.private.streaming.datastax.com`
+|RabbitMQ messaging
+|`rabbitmq-**PROVIDER**-**REGION**.private.streaming.datastax.com`
 
-|Prometheus Metrics
-|`prometheus-azure-eastus.private.streaming.datastax.com`
+|Prometheus metrics
+|`prometheus-**PROVIDER**-**REGION**.private.streaming.datastax.com`
 |===
 
-[#outbound]
-== Outbound traffic
+=== Private connections for outbound traffic
 
-On a case-by-case basis, {product} can support private outbound traffic flowing from {product} to your private endpoint.
+On a case-by-case basis, {product} can support private outbound traffic flowing from a {product} private endpoint to your private link service.
 
-The outbound traffic pattern creates a private endpoint in {product} that connects to your private link service.
 {company} opens a port on the tenant's firewall to allow connectors and functions running in a dedicated namespace on an {product} cluster to connect to your private network.
 Each tenant has its own firewall.
-
-[#credentials]
-== Cloud provider credentials
-
-Each cloud provider requires specific credentials to connect to a private endpoint.
-For information about private link configuration and credentials, see your cloud provider's documentation.
-
-.Private link credentials and documentation
-[cols="1,1,3"]
-|===
-|Cloud provider |Credentials required |Documentation
-
-|AWS
-|AWS account numbers
-|https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-service.html[AWS Private Link]
-
-|Microsoft Azure
-|Azure subscription IDs
-|https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip[Azure Private Link]
-
-|Google Cloud
-|GCP project IDs
-|https://console.cloud.google.com/net-services/psc/[Google Cloud Private Service Connect]
-|===
