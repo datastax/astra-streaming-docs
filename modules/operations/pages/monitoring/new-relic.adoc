@@ -12,7 +12,7 @@ While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/p
 
 xref:monitoring/integration.adoc[Install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
 
-This is required because {product} is a managed service, and you can't modify the {product} Prometheus server as required by the New Relic Prometheus write integration.
+This is required because {product} is a managed service, and you cannot modify the {product} Prometheus server as required by the New Relic Prometheus write integration.
 
 == Configure New Relic
 

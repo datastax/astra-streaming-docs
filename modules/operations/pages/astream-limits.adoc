@@ -9,7 +9,7 @@ In general, xref:operations:astream-pricing.adoc#dedicated-clusters[Streaming Ca
 == {product} guardrails
 
 Guardrails are provisioned in the default settings for {product}.
-You can't directly change these guardrails.
+You cannot directly change these guardrails.
 For Streaming Capacity Units, some guardrails can be changed by contacting {support_url}[{company} Support].
 
 [cols="1,1,1"]
@@ -21,7 +21,7 @@ a|
 * Shared clusters: 10
 * Streaming Capacity Units: Unlimited
 
-|This limit can't be changed for shared clusters.
+|This limit cannot be changed for shared clusters.
 
 |Number of namespaces per tenant
 |All clusters: 20
@@ -306,7 +306,7 @@ Each function instance is assigned a specific amount of CPU and memory which can
 Each {pulsar-short} function running on {product} has a minimum of one function instance allocated to it.
 
 Functions and connector resources for function instances are set in the control plane based as resource limits.
-You can't customize these resources.
+You cannot customize these resources.
 
 The default settings are as follows:
 
@@ -328,7 +328,7 @@ The default settings are as follows:
 
 == Immutable configurations
 
-The following configurations can't be changed:
+The following configurations cannot be changed:
 
 * Data persistency (`En`, `Qw`, `Qa`)
 * `Managedledger` policy/deletion

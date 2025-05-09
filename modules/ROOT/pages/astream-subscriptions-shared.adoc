@@ -78,7 +78,7 @@ The new consumer subscribes to the topic and consumes messages:
 ----
 
 Because this test uses shared subscriptions, you can attach multiple consumers to the topic.
-If you run this test with xref:astream-subscriptions-exclusive.adoc[exclusive subscriptions], you can't attach more than once subscriber to the exclusive topic.
+If you run this test with xref:astream-subscriptions-exclusive.adoc[exclusive subscriptions], you cannot attach more than once subscriber to the exclusive topic.
 
 To continue testing the shared subscription configuration, you can continue running new instances of `SimplePulsarConsumer.java` in new terminal windows.
 All the consumers subscribe to the topic and consume messages in a round-robin fashion.
