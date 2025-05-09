@@ -124,7 +124,7 @@ In the `SimplePulsarConsumer` terminal, the consumer begins receiving messages:
 
 . In a new terminal window, try to run a new instance of `SimplePulsarConsumer.java`.
 +
-The new consumer can't subscribe to the topic because the `SimplePulsarConsumer` configuration reserved the entire hash range for the first consumer:
+The new consumer cannot subscribe to the topic because the `SimplePulsarConsumer` configuration reserved the entire hash range for the first consumer:
 +
 .Result
 [source,console]

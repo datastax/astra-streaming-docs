@@ -21,7 +21,7 @@ This document will help you get started producing and consuming Kafka messages o
 +
 [IMPORTANT]
 ====
-You can't remove the Kafka namespaces created on your tenant with this step.
+You cannot remove the Kafka namespaces created on your tenant with this step.
 You must remove the tenant itself to remove these namespaces.
 ====
 

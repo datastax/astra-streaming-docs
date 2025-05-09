@@ -67,7 +67,7 @@ In the `SimplePulsarConsumer` terminal, the consumer begins consuming the produc
 
 . In a new terminal window, try to run another instance of `SimplePulsarConsumer.java`.
 +
-The second consumer can't subscribe to the topic because the subscription is exclusive:
+The second consumer cannot subscribe to the topic because the subscription is exclusive:
 +
 .Result
 [source,console]

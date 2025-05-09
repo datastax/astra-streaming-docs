@@ -21,7 +21,7 @@ Get started producing and consuming RabbitMQ messages on a {pulsar-short} cluste
 +
 [IMPORTANT]
 ====
-You can't remove the RabbitMQ namespace created on your tenant with this step.
+You cannot remove the RabbitMQ namespace created on your tenant with this step.
 You must remove the tenant itself to remove this namespace.
 ====
 
