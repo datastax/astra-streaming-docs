@@ -22,7 +22,7 @@ To use a private link service or private endpoint for {product}, do the followin
 
 . Get the name of the {product} clusters where you want to enable private connectivity.
 +
-In the {astra-ui-link}, click *Streaming*, and then find cluster names in the *Tenants* list.
+. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, select *Streaming*, and then find cluster names in the *Tenants* list.
 
 . Get your cloud provider resource identifier:
 +

@@ -20,7 +20,7 @@ To learn more about the concept of tenancy, see the https://pulsar.apache.org/do
 You can create a tenant in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
 
-. In the {astra-ui} navigation menu, click *Streaming*.
+. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, and then select *Streaming*.
 
 . Click *Create a Tenant*.
 
@@ -49,7 +49,9 @@ You can create namespaces in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
 For information about the {pulsar-short} CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of your tenant.
+. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, and then select *Streaming*.
+
+. Click the name of your tenant.
 
 . Click the *Namespace And Topics* tab, and then click *Create Namespace*.
 
@@ -72,7 +74,9 @@ To learn more about topics, see the https://pulsar.apache.org/docs/concepts-mess
 
 As in the previous steps, you can create topics in the {astra-ui} or programmatically.
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of your tenant.
+. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, and then select *Streaming*.
+
+. Click the name of your tenant.
 
 . Click the *Namespace And Topics* tab.
 
@@ -89,6 +93,6 @@ Disregard the https://pulsar.apache.org/docs/concepts-messaging/#partitioned-top
 Your new topic is ready to produce and consume messages.
 There are several different ways to do this:
 
-* xref:developing:produce-consume-astra-portal.adoc[{astra-ui}]: Use {product}'s "Try Me" feature in the {astra-ui}.
+* xref:developing:produce-consume-astra-portal.adoc[{astra-ui}]: Use {product}'s **Try Me** feature in the {astra-ui}.
 * xref:developing:produce-consume-pulsar-client.adoc[{pulsar-short} Client]: Use the {pulsar-short} CLI to interact with the topic.
 * xref:developing:clients/index.adoc[Runtime Clients]: Create a client application that interacts with {pulsar-short}.

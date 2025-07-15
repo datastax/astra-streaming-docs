@@ -11,9 +11,11 @@ This doc will show you how to scrape an {product} tenant with Prometheus.
 
 == Get the configuration file from {product}
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of your tenant.
+. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, and then select *Streaming*.
 
-. On the *Connect* tab, click *Prometheus* to generate a new configuration file:
+. Click the name of your tenant, and then click the *Connect* tab.
+
+. Click *Prometheus* to generate a new configuration file:
 +
 .prometheus.yml
 [source,yaml,subs="+quotes"]
