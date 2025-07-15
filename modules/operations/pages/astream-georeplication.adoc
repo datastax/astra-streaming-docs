@@ -131,7 +131,9 @@ key:[null], properties:[], content:hello-from-pulsar
 key:[null], properties:[], content:hello-from-pulsar
 ----
 
-. In the {astra-ui} navigation menu, click *Streaming*, click the name of your tenant, and then click the **Namespaces and Topics** tab.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of your tenant, and then click the **Namespaces and Topics** tab.
 
 . Make sure `persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**` is visible and shows traffic across all regions.
 

@@ -23,7 +23,9 @@ The {gpt-schema-translator} is available for the {astra-db} sink connector only.
 This example uses a JSON schema for a {pulsar-short} topic, and a CQL schema for an {astra-db} table.
 The {gpt-schema-translator} generates a mapping between the two schemas that the {astra-db} sink connector can use to write data from the {pulsar-short} topic to the {astra-db} table.
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of your tenant.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of your tenant.
 
 . On the *Namespaces and Topics* tab, find the topic that you want to map to a table, and then click *Create mapping*.
 

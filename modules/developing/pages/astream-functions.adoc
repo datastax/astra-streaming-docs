@@ -287,7 +287,9 @@ See <<controlling-your-function,Controlling your function>> for more information
 
 == Deploy functions in the {astra-ui}
 
-. In the {astra-ui} navigation menu, click *Streaming*, and then click the name of the tenant where you want to deploy a function.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of the tenant where you want to deploy a function.
 
 . On the *Functions* tab, click *Create Function*.
 
@@ -391,22 +393,33 @@ Your function should output the result of processing the message.
 [#controlling-your-function]
 === Stop and start functions
 
-In the {astra-ui}, on your tenant's *Functions* tab, you can use *Function Controls* to start, stop, and restart functions.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of the tenant where you want to manage functions, and then click the *Functions* tab.
+
+. Use *Function Controls* to start, stop, and restart functions.
 
 === Monitor functions
 
 Functions produce logs to help you debug them.
-In the {astra-ui}, on your tenant's *Functions* tab, you can view, refresh, copy, and download your functions' logs.
 
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of the tenant that you want to debug, and then click the *Functions* tab.
+
+. From here, you can view, refresh, copy, and download your functions' logs.
++
 image::astream-function-log.png[Function Log]
-
++
 If you specified a log topic when deploying your function, function logs also output to that topic.
 
 === Edit functions
 
-. In the {astra-ui}, on your tenant's *Functions* tab, click *Update Function*.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
-. Edit the following settings as needed, and then click *Update*.
+. Click the name of the tenant where your function is deployed, and then click the *Functions* tab.
+
+. Click *Update Function*, edit the following settings as needed, and then click *Update*:
 +
 * Function code
 * Output topic
@@ -423,8 +436,10 @@ If you need to change any other function settings, you must delete and redeploy 
 Deleting a function is permanent.
 ====
 
-. In the {astra-ui}, on your tenant's *Functions* tab, select the function to delete.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
-. Click *Delete*.
+. Click the name of the tenant where you want to delete a function, and then click the *Functions* tab.
+
+. Click the function you want to delete, and then click *Delete*.
 
 . To confirm deletion, enter the function's name, and then click *Delete*.

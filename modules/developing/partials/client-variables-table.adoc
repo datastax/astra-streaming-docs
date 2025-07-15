@@ -4,8 +4,10 @@
 
 |`serviceUrl`
 |The URL to connect to the {pulsar-short} cluster
-|In the {astra-ui} navigation menu, click *Streaming*, and then click the name of your streaming tenant.
-On the *Connect* tab, in the *Tenant Details* section, get the *Broker Service URL*.
+a|
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. Click the name of your tenant, and then click the *Connect* tab.
+. In the *Tenant Details* section, get the *Broker Service URL*.
 
 |`pulsarToken`
 |The token for {pulsar-short} cluster authentication
@@ -13,16 +15,22 @@ On the *Connect* tab, in the *Tenant Details* section, get the *Broker Service U
 
 |`tenantName`
 |The name of your streaming tenant
-|In the {astra-ui} navigation menu, click *Streaming*, and then get the name from the *Tenants* list.
+a|
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. Get the name from the *Tenants* list.
 
 |`namespace`
 |The segmented area for certain topics in your streaming tenant
-|In the {astra-ui} navigation menu, click *Streaming*, click the name of your streaming tenant, and then click the *Namespace and Topics* tab.
-Choose the target namespace from the list of namespaces.
+a|
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. Click the name of your tenant, and then click the *Namespace and Topics* tab.
+. Choose the target namespace from the list of namespaces.
 
 |`topicName`
 |Topic name (not the full name)
-|In the {astra-ui} navigation menu, click *Streaming*, click the name of your streaming tenant, and then click the *Namespace and Topics* tab.
-Expand the target namespace in the list of namespaces to view the names of the topics within.
+a|
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. Click the name of your tenant, and then click the *Namespace and Topics* tab.
+. Expand the target namespace in the list of namespaces to view the names of the topics within.
 Do _not_ use the *Full Name*.
 |===
