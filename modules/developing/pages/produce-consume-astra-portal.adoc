@@ -9,7 +9,7 @@ The following steps will use the "Try Me" feature of the {astra-ui} to interact 
 
 == Select the producer and consumer topics
 
-. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, and then select *Streaming*.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
 . Click the name of your tenant.
 

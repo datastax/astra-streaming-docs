@@ -12,7 +12,7 @@ Depending on the API you use, you need certain information to form HTTP requests
 
 == Get the tenant web service URL
 
-. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, and then select *Streaming*.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
 . Click the name of your tenant.
 

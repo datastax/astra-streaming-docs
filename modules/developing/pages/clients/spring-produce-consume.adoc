@@ -101,7 +101,7 @@ Message received: Hello World
 ----
 ====
 
-. In the {astra-ui-link} header, click icon:material-icons:apps[] **Applications**, and then select *Streaming*.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
 . Click the name of your tenant, and then verify that the message appears in the specified namespace and topic.
 
