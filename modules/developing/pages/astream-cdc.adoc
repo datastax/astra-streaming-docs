@@ -77,7 +77,13 @@ include::common:streaming:partial$cdc-astra/reconcile-multiregion-writes.adoc[]
 
 include::common:streaming:partial$cdc-astra/check-status.adoc[]
 
-== Disable CDC for a table
+[#put-cdc]
+=== Update a database's CDC configuration
+
+include::common:streaming:partial$cdc-astra/put-cdc.adoc[]
+
+[#disable-cdc-for-a-table]
+=== Disable CDC for a table
 
 include::common:streaming:partial$cdc-astra/disable.adoc[]
 
