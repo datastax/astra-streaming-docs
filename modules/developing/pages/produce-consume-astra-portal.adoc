@@ -15,24 +15,20 @@ The following steps will use the "Try Me" feature of the {astra-ui} to interact 
 
 . Click the **Try Me** tab.
 
-. Choose the appropriate namespace and topic.
-In this example, the name for both the producer and consumer is the same.
-Leave the rest of the settings as default.
+. Select a namespace, producer topic, and consumer topic for the test.
+
+. For this example, you can use the default values for the **Connection type**, **Read position**, **Subscription**, and **Subscription Type** settings.
 +
-image:config-try-me.png[Config try me in {product}]
+In future tests, you might want to change these settings.
 
 == Connect and send a message
 
 . Click *Connect* to open a websocket connection in your browser with this topic.
 
-. In *Send message*, type a message, and then click *Send*.
-+
-image:test-message-input.png[Send message in {product}]
+. In *Send message*, type a message for the test, and then click *Send*.
 
 A message is produced (sent) to your selected topic, and then the consumer consumes (retrieves) the message.
-The result is a chat style write and read.
-
-image:try-me-test-message.png[Test message in {product}]
+Produced and consumed messages are printed in a chat style format in the **Test Message** dialog.
 
 == See also
 
