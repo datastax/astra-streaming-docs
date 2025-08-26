@@ -32,9 +32,8 @@ All tenant names in {product} must be unique.
 For this example tenant, the region doesn't really matter.
 
 . Click *Create Tenant*.
-You are directed to the quickstart page for your new tenant.
 +
-image:new-tenant-quickstart.png[New tenant quickstart in {product}]
+If the tenant is successfully created, you are redirected to the tenant's **Quickstart** tab.
 
 == Create a namespace in your tenant
 
