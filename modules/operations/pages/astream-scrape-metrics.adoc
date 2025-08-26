@@ -102,18 +102,18 @@ With your Prometheus scrape container running, you can use curl commands to deco
 Deflate::
 +
 --
-[source,bash,subs="attributes+"]
+[source,bash]
 ----
-include::example$curl_deflate.sh[]
+curl -v -H 'Authorization: Bearer $BEARER_TOKEN' -H 'Accept-encoding: deflate' https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 --compressed
 ----
 --
 
 Gzip::
 +
 --
-[source,bash,subs="attributes+"]
+[source,bash]
 ----
-include::example$curl_gzip.sh[]
+curl -v -H 'Authorization: Bearer $BEARER_TOKEN' -H 'Accept-encoding: gzip' https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 | zcat
 ----
 --
 ======

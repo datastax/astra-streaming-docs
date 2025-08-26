@@ -1,1 +1,0 @@
-curl -v -H 'Authorization: Bearer $BEARER_TOKEN' -H 'Accept-encoding: deflate' https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 --compressed
