@@ -206,7 +206,9 @@ The output includes the "pulsarToken" which is the JWT for this {pulsar-short} i
 curl --location --request DELETE 'https://api.astra.datastax.com/v2/streaming/tenants/{tenant}/clusters/{cluster}' --header 'Content-Type: application/json' --header "Authorization: Bearer $ASTRA_TOKEN"
 ----
 
-No response indicates success.
+A successful request returns either no response or `202 Accepted`.
+
+If unsuccessful, returns `404 Not Found` or other error code.
 
 == {pulsar-short} API namespace operations
 
@@ -238,14 +240,7 @@ curl --location --request GET “https://$WEB_SERVICE_URL/admin/v2/namespaces/$T
 curl -sS --fail --location --request PUT --header "Authorization: Bearer $PULSAR_TOKEN" "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE"
 ----
 
-.Result
-[%collapsible]
-====
-[source,console]
-----
-Output: No reply means successful.
-----
-====
+No response indicates success.
 
 === Delete a namespace
 
