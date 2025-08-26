@@ -24,55 +24,237 @@ For a complete {product} metrics reference, see xref:monitoring/metrics.adoc[].
 {product} exposes both namespace and topic level metrics.
 Namespace metrics can always be inferred from corresponding topic metrics via metrics aggregation.
 
-The following table lists recommended namespace and/or topic metrics as a starting point.
+The following table lists recommended namespace and/or topic metrics as a starting point:
 
-[%header,format=csv,cols="2,1,1,3"]
+[cols=4]
 |===
-include::example$namespace-topic-metrics.csv[]
+| Metrics Name | Namespace and/or Topic Level | Metrics Type | Note
+
+| pulsar_topics_count
+| Namespace
+| Gauge
+| The number of Pulsar topics of a namespace.
+
+| pulsar_producers_count
+| Topic
+| Gauge
+| The number of active producers of a topic.
+
+| pulsar_consumers_count
+| Topic
+| Gauge
+| The number of active consumers of a topic.
+
+| pulsar_subscriptions_count
+| Topic
+| Gauge
+| The number of Pulsar subscriptions of a topic.
+
+| pulsar_rate_in
+| Topic
+| Gauge
+| The total message rate (message per second) coming into a topic.
+
+| pulsar_rate_out
+| Topic
+| Gauge
+| The total message rate (message per second) coming out of a topic.
+
+| pulsar_throughput_in
+| Topic
+| Gauge
+| The total throughput (byte per second) coming into a topic.
+
+| pulsar_throughput_out
+| Topic
+| Gauge
+| The total throughput (byte per second) coming out of a topic.
+
+| pulsar_msg_backlog
+| Topic
+| Gauge
+| The total number of message backlog of a topic.
+
+| pulsar_storage_size
+| Topic
+| Gauge
+| The total storage size (in bytes) of a topic.
+
+| pulsar_storage_backlog_size
+| Topic
+| Gauge
+| The total backlog size (in bytes) of a topic.
+
+| pulsar_storage_offloaded_size
+| Topic
+| Gauge
+| The total amount of the data (in bytes) of a topic offloaded to the tiered storage.
+
+| pulsar_in_bytes_total
+| Topic
+| Counter
+| The total number of messages (in bytes) received for a topic.
+
+| pulsar_out_bytes_total
+| Topic
+| Counter
+| The total number of messages (in bytes) read from a topic.
+
+| pulsar_in_messages_total
+| Topic
+| Counter
+| The total number of messages received for a topic.
+
+| pulsar_out_messages_total
+| Topic
+| Counter
+| The total number of messages read from a topic.
 |===
 
 === Replication metrics
 
 When geo-replication is enabled for a particular namespace, a subset of namespace metrics is available specifically for geo-replication purposes. Below is the list of recommended geo-replication metrics as a starting point.
 
-[%header,format=csv,cols="2,1,1,3"]
+[cols=4]
 |===
-include::example$replication-metrics.csv[]
+| Metrics Name | Namespace and/or Topic Level | Metrics Type | Note
+
+| pulsar_replication_rate_in
+| Namespace
+| Gauge
+| The total message rate (message per second) of the namespace replicating from a remote cluster.
+
+| pulsar_replication_rate_out
+| Namespace
+| Gauge
+| The total message rate (message per second) of the namespace replicating to a remote cluster.
+
+| pulsar_replication_throughput_in
+| Namespace
+| Gauge
+| The total throughput (bytes per second) of the namespace replicating from a remote cluster.
+
+| pulsar_replication_throughput_out
+| Namespace
+| Gauge
+| The total throughput (bytes per second) of the namespace replicating to a remote cluster.
+
+| pulsar_replication_backlog
+| Namespace
+| Gauge
+| The total message backlog of the namespace replicating to a remote cluster.
 |===
 
 === Subscription metrics
 
 The following table gives the list of recommended subscription metrics as a starting point.
 
-[%header,format=csv,cols="2,1,3"]
+[cols="3,1,3"]
 |===
-include::example$subscription-metrics.csv[]
+| Metrics Name | Metrics Type | Note
+
+| pulsar_subscription_back_log
+| Gauge
+| The total backlog (number of messages) for a subscription of a topic.
+
+| pulsar_subscription_delayed
+| Gauge
+| The total number of messages of a subscription that are delayed to be dispatched for a subscription of a topic.
+
+| pulsar_subscription_msg_rate_redeliver
+| Gauge
+| The total message rate (message per second) being redelivered for a subscription of a topic.
+
+| pulsar_subscription_unacked_messages
+| Gauge
+| The total number of unacknowledged messages for a subscription of a topic.
+
+| pulsar_subscription_blocked_on_unacked_messages
+| Gauge
+| Binary indicator (1 or 0) of whether a subscription of a topic is blocked on unacknowledged messages or not.
+
+| pulsar_subscription_msg_rate_out
+| Gauge
+| The total message dispatch rate (message per second) for a subscription of a topic.
+
+| pulsar_subscription_msg_throughput_out
+| Gauge
+| The total message dispatch throughput (bytes per second) for a subscription of a topic.
+
+| pulsar_subscription_msg_ack_rate
+| Gauge
+| The total message acknowledgment rate (message per second) for a subscription of a topic.
+
+| pulsar_subscription_msg_rate_expired
+| Gauge
+| The total rate of messages (message per second) expired on a subscription of a topic.
+
+| pulsar_subscription_total_msg_expired
+| Gauge
+| The total number of messages expired on a subscription of a topic.
+
+| pulsar_subscription_msg_drop_rate
+| Gauge
+| The rate of messages (message per second) dropped on a subscription of a topic.
+
+| pulsar_subscription_consumers_count
+| Gauge
+| The number of connected consumers on a subscription of a topic.
 |===
 
 === Function metrics
 
 The following table gives the list of recommended function metrics as a starting point. This is only relevant when {pulsar-short} functions are deployed in {product}.
 
-[%header,format=csv,cols="2,1,3"]
+[cols="3,1,3"]
 |===
-include::example$function-metrics.csv[]
+| Metrics Name | Metrics Type | Note
+
+| pulsar_function_processed_successfully_total
+| Counter
+| The total number of messages processed successfully by a function.
+
+| pulsar_function_received_total
+| Counter
+| The total number of messages a function receives.
+
+| pulsar_function_process_latency_ms
+| Summary
+| The process latency (in milliseconds) of a function.
 |===
 
 === Source connector metrics
 
 The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when {pulsar-short} source connectors are deployed in {product}.
 
-[%header,format=csv,cols="2,1,3"]
+[cols=3]
 |===
-include::example$source-connector-metrics.csv[]
+| Metrics Name | Metrics Type | Note
+
+| pulsar_source_written_total
+| Counter
+| The total number of messages processed by a source connector.
+
+| pulsar_source_received_total
+| Counter
+| The total number of messages received by a source connector.
 |===
 
 === Sink connector metrics
 
 The following table gives the list of recommended source connector metrics as a starting point. This is only relevant when {pulsar-short} sink connectors are deployed in {product}.
-[%header,format=csv,cols="2,1,3"]
+
+[cols=3]
 |===
-include::example$sink-connector-metrics.csv[]
+| Metrics Name | Metrics Type | Note
+
+| pulsar_sink_written_total
+| Counter
+| The total number of messages processed by a sink connector.
+
+| pulsar_sink_received_total
+| Counter
+| The total number of messages received by a sink connector.
 |===
 
 [#aggregate-astra-streaming-metrics]
@@ -187,9 +369,44 @@ Most of the exposed {product} metrics reflect generic application workload chara
 However, {company} recommends that you monitor the following metrics for unexpected increases:
 
 .Metrics for alerting
-[%header,format=csv,cols="2,2,1,3"]
+[cols=4]
 |===
-include::example$alert-metrics.csv[]
+| Metrics Name | Aggregate | Metrics Type | Note
+
+| pulsar_storage_size
+| Topic
+| Gauge
+| The total storage size (in bytes) of a topic.
+
+| pulsar_storage_backlog_size
+| Topic
+| Gauge
+| The total backlog size (in bytes) of a topic.
+
+| pulsar_replication_backlog
+| Georeplication
+| Gauge
+| The total message backlog of the namespace replicating to a remote cluster.
+
+| pulsar_subscription_back_log
+| Subscription
+| Gauge
+| The total backlog (number of messages) for a subscription of a topic.
+
+| pulsar_subscription_delayed
+| Subscription
+| Gauge
+| The total number of messages of a subscription that are delayed to be dispatched for a subscription of a topic.
+
+| pulsar_subscription_msg_drop_rate
+| Subscription
+| Gauge
+| The rate of messages (message per second) dropped on a subscription of a topic.
+
+| pulsar_subscription_unacked_messages
+| Subscription
+| Gauge
+| The total number of unacknowledged messages for a subscription of a topic.
 |===
 
 === Alerting rules
