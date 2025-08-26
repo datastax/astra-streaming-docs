@@ -36,7 +36,69 @@ This file contains the main method that will run your application with the speci
 ====
 [source,java]
 ----
-include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/java/com/example/demo/DemoApplication.java[]
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.apache.pulsar.client.api.*;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+@SpringBootApplication
+public class DemoApplication
+{
+	private static final String serviceUrl = "<REPLACE_WITH_SERVICE_URL>";
+	private static final String pulsarToken = "<REPLACE_WITH_PULSAR_TOKEN>";
+	private static final String tenantName = "<REPLACE_WITH_TENANT_NAME>";
+	private static final String namespace = "<REPLACE_WITH_NAMESPACE>";
+	private static final String topicName = "<REPLACE_WITH_TOPIC>";
+
+	private static final String topic = String.format("persistent://%s/%s/%s", tenantName,namespace,topicName);
+
+	public static void main( String[] args ) throws IOException
+	{
+		PulsarClient client = PulsarClient.builder()
+				.serviceUrl(serviceUrl)
+				.authentication(
+						AuthenticationFactory.token(pulsarToken)
+				)
+				.build();
+
+		Producer<String> producer = client.newProducer(Schema.STRING)
+				.topic(topic)
+				.create();
+
+		producer.send("Hello World");
+
+		producer.close();
+
+		Consumer<String> consumer = client.newConsumer(Schema.STRING)
+				.topic(topic)
+				.subscriptionName("my-subscription")
+				.subscribe();
+
+		boolean receivedMsg = false;
+
+		do {
+			// Block for up to 1 second for a message
+			Message<String> msg = consumer.receive(1, TimeUnit.SECONDS);
+
+			if(msg != null){
+				System.out.printf("Message received: %s", new String(msg.getData()));
+
+				// Acknowledge the message to remove it from the message backlog
+				consumer.acknowledge(msg);
+
+				receivedMsg = true;
+			}
+
+		} while (!receivedMsg);
+
+		consumer.close();
+
+		client.close();
+	}
+}
 ----
 ====
 
@@ -60,7 +122,20 @@ On your tenant's *Connect* tab, you can download a properties file with the valu
 ====
 [source,yaml]
 ----
-include::{astra-streaming-examples-repo}/java/spring-boot/SpringBoot/src/main/resources/application.properties[]
+spring:
+    pulsar:
+administration:
+service-url: https://pulsar-aws-useast1.api.streaming.datastax.com
+tls-hostname-verification-enable: true
+auth-plugin-class-name: org.apache.pulsar.client.impl.auth.AuthenticationToken
+authentication:
+token: ***
+client:
+service-url: pulsar+ssl://pulsar-aws-useast1.streaming.datastax.com:6651
+tls-hostname-verification-enable: true
+auth-plugin-class-name: org.apache.pulsar.client.impl.auth.AuthenticationToken
+authentication:
+token: ***
 ----
 ====
 

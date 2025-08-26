@@ -23,7 +23,11 @@ For a complete source code example, see the https://github.com/datastax/astra-st
 +
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/python/simple-producer-consumer/create-project.sh[]
+mkdir SimpleProducerConsumer && cd SimpleProducerConsumer
+
+touch index.py
+
+pip install pulsar-client==2.10
 ----
 
 == Write the script
@@ -34,7 +38,19 @@ This code creates a {pulsar-short} client instance with the topic URL and token 
 .index.py
 [source,python]
 ----
-include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-client]
+import pulsar
+import time
+
+serviceUrl = "<REPLACE_WITH_SERVICE_URL>";
+pulsarToken = "<REPLACE_WITH_PULSAR_TOKEN>";
+
+tenantName = "<REPLACE_WITH_TENANT_NAME>";
+namespace = "<REPLACE_WITH_NAMESPACE>";
+topicName = "<REPLACE_WITH_TOPIC>";
+
+topic = "persistent://{0}/{1}/{2}".format(tenantName, namespace, topicName)
+
+client = pulsar.Client(serviceUrl, authentication=pulsar.AuthenticationToken(pulsarToken))
 ----
 +
 This script is intentionally incomplete.
@@ -49,7 +65,7 @@ include::developing:partial$client-variables-table.adoc[]
 .index.py
 [source,python]
 ----
-include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-producer]
+producer = client.create_producer(topic)
 ----
 
 . Send a message:
@@ -57,7 +73,7 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleP
 .index.py
 [source,python]
 ----
-include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=produce-message]
+producer.send('Hello World'.encode('utf-8'))
 ----
 
 . Use the Python client instance to create a consumer subscription to the same topic that you sent a message to:
@@ -65,7 +81,7 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleP
 .index.py
 [source,python]
 ----
-include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=create-consumer]
+consumer = client.subscribe(topic, 'my-subscription')
 ----
 
 . Iterate through messages and write their data:
@@ -73,14 +89,27 @@ include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleP
 .index.py
 [source,python]
 ----
-include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=consume-message]
+waitingForMsg = True
+while waitingForMsg:
+    try:
+        msg = consumer.receive(2000)
+        print("Received message '{}' id='{}'".format(msg.data(), msg.message_id()))
+
+        # Acknowledging the message to remove from message backlog
+        consumer.acknowledge(msg)
+
+        waitingForMsg = False
+    except:
+        print("Still waiting for a message...");
+
+    time.sleep(1)
 ----
 
 . Clean up:
 +
 [source,python]
 ----
-include::{astra-streaming-examples-repo}/python/simple-producer-consumer/SimpleProducerConsumer/index.py[tag=clean-up]
+client.close()
 ----
 
 == Run the script
