@@ -4,6 +4,8 @@
 
 You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants.
 
+For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
+
 . xref:getting-started:index.adoc[Create an {product} tenant.]
 
 . xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}.]

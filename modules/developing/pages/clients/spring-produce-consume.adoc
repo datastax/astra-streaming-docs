@@ -5,7 +5,7 @@
 
 You can produce and consume messages with the Java {pulsar-short} client, {product}, and Spring.
 
-Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
+For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
 
 == Prerequisites
 
