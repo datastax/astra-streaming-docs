@@ -5,7 +5,8 @@
 {product} is powered by http://pulsar.apache.org/[{pulsar-reg}].
 
 To connect to your service, use the open-source client APIs provided by the {pulsar} project.
-{product} is running {pulsar-short} version {pulsar-version}. You should use this API version or higher.
+{product} is running {pulsar-short} version {pulsar-version}.
+You should use this API version or higher.
 
 For more information and examples, see the following:
 
