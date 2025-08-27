@@ -1,4 +1,0 @@
-Metrics Name,Metrics Type,Note
-pulsar_function_processed_successfully_total,Counter,The total number of messages processed successfully by a function.
-pulsar_function_received_total,Counter,The total number of messages a function receives.
-pulsar_function_process_latency_ms,Summary,The process latency (in milliseconds) of a function.

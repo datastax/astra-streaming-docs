@@ -1,8 +1,0 @@
-Metrics Name,Aggregate,Metrics Type,Note
-pulsar_storage_size,Topic,Gauge,The total storage size (in bytes) of a topic.
-pulsar_storage_backlog_size,Topic,Gauge,The total backlog size (in bytes) of a topic.
-pulsar_replication_backlog,Georeplication,Gauge,The total message backlog of the namespace replicating to a remote cluster.
-pulsar_subscription_back_log,Subscription,Gauge,The total backlog (number of messages) for a subscription of a topic.
-pulsar_subscription_delayed,Subscription,Gauge,The total number of messages of a subscription that are delayed to be dispatched for a subscription of a topic.
-pulsar_subscription_msg_drop_rate,Subscription,Gauge,The rate of messages (message per second) dropped on a subscription of a topic.
-pulsar_subscription_unacked_messages,Subscription,Gauge,The total number of unacknowledged messages for a subscription of a topic.

@@ -4,7 +4,7 @@
 
 You can produce and consume messages with the C# {pulsar-short} client and {product}.
 
-Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
+For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
 
 == Prerequisites
 
@@ -18,7 +18,13 @@ Create a new console project, and then add a reference to the https://www.nuget.
 
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/create-project.sh[]
+dotnet new console \
+  --output SimpleProducerConsumer \
+  --framework net6.0
+
+cd SimpleProducerConsumer
+
+dotnet add package DotPulsar --version 2.7.0
 ----
 
 == Write the script
@@ -30,7 +36,24 @@ include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/create-
 .Program.cs
 [source,csharp]
 ----
-include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-client]
+using DotPulsar;
+using DotPulsar.Extensions;
+
+var serviceUrl = "<REPLACE_WITH_SERVICE_URL>";
+var pulsarToken = "<REPLACE_WITH_PULSAR_TOKEN>";
+
+var tenantName = "<REPLACE_WITH_TENANT_NAME>";
+var nmspace = "<REPLACE_WITH_NAMESPACE>";
+var topicName = "<REPLACE_WITH_TOPIC>";
+
+var topic = $"persistent://{tenantName}/{nmspace}/{topicName}";
+
+await using var client = PulsarClient.Builder()
+                                      .ServiceUrl(new Uri(serviceUrl))
+                                      .Authentication(
+                                        AuthenticationFactory.Token(pulsarToken)
+                                      )
+                                      .Build();
 ----
 +
 This code creates an instance of `PulsarClient`.
@@ -46,7 +69,9 @@ Messages can also be in formats like JSON, byte, and AVRO.
 .Program.cs
 [source,csharp]
 ----
-include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-producer]
+await using var producer = client.NewProducer(Schema.String)
+                                 .Topic(topic)
+                                 .Create();
 ----
 
 . Asynchronously send a single message and wait for acknowledgment:
@@ -54,7 +79,8 @@ include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleP
 .Program.cs
 [source,csharp]
 ----
-include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=produce-message]
+_ = await producer.Send("Hello World"); // Send a message and ignore the returned MessageId
+Console.WriteLine("Sent message");
 ----
 
 . Create a new `consumer` instance and instruct it to expect messages in string format.
@@ -63,19 +89,30 @@ The consumer uses broker subscriptions to gather messages.
 .Program.cs
 [source,csharp]
 ----
-include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=build-consumer]
+await using var consumer = client.NewConsumer(Schema.String)
+                                 .SubscriptionName("examples-subscription")
+                                 .Topic(topic)
+                                 .InitialPosition(SubscriptionInitialPosition.Earliest)
+                                 .Create();
 ----
 +
 A subscription is set with a subscription name and an initial position.
 In this example, the subscription starts with the `Earliest` unacknowledged message, which is also the first message in the topic.
-
 
 . Loop through the messages provided to the consumer's subscription and write their contents:
 +
 .Program.cs
 [source,csharp]
 ----
-include::{astra-streaming-examples-repo}/csharp/simple-producer-consumer/SimpleProducerConsumer/Program.cs[tag=consumer-loop]
+var msgCount = 0;
+await foreach (var message in consumer.Messages())
+{
+	msgCount++;
+	Console.WriteLine($"Received: {message.Value()}");
+	await consumer.Acknowledge(message);
+
+	if(msgCount > 0) break;
+}
 ----
 
 == Run the script

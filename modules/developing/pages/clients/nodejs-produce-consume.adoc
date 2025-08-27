@@ -5,7 +5,7 @@
 
 You can produce and consume messages with the Node.js {pulsar-short} client and {product}.
 
-Go to the https://github.com/datastax/astra-streaming-examples[examples repo] for the complete source of this example.
+For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
 
 == Prerequisites
 
@@ -28,7 +28,13 @@ Ubuntu-based Debian::
 --
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-project.sh[tag=prep-env]
+wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/DEB/apache-pulsar-client.deb
+wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/DEB/apache-pulsar-client-dev.deb
+
+sudo apt install -y ./apache-pulsar-client.deb
+sudo apt install -y ./apache-pulsar-client*.deb
+
+sudo ldconfig
 ----
 --
 
@@ -55,7 +61,13 @@ If NPM asks for project values, use the automatically suggested defaults.
 
 [source,shell]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-project.sh[tag=create-project]
+mkdir SimpleProducerConsumer && cd SimpleProducerConsumer
+
+touch index.js
+
+npm init -y
+
+npm install pulsar-client
 ----
 
 == Write the script
@@ -65,7 +77,31 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/create-
 .index.js
 [source,javascript]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-client]
+const Pulsar = require("pulsar-client");
+
+(async () => {
+  const serviceUrl = "<REPLACE_WITH_SERVICE_URL>";
+  const pulsarToken = "<REPLACE_WITH_PULSAR_TOKEN>";
+
+  const tenantName = "<REPLACE_WITH_TENANT_NAME>";
+  const namespace = "<REPLACE_WITH_NAMESPACE>";
+  const topicName = "<REPLACE_WITH_TOPIC>";
+
+  const topic = `persistent://${tenantName}/${namespace}/${topicName}`;
+
+  // Debian Ubuntu:
+  const trustStore = '/etc/ssl/certs/ca-certificates.crt'
+  // CentOS RHEL:
+  // const trustStore = "/etc/ssl/certs/ca-bundle.crt";
+
+  const auth = new Pulsar.AuthenticationToken({ token: pulsarToken });
+
+  const client = new Pulsar.Client({
+    serviceUrl: serviceUrl,
+    authentication: auth,
+    tlsTrustCertsFilePath: trustStore,
+    operationTimeoutSeconds: 30,
+  });
 ----
 +
 This script is intentionally incomplete.
@@ -83,7 +119,9 @@ For this example, declare the topic where messages should go.
 .index.js
 [source,javascript]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-producer]
+  const producer = await client.createProducer({
+    topic: topic,
+  });
 ----
 
 . Send a message and receive acknowledgment:
@@ -91,7 +129,10 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleP
 .index.js
 [source,javascript]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=produce-message]
+  producer.send({
+    data: Buffer.from("Hello World"),
+  });
+  console.log("sent message");
 ----
 
 . Clean up:
@@ -99,7 +140,8 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleP
 .index.js
 [source,javascript]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=cleanup-producer]
+  await producer.flush();
+  await producer.close();
 ----
 +
 At this point, the script produces a message that waits to be consumed and acknowledged.
@@ -109,7 +151,12 @@ At this point, the script produces a message that waits to be consumed and ackno
 .index.js
 [source,javascript]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=create-consumer]
+  const consumer = await client.subscribe({
+    topic: topic,
+    subscription: "examples-subscription",
+    subscriptionType: "Exclusive",
+    ackTimeoutMs: 10000,
+  });
 ----
 
 . Receive messages, write them to the console, and acknowledge receipt with the broker:
@@ -117,7 +164,9 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleP
 .index.js
 [source,javascript]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=consume-message]
+  const msg = await consumer.receive();
+  console.log(msg.getData().toString());
+  consumer.acknowledge(msg);
 ----
 
 . Clean up:
@@ -125,7 +174,9 @@ include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleP
 .index.js
 [source,javascript]
 ----
-include::{astra-streaming-examples-repo}/nodejs/simple-producer-consumer/SimpleProducerConsumer/index.js[tag=cleanup-consumer]
+  await consumer.close();
+  await client.close();
+})();
 ----
 
 == Run the script

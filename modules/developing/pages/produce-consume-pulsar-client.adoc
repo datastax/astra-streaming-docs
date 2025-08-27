@@ -4,6 +4,8 @@
 
 You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants.
 
+For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
+
 . xref:getting-started:index.adoc[Create an {product} tenant.]
 
 . xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}.]
@@ -21,25 +23,40 @@ Replace **RANDOM_UUID** with any random letters and numbers to create a unique t
 
 . Produce a message:
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
-include::{astra-streaming-examples-repo}/pulsar-client/produce-message.sh[]
+# Produce a new message on the given tenant/namespace/topic
+./bin/pulsar-client produce \
+    "$TENANT/$NAMESPACE/$TOPIC" \
+    --messages "Hi there" \
+    --num-produce 1
 ----
 +
 Your topic now has a new, unacknowledged message.
 
 . Create a consumer to retrieve and acknowledge the message:
 +
-[source,shell,subs="attributes+"]
+[source,shell]
 ----
-include::{astra-streaming-examples-repo}/pulsar-client/consume-message.sh[]
+# Consume a new message on the given tenant/namespace/topic
+./bin/pulsar-client consume \
+    "$TENANT/$NAMESPACE/$TOPIC" \
+    --subscription-name "examples-subscriber" \
+    --num-messages 1
 ----
 
 . Make sure the output includes your message:
 +
-[source,shell,subs="attributes+"]
+[source,console]
 ----
-include::{astra-streaming-examples-repo}/pulsar-client/consume-output.sh[]
+# consumer message output
+----- got message -----
+key:[null], properties:[], content:Hi there
+2023-01-09T14:32:40,502-0500 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ConsumerImpl - [new-tenant-from-cli/default/demo] [examples-subscriber] Closed consumer
+2023-01-09T14:32:40,504-0500 [main] INFO  org.apache.pulsar.client.impl.PulsarClientImpl - Client closing. URL: pulsar+ssl://pulsar-aws-useast2.streaming.datastax.com:6651
+2023-01-09T14:32:40,514-0500 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ClientCnx - [id: 0x08d05240, L:/192.168.50.167:52883 ! R:pulsar-aws-useast2.streaming.datastax.com/3.138.177.230:6651] Disconnected
+2023-01-09T14:32:40,520-0500 [pulsar-client-io-1-1] INFO  org.apache.pulsar.client.impl.ClientCnx - [id: 0x934157ae, L:/192.168.50.167:52884 ! R:pulsar-aws-useast2.streaming.datastax.com/3.138.177.230:6651] Disconnected
+2023-01-09T14:32:42,613-0500 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully consumed
 ----
 
 == See also

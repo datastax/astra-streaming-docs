@@ -1,1 +1,0 @@
-curl -v -H 'Authorization: Bearer $BEARER_TOKEN' -H 'Accept-encoding: gzip' https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 | zcat
