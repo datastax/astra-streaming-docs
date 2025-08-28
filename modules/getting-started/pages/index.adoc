@@ -20,9 +20,7 @@ To learn more about the concept of tenancy, see the https://pulsar.apache.org/do
 You can create a tenant in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
-
-. Click *Create a Tenant*.
+. In the {astra-ui-link}, click *Create tenant*.
 
 . Name your streaming tenant something memorable like `my-stream-**RANDOM_UUID**`.
 All tenant names in {product} must be unique.
@@ -32,8 +30,7 @@ All tenant names in {product} must be unique.
 For this example tenant, the region doesn't really matter.
 
 . Click *Create Tenant*.
-+
-If the tenant is successfully created, you are redirected to the tenant's **Quickstart** tab.
+When the tenant is ready, it appears in the list of tenants in the {astra-ui}.
 
 == Create a namespace in your tenant
 
@@ -48,14 +45,14 @@ You can create namespaces in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
 For information about the {pulsar-short} CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of your tenant.
 
 . Click the *Namespace And Topics* tab, and then click *Create Namespace*.
 
-. Enter a namespace name, and then click *Create*.
-. Click "Create" to create the namespace.
+. Enter a namespace name, and then click *Create Namespace*.
+The new namespace appears in the list of *Namespaces And Topics*.
 
 == Create a topic
 
@@ -73,7 +70,7 @@ To learn more about topics, see the https://pulsar.apache.org/docs/concepts-mess
 
 As in the previous steps, you can create topics in the {astra-ui} or programmatically.
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of your tenant.
 
