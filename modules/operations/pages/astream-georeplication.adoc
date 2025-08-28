@@ -131,7 +131,7 @@ key:[null], properties:[], content:hello-from-pulsar
 key:[null], properties:[], content:hello-from-pulsar
 ----
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of your tenant, and then click the **Namespaces and Topics** tab.
 
