@@ -17,7 +17,7 @@ a|
 |The name of your streaming tenant
 a|
 . In the {astra-ui-link}, click *Streaming tenants*.
-. Get the name from the *Tenants* list.
+. Get the name from the list of tenants.
 
 |`namespace`
 |The segmented area for certain topics in your streaming tenant
