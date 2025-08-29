@@ -287,7 +287,7 @@ See <<controlling-your-function,Controlling your function>> for more information
 
 == Deploy functions in the {astra-ui}
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of the tenant where you want to deploy a function.
 
@@ -393,7 +393,7 @@ Your function should output the result of processing the message.
 [#controlling-your-function]
 === Stop and start functions
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of the tenant where you want to manage functions, and then click the *Functions* tab.
 
@@ -403,7 +403,7 @@ Your function should output the result of processing the message.
 
 Functions produce logs to help you debug them.
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of the tenant that you want to debug, and then click the *Functions* tab.
 
@@ -415,7 +415,7 @@ If you specified a log topic when deploying your function, function logs also ou
 
 === Edit functions
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of the tenant where your function is deployed, and then click the *Functions* tab.
 
@@ -436,7 +436,7 @@ If you need to change any other function settings, you must delete and redeploy 
 Deleting a function is permanent.
 ====
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. In the {astra-ui-link}, click *Streaming tenants*.
 
 . Click the name of the tenant where you want to delete a function, and then click the *Functions* tab.
 
