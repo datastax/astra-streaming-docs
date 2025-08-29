@@ -36,7 +36,7 @@ When the tenant is ready, it appears in the list of tenants in the {astra-ui}.
 
 Namespaces are logical groupings, such as environments or applications, for message topics within tenants.
 
-{product} automatically creates a `default` namespaces when you create a tenant.
+{product} automatically creates a `default` namespace when you create a tenant.
 You can use the default namespace or create other namespaces.
 Tenants usually have many namespaces.
 To learn more about namespaces, see the https://pulsar.apache.org/docs/concepts-messaging/#namespaces[{pulsar-short} documentation].
