@@ -20,7 +20,9 @@ To learn more about the concept of tenancy, see the https://pulsar.apache.org/do
 You can create a tenant in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
 
-. In the {astra-ui-link}, click **Create tenant**.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click *Create tenant*.
 
 . Name your streaming tenant something memorable like `my-stream-**RANDOM_UUID**`.
 All tenant names in {product} must be unique.
@@ -30,7 +32,7 @@ All tenant names in {product} must be unique.
 For this example tenant, the region doesn't really matter.
 
 . Click *Create Tenant*.
-When the tenant is ready, it appears in the list of tenants in the {astra-ui}.
+When the tenant is ready, it appears on the *Streaming tenants* dashboard in the {astra-ui}.
 
 == Create a namespace in your tenant
 
@@ -45,7 +47,7 @@ You can create namespaces in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
 For information about the {pulsar-short} CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
 
-. In the {astra-ui-link}, click *Streaming tenants*.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
 . Click the name of your tenant.
 
@@ -70,7 +72,7 @@ To learn more about topics, see the https://pulsar.apache.org/docs/concepts-mess
 
 As in the previous steps, you can create topics in the {astra-ui} or programmatically.
 
-. In the {astra-ui-link}, click *Streaming tenants*.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
 . Click the name of your tenant.
 
