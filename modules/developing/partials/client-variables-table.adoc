@@ -17,7 +17,7 @@ a|
 |The name of your streaming tenant
 a|
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
-. Get the name from the *Streaming tenants* dashboard.
+. Get the tenant name from the *{product}* dashboard.
 
 |`namespace`
 |The segmented area for certain topics in your streaming tenant

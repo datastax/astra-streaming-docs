@@ -31,8 +31,9 @@ All tenant names in {product} must be unique.
 . Choose your preferred cloud provider and region.
 For this example tenant, the region doesn't really matter.
 
-. Click *Create Tenant*.
-When the tenant is ready, it appears on the *Streaming tenants* dashboard in the {astra-ui}.
+. Click *Create tenant*.
+When the tenant is ready, it appears on the *{product}* dashboard.
+Click the tenant's name to inspect and configure it.
 
 == Create a namespace in your tenant
 
