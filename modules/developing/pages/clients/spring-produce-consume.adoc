@@ -24,7 +24,7 @@ You can use Spring Initializr to quickly create a Java project with the required
 
 . Select Maven, Java 17, a non-SNAPSHOT version of Spring Boot, and the {pulsar} dependency:
 +
-image::spring-initializr.png[Spring Initializr]
+image::developing:spring-initializr.png[Spring Initializr]
 
 . Click *Generate Project*, download the zip file, and then extract it.
 

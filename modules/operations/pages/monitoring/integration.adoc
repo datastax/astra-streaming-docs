@@ -16,7 +16,7 @@ This page explains how to set up a Prometheus server in a Kubernetes cluster and
 This example uses the https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack[Prometheus Community Kubernetes Helm Charts] to set up a Prometheus server and a Grafana server in a Kubernetes cluster.
 
 . Download the {product} Prometheus configuration from the {astra-ui}.
-For more information, see https://docs.datastax.com/en/streaming/astra-streaming/operations/astream-scrape-metrics.html[Scrape metrics from {product}].
+For more information, see xref:operations:astream-scrape-metrics.adoc[Scrape metrics from {product}].
 
 . Use the downloaded file to create a `config.yml`.
 +

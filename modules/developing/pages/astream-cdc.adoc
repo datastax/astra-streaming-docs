@@ -2,91 +2,1110 @@
 :navtitle: Enable Change Data Capture (CDC)
 :description: CDC for {astra-db} automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data to {product}.
 
+[IMPORTANT]
+====
+Change Data Capture (CDC) for {astra-db} incurs billed charges based on your {astra-stream} usage.
+For more information, see https://www.datastax.com/pricing?product=astra-streaming[{product} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
+====
 
-include::common:streaming:partial$cdc-astra/intro.adoc[]
+Change Data Capture (CDC) for {astra-db} automatically captures changes in real time, de-duplicates the changes, and then streams the clean set of changed data into {product} where it can be processed by client applications or sent to downstream systems.
+
+{astra-stream} processes data changes through an {pulsar-reg} topic.
+By design, the Change Data Capture (CDC) component has a one-to-one correspondence between a table and a single {pulsar-short} topic.
 
 == Supported data structures
 
-include::common:streaming:partial$cdc-astra/supported-data.adoc[]
+CDC for {astra-db} supports the following xref:astra@cql:reference:data-types.adoc[CQL data types] and corresponding AVRO or logical types:
+
+[cols="1,1"]
+|===
+| Data type | AVRO type
+
+| ascii
+| string
+
+| bigint
+| long
+
+| blob
+| bytes
+
+| boolean
+| boolean
+
+| counter
+| long
+
+| date
+| int
+
+| decimal
+| cql_decimal
+
+| double
+| double
+
+| duration
+| cql_duration
+
+| float
+| float
+
+| inet
+| string
+
+| int
+| int
+
+| list
+| array
+
+| map
+| map (only string-type keys are supported)
+
+| set
+| array
+
+| smallint
+| int
+
+| text
+| string
+
+| time
+| long
+
+| timestamp
+| long
+
+| timeuuid
+| string
+
+| tinyint
+| int
+
+| tuple
+| struct (record)
+
+| udt
+| struct (record)
+
+| uuid
+| string
+
+| varchar
+| string
+
+| varint
+| cql_varint / bytes
+|===
 
 === Static columns
 
-include::common:streaming:partial$cdc-astra/static-columns.adoc[]
+Static columns are supported on the following:
+
+* On row-level updates, static columns are included in the message value.
+
+* On partition-level updates, the clustering keys are null in the message key.
+The message value has static columns only on `INSERT` and `UPDATE` operations.
 
 === Unsupported data types
 
-include::common:streaming:partial$cdc-astra/unsupported-data.adoc[]
+For columns using unsupported data types, those data types are omitted from the events that CDC sends to the {astra-stream} tenant's `data-` topic.
+
+If a row update contains both supported and unsupported data types, the event includes only columns with supported data types.
 
 === AVRO interpretation
 
-include::common:streaming:partial$cdc-astra/avro-interpretation.adoc[]
+Keys from tables in {astra-db} databases are strings, but CDC produces AVRO messages that are structures.
+The conversion for some AVRO structures requires additional tooling that can result in unexpected output.
+
+The following table describes the conversion of AVRO logical types:
+
+.AVRO complex types
+[cols="1,1,1,1"]
+|===
+|Name |AVRO type |Fields |Explanation
+
+|collections
+|array
+|lists, sets
+|Sets and Lists are treated as AVRO type `array`, with the attribute `items` containing the schema of the array's items.
+
+|decimal
+|record
+|BIG_INT, DECIMAL_SCALE
+|The {cass-short} DECIMAL type is converted to a `record` with the `cql_decimal` logical type.
+
+The AVRO record type is a schema containing the listed fields.
+
+|duration
+|record
+|CQL_DURATION_MONTHS, CQL_DURATION_DAYS, CQL_DURATION_NANOSECONDS
+|The {cass-short} DURATION type is converted to a `record` with the `cql_duration` logical type.
+
+The AVRO record type is a schema containing the listed fields.
+
+|maps
+|map
+|KEYS_CONVERTED_TO_STRINGS, VALUE_SCHEMA
+|The {cass-short} MAP type is converted to the AVRO map type, but the keys are converted to strings.
+For complex types, the key is represented in JSON.
+
+|===
 
 == CDC for {astra-db} limitations
 
-include::common:streaming:partial$cdc-astra/limitations.adoc[]
+* Doesn't sync data available before starting the CDC agent
+* Doesn't replay logged batches
+* Doesn't manage time-to-live (TTL)
+* Doesn't support range deletes
+* Doesn't manage table truncates
+* Doesn't allow CQL column names that match a {pulsar-short} primitive type name, such as `INT32`
+* Doesn't support multi-table mutations
 
 == Configure CDC for {astra-db}
 
-include::common:streaming:partial$cdc-astra/configure-intro.adoc[]
+To configure CDC for {astra-db}, you must create an {astra-stream} tenant, an {astra-db} database, and a table in that database.
+Then, you enable CDC on the table and connect a sink.
+
+When you enable CDC on a table, CDC automatically creates a namespace and topics for that table in the streaming tenant.
+The connected sink consumes messages from the `data-` topic, and then sends them to the associated service deployment.
 
 [#prerequisites]
 === Prerequisites
 
-include::common:streaming:partial$cdc-astra/prerequisites.adoc[]
+To enable CDC for {astra-db}, you need the following:
+
+* An active {astra-url}[{product-short} account^] with access to an organization that has an {astra-stream} subscription plan.
++
+You need a role that grants permission to manage streaming tenants, such as the *Organization Administrator* role.
+
+* An active xref:astra-db-serverless:databases:create-database.adoc[database] with at least one xref:astra-db-serverless:databases:manage-keyspaces.adoc[keyspace].
+
+* An active sink service account and sink deployment connection details.
+For example, for https://cloud.elastic.co/login[Elasticsearch], you need an Elasticsearch endpoint, index name, and API key.
++
+This guide uses an Elasticsearch sink as an example.
+You can use xref:streaming-learning:pulsar-io:connectors/index.adoc[other {astra-stream} sinks].
 
 [#create-tenant]
 === Create a streaming tenant
 
-include::common:streaming:partial$cdc-astra/create-tenant.adoc[]
+CDC operates through {astra-stream} tenants and topics.
+If you don't have any {astra-stream} tenants, you must create a tenant in order to enable CDC on a table in an {astra-db} database.
+
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click *Create tenant*.
+
+. Enter a name for the streaming tenant.
+
+. Select a cloud provider and region.
++
+Your {astra-stream} tenant must be in the same region as the table where you want to enable CDC.
++
+CDC for {astra-db} is available only in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+If your database is deployed to an xref:astra-db-serverless:databases:regions.adoc[{astra-db} region] that doesn't yet support {astra-stream}, contact your {company} account representative or {support_url}[{company} Support].
+
+. Click *Create tenant*.
++
+[IMPORTANT]
+====
+Don't create any namespaces or topics in your tenant because CDC does this automatically.
+====
+
+. If you plan to enable CDC on multiple databases or <<multi-region-cdc,enable CDC on a multi-region database>>, create at least one {astra-stream} tenant for each region where your databases are deployed.
 
 [#create-table]
 === Create a table
 
-include::common:streaming:partial$cdc-astra/create-table.adoc[]
+If you haven't done so already, xref:astra-db-serverless:databases:manage-collections.adoc#tables[create one or more tables] in your database.
+
+Alternatively, you can follow these steps to create a small demo table to test CDC for {astra-db} before enabling it on your production tables:
+
+. In the {astra-ui}, click the name of the database where you want to enable CDC.
++
+Make sure the database is deployed to the same region as your {astra-stream} tenant.
+
+. Click *CQL Console*.
+
+. Use the built-in `cqlsh` to create a table in your database.
++
+For example, the following command creates a `cdc_demo` table with two columns in the `default_keyspace` keyspace:
++
+[source,sql]
+----
+CREATE TABLE IF NOT EXISTS default_keyspace.cdc_demo (key text PRIMARY KEY, c1 text);
+----
++
+If your database doesn't have a keyspace named `default_keyspace`, you must replace `default_keyspace` with the name of a keyspace in your database.
+You must also change the other commands in this guide accordingly.
+
+. Run a simple `select` statement to verify that the table was created:
++
+[source,sql]
+----
+select * from default_keyspace.cdc_demo;
+----
++
+Currently, the table has no rows:
++
+.Result
+[source,console]
+----
+ key | c1
+-----+----
+
+(0 rows)
+----
++
+Later, you will insert some rows to test your CDC connection and sink.
 
 [#enable-cdc-on-a-table]
 === Enable CDC on a table
 
-include::common:streaming:partial$cdc-astra/enable-cdc-on-table.adoc[]
+After you <<create-tenant,create a tenant>> and <<create-table,create tables>>, enable CDC on your tables.
+
+For <<multi-region-cdc,multi-region databases>>, you must use the xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}] to enable CDC in secondary regions.
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui}, click the name of the database where you want to enable CDC.
++
+If you created the demo table in <<create-table>>, select the database where you created that table.
+
+. Click the *CDC* tab, and then click *Enable CDC*.
+
+. Select a tenant, keyspace, and table, and then click *Enable CDC*.
+
+. Refresh the page to get the updated list of CDC-enabled tables in this database.
+
+. Repeat to enable CDC on additional tables.
+
+[IMPORTANT]
+====
+Enabling CDC on any table disables the *Add a region* functionality in the {astra-ui} for that database.
+You must use the {product-short} {devops-api} to add a region after enabling CDC.
+====
+--
+
+{product-short} {devops-api}::
++
+--
+[IMPORTANT]
+====
+CDC for multi-region {astra-db} {db-serverless-vector} databases is available only to qualified participants in this private preview release.
+Development is ongoing, and the features and functionality are subject to change.
+This private preview is governed by your Agreement and the https://www.datastax.com/legal/previewterms[{company} Preview Terms].
+
+If you're interested in this private preview feature, contact your {company} account representative.
+====
+
+Use the {product-short} {devops-api} to enable CDC on one or more tables in the same database in the same request.
+
+You can use these endpoints to enable CDC in single-region and multi-region databases.
+
+[tabs]
+====
+Enable CDC after deploying a region::
++
+Use these steps to enable CDC in a single-region database or in previously-deployed regions of a multi-region database.
+You can also use this configuration to enable CDC on new tables.
++
+. Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to check the database's existing CDC configuration:
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json"
+----
++
+Replace the following:
++
+* `**DB_ID**`: The xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID]
+* `**APPLICATION_TOKEN**`: An xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token]
++
+If the database has an existing CDC configuration, copy the `databaseName`, `tables`, and `regions` content from the response as a template for the subsequent `POST` request.
++
+. Use `{devops-api-ref-url}#tag/Database-Operations/operation/enableCDC[POST /v3/databases/**DB_ID**/cdc]` to enable CDC on one or more tables or regions.
++
+For databases where you previously enabled CDC, you only need to include new tables and regions in this `POST` request.
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X POST "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json" \
+--data '{
+  "databaseName": "**DB_NAME**",
+  "tables": [
+    {
+      "tableName": "**TABLE_NAME**",
+      "keyspaceName": "**KEYSPACE_NAME**"
+    },
+    {
+      "tableName": "**TABLE_NAME**",
+      "keyspaceName": "**KEYSPACE_NAME**"
+    }
+  ],
+  "regions": [
+    {
+      "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
+      "datacenterRegion": "**REGION_NAME**",
+      "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+      "streamingTenantName": "**STREAMING_TENANT_NAME**"
+    },
+    {
+      "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
+      "datacenterRegion": "**REGION_NAME**",
+      "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+      "streamingTenantName": "**STREAMING_TENANT_NAME**"
+    }
+  ]
+}'
+----
++
+Provide the following:
++
+* `**DB_ID**`: The xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID]
+* `**APPLICATION_TOKEN**`: An xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token]
+* `**DB_NAME**`: The name of the database where you want to enable CDC.
+* `tables`: An array of objects where each object contains the name of a table and keyspace where you want to enable CDC.
+* `regions`: An array of objects where each object contains the CDC configuration for one datacenter (region) where the database is deployed.
+For multi-region databases, only include regions where you want to enable CDC.
++
+** `**DATACENTER_ID**`: A xref:astra-db-serverless:databases:create-database.adoc#get-region-id[datacenter or region ID], which is the database ID with a numerical suffix.
+** `**DATACENTER_REGION**`: The name of the region where the database and {astra-stream} tenant are deployed, such as `us-east1`.
+You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
+Tenant must be deployed to the same region as the database.
+You can get these names with the xref:astra-streaming:apis:api-operations.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+
+Deploy a secondary region with CDC enabled::
++
+Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database and enable CDC in the same command:
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X POST "https://api.astra.datastax.com/v2/databases/**DB_ID**/datacenters" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json" \
+--data '{
+  [
+    {
+      "tier": "serverless",
+      "status": "ACTIVE",
+      "cloudProvider": "**CLOUD_PROVIDER**",
+      "region": "**REGION_NAME**",
+      "pcuGroupUUID": "**PCU_GROUP_ID**",
+      "streamingTenant": {
+        "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+        "streamingTenantName": "**STREAMING_TENANT_NAME**"
+      }
+    }
+  ]
+}'
+----
++
+Replace the following:
++
+* `**DB_ID**`: The xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID]
+* `**APPLICATION_TOKEN**`: An xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token]
+* `**CLOUD_PROVIDER**`: The cloud provider where the database is deployed, one of `AWS`, `GCP`, or `AZURE`.
+{astra-db} doesn't support cross-provider deployments.
+* `**REGION_NAME**`: The name of the region you want to add, such as `us-east1`.
+You can only add one region at a time.
+To enable CDC, you must deploy the database to xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+* `**PCU_GROUP_ID**`: The ID of the PCU group to provide provisioned capacity for the new datacenter deployment.
+Only applicable for organizations that use xref:astra-db-serverless:administration:provisioned-capacity-units.adoc[PCU groups].
+The PCU group must have the same `cloudProvider` and `region` as the new datacenter deployment.
+This is unrelated to Streaming Capacity Units.
+* `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of the {astra-stream} tenant and cluster.
+The tenant must be in the same region as specified in `region`.
+
++
+All tables replicated to the new region automatically have CDC enabled.
+The `astracdc` namespace and CDC topics for each table are created in the specified regional tenant.
+====
+
+To check the CDC configuration for a database or table, see <<get-cdc>>.
+--
+======
+
+When you enable CDC on a database for the first time, {astra-db} automatically creates an `astracdc` namespace in your streaming tenant.
+For each table where you enable CDC, {astra-db} creates two topics in the `astracdc` namespace:
+
+* The `data-` topic consumes CDC data in {astra-stream}.
+
+* The `log-` topic consumes schema changes, processes them, and then writes clean data to the `data-` topic.
+The `log-` topic is required for CDC functionality; it is not for direct use.
+
+Each topic name includes the keyspace and table name in the format `tenant/astracdc/data-dbid-keyspace.table`.
+If you enable CDC on multiple tables in the same region, each table has its own topics within the corresponding regional {astra-stream} tenant.
+
+Each topic has three partitions by default.
+You can increase partitions for the `data-` topic, as explained in <<increase-partitions>>.
 
 [#connect-a-sink]
 === Connect a sink
 
-include::common:streaming:partial$cdc-astra/connect-sink.adoc[]
+After you enable CDC, you need to connect a sink.
+
+The sink consumes messages from the `data-` topics, and then sends them to the associated service deployment.
+
+This example uses an Elasticsearch sink.
+You can use xref:streaming-learning:pulsar-io:connectors/index.adoc[other {astra-stream} sinks].
+
+. On the *CDC* tab where you just <<enable-cdc-on-a-table,enabled CDC on a table>>, click the table's name.
+
+. Click *Add Elastic Search Sink*.
+
+. For *Namespace*, select *astracdc*.
+
+. For *Sink Type*, select *Elastic Search*.
+
+. Enter a name for the sink.
+
+. In the *Connect Topics* section, for the *Input topic*, select the *data-* topic in the *astracdc* namespace.
+
+. In the *Sink-Specific Configuration* section, enter your *Elasticsearch URL*, *Index name*, and *API key* for your https://cloud.elastic.co/[Elasticsearch deployment].
++
+Don't enter a username, password, or token.
+
+. For *Ignore Record Key*, *Null Value Action*, and *Enable Schema*, {company} recommends the following values:
++
+* *Ignore Record Key*: `false`
+* *Null Value Action*: `DELETE`
+* *Enable Schema*: `true`
+
+. Click *Create*.
+
+If sink creation succeeds, a confirmation message appears in the {astra-ui}, and the new sink appears on the *Sinks* tab.
 
 === Test the connection
 
-include::common:streaming:partial$cdc-astra/test-connection.adoc[]
+Test the CDC functionality to verify that your Elasticsearch sink receives data through CDC:
+
+. In the {astra-ui}, click the name of the database where you enabled CDC and added a sink.
+
+. Click *CQL Console*.
+
+. Make a change to your table.
+For example, the following command inserts two rows into a table:
++
+[source,sql]
+----
+INSERT INTO default_keyspace.cdc_demo (key,c1) VALUES ('32a','bob3123');
+INSERT INTO default_keyspace.cdc_demo (key,c1) VALUES ('32b','bob3123b');
+----
+
+. Use a `select` statement to verify the change.
++
+The following example is a simple select statement that reads the entire table.
+If your table has more than a few rows, use a more specific `select` statement to avoid resource intensive queries.
++
+[source,sql]
+----
+select * from default_keyspace.cdc_demo;
+----
++
+.Result
+[%collapsible]
+====
+The demo table now has two rows:
+
+[source,console]
+----
+ key | c1
+-----+----------
+ 32a |  bob3123
+ 32b | bob3123b
+
+(2 rows)
+----
+====
+
+. Verify that the change was passed from CDC to your sink by fetching the data from your sink service deployment.
++
+For example, if you have an Elasticsearch sink, you can send a `GET` request to your Elasticsearch deployment:
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X POST "**ELASTICSEARCH_URL**/**INDEX_NAME**/_search?pretty" \
+-header "Authorization: ApiKey '**API_KEY**'"
+----
++
+Replace `**ELASTICSEARCH_URL**`, `**INDEX_NAME**`, and `**API_KEY**` with the values from your https://cloud.elastic.co/[Elasticsearch deployment] that you used to <<connect-a-sink,connect the sink>>.
+
+. Make sure the response includes your latest changes.
+This indicates that {astra-stream} successfully sent changes tracked by CDC to your sink service deployment.
++
+The following example shows a response from an Elasticsearch deployment:
++
+[source,json,subs="+quotes"]
+----
+{
+  "took": 1,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 3,
+      "relation": "eq"
+    },
+    "max_score": 1.0,
+    "hits": [
+      {
+        "_index": "**INDEX_NAME**",
+        "_id": "khl_hI0Bh25AUvCHghQo",
+        "_score": 1.0,
+        "_source": {
+          "name": "foo",
+          "title": "bar"
+        }
+      },
+      {
+        "_index": "**INDEX_NAME**",
+        "_id": "32a",
+        "_score": 1.0,
+        "_source": {
+          "c1": "bob3123"
+        }
+      },
+      {
+        "_index": "**INDEX_NAME**",
+        "_id": "32b",
+        "_score": 1.0,
+        "_source": {
+          "c1": "bob3123b"
+        }
+      }
+    ]
+  }
+}
+----
 
 [#increase-partitions]
 == Increase CDC data topic partitions
 
-include::common:streaming:partial$cdc-astra/increase-partitions.adoc[]
+When you enable CDC, {astra-db} creates three `data-` partitions and three `log-` partitions in your tenant's `astracdc` namespace.
+
+Optionally, you can increase the number of partitions for the `data-` topic.
+Increasing the number of partitions creates new partitions, but existing data remains in the original partitions.
+New messages are distributed across the new partitions.
+
+To increase the number of `data-` topic partitions, do the following:
+
+. Before you make changes, use `xref:astra-streaming:developing:configure-pulsar-env.adoc[pulsar-admin]` to get the namespace's existing partitions:
++
+[source,bash]
+----
+bin/pulsar-admin topics list-partitioned-topics astracdc
+----
++
+The response describes the existing partitions for the `data-` and `log-` topics.
+The default configuration has three partitions for each topic numbered 0, 1, and 2.
++
+[source,console,subs="+quotes"]
+----
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-1
+persistent://**TENANT_NAME**/astracdc/log-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-2
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-0
+persistent://**TENANT_NAME**/astracdc/log-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-0
+persistent://**TENANT_NAME**/astracdc/log-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-1
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-2
+----
++
+The `**TENANT_NAME**`, `**DB_ID**`, `**KEYSPACE_NAME**`, and `**TABLE_NAME**` values are the same for each partition.
+The actual values depend on your CDC configuration.
+
+. From the response, get a `data-` topic string without `persistent://` and the partition number.
++
+For example, from `persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-1`, extract only `**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**`.
+
+. Use the `update-partitioned-topic` command to increase the number of partitions for the `data-` topic:
++
+[source,bash,subs="+quotes"]
+----
+bin/pulsar-admin topics update-partitioned-topic **DATA_TOPIC_STRING** --partitions **NUMBER**
+----
++
+Replace the following:
++
+* `**DATA_TOPIC_STRING**`: The `data-` topic string from the `list-partitioned-topics` response in the format of `**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**`.
+* `**NUMBER**`: The desired total number of partitions.
++
+For example, `--partitions 10` increases the total number of partitions to 10.
+If the topic has 3 partitions, then `--partitions 10` creates 7 new partitions for a total of 10.
++
+[IMPORTANT]
+====
+You can only increase the number of partitions.
+
+You cannot decrease the number of partitions due to potential data loss and message ordering issues.
+====
+
+. Verify the increase:
++
+[source,bash,subs="+quotes"]
+----
+bin/pulsar-admin topics list **TENANT_NAME**/astracdc
+----
++
+Replace `**TENANT_NAME**` with your CDC tenant name.
+
+. Make sure the response includes the desired total number of partitions.
++
+The following response indicates that the `data-` topic now has 10 total partitions numbered 0-9:
++
+[source,console,subs="+quotes"]
+----
+persistent://**TENANT_NAME**/astracdc/log-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-2
+persistent://**TENANT_NAME**/astracdc/log-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-0
+persistent://**TENANT_NAME**/astracdc/log-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-1
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-9
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-8
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-7
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-6
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-1
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-0
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-5
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-4
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-3
+persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**-partition-2
+----
+
+. Confirm that the topic was updated to have the desired number of partitions:
++
+[source,bash]
+----
+bin/pulsar-admin topics partitioned-stats persistent://**DATA_TOPIC_STRING**
+----
++
+Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**`.
++
+.Result
+[%collapsible]
+====
+[source,json]
+----
+{
+  "msgRateIn" : 0.0,
+  "msgThroughputIn" : 0.0,
+  "msgRateOut" : 0.0,
+  "msgThroughputOut" : 0.0,
+  "bytesInCounter" : 0,
+  "msgInCounter" : 0,
+  "bytesOutCounter" : 0,
+  "msgOutCounter" : 0,
+  "averageMsgSize" : 0.0,
+  "msgChunkPublished" : false,
+  "storageSize" : 0,
+  "backlogSize" : 0,
+  "publishRateLimitedTimes" : 0,
+  "earliestMsgPublishTimeInBacklogs" : 0,
+  "offloadedStorageSize" : 0,
+  "lastOffloadLedgerId" : 0,
+  "lastOffloadSuccessTimeStamp" : 0,
+  "lastOffloadFailureTimeStamp" : 0,
+  "publishers" : [ ],
+  "waitingPublishers" : 0,
+  "subscriptions" : { },
+  "replication" : { },
+  "nonContiguousDeletedMessagesRanges" : 0,
+  "nonContiguousDeletedMessagesRangesSerializedSize" : 0,
+  "compaction" : {
+    "lastCompactionRemovedEventCount" : 0,
+    "lastCompactionSucceedTimestamp" : 0,
+    "lastCompactionFailedTimestamp" : 0,
+    "lastCompactionDurationTimeInMills" : 0
+  },
+  "metadata" : {
+    "partitions" : 10
+  },
+  "partitions" : { }
+}
+----
+====
 
 [#multi-region-cdc]
 == Enable CDC for multi-region databases
 
-include::common:streaming:partial$cdc-astra/enable-multiregion.adoc[]
+[IMPORTANT]
+====
+CDC for multi-region {astra-db} {db-serverless-vector} databases is available only to qualified participants in this private preview release.
+Development is ongoing, and the features and functionality are subject to change.
+This private preview is governed by your Agreement and the https://www.datastax.com/legal/previewterms[{company} Preview Terms].
+
+If you're interested in this private preview feature, contact your {company} account representative.
+====
+
+To enable CDC for {astra-db} on a xref:astra-db-serverless:databases:manage-regions.adoc[multi-region database], do the following:
+
+. Complete the <<prerequisites>>.
++
+CDC for multi-region databases is only available for {db-serverless-vector} databases.
+
+. <<create-tenant,Create at least one {astra-stream} tenant for each region>> where you want to enable CDC.
++
+If your database is deployed to a region that doesn't support {astra-stream}, contact your {company} account representative or {support_url}[{company} Support].
+
+. <<create-table,Create tables>> in your database, if you haven't done so already.
+
+. Use the {product-short} {devops-api} to <<enable-cdc-on-a-table,enable CDC on all applicable tables and regions>>.
+
+. <<connect-a-sink,Connect a sink>> to transmit messages from all tenants to your sink service deployment.
 
 === Reconcile multi-region writes
 
-include::common:streaming:partial$cdc-astra/reconcile-multiregion-writes.adoc[]
+[IMPORTANT]
+====
+For multi-region databases, you must reconcile concurrent messages transmitted by CDC to your sink service deployment.
+====
+
+{astra-db}'s eventual consistency policy replicates changes to all regions of a multi-region database, regardless of the original region where the write occurred.
+
+When you enable CDC on a multi-region database, CDC emits writes events for all CDC-enabled tables in all CDC-enabled regions, regardless of the original region.
+This means that all `data-` topics for the same table in all regional tenants eventually receive the same write events, and those topics pass concurrent, duplicate events for the same row to the sink.
+
+{astra-db} doesn't reconcile concurrent modifications to the same row in multiple regions.
+Therefore, you are responsible for reconciling concurrent CDC messages transmitted to your sink service deployment.
+
+To assist with reconciling messages, each CDC message contains the entire row, including the partition key and clustering keys, as well as an `eventTime`, which is the internal {cass-short} timestamp for the mutation.
+You can use the primary key and timestamps to reconcile concurrent modifications to the same row in multiple regions.
+
+However, be aware of the following limitations:
+
+* Cross-region writes can be received out of order or be missed.
+* Cross-region repairs don't emit CDC events.
+* Ordering between regions isn't guaranteed.
 
 [#get-cdc]
 == Check CDC status
 
-include::common:streaming:partial$cdc-astra/check-status.adoc[]
+You can check your active CDC configurations in the {astra-ui} or with the {product-short} {devops-api}.
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui}, click the name of the database that you want to inspect.
+
+. Click the *CDC* tab, and then review the list of tables where you have enabled CDC.
+
+. Click a table's name to inspect the table's CDC configuration.
+--
+
+{product-short} {devops-api}::
++
+--
+[tabs]
+====
+By database::
++
+Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get CDC configuration details for an entire database:
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json"
+----
++
+Replace `**DB_ID**` with the xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID], and replace `**APPLICATION_TOKEN**` with an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token].
++
+The response includes an array of tables where CDC is enabled.
+For multi-region databases with CDC enabled in multiple regions, the `regions` array includes the {astra-stream} configuration for each region.
++
+[source,json]
+----
+{
+  "orgID": "8765-4321-10020012-1212",
+  "databaseID": "1234-5678-90080012-2323",
+  "databaseName": "test_db",
+  "tables": [
+    {
+      "tableName": "table1",
+      "keyspaceName": "default_keyspace"
+    },
+    {
+      "tableName": "table2",
+      "keyspaceName": "default_keyspace"
+    },
+    {
+      "tableName": "table3",
+      "keyspaceName": "other_keyspace"
+    }
+  ],
+  "regions": [
+    {
+      "datacenterID": "1234-5678-90080012-2323-1",
+      "datacenterRegion": "us-east1",
+      "streamingClusterName": "pulsar-gcp-useast1-dev",
+      "streamingTenantName": "cdc-streaming"
+    }
+  ]
+}
+----
+
+By table::
++
+Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc]` to get CDC configuration details for a specific table:
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json"
+----
++
+In the path, replace `**DB_ID**` with the xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID], and replace `**KEYSPACE_NAME**` and `**TABLE_NAME**` with the name of the keyspace and table where you want to check the CDC configuration.
+In the `Authorization` header, replace `**APPLICATION_TOKEN**` with an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token].
++
+The response includes the CDC status and, if available, the {astra-stream} configuration.
+For multi-region databases with CDC enabled in multiple regions, the `regions` array includes the {astra-stream} configuration for each region.
++
+[source,json]
+----
+[
+  {
+    "orgID": "8765-4321-10020012-1212",
+    "databaseID": "1234-5678-90080012-2323",
+    "databaseName": "test_db",
+    "regions": [
+      {
+        "datacenterID": "1234-5678-90080012-2323-1",
+        "datacenterRegion": "us-east1",
+        "streamingClusterName": "pulsar-gcp-useast1-dev",
+        "streamingTenantName": "cdc-streaming"
+      }
+    ],
+    "status": "Active"
+  }
+]
+----
+====
+--
+======
 
 [#put-cdc]
 === Update a database's CDC configuration
 
-include::common:streaming:partial$cdc-astra/put-cdc.adoc[]
+You can use the {product-short} {devops-api} to change a database's CDC configuration with one request.
+
+The `PUT /v3/databases/**DB_ID**/cdc` endpoint accepts a desired state list representing the entire CDC configuration for a specific database.
+This allows you to use a single request to add, change, and remove CDC settings for all tables and regions for a single database.
+
+If CDC isn't enabled for the database, the request enables CDC on the tables and regions specified in the request.
+If CDC is already enabled, the request updates the existing CDC configuration.
+
+. Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get the current CDC configuration details for the database:
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json"
+----
++
+Replace `**DB_ID**` with the xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID], and replace `**APPLICATION_TOKEN**` with an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token].
+
+. If the database has an existing CDC configuration, copy the `databaseName`, `tables`, and `regions` content from the response, and then edit the `tables` and `regions` arrays to reflect the desired state of the CDC configuration for the database.
+You can add new tables and regions, remove existing tables and regions, and change streaming clusters and tenants.
++
+If the database has no existing CDC configuration, use the following example as a template:
++
+[source,json]
+----
+{
+  "databaseName": "**DB_NAME**",
+  "tables": [
+    {
+      "tableName": "**TABLE_NAME**",
+      "keyspaceName": "**KEYSPACE_NAME**"
+    },
+    {
+      "tableName": "**TABLE_NAME**",
+      "keyspaceName": "**KEYSPACE_NAME**"
+    }
+  ],
+  "regions": [
+    {
+      "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
+      "datacenterRegion": "**REGION_NAME**",
+      "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+      "streamingTenantName": "**STREAMING_TENANT_NAME**"
+    },
+    {
+      "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
+      "datacenterRegion": "**REGION_NAME**",
+      "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+      "streamingTenantName": "**STREAMING_TENANT_NAME**"
+    }
+  ]
+}
+----
++
+Provide the following:
++
+* `**DB_NAME**`: The name of the database where you want to update the CDC configuration.
+* `tables`: An array of objects where each object contains the name of a table and keyspace where you want CDC to be enabled.
+Include new tables and all existing tables that you want to keep in the CDC configuration.
+* `regions`: An array of objects where each object contains the CDC configuration for one datacenter (region) where the database is deployed.
+At minimum, this includes the database's primary region.
+For multi-region databases, only include regions where you want to enable CDC.
++
+** `**DATACENTER_ID**`: A xref:astra-db-serverless:databases:create-database.adoc#get-region-id[datacenter or region ID], which is the database ID with a numerical suffix.
+** `**DATACENTER_REGION**`: The name of the region where the database and {astra-stream} tenant are deployed, such as `us-east1`.
+You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
+The tenant must be deployed to the same region as the database.
+You can get these names with the xref:astra-streaming:apis:api-operations.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+
+. Send the updated configuration to `{devops-api-ref-url}#tag/Database-Operations/operation/updateCDC[PUT /v3/databases/**DB_ID**/cdc]`.
++
+[IMPORTANT]
+=====
+This is a desired state list.
+
+Make sure that you include all existing tables and regions that you want to keep in the CDC configuration.
+
+If you omit any existing tables or regions from the request, CDC is disabled for those tables or regions.
+=====
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X PUT "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json" \
+--data '{
+  "databaseName": "test_db",
+  "tables": [
+    {
+      "tableName": "table1",
+      "keyspaceName": "default_keyspace"
+    },
+    {
+      "tableName": "table2",
+      "keyspaceName": "default_keyspace"
+    },
+    {
+      "tableName": "table3",
+      "keyspaceName": "other_keyspace"
+    }
+  ],
+  "regions": [
+    {
+      "datacenterID": "1234-5678-90080012-2323-1",
+      "datacenterRegion": "us-east1",
+      "streamingClusterName": "pulsar-gcp-useast1-dev",
+      "streamingTenantName": "cdc-streaming"
+    }
+  ]
+}'
+----
++
+Replace the following:
++
+* `**DB_ID**`: The xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID]
+* `**APPLICATION_TOKEN**`: An xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token]
+* `data`: Replace the example object with your desired state list that you prepared in the previous step.
+
+. To verify that the changes were applied as expected, use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get the new CDC configuration details for the database:
++
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json"
+----
+
+. If you removed any tables from the existing CDC configuration, decide whether you want to delete the associated namespace, topics, and {astra-stream} tenant.
+For more information and options for handling these artifacts, see <<disable-cdc-for-a-table>>.
 
 [#disable-cdc-for-a-table]
 === Disable CDC for a table
 
-include::common:streaming:partial$cdc-astra/disable.adoc[]
+CDC is automatically disabled if you drop a table, terminate a database, or remove a CDC-enabled region from a multi-region database.
+
+You can remove a table's CDC configuration without deleting the table.
+For multi-region databases, this disables CDC for the table across all regions.
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui}, click the name of the database where you want to disable CDC.
+
+. Click the *CDC* tab.
+
+. In the *Change Data Capture* list, click the table's name.
+
+. Click *Disable* to remove the table's CDC configuration.
+--
+
+{product-short} {devops-api}::
++
+--
+Use `{devops-api-ref-url}#tag/Database-Operations/operation/deleteCDC[DELETE /v3/databases/**DB_ID**/cdc]` to disable CDC for a table:
+
+[source,curl,subs="+quotes"]
+----
+curl -sS -L -X DELETE "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+--header "Authorization: Bearer **APPLICATION_TOKEN**" \
+--header "Accept: application/json" \
+--data '{
+  "databaseID": "**DB_ID**",
+  "tables": [
+    {
+      "tableName": "**TABLE_NAME**",
+      "keyspaceName": "**KEYSPACE_NAME**"
+    }
+  ]
+}'
+----
+
+Replace the following:
+
+* `**DB_ID**`: The xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID].
+* `**APPLICATION_TOKEN**`: An xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token].
+* `**TABLE_NAME**` and `**KEYSPACE_NAME**`: The name of table and keyspace where you want to disable CDC.
+If you want to disable CDC for multiple tables at once, include an object for each table in the `tables` array.
+
+[TIP]
+====
+You can use `PUT /v3/databases/**DB_ID**/cdc` to make multiple changes to a database's CDC configuration in one request, including additions, changes, and removals of tables and regions.
+For more information, see <<put-cdc>>.
+====
+--
+======
+
+Disabling CDC doesn't remove the associated namespace, topics, or {astra-stream} tenant:
+
+* If you reenable CDC for the same table, the existing topics are reused with the existing records.
+
+* If you want to discard a table's CDC records, you must manually remove the associated {astra-stream} artifacts after disabling CDC:
++
+** If you remove CDC from a table, then you can delete the table's `data-` and `log-` topics from the `astracdc` namespace in the {astra-stream} tenant.
+For multi-region databases, make sure that you delete the topics in the tenant for each region where the database is deployed
+** If you remove CDC from all tables in a region, and you no longer need CDC in that region, then you can delete the `astracdc` namespace from the {astra-stream} tenant in that region.
+Deleting the namespace also deletes the topics within that namespace.
+** If you remove CDC from all of a database's tables, and you no longer need an {astra-stream} tenant for any reason, you can delete the entire tenant.
 
 == See also
 
-include::common:streaming:partial$cdc-astra/see-also.adoc[]
+* xref:astra-streaming:ROOT:astream-faq.adoc[{astra-stream} FAQs]
+* xref:astra-streaming:developing:clients/index.adoc[Use {pulsar-short} clients with {astra-stream}]
+* xref:streaming-learning:use-cases-architectures:change-data-capture/index.adoc[CDC overview]

@@ -322,7 +322,7 @@ If there isn't a class in the Python file, the class name is the filename withou
 +
 For Java scripts, the class name is the class to execute.
 +
-image::astream-exclamation-function.png[Exclamation Function]
+image::developing:astream-exclamation-function.png[Exclamation Function]
 --
 
 Use {company} transform function::
@@ -409,7 +409,7 @@ Functions produce logs to help you debug them.
 
 . From here, you can view, refresh, copy, and download your functions' logs.
 +
-image::astream-function-log.png[Function Log]
+image::developing:astream-function-log.png[Function Log]
 +
 If you specified a log topic when deploying your function, function logs also output to that topic.
 

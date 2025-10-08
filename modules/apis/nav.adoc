@@ -1,4 +1,0 @@
-.API references
-* xref:index.adoc[]
-* xref:developing:using-curl.adoc[]
-* xref:api-operations.adoc[]

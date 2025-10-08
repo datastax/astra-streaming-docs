@@ -35,7 +35,7 @@ The {gpt-schema-translator} generates a mapping between the two schemas that the
 +
 If this button isn't available, the GPT schema translator doesn't have an available schema for the topic or schema mapping isn't available for the selected topic and table.
 +
-image::two-schemas.png[Schema mapping,320,240]
+image::developing:two-schemas.png[Schema mapping,320,240]
 +
 .{cass-short}-to-{pulsar-short} schema mapping example
 [%collapsible]
@@ -415,7 +415,7 @@ This example demonstrates how you can generates schema mapping in real time.
 . In the {astra-ui}, create a mapping for the tenant.
 When a topic schema is available to the {gpt-schema-translator}, click *Generate Mapping*.
 +
-image::create-schema-mapping.png[Schema mapping,320,240]
+image::developing:create-schema-mapping.png[Schema mapping,320,240]
 +
 The {gpt-schema-translator} generates an AVRO-to-CQL schema mapping while messages are processed.
 +

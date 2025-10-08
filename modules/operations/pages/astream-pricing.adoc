@@ -18,7 +18,7 @@ It is meant for evaluation before upgrading to a paid plan.
 *Pay As You Go* and *Annual* plans can realize the benefits of fully-managed SaaS offerings.
 You only pay for the resources you use to produce, process, and consume messages.
 These plans require a payment method on file.
-For {product} metering details, see https://www.datastax.com/pricing/astra-streaming[{product} pricing].
+For {product} metering details, see https://www.datastax.com/pricing?product=astra-streaming[{product} pricing].
 
 == Shared clusters
 

@@ -4,10 +4,6 @@ version: ~
 start_page: 'index.adoc'
 
 nav:
-- modules/getting-started/nav.adoc
-- modules/developing/nav.adoc
-- modules/operations/nav.adoc
-- modules/apis/nav.adoc
 - modules/ROOT/nav.adoc
 
 asciidoc:

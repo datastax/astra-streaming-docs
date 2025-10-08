@@ -109,7 +109,7 @@ Your IDE might show errors until you complete the next steps.
 
 . Provide values for the following variables:
 +
-include::developing:partial$client-variables-table.adoc[]
+include::ROOT:partial$client-variables-table.adoc[]
 
 . Use the client to create a producer.
 +

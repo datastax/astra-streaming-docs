@@ -21,7 +21,7 @@ Depending on the API you use, you need certain information to form HTTP requests
 . Find the *Tenant Details* section.
 Here you can find the essential information you need to communicate with your {pulsar-short} tenant, including the *Web Service URL*.
 +
-image:tenant-details.png[Tenant details in {product}]
+image::developing:tenant-details.png[Tenant details in {product}]
 +
 [TIP]
 ====
