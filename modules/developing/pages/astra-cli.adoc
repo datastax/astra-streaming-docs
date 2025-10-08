@@ -2,7 +2,7 @@
 :navtitle: {astra-cli}
 :description: {astra-cli} provides a one-stop shop for managing your Astra resources through scripts or commands in your local terminal.
 
-The xref:astra-cli:ROOT:index.adoc[{product-short} Command-Line Interface ({astra-cli})] is a set of commands you can use to create and manage {product-short} and {product} resources:
+The {product-short} Command-Line Interface ({astra-cli}) is a set of commands you can use to create and manage {product-short} and {product} resources:
 
 * Creation and management of {astra-db} databases, {astra_stream} tenants, and their associated artifacts.
 * Querying and data loading.
@@ -23,6 +23,4 @@ astra streaming create **TENANT_NAME** \
 
 You can use {astra-cli} instead of or in addition to the {astra-ui} and {product-short} APIs.
 
-For more information, see the following:
-
-* https://www.datastax.com/blog/introducing-cassandra-astra-cli[Accelerate your {cass-short} development and automation with the {astra-cli}]
+For more information, see the xref:astra-cli:ROOT:index.adoc[{astra-cli} documentation].

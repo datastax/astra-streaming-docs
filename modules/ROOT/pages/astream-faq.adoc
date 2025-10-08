@@ -16,7 +16,7 @@ See xref:operations:astream-pricing.adoc[].
 
 == Why is {product} based on {pulsar-reg}?
 
-For information about the decision to use {pulsar}, see https://www.datastax.com/blog/four-reasons-why-apache-pulsar-essential-modern-data-stack[Four Reasons Why {pulsar} is Essential to the Modern Data Stack].
+For information about the decision to use {pulsar}, see https://www.ibm.com/think/topics/apache-pulsar[What is {pulsar}].
 
 == What happened to Kesque?
 

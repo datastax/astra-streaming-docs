@@ -26,9 +26,9 @@ To use a private link service or private endpoint for {product}, do the followin
 
 . Get your cloud provider resource identifier:
 +
-* https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html[AWS Private Link]: AWS account numbers
-* https://learn.microsoft.com/en-us/azure/private-link/private-link-overview[Microsoft Azure Private Link]: Azure subscription IDs
-* https://cloud.google.com/vpc/docs/private-service-connect[Google Cloud Private Service Connect]: GCP project IDs
+* AWS Private Link: AWS account numbers
+* Microsoft Azure Private Link: Azure subscription IDs
+* Google Cloud Private Service Connect: GCP project IDs
 
 . Contact {support_url}[{company} Support] to request private connectivity for {product}.
 

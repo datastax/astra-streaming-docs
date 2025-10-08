@@ -5,7 +5,7 @@
 [IMPORTANT]
 ====
 Change Data Capture (CDC) for {astra-db} incurs billed charges based on your {astra-stream} usage.
-For more information, see https://www.datastax.com/pricing/astra-streaming[{astra-stream} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
+For more information, see https://www.datastax.com/pricing?product=astra-streaming[{product} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
 ====
 
 Change Data Capture (CDC) for {astra-db} automatically captures changes in real time, de-duplicates the changes, and then streams the clean set of changed data into {product} where it can be processed by client applications or sent to downstream systems.
