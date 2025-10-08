@@ -53,7 +53,7 @@ This example uses tools included with the https://kafka.apache.org/downloads[Apa
 . Create a new topic in your `kafka` namespace.
 This example creates a topic named `test-topic` in the `kafka` namespace on a tenant named `tenant-1`.
 +
-image::astream-create-kafka-topic.png[Create Kafka Topic]
+image::developing:astream-create-kafka-topic.png[Create Kafka Topic]
 
 . Move your `ssl.properties` file to your `Kafka_2.13-3.1.0/config` folder.
 These values are required for SSL encryption.
@@ -95,7 +95,7 @@ hello pulsar
 +
 Your Kafka messages are being produced and consumed in a {pulsar-short} cluster:
 +
-image::astream-kafka-monitor.png[Monitor Kafka Activity]
+image::developing:astream-kafka-monitor.png[Monitor Kafka Activity]
 
 == See also
 

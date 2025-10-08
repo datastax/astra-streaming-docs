@@ -61,7 +61,7 @@ Notice that different configurations are chained together to choose how connecti
 
 . Provide values for the following variables:
 +
-include::developing:partial$client-variables-table.adoc[]
+include::ROOT:partial$client-variables-table.adoc[]
 
 . Create a new `producer` instance, and then instruct it to produce a message in a string format.
 Messages can also be in formats like JSON, byte, and AVRO.

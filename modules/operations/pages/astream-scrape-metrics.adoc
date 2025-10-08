@@ -89,7 +89,7 @@ Prometheus now shows the total incoming {pulsar-reg} messages for your {product}
 . To test the integration, produce a few messages in your tenant with the {pulsar-short} CLI or the {product} Websocket.
 Make sure your Prometheus graph displays the number of incoming {pulsar-short} messages with each 60 second scrape:
 +
-image::astream-prometheus-graph.png[Scraping {product} with Prometheus]
+image::operations:astream-prometheus-graph.png[Scraping {product} with Prometheus]
 
 == Content encoding
 
