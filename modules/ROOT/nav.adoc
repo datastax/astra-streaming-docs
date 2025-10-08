@@ -15,7 +15,7 @@
 *** xref:developing:clients/python-produce-consume.adoc[]
 *** xref:developing:clients/csharp-produce-consume.adoc[]
 *** xref:developing:clients/golang-produce-consume.adoc[]
-*** xref:developing:lients/nodejs-produce-consume.adoc[]
+*** xref:developing:clients/nodejs-produce-consume.adoc[]
 *** xref:developing:clients/spring-produce-consume.adoc[]
 ** {pulsar-short} subscriptions
 *** xref:ROOT:astream-subscriptions.adoc[]
@@ -51,7 +51,7 @@
 
 .API references
 * xref:apis:index.adoc[]
-* xref:apis:developing:using-curl.adoc[]
+* xref:developing:using-curl.adoc[]
 * xref:apis:api-operations.adoc[]
 
 .Frequently asked questions
