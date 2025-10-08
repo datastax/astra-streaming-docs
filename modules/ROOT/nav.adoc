@@ -25,7 +25,7 @@
 *** xref:ROOT:astream-subscriptions-keyshared.adoc[]
 * xref:developing:astream-cdc.adoc[]
 * xref:developing:gpt-schema-translator.adoc[]
-* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors^]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors]
 
 .Operations
 * xref:operations:astream-limits.adoc[]

@@ -79,7 +79,7 @@ await using var producer = client.NewProducer(Schema.String)
 .Program.cs
 [source,csharp]
 ----
-_ = await producer.Send("Hello World"); // Send a message and ignore the returned MessageId
+await producer.Send("Hello World"); // Send a message and ignore the returned MessageId
 Console.WriteLine("Sent message");
 ----
 
