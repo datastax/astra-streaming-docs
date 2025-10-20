@@ -267,7 +267,7 @@ Later, you will insert some rows to test your CDC connection and sink.
 
 After you <<create-tenant,create a tenant>> and <<create-table,create tables>>, enable CDC on your tables.
 
-For <<multi-region-cdc,multi-region databases>>, you must use the xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}] to enable CDC in secondary regions.
+You can use these options to enable single-region CDC and <<multi-region-cdc,multi-region CDC>> (if available for your organization).
 
 [tabs]
 ======
@@ -281,40 +281,25 @@ If you created the demo table in <<create-table>>, select the database where you
 . Click the *CDC* tab, and then click *Enable CDC*.
 
 . Select a tenant, keyspace, and table, and then click *Enable CDC*.
++
+For multi-region databases, you must select a tenant for each region where you want to enable CDC.
 
 . Refresh the page to get the updated list of CDC-enabled tables in this database.
 
 . Repeat to enable CDC on additional tables.
-
-[IMPORTANT]
-====
-Enabling CDC on any table disables the *Add a region* functionality in the {astra-ui} for that database.
-You must use the {product-short} {devops-api} to add a region after enabling CDC.
-====
 --
 
 {product-short} {devops-api}::
 +
 --
-[IMPORTANT]
-====
-CDC for multi-region {astra-db} {db-serverless-vector} databases is available only to qualified participants in this private preview release.
-Development is ongoing, and the features and functionality are subject to change.
-This private preview is governed by your Agreement and the https://www.datastax.com/legal/previewterms[{company} Preview Terms].
-
-If you're interested in this private preview feature, contact your {company} account representative.
-====
-
-Use the {product-short} {devops-api} to enable CDC on one or more tables in the same database in the same request.
-
-You can use these endpoints to enable CDC in single-region and multi-region databases.
+Use the xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}] to enable CDC on one or more tables in the same database in the same request.
 
 [tabs]
 ====
-Enable CDC after deploying a region::
+`/v3/databases/$DB_ID/cdc`::
 +
-Use these steps to enable CDC in a single-region database or in previously-deployed regions of a multi-region database.
-You can also use this configuration to enable CDC on new tables.
+Use the `/v3/databases/$DB_ID/cdc` endpoint to enable CDC on single-region and multi-region databases.
+It supports initial CDC setup and extending CDC to new tables in databases where you enabled CDC previously.
 +
 . Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to check the database's existing CDC configuration:
 +
@@ -386,9 +371,9 @@ You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[
 Tenant must be deployed to the same region as the database.
 You can get these names with the xref:astra-streaming:apis:api-operations.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
-Deploy a secondary region with CDC enabled::
+`/v2/databases/$DB_ID/datacenters`::
 +
-Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database and enable CDC in the same command:
+Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database _and_ enable CDC in the same command:
 +
 [source,curl,subs="+quotes"]
 ----
@@ -762,7 +747,7 @@ If your database is deployed to a region that doesn't support {astra-stream}, co
 
 . <<create-table,Create tables>> in your database, if you haven't done so already.
 
-. Use the {product-short} {devops-api} to <<enable-cdc-on-a-table,enable CDC on all applicable tables and regions>>.
+. <<enable-cdc-on-a-table,Enable CDC on all applicable tables and regions>>.
 
 . <<connect-a-sink,Connect a sink>> to transmit messages from all tenants to your sink service deployment.
 
