@@ -1,38 +1,93 @@
 = {product}
-:navtitle: Intro to {product}
-:page-tag: astra-streaming,planner,admin,dev,pulsar
+:page-layout: landing
+:data-uri:
 
-{product} is a cloud native data streaming and event stream processing
-service tightly integrated into the {astra-ui} and powered by {pulsar-reg}.
-Using {product}, customers can quickly create {pulsar-short} instances,
-manage their clusters, scale across cloud regions, and manage {pulsar-short} resources
-such as topics, connectors, functions and subscriptions.
+[.[&>h2]:!hidden]
+== {empty}
 
-{product} takes advantage of the core capabilities built into {product-short} such
-as SSO, IAM and billing.
-Existing {product-short} customers can augment their existing database capabilities
-with pub/sub and streaming to address a wider range of use cases right away.
+[subs="macros,attributes"]
+++++
+<div class="grid lg:grid-rows-1 lg:grid-cols-2 gap-6 mt-6">
 
-With {product}, customers now have powerful capabilities to help drive key
-business and technical outcomes including:
+  <div class="flex flex-col items-start gap-4 rounded border p-4">
 
-*Real Time Processing*:: Legacy batch processing jobs result in stale data that
-can slow down an entire business.
-With {product}, customers can capture event data and data changes in real-time,
-process that data and take action to create a more responsive, nimble organization.
+    <div class="rounded bg-level1 flex p-2">
+        svg:ROOT:using-the-astra-console.svg[role="mx-auto my-auto w-8 h-8"]
+    </div>
 
-*Data Science & Machine Learning*:: Today, every business is a data business.
-{product} allows event data to be stored as a persistent event log which
-can be retained indefinitely and played back to refine ML data models or
-offloaded to a data lake or other storage for further analysis in the future.
+    <h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Astra Streaming</h3>
 
-*Modernized Event Driven Architectures*:: {product} provides a unified
-messaging platform that addresses streaming, pub/sub and queuing use cases with
-low latency and at massive scale. Organizations that are struggling to make
-their legacy messaging technologies keep up will find {product} to be a
-frictionless path to modernization.
+    Delivered as a fully-managed data streaming and event stream processing service with boundless scale, massive throughput, and low latency, {product} is the simplest way to modernize your event driven architecture and turbo charge your data in motion strategy.
+    You can create {pulsar-short} instances, scale across cloud regions, and manage {pulsar-short} resources such as topics, connectors, functions and subscriptions.
 
-*Faster Access to Data*:: No one has patience for slow loading web pages or mobile apps.
-By combining {product} with {astra-db}, customers can create read-optimized
-views of data that can be quickly read from {astra-db} and ensure that data is
-always up to date by leveraging the event stream processing capabilities of {product}.
+    xref:astra-streaming:getting-started:index.adoc[Get started with Astra Streaming]
+
+  </div>
+
+  <div class="flex flex-col items-start gap-4 rounded border p-4">
+
+    <div class="rounded bg-level1 flex p-2">
+        svg:ROOT:what-is-astra-db.svg[role="mx-auto my-auto w-8 h-8"]
+    </div>
+
+    <h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Streaming Guides</h3>
+
+    Learn about the amazing things you can do with all of our streaming products.
+    We've included best practices for Apache Pulsar, a full connector reference,
+    and examples for getting the most out of Astra's CDC feature.
+
+    xref:streaming-learning:ROOT:index.adoc[Get started with streaming examples and guides]
+
+  </div>
+
+</div>
+
+<div class="grid lg:grid-rows-1 lg:grid-cols-3 gap-6 mt-6">
+
+  <div class="flex flex-col items-start gap-4 rounded border p-4">
+
+    <div class="rounded bg-level1 p-2">
+        svg:ROOT:connect-clients-to-astra-db.svg[role="mx-auto my-auto w-8 h-8"]
+    </div>
+
+    <div><h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Real Time Processing</h3></div>
+
+    Legacy batch processing jobs result in stale data that
+    can slow down an entire business.
+    With {product}, customers can capture event data and data changes in real-time,
+    process that data and take action to create a more responsive, nimble organization.
+
+  </div>
+
+  <div class="flex flex-col items-start gap-4 rounded border p-4">
+
+    <div class="rounded bg-level1 p-2">
+        svg:ROOT:migrating-apps.svg[role="mx-auto my-auto w-8 h-8"]
+    </div>
+
+    <div><h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Event Driven Architecture</h3></div>
+
+    {product} provides a unified
+    messaging platform that addresses streaming, pub/sub and queuing use cases with
+    low latency and at massive scale. Organizations that are struggling to make
+    their legacy messaging technologies keep up will find {product} to be a
+    frictionless path to modernization.
+
+  </div>
+
+  <div class="flex flex-col items-start gap-4 rounded border p-4">
+
+    <div class="rounded bg-level1 p-2">
+        svg:ROOT:what-is-astra-streaming.svg[role="mx-auto my-auto w-8 h-8"]
+    </div>
+
+    <div><h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Change Data Capture</h3></div>
+
+    Change Data Capture (CDC) enables you to send data changes in real time throughout your entire ecosystem.
+    With a wide range of connectors to data warehouses, messaging systems, data lakes as well as client libraries, you can send your data wherever it needs to go in real time.
+
+  </div>
+
+</div>
+
+++++
