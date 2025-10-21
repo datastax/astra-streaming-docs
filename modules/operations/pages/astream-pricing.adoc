@@ -3,22 +3,12 @@
 
 {product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {product-short}.
 
+== Subscription plans
+
 There are three {product} subscription plans.
 An {product} subscription is associated with an {product-short} organization, but {product} subscription plans are separate from {product-short} organization subscription plans.
 
-For {product-short} plans and pricing details, see https://www.datastax.com/pricing?product=astra-db[{product-short} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[].
-
-== {product} subscription plans
-
-The availability of {product} features depends on your {product} subscription plan.
-
-The *Free* plan allows only one topic.
-It is meant for evaluation before upgrading to a paid plan.
-
-*Pay As You Go* and *Annual* plans can realize the benefits of fully-managed SaaS offerings.
-You only pay for the resources you use to produce, process, and consume messages.
-These plans require a payment method on file.
-For {product} metering details, see https://www.datastax.com/pricing?product=astra-streaming[{product} pricing].
+For {product-short} plans and pricing details, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product-short} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[].
 
 == Shared clusters
 
@@ -42,7 +32,6 @@ When you create a tenant, you have the option to deploy to your private cluster.
 This means that you can use both shared clusters and Streaming Capacity Units, depending on your tenants' use cases.
 
 Streaming Capacity Units are an addition to your base {product} subscription plan, and billing for Streaming Capacity Units is unique to each customer.
-For information about Streaming Capacity Unit pricing and metering, see https://www.datastax.com/astra-streaming-dedicated-clusters[{product-short} Streaming Capacity Units pricing].
 
 Like shared clusters, all connections for Streaming Capacity Units in {product} are guarded by authentication, authorization, and secure (TLS) communications.
 By default, these connections are over the public internet.
