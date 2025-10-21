@@ -5,7 +5,7 @@
 [IMPORTANT]
 ====
 Change Data Capture (CDC) for {astra-db} incurs billed charges based on your {astra-stream} usage.
-For more information, see https://www.datastax.com/pricing?product=astra-streaming[{product} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
+For more information, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product} pricing].
 ====
 
 Change Data Capture (CDC) for {astra-db} automatically captures changes in real time, de-duplicates the changes, and then streams the clean set of changed data into {product} where it can be processed by client applications or sent to downstream systems.
@@ -300,7 +300,7 @@ You must use the {product-short} {devops-api} to add a region after enabling CDC
 ====
 CDC for multi-region {astra-db} {db-serverless-vector} databases is available only to qualified participants in this private preview release.
 Development is ongoing, and the features and functionality are subject to change.
-This private preview is governed by your Agreement and the https://www.datastax.com/legal/previewterms[{company} Preview Terms].
+This private preview is governed by your Agreement and the https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{company} Preview Terms].
 
 If you're interested in this private preview feature, contact your {company} account representative.
 ====
@@ -745,7 +745,7 @@ Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `
 ====
 CDC for multi-region {astra-db} {db-serverless-vector} databases is available only to qualified participants in this private preview release.
 Development is ongoing, and the features and functionality are subject to change.
-This private preview is governed by your Agreement and the https://www.datastax.com/legal/previewterms[{company} Preview Terms].
+This private preview is governed by your Agreement and the https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{company} Preview Terms].
 
 If you're interested in this private preview feature, contact your {company} account representative.
 ====
