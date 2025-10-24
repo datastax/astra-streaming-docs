@@ -177,7 +177,7 @@ The connected sink consumes messages from the `data-` topic, and then sends them
 
 To enable CDC for {astra-db}, you need the following:
 
-* An active {astra-url}[{product-short} account^] with access to an organization that has an {astra-stream} subscription plan.
+* An active {astra-url}[{product-short} account] with access to an organization that has an {astra-stream} subscription plan.
 +
 You need a role that grants permission to manage streaming tenants, such as the *Organization Administrator* role.
 

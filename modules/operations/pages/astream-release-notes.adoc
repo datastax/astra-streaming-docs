@@ -64,7 +64,6 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 === {new}
 
 * Custom functions require a xref:operations:astream-pricing.adoc[paid {product} subscription plan].
-Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 
 == February 27, 2023
 
