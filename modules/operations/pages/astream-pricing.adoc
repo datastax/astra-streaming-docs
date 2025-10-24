@@ -5,7 +5,7 @@
 
 == Subscription plans
 
-There are three {product} subscription plans.
+There are multiple {product} subscription plans.
 An {product} subscription is associated with an {product-short} organization, but {product} subscription plans are separate from {product-short} organization subscription plans.
 
 For {product-short} plans and pricing details, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product-short} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[].
