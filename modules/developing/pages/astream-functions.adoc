@@ -1,5 +1,4 @@
 = {product} functions
-:page-tag: astra-streaming,dev,develop,pulsar,java,python
 
 Functions are lightweight compute processes that you can run on each message a topic receives.
 You can apply custom logic to a message, transforming or enriching it, and then output it to a different topic.

@@ -1,5 +1,4 @@
 = {product} release notes
-:page-tag: astra-streaming,admin,dev,pulsar
 :navtitle: Release notes
 :page-toclevels: 1
 :description: This page summarizes significant changes and updates to {product}.

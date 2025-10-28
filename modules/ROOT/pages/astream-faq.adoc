@@ -1,6 +1,5 @@
 = {product} FAQs
 :navtitle: FAQs
-:page-tag: astra-streaming,dev,admin,planner,plan,pulsar
 :page-aliases: operations:onboarding-faq.adoc
 
 When considering {product} for your production workloads, you might have questions about what options are available for connecting and consuming your serverless clusters.

@@ -1,7 +1,6 @@
 = Use the Java {pulsar-short} client with {product}
 :navtitle: Java
 :description: Produce and consume messages with the Java {pulsar-short} client and {product}.
-:page-tag: astra-streaming,dev,develop,pulsar,java
 
 You can produce and consume messages with the Java {pulsar-short} client and {product}.
 
