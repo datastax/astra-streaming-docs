@@ -1,6 +1,5 @@
 = {product} APIs
 :description: Learn about {product} APIs
-:page-tag: astra-streaming,dev,develop,pulsar
 
 You use two APIs to manage {pulsar-reg} tenants and their resources.
 

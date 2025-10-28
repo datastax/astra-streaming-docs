@@ -1,5 +1,4 @@
 = {starlight-rabbitmq}
-:page-tag: starlight-rabbitmq,quickstart,admin,dev,pulsar
 
 {starlight-rabbitmq} brings native RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
 RabbitMQ applications can leverage {pulsar-short} features such as the following:

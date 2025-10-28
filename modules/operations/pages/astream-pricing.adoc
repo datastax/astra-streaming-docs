@@ -1,5 +1,4 @@
 = {product} pricing
-:page-tag: astra-streaming,planner,plan,pulsar
 
 {product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {product-short}.
 

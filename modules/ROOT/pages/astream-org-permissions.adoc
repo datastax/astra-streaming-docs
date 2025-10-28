@@ -1,6 +1,5 @@
 = Manage {product} roles and permissions
 :navtitle: Manage roles and permissions
-:page-tag: astra-streaming,security,secure,pulsar
 
 You manage role-based access control (RBAC) for {product} through your {product-short} organization.
 For information about {product-short} RBAC, including default roles, custom roles, permissions, and user management, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
