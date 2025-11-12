@@ -8,9 +8,7 @@ For example:
 * Create and manage {astra-db} databases, {astra-stream} tenants, and their associated artifacts
 * Query and insert data
 * Manage organizations and users
-* xref:databases:database-statuses.adoc#hibernated[Resume a hibernated database]
-* xref:databases:secure-connect-bundle.adoc#download-the-secure-connect-bundle[Download a {scb}]
-* xref:astra-cli:commands:astra-db-create-dotenv.adoc[Generate a `.env` file for a database]
+* Issue CQL statements and Pulsar commands using built-in `cqlsh` and Pulsar shell utilities
 
 For more information and commands, see the xref:astra-cli:ROOT:index.adoc[{astra-cli} documentation]
 
