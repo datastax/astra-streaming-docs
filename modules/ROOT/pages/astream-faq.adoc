@@ -1,6 +1,5 @@
 = {product} FAQs
 :navtitle: FAQs
-:page-tag: astra-streaming,dev,admin,planner,plan,pulsar
 :page-aliases: operations:onboarding-faq.adoc
 
 When considering {product} for your production workloads, you might have questions about what options are available for connecting and consuming your serverless clusters.
@@ -101,7 +100,7 @@ The following questions address security and access control in {product}.
 
 === Does {product} support single-sign on?
 
-If your {product-short} organization is on the *Pay As You Go* or *Enterprise* {product-short} subscription plan, your users can use SSO to sign in to the {astra-ui}.
+If your {product-short} organization is on a paid {product-short} subscription plan, your users can use SSO to sign in to the {astra-ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
 === How do {product-short} roles and permissions map to {pulsar-short} roles and permissions?

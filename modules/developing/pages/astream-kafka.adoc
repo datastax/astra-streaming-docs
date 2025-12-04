@@ -1,5 +1,4 @@
 = {kafka-for-astra}
-:page-tag: starlight-kafka,dev,admin,pulsar,kafka
 
 {kafka-for-astra} brings native Apache Kafka(R) protocol support to {pulsar-reg}, enabling migration of existing Kafka applications and services to {pulsar-short} without modifying the code.
 Kafka applications can leverage {pulsar-short} features such as the following:

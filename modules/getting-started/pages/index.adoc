@@ -1,6 +1,5 @@
 = {product} quickstart
 :navtitle: Get started
-:page-tag: astra-streaming,planner,quickstart,pulsar
 
 {product} is a serverless data streaming and event stream processing service integrated in the {astra-ui} and powered by {pulsar-reg}.
 Using {product}, you can create {pulsar-short} instances, manage streaming clusters, scale across cloud regions, and manage {pulsar-short} resources such as topics, connectors, functions and subscriptions.

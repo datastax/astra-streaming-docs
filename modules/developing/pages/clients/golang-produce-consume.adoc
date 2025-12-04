@@ -1,7 +1,6 @@
 = Use the Golang {pulsar-short} client with {product}
 :navtitle: Golang
 :description: Produce and consume messages with the Golang {pulsar-short} client and {product}.
-:page-tag: astra-streaming,dev,develop,pulsar,go
 
 You can produce and consume messages with the Golang {pulsar-short} client and {product}.
 

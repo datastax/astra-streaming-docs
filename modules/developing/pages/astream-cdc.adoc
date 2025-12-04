@@ -5,7 +5,7 @@
 [IMPORTANT]
 ====
 Change Data Capture (CDC) for {astra-db} incurs billed charges based on your {astra-stream} usage.
-For more information, see https://www.datastax.com/pricing?product=astra-streaming[{product} pricing] and https://www.datastax.com/products/datastax-astra/cdc-for-astra-db[CDC metering rates].
+For more information, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product} pricing].
 ====
 
 Change Data Capture (CDC) for {astra-db} automatically captures changes in real time, de-duplicates the changes, and then streams the clean set of changed data into {product} where it can be processed by client applications or sent to downstream systems.
@@ -177,7 +177,7 @@ The connected sink consumes messages from the `data-` topic, and then sends them
 
 To enable CDC for {astra-db}, you need the following:
 
-* An active {astra-url}[{product-short} account^] with access to an organization that has an {astra-stream} subscription plan.
+* An active {astra-url}[{product-short} account] with access to an organization that has an {astra-stream} subscription plan.
 +
 You need a role that grants permission to manage streaming tenants, such as the *Organization Administrator* role.
 
@@ -730,7 +730,7 @@ Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `
 ====
 CDC for multi-region {astra-db} {db-serverless-vector} databases is available only to qualified participants in this private preview release.
 Development is ongoing, and the features and functionality are subject to change.
-This private preview is governed by your Agreement and the https://www.datastax.com/legal/previewterms[{company} Preview Terms].
+This private preview is governed by your Agreement and the https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{company} Preview Terms].
 
 If you're interested in this private preview feature, contact your {company} account representative.
 ====

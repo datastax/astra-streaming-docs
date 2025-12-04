@@ -1,5 +1,4 @@
 = {product} regions
-:page-tag: astra-streaming,admin,manage,pulsar
 :description: {product} is available in specific AWS, Microsoft Azure, and Google Cloud regions.
 
 {product} is available in a subset of the xref:astra-db-serverless:databases:regions.adoc[{astra-db} regions], including AWS, Microsoft Azure, and Google Cloud regions.

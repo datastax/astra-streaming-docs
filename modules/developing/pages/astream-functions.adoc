@@ -1,5 +1,4 @@
 = {product} functions
-:page-tag: astra-streaming,dev,develop,pulsar,java,python
 
 Functions are lightweight compute processes that you can run on each message a topic receives.
 You can apply custom logic to a message, transforming or enriching it, and then output it to a different topic.
@@ -13,8 +12,6 @@ Functions are implemented using https://pulsar.apache.org/docs/en/functions-over
 [IMPORTANT]
 ====
 Custom functions require a xref:operations:astream-pricing.adoc[paid {product} subscription plan].
-
-Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 ====
 
 [#create-an-archive]
@@ -250,7 +247,6 @@ bin/pulsar-admin functions create --function-config-file **PATH_TO_FUNCTION_CONF
 A response of `Created Successfully!` indicates the function is deployed and ready to accept messages.
 
 If the response is `402 Payment Required` with `Reason: only qualified organizations can create functions`, then you must upgrade to a xref:operations:astream-pricing.adoc[paid {product} subscription plan].
-Organizations on the *Free* plan can use xref:streaming-learning:functions:index.adoc[transform functions] only.
 ====
 +
 [TIP]
@@ -329,10 +325,6 @@ Use {company} transform function::
 +
 --
 .. Select *Use {company} transform function*.
-
-This is the only function option available on the {product} *Free* plan.
-
-For more information, see xref:streaming-learning:functions:index.adoc[] and xref:operations:astream-pricing.adoc[].
 --
 ======
 

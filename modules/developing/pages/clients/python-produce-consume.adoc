@@ -1,7 +1,6 @@
 = Use the Python {pulsar-short} client with {product}
 :navtitle: Python
 :description: Use the Python {pulsar-short} client with {product} to produce and consume messages.
-:page-tag: astra-streaming,dev,develop,python,pulsar
 
 You can use the Python {pulsar-short} client with {product} to produce and consume messages.
 

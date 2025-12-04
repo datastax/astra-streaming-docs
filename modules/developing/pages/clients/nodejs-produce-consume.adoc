@@ -1,7 +1,6 @@
 = Use the Node.js {pulsar-short} client with {product}
 :navtitle: Node.js
 :description: Produce and consume messages with the Node.js {pulsar-short} client and {product}.
-:page-tag: astra-streaming,connect,dev,develop,nodejs,pulsar
 
 You can produce and consume messages with the Node.js {pulsar-short} client and {product}.
 
