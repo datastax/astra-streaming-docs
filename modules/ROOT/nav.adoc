@@ -1,6 +1,6 @@
 .Get started
 * xref:getting-started:index.adoc[]
-* xref:getting-started:quickstart.adoc[]
+* xref:getting-started:real-time-data-pipelines-tutorial.adoc[]
 
 .Development
 * xref:developing:configure-pulsar-env.adoc[]
