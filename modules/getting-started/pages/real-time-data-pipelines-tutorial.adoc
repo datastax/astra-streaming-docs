@@ -1,43 +1,50 @@
 = Build real-time data pipelines with {product-short} and Decodable
 :navtitle: Build real-time data pipelines
 
-This guide presents a hands-on approach for defining the objects that make up a real-time data processing pipeline.
-You'll create and configure an {product} tenant and an {astra-db} database, connect them with data processing pipelines in Decodable, and send a single data record through to validate your real-time data pipeline. +
-For extra credit, we'll demonstrate processing under load with a bulk of data.
+This tutorial shows you how to build real-time data processing pipelines using {product} and Decodable.
+Specifically, this tutorial simulates capturing web click data from an e-commerce website.
+It describes how to create, integrate, run, and test all components required to capture, process, and store real-time web click events.
 
-This guide uses the {astra-ui} and Decodable UI in your web browser, so no terminal or scripting is required!
-You just need a safe place to temporarily store access tokens.
+This guide uses the {astra-ui} and Decodable UI in your web browser.
+No terminal or scripting is required.
 
 == Architecture
 
-Before we get started on our journey, let’s discuss the objects we’re creating and why we need to create them. +
-We want to build a pipeline that takes in raw web click data, breaks it into queryable values, saves the data, and filters for certain values. Both the parsed click data and the filtered data will be saved. We will use Decodable’s real-time stream processing (powered by Apache Flink) as well as {astra-db} and {product} (powered by {pulsar-reg} and {cass-reg}).
-This pipeline is intended to be production ready, because we’re using cloud-based services that are automatically setting values for scaling, latency, and security.
+Before building a pipeline, it's important to understand the required components and their purpose.
 
-The pipeline components are outlined below.
+This tutorial's pipelines will ingest raw web click data, break it into queryable values, save the data, and filter for certain values.
+The parsed raw click data _and_ the filtered data will be written to the database.
 
 image:ROOT:real-time-data-pipeline.png[Real-time data pipelines with {product} and Decodable]
 
-E-Commerce Site Clicks::
-Where the data comes from
+This tutorial uses the following services and components:
 
-{astra-db}::
-+
-- All Clicks Topic: a collection of messages with normalized click data
-- Product Clicks Topic: a collection of messages with normalized and filtered click data
-- All Clicks Sink: a function that writes message data to a certain DB table
-- Product Clicks Sink: a function that writes message data to a certain DB table
-- {cass-short}: data store
+Data sources::
+Simulated e-commerce site clicks are captured and streamed to a Decodable REST endpoint, then processed through two pipelines.
+The resulting event data is written to {astra-db} database tables through {product} topics and sinks.
 
 Decodable::
+This tutorial uses Decodable's real-time stream processing, which is powered by Apache Flink(TM).
+Specifically, you will create the following Decodable objects:
 +
-- HTTP Connection: a managed endpoint for posting click data
-- Raw Click Stream: the flow of click data that other objects can “listen” to
-- Click Normalization Pipeline: a SQL based pipeline that takes in raw click data, parses certain pieces, gives context to other data, and transforms some data
-- All Clicks Stream: the flow of normalized click data that other objects can “listen” to
-- {product} Connector: a sink objects can publish data to, which will be transformed into a {pulsar-short} message and produced to a given topic
-- Product Clicks Pipeline: a SQL based pipeline that takes normalized data and filters for only clicks associated with a product
-- Product Clicks Stream: the flow of filtered product click data that other objects can “listen” to
+* HTTP connection: A managed REST endpoint for posting click data
+* Raw clicks stream: A flow of click data that other Decodable objects can listen to.
+* Normalization pipeline: A SQL-based pipeline that takes in raw click data (from the raw clicks stream), and processes the data based for writing to the database, including parses, adding context, and transforming certain parts of the data
+* All clicks stream: A flow of normalized click data that other Decodable objects can listen to.
+* {product} connector: A sink where Decodable objects publish data, which transforms the data into a {pulsar-short} message that is produced to a given streaming topic
+* Product clicks pipeline: A SQL-based pipeline that takes normalized click data and filters for a subset of clicks associated with product entries on the e-commerce site
+* Product clicks stream: A flow of filtered product click data that other Decodable objects can listen to
+
+{product-short}::
+Within {product-short}, the tutorial uses {astra-db} and {product}, which are powered by {cass-reg} and {pulsar-reg} respectively.
+Specifically, you will create the following {product-short} objects:
++
+* {product} tenant: A dedicated streaming environment for your data pipelines
+* {product} topic for all clicks: A collection of messages with normalized click data from all web click events
+* {product} topic for product clicks: A collection of messages with normalized and filtered click data for product click events only
+* {product} sink for all clicks: A function that writes message data from the all clicks topic to the `all_clicks` database table
+* {product} sink for product clicks: A function that writes message data from the product clicks topic to the `product_clicks` database table
+* {astra-db}: The backend data store where the event data is written and persisted
 
 == Prerequisites
 
@@ -45,14 +52,15 @@ Decodable::
 
 * A https://app.decodable.co/-/accounts/create[Decodable account]
 
+* A place to store credentials securely for the duration of this tutorial
+
 == Create {product-short} objects
 
 First, you need to create a streaming tenant in {product} with a namespace and topics, create an {astra-db} database, and then hook the streaming topics and database together with a sink connector.
 
-=== Creating message topics to capture the stream of click data
+=== Create message topics to capture the stream of click data
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], select *Streaming*, and then click **Create tenant**.
-
 
 . Name the new streaming tenant `webstore-clicks`, select any cloud provider and region, and then click **Create tenant**.
 
@@ -69,7 +77,7 @@ You could also have namespaces for `development` and `staging`.
 
 You now have a `production` namespace with two topics, as well as the `default` namespace that is automatically created by {pulsar-short} whenever you create a streaming tenant.
 
-=== Storing the stream of click data
+=== Store the stream of click data
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *{product-short}*.
 
@@ -181,7 +189,7 @@ CREATE TABLE click_data.product_clicks (
 ----
 ====
 
-=== Connecting the topics to the store
+=== Connect the topics to the store
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
@@ -219,14 +227,14 @@ When the sink is ready, its status changes to **Running**.
 After the second sink initializes, you have two running sinks.
 
 To debug a sink, you can view the sink's logs in the {astra-ui}.
-To do this, click the sink name, and then scroll to terminal output area on the sink's overview page.
+To do this, click the sink name, and then find the terminal output area on the sink's overview page.
 The deployment logs are printed in this terminal output area, including semi-verbose `starting`, `validating`, and `running` logs.
 
 == Create Decodable objects
 
 After you create the required {product-short} objects, you can create pipelines for processing incoming data and connectors that bond a Decodable stream of data with the {product} topics.
 
-=== The {product} connection info
+=== Get the {product} tenant details
 
 To connect {product} to Decodable, you need some information from your {product} tenant.
 
@@ -241,7 +249,7 @@ You will need the information in this section to create the connection in Decoda
 .. Click **Create Token**, copy the **Token**, and then store it securely.
 .. Click **Close**.
 
-=== Creating a Decodable connection to {product} for all web clicks
+=== Create a Decodable connection to {product} for all web clicks
 
 In Decodable, create a connection to stream data for all web clicks to the correct topics in {product}:
 
@@ -299,9 +307,9 @@ For **Type**, you must select options from the dropdown menu in order for Decoda
 
 . Click **Next**, name the connection `Astra-Streaming-All-Webclicks-Connection`, and then click **Create Connection**.
 
-== Creating a Decodable connection to {product} for product web clicks
+== Create a Decodable connection to {product} for product web clicks
 
-Create another connection in Decodable to stream product clicks.
+Create another connection in Decodable to stream product clicks:
 
 . In Decodable, on the **Connections** tab, click **New Connection**.
 
@@ -337,7 +345,7 @@ All values are the same as the other connection except the **Topic**.
 
 . Click **Next**, name the connection `Astra-Streaming-Product-Webclicks-Connection`, and then click **Create Connection**.
 
-=== Creating an HTTP data ingestion source
+=== Create an HTTP data ingestion source
 
 Create a third connection to use Decodable's REST API to ingest (`POST`) raw data into the pipeline:
 
@@ -379,7 +387,7 @@ Go to the connection's **Details** tab to get the resolved endpoint path, such a
 Combine this path with your account domain, such as `user.api.decodable.co`, to create the full endpoint URL.
 For more information about the REST connector, see the https://docs.decodable.co/docs/connector-reference-rest#endpoint-url[Decodable documentation].
 
-=== Creating a data normalization pipeline
+=== Create a data normalization pipeline
 
 After creating the three connections (raw clicks, all webclicks, and product webclicks), create two pipelines to process the data:
 
@@ -419,7 +427,7 @@ The output stream should be correct by default if you followed along with the tu
 +
 It can take a few minutes for the pipeline to be created.
 
-=== Creating a data filtering pipeline
+=== Create a data filtering pipeline
 
 Create a pipeline to separate product click data from all web click data:
 
@@ -448,14 +456,14 @@ The output stream should be correct by default if you followed along with the tu
 +
 It can take a few minutes for the pipeline to be created.
 
-== Run the real-time data pipeline
+== Run the pipelines
 
-Next, start the connectors and run the pipeline.
+Next, start the connectors and run the pipelines.
 
-These steps start the processing pipelines, send a single record of data through them, and then validate that everything happened as expected.
-Optionally, you can put the processing pipeline under load with a bulk of data.
+These steps start the processing pipelines, send a single record of data through them, and then validate that the data was handled as expected.
+Optionally, you can use a sample website to test how the pipelines handle a heavier data flow.
 
-=== Starting the processing
+=== Start the connections and pipelines
 
 . In Decodable, go to the **Connections** tab.
 
@@ -474,9 +482,9 @@ You can click a connection to inspect it and get more information about the issu
 
 At this point you should have three running connections (one REST connector and two {company} {product} connectors) and two running pipelines (normalize and product clicks).
 
-=== Ingest a simulated REST payload
+=== Send a simulated REST payload
 
-Use a simulated ingestion to test the connections and pipelines:
+Use a simulated ingestion to test how the connections and pipelines handle a single event:
 
 . In Decodable, go to the **Connections** tab, and then click the **REST** connection.
 
@@ -501,12 +509,13 @@ A confirmation message appears if the connector receives the data.
 [#follow-the-data]
 === Follow the data
 
-After the REST connector ingests the simulated click event data, the normalize pipeline receives the raw click data, processes it, and then passes the filtered event data to the product clicks pipeline.
-Through the {company} {product} connections, the data is streamed to {astra_db} and written to your database.
-The raw clicks are written to the `all_clicks` table, and the filtered clicks are written to the `product_clicks` table.
+After the REST connector ingests the simulated click event data, the normalize pipeline receives the raw click data, processes it, and writes it to the `all_clicks` table in {astra_db}.
+Because the simulated payload was a product click, the product clicks pipeline receives the normalized click data, and then writes it to the `product_clicks` table in {astra_db}.
 
-You can confirm that the data was received and processed by inspecting the metrics for the pipelines and connectors.
-The following steps inspect the raw clicks data flow, and then the product clicks data flow:
+You can confirm that the data was received and processed by inspecting the metrics for the pipelines, connectors, topics, and sink.
+You can also query your database tables to verify that the data was written to them as expected.
+
+The following steps inspect the raw clicks data flow and the product clicks data flow:
 
 . In Decodable, go to the **Pipelines** tab, and then click the **Webstore-Raw-Clicks-Normalize-Pipeline** pipeline.
 
@@ -661,7 +670,7 @@ There are two tools you can use to debug this at various stages of the pipeline:
 
 To clean up the resources created for this tutorial, you need to remove the Decodable and {product-short} objects you created.
 
-=== Removing Decodable objects
+=== Remove Decodable objects
 
 . In Decodable, go to the **Connections** tab.
 
@@ -673,7 +682,7 @@ To clean up the resources created for this tutorial, you need to remove the Deco
 
 . Optional: Go to the **Streams** tab, and then delete the tutorial's streams.
 
-=== Removing {product-short} objects
+=== Remove {product-short} objects
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
