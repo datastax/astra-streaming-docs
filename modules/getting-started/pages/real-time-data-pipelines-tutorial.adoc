@@ -8,6 +8,12 @@ It describes how to create, integrate, run, and test all components required to 
 This guide uses the {astra-ui} and Decodable UI in your web browser.
 No terminal or scripting is required.
 
+[TIP]
+====
+This tutorial builds complete real-time data pipelines with third-party integrations.
+For a simplified tutorial that focuses on the {product} components only, see the xref:getting-started:index.adoc[quickstart].
+====
+
 == Architecture
 
 Before building a pipeline, it's important to understand the required components and their purpose.
