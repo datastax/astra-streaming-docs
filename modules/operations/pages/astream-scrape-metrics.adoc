@@ -134,7 +134,7 @@ The following Prometheus metrics are exposed by {product}:
 * https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#subscription-metrics[Subscription metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#managedledger-metrics[ManagedLedger metrics]
-* https://pulsar.apache.org/docs/reference-metrics/#pulsar-functions[Pulsar Functions metrics]
+* https://pulsar.apache.org/docs/reference-metrics/#pulsar-functions[{pulsar-short} functions metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#connectors[Connector metrics]
 
 Cluster operational metrics are _not_ exposed to individual cluster tenants.

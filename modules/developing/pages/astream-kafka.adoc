@@ -1,20 +1,10 @@
-= {kafka-for-astra}
-
-{kafka-for-astra} brings native Apache Kafka(R) protocol support to {pulsar-reg}, enabling migration of existing Kafka applications and services to {pulsar-short} without modifying the code.
-Kafka applications can leverage {pulsar-short} features such as the following:
-
-* Streamlined operations with enterprise-grade multi-tenancy
-* Simplified operations with a rebalance-free architecture
-* Infinite event stream retention with Apache BookKeeper(TM) and tiered storage
-* Serverless event processing with xref:astream-functions.adoc[{pulsar-short} Functions]
-
-By integrating two popular event streaming ecosystems, {kafka-for-astra} unlocks new use cases and reduces barriers for users adopting {pulsar-short}. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {kafka-for-astra} to accelerate the development of real-time applications and services.
+= {starlight-kafka}
 
 This document will help you get started producing and consuming Kafka messages on a {pulsar-short} cluster.
 
-== {kafka-for-astra} Quickstart
+== {starlight-kafka} Quickstart
 
-. To start connecting {kafka-for-astra}, select *Kafka* in the {product} *Connect* tab.
+. To start connecting {starlight-kafka}, select *Kafka* in the {product} *Connect* tab.
 
 . When the popup appears, confirm you want to enable Kafka on your tenant.
 +
@@ -98,5 +88,5 @@ image::developing:astream-kafka-monitor.png[Monitor Kafka Activity]
 
 == See also
 
-* https://github.com/datastax/starlight-for-kafka[{company} {kafka-for-astra} project]
+* https://github.com/datastax/starlight-for-kafka[{company} {starlight-kafka} project]
 * xref:getting-started:index.adoc[]

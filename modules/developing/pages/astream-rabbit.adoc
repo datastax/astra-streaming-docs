@@ -1,15 +1,5 @@
 = {starlight-rabbitmq}
 
-{starlight-rabbitmq} brings native RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
-RabbitMQ applications can leverage {pulsar-short} features such as the following:
-
-* *Consistent metadata store*: {starlight-rabbitmq} uses Apache ZooKeeper(TM), so existing Zookeeper configuration stores can store {starlight-rabbitmq} metadata.
-* *Security and authentication*: {starlight-rabbitmq} connects to brokers that have TLS, authentication, and/or authorization enabled, because it uses the same `AuthenticationService` as {pulsar-short}.
-* *Clustering*: Launch multiple stateless {starlight-rabbitmq} instances simultaneously for scalability and high availability.
-* *Multi-tenancy*: {starlight-rabbitmq} offers support for multi-tenancy, mapping an AMQP virtual host to a {pulsar-short} tenant and namespace.
-
-By integrating two popular event streaming ecosystems, {starlight-rabbitmq} unlocks new use cases and reduces barriers for users adopting {pulsar-short}. Leverage advantages from each ecosystem and build a truly unified event streaming platform with {starlight-rabbitmq} to accelerate the development of real-time applications and services.
-
 Get started producing and consuming RabbitMQ messages on a {pulsar-short} cluster.
 
 == {starlight-rabbitmq} Quickstart
@@ -157,9 +147,3 @@ Your RabbitMQ messages are being published to a {pulsar-short} topic.
 channel.basic_publish(exchange='header_logs'),`
 
 |===
-
-== See also
-
-* https://github.com/datastax/starlight-for-rabbitmq[{company} {starlight-rabbitmq} project]
-* xref:getting-started:index.adoc[]
-* xref:astream-kafka.adoc[{kafka-for-astra}]
