@@ -126,7 +126,7 @@ For migration assistance, contact {support_url}[{company} Support].
 
 Every tenant in {product} comes with custom ports for Kafka and RabbitMQ workloads.
 {company} also offers a fully-compatible JMS implementation for your Java workloads.
-For more information, see xref:streaming-learning:use-cases-architectures:starlight/index.adoc[].
+For more information, see xref:developing:starlight.adoc[].
 
 === How do I separate messaging traffic?
 
@@ -159,8 +159,8 @@ If you are trying to reduce costs, use the free tier of {product} and then switc
 
 === Can I use {product} with my existing Kafka or RabbitMQ applications?
 
-Yes, {product} offers a fully compatible Kafka and RabbitMQ implementation. This means you can use your existing Kafka or RabbitMQ applications with {product}. You can also use the {product} Kafka or RabbitMQ implementation with your existing {pulsar-short} applications. {product} comes with custom ports for Kafka and RabbitMQ workloads. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+Yes, see xref:developing:starlight.adoc[].
 
 === Can I use {product} with my existing Java applications?
 
-Yes, {product} offers a fully compatible JMS implementation. This means you can use your existing JMS applications with {product}. You can also use the {product} JMS implementation with your existing {pulsar-short} applications. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+Yes, see xref:developing:starlight.adoc[].
