@@ -5,25 +5,22 @@ The Starlight suite of extensions is a collection of {pulsar-reg} protocol handl
 The goal of these extensions is to create a native, seamless interaction with a {pulsar-short} cluster using existing tooling and clients.
 
 Each extension integrates two popular event streaming ecosystems, unlocking new use cases and reducing barriers for users adopting {pulsar-short}.
-Leverage advantages from each ecosystem to build a truly unified event streaming platform with {starlight-rabbitmq}, accelerating the development of real-time applications and services.
+Leverage advantages from each ecosystem to build a truly unified event streaming platform, accelerating the development of real-time applications and services.
 
 == {starlight-kafka}
 
 The https://github.com/datastax/starlight-for-kafka[{starlight-kafka} extension] brings native Apache Kafka(R) protocol support to {pulsar} by introducing a Kafka protocol handler on {pulsar-short} brokers.
-This enables migration of existing Kafka applications and services to {pulsar-short} without modifying the code.
-
-Kafka applications can leverage {pulsar-short} features such as the following:
-
-* Streamlined operations with enterprise-grade multi-tenancy
-* Simplified operations with a rebalance-free architecture
-* Infinite event stream retention with Apache BookKeeper(TM) and tiered storage
-* Serverless event processing with xref:developing:astream-functions.adoc[{pulsar-short} functions]
 
 For more information, see the xref:starlight-for-kafka:ROOT:index.adoc[{starlight-kafka} documentation].
 
 == {starlight-rabbitmq}
 
-The https://github.com/datastax/starlight-for-rabbitmq[{starlight-rabbitmq} extension] brings native RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
+The https://github.com/datastax/starlight-for-rabbitmq[{starlight-rabbitmq} extension] brings native RabbitMQ(R) protocol support to {pulsar-reg}.
+
+////
+Move this to the starlight-for-rabbitmq:ROOT:index topic:
+
+enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
 
 RabbitMQ applications can leverage {pulsar-short} features such as the following:
 
@@ -31,12 +28,12 @@ RabbitMQ applications can leverage {pulsar-short} features such as the following
 * *Security and authentication*: {starlight-rabbitmq} connects to brokers that have TLS, authentication, or authorization enabled, because it uses the same `AuthenticationService` as {pulsar-short}.
 * *Clustering*: Launch multiple stateless {starlight-rabbitmq} instances simultaneously for scalability and high availability.
 * *Multi-tenancy*: {starlight-rabbitmq} offers support for multi-tenancy, mapping an AMQP virtual host to a {pulsar-short} tenant and namespace.
+////
 
 For more information, see the xref:starlight-for-rabbitmq:ROOT:index.adoc[{starlight-rabbitmq} documentation].
 
 == Starlight for JMS
 
 The https://github.com/datastax/pulsar-jms[Starlight for JMS extension] allows enterprises to take advantage of the scalability and resiliency of a modern streaming platform to run their existing JMS applications.
-Because {pulsar-short} is open-source and cloud-native, Starlight for JMS enables enterprises to move their JMS applications to run on-premises and in any cloud environment.
 
 For more information, see the xref:starlight-for-jms:ROOT:index.adoc[Starlight for JMS documentation].
