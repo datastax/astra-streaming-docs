@@ -1,4 +1,4 @@
-= {company} Starlight Suite of {pulsar-reg} Extensions
+= {company} Starlight suite of {pulsar-reg} extensions
 :navtitle: Use the Starlight extensions
 
 The Starlight suite of extensions is a collection of {pulsar-reg} protocol handlers that extend an existing {pulsar-short} cluster.
