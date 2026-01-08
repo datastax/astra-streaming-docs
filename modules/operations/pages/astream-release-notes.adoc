@@ -125,7 +125,7 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 [discrete]
 ==== {new}
 
-* xref:developing:astream-rabbit.adoc[{starlight-rabbitmq}] is now available, bringing built-in RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
+* xref:starlight-for-rabbitmq:ROOT:index.adoc[{starlight-rabbitmq}] is now available, bringing built-in RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
 
 [discrete]
 === April 19, 2022
@@ -135,7 +135,7 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 [discrete]
 ==== {new}
 
-* xref:developing:astream-kafka.adoc[{kafka-for-astra}] is now available, bringing built-in Apache Kafka(R) protocol support to {pulsar-short}.
+* xref:starlight-for-jms:ROOT:index.adoc[{starlight-kafka}] is now available, bringing built-in Apache Kafka(R) protocol support to {pulsar-short}.
 
 [discrete]
 === March 24, 2022

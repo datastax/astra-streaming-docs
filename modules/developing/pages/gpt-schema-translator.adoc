@@ -1,4 +1,4 @@
-= {gpt-schema-translator}
+= Use the {gpt-schema-translator}
 
 Systems in streaming pipelines can use different representations for schema and data types.
 
