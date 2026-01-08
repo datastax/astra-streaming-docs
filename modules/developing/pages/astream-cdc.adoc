@@ -1108,4 +1108,4 @@ Deleting the namespace also deletes the topics within that namespace.
 
 * xref:astra-streaming:ROOT:astream-faq.adoc[{astra-stream} FAQs]
 * xref:astra-streaming:developing:clients/index.adoc[Use {pulsar-short} clients with {astra-stream}]
-* xref:streaming-learning:use-cases-architectures:change-data-capture/index.adoc[CDC overview]
+* xref:cdc-for-cassandra:ROOT:cdc-concepts.adoc[]
