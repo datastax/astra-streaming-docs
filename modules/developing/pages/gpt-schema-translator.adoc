@@ -477,4 +477,4 @@ passportnumber=value.passportnumber, age=value.age, firstname=value.firstname, l
 
 == See also
 
-* xref:streaming-learning:use-cases-architectures:change-data-capture/index.adoc[]
+* xref:cdc-for-cassandra:ROOT:cdc-concepts.adoc[]
