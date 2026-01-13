@@ -32,25 +32,24 @@ This means you can enable asynchronous geo-replication on topics where it is nee
 
 To enable geo-replication in {product}, follow these steps:
 
-. In your {product} tenant, click **Namespaces and Topics** to view a list of your tenant's current namespaces and topics.
+. In your {product} tenant, click the **Namespaces and Topics** tab.
 
-. Select **Modify namespace** in the namespace you want to replicate *from*.
+. Find the namespace that you want to use as the origin of the replicated data, and then click **Modify Namespace**.
 
-. Select Replication, and select **Add Region**.
+. Click the **Replication** tab, and then click **Add Region**.
 
-. Select the **Cloud Provider** and **Region** you want to replicate *to*, and select **Create Replication**.
+. Select the target **Cloud Provider** and **Region** where you want to send the replicated data.
 
-. The new replication is created:
+. Click **Create Replication** to create the replica:
++
+* A new streaming tenant is created in the selected provider and region.
+* All existing data from the original namespace is duplicated to the replica, and replication is maintained going forward.
+* The replica's *Provider*, *Region*, and *Replication Direction* are listed under each namespace's **Replication** tab.
+* The **Replication direction** can be **Replicate to**, **Replicate from**, or **Bidirectional**.
 
-* A new streaming tenant is replicated in the selected region and provider.
+To control retention, backlog, and schema policies, go to the namespace's **Settings** tab.
 
-* The new replication's *Provider*, *Region*, and *Replication Direction* are listed in **Namespace Replication*.
-
-* The **Replication direction** value can be **Replicate to**, **Replicate from**, or **Bidirectional**.
-
-To control retention, backlog, and schema policies, visit the **Settings** tab.
-
-To disable replication on a namespace, select **Disable Replication**.
+To disable replication on a namespace, click **Disable Replication**.
 
 [#test]
 == Test georeplicated clusters
