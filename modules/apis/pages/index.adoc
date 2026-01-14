@@ -1,6 +1,6 @@
 = {product} APIs
 :description: Learn about {product} APIs
-
+//Repurpose for Astra Streaming DevOps API. Use API-operations for Pulsar only.
 You use two APIs to manage {pulsar-reg} tenants and their resources.
 
 == {product} {devops-api}

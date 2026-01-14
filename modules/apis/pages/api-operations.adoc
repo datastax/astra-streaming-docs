@@ -1,5 +1,6 @@
 = API operations
-
+//Separate by devops and pulsar APIs.
+//Check for links to this page, using-curl, and apis:index.adoc
 This {product} workbook is a comprehensive guide that provides detailed examples and practices for managing the {product} platform using the {devops-api}s.
 It provides details on the most commonly used APIs for managing {product} and {pulsar-reg} instances.
 These details include required parameters and the expected output from the API.

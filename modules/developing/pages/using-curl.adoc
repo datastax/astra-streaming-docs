@@ -4,7 +4,7 @@
 
 You can use the xref:apis:index.adoc[{devops-api}s] and https://pulsar.apache.org/docs/reference-rest-api-overview/[{pulsar-reg} REST APIs] to programmatically interact with your tenants and related {product} configurations.
 Each API supports different functionalities.
-
+//Whole page is for Pulsar API except the application token for the devops api. Move and redirect to the Pulsar API ref
 Depending on the API you use, you need certain information to form HTTP requests:
 
 * To use the {product} {pulsar-short} Admin API and {pulsar-short} REST APIs, you need the tenant's Web Service URL and {pulsar-short} token.
