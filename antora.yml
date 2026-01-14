@@ -27,7 +27,7 @@ asciidoc:
     pulsar-reg: 'Apache Pulsar(TM)'
     pulsar-version: '3.1' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
     pulsar-version-patch: '3.1.0'
-    kafka-for-astra: 'Starlight for Kafka'
+    starlight-kafka: 'Starlight for Kafka'
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
     astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'

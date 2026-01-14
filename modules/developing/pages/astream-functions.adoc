@@ -1,4 +1,5 @@
 = {product} functions
+:navtitle: Use {pulsar-short} functions
 
 Functions are lightweight compute processes that you can run on each message a topic receives.
 You can apply custom logic to a message, transforming or enriching it, and then output it to a different topic.
