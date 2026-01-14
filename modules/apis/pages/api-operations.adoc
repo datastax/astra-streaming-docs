@@ -1,4 +1,9 @@
-= API operations
+= Use the {product} {pulsar-short} Admin API
+:description: Learn about the {product} {pulsar-short} Admin API.
+
+
+
+
 //Separate by devops and pulsar APIs.
 //Check for links to this page, using-curl, and apis:index.adoc
 This {product} workbook is a comprehensive guide that provides detailed examples and practices for managing the {product} platform using the {devops-api}s.
@@ -14,7 +19,7 @@ Overall, this {product} Workbook is a valuable resource for customers who want t
 == Prerequisites
 
 * An active {product-short} account with access to {product}
-* Credentials and values required to xref:developing:using-curl.adoc[form HTTP requests]
+* Credentials and values required to form HTTP requests
 
 === Set environment variables
 
@@ -42,10 +47,12 @@ The examples in this guide use environment variables for these values.
 Additionally, some examples in this guide use `python3 -mjson.tool` to format the JSON response.
 This is optional; it is not required to execute API requests.
 
+[#astra-streaming-devops-api-tenant-operations]
 == {product} {devops-api} tenant operations
 
 The following examples demonstrate how to use the {product} {devops-api} to manage {product} resources.
 
+[#get-tenant-information]
 === Get tenant information
 
 [source,curl]
@@ -143,6 +150,7 @@ curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/prov
 ----
 ====
 
+[#create-a-tenant]
 === Create a tenant
 
 Create a tenant:
@@ -199,6 +207,7 @@ The output includes the "pulsarToken" which is the JWT for this {pulsar-short} i
 ----
 ====
 
+[#delete-a-tenant]
 === Delete a tenant
 
 [source,curl]
@@ -210,6 +219,7 @@ A successful request returns either no response or `202 Accepted`.
 
 If unsuccessful, returns `404 Not Found` or other error code.
 
+[#pulsar-api-namespace-operations]
 == {pulsar-short} API namespace operations
 
 To manage {product} namespaces, use the https://pulsar.apache.org/admin-rest-api/[{pulsar-short} REST APIs].
@@ -218,7 +228,7 @@ To manage {product} namespaces, use the https://pulsar.apache.org/admin-rest-api
 
 [source,curl]
 ----
-curl --location --request GET “https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl --location --request GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
 
 .Result
@@ -339,7 +349,7 @@ No response indicates success.
 
 === Set namespace AutoTopicCreation
 
-Input parameter “topicType" should be either “non-partitioned" or “partitioned".
+Input parameter "topicType" should be either "non-partitioned" or "partitioned".
 
 [source,curl]
 ----
@@ -385,6 +395,7 @@ curl -sS --fail --location  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMES
 
 The response is a number.
 
+[#pulsar-admin-api-topic-operations]
 == {pulsar-short} Admin API topic operations
 
 === Get topics in a namespace
@@ -810,7 +821,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 === Create a subscription for a topic
 
 Create a replicated or non-replicated subscription.
-"Replicated=true" can be set to “false" for non-replicated subscriptions.
+"Replicated=true" can be set to "false" for non-replicated subscriptions.
 
 [source,curl]
 ----
@@ -1226,7 +1237,7 @@ eyJhbGciOiJSUzI1NiIsI . . .
 
 === Delete a JWT
 
-Required parameters "CLUSTER" is obtained from the “List Tenants with Details" API command.
+Required parameters "CLUSTER" is obtained from the "List Tenants with Details" API command.
 List of "TOKENID" can be obtained from List Existing Tokens IDs.
 
 [source,curl]
@@ -1511,7 +1522,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT
 No response indicates success.
 
 In the example above, a configuration file is provided as input to CURL.
-The file is named "mynetty-source-config.json", which has the following context for the built-in “netty" source connector in {product}.
+The file is named "mynetty-source-config.json", which has the following context for the built-in "netty" source connector in {product}.
 
 [TIP]
 ====
@@ -1537,7 +1548,7 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 
 No response indicates success.
 
-In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in “kafka" source connector in {product}.
+In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in "kafka" source connector in {product}.
 
 [source,json]
 ----
@@ -1582,3 +1593,8 @@ curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT
 ----
 
 No response indicates success.
+
+== See also
+
+* xref:apis:index.adoc[]
+* xref:developing:using-curl.adoc[]

@@ -35,7 +35,7 @@ If your preferred region isn't available, contact your {company} account represe
 API::
 +
 --
-Use `xref:apis:api-operations.adoc#create-a-tenant[POST 'https://api.astra.datastax.com/v2/streaming/tenants']`.
+Use `xref:apis:index.adoc#create-a-tenant[POST 'https://api.astra.datastax.com/v2/streaming/tenants']`.
 --
 
 CLI::
@@ -66,7 +66,7 @@ After you create a tenant, you can inspect the tenant, create and manage namespa
 API::
 +
 --
-Use `xref:apis:api-operations.adoc#get-tenant-information[GET 'https://api.astra.datastax.com/v2/streaming/tenants']`.
+Use `xref:apis:index.adoc#get-tenant-information[GET 'https://api.astra.datastax.com/v2/streaming/tenants']`.
 --
 
 CLI::
@@ -144,7 +144,7 @@ Terminating a tenant is a destructive operation that permanently deletes the ten
 API::
 +
 --
-Use `xref:apis:api-operations.adoc#delete-a-tenant[DELETE 'https://api.astra.datastax.com/v2/streaming/tenants/**TENANT_NAME**/clusters/**CLUSTER_NAME**']`.
+Use `xref:apis:index.adoc#delete-a-tenant[DELETE 'https://api.astra.datastax.com/v2/streaming/tenants/**TENANT_NAME**/clusters/**CLUSTER_NAME**']`.
 --
 
 CLI::

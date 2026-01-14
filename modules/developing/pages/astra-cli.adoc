@@ -1,5 +1,4 @@
-= {astra-cli} overview
-:navtitle: {astra-cli}
+= Use the {astra-cli}
 
 The xref:astra-cli:ROOT:index.adoc[{astra-cli}] is a command-line interface that lets you create and manage {astra-db} and {astra-stream} resources from your terminal.
 

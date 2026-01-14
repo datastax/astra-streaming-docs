@@ -80,5 +80,4 @@ Run some commands to validate the binary configuration.
 
 == See also
 
-* xref:produce-consume-astra-portal.adoc[]
 * xref:produce-consume-pulsar-client.adoc[]

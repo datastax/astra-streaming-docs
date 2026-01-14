@@ -44,7 +44,7 @@ To learn more about namespaces, see the https://pulsar.apache.org/docs/concepts-
 
 You can create namespaces in the {astra-ui} or programmatically.
 For this quickstart, use the {astra-ui}.
-For information about the {pulsar-short} CLI or APIs, see xref:developing:configure-pulsar-env.adoc[] and xref:developing:using-curl.adoc[].
+For programmatic options, see xref:operations:create-delete-tenants.adoc[].
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
@@ -91,6 +91,6 @@ Your new topic is ready to produce and consume messages.
 There are several ways to do this, for example:
 
 * xref:developing:produce-consume-astra-portal.adoc[{astra-ui}]: Use {product}'s **Try Me** feature in the {astra-ui}.
-* xref:developing:produce-consume-pulsar-client.adoc[{pulsar-short} Client]: Use the {pulsar-short} CLI to interact with the topic.
-* xref:developing:clients/index.adoc[Runtime Clients]: Create a client application that interacts with {pulsar-short}.
+* xref:developing:produce-consume-pulsar-client.adoc[{pulsar-short} client]: Use the {pulsar-short} CLI to interact with the topic.
+* xref:developing:clients/index.adoc[Runtime clients]: Create a client application that interacts with {pulsar-short}.
 * xref:getting-started:real-time-data-pipelines-tutorial.adoc[Third-party integrations]: Follow a step-by-step tutorial that shows you how to build real-time data pipelines that use {product}.

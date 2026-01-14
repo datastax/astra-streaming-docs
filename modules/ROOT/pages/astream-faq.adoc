@@ -117,7 +117,11 @@ The following questions are related to application development with {product}.
 
 === What APIs are available?
 
-See xref:apis:index.adoc[].
+See the following:
+
+* xref:apis:index.adoc[]
+* xref:apis:api-operations.adoc[]
+* xref:developing:using-curl.adoc[]
 
 === Can I migrate data from my existing {pulsar-short} cluster to {product}?
 

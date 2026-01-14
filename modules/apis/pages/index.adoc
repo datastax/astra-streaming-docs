@@ -1,9 +1,11 @@
-= {product} APIs
-:description: Learn about {product} APIs
-//Repurpose for Astra Streaming DevOps API. Use API-operations for Pulsar only.
-You use two APIs to manage {pulsar-reg} tenants and their resources.
+= Use the {product} {devops-api}
+:description: Learn about the {product} {devops-api}.
 
-== {product} {devops-api}
+The {product} {devops-api} is one of the APIs that you can use to manage your {pulsar-reg} tenants and their resources.
+
+Other available APIs include the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], and the xref:
+
+== {product} 
 
 Use the xref:astra-streaming:apis:attachment$devops.html[{product} {devops-api}] to manage higher-level {product} objects associated with your {product-short} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, geo-replications, {pulsar-short} stats, and {pulsar-short} tokens.
 
@@ -29,4 +31,3 @@ Some OSS {pulsar-short} Admin API endpoints aren't supported in the {product} {p
 
 * xref:apis:api-operations.adoc[]
 * xref:developing:using-curl.adoc[]
-* https://pulsar.apache.org/docs/reference-rest-api-overview/[{pulsar-short} REST APIs]

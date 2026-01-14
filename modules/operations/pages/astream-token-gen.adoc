@@ -5,7 +5,7 @@
 [#astra-token]
 == Application tokens
 
-{product-short} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{devops-api}s].
+{product-short} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{product} {devops-api}].
 
 To create an {product-short} application token, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 

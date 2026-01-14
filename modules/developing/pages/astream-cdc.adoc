@@ -384,7 +384,7 @@ For multi-region databases, only include regions where you want to enable CDC.
 You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
 ** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
 Tenant must be deployed to the same region as the database.
-You can get these names with the xref:astra-streaming:apis:api-operations.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
 Deploy a secondary region with CDC enabled::
 +
@@ -971,7 +971,7 @@ For multi-region databases, only include regions where you want to enable CDC.
 You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
 ** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
 The tenant must be deployed to the same region as the database.
-You can get these names with the xref:astra-streaming:apis:api-operations.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
 . Send the updated configuration to `{devops-api-ref-url}#tag/Database-Operations/operation/updateCDC[PUT /v3/databases/**DB_ID**/cdc]`.
 +

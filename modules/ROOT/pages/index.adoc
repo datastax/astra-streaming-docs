@@ -30,13 +30,9 @@
         svg:ROOT:what-is-astra-db.svg[role="mx-auto my-auto w-8 h-8"]
     </div>
 
-    <h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Streaming Guides</h3>
+    <h3 class="discrete !text-h2 !m-0 [&>a]:text-white">APIs and integrations</h3>
 
-    Learn about the amazing things you can do with all of our streaming products.
-    We've included best practices for Apache Pulsar, a full connector reference,
-    and examples for getting the most out of Astra's CDC feature.
-
-    xref:streaming-learning:ROOT:index.adoc[Get started with streaming examples and guides]
+    <p>{product} goes beyond the {astra-ui}. You can use xref:apis:index.adoc[{product} APIs], xref:developing:clients/index.adoc[{pulsar} clients], and related tools to manage your streaming tenants and resources, develop applications, and xref:streaming-learning:pulsar-io:connectors/index.adoc[integrate] with popular sinks and sources.</p>
 
   </div>
 
@@ -52,8 +48,7 @@
 
     <div><h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Real Time Processing</h3></div>
 
-    Legacy batch processing jobs result in stale data that
-    can slow down an entire business.
+    Legacy batch processing jobs result in stale data that can slow down an entire business.
     With {product}, customers can capture event data and data changes in real-time,
     process that data and take action to create a more responsive, nimble organization.
 
@@ -67,10 +62,9 @@
 
     <div><h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Event Driven Architecture</h3></div>
 
-    {product} provides a unified
-    messaging platform that addresses streaming, pub/sub and queuing use cases with
-    low latency and at massive scale. Organizations that are struggling to make
-    their legacy messaging technologies keep up will find {product} to be a
+    {product} provides a unified messaging platform that addresses streaming,
+    pub/sub and queuing use cases with low latency and at massive scale.
+    Organizations that need to maintain legacy messaging technologies will find {product} to be a
     frictionless path to modernization.
 
   </div>
@@ -83,7 +77,7 @@
 
     <div><h3 class="discrete !text-h2 !m-0 [&>a]:text-white">Change Data Capture</h3></div>
 
-    Change Data Capture (CDC) enables you to send data changes in real time throughout your entire ecosystem.
+    xref:developing:astream-cdc.adoc[Change Data Capture (CDC)] enables you to send data changes in real time throughout your entire ecosystem.
     With a wide range of connectors to data warehouses, messaging systems, data lakes as well as client libraries, you can send your data wherever it needs to go in real time.
 
   </div>
