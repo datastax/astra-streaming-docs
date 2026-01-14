@@ -2,30 +2,52 @@
 :description: Learn about the {product} {devops-api}.
 
 The {product} {devops-api} is one of the APIs that you can use to manage your {pulsar-reg} tenants and their resources.
+Use this API to manage higher-level {product} objects associated with your {product-short} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, geo-replications, {pulsar-short} stats, and {pulsar-short} tokens.
 
-Other available APIs include the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], and the xref:
+This page summarizes commonly used endpoints.
+For more information and all endpoints, see the xref:astra-streaming:apis:attachment$devops.html[{product} {devops-api} specification reference].
 
-== {product} 
+Other available APIs include the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
 
-Use the xref:astra-streaming:apis:attachment$devops.html[{product} {devops-api}] to manage higher-level {product} objects associated with your {product-short} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, geo-replications, {pulsar-short} stats, and {pulsar-short} tokens.
+== Prerequisites
 
-This API uses an {product-short} application token for authentication.
+To use the {product} {devops-api}, you need the following:
 
-== {product} {pulsar-short} Admin API
+* An active {product-short} account with access to {product}.
+* An xref:operations:astream-token-gen.adoc[{product-short} application token].
+* Depending on the operations you need to perform, you might need additional information about your tenant.
+You can get this information with `<<get-tenant-information,GET 'https://api.astra.datastax.com/v2/streaming/tenants'>>` or from the xref:operations:create-delete-tenants.adoc#get-tenant-information[**Tenant Details** section in the {astra-ui}].
 
-Use the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API] to manage specific resources within a specific tenant, such as namespaces, topics, and subscriptions.
+=== Set environment variables
 
-This API uses your {pulsar-short} token for authentication.
+Due to their frequency in {product} {devops-api} calls, you might find it helpful to set the following environment variables:
 
-=== OSS {pulsar-short} Admin API
+[source,bash,subs="+quotes"]
+----
+export NAMESPACE="**NAMESPACE_NAME**"
+export TENANT="**TENANT_NAME**"
+export TOPIC="**TOPIC_NAME**"
+export ASTRA_TOKEN="**ASTRA_APPLICATION_TOKEN**"
+----
 
-The https://pulsar.apache.org/admin-rest-api[open source {pulsar-short} project's {pulsar-short} Admin API] isn't the same as the {product} {pulsar-short} Admin API.
+The examples in this guide use environment variables for these values.
+For example:
 
-In OSS {pulsar-short} you manage instances, the clusters within each instance, the tenants in the cluster, and so on.
-In {product}, clusters are a managed service.
-You manage only the tenants and resources within those tenants.
+//FIX the intro for all devops api code samples per below.
+//Use double quotes around paths
+[source,curl]
+----
+curl -sS -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" \
+--header "Authorization: Bearer $ASTRA_TOKEN" \
+| python3 -mjson.tool
+----
 
-Some OSS {pulsar-short} Admin API endpoints aren't supported in the {product} {pulsar-short} Admin API because they don't apply to the {product} managed service.
+=== Format responses
+
+include::ROOT:partial$format-api-response.adoc[]
+
+
+//Bring devops api code samples from api-operations.adoc
 
 == See also
 

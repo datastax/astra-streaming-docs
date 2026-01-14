@@ -49,6 +49,7 @@ Use `xref:astra-cli:commands:astra-streaming-create.adoc[astra streaming create]
 
 After you create a tenant, you can inspect the tenant, create and manage namespaces and topics, and configure tenant settings.
 
+[#get-tenant-information]
 === Get tenant information
 
 [tabs]
@@ -61,6 +62,15 @@ After you create a tenant, you can inspect the tenant, create and manage namespa
 . Click the name of your tenant.
 
 . Click any of the tabs to access tenant information and settings, such as **Connect** or **Sinks**.
++
+[TIP]
+====
+On the **Connect** tab, the *Tenant Details* section contains essential information for connecting to your {product} {pulsar-short} tenant, including the Web Service URL, cluster ID, and tenant ID.
+
+You can also create a xref:operations:astream-token-gen.adoc[{pulsar-short} token] from this section.
+
+image::developing:tenant-details.png[Tenant details in {product}]
+====
 --
 
 API::

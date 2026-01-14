@@ -1,37 +1,43 @@
 = Use the {product} {pulsar-short} Admin API
 :description: Learn about the {product} {pulsar-short} Admin API.
 
+Use the {product} {pulsar-short} Admin API to manage resources within your {product} tenants, such as namespaces, topics, and subscriptions.
 
+This page summarizes commonly used endpoints.
+For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 
-
-//Separate by devops and pulsar APIs.
-//Check for links to this page, using-curl, and apis:index.adoc
-This {product} workbook is a comprehensive guide that provides detailed examples and practices for managing the {product} platform using the {devops-api}s.
-It provides details on the most commonly used APIs for managing {product} and {pulsar-reg} instances.
-These details include required parameters and the expected output from the API.
-The workbook is designed to fill the gap between detailed API reference docs and HowTo guides.
-The result is to help customers in operating and managing {product} and provide guidance on how to use {devops-api}s to automate many common tasks.
-
-The workbook covers a wide range of topics, including provisioning of resources, monitoring, and troubleshooting. It provides instructions for various operations, such as creating a new tenant, namespace, topics, geo-replication, and access tokens, to setting up monitoring and alerting, and troubleshooting common issues.
-
-Overall, this {product} Workbook is a valuable resource for customers who want to leverage the benefits of {product} and manage their streaming environment effectively with {devops-api}s. By following the best practices and guidelines outlined in the workbook, customers can ensure that their streaming applications are secure, performant, and reliable.
+Other available APIs include the xref:apis:index.adoc[{product} {devops-api}] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
 
 == Prerequisites
 
-* An active {product-short} account with access to {product}
-* Credentials and values required to form HTTP requests
+To send requests to the {product} {pulsar-short} Admin API, you need the following:
+
+* An active {product-short} account with access to {product}.
+
+* A {product} tenant.
+
+* A xref:operations:astream-token-gen.adoc[{pulsar-short} token] for your tenant.
++
+[IMPORTANT]
+====
+An xref:operations:astream-token-gen.adoc[{product-short} application token] _isn't_ the same as a {pulsar-short} token.
+====
+
+* Your tenant's Web Service URL.
++
+include::ROOT:partial$get-web-service-url.adoc[]
 
 === Set environment variables
 
-Due to their frequency in {product} API calls, you might find it helpful to set the following environment variables:
-
+Due to their frequency in {product} {pulsar-short} Admin API calls, you might find it helpful to set the following environment variables:
+s
 [source,bash,subs="+quotes"]
 ----
-export PULSAR_TOKEN="**PULSAR_TOKEN**"
-export WEB_SERVICE_URL="**PULSAR_WEB_SERVICE_URL**"
-export NAMESPACE="**STREAMING_NAMESPACE_NAME**"
-export TENANT="**STREAMING_TENANT_NAME**"
-export TOPIC="**STREAMING_TOPIC_NAME**"
+export PULSAR_TOKEN="**TENANT_PULSAR_TOKEN**"
+export WEB_SERVICE_URL="**TENANT_PULSAR_WEB_SERVICE_URL**"
+export NAMESPACE="**NAMESPACE_NAME**"
+export TENANT="**TENANT_NAME**"
+export TOPIC="**TOPIC_NAME**"
 export NUM_OF_PARTITIONS="**PARTITIONS**"
 export SUBSCRIPTION="**SUBSCRIPTION_NAME**"
 export INSTANCE="**TENANT_INSTANCE_NAME**"
@@ -39,14 +45,38 @@ export SOURCE="**SOURCE_CONNECTOR_NAME**"
 export SINK="**SINK_NAME**"
 export FUNCTION="**FUNCTION_DISPLAY_NAME**"
 export TOKENID="**PULSAR_TOKEN_UUID**"
-export ASTRA_TOKEN="**ASTRA_DB_APPLICATION_TOKEN**"
 ----
 
-The examples in this guide use environment variables for these values.
+The examples in this reference use environment variables for these values.
+For example:
 
-Additionally, some examples in this guide use `python3 -mjson.tool` to format the JSON response.
-This is optional; it is not required to execute API requests.
+[source,curl]
+----
+curl -sS --location -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+--header "Authorization: $PULSAR_TOKEN" \
+--header "Content-Type: application/json"
+----
 
+=== Format responses
+
+include::ROOT:partial$format-api-response.adoc[]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Separate by devops and pulsar APIs.
+//Check for links to this page, using-curl, and apis:index.adoc
 [#astra-streaming-devops-api-tenant-operations]
 == {product} {devops-api} tenant operations
 
@@ -57,7 +87,7 @@ The following examples demonstrate how to use the {product} {devops-api} to mana
 
 [source,curl]
 ----
-curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/tenants' --header "Authorization: Bearer $ASTRA_TOKEN" | python3 -mjson.tool
+curl --location --request GET 'https://api.astra.datastax.com/v2/streaming/tenants' --header "Authorization: Bearer $ASTRA_TOKEN" | python3 -mjson.tool
 ----
 
 .Result
@@ -120,7 +150,7 @@ curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/tena
 
 [source,curl]
 ----
-curl --location --request GET  'https://api.astra.datastax.com/v2/streaming/providers' --header "Authorization: Bearer $ASTRA_TOKEN" | python3 -mjson.tool
+curl --location --request GET 'https://api.astra.datastax.com/v2/streaming/providers' --header "Authorization: Bearer $ASTRA_TOKEN" | python3 -mjson.tool
 ----
 
 .Result
@@ -319,7 +349,7 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuota" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data '{
+curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuota" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data '{
 "limit": -1,
 "limitSize": 102400,
 "limitTime": 3600,
@@ -342,7 +372,7 @@ The response is a number, such as `3600`.
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data 3600
+curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data 3600
 ----
 
 No response indicates success.
@@ -353,7 +383,7 @@ Input parameter "topicType" should be either "non-partitioned" or "partitioned".
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST --header "Authorization: Bearer $PULSAR_TOKEN"  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/autoTopicCreation" --header 'Content-Type: application/json' --data '{
+curl -sS --fail --location --request POST --header "Authorization: Bearer $PULSAR_TOKEN" "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/autoTopicCreation" --header 'Content-Type: application/json' --data '{
   "allowAutoTopicCreation": false,
   "topicType": "non-partitioned"
 }'
@@ -390,7 +420,7 @@ The response is a number.
 
 [source,curl]
 ----
-curl -sS --fail --location  "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" --header 'Content-Type: application/json' --header "Authorization: Bearer $PULSAR_TOKEN" --data 1000
+curl -sS --fail --location "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" --header 'Content-Type: application/json' --header "Authorization: Bearer $PULSAR_TOKEN" --data 1000
 ----
 
 The response is a number.
@@ -825,7 +855,7 @@ Create a replicated or non-replicated subscription.
 
 [source,curl]
 ----
-curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION?replicated=true" --header "Authorization: Bearer $PULSAR_TOKEN"  --header "Content-Type: application/json"
+curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION?replicated=true" --header "Authorization: Bearer $PULSAR_TOKEN" --header "Content-Type: application/json"
 ----
 
 No response indicates success.
@@ -854,7 +884,7 @@ No response indicates success.
 
 [source,curl]
 ----
-curl --location --fail --request GET "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE"  --header "Authorization: Bearer $ASTRA_TOKEN" | python3 -mjson.tool
+curl --location --fail --request GET "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" --header "Authorization: Bearer $ASTRA_TOKEN" | python3 -mjson.tool
 ----
 
 .Result
@@ -911,7 +941,7 @@ The JSON input parameters can be obtained from List Tenants with Details and Get
 
 [source,curl]
 ----
-curl --location --fail --request POST "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE"  --header "Content-Type: application/json"  --header "Authorization: Bearer $ASTRA_TOKEN"  --data-raw '{
+curl --location --fail --request POST "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" --header "Content-Type: application/json" --header "Authorization: Bearer $ASTRA_TOKEN" --data-raw '{
   "bidirection": true,
   "destCluster": "pulsar-aws-uswest2",
   "email": "joshua@example.com",
@@ -1218,7 +1248,7 @@ eyJhbGciOiJSUzI1NiIsI . . .
 Create a new {pulsar-short} JWT.
 The new JWT will also be visible in the {astra-ui} for that Tenant and Cluster.
 
-Required parameters "CLUSTER" is  obtained from the "List Tenants with Details" API command.
+Required parameters "CLUSTER" is obtained from the "List Tenants with Details" API command.
 
 [source,curl]
 ----
@@ -1548,7 +1578,8 @@ curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$
 
 No response indicates success.
 
-In the example above, a configuration file is provided as input to CURL.  The file is named mykafka-sink-config.json which has the following context for the built-in "kafka" source connector in {product}.
+In the example above, a configuration file is provided as input to CURL.
+The file is named mykafka-sink-config.json which has the following context for the built-in "kafka" source connector in {product}.
 
 [source,json]
 ----

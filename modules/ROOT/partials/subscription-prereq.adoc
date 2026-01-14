@@ -18,6 +18,6 @@ This example requires the following:
 service_url=**BROKER_SERVICE_URL**
 namespace=default
 tenant_name=my-tenant
-authentication_token=**ASTRA_DB_APPLICATION_TOKEN**
+authentication_token=**ASTRA_APPLICATION_TOKEN**
 topic_name=my-topic
 ----

@@ -1,4 +1,4 @@
-=  Use {pulsar-reg} binaries with {product}
+= Use {pulsar-reg} binaries with {product}
 :navtitle: Configure the {pulsar-short} CLI
 :description: Download a compatible {pulsar-short} artifact and configure the binaries for use with {product}.
 

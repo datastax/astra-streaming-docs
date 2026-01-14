@@ -1,0 +1,6 @@
+The default response is a single JSON string.
+
+You can use modifications like `| jq .` or `| python3 -mjson.tool` to format the output for easier reading.
+Some examples in this reference use the `python3 -mjson.tool` to format the JSON response.
+
+Formatting the response is optional; it isn't required to execute API requests.
