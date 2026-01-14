@@ -29,31 +29,33 @@
 * xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors]
 
 .Operations
+* xref:operations:create-delete-tenants.adoc[]
 * xref:operations:astream-limits.adoc[]
-* xref:operations:astream-pricing.adoc[]
 * xref:operations:astream-regions.adoc[]
 * xref:operations:astream-georeplication.adoc[]
-* xref:developing:astra-cli.adoc[]
 * Monitor streaming tenants
 ** xref:operations:monitoring/index.adoc[]
 ** xref:operations:astream-scrape-metrics.adoc[]
 ** xref:operations:monitoring/integration.adoc[]
 ** xref:operations:monitoring/new-relic.adoc[]
-** xref:operations:monitoring/stream-audit-logs.adoc[]
 ** Grafana dashboards
 *** xref:operations:monitoring/metrics.adoc[]
 *** xref:operations:monitoring/overview-dashboard.adoc[]
 *** xref:operations:monitoring/namespace-dashboard.adoc[]
 *** xref:operations:monitoring/topic-dashboard.adoc[]
-* Administration
-** xref:operations:astream-token-gen.adoc[]
-** xref:operations:private-connectivity.adoc[]
-** xref:ROOT:astream-org-permissions.adoc[]
+
+.Administration
+* xref:operations:astream-token-gen.adoc[]
+* xref:operations:private-connectivity.adoc[]
+* xref:ROOT:astream-org-permissions.adoc[]
+* xref:operations:astream-pricing.adoc[]
+* xref:operations:monitoring/stream-audit-logs.adoc[]
 
 .API references
 * xref:apis:index.adoc[]
 * xref:developing:using-curl.adoc[]
 * xref:apis:api-operations.adoc[]
+* xref:developing:astra-cli.adoc[]
 
 .Frequently asked questions
 * xref:ROOT:astream-faq.adoc[]
