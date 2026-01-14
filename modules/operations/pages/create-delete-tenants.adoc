@@ -1,7 +1,9 @@
-= Create and manage {product} tenants
+= Create and manage {product} tenants, namespaces, and topic
 :navtitle: Manage tenants, namespaces, and topics
 
-This page explains how to create and delete {product} streaming tenants programmatically and in the {astra-ui}.
+This page summarizes how to create, view, edit, and delete {product} streaming tenants, namespaces, and topics.
+The primary actions can be performed programmatically and in the {astra-ui}.
+However, some details are available in the {astra-ui} only.
 
 [TIP]
 ====
