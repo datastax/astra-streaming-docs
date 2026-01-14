@@ -3,10 +3,6 @@
 * xref:getting-started:real-time-data-pipelines-tutorial.adoc[]
 
 .Development
-* xref:developing:configure-pulsar-env.adoc[]
-* xref:developing:astream-functions.adoc[]
-* xref:developing:astream-kafka.adoc[]
-* xref:developing:astream-rabbit.adoc[]
 * Produce and consume messages
 ** xref:developing:produce-consume-astra-portal.adoc[]
 ** xref:developing:produce-consume-pulsar-client.adoc[]
@@ -24,9 +20,12 @@
 *** xref:ROOT:astream-subscriptions-shared.adoc[]
 *** xref:ROOT:astream-subscriptions-failover.adoc[]
 *** xref:ROOT:astream-subscriptions-keyshared.adoc[]
+* xref:developing:astream-functions.adoc[]
+* xref:developing:configure-pulsar-env.adoc[]
+* xref:developing:starlight.adoc[]
 * xref:developing:astream-cdc.adoc[]
 * xref:developing:gpt-schema-translator.adoc[]
-* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors]
+* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors reference]
 
 .Operations
 * xref:operations:create-delete-tenants.adoc[]

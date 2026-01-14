@@ -35,5 +35,5 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.BYTES)
 == See also
 
 * xref:getting-started:index.adoc[]
-* xref:developing:astream-kafka.adoc[]
+* xref:developing:starlight.adoc[]
 
