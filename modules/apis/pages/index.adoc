@@ -61,7 +61,7 @@ curl -sS -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" \
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 [
   {
@@ -128,7 +128,7 @@ curl -sS -L -X GET "https://api.astra.datastax.com/v2/streaming/providers" \
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
   "aws": [
@@ -187,7 +187,7 @@ curl --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
 ====
 The output includes the "pulsarToken" which is the JWT for this {pulsar-short} instance.
 
-[source,console]
+[source,json]
 ----
 {
   "namespace": "default",
@@ -250,7 +250,7 @@ curl --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/replications/
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
   "pulsarInstance": "prod0",
@@ -364,7 +364,7 @@ curl -sS -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 [
   {
@@ -394,7 +394,7 @@ curl --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENA
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 Output: Raw string JWT
 eyJhbGciOiJSUzI1NiIsI...
@@ -425,7 +425,7 @@ curl --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants/$TEN
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 Output: new raw string JWT
 eyJhbGciOiJSUzI1NiIsI...
@@ -459,7 +459,7 @@ Replace the following:
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
   "id": "cdb87797...",
@@ -468,6 +468,7 @@ Replace the following:
 }
 ----
 ====
+
 --
 ======
 

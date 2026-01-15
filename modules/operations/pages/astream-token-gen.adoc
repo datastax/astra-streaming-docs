@@ -3,14 +3,15 @@
 {product} uses two types of tokens that you can generate in {product-short}.
 
 [#astra-token]
-== Application tokens
+== {product-short} application tokens
 
 {product-short} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{product} {devops-api}].
+You use these tokens for tenant administration, such as creating tenants and {pulsar-short} tokens (JWT)
 
 To create an {product-short} application token, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 
 [#pulsar-token]
-== {product} {pulsar-short} tokens
+== {product} {pulsar-short} tokens (JWT)
 
 {product} {pulsar-short} token are {pulsar-reg} https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} {pulsar-short} cluster through the {pulsar-short} CLI, runtime clients, or the {pulsar-short} Admin API.
 If necessary, {product-short} forwards the JWT to the {pulsar-short} cluster for role verification.
@@ -45,75 +46,69 @@ Applications using the deleted {pulsar-short} token will no longer be able to co
 
 == Set environment variables
 
-Create environment variables for your tenant's {pulsar-short} token and tenant web service URL:
+Consider setting environment variables for sensitive and frequently used values, such as your authentication credentials and xref:operations:create-delete-tenants.adoc#get-tenant-information[tenant connection details]:
 
-. Create a <<pulsar-token,{pulsar-short} token>>.
+[source,bash,subs="+quotes"]
+----
+export WEB_SERVICE_URL=**ASTRA_STREAMING_TENANT_WEB_SERVICE_URL**
+export PULSAR_TOKEN=**ASTRA_STREAMING_TENANT_PULSAR_TOKEN**
+export ASTRA_TOKEN=**ASTRA_APPLICATION_TOKEN**
+----
 
-. On your tenant's *Connect* tab, copy the *Web Service URL*.
+== When to use the tokens
 
-. Set environment variables:
+The required credentials and connection details depend on the tool you use to interact with {product}:
+
+{product} {devops-api}::
+To send requests to the xref:apis:index.adoc[{product} {devops-api}], use an {product-short} application token.
 +
-[source,shell,subs="attributes+"]
-----
-export WEB_SERVICE_URL=<replace-me>
-export ASTRA_STREAMING_TOKEN=<replace-me>
-----
-
-. Use these values to form curl commands:
+For the {devops-api}, the base URL is always `\https://api.astra.datastax.com`.
 +
-[source,shell,subs="attributes+"]
-----
-curl "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" -H "Authorization: $ASTRA_STREAMING_TOKEN"
-----
-
-== Usage examples
-
-The following examples show how you can use the two tokens for different actions.
-
-=== Track monthly usage
-
-Use an {product-short} application token to track monthly usage.
 For example:
-
++
+.Billing report by tenant
 [source,curl,subs="+quotes"]
 ----
-curl -sS --location -X GET "https://api.astra.datastax.com/v2/databases/**DATABASE_ID**" \
+curl -sS -L -X GET "https://api.astra.datastax.com/v2/stats/namespaces/**TENANT_NAME**" \
 --header "Accept: application/json" \
---header "Authorization: Bearer **APPLICATION_TOKEN**"
+--header "Authorization: Bearer **ASTRA_TOKEN**"
 ----
 
-=== Monitor a topic's health
+{product} {pulsar-short} Admin API::
+To send requests to the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], use your tenant's web service URL and a {pulsar-short} token.
+For example:
++
+.Get built-in sinks
+[source,curl]
+----
+curl "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+-H "Authorization: $ASTRA_PULSAR_TOKEN"
+----
 
-Use a {pulsar-short} token to monitor a topic's health.
-For example, the following command would authenticate through a {pulsar-short} token declared in the `pulsar-admin` binary configuration:
+OSS {pulsar-short} REST APIs::
+To send requests to the xref:developing:using-curl.adoc[open source {pulsar} project's REST APIs], use your tenant's web service URL and a {pulsar-short} token.
 
+{pulsar-short} CLI::
+Use a {pulsar-short} token to authenticate with the xref:developing:configure-pulsar-env.adoc[{pulsar-short} CLI].
++
+The following commands use a {pulsar-short} token declared in the `pulsar-admin` binary configuration so the token doesn't have to be passed directly on the command line:
++
+.Monitor a topic's health
 [source,shell]
 ----
 bin/pulsar-admin topics stats
 ----
-
-=== Monitor a connector's health
-
-Use a {pulsar-short} token to monitor a connector's health.
-For example:
-
++
+.Monitor a connector's health
 [source,shell]
 ----
 bin/pulsar-admin sinks status
 ----
 
-=== Billing report by tenant
-
-Use an {product-short} application token to get tenant billing reports.
-For example:
-
-[source,curl,subs="+quotes"]
-----
-curl -sS --location -X GET "https://api.astra.datastax.com/v2/stats/namespaces/**TENANT_NAME**" \
---header "Accept: application/json" \
---header "Authorization: Bearer **APPLICATION_TOKEN**"
-----
+{astra-cli}::
+Use an {product-short} application token to authenticate with the xref:developing:astra-cli.adoc[{astra-cli}].
 
 == See also
 
+* xref:astra-db-serverless:api-reference:devops-api.adoc[]
 * xref:getting-started:index.adoc[]

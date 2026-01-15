@@ -376,7 +376,7 @@ This example demonstrates how you can generates schema mapping in real time.
 .CQL schema example
 [%collapsible]
 ====
-[source,]
+[source,cql]
 ----
 "cassandra_table_schemas": {
         "person": {

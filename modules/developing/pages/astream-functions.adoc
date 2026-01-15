@@ -44,7 +44,7 @@ For example, assuming a project named `testpythonfunction`, the extracted archiv
 
 . Prepare the directory structure:
 +
-[source,shell]
+[source,bash]
 ----
 mkdir **FUNCTION_NAME**
 mkdir **FUNCTION_NAME**/python-code
@@ -72,7 +72,7 @@ class ExclamationFunction(Function):
 . Add dependencies to `/deps`.
 This example uses the `pulsar-client` library.
 +
-[source,shell]
+[source,bash]
 ----
 cd deps
 pip install pulsar-client==2.10.0
@@ -80,7 +80,7 @@ pip install pulsar-client==2.10.0
 
 . Create a `.zip` file at the root of the project:
 +
-[source,shell]
+[source,bash]
 ----
 cd deps
 zip -r ../my-python-function.zip .
@@ -256,16 +256,16 @@ If your Python function contains only a single script and no dependencies, you c
 
 [source,bash,subs="+quotes"]
 ----
-$ ./pulsar-admin functions create \
-  --py **PATH_TO_PYTHON_FILE** \
-  --classname **FILE_NAME**.**CLASS_NAME** \
-  --tenant **TENANT_NAME** \
-  --namespace **NAMESPACE_NAME** \
-  --name **DISPLAY_NAME** \
-  --auto-ack true \
-  --inputs persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
-  --output persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
-  --log-topic persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
+./pulsar-admin functions create \
+--py **PATH_TO_PYTHON_FILE** \
+--classname **FILE_NAME**.**CLASS_NAME** \
+--tenant **TENANT_NAME** \
+--namespace **NAMESPACE_NAME** \
+--name **DISPLAY_NAME** \
+--auto-ack true \
+--inputs persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
+--output persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
+--log-topic persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
 ----
 
 If there isn't a class in the file, the `className` is only the filename without the extension.
@@ -364,20 +364,20 @@ If the function produces output and it has an `output` topic, the output data is
 +
 [source,bash]
 ----
-$ ./pulsar-client consume persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
-  --subscription-name my-subscription \
-  --num-messages 0 # Listen indefinitely
+./pulsar-client consume persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
+--subscription-name my-subscription \
+--num-messages 0 # Listen indefinitely
 ----
 +
 . Test your function:
 +
 [source,bash]
 ----
-$ ./pulsar-admin functions trigger \
-  --name **FUNCTION_DISPLAY_NAME** \
-  --tenant **TENANT_NAME** \
-  --namespace **NAMESPACE_NAME** \
-  --trigger-value "**MESSAGE**"
+./pulsar-admin functions trigger \
+--name **FUNCTION_DISPLAY_NAME** \
+--tenant **TENANT_NAME** \
+--namespace **NAMESPACE_NAME** \
+--trigger-value "**MESSAGE**"
 ----
 +
 The trigger sends the message string to the function.

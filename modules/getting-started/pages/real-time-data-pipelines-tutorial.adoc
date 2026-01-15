@@ -106,7 +106,7 @@ This can take several minutes.
 +
 This statement creates a table named `all_clicks` in the `click_data` keyspace that will store all unfiltered web click data.
 +
-[source, sql]
+[source,cql]
 ----
 CREATE TABLE IF NOT EXISTS click_data.all_clicks (
   click_timestamp bigint,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS click_data.all_clicks (
 
 . Run the following command in the CQL console to create another table that will store filtered web click data for product clicks only.
 +
-[source, sql]
+[source,cql]
 ----
 CREATE TABLE click_data.product_clicks (
     catalog_area_name text,
@@ -140,7 +140,7 @@ The console prints create statements describing the keyspace itself and the two 
 .Result
 [%collapsible]
 ====
-[source,cql]
+[source,console]
 ----
 token@cqlsh> describe click_data;
 
@@ -550,14 +550,14 @@ This means the sink consumed a message from the topic, and then wrote the data t
 
 . Go to your **webstore-clicks** database, click **CQL Console**, and then run the following CQL statement to inspect the data that was written to the `all_clicks` table:
 +
-[source,sql,subs="attributes+"]
+[source,cql]
 ----
 select * from click_data.all_clicks;
 ----
 +
 The result should look similar to the following:
 +
-[source,cql]
+[source,console]
 ----
 token@cqlsh> EXPAND ON; //this cleans up the output
 Now Expanded output is enabled
@@ -599,14 +599,14 @@ Next, inspect the product clicks pipeline.
 
 . Go to your **webstore-clicks** database, click **CQL Console**, and then run the following CQL statement to inspect the data that was written to the `product_clicks` table:
 +
-[source,sql,subs="attributes+"]
+[source,cql]
 ----
 select * from click_data.product_clicks;
 ----
 +
 The result should look similar to the following:
 +
-[source,sql]
+[source,console]
 ----
 @ Row 1
 -------------------+---------------------------------

@@ -160,7 +160,7 @@ The following is an example of a default namespace policy with limits set.
 .Default namespace policy with limits set
 [%collapsible]
 ====
-[source,yaml]
+[source,json]
 ----
 {
   "auth_policies" : {
