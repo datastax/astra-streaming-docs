@@ -105,7 +105,7 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 [discrete]
 ==== {new}
 
-* {product} now supports xref:operations:astream-georeplication.adoc[geo-replication].
+* {product} now supports xref:operations:astream-georeplication.adoc[georeplication].
 
 [discrete]
 === June 7, 2022

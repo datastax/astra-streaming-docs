@@ -33,7 +33,7 @@ Messaging displays the time series metrics chart summarized at the namespace lev
 
 == Georeplication
 
-Geo-replication displays the time series metrics chart summarized at the namespace level with an additional level of detail (remote clusters).
+Georeplication displays the time series metrics chart summarized at the namespace level with an additional level of detail (remote clusters).
 
 * Total incoming replication rate (msg/s) to the namespace divided by remote clusters
 * Total outgoing replication rate (msg/s) from the namespace divided by remote clusters

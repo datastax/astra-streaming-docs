@@ -8,6 +8,7 @@ For more information and all endpoints, see the xref:astra-streaming:apis:attach
 
 Other available APIs include the xref:apis:index.adoc[{product} {devops-api}] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
 
+[#prerequisites]
 == Prerequisites
 
 To send requests to the {product} {pulsar-short} Admin API, you need the following:
@@ -20,16 +21,20 @@ To send requests to the {product} {pulsar-short} Admin API, you need the followi
 +
 [IMPORTANT]
 ====
-An xref:operations:astream-token-gen.adoc[{product-short} application token] _isn't_ the same as a {pulsar-short} token.
+An {product-short} application token _isn't_ the same as a {pulsar-short} token.
+For more information, see xref:operations:astream-token-gen.adoc[].
 ====
 
 * Your tenant's Web Service URL.
 +
 include::ROOT:partial$get-web-service-url.adoc[]
 
+* Depending on the operations you need to perform, you might need additional information about your tenant, such as the subscription name or topic name.
+You can get this information with `xref:apis:index.adoc#get-tenant-information[GET 'https://api.astra.datastax.com/v2/streaming/tenants']` or from the xref:operations:create-delete-tenants.adoc#get-tenant-information[**Tenant Details** section in the {astra-ui}].
+
 === Set environment variables
 
-Due to their frequency in {product} {pulsar-short} Admin API calls, you might find it helpful to set the following environment variables:
+Due to their frequency in {product} {pulsar-short} Admin API calls, you might find it helpful to set environment variables for the credentials, tenant details, and other values:
 
 [source,bash,subs="+quotes"]
 ----
@@ -47,14 +52,15 @@ export FUNCTION="**FUNCTION_DISPLAY_NAME**"
 export TOKENID="**PULSAR_TOKEN_UUID**"
 ----
 
-The examples in this reference use environment variables for these values.
+To learn how to get these values, see <<prerequisites>>.
+
+The examples in this guide use environment variables for these values.
 For example:
 
 [source,curl]
 ----
-curl -sS --location -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
---header "Authorization: $PULSAR_TOKEN" \
---header "Content-Type: application/json"
+curl -sS -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+--header "Authorization: $PULSAR_TOKEN"
 ----
 
 === Format responses
@@ -70,7 +76,7 @@ To manage {product} namespaces, use the https://pulsar.apache.org/admin-rest-api
 
 [source,curl]
 ----
-curl --location --request GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
 ----
 
 .Result
