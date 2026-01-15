@@ -1,28 +1,31 @@
 = Use OSS {pulsar-short} REST APIs
 :description: Interact with {product} using OSS {pulsar-reg} REST APIs.
 
-In addition to the xref:apis:index.adoc[{product} {devops-api}] and the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], you can use some of the functionality provided by the https://pulsar.apache.org/docs/reference-rest-api-overview/[open source {pulsar-reg} REST APIs] to programmatically interact with your tenants.
+In addition to the xref:apis:index.adoc[{product} {devops-api}] and the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], you can use some of the functionality provided by the https://pulsar.apache.org/docs/reference-rest-api-overview/[open source {pulsar-reg} project's REST APIs] to programmatically interact with your tenants.
 
-Limitations::
+== Limitations
+
 Not all functionality is available to {product} tenants because {product} is a managed service.
 
-OSS {pulsar-short} Admin API compared to the {product} {pulsar-short} Admin API::
-The https://pulsar.apache.org/admin-rest-api[open source {pulsar-short} project's {pulsar-short} Admin API] isn't the same as the {product} {pulsar-short} Admin API.
-+
-In OSS {pulsar-short} you manage instances, the clusters within each instance, the tenants in the cluster, and so on.
-In {product}, clusters are a managed service.
-You manage only the tenants and resources within those tenants.
-+
-Some OSS {pulsar-short} Admin API endpoints aren't supported in the {product} {pulsar-short} Admin API because they don't apply to the {product} managed service.
+For example, the https://pulsar.apache.org/admin-rest-api[OSS {pulsar-short} Admin API] isn't the same as the {product} {pulsar-short} Admin API.
 
-Usage::
+In OSS {pulsar-short} you manage all aspects of your {pulsar-short} instances, including clusters and tenants.
+In {product}, clusters are a managed service; You manage only the tenants and resources within those tenants.
+
+Some OSS {pulsar-short} Admin API endpoints aren't supported in the {product} {pulsar-short} Admin API because they don't align with the {product} managed service.
+
+== Usage
+
 For detailed information about using these APIs, refer to the https://pulsar.apache.org/docs/reference-rest-api-overview/[OSS {pulsar-reg} REST API documentation].
-+
+
 To use the {pulsar-short} REST APIs with {product} tenants, you need the following:
-+
+
 * An active {product-short} account with access to {product}.
+
 * A {product} tenant.
+
 * A xref:operations:astream-token-gen.adoc[{pulsar-short} token] for your tenant.
+
 * Your tenant's Web Service URL.
 +
 include::ROOT:partial$get-web-service-url.adoc[]
