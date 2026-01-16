@@ -25,9 +25,9 @@ Replace **RANDOM_UUID** with any random letters and numbers to create a unique t
 ----
 # Produce a new message on the given tenant/namespace/topic
 ./bin/pulsar-client produce \
-    "$TENANT/$NAMESPACE/$TOPIC" \
-    --messages "Hi there" \
-    --num-produce 1
+"$TENANT/$NAMESPACE/$TOPIC" \
+--messages "Hi there" \
+--num-produce 1
 ----
 +
 Your topic now has a new, unacknowledged message.
@@ -38,9 +38,9 @@ Your topic now has a new, unacknowledged message.
 ----
 # Consume a new message on the given tenant/namespace/topic
 ./bin/pulsar-client consume \
-    "$TENANT/$NAMESPACE/$TOPIC" \
-    --subscription-name "examples-subscriber" \
-    --num-messages 1
+"$TENANT/$NAMESPACE/$TOPIC" \
+--subscription-name "examples-subscriber" \
+--num-messages 1
 ----
 
 . Make sure the output includes your message:

@@ -3,8 +3,12 @@
 
 Use the {product} {pulsar-short} Admin API to manage resources within your {product} tenants, such as namespaces, topics, and subscriptions.
 
+.More endpoints
+[TIP]
+====
 This page summarizes commonly used endpoints.
 For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
+====
 
 Other available APIs include the xref:apis:index.adoc[{product} {devops-api}] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
 
@@ -30,7 +34,7 @@ For more information, see xref:operations:astream-token-gen.adoc[].
 include::ROOT:partial$get-web-service-url.adoc[]
 
 * Depending on the operations you need to perform, you might need additional information about your tenant, such as the subscription name or topic name.
-You can get this information with `xref:apis:index.adoc#get-tenant-information[GET 'https://api.astra.datastax.com/v2/streaming/tenants']` or from the xref:operations:create-delete-tenants.adoc#get-tenant-information[**Tenant Details** section in the {astra-ui}].
+You can get this information with `xref:apis:index.adoc#get-tenant-details[GET "https://api.astra.datastax.com/v2/streaming/tenants"]` or from the xref:operations:create-delete-tenants.adoc#get-tenant-details[**Tenant Details** section in the {astra-ui}].
 
 === Set environment variables
 
@@ -59,7 +63,7 @@ For example:
 
 [source,curl]
 ----
-curl -sS -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
 --header "Authorization: $PULSAR_TOKEN"
 ----
 
@@ -68,25 +72,27 @@ curl -sS -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
 include::ROOT:partial$format-api-response.adoc[]
 
 [#pulsar-api-namespace-operations]
-== {pulsar-short} API namespace operations
+== Namespace operations
 
-To manage {product} namespaces, use the https://pulsar.apache.org/admin-rest-api/[{pulsar-short} REST APIs].
+Use the following {product} {pulsar-short} Admin API endpoints to manage {product} namespaces.
 
-=== Get existing namespaces
+=== Get namespaces
 
 [source,curl]
 ----
-curl -sS -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 [
-    "mytenant/default",
-    "mytenant/mynamespace"
+  "mytenant/default",
+  "mytenant/mynamespace"
 ]
 ----
 ====
@@ -95,7 +101,8 @@ curl -sS -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT" --head
 
 [source,curl]
 ----
-curl -sS --fail --location --request PUT --header "Authorization: Bearer $PULSAR_TOKEN" "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE"
+curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
@@ -104,104 +111,123 @@ No response indicates success.
 
 [source,curl]
 ----
-curl -sS --fail --location --request DELETE --header "Authorization: Bearer $PULSAR_TOKEN" "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE"
+curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
 
-=== Get namespace message retention
+=== Get namespace message retention settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retention" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retention" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "retentionTimeInMinutes": 0,
-    "retentionSizeInMB": 0
+  "retentionTimeInMinutes": 0,
+  "retentionSizeInMB": 0
 }
 ----
 ====
 
-=== Set namespace message retention
+=== Edit namespace message retention settings
 
 [source,curl]
 ----
-curl --location "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retention" --header 'Content-Type: application/json' --header "Authorization: Bearer $PULSAR_TOKEN" --data '{
-    "retentionTimeInMinutes": 360,
-    "retentionSizeInMB": 102
+curl -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retention" \
+--header "Content-Type: application/json" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--data '{
+  "retentionTimeInMinutes": 360,
+  "retentionSizeInMB": 102
 }'
 ----
 
 No response indicates success.
 
-=== Get namespace backlog quota
+=== Get namespace backlog quota settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuotaMap" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuotaMap" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "destination_storage": {
-        "limit": -1,
-        "limitSize": 102400,
-        "limitTime": 3600,
-        "policy": "producer_exception"
-    }
+  "destination_storage": {
+    "limit": -1,
+    "limitSize": 102400,
+    "limitTime": 3600,
+    "policy": "producer_exception"
+  }
 }
 ----
 ====
 
-=== Set namespace backlog quota settings
+=== Edit namespace backlog quota settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuota" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data '{
-"limit": -1,
-"limitSize": 102400,
-"limitTime": 3600,
-"policy": "producer_exception"
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/backlogQuota" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--header "Content-Type: application/json" \
+--data '{
+  "limit": -1,
+  "limitSize": 102400,
+  "limitTime": 3600,
+  "policy": "producer_exception"
 }'
 ----
 
 No response indicates success.
 
-=== Get namespace message TTL
+=== Get namespace message TTL settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 The response is a number, such as `3600`.
 
-=== Set namespace message TTL
+=== Edit namespace message TTL settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data 3600
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/messageTTL" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--header "Content-Type: application/json" \
+--data 3600
 ----
 
 No response indicates success.
 
-=== Set namespace AutoTopicCreation
+=== Edit namespace AutoTopicCreation settings
 
 Input parameter "topicType" should be either "non-partitioned" or "partitioned".
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST --header "Authorization: Bearer $PULSAR_TOKEN" "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/autoTopicCreation" --header 'Content-Type: application/json' --data '{
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/autoTopicCreation" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--header "Content-Type: application/json" \
+--data '{
   "allowAutoTopicCreation": false,
   "topicType": "non-partitioned"
 }'
@@ -209,54 +235,69 @@ curl -sS --fail --location --request POST --header "Authorization: Bearer $PULSA
 
 No response indicates success.
 
-=== Get namespace MaxConsumersPerTopic
+=== Get namespace MaxConsumersPerTopic settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxConsumersPerTopic" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxConsumersPerTopic" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 The response is a number, such as `50`.
 
-=== Set namespace MaxConsumersPerTopic
+=== Edit namespace MaxConsumersPerTopic settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxConsumersPerTopic" --header "Authorization: Bearer $PULSAR_TOKEN" --header 'Content-Type: application/json' --data 100
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxConsumersPerTopic" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--header "Content-Type: application/json" \
+--data 100
 ----
 
-=== Get namespace MaxTopicPerNamespace
+=== Get namespace MaxTopicPerNamespace settings
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
-The response is a number.
+The response is the maximum number of topics allowed in the namespace.
 
-=== Set namespace MaxTopicPerNamespace
+=== Edit namespace MaxTopicPerNamespace settings
 
 [source,curl]
 ----
-curl -sS --fail --location "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" --header 'Content-Type: application/json' --header "Authorization: Bearer $PULSAR_TOKEN" --data 1000
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/maxTopicsPerNamespace" \
+--header "Content-Type: application/json" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--data 1000
 ----
 
-The response is a number.
+The response is the maximum number of topics allowed in the namespace.
+Typically, this is the same number set in your request, unless your request exceeds the system's maximum allowed value.
 
 [#pulsar-admin-api-topic-operations]
-== {pulsar-short} Admin API topic operations
+== Topic operations
+
+Use the following {product} {pulsar-short} Admin API endpoints to manage topics in your {product} {pulsar-short} namespaces.
 
 === Get topics in a namespace
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 [
     "persistent://testtenant/ns0/mytopic-partition-0",
@@ -271,75 +312,81 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 ----
 ====
 
-=== Create non-partitioned topic
+=== Create a non-partitioned topic
 
 [source,curl]
 ----
-curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE
-/$TOPIC" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
 
-=== Create partitioned topic
+=== Create a partitioned topic
 
 [source,curl]
 ----
-curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" --header "Authorization: Bearer $PULSAR_TOKEN" --header "Content-Type: application/json" --data $NUM_OF_PARTITIONS
+curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--header "Content-Type: application/json" \
+--data $NUM_OF_PARTITIONS
 ----
 
 No response indicates success.
 
-=== Delete a persistent topic
+=== Delete a topic
 
 [source,curl]
 ----
-curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitions" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
 
-=== Get InternalStats of non-partitioned topic
+=== Get InternalStats of a non-partitioned topic
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/internalStats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/internalStats" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "entriesAddedCounter": 0,
-    "numberOfEntries": 0,
-    "totalSize": 0,
-    "currentLedgerEntries": 0,
-    "currentLedgerSize": 0,
-    "lastLedgerCreatedTimestamp": "2023-04-25T15:35:45.136Z",
-    "waitingCursorsCount": 0,
-    "pendingAddEntriesCount": 0,
-    "lastConfirmedEntry": "275812:-1",
-    "state": "LedgerOpened",
-    "ledgers": [
-        {
-            "ledgerId": 275812,
-            "entries": 0,
-            "size": 0,
-            "offloaded": false,
-            "underReplicated": false
-        }
-    ],
-    "cursors": {},
-    "schemaLedgers": [],
-    "compactedLedger": {
-        "ledgerId": -1,
-        "entries": -1,
-        "size": -1,
-        "offloaded": false,
-        "underReplicated": false
+  "entriesAddedCounter": 0,
+  "numberOfEntries": 0,
+  "totalSize": 0,
+  "currentLedgerEntries": 0,
+  "currentLedgerSize": 0,
+  "lastLedgerCreatedTimestamp": "2023-04-25T15:35:45.136Z",
+  "waitingCursorsCount": 0,
+  "pendingAddEntriesCount": 0,
+  "lastConfirmedEntry": "275812:-1",
+  "state": "LedgerOpened",
+  "ledgers": [
+    {
+      "ledgerId": 275812,
+      "entries": 0,
+      "size": 0,
+      "offloaded": false,
+      "underReplicated": false
     }
+  ],
+  "cursors": {},
+  "schemaLedgers": [],
+  "compactedLedger": {
+    "ledgerId": -1,
+    "entries": -1,
+    "size": -1,
+    "offloaded": false,
+    "underReplicated": false
+  }
 }
 ----
 ====
@@ -348,47 +395,49 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/stats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/stats" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "msgRateIn": 0.0,
-    "msgThroughputIn": 0.0,
-    "msgRateOut": 0.0,
-    "msgThroughputOut": 0.0,
-    "bytesInCounter": 0,
-    "msgInCounter": 0,
-    "bytesOutCounter": 0,
-    "msgOutCounter": 0,
-    "averageMsgSize": 0.0,
-    "msgChunkPublished": false,
-    "storageSize": 0,
-    "backlogSize": 0,
-    "publishRateLimitedTimes": 0,
-    "earliestMsgPublishTimeInBacklogs": 0,
-    "offloadedStorageSize": 0,
-    "lastOffloadLedgerId": 0,
-    "lastOffloadSuccessTimeStamp": 0,
-    "lastOffloadFailureTimeStamp": 0,
-    "publishers": [],
-    "waitingPublishers": 0,
-    "subscriptions": {},
-    "replication": {},
-    "deduplicationStatus": "Disabled",
-    "nonContiguousDeletedMessagesRanges": 0,
-    "nonContiguousDeletedMessagesRangesSerializedSize": 0,
-    "compaction": {
-        "lastCompactionRemovedEventCount": 0,
-        "lastCompactionSucceedTimestamp": 0,
-        "lastCompactionFailedTimestamp": 0,
-        "lastCompactionDurationTimeInMills": 0
-    }
-    ...TRUNCATED FOR READABILITY...
+  "msgRateIn": 0.0,
+  "msgThroughputIn": 0.0,
+  "msgRateOut": 0.0,
+  "msgThroughputOut": 0.0,
+  "bytesInCounter": 0,
+  "msgInCounter": 0,
+  "bytesOutCounter": 0,
+  "msgOutCounter": 0,
+  "averageMsgSize": 0.0,
+  "msgChunkPublished": false,
+  "storageSize": 0,
+  "backlogSize": 0,
+  "publishRateLimitedTimes": 0,
+  "earliestMsgPublishTimeInBacklogs": 0,
+  "offloadedStorageSize": 0,
+  "lastOffloadLedgerId": 0,
+  "lastOffloadSuccessTimeStamp": 0,
+  "lastOffloadFailureTimeStamp": 0,
+  "publishers": [],
+  "waitingPublishers": 0,
+  "subscriptions": {},
+  "replication": {},
+  "deduplicationStatus": "Disabled",
+  "nonContiguousDeletedMessagesRanges": 0,
+  "nonContiguousDeletedMessagesRangesSerializedSize": 0,
+  "compaction": {
+    "lastCompactionRemovedEventCount": 0,
+    "lastCompactionSucceedTimestamp": 0,
+    "lastCompactionFailedTimestamp": 0,
+    "lastCompactionDurationTimeInMills": 0
+  }
+  ...TRUNCATED FOR READABILITY...
 }
 ----
 ====
@@ -397,273 +446,280 @@ curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitioned-stats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitioned-stats" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "msgRateIn": 0.0,
-    "msgThroughputIn": 0.0,
-    "msgRateOut": 0.0,
-    "msgThroughputOut": 0.0,
-    "bytesInCounter": 0,
-    "msgInCounter": 0,
-    "bytesOutCounter": 0,
-    "msgOutCounter": 0,
-    "averageMsgSize": 0.0,
-    "msgChunkPublished": false,
-    "storageSize": 0,
-    "backlogSize": 0,
-    "publishRateLimitedTimes": 0,
-    "earliestMsgPublishTimeInBacklogs": 0,
-    "offloadedStorageSize": 0,
-    "lastOffloadLedgerId": 0,
-    "lastOffloadSuccessTimeStamp": 0,
-    "lastOffloadFailureTimeStamp": 0,
-    "publishers": [],
-    "waitingPublishers": 0,
-    "subscriptions": {},
-    "replication": {},
-    "nonContiguousDeletedMessagesRanges": 0,
-    "nonContiguousDeletedMessagesRangesSerializedSize": 0,
-    "compaction": {
+  "msgRateIn": 0.0,
+  "msgThroughputIn": 0.0,
+  "msgRateOut": 0.0,
+  "msgThroughputOut": 0.0,
+  "bytesInCounter": 0,
+  "msgInCounter": 0,
+  "bytesOutCounter": 0,
+  "msgOutCounter": 0,
+  "averageMsgSize": 0.0,
+  "msgChunkPublished": false,
+  "storageSize": 0,
+  "backlogSize": 0,
+  "publishRateLimitedTimes": 0,
+  "earliestMsgPublishTimeInBacklogs": 0,
+  "offloadedStorageSize": 0,
+  "lastOffloadLedgerId": 0,
+  "lastOffloadSuccessTimeStamp": 0,
+  "lastOffloadFailureTimeStamp": 0,
+  "publishers": [],
+  "waitingPublishers": 0,
+  "subscriptions": {},
+  "replication": {},
+  "nonContiguousDeletedMessagesRanges": 0,
+  "nonContiguousDeletedMessagesRangesSerializedSize": 0,
+  "compaction": {
+    "lastCompactionRemovedEventCount": 0,
+    "lastCompactionSucceedTimestamp": 0,
+    "lastCompactionFailedTimestamp": 0,
+    "lastCompactionDurationTimeInMills": 0
+  },
+  "metadata": {
+    "partitions": 2,
+    "deleted": false
+  },
+  "partitions": {
+    "persistent://testcreate/ns0/mytopic-partition-1": {
+      "msgRateIn": 0.0,
+      "msgThroughputIn": 0.0,
+      "msgRateOut": 0.0,
+      "msgThroughputOut": 0.0,
+      "bytesInCounter": 0,
+      "msgInCounter": 0,
+      "bytesOutCounter": 0,
+      "msgOutCounter": 0,
+      "averageMsgSize": 0.0,
+      "msgChunkPublished": false,
+      "storageSize": 0,
+      "backlogSize": 0,
+      "publishRateLimitedTimes": 0,
+      "earliestMsgPublishTimeInBacklogs": 0,
+      "offloadedStorageSize": 0,
+      "lastOffloadLedgerId": 0,
+      "lastOffloadSuccessTimeStamp": 0,
+      "lastOffloadFailureTimeStamp": 0,
+      "publishers": [],
+      "waitingPublishers": 0,
+      "subscriptions": {},
+      "replication": {},
+      "deduplicationStatus": "Disabled",
+      "nonContiguousDeletedMessagesRanges": 0,
+      "nonContiguousDeletedMessagesRangesSerializedSize": 0,
+      "compaction": {
         "lastCompactionRemovedEventCount": 0,
         "lastCompactionSucceedTimestamp": 0,
         "lastCompactionFailedTimestamp": 0,
         "lastCompactionDurationTimeInMills": 0
+      }
     },
-    "metadata": {
-        "partitions": 2,
-        "deleted": false
-    },
-    "partitions": {
-        "persistent://testcreate/ns0/mytopic-partition-1": {
-            "msgRateIn": 0.0,
-            "msgThroughputIn": 0.0,
-            "msgRateOut": 0.0,
-            "msgThroughputOut": 0.0,
-            "bytesInCounter": 0,
-            "msgInCounter": 0,
-            "bytesOutCounter": 0,
-            "msgOutCounter": 0,
-            "averageMsgSize": 0.0,
-            "msgChunkPublished": false,
-            "storageSize": 0,
-            "backlogSize": 0,
-            "publishRateLimitedTimes": 0,
-            "earliestMsgPublishTimeInBacklogs": 0,
-            "offloadedStorageSize": 0,
-            "lastOffloadLedgerId": 0,
-            "lastOffloadSuccessTimeStamp": 0,
-            "lastOffloadFailureTimeStamp": 0,
-            "publishers": [],
-            "waitingPublishers": 0,
-            "subscriptions": {},
-            "replication": {},
-            "deduplicationStatus": "Disabled",
-            "nonContiguousDeletedMessagesRanges": 0,
-            "nonContiguousDeletedMessagesRangesSerializedSize": 0,
-            "compaction": {
-                "lastCompactionRemovedEventCount": 0,
-                "lastCompactionSucceedTimestamp": 0,
-                "lastCompactionFailedTimestamp": 0,
-                "lastCompactionDurationTimeInMills": 0
-            }
-        },
-        "persistent://testcreate/ns0/mytopic-partition-0": {
-            "msgRateIn": 0.0,
-            "msgThroughputIn": 0.0,
-            "msgRateOut": 0.0,
-            "msgThroughputOut": 0.0,
-            "bytesInCounter": 0,
-            "msgInCounter": 0,
-            "bytesOutCounter": 0,
-            "msgOutCounter": 0,
-            "averageMsgSize": 0.0,
-            "msgChunkPublished": false,
-            "storageSize": 0,
-            "backlogSize": 0,
-            "publishRateLimitedTimes": 0,
-            "earliestMsgPublishTimeInBacklogs": 0,
-            "offloadedStorageSize": 0,
-            "lastOffloadLedgerId": 0,
-            "lastOffloadSuccessTimeStamp": 0,
-            "lastOffloadFailureTimeStamp": 0,
-            "publishers": [],
-            "waitingPublishers": 0,
-            "subscriptions": {},
-            "replication": {},
-            "deduplicationStatus": "Disabled",
-            "nonContiguousDeletedMessagesRanges": 0,
-            "nonContiguousDeletedMessagesRangesSerializedSize": 0,
-            "compaction": {
-                "lastCompactionRemovedEventCount": 0,
-                "lastCompactionSucceedTimestamp": 0,
-                "lastCompactionFailedTimestamp": 0,
-                "lastCompactionDurationTimeInMills": 0
-            }
-        }
+    "persistent://testcreate/ns0/mytopic-partition-0": {
+      "msgRateIn": 0.0,
+      "msgThroughputIn": 0.0,
+      "msgRateOut": 0.0,
+      "msgThroughputOut": 0.0,
+      "bytesInCounter": 0,
+      "msgInCounter": 0,
+      "bytesOutCounter": 0,
+      "msgOutCounter": 0,
+      "averageMsgSize": 0.0,
+      "msgChunkPublished": false,
+      "storageSize": 0,
+      "backlogSize": 0,
+      "publishRateLimitedTimes": 0,
+      "earliestMsgPublishTimeInBacklogs": 0,
+      "offloadedStorageSize": 0,
+      "lastOffloadLedgerId": 0,
+      "lastOffloadSuccessTimeStamp": 0,
+      "lastOffloadFailureTimeStamp": 0,
+      "publishers": [],
+      "waitingPublishers": 0,
+      "subscriptions": {},
+      "replication": {},
+      "deduplicationStatus": "Disabled",
+      "nonContiguousDeletedMessagesRanges": 0,
+      "nonContiguousDeletedMessagesRangesSerializedSize": 0,
+      "compaction": {
+        "lastCompactionRemovedEventCount": 0,
+        "lastCompactionSucceedTimestamp": 0,
+        "lastCompactionFailedTimestamp": 0,
+        "lastCompactionDurationTimeInMills": 0
+      }
     }
-    ...TRUNCATED FOR READABILITY...
+  }
+  ...TRUNCATED FOR READABILITY...
 }
 ----
 ====
-
 
 === Get stats of all topics
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/stats/topics/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/stats/topics/$TENANT/$NAMESPACE" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "persistent://testcreate/ns0/mytopic3": {
-        "name": "persistent://testcreate/ns0/mytopic3",
-        "totalMessagesIn": 0,
-        "totalMessagesOut": 0,
-        "totalBytesIn": 0,
-        "totalBytesOut": 0,
-        "msgRateIn": 0,
-        "msgRateOut": 0,
-        "throughputIn": 0,
-        "throughputOut": 0,
-        "subscriptionCount": 0,
-        "producerCount": 0,
-        "consumerCount": 0,
-        "subscriptionDelayed": 0,
-        "storageSize": 0,
-        "backlogStorageByteSize": 0,
-        "msgBacklogNumber": 0,
-        "updatedAt": "2023-04-25T16:00:24.252397617Z"
-    },
-    "persistent://testcreate/ns0/t1": {
-        "name": "persistent://testcreate/ns0/t1",
-        "totalMessagesIn": 0,
-        "totalMessagesOut": 0,
-        "totalBytesIn": 0,
-        "totalBytesOut": 0,
-        "msgRateIn": 0,
-        "msgRateOut": 0,
-        "throughputIn": 0,
-        "throughputOut": 0,
-        "subscriptionCount": 0,
-        "producerCount": 0,
-        "consumerCount": 0,
-        "subscriptionDelayed": 0,
-        "storageSize": 0,
-        "backlogStorageByteSize": 0,
-        "msgBacklogNumber": 0,
-        "updatedAt": "2023-04-25T16:00:24.252466612Z"
-    },
-    "persistent://testcreate/ns0/t1-partition-0": {
-        "name": "persistent://testcreate/ns0/t1-partition-0",
-        "totalMessagesIn": 516,
-        "totalMessagesOut": 514,
-        "totalBytesIn": 637776,
-        "totalBytesOut": 637674,
-        "msgRateIn": 0,
-        "msgRateOut": 0,
-        "throughputIn": 0,
-        "throughputOut": 0,
-        "subscriptionCount": 1,
-        "producerCount": 0,
-        "consumerCount": 0,
-        "subscriptionDelayed": 0,
-        "storageSize": 1899200,
-        "backlogStorageByteSize": 0,
-        "msgBacklogNumber": 0,
-        "updatedAt": "2023-04-25T16:00:24.252410963Z"
-    },
-    "persistent://testcreate/ns0/t1-partition-1": {
-        "name": "persistent://testcreate/ns0/t1-partition-1",
-        "totalMessagesIn": 534,
-        "totalMessagesOut": 531,
-        "totalBytesIn": 696340,
-        "totalBytesOut": 692347,
-        "msgRateIn": 0,
-        "msgRateOut": 0,
-        "throughputIn": 0,
-        "throughputOut": 0,
-        "subscriptionCount": 1,
-        "producerCount": 0,
-        "consumerCount": 0,
-        "subscriptionDelayed": 0,
-        "storageSize": 2020678,
-        "backlogStorageByteSize": 2151,
-        "msgBacklogNumber": 3,
-        "updatedAt": "2023-04-25T16:00:24.252425482Z"
-    },
-    "persistent://testcreate/ns0/t1-partition-2": {
-        "name": "persistent://testcreate/ns0/t1-partition-2",
-        "totalMessagesIn": 522,
-        "totalMessagesOut": 519,
-        "totalBytesIn": 653487,
-        "totalBytesOut": 649286,
-        "msgRateIn": 0,
-        "msgRateOut": 0,
-        "throughputIn": 0,
-        "throughputOut": 0,
-        "subscriptionCount": 1,
-        "producerCount": 0,
-        "consumerCount": 0,
-        "subscriptionDelayed": 0,
-        "storageSize": 1916574,
-        "backlogStorageByteSize": 0,
-        "msgBacklogNumber": 0,
-        "updatedAt": "2023-04-25T16:00:24.252438306Z"
-    },
-    "persistent://testcreate/ns0/t1-partition-3": {
-        "name": "persistent://testcreate/ns0/t1-partition-3",
-        "totalMessagesIn": 516,
-        "totalMessagesOut": 514,
-        "totalBytesIn": 631638,
-        "totalBytesOut": 631536,
-        "msgRateIn": 0,
-        "msgRateOut": 0,
-        "throughputIn": 0,
-        "throughputOut": 0,
-        "subscriptionCount": 1,
-        "producerCount": 0,
-        "consumerCount": 0,
-        "subscriptionDelayed": 0,
-        "storageSize": 1890920,
-        "backlogStorageByteSize": 1586,
-        "msgBacklogNumber": 4,
-        "updatedAt": "2023-04-25T16:00:24.252452735Z"
-        ...TRUNCATED FOR READABILITY...
-    }
+  "persistent://testcreate/ns0/mytopic3": {
+    "name": "persistent://testcreate/ns0/mytopic3",
+    "totalMessagesIn": 0,
+    "totalMessagesOut": 0,
+    "totalBytesIn": 0,
+    "totalBytesOut": 0,
+    "msgRateIn": 0,
+    "msgRateOut": 0,
+    "throughputIn": 0,
+    "throughputOut": 0,
+    "subscriptionCount": 0,
+    "producerCount": 0,
+    "consumerCount": 0,
+    "subscriptionDelayed": 0,
+    "storageSize": 0,
+    "backlogStorageByteSize": 0,
+    "msgBacklogNumber": 0,
+    "updatedAt": "2023-04-25T16:00:24.252397617Z"
+  },
+  "persistent://testcreate/ns0/t1": {
+    "name": "persistent://testcreate/ns0/t1",
+    "totalMessagesIn": 0,
+    "totalMessagesOut": 0,
+    "totalBytesIn": 0,
+    "totalBytesOut": 0,
+    "msgRateIn": 0,
+    "msgRateOut": 0,
+    "throughputIn": 0,
+    "throughputOut": 0,
+    "subscriptionCount": 0,
+    "producerCount": 0,
+    "consumerCount": 0,
+    "subscriptionDelayed": 0,
+    "storageSize": 0,
+    "backlogStorageByteSize": 0,
+    "msgBacklogNumber": 0,
+    "updatedAt": "2023-04-25T16:00:24.252466612Z"
+  },
+  "persistent://testcreate/ns0/t1-partition-0": {
+    "name": "persistent://testcreate/ns0/t1-partition-0",
+    "totalMessagesIn": 516,
+    "totalMessagesOut": 514,
+    "totalBytesIn": 637776,
+    "totalBytesOut": 637674,
+    "msgRateIn": 0,
+    "msgRateOut": 0,
+    "throughputIn": 0,
+    "throughputOut": 0,
+    "subscriptionCount": 1,
+    "producerCount": 0,
+    "consumerCount": 0,
+    "subscriptionDelayed": 0,
+    "storageSize": 1899200,
+    "backlogStorageByteSize": 0,
+    "msgBacklogNumber": 0,
+    "updatedAt": "2023-04-25T16:00:24.252410963Z"
+  },
+  "persistent://testcreate/ns0/t1-partition-1": {
+    "name": "persistent://testcreate/ns0/t1-partition-1",
+    "totalMessagesIn": 534,
+    "totalMessagesOut": 531,
+    "totalBytesIn": 696340,
+    "totalBytesOut": 692347,
+    "msgRateIn": 0,
+    "msgRateOut": 0,
+    "throughputIn": 0,
+    "throughputOut": 0,
+    "subscriptionCount": 1,
+    "producerCount": 0,
+    "consumerCount": 0,
+    "subscriptionDelayed": 0,
+    "storageSize": 2020678,
+    "backlogStorageByteSize": 2151,
+    "msgBacklogNumber": 3,
+    "updatedAt": "2023-04-25T16:00:24.252425482Z"
+  },
+  "persistent://testcreate/ns0/t1-partition-2": {
+    "name": "persistent://testcreate/ns0/t1-partition-2",
+    "totalMessagesIn": 522,
+    "totalMessagesOut": 519,
+    "totalBytesIn": 653487,
+    "totalBytesOut": 649286,
+    "msgRateIn": 0,
+    "msgRateOut": 0,
+    "throughputIn": 0,
+    "throughputOut": 0,
+    "subscriptionCount": 1,
+    "producerCount": 0,
+    "consumerCount": 0,
+    "subscriptionDelayed": 0,
+    "storageSize": 1916574,
+    "backlogStorageByteSize": 0,
+    "msgBacklogNumber": 0,
+    "updatedAt": "2023-04-25T16:00:24.252438306Z"
+  },
+  "persistent://testcreate/ns0/t1-partition-3": {
+    "name": "persistent://testcreate/ns0/t1-partition-3",
+    "totalMessagesIn": 516,
+    "totalMessagesOut": 514,
+    "totalBytesIn": 631638,
+    "totalBytesOut": 631536,
+    "msgRateIn": 0,
+    "msgRateOut": 0,
+    "throughputIn": 0,
+    "throughputOut": 0,
+    "subscriptionCount": 1,
+    "producerCount": 0,
+    "consumerCount": 0,
+    "subscriptionDelayed": 0,
+    "storageSize": 1890920,
+    "backlogStorageByteSize": 1586,
+    "msgBacklogNumber": 4,
+    "updatedAt": "2023-04-25T16:00:24.252452735Z"
     ...TRUNCATED FOR READABILITY...
+  }
+  ...TRUNCATED FOR READABILITY...
 }
 ----
 ====
 
 == Subscription operations
 
-=== Get topic subscriptions
+Use the following {product} {pulsar-short} Admin API endpoints to manage xref:ROOT:astream-subscriptions.adoc[{pulsar-short} subscriptions].
+
+=== Get subscriptions for a topic
 
 [source,curl]
 ----
-curl -sS --fail --location --request GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscriptions" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscriptions" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 [
-    "mysub",
-    "subscript2"
+  "mysub",
+  "subscript2"
 ]
 ----
 ====
@@ -675,7 +731,9 @@ Create a replicated or non-replicated subscription.
 
 [source,curl]
 ----
-curl -sS --fail --location --request PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION?replicated=true" --header "Authorization: Bearer $PULSAR_TOKEN" --header "Content-Type: application/json"
+curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION?replicated=true" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--header "Content-Type: application/json"
 ----
 
 No response indicates success.
@@ -684,7 +742,8 @@ No response indicates success.
 
 [source,curl]
 ----
-curl -sS --fail --location --request DELETE"$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
@@ -693,116 +752,125 @@ No response indicates success.
 
 [source,curl]
 ----
-curl -sS --fail --location --request POST "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION/skip_all" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/subscription/$SUBSCRIPTION/skip_all" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
 
-== {pulsar-short} Admin API functions operations
+== Functions operations
 
-=== List existing functions in a namespace
+Use the following {product} {pulsar-short} Admin API endpoints to manage xref:astra-streaming:developing:astream-functions.adoc[{pulsar-short} functions].
 
-[source,bash]
+=== Get functions in a namespace
+
+[source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 [
-    "testfunction1"
+  "testfunction1"
 ]
 ----
 ====
 
-=== Get status of a function
+=== Get function status
 
-[source,bash]
+[source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/status" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/status" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "numInstances": 1,
-    "numRunning": 0,
-    "instances": [
-        {
-            "instanceId": 0,
-            "status": {
-                "running": false,
-                "error": "",
-                "numRestarts": 0,
-                "numReceived": 0,
-                "numSuccessfullyProcessed": 0,
-                "numUserExceptions": 0,
-                "latestUserExceptions": null,
-                "numSystemExceptions": 0,
-                "latestSystemExceptions": null,
-                "averageLatency": 0.0,
-                "lastInvocationTime": 0,
-                "workerId": "pulsar-aws-useast2-function-0"
-            }
-        }
-    ]
+  "numInstances": 1,
+  "numRunning": 0,
+  "instances": [
+    {
+      "instanceId": 0,
+      "status": {
+        "running": false,
+        "error": "",
+        "numRestarts": 0,
+        "numReceived": 0,
+        "numSuccessfullyProcessed": 0,
+        "numUserExceptions": 0,
+        "latestUserExceptions": null,
+        "numSystemExceptions": 0,
+        "latestSystemExceptions": null,
+        "averageLatency": 0.0,
+        "lastInvocationTime": 0,
+        "workerId": "pulsar-aws-useast2-function-0"
+      }
+    }
+  ]
 }
 ----
 ====
 
-=== Get stats of a function
+=== Get function stats
 
 [source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/stats" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/stats" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
+  "receivedTotal": 0,
+  "processedSuccessfullyTotal": 0,
+  "systemExceptionsTotal": 0,
+  "userExceptionsTotal": 0,
+  "avgProcessLatency": null,
+  "1min": {
     "receivedTotal": 0,
     "processedSuccessfullyTotal": 0,
     "systemExceptionsTotal": 0,
     "userExceptionsTotal": 0,
-    "avgProcessLatency": null,
-    "1min": {
+    "avgProcessLatency": null
+  },
+  "lastInvocation": null,
+  "instances": [
+    {
+      "instanceId": 0,
+      "metrics": {
         "receivedTotal": 0,
         "processedSuccessfullyTotal": 0,
         "systemExceptionsTotal": 0,
         "userExceptionsTotal": 0,
-        "avgProcessLatency": null
-    },
-    "lastInvocation": null,
-    "instances": [
-        {
-            "instanceId": 0,
-            "metrics": {
-                "receivedTotal": 0,
-                "processedSuccessfullyTotal": 0,
-                "systemExceptionsTotal": 0,
-                "userExceptionsTotal": 0,
-                "avgProcessLatency": null,
-                "1min": {
-                    "receivedTotal": 0,
-                    "processedSuccessfullyTotal": 0,
-                    "systemExceptionsTotal": 0,
-                    "userExceptionsTotal": 0,
-                    "avgProcessLatency": null
-                },
-                "lastInvocation": null,
-                "userMetrics": {}
-            }
-        }
-    ]
+        "avgProcessLatency": null,
+        "1min": {
+          "receivedTotal": 0,
+          "processedSuccessfullyTotal": 0,
+          "systemExceptionsTotal": 0,
+          "userExceptionsTotal": 0,
+          "avgProcessLatency": null
+        },
+        "lastInvocation": null,
+        "userMetrics": {}
+      }
+    }
+  ]
 }
 ----
 ====
@@ -811,85 +879,87 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 
 [source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "runtimeFlags": null,
-    "tenant": "mytenant",
-    "namespace": "mynamespace",
-    "name": "testfunction1",
-    "className": "TransformFunction",
-    "inputs": null,
-    "customSerdeInputs": null,
-    "topicsPattern": null,
-    "customSchemaInputs": null,
-    "customSchemaOutputs": null,
-    "inputSpecs": {
-        "testcreate/ns0/tp1": {
-            "schemaType": null,
-            "serdeClassName": null,
-            "schemaProperties": {},
-            "consumerProperties": {},
-            "receiverQueueSize": null,
-            "cryptoConfig": null,
-            "poolMessages": false,
-            "regexPattern": false
-        }
-    },
-    "output": "mytenant/mynamespace/tp2",
-    "producerConfig": {
-        "maxPendingMessages": null,
-        "maxPendingMessagesAcrossPartitions": null,
-        "useThreadLocalProducers": false,
-        "cryptoConfig": null,
-        "batchBuilder": ""
-    },
-    "outputSchemaType": null,
-    "outputSerdeClassName": null,
-    "logTopic": null,
-    "processingGuarantees": "ATLEAST_ONCE",
-    "retainOrdering": false,
-    "retainKeyOrdering": false,
-    "batchBuilder": null,
-    "forwardSourceMessageProperty": true,
-    "userConfig": {
-        "steps": [
-            {
-                "schema-type": "STRING",
-                "type": "cast"
-            }
-        ]
-    },
-    "secrets": null,
-    "runtime": "JAVA",
-    "autoAck": true,
-    "maxMessageRetries": null,
-    "deadLetterTopic": null,
-    "subName": null,
-    "parallelism": 1,
-    "resources": {
-        "cpu": 0.25,
-        "ram": 1000000000,
-        "disk": 1000000000
-    },
-    "fqfn": null,
-    "windowConfig": null,
-    "timeoutMs": 11000,
-    "jar": null,
-    "py": null,
-    "go": null,
-    "functionType": null,
-    "cleanupSubscription": false,
-    "customRuntimeOptions": "",
-    "maxPendingAsyncRequests": null,
-    "exposePulsarAdminClientEnabled": null,
-    "subscriptionPosition": "Latest"
+  "runtimeFlags": null,
+  "tenant": "mytenant",
+  "namespace": "mynamespace",
+  "name": "testfunction1",
+  "className": "TransformFunction",
+  "inputs": null,
+  "customSerdeInputs": null,
+  "topicsPattern": null,
+  "customSchemaInputs": null,
+  "customSchemaOutputs": null,
+  "inputSpecs": {
+    "testcreate/ns0/tp1": {
+      "schemaType": null,
+      "serdeClassName": null,
+      "schemaProperties": {},
+      "consumerProperties": {},
+      "receiverQueueSize": null,
+      "cryptoConfig": null,
+      "poolMessages": false,
+      "regexPattern": false
+    }
+  },
+  "output": "mytenant/mynamespace/tp2",
+  "producerConfig": {
+    "maxPendingMessages": null,
+    "maxPendingMessagesAcrossPartitions": null,
+    "useThreadLocalProducers": false,
+    "cryptoConfig": null,
+    "batchBuilder": ""
+  },
+  "outputSchemaType": null,
+  "outputSerdeClassName": null,
+  "logTopic": null,
+  "processingGuarantees": "ATLEAST_ONCE",
+  "retainOrdering": false,
+  "retainKeyOrdering": false,
+  "batchBuilder": null,
+  "forwardSourceMessageProperty": true,
+  "userConfig": {
+    "steps": [
+      {
+        "schema-type": "STRING",
+        "type": "cast"
+      }
+    ]
+  },
+  "secrets": null,
+  "runtime": "JAVA",
+  "autoAck": true,
+  "maxMessageRetries": null,
+  "deadLetterTopic": null,
+  "subName": null,
+  "parallelism": 1,
+  "resources": {
+    "cpu": 0.25,
+    "ram": 1000000000,
+    "disk": 1000000000
+  },
+  "fqfn": null,
+  "windowConfig": null,
+  "timeoutMs": 11000,
+  "jar": null,
+  "py": null,
+  "go": null,
+  "functionType": null,
+  "cleanupSubscription": false,
+  "customRuntimeOptions": "",
+  "maxPendingAsyncRequests": null,
+  "exposePulsarAdminClientEnabled": null,
+  "subscriptionPosition": "Latest"
 }
 ----
 ====
@@ -898,7 +968,8 @@ curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/functions/$TENAN
 
 [source,curl]
 ----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/start" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/start" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
@@ -907,7 +978,8 @@ No response indicates success.
 
 [source,curl]
 ----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/stop" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/stop" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
@@ -916,245 +988,195 @@ No response indicates success.
 
 [source,curl]
 ----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/restart" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPACE/$FUNCTION/restart" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
 
-== {pulsar-short} Admin API IO connectors operations
+== Sink connector operations
 
-{pulsar-short} Sources and Sinks share a similar API structure for most methods.
+Use the following {product} {pulsar-short} Admin API endpoints to manage sink connectors.
 
-=== List existing sources in a namespace
+[TIP]
+====
+The {product} {pulsar-short} Admin API endpoints for source and sink connectors have similar paths and parameters.
+If you reuse requests for both sources and sinks, be sure to set the `/sources` or `/sinks` path accordingly.
+====
+
+=== Get sinks for a namespace
 
 [source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 [
-    "mysource1"
+  "mysink1"
 ]
 ----
 ====
 
-=== List existing sinks in a namespace
+=== Get a sink's status
 
 [source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SINK/status" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
-----
-[
-    "mysink1"
-]
-----
-====
-
-=== Get status of a source
-
-[source,curl]
-----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/status" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
-----
-
-.Result
-[%collapsible]
-====
-[source,console]
+[source,json]
 ----
 {
-    "numInstances": 1,
-    "numRunning": 1,
-    "instances": [
-        {
-            "instanceId": 0,
-            "status": {
-                "running": true,
-                "error": "",
-                "numRestarts": 0,
-                "numReceivedFromSource": 0,
-                "numSystemExceptions": 0,
-                "latestSystemExceptions": [],
-                "numSourceExceptions": 0,
-                "latestSourceExceptions": [],
-                "numWritten": 0,
-                "lastReceivedTime": 0,
-                "workerId": "pulsar-aws-useast2-function-0"
-            }
-        }
-    ]
+  "numInstances": 1,
+  "numRunning": 0,
+  "instances": [
+    {
+      "instanceId": 0,
+      "status": {
+        "running": false,
+        "error": "",
+        "numRestarts": 0,
+        "numReadFromPulsar": 0,
+        "numSystemExceptions": 0,
+        "latestSystemExceptions": null,
+        "numSinkExceptions": 0,
+        "latestSinkExceptions": null,
+        "numWrittenToSink": 0,
+        "lastReceivedTime": 0,
+        "workerId": "pulsar-useast-function-1"
+      }
+    }
+  ]
 }
 ----
 ====
 
-=== Get status of a sink
+=== Get a sink's details
 
 [source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SINK/status" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
 ----
 
 .Result
 [%collapsible]
 ====
-[source,console]
+[source,json]
 ----
 {
-    "numInstances": 1,
-    "numRunning": 0,
-    "instances": [
-        {
-            "instanceId": 0,
-            "status": {
-                "running": false,
-                "error": "",
-                "numRestarts": 0,
-                "numReadFromPulsar": 0,
-                "numSystemExceptions": 0,
-                "latestSystemExceptions": null,
-                "numSinkExceptions": 0,
-                "latestSinkExceptions": null,
-                "numWrittenToSink": 0,
-                "lastReceivedTime": 0,
-                "workerId": "pulsar-useast-function-1"
-            }
-        }
-    ]
+  "archive": "builtin://data-generator",
+  "autoAck": true,
+  "className": "org.apache.pulsar.io.datagenerator.DataGeneratorPrintSink",
+  "cleanupSubscription": false,
+  "configs": {},
+  "customRuntimeOptions": "internal_data",
+  "deadLetterTopic": null,
+  "inputSpecs": {
+    "persistent://testcreate/ns0/tp1": {
+      "consumerProperties": {},
+      "cryptoConfig": null,
+      "poolMessages": false,
+      "receiverQueueSize": null,
+      "regexPattern": false,
+      "schemaProperties": {},
+      "schemaType": null,
+      "serdeClassName": null
+    }
+  },
+  "inputs": [
+    "persistent://testcreate/ns0/tp1"
+  ],
+  "maxMessageRetries": null,
+  "name": "mysink1",
+  "namespace": "ns0",
+  "negativeAckRedeliveryDelayMs": null,
+  "parallelism": 1,
+  "processingGuarantees": "ATLEAST_ONCE",
+  "resources": {
+    "cpu": 0.15,
+    "disk": 500000000,
+    "ram": 400000000
+  },
+  "retainKeyOrdering": false,
+  "retainOrdering": false,
+  "runtimeFlags": null,
+  "secrets": null,
+  "sourceSubscriptionName": null,
+  "sourceSubscriptionPosition": "Latest",
+  "tenant": "testcreate",
+  "timeoutMs": 5000,
+  "topicToSchemaProperties": null,
+  "topicToSchemaType": null,
+  "topicToSerdeClassName": null,
+  "topicsPattern": null,
+  "transformFunction": null,
+  "transformFunctionClassName": null,
+  "transformFunctionConfig": null
 }
 ----
 ====
 
-=== Get source connector details
+=== Create a sink
 
 [source,curl]
 ----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--form "sinkConfig=@kafka-sink-config.json;type=application/json"
 ----
 
-.Result
-[%collapsible]
+[TIP]
 ====
-[source,console]
+The curl parameter `@` indicates a file input.
+When executing the curl command, ensure the file is accessible and in the proper directory for reading.
+====
+
+In the example above, the sink connector configuration is provided in a file named `kafka-sink-config.json`.
+If you use a configuration file, the file must contain a valid JSON configuration for the sink connector.
+For example, the following JSON configures the built-in Kafka sink connector in {product}.
+
+.kafka-sink-config.json
+[source,json]
 ----
 {
-    "archive": "builtin://netty",
-    "batchBuilder": null,
-    "batchSourceConfig": null,
-    "className": "org.apache.pulsar.io.netty.NettySource",
-    "configs": {
-        "host": "127.0.0.1",
-        "numberOfThreads": "1",
-        "port": "10999",
-        "type": "tcp"
+  "tenant": "testcreate",
+  "namespace": "ns0",
+  "name": "mykafkaconnector",
+  "archive": "builtin://kafka",
+  "parallelism": 1,
+  "autoAck": true,
+  "cleanupSubscription": false,
+  "configs": {
+    "acks": "1",
+    "batchSize": "16384",
+    "bootstrapServers": "localhost:55200,localhost:55201",
+    "maxRequestSize": "1048576",
+    "producerConfigProperties": {
+      "client.id": "astra-streaming-client",
+      "sasl.jaas.config": "sensitive_data_removed",
+      "sasl.mechanism": "PLAIN",
+      "sasl.password": "sensitive_data_removed",
+      "sasl.username": "myuserid",
+      "security.protocol": "SASL_SSL"
     },
-    "customRuntimeOptions": "internal_data",
-    "name": "mysource",
-    "namespace": "ns0",
-    "parallelism": 1,
-    "processingGuarantees": "ATLEAST_ONCE",
-    "producerConfig": {
-        "batchBuilder": "",
-        "cryptoConfig": null,
-        "maxPendingMessages": null,
-        "maxPendingMessagesAcrossPartitions": null,
-        "useThreadLocalProducers": false
-    },
-    "resources": {
-        "cpu": 0.25,
-        "disk": 1000000000,
-        "ram": 1000000000
-    },
-    "runtimeFlags": null,
-    "schemaType": null,
-    "secrets": null,
-    "serdeClassName": null,
-    "tenant": "testcreate",
-    "topicName": "persistent://testcreate/ns0/t1"
+    "topic": "mykafka-topic"
+  },
+  "inputs": [ "persistent://testcreate/ns0/mytopic3" ]
 }
-----
-====
-
-=== Get sink details
-
-[source,curl]
-----
-curl --fail --location --request GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" --header "Authorization: Bearer $PULSAR_TOKEN" | python3 -mjson.tool
-----
-
-.Result
-[%collapsible]
-====
-[source,console]
-----
-{
-    "archive": "builtin://data-generator",
-    "autoAck": true,
-    "className": "org.apache.pulsar.io.datagenerator.DataGeneratorPrintSink",
-    "cleanupSubscription": false,
-    "configs": {},
-    "customRuntimeOptions": "internal_data",
-    "deadLetterTopic": null,
-    "inputSpecs": {
-        "persistent://testcreate/ns0/tp1": {
-            "consumerProperties": {},
-            "cryptoConfig": null,
-            "poolMessages": false,
-            "receiverQueueSize": null,
-            "regexPattern": false,
-            "schemaProperties": {},
-            "schemaType": null,
-            "serdeClassName": null
-        }
-    },
-    "inputs": [
-        "persistent://testcreate/ns0/tp1"
-    ],
-    "maxMessageRetries": null,
-    "name": "mysink1",
-    "namespace": "ns0",
-    "negativeAckRedeliveryDelayMs": null,
-    "parallelism": 1,
-    "processingGuarantees": "ATLEAST_ONCE",
-    "resources": {
-        "cpu": 0.15,
-        "disk": 500000000,
-        "ram": 400000000
-    },
-    "retainKeyOrdering": false,
-    "retainOrdering": false,
-    "runtimeFlags": null,
-    "secrets": null,
-    "sourceSubscriptionName": null,
-    "sourceSubscriptionPosition": "Latest",
-    "tenant": "testcreate",
-    "timeoutMs": 5000,
-    "topicToSchemaProperties": null,
-    "topicToSchemaType": null,
-    "topicToSerdeClassName": null,
-    "topicsPattern": null,
-    "transformFunction": null,
-    "transformFunctionClassName": null,
-    "transformFunctionConfig": null
-}
-----
-====
-
-=== Start a source connector
-
-[source,curl]
-----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/start" --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
@@ -1163,16 +1185,8 @@ No response indicates success.
 
 [source,curl]
 ----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/start" --header "Authorization: Bearer $PULSAR_TOKEN"
-----
-
-No response indicates success.
-
-=== Stop a source connector
-
-[source,curl]
-----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/stop" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/start" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
@@ -1181,90 +1195,189 @@ No response indicates success.
 
 [source,curl]
 ----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/stop" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/stop" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.
-
-=== Create a source connector
-
-[source,curl]
-----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" --header "Authorization: Bearer $PULSAR_TOKEN" --form "sourceConfig=@mynetty-source-config.json;type=application/json"
-----
-
-No response indicates success.
-
-In the example above, a configuration file is provided as input to CURL.
-The file is named "mynetty-source-config.json", which has the following context for the built-in "netty" source connector in {product}.
-
-[TIP]
-====
-The curl parameter `@` indicates an input file.
-When executing the curl command, ensure the input file is accessible and in the proper directory for reading.
-====
-
-=== Delete a source connector
-
-[source,curl]
-----
-curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" --header "Authorization: Bearer $PULSAR_TOKEN"
-----
-
-No response indicates success.
-
-=== Create a sink
-
-[source,curl]
-----
-curl --fail --location --request POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" --header "Authorization: Bearer $PULSAR_TOKEN" --form "sinkConfig=@mykafka-sink-config.json;type=application/json"
-----
-
-No response indicates success.
-
-In the example above, a configuration file is provided as input to CURL.
-The file is named mykafka-sink-config.json which has the following context for the built-in "kafka" source connector in {product}.
-
-[source,json]
-----
-{
-    "tenant": "testcreate",
-    "namespace": "ns0",
-    "name": "mykafkaconnector",
-    "archive": "builtin://kafka",
-    "parallelism": 1,
-    "autoAck": true,
-    "cleanupSubscription": false,
-    "configs": {
-      "acks": "1",
-      "batchSize": "16384",
-      "bootstrapServers": "localhost:55200,localhost:55201",
-      "maxRequestSize": "1048576",
-      "producerConfigProperties": {
-        "client.id": "astra-streaming-client",
-        "sasl.jaas.config": "sensitive_data_removed",
-        "sasl.mechanism": "PLAIN",
-        "sasl.password": "sensitive_data_removed",
-        "sasl.username": "myuserid",
-        "security.protocol": "SASL_SSL"
-      },
-      "topic": "mykafka-topic"
-    },
-    "inputs": [ "persistent://testcreate/ns0/mytopic3" ]
-}
-----
-
-[TIP]
-====
-The curl parameter `@` indicates an input file.
-When executing the curl command, ensure the input file is accessible and in the proper directory for reading.
-====
 
 === Delete a sink
 
 [source,curl]
 ----
-curl --fail --location --request DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" --header "Authorization: Bearer $PULSAR_TOKEN"
+curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+No response indicates success.
+
+== Source connector operations
+
+Use the following {product} {pulsar-short} Admin API endpoints to manage source connectors.
+
+[TIP]
+====
+The {product} {pulsar-short} Admin API endpoints for source and sink connectors have similar paths and parameters.
+If you reuse requests for both sources and sinks, be sure to set the `/sources` or `/sinks` path accordingly.
+====
+
+=== Get sources in a namespace
+
+[source,curl]
+----
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
+----
+
+.Result
+[%collapsible]
+====
+[source,json]
+----
+[
+  "mysource1"
+]
+----
+====
+
+=== Get a source's status
+
+[source,curl]
+----
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/status" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
+----
+
+.Result
+[%collapsible]
+====
+[source,json]
+----
+{
+  "numInstances": 1,
+  "numRunning": 1,
+  "instances": [
+    {
+      "instanceId": 0,
+      "status": {
+        "running": true,
+        "error": "",
+        "numRestarts": 0,
+        "numReceivedFromSource": 0,
+        "numSystemExceptions": 0,
+        "latestSystemExceptions": [],
+        "numSourceExceptions": 0,
+        "latestSourceExceptions": [],
+        "numWritten": 0,
+        "lastReceivedTime": 0,
+        "workerId": "pulsar-aws-useast2-function-0"
+      }
+    }
+  ]
+}
+----
+====
+
+=== Get a source's details
+
+[source,curl]
+----
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
+----
+
+.Result
+[%collapsible]
+====
+[source,json]
+----
+{
+  "archive": "builtin://netty",
+  "batchBuilder": null,
+  "batchSourceConfig": null,
+  "className": "org.apache.pulsar.io.netty.NettySource",
+  "configs": {
+    "host": "127.0.0.1",
+    "numberOfThreads": "1",
+    "port": "10999",
+    "type": "tcp"
+  },
+  "customRuntimeOptions": "internal_data",
+  "name": "mysource",
+  "namespace": "ns0",
+  "parallelism": 1,
+  "processingGuarantees": "ATLEAST_ONCE",
+  "producerConfig": {
+    "batchBuilder": "",
+    "cryptoConfig": null,
+    "maxPendingMessages": null,
+    "maxPendingMessagesAcrossPartitions": null,
+    "useThreadLocalProducers": false
+  },
+  "resources": {
+    "cpu": 0.25,
+    "disk": 1000000000,
+    "ram": 1000000000
+  },
+  "runtimeFlags": null,
+  "schemaType": null,
+  "secrets": null,
+  "serdeClassName": null,
+  "tenant": "testcreate",
+  "topicName": "persistent://testcreate/ns0/t1"
+}
+----
+====
+
+=== Create a source
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+--form "sourceConfig=@mynetty-source-config.json;type=application/json"
+----
+
+[TIP]
+====
+The curl parameter `@` indicates a file input.
+When executing the curl command, ensure the file is accessible and in the proper directory for reading.
+====
+
+In the example above, the source connector configuration is passed in a configuration file named `mynetty-source-config.json`.
+If you use a configuration file, the file must contain a valid JSON configuration for the source connector.
+
+No response indicates success.
+
+=== Start a source
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/start" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+No response indicates success.
+
+=== Stop a source
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/stop" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+No response indicates success.
+
+=== Delete a source
+
+[source,curl]
+----
+curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
 No response indicates success.

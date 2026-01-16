@@ -47,9 +47,9 @@ These are added later when configuring the Helm chart.
 +
 [source,bash,subs="+quotes"]
 ----
-kubectl create secret generic **SECRET_NAME** \
-  --from-file=config.yml \
-  --dry-run=client -oyaml > k8s-additional-scrape-config-demo.yaml
+kubectl create secret generic **SECRET_NAME** --from-file=config.yml --dry-run=client \
+  -oyaml > k8s-additional-scrape-config-demo.yaml
+
 kubectl apply -f k8s-additional-scrape-config-demo.yaml
 ----
 +
@@ -88,9 +88,7 @@ If you don't run this command, you might encounter a problem when initializing t
 kubectl patch ds kubeprom-prometheus-node-exporter --type "json" -p '[{"op": "remove", "path" : "/spec/template/spec/containers/0/volumeMounts/2/mountPropagation"}]'
 
 # Confirm Prometheus node exporter daemonset is running properly
-kubectl rollout status daemonset \
-  kubeprom-prometheus-node-exporter \
-  --timeout 60s
+kubectl rollout status daemonset kubeprom-prometheus-node-exporter --timeout 60s
 ----
 
 . To confirm that {product} metrics are integrated with your external Prometheus server, go to your external Prometheus server UI.

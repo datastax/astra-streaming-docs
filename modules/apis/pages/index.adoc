@@ -4,8 +4,12 @@
 The {product} {devops-api} is one of the APIs that you can use to manage your {pulsar-reg} tenants and their resources.
 Use this API to manage higher-level {product} objects associated with your {product-short} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, georeplication, {pulsar-short} stats, and {pulsar-short} tokens.
 
+.More endpoints
+[TIP]
+====
 This page summarizes commonly used endpoints.
 For more information and all endpoints, see the xref:astra-streaming:apis:attachment$devops.html[{product} {devops-api} specification reference].
+====
 
 Other available APIs include the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
 
@@ -19,7 +23,7 @@ To use the {product} {devops-api}, you need the following:
 * An xref:operations:astream-token-gen.adoc[{product-short} application token] that has a role with {product} permissions.
 
 * Depending on the operations you need to perform, you might need additional information about your tenant, such as the cluster name or {pulsar-short} instance name.
-You can get this information with `<<get-tenant-information,GET 'https://api.astra.datastax.com/v2/streaming/tenants'>>` or from the xref:operations:create-delete-tenants.adoc#get-tenant-information[**Tenant Details** section in the {astra-ui}].
+You can get this information with `<<get-tenant-details,GET "https://api.astra.datastax.com/v2/streaming/tenants">>` or from the xref:operations:create-delete-tenants.adoc#get-tenant-details[**Tenant Details** section in the {astra-ui}].
 
 === Set environment variables
 
@@ -48,12 +52,12 @@ include::ROOT:partial$format-api-response.adoc[]
 
 Use the following {product} {devops-api} endpoints to manage {product} {pulsar-short} tenants.
 
-[#get-tenant-information]
-=== Get tenant information
+[#get-tenant-details]
+=== Get tenant details
 
 [source,curl]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 | python3 -mjson.tool
 ----
@@ -120,7 +124,7 @@ Get cloud provider and regions supported by {product}:
 
 [source,curl]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v2/streaming/providers" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/providers" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 | python3 -mjson.tool
 ----
@@ -159,7 +163,7 @@ Create a tenant:
 
 [source,curl]
 ----
-curl -sS -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --data-raw '{
@@ -171,11 +175,11 @@ curl -sS -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
 | python3 -mjson.tool
 ----
 
-Create a tenant with file input: (Note the use of `--fail` and the structure of the `data` payload in this example)
+Create a tenant with file input:
 
 [source,curl]
 ----
-curl --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --data "@mytenant-config.json" \
@@ -222,7 +226,7 @@ The output includes the "pulsarToken" which is the JWT for this {pulsar-short} i
 
 [source,curl]
 ----
-curl -sS -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/clusters/$CLUSTER" \
+curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/clusters/$CLUSTER" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $ASTRA_TOKEN"
 ----
@@ -242,7 +246,7 @@ Get the georeplication settings for a namespace, if enabled:
 
 [source,curl]
 ----
-curl --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 | python3 -mjson.tool
 ----
@@ -301,7 +305,7 @@ The JSON input parameters can be obtained from List Tenants with Details and Get
 
 [source,curl]
 ----
-curl --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --data-raw '{
@@ -313,7 +317,7 @@ curl --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/replications
 }'
 ----
 
-Because `--fail` is used in this example, no response indicates success.
+No response indicates success.
 
 === Disable (remove) georeplication
 
@@ -321,7 +325,7 @@ The JSON input parameters can be obtained from `List Tenants with Details` and `
 
 [source,curl]
 ----
-curl --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
+curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --data-raw '{
@@ -333,7 +337,7 @@ curl --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/replicatio
 }'
 ----
 
-Because `--fail` is used in this example, no response indicates success.
+No response indicates success.
 
 == {pulsar-short} token (JWT) operations
 
@@ -355,7 +359,7 @@ Required parameters "CLUSTER" is obtained from the "List Tenants with Details" A
 
 [source,curl]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --header "X-DataStax-Pulsar-Cluster: $CLUSTER" \
 | python3 -mjson.tool
@@ -386,7 +390,7 @@ Required parameters "CLUSTER" is obtained from the "List Tenants with Details" A
 
 [source,curl,subs="+quotes"]
 ----
-curl --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens/**PULSAR_TOKEN_ID**" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens/**PULSAR_TOKEN_ID**" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --header "X-DataStax-Pulsar-Cluster: $CLUSTER"
 ----
@@ -417,7 +421,7 @@ The `v2/streaming/tenants/$TENANT/tokens` endpoint returns a raw string JWT with
 
 [source,curl]
 ----
-curl --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --header "X-DataStax-Pulsar-Cluster: $CLUSTER"
 ----
@@ -440,7 +444,7 @@ The `v3/streaming/tenants/$TENANT/tokens` endpoint returns a JSON response and a
 
 [source,curl,subs="+quotes"]
 ----
-curl --fail -L -X POST "https://api.astra.datastax.com/v3/streaming/tenants/$TENANT/tokens" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v3/streaming/tenants/$TENANT/tokens" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --header "X-DataStax-Pulsar-Cluster: $CLUSTER" \
 --data-raw '{
@@ -479,7 +483,7 @@ List of "TOKENID" can be obtained from List Existing Tokens IDs.
 
 [source,curl,subs="+quotes"]
 ----
-curl --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens/**PULSAR_TOKEN_ID**" \
+curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens/**PULSAR_TOKEN_ID**" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --header "X-DataStax-Pulsar-Cluster: $CLUSTER"
 ----

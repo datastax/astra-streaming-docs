@@ -18,9 +18,7 @@ Create a new console project, and then add a reference to the https://www.nuget.
 
 [source,shell]
 ----
-dotnet new console \
-  --output SimpleProducerConsumer \
-  --framework net6.0
+dotnet new console --output SimpleProducerConsumer --framework net6.0
 
 cd SimpleProducerConsumer
 

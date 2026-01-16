@@ -105,8 +105,8 @@ Deflate::
 [source,bash]
 ----
 curl -v \
--H 'Authorization: Bearer $BEARER_TOKEN' \
--H 'Accept-encoding: deflate' \
+-H "Authorization: Bearer $BEARER_TOKEN" \
+-H "Accept-encoding: deflate" \
 https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
 --compressed
 ----
@@ -118,8 +118,8 @@ Gzip::
 [source,bash]
 ----
 curl -v \
--H 'Authorization: Bearer $BEARER_TOKEN' \
--H 'Accept-encoding: gzip' \
+-H "Authorization: Bearer $BEARER_TOKEN" \
+-H "Accept-encoding: gzip" \
 https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
 | zcat
 ----

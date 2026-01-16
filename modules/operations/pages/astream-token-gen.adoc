@@ -46,10 +46,11 @@ Applications using the deleted {pulsar-short} token will no longer be able to co
 
 == Set environment variables
 
-Consider setting environment variables for sensitive and frequently used values, such as your authentication credentials and xref:operations:create-delete-tenants.adoc#get-tenant-information[tenant connection details]:
+Consider setting environment variables for sensitive and frequently used values, such as your authentication credentials and xref:operations:create-delete-tenants.adoc#get-tenant-details[tenant connection details]:
 
 [source,bash,subs="+quotes"]
 ----
+export TENANT=**ASTRA_STREAMING_TENANT_NAME**
 export WEB_SERVICE_URL=**ASTRA_STREAMING_TENANT_WEB_SERVICE_URL**
 export PULSAR_TOKEN=**ASTRA_STREAMING_TENANT_PULSAR_TOKEN**
 export ASTRA_TOKEN=**ASTRA_APPLICATION_TOKEN**
@@ -67,11 +68,11 @@ For the {devops-api}, the base URL is always `\https://api.astra.datastax.com`.
 For example:
 +
 .Billing report by tenant
-[source,curl,subs="+quotes"]
+[source,curl]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v2/stats/namespaces/**TENANT_NAME**" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/stats/namespaces/$TENANT" \
 --header "Accept: application/json" \
---header "Authorization: Bearer **ASTRA_TOKEN**"
+--header "Authorization: Bearer $ASTRA_TOKEN"
 ----
 
 {product} {pulsar-short} Admin API::
@@ -81,7 +82,7 @@ For example:
 .Get built-in sinks
 [source,curl]
 ----
-curl "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
 -H "Authorization: $ASTRA_PULSAR_TOKEN"
 ----
 

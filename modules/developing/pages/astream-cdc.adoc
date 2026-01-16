@@ -320,7 +320,7 @@ You can also use this configuration to enable CDC on new tables.
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -338,7 +338,7 @@ For databases where you previously enabled CDC, you only need to include new tab
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X POST "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{
@@ -392,7 +392,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST 
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X POST "https://api.astra.datastax.com/v2/databases/**DB_ID**/datacenters" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/databases/**DB_ID**/datacenters" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{
@@ -536,7 +536,7 @@ For example, if you have an Elasticsearch sink, you can send a `GET` request to 
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X POST "**ELASTICSEARCH_URL**/**INDEX_NAME**/_search?pretty" \
+curl -sS --fail -L -X POST "**ELASTICSEARCH_URL**/**INDEX_NAME**/_search?pretty" \
 -header "Authorization: ApiKey '**API_KEY**'"
 ----
 +
@@ -818,7 +818,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/datab
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -865,7 +865,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/datab
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -914,7 +914,7 @@ If CDC is already enabled, the request updates the existing CDC configuration.
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -986,7 +986,7 @@ If you omit any existing tables or regions from the request, CDC is disabled for
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X PUT "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X PUT "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{
@@ -1026,7 +1026,7 @@ Replace the following:
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -1063,7 +1063,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/deleteCDC[DELETE /v3
 
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X DELETE "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{

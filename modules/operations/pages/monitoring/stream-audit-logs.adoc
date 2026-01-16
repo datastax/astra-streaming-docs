@@ -45,7 +45,7 @@ You can use the {devops-api-ref-url}#tag/Organization-Operations/operation/confi
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS --location -X POST "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 --data '{
@@ -80,7 +80,7 @@ HTTP/1.1 202 Accepted
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS --location -X GET "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
