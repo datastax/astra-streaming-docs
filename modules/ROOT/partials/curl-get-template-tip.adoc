@@ -1,0 +1,4 @@
+[TIP]
+====
+Use the response from the `GET` request as a template for the `POST` request body.
+====
