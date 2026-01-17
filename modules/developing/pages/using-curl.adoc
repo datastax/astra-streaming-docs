@@ -22,7 +22,7 @@ To use the {pulsar-short} REST APIs with {product} tenants, you need the followi
 
 * An active {product-short} account with access to {product}.
 
-* A {product} tenant.
+* An active {product} tenant.
 
 * A xref:operations:astream-token-gen.adoc[{pulsar-short} token] for your tenant.
 

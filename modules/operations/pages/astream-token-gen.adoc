@@ -13,7 +13,7 @@ To create an {product-short} application token, see xref:astra-db-serverless:adm
 [#pulsar-token]
 == {product} {pulsar-short} tokens (JWT)
 
-{product} {pulsar-short} token are {pulsar-reg} https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} {pulsar-short} cluster through the {pulsar-short} CLI, runtime clients, or the {pulsar-short} Admin API.
+{product} {pulsar-short} tokens are {pulsar-reg} https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} {pulsar-short} cluster through the {pulsar-short} CLI, runtime clients, or the {pulsar-short} Admin API.
 If necessary, {product-short} forwards the JWT to the {pulsar-short} cluster for role verification.
 
 You need a {pulsar-short} JWT for actions related to {pulsar-short} tenants, namespaces, messages, topics, and functions, as well as {pulsar-short} CLI/API commands.
