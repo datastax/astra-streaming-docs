@@ -1,0 +1,9 @@
+The default response is a single JSON string.
+
+You can use modifications like `| jq .` or `| python3 -mjson.tool` to format the output for easier reading.
+Formatting the response is optional; it isn't required to execute API requests.
+
+Many examples in this reference use `| python3 -mjson.tool` to format the JSON response.
+Additionally, the examples use the `-sS --fail` options to suppress trivial output and handle errors more gracefully while passing the content of successful responses to `stdout`.
+
+Omit the `-sS --fail` options for debugging or to get the full output, including progress bars and warnings.

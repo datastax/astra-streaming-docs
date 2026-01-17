@@ -3,25 +3,23 @@
 * xref:getting-started:real-time-data-pipelines-tutorial.adoc[]
 
 .Development
-* Produce and consume messages
-** xref:developing:produce-consume-astra-portal.adoc[]
-** xref:developing:produce-consume-pulsar-client.adoc[]
-** Client applications
-*** xref:developing:clients/index.adoc[]
-*** xref:developing:clients/java-produce-consume.adoc[]
-*** xref:developing:clients/python-produce-consume.adoc[]
-*** xref:developing:clients/csharp-produce-consume.adoc[]
-*** xref:developing:clients/golang-produce-consume.adoc[]
-*** xref:developing:clients/nodejs-produce-consume.adoc[]
-*** xref:developing:clients/spring-produce-consume.adoc[]
-** {pulsar-short} subscriptions
-*** xref:ROOT:astream-subscriptions.adoc[]
-*** xref:ROOT:astream-subscriptions-exclusive.adoc[]
-*** xref:ROOT:astream-subscriptions-shared.adoc[]
-*** xref:ROOT:astream-subscriptions-failover.adoc[]
-*** xref:ROOT:astream-subscriptions-keyshared.adoc[]
+* xref:developing:produce-consume-astra-portal.adoc[]
+* xref:developing:produce-consume-pulsar-client.adoc[]
+* Client applications
+** xref:developing:clients/index.adoc[]
+** xref:developing:clients/java-produce-consume.adoc[]
+** xref:developing:clients/python-produce-consume.adoc[]
+** xref:developing:clients/csharp-produce-consume.adoc[]
+** xref:developing:clients/golang-produce-consume.adoc[]
+** xref:developing:clients/nodejs-produce-consume.adoc[]
+** xref:developing:clients/spring-produce-consume.adoc[]
+* {pulsar-short} subscriptions
+** xref:ROOT:astream-subscriptions.adoc[]
+** xref:ROOT:astream-subscriptions-exclusive.adoc[]
+** xref:ROOT:astream-subscriptions-shared.adoc[]
+** xref:ROOT:astream-subscriptions-failover.adoc[]
+** xref:ROOT:astream-subscriptions-keyshared.adoc[]
 * xref:developing:astream-functions.adoc[]
-* xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:starlight.adoc[]
 * xref:developing:astream-cdc.adoc[]
 * xref:developing:gpt-schema-translator.adoc[]
@@ -50,10 +48,11 @@
 * xref:operations:astream-pricing.adoc[]
 * xref:operations:monitoring/stream-audit-logs.adoc[]
 
-.API references
+.API and CLI references
 * xref:apis:index.adoc[]
-* xref:developing:using-curl.adoc[]
 * xref:apis:api-operations.adoc[]
+* xref:developing:using-curl.adoc[]
+* xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astra-cli.adoc[]
 
 .Frequently asked questions

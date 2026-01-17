@@ -1,14 +1,12 @@
-= Use the {product} {pulsar-short} Client
-:navtitle: {pulsar-short} CLI
+= Produce and consume messages with the {pulsar-short} CLI and {product}
+:navtitle: Use the {pulsar-short} CLI
 :description: Use the pulsar-client CLI to interact with your {product} tenants
 
-You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants.
+You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants:
 
-For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
+. xref:operations:create-delete-tenants.adoc[Create an {product} tenant].
 
-. xref:getting-started:index.adoc[Create an {product} tenant.]
-
-. xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}.]
+. xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}].
 
 . Set the following environment variables:
 +
@@ -27,9 +25,9 @@ Replace **RANDOM_UUID** with any random letters and numbers to create a unique t
 ----
 # Produce a new message on the given tenant/namespace/topic
 ./bin/pulsar-client produce \
-    "$TENANT/$NAMESPACE/$TOPIC" \
-    --messages "Hi there" \
-    --num-produce 1
+"$TENANT/$NAMESPACE/$TOPIC" \
+--messages "Hi there" \
+--num-produce 1
 ----
 +
 Your topic now has a new, unacknowledged message.
@@ -40,9 +38,9 @@ Your topic now has a new, unacknowledged message.
 ----
 # Consume a new message on the given tenant/namespace/topic
 ./bin/pulsar-client consume \
-    "$TENANT/$NAMESPACE/$TOPIC" \
-    --subscription-name "examples-subscriber" \
-    --num-messages 1
+"$TENANT/$NAMESPACE/$TOPIC" \
+--subscription-name "examples-subscriber" \
+--num-messages 1
 ----
 
 . Make sure the output includes your message:
@@ -61,5 +59,6 @@ key:[null], properties:[], content:Hi there
 
 == See also
 
+* https://github.com/datastax/astra-streaming-examples[{product} examples GitHub repository]
 * xref:astream-functions.adoc[]
 * xref:astream-cdc.adoc[]

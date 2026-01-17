@@ -10,8 +10,8 @@ Overview displays the aggregated total metrics values summarized at the tenant l
 * Total number of producers
 * Total number of consumers
 * Total number of subscriptions
-* Total message storage size (logical) - before replication
-* Total message storage size -  after replication
+* Total message storage size (logical) before replication
+* Total message storage size after replication
 * Total message size offloaded to a tiered storage
 * Total message backlog
 * Total message replication backlog

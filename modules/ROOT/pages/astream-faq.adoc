@@ -77,9 +77,9 @@ However, shared clusters don't support private links.
 
 For more information, see xref:operations:astream-pricing.adoc[].
 
-=== What are the differences in geo-replication for shared clusters and Streaming Capacity Units?
+=== What are the differences in georeplication for shared clusters and Streaming Capacity Units?
 
-Geo-replication is available for both shared clusters and Streaming Capacity Units.
+Georeplication is available for both shared clusters and Streaming Capacity Units.
 Both cluster types can replicate to other clusters, but there are some differences:
 
 Connections::
@@ -92,7 +92,7 @@ Shared clusters can replicate between any xref:operations:astream-regions.adoc[s
 +
 Streaming Capacity Units can use almost any region supported by your cloud provider, as well as across cloud providers.
 
-For more on geo-replication, see xref:operations:astream-georeplication.adoc[].
+For more on georeplication, see xref:operations:astream-georeplication.adoc[].
 
 == Security and access control
 
@@ -117,7 +117,11 @@ The following questions are related to application development with {product}.
 
 === What APIs are available?
 
-See xref:apis:index.adoc[].
+See the following:
+
+* xref:apis:index.adoc[]
+* xref:apis:api-operations.adoc[]
+* xref:developing:using-curl.adoc[]
 
 === Can I migrate data from my existing {pulsar-short} cluster to {product}?
 

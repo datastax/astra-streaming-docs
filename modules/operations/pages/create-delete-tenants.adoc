@@ -35,7 +35,7 @@ If your preferred region isn't available, contact your {company} account represe
 API::
 +
 --
-Use `xref:apis:api-operations.adoc#create-a-tenant[POST 'https://api.astra.datastax.com/v2/streaming/tenants']`.
+Use `xref:apis:index.adoc#create-a-tenant[POST "https://api.astra.datastax.com/v2/streaming/tenants"]`.
 --
 
 CLI::
@@ -49,7 +49,8 @@ Use `xref:astra-cli:commands:astra-streaming-create.adoc[astra streaming create]
 
 After you create a tenant, you can inspect the tenant, create and manage namespaces and topics, and configure tenant settings.
 
-=== Get tenant information
+[#get-tenant-details]
+=== Get tenant details
 
 [tabs]
 ======
@@ -60,13 +61,22 @@ After you create a tenant, you can inspect the tenant, create and manage namespa
 
 . Click the name of your tenant.
 
-. Click any of the tabs to access tenant information and settings, such as **Connect** or **Sinks**.
+. Click any of the tabs to access tenant details and settings, such as **Connect** or **Sinks**.
++
+[TIP]
+====
+On the **Connect** tab, the *Tenant Details* section contains essential information for connecting to your {product} {pulsar-short} tenant, including the Web Service URL, cluster ID, and tenant ID.
+
+You can also create a xref:operations:astream-token-gen.adoc[{pulsar-short} token] from this section.
+
+image::developing:tenant-details.png[Tenant details in {product}]
+====
 --
 
 API::
 +
 --
-Use `xref:apis:api-operations.adoc#get-tenant-information[GET 'https://api.astra.datastax.com/v2/streaming/tenants']`.
+Use `xref:apis:index.adoc#get-tenant-details[GET "https://api.astra.datastax.com/v2/streaming/tenants"]`.
 --
 
 CLI::
@@ -144,7 +154,7 @@ Terminating a tenant is a destructive operation that permanently deletes the ten
 API::
 +
 --
-Use `xref:apis:api-operations.adoc#delete-a-tenant[DELETE 'https://api.astra.datastax.com/v2/streaming/tenants/**TENANT_NAME**/clusters/**CLUSTER_NAME**']`.
+Use `xref:apis:index.adoc#delete-a-tenant[DELETE "https://api.astra.datastax.com/v2/streaming/tenants/**TENANT_NAME**/clusters/**CLUSTER_NAME**"]`.
 --
 
 CLI::

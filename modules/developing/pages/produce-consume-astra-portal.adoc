@@ -1,13 +1,15 @@
 = Produce and consume messages in the {astra-ui}
-:navtitle: {astra-ui}
+:navtitle: Test tenants in the {astra-ui}
 :description: Use this guide to create and consume a topic message using the {astra-ui}.
 
-This guide assumes you have completed the xref:getting-started:index.adoc[{product} quickstart].
+To verify that your {product} tenant can produce and consume messages, you can use the **Try Me** feature in the {astra-ui}.
 
-Now, it's time to produce and consume messages in your new streaming tenant.
-The following steps will use the "Try Me" feature of the {astra-ui} to interact with an existing topic.
+== Prerequisites
 
-== Select the producer and consumer topics
+You need an {product} tenant with at least one namespace and two topics (one for the producer and one for the consumer).
+For instructions, see the xref:getting-started:index.adoc[{product} quickstart] or xref:operations:create-delete-tenants.adoc[].
+
+== Produce and consume a test message
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
@@ -17,17 +19,14 @@ The following steps will use the "Try Me" feature of the {astra-ui} to interact 
 
 . Select a namespace, producer topic, and consumer topic for the test.
 
-. For this example, you can use the default values for the **Connection type**, **Read position**, **Subscription**, and **Subscription Type** settings.
-+
+. For this example, use the default values for the **Connection type**, **Read position**, **Subscription**, and **Subscription Type** settings.
 In future tests, you might want to change these settings.
 
-== Connect and send a message
+. Click *Connect* to open a websocket connection in your browser with the producer topic.
 
-. Click *Connect* to open a websocket connection in your browser with this topic.
+. In the *Send message* field, enter a test message, and then click *Send*.
 
-. In *Send message*, type a message for the test, and then click *Send*.
-
-A message is produced (sent) to your selected topic, and then the consumer consumes (retrieves) the message.
+A message is produced (sent) to your selected producer topic, and then the consumer topic consumes (retrieves) the message.
 Produced and consumed messages are printed in a chat style format in the **Test Message** dialog.
 
 == See also

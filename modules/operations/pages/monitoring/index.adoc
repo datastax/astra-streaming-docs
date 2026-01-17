@@ -113,7 +113,7 @@ The following table lists recommended namespace and/or topic metrics as a starti
 
 === Replication metrics
 
-When geo-replication is enabled for a particular namespace, a subset of namespace metrics is available specifically for geo-replication purposes. Below is the list of recommended geo-replication metrics as a starting point.
+When georeplication is enabled for a particular namespace, a subset of namespace metrics is available specifically for georeplication purposes. Below is the list of recommended georeplication metrics as a starting point.
 
 [cols=4]
 |===
@@ -306,16 +306,11 @@ You can use the following expression to filter system topics:
 
 [source,pgsql]
 ----
-{topic !~ ".*__.*"}`
+{topic !~ ".*__.*"}
 ----
 
 This expression excludes messages with topic labels that include two consecutive underscores.
-This works because {pulsar-short} system topics and namespaces are usually prefixed by two underscores, such as:
-
-[source,plain]
-----
-persistent://some_tenant/__kafka/__consumer_offsets_partition_0
-----
+This works because {pulsar-short} system topics and namespaces are usually prefixed by two underscores, such as `+persistent://some_tenant/__kafka/__consumer_offsets_partition_0+`.
 
 To use this expression, your applications' namespace and topic names don't contain double underscores.
 If they do, they will also be excluded by this filter.
@@ -345,7 +340,7 @@ sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 
 [source,pgsql]
 ----
-sum(pulsar_msg_backlog{namespace=~"$tenant.+"", topic !~ ".*__.*"})
+sum(pulsar_msg_backlog{namespace=~"$tenant.+", topic !~ ".*__.*"})
 ----
 
 ==== Get the total message backlog of each topic within a specific namespace, excluding system topics
@@ -357,7 +352,7 @@ sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 
 ==== Get the top 10 message backlog by topic within a specific namespace, excluding system topics
 
-[source,pssql]
+[source,pgsql]
 ----
 topk (10, sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"}))
 ----
@@ -388,7 +383,7 @@ However, {company} recommends that you monitor the following metrics for unexpec
 | Gauge
 | The total message backlog of the namespace replicating to a remote cluster.
 
-| pulsar_subscription_back_log
+| pulsar_subscription_backlog
 | Subscription
 | Gauge
 | The total backlog (number of messages) for a subscription of a topic.
