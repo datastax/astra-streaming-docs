@@ -58,7 +58,7 @@ With shared clusters, you can create tenants in any of the xref:astream-regions.
 
 Streaming Capacity Units are open to almost any public cloud region.
 For this reason, Streaming Capacity Units offer more flexibility for xref:operations:astream-georeplication.adoc[georeplication].
-If your preferred region isn't already available, you can contact your {company} account representative or {support_url}[{company} Support] to request it.
+If your preferred region isn't already available, you can contact your {company} account representative or {support-url}[IBM Support] to request it.
 
 == See also
 

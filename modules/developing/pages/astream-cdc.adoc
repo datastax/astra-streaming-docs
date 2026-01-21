@@ -206,7 +206,7 @@ If you don't have any {astra-stream} tenants, you must create a tenant in order 
 Your {astra-stream} tenant must be in the same region as the table where you want to enable CDC.
 +
 CDC for {astra-db} is available only in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
-If your database is deployed to an xref:astra-db-serverless:databases:regions.adoc[{astra-db} region] that doesn't yet support {astra-stream}, contact your {company} account representative or {support_url}[{company} Support].
+If your database is deployed to an xref:astra-db-serverless:databases:regions.adoc[{astra-db} region] that doesn't yet support {astra-stream}, contact your {company} account representative or {support-url}[IBM Support].
 
 . Click *Create tenant*.
 +
@@ -758,7 +758,7 @@ CDC for multi-region databases is only available for {db-serverless-vector} data
 
 . <<create-tenant,Create at least one {astra-stream} tenant for each region>> where you want to enable CDC.
 +
-If your database is deployed to a region that doesn't support {astra-stream}, contact your {company} account representative or {support_url}[{company} Support].
+If your database is deployed to a region that doesn't support {astra-stream}, contact your {company} account representative or {support-url}[IBM Support].
 
 . <<create-table,Create tables>> in your database, if you haven't done so already.
 
