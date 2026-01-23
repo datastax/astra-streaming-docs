@@ -309,7 +309,7 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 
 === Delete a namespace
 
-[source,curl]
+[source,curl,subs="+quotes"]
 ----
 curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/**NAMESPACE_TO_DELETE**" \
 --header "Authorization: Bearer $PULSAR_TOKEN"

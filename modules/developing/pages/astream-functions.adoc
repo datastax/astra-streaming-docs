@@ -44,7 +44,7 @@ For example, assuming a project named `testpythonfunction`, the extracted archiv
 
 . Prepare the directory structure:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
 mkdir **FUNCTION_NAME**
 mkdir **FUNCTION_NAME**/python-code
