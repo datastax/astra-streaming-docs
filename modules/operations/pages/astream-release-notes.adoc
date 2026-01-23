@@ -95,7 +95,7 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 [discrete]
 ==== {new}
 
-* {product} now supports xref:streaming-learning:functions:index.adoc[transform functions].
+* {product} now supports xref:developing:astream-functions-transform.adoc[transform functions].
 
 [discrete]
 === November 16, 2022

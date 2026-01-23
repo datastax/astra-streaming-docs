@@ -1,0 +1,6 @@
+= {product} {pulsar-short} transform functions configuration reference
+:navtitle: Transform functions configuration reference
+
+Use these configurations to create transform functions in {product}.
+For instructions, see xref:developing:astream-functions.adoc#deploy-functions-in-the-astra-portal[Deploy functions in the {astra-ui}].
+

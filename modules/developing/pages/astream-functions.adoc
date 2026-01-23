@@ -1,5 +1,5 @@
-= {product} functions
-:navtitle: Use {pulsar-short} functions
+= Deploy and manage {product} {pulsar-short} functions
+:navtitle: Deploy and manage {pulsar-short} functions
 
 Functions are lightweight compute processes that you can run on each message a topic receives.
 You can apply custom logic to a message, transforming or enriching it, and then output it to a different topic.
@@ -177,16 +177,8 @@ mvn package
 [INFO] ------------------------------------------------------------------------
 ----
 ====
---
 
-////
-TODO:
-Go functions::
-+
 --
-Must have 4 steps to maintain numbering.
---
-////
 ======
 
 [start=5]
@@ -282,6 +274,7 @@ You can also check the {astra-ui} to confirm the function is listed on the tenan
 +
 See <<controlling-your-function,Controlling your function>> for more information on testing and monitoring your function in {product}.
 
+[#deploy-functions-in-the-astra-portal]
 == Deploy functions in the {astra-ui}
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
@@ -326,6 +319,13 @@ Use {company} transform function::
 +
 --
 .. Select *Use {company} transform function*.
+
+//Add sink steps somewhere.
+//Combine regular transform fx steps below
+[TIP]
+====
+You can also deploy transform functions in sinks.
+====
 --
 ======
 
@@ -344,8 +344,11 @@ This means there is a change that a message is not processed.
 * *Timeout*: Set a timeout limit.
 * *Auto Acknowledge*: Enable or disable automatic message acknowledgment.
 
-. Optional: Provide a config key, if required.
-For more information, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[{pulsar-short} documentation].
+. Optional: Provide a config key or additional configuration options, if needed.
++
+For transform functions, see the xref:developing:astream-functions-transform.adoc[transform functions configuration reference].
++
+For general information about function configuration, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[{pulsar-short} documentation].
 
 . Click *Create*.
 
