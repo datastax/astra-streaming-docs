@@ -323,42 +323,6 @@ Use {company} transform function::
 .. Select *Use {company} transform function*.
 
 .. Select the xref:developing:astream-functions-transform.adoc[transform function] that you want to use.
-
-[TIP]
-=====
-You can also deploy transform functions in sinks.
-
-.Deploy a transform function in a sink
-[%collapsible]
-====
-By default, functions transform data either after it is written to a topic by a source connector, or before it is read from a topic by a sink connector.
-This requires either a custom connector or an intermediate topic (with additional storage, IO, and latency).
-
-Alternatively, you can deploy transform functions in a sink to apply preprocessing to sink topic writes (outgoing messages from the sink).
-
-You can deploy the transform function while creating the sink:
-
-. xref:streaming-learning:pulsar-io:connectors/index.adoc[Create a sink] and include the transform function with your sink configuration.
-You can do this in the {astra-ui}, with the {pulsar-short} CLI, or with {product} {pulsar-short} Admin API.
-For example:
-+
-.. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
-.. Click the name of the tenant where you want to create the sink.
-.. Click the **Sinks** tab, and then click **Create Sink**.
-.. Configure the sink and select a transform function to deploy with the sink.
-.. Click **Create**, and then wait for the sink to initialize.
-+
-When the sink is ready, its status changes to **Running**.
-
-. When the sink is running, inspect the sink connector's log to verify that the function was loaded at sink creation.
-For example:
-+
-[source,console]
-----
-2022-11-14T15:01:02.398190413Z 2022-11-14T15:01:02,397+0000 [main] INFO org.apache.pulsar.functions.runtime.thread.ThreadRuntime - ThreadContainer starting function with instanceId 0 functionId f584ae69-2eda-449b-9759-2d19fd7c4da5 namespace astracdc
-----
-====
-=====
 --
 ======
 
@@ -415,6 +379,38 @@ transform-function-2
 ====
 
 Once created, the function starts processing messages from the input topics according to its logic.
+
+=== Deploy functions in sinks
+
+By default, functions modify data either after it is written to a topic by a source connector, or before it is read from a topic by a sink connector.
+This requires either a custom connector or an intermediate topic (with additional storage, IO, and latency).
+
+Alternatively, you can deploy functions in a sink to apply preprocessing to sink topic writes (outgoing messages from the sink).
+
+To deploy a function in a sink, xref:streaming-learning:pulsar-io:connectors/index.adoc[create a sink], and include the function in your sink configuration.
+You can do this in the {astra-ui}, with the {pulsar-short} CLI, or with {product} {pulsar-short} Admin API.
+
+For example, with the {astra-ui}:
+
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of the tenant where you want to create the sink.
+
+. Click the **Sinks** tab, and then click **Create Sink**.
+
+. Configure the sink and select a function to deploy with the sink.
+
+. Click **Create**, and then wait for the sink to initialize.
++
+When the sink is ready, its status changes to **Running**.
+
+. When the sink is running, inspect the sink connector's log to verify that the function was loaded at sink creation.
+For example:
++
+[source,console]
+----
+2022-11-14T15:01:02.398190413Z 2022-11-14T15:01:02,397+0000 [main] INFO org.apache.pulsar.functions.runtime.thread.ThreadRuntime - ThreadContainer starting function with instanceId 0 functionId f584ae69-2eda-449b-9759-2d19fd7c4da5 namespace astracdc
+----
 
 == Manage deployed functions
 
