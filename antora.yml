@@ -9,6 +9,7 @@ nav:
 asciidoc:
   attributes:
     company: 'DataStax'
+    support-url: 'https://www.ibm.com/mysupport/s/'
     astra-db: 'Astra DB'
     product: 'Astra Streaming'
     product-short: 'Astra'

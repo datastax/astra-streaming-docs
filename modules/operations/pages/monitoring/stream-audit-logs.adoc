@@ -4,7 +4,7 @@ Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[
 
 To enable audit log streaming, you must do one of the following:
 
- * Provide the **Full Name** of your {product} topic and the streaming tenant's `client.conf` file to {support_url}[{company} Support] or your {company} account representative.
+ * Provide the **Full Name** of your {product} topic and the streaming tenant's `client.conf` file to {support-url}[IBM Support] or your {company} account representative.
  * POST your configuration to the {devops-api-ref-url}#tag/Organization-Operations/operation/configureTelemetry[{product-short} {devops-api} telemetry endpoint].
 
 == Create an {product} topic for audit logs
@@ -29,13 +29,13 @@ You can use topics to organize audit logs by event type or other criteria.
 
 . To finalize the configuration, do one of the following:
 +
-* Send your topic's full name and the `client.conf` file to {support_url}[{company} Support] or your {company} account representative, and then {company} will complete the setup.
+* Send your topic's full name and the `client.conf` file to {support-url}[IBM Support] or your {company} account representative, and then {company} will complete the setup.
 * <<use-the-devops-api,Use the {product-short} {devops-api} to complete the setup.>>
 
 [#use-the-devops-api]
 == Configure audit log streaming with the {devops-api}
 
-You can use the {devops-api-ref-url}#tag/Organization-Operations/operation/configureTelemetry[{product-short} {devops-api} telemetry endpoint] to configure audit log streaming instead of providing the configuration details to {company} Support.
+You can use the {devops-api-ref-url}#tag/Organization-Operations/operation/configureTelemetry[{product-short} {devops-api} telemetry endpoint] to configure audit log streaming instead of providing the configuration details to IBM Support.
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Admin*.
 

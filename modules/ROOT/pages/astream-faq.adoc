@@ -126,7 +126,7 @@ See the following:
 === Can I migrate data from my existing {pulsar-short} cluster to {product}?
 
 Unless you are starting a project from scratch, you likely have message data that needs to be brought over to your {product} tenants.
-For migration assistance, contact {support_url}[{company} Support].
+For migration assistance, contact {support-url}[IBM Support].
 
 Every tenant in {product} comes with custom ports for Kafka and RabbitMQ workloads.
 {company} also offers a fully-compatible JMS implementation for your Java workloads.

@@ -26,7 +26,7 @@ If you're new to {product}, try the xref:getting-started:index.adoc[{product} qu
 . Select a xref:astra-streaming:operations:astream-regions.adoc[cloud provider and region that supports {astra-stream}].
 +
 Not all {astra-db} regions support {product}.
-If your preferred region isn't available, contact your {company} account representative or {support_url}[{company} Support].
+If your preferred region isn't available, contact your {company} account representative or {support-url}[IBM Support].
 
 . Click *Create tenant*.
 +
