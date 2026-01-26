@@ -1,6 +1,132 @@
 = {product} {pulsar-short} transform functions configuration reference
 :navtitle: Transform functions configuration reference
 
-Use these configurations to create transform functions in {product}.
-For instructions, see xref:developing:astream-functions.adoc#deploy-functions-in-the-astra-portal[Deploy functions in the {astra-ui}].
+include::common:streaming:partial$transform-functions/intro.adoc[]
 
+To deploy transform functions, see xref:developing:astream-functions.adoc#deploy-functions-in-the-astra-portal[Deploy functions in the {astra-ui}].
+
+== Configure transform functions
+
+include::common:streaming:partial$transform-functions/config.adoc[]
+
+[#expression-language]
+=== Expression language
+
+include::common:streaming:partial$transform-functions/expression-language.adoc[]
+
+[#conditional-steps]
+=== Conditional steps
+
+include::common:streaming:partial$transform-functions/when.adoc[]
+
+[#cast]
+== Cast
+
+include::common:streaming:partial$transform-functions/cast.adoc[]
+
+[#compute]
+== Compute
+
+include::common:streaming:partial$transform-functions/compute.adoc[]
+
+[#drop]
+== Drop
+
+include::common:streaming:partial$transform-functions/drop.adoc[]
+
+[#drop-fields]
+== Drop fields
+
+include::common:streaming:partial$transform-functions/drop-fields.adoc[]
+
+[#flatten]
+== Flatten
+
+include::common:streaming:partial$transform-functions/flatten.adoc[]
+
+[#merge-keyvalue]
+== Merge KeyValue
+
+include::common:streaming:partial$transform-functions/merge-keyvalue.adoc[]
+
+[#unwrap-keyvalue]
+== Unwrap KeyValue
+
+include::common:streaming:partial$transform-functions/unwrap-keyvalue.adoc[]
+
+
+////
+== Deploy transform functions in the Astra Streaming UI
+Deploy transform functions in the *Functions* tab of the {astra-ui}.
+
+The process is similar to xref:astra-streaming:developing:astream-functions.adoc[creating a function in the {astra-ui}], but with a few additional steps.
+
+. After naming your new function, select the *Use {company} transform function* option.
+
+. Select a transform function from the list of available functions:
+
+. Select the transform function's namespace and input topic(s).
+
+. Select the transform function's namespace, output topic, and log topic.
++
+The log topic is a separate output topic for messages containing additional `loglevel`, `fqn`, and `instance` properties.
+
+. Specify advanced configuration options, if applicable.
+
+. Pass JSON configuration values with your function, if applicable.
++
+For more, see the transform function <<Configuration>> table.
+
+. Select *Create*.
+The transform function will initialize and begin processing data changes.
+
+. Confirm your function has been created with the {pulsar-short} CLI:
++
+[source,shell]
+----
+./bin/pulsar-admin functions list --tenant $TENANT
+----
++
+.Result
+[%collapsible]
+====
+[source,console]
+----
+cast-function
+flatten-function
+transform-function
+transform-function-2
+----
+====
+
+== Deploy a transform function in a sink
+
+With modern Pulsar versions, transform functions can be deployed inside of a sink process.
+
+Before this update, functions transformed data either after it was written to a topic by a source connector, or before it was read from a topic by a sink connector.
+This required either an intermediate topic, with additional storage, IO, and latency, or a custom connector.
+Now, functions can be deployed at sink creation and apply preprocessing to sink topic writes.
+
+Create sink function in Astra Streaming:
+
+Creating a sink function is similar to creating a sink in the {astra-ui}, but with a few additional steps.
+
+. xref:pulsar-io:connectors/index.adoc[Create a sink] as described in the Astra Streaming documentation.
+
+. During sink creation, select the transform function you want to run inside the sink.
+
+. When the sink is up and running, inspect the sink connector's log.
+The function is loaded at sink creation:
++
+[source,console]
+----
+2022-11-14T15:01:02.398190413Z 2022-11-14T15:01:02,397+0000 [main] INFO org.apache.pulsar.functions.runtime.thread.ThreadRuntime - ThreadContainer starting function with instanceId 0 functionId f584ae69-2eda-449b-9759-2d19fd7c4da5 namespace astracdc
+----
+
+. The function then applies preprocessing to outgoing messages, in this case casting an AVRO record to `String` to your selected topic:
++
+[source,json]
+----
+{{"field1": "value1", "field2": "value2"}}
+----
+////
