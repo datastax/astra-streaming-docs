@@ -267,13 +267,10 @@ Later, you will insert some rows to test your CDC connection and sink.
 
 After you <<create-tenant,create a tenant>> and <<create-table,create tables>>, enable CDC on your tables.
 
-For <<multi-region-cdc,multi-region databases>>, you must use the xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}] to enable CDC in secondary regions.
+You can use these options to enable single-region CDC and <<multi-region-cdc,multi-region CDC>> (if available for your organization).
 
-[tabs]
-======
-{astra-ui}::
-+
---
+==== Enable CDC in the {astra-ui}
+
 . In the {astra-ui}, click the name of the database where you want to enable CDC.
 +
 If you created the demo table in <<create-table>>, select the database where you created that table.
@@ -281,40 +278,23 @@ If you created the demo table in <<create-table>>, select the database where you
 . Click the *CDC* tab, and then click *Enable CDC*.
 
 . Select a tenant, keyspace, and table, and then click *Enable CDC*.
++
+For multi-region databases, you must select a tenant for each region where you want to enable CDC.
 
 . Refresh the page to get the updated list of CDC-enabled tables in this database.
 
 . Repeat to enable CDC on additional tables.
 
-[IMPORTANT]
-====
-Enabling CDC on any table disables the *Add a region* functionality in the {astra-ui} for that database.
-You must use the {product-short} {devops-api} to add a region after enabling CDC.
-====
---
+==== Enable CDC with the {product-short} {devops-api}
 
-{product-short} {devops-api}::
+Use the xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}] to enable CDC on one or more tables in the same database in the same request.
+
+To check the CDC configuration for a database or table, see <<get-cdc>>.
+
+`/v3/databases/$DB_ID/cdc`::
 +
---
-[IMPORTANT]
-====
-CDC for multi-region {astra-db} {db-serverless-vector} databases is available only to qualified participants in this private preview release.
-Development is ongoing, and the features and functionality are subject to change.
-This private preview is governed by your Agreement and the https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{company} Preview Terms].
-
-If you're interested in this private preview feature, contact your {company} account representative.
-====
-
-Use the {product-short} {devops-api} to enable CDC on one or more tables in the same database in the same request.
-
-You can use these endpoints to enable CDC in single-region and multi-region databases.
-
-[tabs]
-====
-Enable CDC after deploying a region::
-+
-Use these steps to enable CDC in a single-region database or in previously-deployed regions of a multi-region database.
-You can also use this configuration to enable CDC on new tables.
+Use the `/v3/databases/$DB_ID/cdc` endpoint to enable CDC on single-region and multi-region databases.
+It supports initial CDC setup and extending CDC to new tables in databases where you enabled CDC previously.
 +
 . Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to check the database's existing CDC configuration:
 +
@@ -386,9 +366,9 @@ You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[
 Tenant must be deployed to the same region as the database.
 You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
-Deploy a secondary region with CDC enabled::
+`/v2/databases/$DB_ID/datacenters`::
 +
-Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database and enable CDC in the same command:
+Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database _and_ enable CDC in the same command:
 +
 [source,curl,subs="+quotes"]
 ----
@@ -431,11 +411,8 @@ The tenant must be in the same region as specified in `region`.
 +
 All tables replicated to the new region automatically have CDC enabled.
 The `astracdc` namespace and CDC topics for each table are created in the specified regional tenant.
-====
 
-To check the CDC configuration for a database or table, see <<get-cdc>>.
---
-======
+==== CDC topics
 
 When you enable CDC on a database for the first time, {astra-db} automatically creates an `astracdc` namespace in your streaming tenant.
 For each table where you enable CDC, {astra-db} creates two topics in the `astracdc` namespace:
@@ -514,11 +491,9 @@ If your table has more than a few rows, use a more specific `select` statement t
 select * from default_keyspace.cdc_demo;
 ----
 +
-.Result
-[%collapsible]
-====
 The demo table now has two rows:
-
++
+.Result
 [source,console]
 ----
  key | c1
@@ -528,7 +503,6 @@ The demo table now has two rows:
 
 (2 rows)
 ----
-====
 
 . Verify that the change was passed from CDC to your sink by fetching the data from your sink service deployment.
 +
@@ -695,8 +669,6 @@ bin/pulsar-admin topics partitioned-stats persistent://**DATA_TOPIC_STRING**
 Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**`.
 +
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -736,7 +708,6 @@ Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `
   "partitions" : { }
 }
 ----
-====
 
 [#multi-region-cdc]
 == Enable CDC for multi-region databases
@@ -762,7 +733,7 @@ If your database is deployed to a region that doesn't support {astra-stream}, co
 
 . <<create-table,Create tables>> in your database, if you haven't done so already.
 
-. Use the {product-short} {devops-api} to <<enable-cdc-on-a-table,enable CDC on all applicable tables and regions>>.
+. <<enable-cdc-on-a-table,Enable CDC on all applicable tables and regions>>.
 
 . <<connect-a-sink,Connect a sink>> to transmit messages from all tenants to your sink service deployment.
 
@@ -795,25 +766,17 @@ However, be aware of the following limitations:
 
 You can check your active CDC configurations in the {astra-ui} or with the {product-short} {devops-api}.
 
-[tabs]
-======
-{astra-ui}::
-+
---
+=== Check CDC status in the {astra-ui}
+
 . In the {astra-ui}, click the name of the database that you want to inspect.
 
 . Click the *CDC* tab, and then review the list of tables where you have enabled CDC.
 
 . Click a table's name to inspect the table's CDC configuration.
---
 
-{product-short} {devops-api}::
-+
---
-[tabs]
-====
+=== Check CDC status with the {product-short} {devops-api}
+
 By database::
-+
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get CDC configuration details for an entire database:
 +
 [source,curl,subs="+quotes"]
@@ -860,7 +823,6 @@ For multi-region databases with CDC enabled in multiple regions, the `regions` a
 ----
 
 By table::
-+
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc]` to get CDC configuration details for a specific table:
 +
 [source,curl,subs="+quotes"]
@@ -895,9 +857,6 @@ For multi-region databases with CDC enabled in multiple regions, the `regions` a
   }
 ]
 ----
-====
---
-======
 
 [#put-cdc]
 === Update a database's CDC configuration
@@ -976,13 +935,13 @@ You can get these names with the xref:astra-streaming:apis:index.adoc#astra-stre
 . Send the updated configuration to `{devops-api-ref-url}#tag/Database-Operations/operation/updateCDC[PUT /v3/databases/**DB_ID**/cdc]`.
 +
 [IMPORTANT]
-=====
+====
 This is a desired state list.
 
 Make sure that you include all existing tables and regions that you want to keep in the CDC configuration.
 
 If you omit any existing tables or regions from the request, CDC is disabled for those tables or regions.
-=====
+====
 +
 [source,curl,subs="+quotes"]
 ----
@@ -1042,11 +1001,20 @@ CDC is automatically disabled if you drop a table, terminate a database, or remo
 You can remove a table's CDC configuration without deleting the table.
 For multi-region databases, this disables CDC for the table across all regions.
 
-[tabs]
-======
-{astra-ui}::
+Disabling CDC doesn't remove the associated namespace, topics, or {astra-stream} tenant:
+
+* If you reenable CDC for the same table, the existing topics are reused with the existing records.
+
+* If you want to discard a table's CDC records, you must manually remove the associated {astra-stream} artifacts after disabling CDC:
 +
---
+** If you remove CDC from a table, then you can delete the table's `data-` and `log-` topics from the `astracdc` namespace in the {astra-stream} tenant.
+For multi-region databases, make sure that you delete the topics in the tenant for each region where the database is deployed
+** If you remove CDC from all tables in a region, and you no longer need CDC in that region, then you can delete the `astracdc` namespace from the {astra-stream} tenant in that region.
+Deleting the namespace also deletes the topics within that namespace.
+** If you remove CDC from all of a database's tables, and you no longer need an {astra-stream} tenant for any reason, you can delete the entire tenant.
+
+==== Disable CDC in the {astra-ui}
+
 . In the {astra-ui}, click the name of the database where you want to disable CDC.
 
 . Click the *CDC* tab.
@@ -1054,11 +1022,9 @@ For multi-region databases, this disables CDC for the table across all regions.
 . In the *Change Data Capture* list, click the table's name.
 
 . Click *Disable* to remove the table's CDC configuration.
---
 
-{product-short} {devops-api}::
-+
---
+==== Disable CDC with the {product-short} {devops-api}
+
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/deleteCDC[DELETE /v3/databases/**DB_ID**/cdc]` to disable CDC for a table:
 
 [source,curl,subs="+quotes"]
@@ -1089,20 +1055,6 @@ If you want to disable CDC for multiple tables at once, include an object for ea
 You can use `PUT /v3/databases/**DB_ID**/cdc` to make multiple changes to a database's CDC configuration in one request, including additions, changes, and removals of tables and regions.
 For more information, see <<put-cdc>>.
 ====
---
-======
-
-Disabling CDC doesn't remove the associated namespace, topics, or {astra-stream} tenant:
-
-* If you reenable CDC for the same table, the existing topics are reused with the existing records.
-
-* If you want to discard a table's CDC records, you must manually remove the associated {astra-stream} artifacts after disabling CDC:
-+
-** If you remove CDC from a table, then you can delete the table's `data-` and `log-` topics from the `astracdc` namespace in the {astra-stream} tenant.
-For multi-region databases, make sure that you delete the topics in the tenant for each region where the database is deployed
-** If you remove CDC from all tables in a region, and you no longer need CDC in that region, then you can delete the `astracdc` namespace from the {astra-stream} tenant in that region.
-Deleting the namespace also deletes the topics within that namespace.
-** If you remove CDC from all of a database's tables, and you no longer need an {astra-stream} tenant for any reason, you can delete the entire tenant.
 
 == See also
 
