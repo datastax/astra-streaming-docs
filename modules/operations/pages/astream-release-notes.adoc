@@ -72,11 +72,8 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 
 * Launched a refreshed {astra-ui}.
 
-== Previous releases
+== 2022 release notes
 
-.2022 release notes
-[%collapsible]
-====
 [discrete]
 === November 21, 2022
 
@@ -95,7 +92,7 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 [discrete]
 ==== {new}
 
-* {product} now supports xref:streaming-learning:functions:index.adoc[transform functions].
+* {product} now supports xref:developing:astream-functions-transform.adoc[transform functions].
 
 [discrete]
 === November 16, 2022
@@ -159,11 +156,9 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 * Added support for the Google Cloud `us-central1` (Council Bluffs, Iowa) region.
 * xref:operations:astream-token-gen.adoc[{pulsar-short} tokens] simplify connecting to your streaming instances.
 * Enabled xref:operations:astream-pricing.adoc[billing].
-====
 
-.2021 release notes
-[%collapsible]
-====
+== 2021 release notes
+
 [discrete]
 === December 20, 2021
 
@@ -175,4 +170,3 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 * Security upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105.
 
 * The public preview of {product} brings the ability to quickly create {pulsar-reg} instances, manage your clusters, scale across cloud regions, and manage {pulsar-short} resources such as topics, connectors, functions and subscriptions.
-====

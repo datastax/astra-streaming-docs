@@ -19,7 +19,9 @@
 ** xref:ROOT:astream-subscriptions-shared.adoc[]
 ** xref:ROOT:astream-subscriptions-failover.adoc[]
 ** xref:ROOT:astream-subscriptions-keyshared.adoc[]
-* xref:developing:astream-functions.adoc[]
+* {pulsar-short} functions
+** xref:developing:astream-functions.adoc[]
+** xref:developing:astream-functions-transform.adoc[]
 * xref:developing:starlight.adoc[]
 * xref:developing:astream-cdc.adoc[]
 * xref:developing:gpt-schema-translator.adoc[]

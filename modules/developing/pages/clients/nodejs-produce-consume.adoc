@@ -18,13 +18,9 @@ For a complete source code example, see the https://github.com/datastax/astra-st
 
 Install the {cpp} {pulsar-short} library dependency required by the Node.js {pulsar-short} client npm package.
 
-{pulsar-short} Node client versions 1.8 and later do not require installation of the {cpp} {pulsar-short} library dependency.
+{pulsar-short} Node client versions 1.8 and later don't require installation of the {cpp} {pulsar-short} library dependency.
 
-[tabs]
-======
-Ubuntu-based Debian::
-+
---
+.Ubuntu-based Debian
 [source,shell]
 ----
 wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/DEB/apache-pulsar-client.deb
@@ -35,11 +31,8 @@ sudo apt install -y ./apache-pulsar-client*.deb
 
 sudo ldconfig
 ----
---
 
-Centos/RHEL-based rpm::
-+
---
+.Centos/RHEL-based rpm
 [source,shell]
 ----
 wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/RPMS/apache-pulsar-client-2.10.2-1.x86_64.rpm
@@ -50,8 +43,6 @@ sudo rpm -i ./apache-pulsar-client-devel-2.10.2-1.x86_64.rpm
 
 sudo ldconfig
 ----
---
-======
 
 == Create a project
 

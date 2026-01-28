@@ -31,8 +31,6 @@ image::developing:spring-initializr.png[Spring Initializr]
 This file contains the main method that will run your application with the specified dependencies.
 +
 .DemoApplication.java
-[%collapsible]
-====
 [source,java]
 ----
 package com.example.demo;
@@ -99,7 +97,6 @@ public class DemoApplication
 	}
 }
 ----
-====
 
 . Replace the following values in `DemoApplication.java` with values from your tenant's *Connect* tab in the {astra-ui}:
 +
@@ -115,10 +112,8 @@ public class DemoApplication
 +
 You can also modify the values in the `application.properties` file in the `/resources` directory, which is recommended for production applications.
 On your tenant's *Connect* tab, you can download a properties file with the values your application needs to connect to your {product} instance.
+For example:
 +
-.Spring application properties
-[%collapsible]
-====
 [source,yaml]
 ----
 spring:
@@ -136,7 +131,6 @@ auth-plugin-class-name: org.apache.pulsar.client.impl.auth.AuthenticationToken
 authentication:
 token: ***
 ----
-====
 
 . From your project's root directory, compile the Java application with the {pulsar-short} client dependency:
 +
@@ -146,8 +140,6 @@ mvn clean compile
 ----
 +
 .Result
-[%collapsible]
-====
 [source,console]
 ----
 [INFO] ------------------------------------------------------------------------
@@ -157,7 +149,6 @@ mvn clean compile
 [INFO] Finished at: 2023-05-09T15:36:33-04:00
 [INFO] ------------------------------------------------------------------------
 ----
-====
 
 . Run the project to send a message to your {product} cluster:
 +
@@ -167,13 +158,10 @@ mvn spring-boot:run
 ----
 +
 .Result
-[%collapsible]
-====
 [source,console]
 ----
 Message received: Hello World
 ----
-====
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
