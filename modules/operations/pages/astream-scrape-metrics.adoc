@@ -58,9 +58,9 @@ docker pull prom/prometheus
 [source,shell]
 ----
 docker run \
-    -p 9090:9090 \
-    -v /**PATH_TO_PROMETHEUS_YAML**:/etc/prometheus/prometheus.yml \
-    prom/prometheus
+  -p 9090:9090 \
+  -v /**PATH_TO_PROMETHEUS_YAML**:/etc/prometheus/prometheus.yml \
+  prom/prometheus
 ----
 
 . Make sure the response is similar to the following example.
@@ -104,7 +104,11 @@ Deflate::
 --
 [source,bash]
 ----
-curl -v -H 'Authorization: Bearer $BEARER_TOKEN' -H 'Accept-encoding: deflate' https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 --compressed
+curl -v \
+-H "Authorization: Bearer $BEARER_TOKEN" \
+-H "Accept-encoding: deflate" \
+https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
+--compressed
 ----
 --
 
@@ -113,7 +117,11 @@ Gzip::
 --
 [source,bash]
 ----
-curl -v -H 'Authorization: Bearer $BEARER_TOKEN' -H 'Accept-encoding: gzip' https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 | zcat
+curl -v \
+-H "Authorization: Bearer $BEARER_TOKEN" \
+-H "Accept-encoding: gzip" \
+https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
+| zcat
 ----
 --
 ======
@@ -134,7 +142,7 @@ The following Prometheus metrics are exposed by {product}:
 * https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#subscription-metrics[Subscription metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#managedledger-metrics[ManagedLedger metrics]
-* https://pulsar.apache.org/docs/reference-metrics/#pulsar-functions[Pulsar Functions metrics]
+* https://pulsar.apache.org/docs/reference-metrics/#pulsar-functions[{pulsar-short} functions metrics]
 * https://pulsar.apache.org/docs/reference-metrics/#connectors[Connector metrics]
 
 Cluster operational metrics are _not_ exposed to individual cluster tenants.

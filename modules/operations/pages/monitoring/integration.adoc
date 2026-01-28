@@ -47,9 +47,9 @@ These are added later when configuring the Helm chart.
 +
 [source,bash,subs="+quotes"]
 ----
-kubectl create secret generic **SECRET_NAME** \
-  --from-file=config.yml \
-  --dry-run=client -oyaml > k8s-additional-scrape-config-demo.yaml
+kubectl create secret generic **SECRET_NAME** --from-file=config.yml --dry-run=client \
+  -oyaml > k8s-additional-scrape-config-demo.yaml
+
 kubectl apply -f k8s-additional-scrape-config-demo.yaml
 ----
 +
@@ -73,7 +73,7 @@ prometheus:
 
 . Deploy the Helm chart:
 +
-[source,shell]
+[source,bash]
 ----
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm upgrade --install kubeprom -f custom-values.yaml prometheus-community/kube-prometheus-stack
@@ -82,15 +82,13 @@ helm upgrade --install kubeprom -f custom-values.yaml prometheus-community/kube-
 . For macOS users who run Docker Desktop as the underlying Kubernetes cluster, run the following commands to ensure the deployment is successful.
 If you don't run this command, you might encounter a problem when initializing the Prometheus node exporter daemon set.
 +
-[source,shell]
+[source,bash]
 ----
 # Patch Prometheus node exporter daemon set
 kubectl patch ds kubeprom-prometheus-node-exporter --type "json" -p '[{"op": "remove", "path" : "/spec/template/spec/containers/0/volumeMounts/2/mountPropagation"}]'
 
 # Confirm Prometheus node exporter daemonset is running properly
-kubectl rollout status daemonset \
-  kubeprom-prometheus-node-exporter \
-  --timeout 60s
+kubectl rollout status daemonset kubeprom-prometheus-node-exporter --timeout 60s
 ----
 
 . To confirm that {product} metrics are integrated with your external Prometheus server, go to your external Prometheus server UI.

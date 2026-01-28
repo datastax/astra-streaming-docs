@@ -1,56 +1,55 @@
-= Geo-replication
+= Georeplication
 
-A key feature of {pulsar-reg} is how it handles geo-replication. While other pub-sub messaging systems require additional processes to mirror messages between data centers, {pulsar-short} has multi-datacenter replication as an integrated feature.
+A key feature of {pulsar-reg} is how it handles georeplication. While other pub-sub messaging systems require additional processes to mirror messages between data centers, {pulsar-short} has multi-datacenter replication as an integrated feature.
 
 {pulsar-short}'s serving layer (brokers) and storage layer (bookies) are decoupled in {pulsar-short} architecture, allowing seamless message replication across data centers in different regions.
 
-Geo-replication typically provides redundancy in the event of datacenter outages, but can also be used for any application where {pulsar-short} messages are produced and consumed across regions.
+Georeplication typically provides redundancy in the event of datacenter outages, but can also be used for any application where {pulsar-short} messages are produced and consumed across regions.
 
 [#overview]
 == Message replication in {pulsar-short}
 
 In {pulsar-short}, cross-cluster message replication can be implemented with _synchronous_ or _asynchronous_ message replication, and with or without a global configuration store in ZooKeeper.
 
-{product} supports only asynchronous geo-replication without a global configuration store.
+{product} supports only asynchronous georeplication without a global configuration store.
 This approach offers better performance and lower latency.
 
-In asynchronous geo-replication, each region has its own local {pulsar-short} cluster. Each {pulsar-short} cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
+In asynchronous georeplication, each region has its own local {pulsar-short} cluster. Each {pulsar-short} cluster contains its own set of brokers, bookies, and ZooKeeper nodes that are completely isolated from one another.
 
 When messages are produced on a {pulsar-short} topic, they are first persisted to the local cluster, and are then replicated asynchronously to the remote clusters in other regions.
-This is achieved through {pulsar-short}'s built-in geo-replication capability.
+This is achieved through {pulsar-short}'s built-in georeplication capability.
 
 The message producer doesn't wait for confirmation from multiple {pulsar-short} clusters.
 The producer receives a response immediately after the nearest cluster successfully persists the data.
 The data is then asynchronously replicated to the other {pulsar-short} clusters in the background.
 
 [#astra-ui]
-== Enable geo-replication in {product}
+== Enable georeplication in {product}
 
-Asynchronous geo-replication is enabled on a per-tenant basis and managed at the namespace level.
+Asynchronous georeplication is enabled on a per-tenant basis and managed at the namespace level.
 
-This means you can enable asynchronous geo-replication on topics where it is needed, while controlling which datasets are replicated by namespace.
+This means you can enable asynchronous georeplication on topics where it is needed, while controlling which datasets are replicated by namespace.
 
-To enable geo-replication in {product}, follow these steps:
+To enable georeplication in {product}, follow these steps:
 
-. In your {product} tenant, click **Namespaces and Topics** to view a list of your tenant's current namespaces and topics.
+. In your {product} tenant, click the **Namespaces and Topics** tab.
 
-. Select **Modify namespace** in the namespace you want to replicate *from*.
+. Find the namespace that you want to use as the origin of the replicated data, and then click **Modify Namespace**.
 
-. Select Replication, and select **Add Region**.
+. Click the **Replication** tab, and then click **Add Region**.
 
-. Select the **Cloud Provider** and **Region** you want to replicate *to*, and select **Create Replication**.
+. Select the target **Cloud Provider** and **Region** where you want to send the replicated data.
 
-. The new replication is created:
+. Click **Create Replication** to create the replica:
++
+* A new streaming tenant is created in the selected provider and region.
+* All existing data from the original namespace is duplicated to the replica, and replication is maintained going forward.
+* The replica's *Provider*, *Region*, and *Replication Direction* are listed under each namespace's **Replication** tab.
+* The **Replication direction** can be **Replicate to**, **Replicate from**, or **Bidirectional**.
 
-* A new streaming tenant is replicated in the selected region and provider.
+To control retention, backlog, and schema policies, go to the namespace's **Settings** tab.
 
-* The new replication's *Provider*, *Region*, and *Replication Direction* are listed in **Namespace Replication*.
-
-* The **Replication direction** value can be **Replicate to**, **Replicate from**, or **Bidirectional**.
-
-To control retention, backlog, and schema policies, visit the **Settings** tab.
-
-To disable replication on a namespace, select **Disable Replication**.
+To disable replication on a namespace, click **Disable Replication**.
 
 [#test]
 == Test georeplicated clusters

@@ -1,4 +1,4 @@
-= {gpt-schema-translator}
+= Use the {gpt-schema-translator}
 
 Systems in streaming pipelines can use different representations for schema and data types.
 
@@ -376,7 +376,7 @@ This example demonstrates how you can generates schema mapping in real time.
 .CQL schema example
 [%collapsible]
 ====
-[source,]
+[source,cql]
 ----
 "cassandra_table_schemas": {
         "person": {
@@ -477,4 +477,4 @@ passportnumber=value.passportnumber, age=value.age, firstname=value.firstname, l
 
 == See also
 
-* xref:streaming-learning:use-cases-architectures:change-data-capture/index.adoc[]
+* xref:cdc-for-cassandra:ROOT:cdc-concepts.adoc[]

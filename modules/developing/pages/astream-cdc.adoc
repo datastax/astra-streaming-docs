@@ -305,7 +305,7 @@ It supports initial CDC setup and extending CDC to new tables in databases where
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -323,7 +323,7 @@ For databases where you previously enabled CDC, you only need to include new tab
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X POST "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{
@@ -369,7 +369,7 @@ For multi-region databases, only include regions where you want to enable CDC.
 You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
 ** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
 Tenant must be deployed to the same region as the database.
-You can get these names with the xref:astra-streaming:apis:api-operations.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
 `/v2/databases/$DB_ID/datacenters`::
 +
@@ -377,7 +377,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST 
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X POST "https://api.astra.datastax.com/v2/databases/**DB_ID**/datacenters" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/databases/**DB_ID**/datacenters" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{
@@ -521,7 +521,7 @@ For example, if you have an Elasticsearch sink, you can send a `GET` request to 
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X POST "**ELASTICSEARCH_URL**/**INDEX_NAME**/_search?pretty" \
+curl -sS --fail -L -X POST "**ELASTICSEARCH_URL**/**INDEX_NAME**/_search?pretty" \
 -header "Authorization: ApiKey '**API_KEY**'"
 ----
 +
@@ -803,7 +803,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/datab
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -850,7 +850,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/datab
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -899,7 +899,7 @@ If CDC is already enabled, the request updates the existing CDC configuration.
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -956,7 +956,7 @@ For multi-region databases, only include regions where you want to enable CDC.
 You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
 ** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
 The tenant must be deployed to the same region as the database.
-You can get these names with the xref:astra-streaming:apis:api-operations.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
 . Send the updated configuration to `{devops-api-ref-url}#tag/Database-Operations/operation/updateCDC[PUT /v3/databases/**DB_ID**/cdc]`.
 +
@@ -971,7 +971,7 @@ If you omit any existing tables or regions from the request, CDC is disabled for
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X PUT "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X PUT "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{
@@ -1011,7 +1011,7 @@ Replace the following:
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----
@@ -1048,7 +1048,7 @@ Use `{devops-api-ref-url}#tag/Database-Operations/operation/deleteCDC[DELETE /v3
 
 [source,curl,subs="+quotes"]
 ----
-curl -sS -L -X DELETE "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
+curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json" \
 --data '{
@@ -1093,4 +1093,4 @@ Deleting the namespace also deletes the topics within that namespace.
 
 * xref:astra-streaming:ROOT:astream-faq.adoc[{astra-stream} FAQs]
 * xref:astra-streaming:developing:clients/index.adoc[Use {pulsar-short} clients with {astra-stream}]
-* xref:streaming-learning:use-cases-architectures:change-data-capture/index.adoc[CDC overview]
+* xref:cdc-for-cassandra:ROOT:cdc-concepts.adoc[]

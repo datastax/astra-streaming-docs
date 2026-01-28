@@ -24,10 +24,10 @@ For this example, you need the following:
 mkdir SimpleProducerConsumer && cd SimpleProducerConsumer
 
 mvn archetype:generate \
-    -DgroupId=org.example \
-    -DartifactId=SimpleProducerConsumer \
-    -DarchetypeArtifactId=maven-archetype-quickstart \
-    -DinteractiveMode=false
+  -DgroupId=org.example \
+  -DartifactId=SimpleProducerConsumer \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DinteractiveMode=false
 ----
 
 . Add the {pulsar-short} client dependency in `pom.xml`:

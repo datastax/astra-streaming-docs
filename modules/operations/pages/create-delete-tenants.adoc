@@ -1,0 +1,165 @@
+= Create and manage {product} tenants, namespaces, and topic
+:navtitle: Manage tenants, namespaces, and topics
+
+This page summarizes how to create, view, edit, and delete {product} streaming tenants, namespaces, and topics.
+The primary actions can be performed programmatically and in the {astra-ui}.
+However, some details are available in the {astra-ui} only.
+
+[TIP]
+====
+If you're new to {product}, try the xref:getting-started:index.adoc[{product} quickstart] to learn about creating tenants, namespaces, and topics.
+====
+
+== Create a tenant
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click *Create tenant*.
+
+. Enter a name for the streaming tenant.
+
+. Select a xref:astra-streaming:operations:astream-regions.adoc[cloud provider and region that supports {astra-stream}].
++
+Not all {astra-db} regions support {product}.
+If your preferred region isn't available, contact your {company} account representative or {support_url}[{company} Support].
+
+. Click *Create tenant*.
++
+--
+
+API::
++
+--
+Use `xref:apis:index.adoc#create-a-tenant[POST "https://api.astra.datastax.com/v2/streaming/tenants"]`.
+--
+
+CLI::
++
+--
+Use `xref:astra-cli:commands:astra-streaming-create.adoc[astra streaming create]`.
+--
+======
+
+== View and edit a tenant, namespace, or topic
+
+After you create a tenant, you can inspect the tenant, create and manage namespaces and topics, and configure tenant settings.
+
+[#get-tenant-details]
+=== Get tenant details
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of your tenant.
+
+. Click any of the tabs to access tenant details and settings, such as **Connect** or **Sinks**.
++
+[TIP]
+====
+On the **Connect** tab, the *Tenant Details* section contains essential information for connecting to your {product} {pulsar-short} tenant, including the Web Service URL, cluster ID, and tenant ID.
+
+You can also create a xref:operations:astream-token-gen.adoc[{pulsar-short} token] from this section.
+
+image::developing:tenant-details.png[Tenant details in {product}]
+====
+--
+
+API::
++
+--
+Use `xref:apis:index.adoc#get-tenant-details[GET "https://api.astra.datastax.com/v2/streaming/tenants"]`.
+--
+
+CLI::
++
+--
+Use `xref:astra-cli:commands:astra-streaming-get.adoc[astra streaming get]`.
+--
+======
+
+=== Manage namespaces
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of your tenant, and then click the *Namespace And Topics* tab to manage namespaces:
++
+* **Create a namespace**: Click *Create Namespace*, enter a namespace name, and then click *Create Namespace*.
+* **Configure replication**: See xref:operations:astream-georeplication.adoc[].
+* **Delete a namespace**: Find the namespace you want to delete, click **Modify Namespace**, find the **Delete This Namespace** section, and then click *Delete Namespace*.
+* **Return to all namespaces**: When modifying an individual namespace, click **Back to Namespaces** to return to the list of all namespaces in the current tenant.
+--
+
+API::
++
+--
+See xref:apis:api-operations.adoc#pulsar-api-namespace-operations[Pulsar Admin API namespace operations].
+--
+======
+
+=== Manage topics
+
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of your tenant, and then click the *Namespace And Topics* tab to manage topics:
++
+* **Create a topic**: Find the namespace where you want to create the topic, click *Add Topic*, enter a topic name, and then click *Add Topic*.
+* **Inspect and configure a topic**: Click icon:chevron-down[name="Expand"] to view the list of topics in a specific namespace, click the name of the topic you want to manage, and then use the tabs to access the topic's information and settings, such as **Subscriptions** and **Consumers**.
+* **Delete a topic**: Click icon:chevron-down[name="Expand"] to view the list of topics in a specific namespace, find the topic you want to delete, click icon:ellipsis[name="More"], and then select *Delete Topic*.
+--
+
+API::
++
+--
+See xref:apis:api-operations.adoc#pulsar-admin-api-topic-operations[Pulsar Admin API topic operations].
+--
+======
+
+== Terminate a tenant
+
+[WARNING]
+====
+Terminating a tenant is a destructive operation that permanently deletes the tenant and all associated sinks, topics, messages, and namespaces.
+====
+
+[tabs]
+======
+{astra-ui}::
++
+--
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Find the tenant that you want to delete, click icon:ellipsis-vertical[name="More"], and then select **Terminate**.
+--
+
+API::
++
+--
+Use `xref:apis:index.adoc#delete-a-tenant[DELETE "https://api.astra.datastax.com/v2/streaming/tenants/**TENANT_NAME**/clusters/**CLUSTER_NAME**"]`.
+--
+
+CLI::
++
+--
+Use `xref:astra-cli:commands:astra-streaming-delete.adoc[astra streaming delete]`.
+--
+======

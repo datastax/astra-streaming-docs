@@ -12,7 +12,7 @@ Overview displays the aggregated total metrics values summarized at the topic le
 * Total number of subscriptions
 * Total message backlog
 * Total message replication backlog
-* Total message storage size -  after replication
+* Total message storage size after replication
 * Total message size offloaded to a tiered storage
 * Total hourly incoming message number
 * Total hourly incoming message average size

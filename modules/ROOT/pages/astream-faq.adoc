@@ -77,9 +77,9 @@ However, shared clusters don't support private links.
 
 For more information, see xref:operations:astream-pricing.adoc[].
 
-=== What are the differences in geo-replication for shared clusters and Streaming Capacity Units?
+=== What are the differences in georeplication for shared clusters and Streaming Capacity Units?
 
-Geo-replication is available for both shared clusters and Streaming Capacity Units.
+Georeplication is available for both shared clusters and Streaming Capacity Units.
 Both cluster types can replicate to other clusters, but there are some differences:
 
 Connections::
@@ -92,7 +92,7 @@ Shared clusters can replicate between any xref:operations:astream-regions.adoc[s
 +
 Streaming Capacity Units can use almost any region supported by your cloud provider, as well as across cloud providers.
 
-For more on geo-replication, see xref:operations:astream-georeplication.adoc[].
+For more on georeplication, see xref:operations:astream-georeplication.adoc[].
 
 == Security and access control
 
@@ -117,7 +117,11 @@ The following questions are related to application development with {product}.
 
 === What APIs are available?
 
-See xref:apis:index.adoc[].
+See the following:
+
+* xref:apis:index.adoc[]
+* xref:apis:api-operations.adoc[]
+* xref:developing:using-curl.adoc[]
 
 === Can I migrate data from my existing {pulsar-short} cluster to {product}?
 
@@ -126,7 +130,7 @@ For migration assistance, contact {support_url}[{company} Support].
 
 Every tenant in {product} comes with custom ports for Kafka and RabbitMQ workloads.
 {company} also offers a fully-compatible JMS implementation for your Java workloads.
-For more information, see xref:streaming-learning:use-cases-architectures:starlight/index.adoc[].
+For more information, see xref:developing:starlight.adoc[].
 
 === How do I separate messaging traffic?
 
@@ -159,8 +163,8 @@ If you are trying to reduce costs, use the free tier of {product} and then switc
 
 === Can I use {product} with my existing Kafka or RabbitMQ applications?
 
-Yes, {product} offers a fully compatible Kafka and RabbitMQ implementation. This means you can use your existing Kafka or RabbitMQ applications with {product}. You can also use the {product} Kafka or RabbitMQ implementation with your existing {pulsar-short} applications. {product} comes with custom ports for Kafka and RabbitMQ workloads. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+Yes, see xref:developing:starlight.adoc[].
 
 === Can I use {product} with my existing Java applications?
 
-Yes, {product} offers a fully compatible JMS implementation. This means you can use your existing JMS applications with {product}. You can also use the {product} JMS implementation with your existing {pulsar-short} applications. xref:streaming-learning:use-cases-architectures:starlight/index.adoc[Learn more] about the Starlight suite of APIs.
+Yes, see xref:developing:starlight.adoc[].

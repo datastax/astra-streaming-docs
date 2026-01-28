@@ -1,0 +1,8 @@
+[TIP]
+====
+To use a file as input for a curl command, use the `@` symbol followed by the file path and name.
+
+Relative paths are resolved from the current working directory.
+
+The file must be in a location that the shell can access, and the user running the command must have permission to read the file.
+====

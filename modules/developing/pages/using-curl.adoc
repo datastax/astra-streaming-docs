@@ -1,72 +1,36 @@
-= Form {product} HTTP requests
-:navtitle: Form HTTP requests
-:description: Interact with {product} over HTTP, such as with curl commands.
+= Use OSS {pulsar-short} REST APIs
+:description: Interact with {product} using OSS {pulsar-reg} REST APIs.
 
-You can use the xref:apis:index.adoc[{devops-api}s] and https://pulsar.apache.org/docs/reference-rest-api-overview/[{pulsar-reg} REST APIs] to programmatically interact with your tenants and related {product} configurations.
-Each API supports different functionalities.
+In addition to the xref:apis:index.adoc[{product} {devops-api}] and the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], you can use some of the functionality provided by the https://pulsar.apache.org/docs/reference-rest-api-overview/[open source {pulsar-reg} project's REST APIs] to programmatically interact with your tenants.
 
-Depending on the API you use, you need certain information to form HTTP requests:
+== Limitations
 
-* To use the {product} {pulsar-short} Admin API and {pulsar-short} REST APIs, you need the tenant's Web Service URL and {pulsar-short} token.
-* To use the {devops-api}s, you need an xref:operations:astream-token-gen.adoc[{product-short} application token].
+Not all functionality is available to {product} tenants because {product} is a managed service.
 
-== Get the tenant web service URL
+For example, the https://pulsar.apache.org/admin-rest-api[OSS {pulsar-short} Admin API] isn't the same as the {product} {pulsar-short} Admin API.
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+In OSS {pulsar-short} you manage all aspects of your {pulsar-short} instances, including clusters and tenants.
+In {product}, clusters are a managed service; You manage only the tenants and resources within those tenants.
 
-. Click the name of your tenant.
+Some OSS {pulsar-short} Admin API endpoints aren't supported in the {product} {pulsar-short} Admin API because they don't align with the {product} managed service.
 
-. Click the *Connect* tab.
+== Usage
 
-. Find the *Tenant Details* section.
-Here you can find the essential information you need to communicate with your {pulsar-short} tenant, including the *Web Service URL*.
+For detailed information about using these APIs, refer to the https://pulsar.apache.org/docs/reference-rest-api-overview/[OSS {pulsar-reg} REST API documentation].
+
+To use the {pulsar-short} REST APIs with {product} tenants, you need the following:
+
+* An active {product-short} account with access to {product}.
+
+* An active {product} tenant.
+
+* A xref:operations:astream-token-gen.adoc[{pulsar-short} token] for your tenant.
+
+* Your tenant's Web Service URL.
 +
-image::developing:tenant-details.png[Tenant details in {product}]
-+
-[TIP]
-====
-The *Web Service URL* is _not_ the same as the {pulsar-short} *Broker Service URL*.
-
-Web Service URLs start with `http`.
-Broker Service URLs start with `pulsar(+ssl)`.
-====
-
-== Create an {product} {pulsar-short} token
-
-[IMPORTANT]
-====
-An xref:operations:astream-token-gen.adoc[{product-short} application token] is _not_ the same as a {pulsar-short} token.
-====
-
-For information about creating {pulsar-short} tokens, see xref:operations:astream-token-gen.adoc[].
-
-== Make a request
-
-. Set your environment variables:
-+
-[source,shell,subs="+quotes"]
-----
-PULSAR_TOKEN="**PULSAR_TOKEN**"
-WEB_SERVICE_URL="**TENANT_WEB_SERVICE_URL**"
-----
-
-. Run a curl command.
-The following example lists built-in sink connectors.
-+
-[source,curl]
-----
-curl -sS --location -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
---header "Authorization: $PULSAR_TOKEN" \
---header "Content-Type: application/json"
-----
-
-== Format responses
-
-The default response is a single JSON string.
-
-You can use modifications like `| jq .` or `| python3 -mjson.tool` to format the output for easier reading.
+include::ROOT:partial$get-web-service-url.adoc[]
 
 == See also
 
-* xref:streaming-learning:pulsar-io:connectors/index.adoc[]
-* xref:developing:astream-functions.adoc[]
+* xref:apis:api-operations.adoc[]
+* xref:apis:index.adoc[]

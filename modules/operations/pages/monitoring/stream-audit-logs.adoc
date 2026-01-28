@@ -9,14 +9,14 @@ To enable audit log streaming, you must do one of the following:
 
 == Create an {product} topic for audit logs
 
-Audit log streaming requires a streaming tenant in the AWS `us-east-2` region.
-You can create a new tenant with the xref:astra-streaming:getting-started:index.adoc[{product} quickstart] or use an existing {product} tenant.
-
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
-. Click the name of an existing tenant or create a streaming tenant in AWS `us-east-2`, and then create a namespace and topic in the tenant.
+. Click the name of an existing tenant or xref:operations:create-delete-tenants.adoc[create a tenant] in AWS `us-east-2`, and then create a namespace and topic in the tenant.
 +
-For more information about creating tenants, namespaces, and topics, see xref:astra-streaming:getting-started:index.adoc[].
+[IMPORTANT]
+====
+Audit log streaming requires a streaming tenant in the AWS `us-east-2` region.
+====
 
 . On the *Namespace and Topics* page, click the new topic, and then copy the topic's **Full Name**, such as `persistent://aws-us-east-2-mk/*NAMESPACE_NAME*/*TOPIC_NAME*`.
 
@@ -45,7 +45,7 @@ You can use the {devops-api-ref-url}#tag/Organization-Operations/operation/confi
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS --location -X POST "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
+curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 --data '{
@@ -70,7 +70,7 @@ Replace the following:
 .Result
 [%collapsible]
 ====
-[source,plain]
+[source,json]
 ----
 HTTP/1.1 202 Accepted
 ----
@@ -80,7 +80,7 @@ HTTP/1.1 202 Accepted
 +
 [source,curl,subs="+quotes"]
 ----
-curl -sS --location -X GET "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
+curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/organizations/**ORG_ID**/telemetry/auditLogs" \
 --header "Authorization: Bearer **APPLICATION_TOKEN**" \
 --header "Accept: application/json"
 ----

@@ -1,4 +1,4 @@
-=  Use {pulsar-reg} binaries with {product}
+= Use {pulsar-reg} binaries with {product}
 :navtitle: Configure the {pulsar-short} CLI
 :description: Download a compatible {pulsar-short} artifact and configure the binaries for use with {product}.
 
@@ -16,7 +16,7 @@ To get started, you must download a compatible {pulsar-short} artifact, and then
 Replace `**PATCH**` with the specific patch version you want to use.
 For example, to download Pulsar version `3.1.0`, use patch version `0`.
 +
-[source,shell,subs="+quotes,+attributes"]
+[source,bash,subs="+quotes,+attributes"]
 ----
 PULSAR_VERSION="{pulsar-version}.**PATCH**"
 wget https://archive.apache.org/dist/pulsar/pulsar-$PULSAR_VERSION/apache-pulsar-$PULSAR_VERSION-bin.tar.gz
@@ -24,7 +24,7 @@ wget https://archive.apache.org/dist/pulsar/pulsar-$PULSAR_VERSION/apache-pulsar
 
 . Extract the downloaded artifact:
 +
-[source,shell]
+[source,bash]
 ----
 tar xvfz apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 ----
@@ -66,19 +66,18 @@ Run some commands to validate the binary configuration.
 
 . List all tenants:
 +
-[source,shell]
+[source,bash]
 ----
 ./bin/pulsar-admin tenants list
 ----
 
 . Produce a message:
 +
-[source,shell,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 ./bin/pulsar-client produce **TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** --messages "Hi there" --num-produce 1
 ----
 
 == See also
 
-* xref:produce-consume-astra-portal.adoc[]
 * xref:produce-consume-pulsar-client.adoc[]

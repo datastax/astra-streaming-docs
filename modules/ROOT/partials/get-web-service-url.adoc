@@ -1,0 +1,17 @@
+To get the Web Service URL, do the following:
++
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+. Click the name of your tenant.
+. Click the *Connect* tab.
+. Find the *Tenant Details* section.
+This section includes the essential information you need to communicate with your {pulsar-short} tenant, including the *Web Service URL*.
++
+image::developing:tenant-details.png[Tenant details in {product}]
++
+[TIP]
+====
+The *Web Service URL* _isn't_ the same as the {pulsar-short} *Broker Service URL*.
+
+Web Service URLs start with `http`.
+Broker Service URLs start with `pulsar(+ssl)`.
+====
