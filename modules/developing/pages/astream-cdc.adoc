@@ -504,9 +504,9 @@ If your table has more than a few rows, use a more specific `select` statement t
 select * from default_keyspace.cdc_demo;
 ----
 +
-.Result
 The demo table now has two rows:
 +
+.Result
 [source,console]
 ----
  key | c1
@@ -950,13 +950,13 @@ You can get these names with the xref:astra-streaming:apis:index.adoc#astra-stre
 . Send the updated configuration to `{devops-api-ref-url}#tag/Database-Operations/operation/updateCDC[PUT /v3/databases/**DB_ID**/cdc]`.
 +
 [IMPORTANT]
-=====
+====
 This is a desired state list.
 
 Make sure that you include all existing tables and regions that you want to keep in the CDC configuration.
 
 If you omit any existing tables or regions from the request, CDC is disabled for those tables or regions.
-=====
+====
 +
 [source,curl,subs="+quotes"]
 ----

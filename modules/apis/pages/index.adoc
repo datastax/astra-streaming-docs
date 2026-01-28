@@ -437,6 +437,7 @@ Replace the following:
 * **`EXPIRATION`**: The token lifetime expressed as a number and unit, such as `1d` for one day.
 * **`ROLE`**: A string describing the token's role.
 * **`TYPE`**: The token's privilege level, either `admin` or `non-admin`.
+
 +
 .Result
 [source,json]
