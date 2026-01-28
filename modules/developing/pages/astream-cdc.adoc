@@ -269,7 +269,8 @@ After you <<create-tenant,create a tenant>> and <<create-table,create tables>>, 
 
 For <<multi-region-cdc,multi-region databases>>, you must use the xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}] to enable CDC in secondary regions.
 
-==== Enable CDC in the {astra-ui}::
+==== Enable CDC in the {astra-ui}
+
 . In the {astra-ui}, click the name of the database where you want to enable CDC.
 +
 If you created the demo table in <<create-table>>, select the database where you created that table.
@@ -305,7 +306,6 @@ You can use the following endpoints to enable CDC in single-region and multi-reg
 To check the CDC configuration for a database or table, see <<get-cdc>>.
 
 Enable CDC after deploying a region::
-+
 Use these steps to enable CDC in a single-region database or in previously-deployed regions of a multi-region database.
 You can also use this configuration to enable CDC on new tables.
 +
@@ -380,7 +380,6 @@ Tenant must be deployed to the same region as the database.
 You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
 Deploy a secondary region with CDC enabled::
-+
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database and enable CDC in the same command:
 +
 [source,curl,subs="+quotes"]
@@ -790,7 +789,6 @@ You can check your active CDC configurations in the {astra-ui} or with the {prod
 === Check CDC status with the {product-short} {devops-api}
 
 By database::
-+
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get CDC configuration details for an entire database:
 +
 [source,curl,subs="+quotes"]
@@ -837,7 +835,6 @@ For multi-region databases with CDC enabled in multiple regions, the `regions` a
 ----
 
 By table::
-+
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc]` to get CDC configuration details for a specific table:
 +
 [source,curl,subs="+quotes"]
@@ -1038,7 +1035,7 @@ Deleting the namespace also deletes the topics within that namespace.
 
 . Click *Disable* to remove the table's CDC configuration.
 
-==== Disable CDC with the {product-short} {devops-api}::
+==== Disable CDC with the {product-short} {devops-api}
 
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/deleteCDC[DELETE /v3/databases/**DB_ID**/cdc]` to disable CDC for a table:
 
