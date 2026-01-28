@@ -1,0 +1,7 @@
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+
+. Click the name of the tenant where you want to deploy a function.
+
+. On the *Functions* tab, click *Create Function*.
+
+. Enter a function name.

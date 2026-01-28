@@ -16,7 +16,7 @@ Custom functions require a xref:operations:astream-pricing.adoc[paid {product} s
 ====
 
 [#create-an-archive]
-== Deploy a function archive
+== Deploy a function ZIP or JAR
 
 You can write {pulsar-short} functions for {product} in Python, Java, or Go.
 
@@ -26,11 +26,8 @@ You can deploy the same archive to either environment.
 This is recommended for complex functions with long scripts, multiple scripts, or many dependencies.
 You can also use this approach to deploy multiple function classes with a single package.
 
-[tabs]
-======
-Python functions::
-+
---
+=== Prepare a Python function for deployment
+
 To create a Python function, the `.zip` file must have the correct structure.
 For example, assuming a project named `testpythonfunction`, the extracted archive has the following structure:
 
@@ -85,11 +82,11 @@ pip install pulsar-client==2.10.0
 cd deps
 zip -r ../my-python-function.zip .
 ----
---
 
-Java functions::
-+
---
+. <<deploy-the-function-with-the-pulsar-cli>>.
+
+=== Prepare a Java function for deployment
+
 To deploy a Java function, you must create a `.jar` file.
 
 . Create a Java project for your function.
@@ -174,10 +171,12 @@ mvn package
 [INFO] Finished at: 2023-05-16T16:19:05-04:00
 [INFO] ------------------------------------------------------------------------
 ----
---
-======
 
-[start=5]
+. <<deploy-the-function-with-the-pulsar-cli>>.
+
+[#deploy-the-function-with-the-pulsar-cli]
+=== Deploy the function with the {pulsar-short} CLI
+
 . If you haven't done so already, xref:configure-pulsar-env.adoc[set up your environment for the {pulsar-short} binaries].
 
 . Create a deployment configuration YAML file that defines the function metadata and associated topics:
@@ -230,9 +229,8 @@ Optionally, you can declare a `logTopic` in the same way: `persistent://**TENANT
 bin/pulsar-admin functions create --function-config-file **PATH_TO_FUNCTION_CONFIG_YAML**
 ----
 +
-.Result
 A response of `Created Successfully!` indicates the function is deployed and ready to accept messages.
-
++
 If the response is `402 Payment Required` with `Reason: only qualified organizations can create functions`, then you must upgrade to a xref:operations:astream-pricing.adoc[paid {product} subscription plan].
 +
 [TIP]
@@ -270,33 +268,25 @@ See <<controlling-your-function,Controlling your function>> for more information
 [#deploy-functions-in-the-astra-portal]
 == Deploy functions in the {astra-ui}
 
-In the {astra-ui}, you can deploy your own function code and built-in {company} transform functions:
+In the {astra-ui}, you can deploy your own function code and built-in {company} transform functions.
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
+=== Deploy custom functions in the {astra-ui}
 
-. Click the name of the tenant where you want to deploy a function.
+include::ROOT:partial$functions-ui-common-steps-pt1.adoc[]
 
-. On the *Functions* tab, click *Create Function*.
+. Select *Upload my own code*.
 
-. Enter a function name.
-
-. Upload function code or select a built-in {company} transform function:
-+
-[tabs]
-======
-Upload your own code::
-+
---
-.. Select *Upload my own code*.
-
-.. Select your function file:
+. Select your function file:
 +
 * `.py`: A single, independent Python script
 * `.zip`: A Python script with dependencies
 * `.jar`: A Java function
 * `.go`: A Go function
 
-.. Based on the uploaded file, select the specific class (function) to deploy.
++
+For examples, see <<prepare-a-python-function-for-deployment,Prepare a Python function for deployment>> and <<prepare-a-java-function-for-deployment,Prepare a Java function for deployment>>.
+
+. Based on the uploaded file, select the specific class (function) to deploy.
 +
 {product-short} generates a list of acceptable classes detected in the code.
 A file can contain multiple classes, but only one is used per deployment.
@@ -308,67 +298,21 @@ If there isn't a class in the Python file, the class name is the filename withou
 For Java scripts, the class name is the class to execute.
 +
 image::developing:astream-exclamation-function.png[Exclamation Function]
---
 
-Use {company} transform function::
-+
---
-.. Select *Use {company} transform function*.
+include::ROOT:partial$functions-ui-common-steps-pt2.adoc[]
 
-.. Select the xref:developing:astream-functions-transform.adoc[transform function] that you want to use.
---
-======
+=== Deploy {company} transform functions in the {astra-ui}
 
-. Select the namespace and one or more input topics for the function.
+To deploy built-in {company} transform functions, you select the function you want to deploy and provide a JSON-formatted config key, if you want to use a non-default configuration.
+For more information, see the xref:developing:astream-functions-transform.adoc[transform functions configuration reference].
 
-. If needed, select an output namespace and topics.
-+
-Whether you need to specify an output topic depends on the function's logic.
-For example, the `cast` xref:developing:astream-functions-transform.adoc[transform function] needs an output topic to receive the transformed messages.
+include::ROOT:partial$functions-ui-common-steps-pt1.adoc[]
 
-. Optional: Select a log topic.
-+
-The log topic is a separate output topic for messages containing additional `loglevel`, `fqn`, and `instance` properties.
+. Select *Use {company} transform function*.
 
-. Optional: Configure advanced settings:
-+
-* *Instances*: Enter a number of sink instances to run.
-* *Processing Guarantee*: Select one of the following:
-** *ATLEAST_ONCE* (default): Each message sent to the function can be processed one or more times.
-** *ATMOST_ONCE*: Each message sent to the function is processed 0 or 1 times.
-This means there is a change that a message is not processed.
-** *EFFECTIVELY_ONCE*: Each message sent to the function has only one output associated with it.
-* *Timeout*: Set a timeout limit.
-* *Auto Acknowledge*: Enable or disable automatic message acknowledgment.
+. Select the xref:developing:astream-functions-transform.adoc[transform function] that you want to use.
 
-. If needed, provide a JSON-formatted config key for your function.
-This configuration depends on your function code.
-+
-For transform functions, see the xref:developing:astream-functions-transform.adoc[transform functions configuration reference].
-+
-For general information about function configuration, see the https://pulsar.apache.org/functions-rest-api/#operation/registerFunction[{pulsar-short} documentation].
-
-. Click *Create*.
-
-. Confirm your function was created on the *Functions* tab.
-+
-You can also verify the function deployment with the {pulsar-short} CLI:
-+
-[source,shell]
-----
-./bin/pulsar-admin functions list --tenant $TENANT
-----
-+
-.Result
-[source,console]
-----
-cast-function
-flatten-function
-transform-function
-transform-function-2
-----
-
-Once created, the function starts processing messages from the input topics according to its logic.
+include::ROOT:partial$functions-ui-common-steps-pt2.adoc[]
 
 === Deploy functions in sinks
 
