@@ -93,8 +93,6 @@ curl -sS --fail -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT"
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
@@ -102,7 +100,6 @@ curl -sS --fail -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT"
   "mytenant/mynamespace"
 ]
 ----
-====
 
 === Create a namespace
 
@@ -126,9 +123,8 @@ After you create a namespace, you can use targeted endpoints to get and set spec
 The following examples demonstrate some of these endpoints.
 For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 
-.Message retention policy
-[%collapsible]
-======
+==== Message retention policy
+
 Get the message retention settings for a namespace:
 
 [source,curl]
@@ -163,11 +159,9 @@ curl -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retenti
 ----
 
 include::ROOT:partial$curl-get-template-tip.adoc[]
-======
 
-.Backlog quota policy
-[%collapsible]
-======
+==== Backlog quota policy
+
 Get the backlog quota settings for a namespace:
 
 [source,curl]
@@ -208,11 +202,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 ----
 
 include::ROOT:partial$curl-get-template-tip.adoc[]
-======
 
-.Message TTL policy
-[%collapsible]
-======
+==== Message TTL policy
+
 Get the message time-to-live (TTL) setting for a namespace:
 
 [source,curl]
@@ -233,11 +225,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 --header "Content-Type: application/json" \
 --data 5000
 ----
-======
 
-.Automatic topic creation policy
-[%collapsible]
-======
+==== Automatic topic creation policy
+
 Edit the automatic topic creation settings for the specified namespace, passing the new settings in the request body:
 
 [source,curl]
@@ -259,11 +249,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 `topicType` indicates the type of topic that can be automatically created.
 It can be either `non-partitioned` or `partitioned`.
 If set to `non-partitioned`, then the `defaultNumPartitions` field is ignored.
-======
 
-.Maximum consumers per topic policy
-[%collapsible]
-======
+==== Maximum consumers per topic policy
+
 Get the maximum number of consumers allowed for each topic in a namespace:
 
 [source,curl]
@@ -282,11 +270,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 --header "Content-Type: application/json" \
 --data 100
 ----
-======
 
-.Maximum topics per namespace policy
-[%collapsible]
-======
+==== Maximum topics per namespace policy
+
 Get the maximum number of topics allowed in a namespace:
 
 [source,curl]
@@ -305,7 +291,6 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 --data 1000
 ----
-======
 
 === Delete a namespace
 
@@ -443,9 +428,8 @@ There are multiple endpoints you can use to get information about topics, includ
 The following examples demonstrate some of these endpoints.
 For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 
-.Get internal statistics for a persistent, non-partitioned topic
-[%collapsible]
-======
+==== Get internal statistics for a persistent, non-partitioned topic
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/internalStats" \
@@ -487,11 +471,9 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   }
 }
 ----
-======
 
-.Get statistics for a persistent, non-partitioned topic
-[%collapsible]
-======
+==== Get statistics for a persistent, non-partitioned topic
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/stats" \
@@ -537,11 +519,9 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   ...TRUNCATED FOR READABILITY...
 }
 ----
-======
 
-.Get statistics for a persistent, partitioned topic
-[%collapsible]
-======
+==== Get statistics for a persistent, partitioned topic
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitioned-stats" \
@@ -658,11 +638,9 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   ...TRUNCATED FOR READABILITY...
 }
 ----
-======
 
-.Get statistics for all topics in a namespace
-[%collapsible]
-======
+==== Get statistics for all topics in a namespace
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/stats/topics/$TENANT/$NAMESPACE" \
@@ -792,7 +770,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/stats/topics/$TENANT/$NAMES
   ...TRUNCATED FOR READABILITY...
 }
 ----
-======
 
 == Subscription operations
 
@@ -816,8 +793,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
@@ -825,7 +800,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   "subscript2"
 ]
 ----
-====
 
 === Create a subscription
 
@@ -883,15 +857,12 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
   "testfunction1"
 ]
 ----
-====
 
 === Get function status
 
@@ -903,8 +874,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -931,7 +900,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
   ]
 }
 ----
-====
 
 === Get function statistics
 
@@ -943,8 +911,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -984,7 +950,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
   ]
 }
 ----
-====
 
 === Get function details
 
@@ -996,8 +961,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1073,7 +1036,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
   "subscriptionPosition": "Latest"
 }
 ----
-====
 
 === Start a function
 
@@ -1119,15 +1081,12 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE" \
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
   "mysink1"
 ]
 ----
-====
 
 === Get the status of a sink
 
@@ -1139,8 +1098,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1166,7 +1123,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
   ]
 }
 ----
-====
 
 === Get sink details
 
@@ -1178,8 +1134,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$S
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1233,7 +1187,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$S
   "transformFunctionConfig": null
 }
 ----
-====
 
 === Create a sink
 
@@ -1328,15 +1281,12 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE"
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
   "mysource1"
 ]
 ----
-====
 
 === Get the status of a source
 
@@ -1348,8 +1298,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1375,7 +1323,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
   ]
 }
 ----
-====
 
 === Get source details
 
@@ -1387,8 +1334,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1427,7 +1372,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
   "topicName": "persistent://testcreate/ns0/t1"
 }
 ----
-====
 
 === Create a source
 

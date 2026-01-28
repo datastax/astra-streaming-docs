@@ -165,8 +165,6 @@ mvn package
 ----
 +
 .Result
-[%collapsible]
-====
 [source,console]
 ----
 [INFO] ------------------------------------------------------------------------
@@ -176,8 +174,6 @@ mvn package
 [INFO] Finished at: 2023-05-16T16:19:05-04:00
 [INFO] ------------------------------------------------------------------------
 ----
-====
-
 --
 ======
 
@@ -235,12 +231,9 @@ bin/pulsar-admin functions create --function-config-file **PATH_TO_FUNCTION_CONF
 ----
 +
 .Result
-[%collapsible]
-====
 A response of `Created Successfully!` indicates the function is deployed and ready to accept messages.
 
 If the response is `402 Payment Required` with `Reason: only qualified organizations can create functions`, then you must upgrade to a xref:operations:astream-pricing.adoc[paid {product} subscription plan].
-====
 +
 [TIP]
 ====
@@ -367,8 +360,6 @@ You can also verify the function deployment with the {pulsar-short} CLI:
 ----
 +
 .Result
-[%collapsible]
-====
 [source,console]
 ----
 cast-function
@@ -376,7 +367,6 @@ flatten-function
 transform-function
 transform-function-2
 ----
-====
 
 Once created, the function starts processing messages from the input topics according to its logic.
 

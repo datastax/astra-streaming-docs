@@ -38,8 +38,6 @@ If this button isn't available, the GPT schema translator doesn't have an availa
 image::developing:two-schemas.png[Schema mapping,320,240]
 +
 .{cass-short}-to-{pulsar-short} schema mapping example
-[%collapsible]
-====
 [cols="1,1,1"]
 |===
 | {cass-short} table schema | {pulsar-short} JSON schema | Generated mapping
@@ -121,7 +119,6 @@ id=key, file1=value.file1, file2=value.file2, file3=value.file3
 ----
 
 |===
-====
 
 . Save the mapping configuration.
 
@@ -136,8 +133,6 @@ This example demonstrates how you can generates schema mapping in real time.
 . The xref:streaming-learning:pulsar-io:connectors/sources/data-generator.adoc[DataGenerator source connector] generates data for a {pulsar-short} topic with an AVRO schema.
 +
 .AVRO schema example
-[%collapsible]
-====
 [source,avro]
 ----
 "pulsar_topic_schema": {
@@ -369,13 +364,10 @@ This example demonstrates how you can generates schema mapping in real time.
           },
 }
 ----
-====
 
 . The {astra-db} sink connector writes data to the {cass-short} table with a CQL schema.
 +
 .CQL schema example
-[%collapsible]
-====
 [source,cql]
 ----
 "cassandra_table_schemas": {
@@ -410,7 +402,6 @@ This example demonstrates how you can generates schema mapping in real time.
           },
 }
 ----
-====
 
 . In the {astra-ui}, create a mapping for the tenant.
 When a topic schema is available to the {gpt-schema-translator}, click *Generate Mapping*.

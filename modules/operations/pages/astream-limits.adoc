@@ -155,11 +155,8 @@ You can read more about Kubernetes pod naming restrictions https://kubernetes.io
 
 === Namespace policy configuration file
 
-The following is an example of a default namespace policy with limits set.
+The following is an example of a default namespace policy with limits set:
 
-.Default namespace policy with limits set
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -253,7 +250,6 @@ The following is an example of a default namespace policy with limits set.
   "schema_validation_enforced" : false
 }
 ----
-====
 
 == {product} topic and namespace actions
 

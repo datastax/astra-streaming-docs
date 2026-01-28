@@ -68,13 +68,10 @@ Replace the following:
 * The `auth_strategy` and other authentication details depend on your Pulsar configuration.
 +
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 HTTP/1.1 202 Accepted
 ----
-====
 
 . Retrieve and verify the audit log streaming configuration:
 +
@@ -86,8 +83,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/organizations/**ORG
 ----
 +
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -100,7 +95,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/organizations/**ORG
   }
 }
 ----
-====
 
 == Delete an audit log streaming configuration
 

@@ -63,8 +63,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" 
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
@@ -116,7 +114,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" 
   }
 ]
 ----
-====
 
 [#get-cloud-providers-and-regions]
 === Get cloud providers and regions
@@ -131,8 +128,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/providers
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -155,7 +150,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/providers
   ]
 }
 ----
-====
 
 [#create-a-tenant]
 === Create a tenant
@@ -253,8 +247,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/replicati
 If georeplication is enabled, the response includes the replication configuration details.
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -298,7 +290,6 @@ If georeplication is enabled, the response includes the replication configuratio
   }
 }
 ----
-====
 
 === Enable georeplication
 
@@ -398,14 +389,11 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$
 You can get token IDs from <<get-existing-pulsar-tokens>>, and you can get the cluster name from <<get-tenant-details>>.
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 Output: Raw string JWT
 eyJhbGciOiJSUzI1NiIsI...
 ----
-====
 
 === Create a {pulsar-short} token
 
@@ -427,14 +415,11 @@ curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants/
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 Output: new raw string JWT
 eyJhbGciOiJSUzI1NiIsI...
 ----
-====
 --
 
 v3 endpoint::
@@ -461,8 +446,6 @@ Replace the following:
 * **`TYPE`**: The token's privilege level, either `admin` or `non-admin`.
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -471,7 +454,6 @@ Replace the following:
   "token": "eyJhbGciOiJSUzI1NiIsI..."
 }
 ----
-====
 --
 ======
 

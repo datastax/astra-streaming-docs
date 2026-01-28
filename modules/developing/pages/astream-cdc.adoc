@@ -515,10 +515,8 @@ select * from default_keyspace.cdc_demo;
 ----
 +
 .Result
-[%collapsible]
-====
 The demo table now has two rows:
-
++
 [source,console]
 ----
  key | c1
@@ -528,7 +526,6 @@ The demo table now has two rows:
 
 (2 rows)
 ----
-====
 
 . Verify that the change was passed from CDC to your sink by fetching the data from your sink service deployment.
 +
@@ -695,8 +692,6 @@ bin/pulsar-admin topics partitioned-stats persistent://**DATA_TOPIC_STRING**
 Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**`.
 +
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -736,7 +731,6 @@ Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `
   "partitions" : { }
 }
 ----
-====
 
 [#multi-region-cdc]
 == Enable CDC for multi-region databases
