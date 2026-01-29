@@ -80,14 +80,11 @@ bin/pulsar-admin namespaces get-clusters **TENANT_NAME**/**NAMESPACE_NAME**
 ----
 +
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 pulsar-aws-useast1-staging
 pulsar-aws-useast2-staging
 ----
-====
 
 . Create a {pulsar-short} consumer with a subscription to a specified topic:
 +
@@ -161,11 +158,9 @@ Consumer<String> consumer = pulsarClient.newConsumer(Schema.STRING)
 bin/pulsar-admin topics stats persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
 ----
 +
-In the configuration, `isReplicated` is now `true` for this subscription.
+In the configuration, `isReplicated` is now `true` for this subscription:
 +
 .config.json
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -252,7 +247,6 @@ In the configuration, `isReplicated` is now `true` for this subscription.
   }
 }
 ----
-====
 
 [#monitor]
 == Monitor replicated clusters

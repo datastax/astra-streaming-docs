@@ -299,59 +299,56 @@ For more information, see the https://prometheus.io/docs/prometheus/latest/query
 The following examples use the `pulsar_msg_backlog` raw metric to demonstrate the patterns.
 In accordance with the recommendations in <<aggregate-astra-streaming-metrics>>, the example patterns aggregate messages at the parent topic level or higher and they exclude system topics.
 
-.Filter system topics
-[%collapsible]
-====
+Filter system topics::
 You can use the following expression to filter system topics:
-
++
 [source,pgsql]
 ----
 {topic !~ ".*__.*"}
 ----
-
++
 This expression excludes messages with topic labels that include two consecutive underscores.
 This works because {pulsar-short} system topics and namespaces are usually prefixed by two underscores, such as `+persistent://some_tenant/__kafka/__consumer_offsets_partition_0+`.
-
++
 To use this expression, your applications' namespace and topic names don't contain double underscores.
 If they do, they will also be excluded by this filter.
-====
 
-==== Get the total message backlog of a specific parent topic, excluding system topics
-
+Get the total message backlog of a specific parent topic, excluding system topics::
 `$ptopic` is a Grafana dashboard variable that represents a specific parent topic.
-
+For example:
++
 [source,pgsql]
 ----
 sum(pulsar_msg_backlog{topic=~$ptopic, topic !~ ".*__.*"})
 ----
 
-==== Get the total message backlog of a specific namespace, excluding system topics
-
+Get the total message backlog of a specific namespace, excluding system topics::
 `$namespace` is a Grafana dashboard variable that represents a specific namespace.
-
+For example:
++
 [source,pgsql]
 ----
 sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
-==== Get the total message backlog of a tenant, excluding system topics
-
+Get the total message backlog of a tenant, excluding system topics::
 `$tenant` is a (Grafana dashboard) variable that represents a specific tenant.
-
+For example:
++
 [source,pgsql]
 ----
 sum(pulsar_msg_backlog{namespace=~"$tenant.+", topic !~ ".*__.*"})
 ----
 
-==== Get the total message backlog of each topic within a specific namespace, excluding system topics
-
+Get the total message backlog of each topic within a specific namespace, excluding system topics::
++
 [source,pgsql]
 ----
 sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
-==== Get the top 10 message backlog by topic within a specific namespace, excluding system topics
-
+Get the top 10 message backlog by topic within a specific namespace, excluding system topics::
++
 [source,pgsql]
 ----
 topk (10, sum by(topic) (pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"}))

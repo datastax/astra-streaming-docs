@@ -63,8 +63,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" 
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
@@ -116,7 +114,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" 
   }
 ]
 ----
-====
 
 [#get-cloud-providers-and-regions]
 === Get cloud providers and regions
@@ -131,8 +128,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/providers
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -155,7 +150,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/providers
   ]
 }
 ----
-====
 
 [#create-a-tenant]
 === Create a tenant
@@ -253,8 +247,6 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/replicati
 If georeplication is enabled, the response includes the replication configuration details.
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -298,7 +290,6 @@ If georeplication is enabled, the response includes the replication configuratio
   }
 }
 ----
-====
 
 === Enable georeplication
 
@@ -398,50 +389,37 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$
 You can get token IDs from <<get-existing-pulsar-tokens>>, and you can get the cluster name from <<get-tenant-details>>.
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 Output: Raw string JWT
 eyJhbGciOiJSUzI1NiIsI...
 ----
-====
 
 === Create a {pulsar-short} token
 
 Create a new {pulsar-short} token (JWT) for a given tenant and cluster.
 You can get the cluster name from <<get-tenant-details>>.
 
-[tabs]
-======
 v2 endpoint::
-+
---
 The `v2/streaming/tenants/$TENANT/tokens` endpoint returns a raw string JWT with an unlimited lifetime:
-
++
 [source,curl]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" \
 --header "Authorization: Bearer $ASTRA_TOKEN" \
 --header "X-DataStax-Pulsar-Cluster: $CLUSTER"
 ----
-
++
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 Output: new raw string JWT
 eyJhbGciOiJSUzI1NiIsI...
 ----
-====
---
 
 v3 endpoint::
-+
---
 The `v3/streaming/tenants/$TENANT/tokens` endpoint returns a JSON response and accepts additional token parameters:
-
++
 [source,curl,subs="+quotes"]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v3/streaming/tenants/$TENANT/tokens" \
@@ -453,16 +431,15 @@ curl -sS --fail -L -X POST "https://api.astra.datastax.com/v3/streaming/tenants/
   "type": "**TYPE**"
 }'
 ----
-
++
 Replace the following:
-
++
 * **`EXPIRATION`**: The token lifetime expressed as a number and unit, such as `1d` for one day.
 * **`ROLE`**: A string describing the token's role.
 * **`TYPE`**: The token's privilege level, either `admin` or `non-admin`.
 
++
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -471,9 +448,6 @@ Replace the following:
   "token": "eyJhbGciOiJSUzI1NiIsI..."
 }
 ----
-====
---
-======
 
 === Delete a {pulsar-short} token
 
