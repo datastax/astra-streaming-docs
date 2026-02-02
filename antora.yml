@@ -32,6 +32,10 @@ asciidoc:
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
     astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'
+    scb: 'Secure Connect Bundle (SCB)'
+    scb-short: 'SCB'
+    scb-brief: 'Secure Connect Bundle'
+    web-ui: '{astra-ui}' # Required for include::common partials that are shared with Luna Streaming
 
     # LEGACY ATTRIBUTES - CONSIDER REMOVING
     langstream: 'RAGStack'
