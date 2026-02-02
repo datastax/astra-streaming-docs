@@ -7,7 +7,7 @@ Use the {product} {pulsar-short} Admin API to manage resources within your {prod
 [TIP]
 ====
 This page summarizes commonly used endpoints.
-For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
+For more information and all endpoints, see the xref:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 ====
 
 Other available APIs include the xref:apis:index.adoc[{product} {devops-api}] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
@@ -114,14 +114,14 @@ curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/**NAMESP
 
 There are many settings you can configure for a namespace, such as message retention, backlog quota, and message TTL.
 If the request body is empty, default values are used for the namespace configuration.
-For more information, see the xref:astra-streaming:apis:attachment$pulsar-admin.html#tag/namespaces/operation/Namespaces_createNamespace[`PUT /admin/v2/namespaces/$TENANT/$NAMESPACE` specification].
+For more information, see the xref:apis:attachment$pulsar-admin.html#tag/namespaces/operation/Namespaces_createNamespace[`PUT /admin/v2/namespaces/$TENANT/$NAMESPACE` specification].
 
 === Edit namespace policies
 
 After you create a namespace, you can use targeted endpoints to get and set specific policies without needing to pass the entire namespace configuration in the request.
 
 The following examples demonstrate some of these endpoints.
-For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
+For more information and all endpoints, see the xref:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 
 ==== Message retention policy
 
@@ -426,7 +426,7 @@ curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v2/non-persistent/$TENANT/$
 There are multiple endpoints you can use to get information about topics, including filtered and unfiltered responses.
 
 The following examples demonstrate some of these endpoints.
-For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
+For more information and all endpoints, see the xref:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 
 ==== Get internal statistics for a persistent, non-partitioned topic
 
@@ -845,7 +845,7 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESP
 
 == Function operations
 
-Use the following {product} {pulsar-short} Admin API endpoints to manage xref:astra-streaming:developing:astream-functions.adoc[{pulsar-short} functions].
+Use the following {product} {pulsar-short} Admin API endpoints to manage xref:developing:astream-functions.adoc[{pulsar-short} functions].
 
 === Get functions in a namespace
 

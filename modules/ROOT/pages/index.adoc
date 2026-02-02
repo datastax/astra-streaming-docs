@@ -20,7 +20,7 @@
     Delivered as a fully-managed data streaming and event stream processing service with boundless scale, massive throughput, and low latency, {product} is the simplest way to modernize your event driven architecture and turbo charge your data in motion strategy.
     You can create {pulsar-short} instances, scale across cloud regions, and manage {pulsar-short} resources such as topics, connectors, functions and subscriptions.
 
-    xref:astra-streaming:getting-started:index.adoc[Get started with Astra Streaming]
+    xref:getting-started:index.adoc[Get started with Astra Streaming]
 
   </div>
 

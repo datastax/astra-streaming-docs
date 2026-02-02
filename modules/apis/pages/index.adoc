@@ -8,7 +8,7 @@ Use this API to manage higher-level {product} objects associated with your {prod
 [TIP]
 ====
 This page summarizes commonly used endpoints.
-For more information and all endpoints, see the xref:astra-streaming:apis:attachment$devops.html[{product} {devops-api} specification reference].
+For more information and all endpoints, see the xref:apis:attachment$devops.html[{product} {devops-api} specification reference].
 ====
 
 Other available APIs include the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
