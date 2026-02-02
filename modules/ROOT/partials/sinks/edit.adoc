@@ -4,7 +4,7 @@ For example, if you created the connector with a configuration file, you can pas
 You can include the entire configuration or only the properties that you want to change.
 Additionally, some properties can be modified with specific arguments, such as `--parallelism`.
 
-To get the current configuration, see xref:connectors:index.adoc#get-sink-connector-configuration-data[Get sink connector configuration data].
+To get the current configuration, see xref:apis:api-operations.adoc#get-sink-connector-configuration-data[Get sink connector configuration data].
 
 .pulsar-admin CLI
 [source,shell,subs="+attributes"]

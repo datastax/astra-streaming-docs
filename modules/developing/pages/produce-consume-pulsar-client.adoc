@@ -1,29 +1,35 @@
-= Produce and consume messages with the {pulsar-short} CLI and {product}
+= Produce and consume messages with the {pulsar-short} CLIs and {product}
 :navtitle: Use the {pulsar-short} CLI
-:description: Use the pulsar-client CLI to interact with your {product} tenants
+:description: Use the {pulsar-short} CLIs to interact with your {product} tenants
 
-You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants:
+You can use the `pulsar-client` and `pulsar-admin` CLIs to interact with your {product} tenants.
 
-. xref:operations:create-delete-tenants.adoc[Create an {product} tenant].
+== Prerequisites
 
-. xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}].
+* xref:operations:create-delete-tenants.adoc[Create an {product} tenant].
 
-. Set the following environment variables:
+* xref:developing:configure-pulsar-env.adoc[Configure {pulsar-reg} binaries for {product}].
+
+* Optional: Set environment variables for common values, for example:
 +
 [source,shell,subs="+quotes"]
 ----
-TOPIC="my-topic"
-NAMESPACE="my-namespace"
-TENANT="my-stream-**RANDOM_UUID**"
+TOPIC="**TOPIC_NAME**"
+NAMESPACE="**NAMESPACE_NAME**"
+TENANT="**TENANT_NAME**"
+SINK_NAME="**SINK_CONNECTOR_NAME**"
+SOURCE_NAME="**SOURCE_CONNECTOR_NAME**"
 ----
-+
-Replace **RANDOM_UUID** with any random letters and numbers to create a unique tenant name.
 
-. Produce a message:
+== Use the `pulsar-client` CLI
+
+You can use the `pulsar-client` CLI to produce and consume messages in your {product} tenants.
+For example:
+
+. Produce a new message on the given topic:
 +
 [source,shell]
 ----
-# Produce a new message on the given tenant/namespace/topic
 ./bin/pulsar-client produce \
 "$TENANT/$NAMESPACE/$TOPIC" \
 --messages "Hi there" \
@@ -36,7 +42,6 @@ Your topic now has a new, unacknowledged message.
 +
 [source,shell]
 ----
-# Consume a new message on the given tenant/namespace/topic
 ./bin/pulsar-client consume \
 "$TENANT/$NAMESPACE/$TOPIC" \
 --subscription-name "examples-subscriber" \
@@ -57,8 +62,188 @@ key:[null], properties:[], content:Hi there
 2023-01-09T14:32:42,613-0500 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully consumed
 ----
 
+== Use the `pulsar-admin` CLI
+
+You can use the `pulsar-admin` CLI to manage topics, namespaces, connectors, and functions in your {product} tenants.
+
+=== `pulsar-admin` CLI sink connector operations
+
+Although you use the same base commands to create and update all {product} {pulsar-short} connectors, each connector has different configuration options.
+For configuration details, see the documentation for your preferred xref:connectors:index.adoc[sink connectors].
+
+Get available sink connectors::
+Get a list of sink connectors that are available in your {product} {pulsar-short} tenant:
++
+[source,shell]
+----
+./bin/pulsar-admin sinks available-sinks
+----
+
+Get sink connector configuration data::
+Get the configuration for an existing sink connector:
++
+[source,shell]
+----
+# Get information about a connector
+./bin/pulsar-admin sinks get \
+  --namespace "$NAMESPACE" \
+  --name "$SINK_NAME" \
+  --tenant "$TENANT"
+----
+
+Start a sink connector::
++
+[source,shell]
+----
+# Start all instances of a connector
+./bin/pulsar-admin sinks start \
+  --namespace "$NAMESPACE" \
+  --name "$SINK_NAME" \
+  --tenant "$TENANT"
+
+# optionally add --instance-id to only start an individual instance
+----
+
+Stop a sink connector::
++
+[source,shell]
+----
+# Stop all instances of a connector
+./bin/pulsar-admin sinks stop \
+  --namespace "$NAMESPACE" \
+  --name "$SINK_NAME" \
+  --tenant "$TENANT"
+
+# optionally add --instance-id to only stop an individual instance
+----
+
+Restart a sink connector::
++
+[source,shell]
+----
+# Restart all instances of a connector
+./bin/pulsar-admin sinks restart \
+  --namespace "$NAMESPACE" \
+  --name "$SINK_NAME" \
+  --tenant "$TENANT"
+
+# optionally add --instance-id to only restart an individual instance
+----
+
+Get sink connector status::
++
+[source,shell]
+----
+# Check connector status
+./bin/pulsar-admin sinks status \
+  --instance-id "$SINK_INSTANCE_ID" \
+  --namespace "$NAMESPACE" \
+  --name "$SINK_NAME" \
+  --tenant "$TENANT"
+----
+
+Delete a sink connector::
++
+[source,shell]
+----
+# Delete all instances of a connector
+./bin/pulsar-admin sinks delete \
+  --namespace "$NAMESPACE" \
+  --name "$SINK_NAME" \
+  --tenant "$TENANT"
+----
+
+=== `pulsar-admin` CLI source connector operations
+
+Although you use the same base commands to create and update all {product} {pulsar-short} connectors, each connector has different configuration options.
+For configuration details, see the documentation for your preferred xref:connectors:index.adoc[source connectors].
+
+Get available source connectors::
+Get a list of source connectors that are available in your {product} {pulsar-short} tenant:
++
+[source,shell]
+----
+./bin/pulsar-admin sources available-sources
+----
+
+Get source connector configuration data::
+Get the configuration for an existing source connector:
++
+[source,shell]
+----
+# Get information about connector
+./bin/pulsar-admin sources get \
+  --namespace "$NAMESPACE" \
+  --name "$SOURCE_NAME" \
+  --tenant "$TENANT"
+----
+
+Start a source connector::
++
+[source,shell]
+----
+# Start all instances of a connector
+./bin/pulsar-admin sources start \
+  --namespace "$NAMESPACE" \
+  --name "$SOURCE_NAME" \
+  --tenant "$TENANT"
+
+# optionally add --instance-id to only start an individual instance
+----
+
+Stop a source connector::
++
+[source,shell]
+----
+# Stop all instances of a connector
+./bin/pulsar-admin sources stop \
+  --namespace "$NAMESPACE" \
+  --name "$SOURCE_NAME" \
+  --tenant "$TENANT"
+
+# optionally add --instance-id to only stop an individual instance
+----
+
+Restart a source connector::
++
+[source,shell]
+----
+# Restart all instances of a connector
+./bin/pulsar-admin sources restart \
+  --namespace "$NAMESPACE" \
+  --name "$SOURCE_NAME" \
+  --tenant "$TENANT"
+
+# optionally add --instance-id to only restart an individual instance
+----
+
+Get source connector status::
++
+[source,shell]
+----
+# Check connector status
+./bin/pulsar-admin sources status \
+  --instance-id "$SOURCE_INSTANCE_ID" \
+  --namespace "$NAMESPACE" \
+  --name "$SOURCE_NAME" \
+  --tenant "$TENANT"
+----
+
+Delete a source connector::
++
+[source,shell]
+----
+# Delete all instances of a connector
+./bin/pulsar-admin sources delete \
+  --namespace "$NAMESPACE" \
+  --name "$SOURCE_NAME" \
+  --tenant "$TENANT"
+----
+
 == See also
 
 * https://github.com/datastax/astra-streaming-examples[{product} examples GitHub repository]
 * xref:astream-functions.adoc[]
 * xref:astream-cdc.adoc[]
+* xref:connectors:index.adoc[]
+* xref:developing:astream-functions.adoc[]
