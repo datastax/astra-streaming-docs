@@ -321,7 +321,7 @@ This requires either a custom connector or an intermediate topic (with additiona
 
 Alternatively, you can deploy functions in a sink to apply preprocessing to sink topic writes (outgoing messages from the sink).
 
-To deploy a function in a sink, xref:streaming-learning:pulsar-io:connectors/index.adoc[create a sink], and include the function in your sink configuration.
+To deploy a function in a sink, xref:connectors:index.adoc[create a sink], and include the function in your sink configuration.
 You can do this in the {astra-ui}, with the {pulsar-short} CLI, or with {product} {pulsar-short} Admin API.
 
 For example, with the {astra-ui}:

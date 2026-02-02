@@ -32,7 +32,7 @@
 
     <h3 class="discrete !text-h2 !m-0 [&>a]:text-white">APIs and integrations</h3>
 
-    <p>{product} goes beyond the {astra-ui}. You can use xref:apis:index.adoc[{product} APIs], xref:developing:clients/index.adoc[{pulsar} clients], and related tools to manage your streaming tenants and resources, develop applications, and xref:streaming-learning:pulsar-io:connectors/index.adoc[integrate] with popular sinks and sources.</p>
+    <p>{product} goes beyond the {astra-ui}. You can use xref:apis:index.adoc[{product} APIs], xref:developing:clients/index.adoc[{pulsar} clients], and related tools to manage your streaming tenants and resources, develop applications, and xref:connectors:index.adoc[integrate] with popular sinks and sources.</p>
 
   </div>
 

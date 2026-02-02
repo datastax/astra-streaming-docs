@@ -25,7 +25,7 @@
 * xref:developing:starlight.adoc[]
 * xref:developing:astream-cdc.adoc[]
 * xref:developing:gpt-schema-translator.adoc[]
-* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors reference]
+* xref:connectors:index.adoc[]
 
 .Operations
 * xref:operations:create-delete-tenants.adoc[]

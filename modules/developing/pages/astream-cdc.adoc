@@ -187,7 +187,7 @@ You need a role that grants permission to manage streaming tenants, such as the 
 For example, for https://cloud.elastic.co/login[Elasticsearch], you need an Elasticsearch endpoint, index name, and API key.
 +
 This guide uses an Elasticsearch sink as an example.
-You can use xref:streaming-learning:pulsar-io:connectors/index.adoc[other {astra-stream} sinks].
+You can use xref:connectors:index.adoc[other {astra-stream} sinks].
 
 [#create-tenant]
 === Create a streaming tenant
@@ -448,7 +448,7 @@ After you enable CDC, you need to connect a sink.
 The sink consumes messages from the `data-` topics, and then sends them to the associated service deployment.
 
 This example uses an Elasticsearch sink.
-You can use xref:streaming-learning:pulsar-io:connectors/index.adoc[other {astra-stream} sinks].
+You can use xref:connectors:index.adoc[other {astra-stream} sinks].
 
 . On the *CDC* tab where you just <<enable-cdc-on-a-table,enabled CDC on a table>>, click the table's name.
 
