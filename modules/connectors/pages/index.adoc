@@ -21,17 +21,17 @@ Sink connectors export messages from {pulsar-short} topics to external services.
 Supported sink connectors::
 The following sink connectors are included in {product}:
 +
-* xref:connectors/sinks/astra-db.adoc[{astra-db} and {cass} sink]
-* xref:connectors/sinks/kafka.adoc[Apache Kafka sink]
-* xref:connectors/sinks/kinesis.adoc[AWS Kinesis sink]
-* xref:connectors/sinks/cloud-storage.adoc[Cloud Storage sink]
-* xref:connectors/sinks/elastic-search.adoc[Elasticsearch sink]
-* xref:connectors/sinks/google-bigquery.adoc[Google BigQuery sink]
-* xref:connectors/sinks/jdbc-clickhouse.adoc[JDBC ClickHouse sink]
-* xref:connectors/sinks/jdbc-mariadb.adoc[JDBC MariaDB sink]
-* xref:connectors/sinks/jdbc-postgres.adoc[JDBC PostgreSQL sink]
-* xref:connectors/sinks/jdbc-sqllite.adoc[JDBC SQLite sink]
-* xref:connectors/sinks/snowflake.adoc[Snowflake sink]
+* xref:connectors:sinks/astra-db.adoc[{astra-db} and {cass} sink]
+* xref:connectors:sinks/kafka.adoc[Apache Kafka sink]
+* xref:connectors:sinks/kinesis.adoc[AWS Kinesis sink]
+* xref:connectors:sinks/cloud-storage.adoc[Cloud Storage sink]
+* xref:connectors:sinks/elastic-search.adoc[Elasticsearch sink]
+* xref:connectors:sinks/google-bigquery.adoc[Google BigQuery sink]
+* xref:connectors:sinks/jdbc-clickhouse.adoc[JDBC ClickHouse sink]
+* xref:connectors:sinks/jdbc-mariadb.adoc[JDBC MariaDB sink]
+* xref:connectors:sinks/jdbc-postgres.adoc[JDBC PostgreSQL sink]
+* xref:connectors:sinks/jdbc-sqllite.adoc[JDBC SQLite sink]
+* xref:connectors:sinks/snowflake.adoc[Snowflake sink]
 
 Experimental sink connectors::
 The following sink connectors are experimental.
@@ -82,14 +82,14 @@ Source connectors ingest messages from external services into {pulsar-short} top
 Supported source connectors::
 The following source connectors are included in {product}:
 +
-* xref:connectors/sources/kafka.adoc[Apache Kafka source]
-* xref:connectors/sources/kinesis.adoc[AWS Kinesis source]
-* xref:connectors/sources/data-generator.adoc[Data Generator source]
-* xref:connectors/sources/debezium-mongodb.adoc[Debezium MongoDB source]
-* xref:connectors/sources/debezium-mysql.adoc[Debezium MySQL source]
-* xref:connectors/sources/debezium-oracle.adoc[Debezium Oracle source]
-* xref:connectors/sources/debezium-postgres.adoc[Debezium PostgreSQL source]
-* xref:connectors/sources/debezium-sqlserver.adoc[Debezium SQL Server source]
+* xref:connectors:sources/kafka.adoc[Apache Kafka source]
+* xref:connectors:sources/kinesis.adoc[AWS Kinesis source]
+* xref:connectors:sources/data-generator.adoc[Data Generator source]
+* xref:connectors:sources/debezium-mongodb.adoc[Debezium MongoDB source]
+* xref:connectors:sources/debezium-mysql.adoc[Debezium MySQL source]
+* xref:connectors:sources/debezium-oracle.adoc[Debezium Oracle source]
+* xref:connectors:sources/debezium-postgres.adoc[Debezium PostgreSQL source]
+* xref:connectors:sources/debezium-sqlserver.adoc[Debezium SQL Server source]
 
 Experimental source connectors::
 The following source connectors are experimental.
