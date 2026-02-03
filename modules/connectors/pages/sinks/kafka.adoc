@@ -1,1 +1,37 @@
-include::common:streaming:partial$connectors/sinks/kafka.adoc[]
+= Kafka
+:connectorType: kafka
+
+The Kafka sink connector reads messages from {pulsar-short} topics and writes them to https://kafka.apache.org/[Kafka] topics.
+
+[#compatibility]
+== Compatibility
+
+{product} supports {pulsar-reg} {pulsar-version}, which uses the https://github.com/apache/kafka/tree/2.7[Kafka 2.7.2 library].
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== Kafka sink connector properties (`configs`)
+
+Set these properties in the `configs` section of the connector configuration.
+
+Generally, all properties provided in the https://pulsar.apache.org/docs/io-kafka-sink[OSS {pulsar} Kafka sink connector] are supported.
+Exceptions include properties that aren't relevant to {product} and properties that aren't present in {pulsar} {pulsar-version}.

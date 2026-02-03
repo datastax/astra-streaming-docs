@@ -1,1 +1,34 @@
-include::common:streaming:partial$connectors/sinks/jdbc-mariadb.adoc[]
+= JDBC MariaDB
+:connectorType: jdbc-mariadb
+
+You can use the JDBC MariaDB sink connector to stream data from {pulsar-short} topics into https://mariadb.org/[MariaDB] tables.
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sinks/jdbc-mariadb-compatibility.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== JDBC MariaDB sink connector properties (`configs`)
+
+include::common:streaming:partial$connectors/sinks/jdbc-config-params.adoc[]

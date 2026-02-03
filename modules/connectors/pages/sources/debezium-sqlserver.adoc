@@ -1,1 +1,57 @@
-include::common:streaming:partial$connectors/sources/debezium-sqlserver.adoc[]
+= Debezium SQL Server
+:connectorType: debezium-sqlserver
+
+The Debezium SQL Server source connector reads data from Debezium SQL Server databases and tables, and then emits change data event messages to {pulsar-short} topics.
+
+It is based on the change data capture (CDC) feature available in SQL Server 2016 Service Pack 1 (SP1) and later editions.
+
+The SQL Server capture process monitors designated databases and tables, and then stores changes into dedicated change tables with stored procedure facades.
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sources/debezium-compatibility.adoc[]
+
+[#create-the-connector]
+== Create the connector
+
+include::common:streaming:partial$connectors/sources/debezium-sqlserver-setup.adoc[]
+
+include::ROOT:partial$sources/get-started.adoc[]
+
+. Set your consumers to subscribe to the `events` topic in your {pulsar-short} namespace to receive CDC events.
+This topic contains the CDC events emitted by Debezium for the configured tables.
+
+== Edit the connector
+
+include::ROOT:partial$sources/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} source connector properties
+
+[WARNING]
+====
+The `name` property must match the connector name you used in the topic names as explained in <<create-the-connector>>.
+====
+
+include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
+
+[#configs]
+=== Debezium SQL Server source connector properties (`configs`)
+
+[WARNING]
+====
+Make sure you set the `topic.prefix`, `database.server.name`, and `task.id` properties as explained in <<create-the-connector>>.
+====
+
+Set these properties in the `configs` section of the connector configuration.
+
+Generally, all properties provided in the https://debezium.io/documentation/reference/stable/connectors/sqlserver.html#sqlserver-connector-properties[Debezium connector for SQL Server] and the https://pulsar.apache.org/docs/io-debezium-source[OSS {pulsar} Debezium source connector] are supported.
+Exceptions include properties that aren't relevant to {product} and properties that are only present in <<compatibility,incompatible versions>>.

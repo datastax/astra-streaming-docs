@@ -1,1 +1,34 @@
-include::common:streaming:partial$connectors/sources/data-generator.adoc[]
+= Data Generator
+:connectorType: data-generator
+
+include::common:streaming:partial$connectors/sources/data-generator-intro.adoc[]
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sources/data-generator-compatibility.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sources/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sources/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} source connector properties
+
+include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
+
+[#configs]
+=== Data Generator source connector properties (`configs`)
+
+include::common:streaming:partial$connectors/sources/data-generator-properties.adoc[]

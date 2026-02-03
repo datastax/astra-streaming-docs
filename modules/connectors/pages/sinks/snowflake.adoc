@@ -1,1 +1,34 @@
-include::common:streaming:partial$connectors/sinks/snowflake.adoc[]
+= Snowflake
+:connectorType: snowflake
+
+A https://www.snowflake.com/en/[Snowflake] database ingests structured and semi-structured datasets for processing and analysis.
+Snowflake automatically manages all parts of the data storage process, including organization, structure, metadata, file size, compression, and statistics.
+
+The Snowflake sink connector reads messages from {pulsar-short} topics and writes them to Snowflake databases.
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== Snowflake sink connector properties (`configs`)
+
+Set these properties in the `configs` section of the connector configuration.
+
+For all supported properties, examples, and exceptions, see the https://github.com/datastax/snowflake-connector[{company} Snowflake connector GitHub repository].

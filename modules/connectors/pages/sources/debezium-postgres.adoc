@@ -1,1 +1,37 @@
-include::common:streaming:partial$connectors/sources/debezium-postgres.adoc[]
+= Debezium PostgreSQL
+:connectorType: debezium-postgres
+
+The Debezium PostgreSQL source connector produces a change event for every row-level `INSERT`, `UPDATE`, and `DELETE` operation that it captures, and then it sends change event records for each table to separate {pulsar-short} topics.
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sources/debezium-compatibility.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sources/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sources/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} source connector properties
+
+include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
+
+[#configs]
+=== Debezium PostgreSQL source connector properties (`configs`)
+
+Set these properties in the `configs` section of the connector configuration.
+
+Generally, all properties provided in the https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-connector-properties[Debezium connector for PostgreSQL] and the https://pulsar.apache.org/docs/io-debezium-source[OSS {pulsar} Debezium source connector] are supported.
+Exceptions include properties that aren't relevant to {product} and properties that are only present in <<compatibility,incompatible versions>>.

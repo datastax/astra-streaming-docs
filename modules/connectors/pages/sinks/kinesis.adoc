@@ -1,1 +1,39 @@
-include::common:streaming:partial$connectors/sinks/kinesis.adoc[]
+= Kinesis
+:connectorType: kinesis
+
+The Kinesis sink connector reads messages from {pulsar-short} topics and writes them to https://aws.amazon.com/kinesis/[Amazon Kinesis].
+
+[#compatibility]
+== Compatibility
+
+The Amazon Kinesis Client Library for Java (Amazon KCL) is used to consume and process data from Amazon Kinesis in Java applications.
+
+{product} supports {pulsar-reg} {pulsar-version}, which uses the https://github.com/awslabs/amazon-kinesis-client[Amazon Kinesis Client 2.2.8 library] and the https://github.com/aws/aws-sdk-java[AWS Java SDK 0.14.0 library].
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== Kinesis sink connector properties (`configs`)
+
+Set these properties in the `configs` section of the connector configuration.
+
+Generally, all properties provided in the https://pulsar.apache.org/docs/io-kinesis-sink[OSS {pulsar} Kinesis sink connector] are supported.
+Exceptions include properties that aren't relevant to {product} and properties that aren't present in {pulsar} {pulsar-version}.

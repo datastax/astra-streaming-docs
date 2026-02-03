@@ -1,1 +1,40 @@
-include::common:streaming:partial$connectors/sources/debezium-oracle.adoc[]
+= Debezium Oracle
+:connectorType: debezium-oracle
+
+The Debezium Oracle source connector captures and records row-level changes that occur in databases on Oracle servers, including tables that are added while the connector is running.
+
+You can configure the connector according to the events and data that you want to stream.
+For example, you can configure it to emit change events for a subset of schemas and tables, or configure it to ignore, mask, or truncate values in specific columns.
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sources/debezium-compatibility.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sources/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sources/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} source connector properties
+
+include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
+
+[#configs]
+=== Debezium Oracle source connector properties (`configs`)
+
+Set these properties in the `configs` section of the connector configuration.
+
+Generally, all properties provided in the https://debezium.io/documentation/reference/stable/connectors/oracle.html#oracle-connector-properties[Debezium connector for Oracle] and the https://pulsar.apache.org/docs/io-debezium-source[OSS {pulsar} Debezium source connector] are supported.
+Exceptions include properties that aren't relevant to {product} and properties that are only present in <<compatibility,incompatible versions>>.
