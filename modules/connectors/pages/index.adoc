@@ -31,7 +31,7 @@ The following sink connectors are included in {product}:
 Experimental sink connectors::
 The following sink connectors are experimental.
 They are in development, and they aren't fully supported or tested with {product}.
-To get access to experimental connectors, contact {support-url}[{company} Support].
+To get access to experimental connectors, contact {support_url}[{company} Support].
 +
 * Aerospike
 * Apache Geode
@@ -89,7 +89,7 @@ The following source connectors are included in {product}:
 Experimental source connectors::
 The following source connectors are experimental.
 They are in development, and they aren't fully supported or tested with {product}.
-To get access to experimental connectors, contact {support-url}[{company} Support].
+To get access to experimental connectors, contact {support_url}[{company} Support].
 +
 * {cass}
 * Apache Geode
