@@ -28,6 +28,7 @@ asciidoc:
     pulsar-reg: 'Apache Pulsar(TM)'
     pulsar-version: '3.1' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
     pulsar-version-patch: '3.1.0'
+
     starlight-kafka: 'Starlight for Kafka'
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
@@ -35,7 +36,16 @@ asciidoc:
     scb: 'Secure Connect Bundle (SCB)'
     scb-short: 'SCB'
     scb-brief: 'Secure Connect Bundle'
-    web-ui: '{astra-ui}' # Required for include::common partials that are shared with Luna Streaming
+
+    # Required for include::common partials that are shared with Luna Streaming
+    web-ui: '{astra-ui}'
+    debezium-version: '1.7'
+    get-started: 'include::ROOT:partial$sinks/get-started.adoc[]'
+    edit: 'include::ROOT:partial$sinks/edit.adoc[]'
+    get-started-sink: 'include::ROOT:partial$sinks/get-started.adoc[]'
+    edit-sink: 'include::ROOT:partial$sinks/edit.adoc[]'
+    get-started-source: 'include::ROOT:partial$sources/get-started.adoc[]'
+    edit-source: 'include::ROOT:partial$sources/edit.adoc[]'
 
     # LEGACY ATTRIBUTES - CONSIDER REMOVING
     langstream: 'RAGStack'
