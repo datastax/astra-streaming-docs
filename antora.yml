@@ -40,10 +40,8 @@ asciidoc:
     # Required for include::common partials that are shared with Luna Streaming
     web-ui: '{astra-ui}'
     debezium-version: '1.7'
-    get-started: pass:q[include::ROOT:partial$sinks/get-started.adoc[]]
-    edit: include::ROOT:partial$sinks/edit.adoc[]
-    get-started-sink: 'include::ROOT:partial$sinks/get-started.adoc[]'
-    edit-sink: 'include::ROOT:partial$sinks/edit.adoc[]'
+    get-started-sink: pass:q[include::ROOT:partial$sinks/get-started.adoc[]]
+    edit-sink: include::ROOT:partial$sinks/edit.adoc[]
     get-started-source: 'include::ROOT:partial$sources/get-started.adoc[]'
     edit-source: 'include::ROOT:partial$sources/edit.adoc[]'
     astra: 'Astra'
