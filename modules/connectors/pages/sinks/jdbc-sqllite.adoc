@@ -1,0 +1,34 @@
+= JDBC SQLite
+:connectorType: jdbc-sqlite
+
+You can use the JDBC SQLite sink connector to stream data from {pulsar-short} topics into https://www.sqlite.org/index.html[SQLite] tables.
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sinks/jdbc-sqllite-compatibility.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== JDBC SQLite sink connector properties (`configs`)
+
+include::common:streaming:partial$connectors/sinks/jdbc-config-params.adoc[]

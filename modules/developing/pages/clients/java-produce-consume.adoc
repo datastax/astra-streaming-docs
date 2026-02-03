@@ -209,4 +209,4 @@ Message received: Hello World
 
 * xref:developing:configure-pulsar-env.adoc[]
 * xref:developing:astream-functions.adoc[]
-* xref:streaming-learning:pulsar-io:connectors/index.adoc[]
+* xref:connectors:index.adoc[]

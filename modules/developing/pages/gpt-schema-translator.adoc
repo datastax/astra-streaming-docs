@@ -15,7 +15,7 @@ This tool uses generative AI,based on the `GPT-4` model, to automatically genera
 
 * An {product} tenant with a namespace and topic.
 * An {astra-db} database with a keyspace and table.
-* An xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[{astra-db} sink connector].
+* An xref:connectors:sinks/astra-db.adoc[{astra-db} sink connector].
 The {gpt-schema-translator} is available for the {astra-db} sink connector only.
 
 == JSON-to-CQL mapping example
@@ -130,7 +130,7 @@ You can check the {astra-ui} logs to confirm that the data is flowing into your 
 
 This example demonstrates how you can generates schema mapping in real time.
 
-. The xref:streaming-learning:pulsar-io:connectors/sources/data-generator.adoc[DataGenerator source connector] generates data for a {pulsar-short} topic with an AVRO schema.
+. The xref:connectors:sources/data-generator.adoc[Data Generator source connector] generates data for a {pulsar-short} topic with an AVRO schema.
 +
 .AVRO schema example
 [source,avro]

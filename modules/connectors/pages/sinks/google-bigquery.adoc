@@ -1,0 +1,35 @@
+= Google BigQuery
+:connectorType: bigquery
+
+include::common:streaming:partial$connectors/sinks/google-bigquery-intro.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+[#pulsar-sink-connector-properties]
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== Kafka Connect adaptor properties (`configs`)
+
+include::common:streaming:partial$connectors/sinks/google-bigquery-properties.adoc[]
+
+[#kafkaConnectorConfigProperties]
+=== Kafka Connect BigQuery Sink properties (`kafkaConnectorConfigProperties`)
+
+include::common:streaming:partial$connectors/sinks/google-bigquery-sink-properties.adoc[]

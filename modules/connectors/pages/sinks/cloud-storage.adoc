@@ -1,0 +1,35 @@
+= Cloud Storage
+:connectorType: cloud-storage
+
+include::common:streaming:partial$connectors/sinks/cloud-storage-intro.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+[#pulsar-sink-connector-properties]
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+== Cloud Storage sink connector properties (`configs`)
+
+include::common:streaming:partial$connectors/sinks/cloud-storage-properties.adoc[]
+
+[#data-format-types]
+== Data format types
+
+include::common:streaming:partial$connectors/sinks/cloud-storage-format-types.adoc[]

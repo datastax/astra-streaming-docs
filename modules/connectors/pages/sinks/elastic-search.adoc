@@ -1,0 +1,37 @@
+= Elasticsearch
+:connectorType: elastic_search
+
+The Elasticsearch sink connector reads messages from {pulsar-short} topics and writes them to https://www.elastic.co/elasticsearch/[Elasticsearch].
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sinks/elastic-search-compatibility.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== Elasticsearch sink connector properties (`configs`)
+
+Set these properties in the `configs` section of the connector configuration.
+
+Generally, all properties provided in the https://pulsar.apache.org/docs/io-elasticsearch-sink[OSS {pulsar} Elasticsearch sink connector] are supported.
+Exceptions include properties that aren't relevant to {product} and properties that are only present in <<compatibility,incompatible versions>>.

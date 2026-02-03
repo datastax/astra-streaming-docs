@@ -187,7 +187,7 @@ You need a role that grants permission to manage streaming tenants, such as the 
 For example, for https://cloud.elastic.co/login[Elasticsearch], you need an Elasticsearch endpoint, index name, and API key.
 +
 This guide uses an Elasticsearch sink as an example.
-You can use xref:streaming-learning:pulsar-io:connectors/index.adoc[other {astra-stream} sinks].
+You can use xref:connectors:index.adoc[other {astra-stream} sinks].
 
 [#create-tenant]
 === Create a streaming tenant
@@ -205,7 +205,7 @@ If you don't have any {astra-stream} tenants, you must create a tenant in order 
 +
 Your {astra-stream} tenant must be in the same region as the table where you want to enable CDC.
 +
-CDC for {astra-db} is available only in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+CDC for {astra-db} is available only in xref:operations:astream-regions.adoc[regions that support {astra-stream}].
 If your database is deployed to an xref:astra-db-serverless:databases:regions.adoc[{astra-db} region] that doesn't yet support {astra-stream}, contact your {company} account representative or {support_url}[{company} Support].
 
 . Click *Create tenant*.
@@ -374,10 +374,10 @@ For multi-region databases, only include regions where you want to enable CDC.
 +
 ** `**DATACENTER_ID**`: A xref:astra-db-serverless:databases:create-database.adoc#get-region-id[datacenter or region ID], which is the database ID with a numerical suffix.
 ** `**DATACENTER_REGION**`: The name of the region where the database and {astra-stream} tenant are deployed, such as `us-east1`.
-You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+You can only enable CDC in xref:operations:astream-regions.adoc[regions that support {astra-stream}].
 ** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
 Tenant must be deployed to the same region as the database.
-You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+You can get these names with the xref:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
 Deploy a secondary region with CDC enabled::
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database and enable CDC in the same command:
@@ -412,7 +412,7 @@ Replace the following:
 {astra-db} doesn't support cross-provider deployments.
 * `**REGION_NAME**`: The name of the region you want to add, such as `us-east1`.
 You can only add one region at a time.
-To enable CDC, you must deploy the database to xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+To enable CDC, you must deploy the database to xref:operations:astream-regions.adoc[regions that support {astra-stream}].
 * `**PCU_GROUP_ID**`: The ID of the PCU group to provide provisioned capacity for the new datacenter deployment.
 Only applicable for organizations that use xref:astra-db-serverless:administration:provisioned-capacity-units.adoc[PCU groups].
 The PCU group must have the same `cloudProvider` and `region` as the new datacenter deployment.
@@ -448,7 +448,7 @@ After you enable CDC, you need to connect a sink.
 The sink consumes messages from the `data-` topics, and then sends them to the associated service deployment.
 
 This example uses an Elasticsearch sink.
-You can use xref:streaming-learning:pulsar-io:connectors/index.adoc[other {astra-stream} sinks].
+You can use xref:connectors:index.adoc[other {astra-stream} sinks].
 
 . On the *CDC* tab where you just <<enable-cdc-on-a-table,enabled CDC on a table>>, click the table's name.
 
@@ -592,7 +592,7 @@ New messages are distributed across the new partitions.
 
 To increase the number of `data-` topic partitions, do the following:
 
-. Before you make changes, use `xref:astra-streaming:developing:configure-pulsar-env.adoc[pulsar-admin]` to get the namespace's existing partitions:
+. Before you make changes, use `xref:developing:configure-pulsar-env.adoc[pulsar-admin]` to get the namespace's existing partitions:
 +
 [source,bash]
 ----
@@ -939,10 +939,10 @@ For multi-region databases, only include regions where you want to enable CDC.
 +
 ** `**DATACENTER_ID**`: A xref:astra-db-serverless:databases:create-database.adoc#get-region-id[datacenter or region ID], which is the database ID with a numerical suffix.
 ** `**DATACENTER_REGION**`: The name of the region where the database and {astra-stream} tenant are deployed, such as `us-east1`.
-You can only enable CDC in xref:astra-streaming:operations:astream-regions.adoc[regions that support {astra-stream}].
+You can only enable CDC in xref:operations:astream-regions.adoc[regions that support {astra-stream}].
 ** `**STREAMING_CLUSTER_NAME**` and `**STREAMING_TENANT_NAME**`: The name of your {astra-stream} tenant and cluster.
 The tenant must be deployed to the same region as the database.
-You can get these names with the xref:astra-streaming:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
+You can get these names with the xref:apis:index.adoc#astra-streaming-devops-api-tenant-operations[{astra-stream} {devops-api}] or from the **{astra-stream}** dashboard in the {astra-ui} (click icon:grip[name="Applications"], and then select *Streaming*).
 
 . Send the updated configuration to `{devops-api-ref-url}#tag/Database-Operations/operation/updateCDC[PUT /v3/databases/**DB_ID**/cdc]`.
 +
@@ -1070,6 +1070,6 @@ For more information, see <<put-cdc>>.
 
 == See also
 
-* xref:astra-streaming:ROOT:astream-faq.adoc[{astra-stream} FAQs]
-* xref:astra-streaming:developing:clients/index.adoc[Use {pulsar-short} clients with {astra-stream}]
+* xref:ROOT:astream-faq.adoc[{astra-stream} FAQs]
+* xref:developing:clients/index.adoc[Use {pulsar-short} clients with {astra-stream}]
 * xref:cdc-for-cassandra:ROOT:cdc-concepts.adoc[]

@@ -1,0 +1,142 @@
+= {pulsar-short} I/O connectors in {product}
+:navtitle: {pulsar-short} I/O connectors reference
+
+{product} offers fully-managed versions of https://pulsar.apache.org/docs/en/io-overview/[{pulsar-reg} sink and source connectors].
+
+[IMPORTANT]
+====
+{product} doesn't support custom sink or source connectors.
+====
+
+[#sink-connectors]
+== Sink connectors
+
+Sink connectors export messages from {pulsar-short} topics to external services.
+
+Supported sink connectors::
+The following sink connectors are included in {product}:
++
+* xref:connectors:sinks/astra-db.adoc[{astra-db} and {cass} sink]
+* xref:connectors:sinks/kafka.adoc[Apache Kafka sink]
+* xref:connectors:sinks/kinesis.adoc[AWS Kinesis sink]
+* xref:connectors:sinks/cloud-storage.adoc[Cloud Storage sink]
+* xref:connectors:sinks/elastic-search.adoc[Elasticsearch sink]
+* xref:connectors:sinks/google-bigquery.adoc[Google BigQuery sink]
+* xref:connectors:sinks/jdbc-clickhouse.adoc[JDBC ClickHouse sink]
+* xref:connectors:sinks/jdbc-mariadb.adoc[JDBC MariaDB sink]
+* xref:connectors:sinks/jdbc-postgres.adoc[JDBC PostgreSQL sink]
+* xref:connectors:sinks/jdbc-sqllite.adoc[JDBC SQLite sink]
+* xref:connectors:sinks/snowflake.adoc[Snowflake sink]
+
+Experimental sink connectors::
+The following sink connectors are experimental.
+They are in development, and they aren't fully supported or tested with {product}.
+To get access to experimental connectors, contact {support_url}[{company} Support].
++
+* Aerospike
+* Apache Geode
+* Apache HBase
+* Apache Kudu
+* Apache Phoenix
+* Apache Solr
+* Batch Data Generator
+* CoAP
+* Couchbase
+* DataDog
+* Diffusion
+* Flume
+* Hazelcast
+* HDFS 2
+* HDFS 3
+* Humio
+* InfluxDB
+* JMS
+* Kinetica
+* MarkLogic
+* Microsoft Azure Data Explorer (Kusto)
+* Microsoft Azure DocumentDB
+* MongoDB
+* MQTT
+* Neo4J
+* New Relic
+* OrientDB
+* PLC4X
+* RabbitMQ
+* Redis
+* SAP HANA
+* SingleStore
+* Splunk
+* XTDB
+* Zeebe
+
+[#source-connectors]
+== Source connectors
+
+Source connectors ingest messages from external services into {pulsar-short} topics.
+
+Supported source connectors::
+The following source connectors are included in {product}:
++
+* xref:connectors:sources/kafka.adoc[Apache Kafka source]
+* xref:connectors:sources/kinesis.adoc[AWS Kinesis source]
+* xref:connectors:sources/data-generator.adoc[Data Generator source]
+* xref:connectors:sources/debezium-mongodb.adoc[Debezium MongoDB source]
+* xref:connectors:sources/debezium-mysql.adoc[Debezium MySQL source]
+* xref:connectors:sources/debezium-oracle.adoc[Debezium Oracle source]
+* xref:connectors:sources/debezium-postgres.adoc[Debezium PostgreSQL source]
+* xref:connectors:sources/debezium-sqlserver.adoc[Debezium SQL Server source]
+
+Experimental source connectors::
+The following source connectors are experimental.
+They are in development, and they aren't fully supported or tested with {product}.
+To get access to experimental connectors, contact {support_url}[{company} Support].
++
+* {cass}
+* Apache Geode
+* Apache Kudu
+* Apache Phoenix
+* Batch Data Generator
+* Big Query
+* Canal
+* CoAP
+* Couchbase
+* DataDog
+* Diffusion
+* DynamoDB
+* File
+* Flume
+* Hazelcast
+* Humio
+* JMS
+* Kinetica
+* MarkLogic
+* Microsoft Azure DocumentDB
+* MongoDB
+* MQTT
+* Neo4J
+* New Relic
+* NSQ
+* OrientDB
+* PLC4X
+* RabbitMQ
+* Redis
+* SAP HANA
+* SingleStore
+* Splunk
+* Twitter
+* XTDB
+* Zeebe
+
+[#create-and-manage-connectors]
+== Create and manage connectors
+
+You can use the {astra-ui}, the `pulsar-admin` CLI, or the {pulsar-short} Admin API to create, monitor, and manage sink and source connectors:
+
+* xref:apis:api-operations.adoc#sink-connector-operations[{pulsar-short} Admin API sink connector operations]
+* xref:apis:api-operations.adoc#source-connector-operations[{pulsar-short} Admin API source connector operations]
+* xref:developing:produce-consume-pulsar-client.adoc[{pulsar-short} CLI operations]
+
+== Connector metrics
+
+{product} exposes Prometheus-formatted metrics for every connector.
+For more information, see xref:operations:astream-scrape-metrics.adoc[].

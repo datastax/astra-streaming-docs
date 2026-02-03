@@ -1,0 +1,43 @@
+. Optional: If you are using the `pulsar-admin` CLI or {pulsar-short} Admin API, set the following commonly-used environment variables:
++
+[source,shell,subs="+quotes"]
+----
+export TENANT="**TENANT_NAME**"
+export TOPIC="**INPUT_TOPIC_NAME**"
+export NAMESPACE="**NAMESPACE_NAME**" # or default
+export SINK_NAME="**SINK_CONNECTOR_UNIQUE_NAME**"
+export PULSAR_TOKEN="**TENANT_PULSAR_TOKEN**" # API only
+export WEB_SERVICE_URL="**TENANT_PULSAR_WEB_SERVICE_URL**" # API only
+----
++
+`**SINK_NAME**` is the name for your new sink connector.
+{company} recommends a memorable, human-readable name that summarizes the connector's purpose.
+For example: `{connectorType}-sink-prod-us-east-1`.
+
+. Create the connector using JSON-formatted connector configuration data.
+You can pass the configuration directly or with a configuration file.
++
+.pulsar-admin CLI
+[source,shell,subs="+attributes"]
+----
+./bin/pulsar-admin sinks create \
+  --sink-type {connectorType} \
+  --name "$SINK_NAME" \
+  --inputs "persistent://$TENANT/$NAMESPACE/$TOPIC" \
+  --tenant "$TENANT" \
+  --sink-config-file configs.json
+----
++
+.{pulsar-short} Admin API
+[source,shell]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME" \
+  --header "Authorization: Bearer $PULSAR_TOKEN" \
+  --form "sinkConfig=@configs.json;type=application/json"
+----
++
+.Example configuration data structure
+[source,json]
+----
+include::common:streaming:example$connectors/sinks/{connectorType}/sample-data.json[]
+----

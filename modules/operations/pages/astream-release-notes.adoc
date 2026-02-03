@@ -24,7 +24,7 @@ This page summarizes significant changes and updates to {product}.
 
 === {new}
 
-* The xref:developing:gpt-schema-translator.adoc[GPT schema translator] is now available for the xref:streaming-learning:pulsar-io:connectors/sinks/astra-db.adoc[{astra-db} Sink Connector].
+* The xref:developing:gpt-schema-translator.adoc[GPT schema translator] is now available for the xref:connectors:sinks/astra-db.adoc[{astra-db} Sink Connector].
 
 == June 1, 2023
 
