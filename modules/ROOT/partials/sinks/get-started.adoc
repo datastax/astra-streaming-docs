@@ -37,4 +37,7 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$
 ----
 +
 .Example configuration data structure
+[source,json,subs="+attributes"]
+----
 include::common:streaming:example$connectors/sinks/{connectorType}/sample-data.adoc[]
+----
