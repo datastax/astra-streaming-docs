@@ -35,7 +35,7 @@
 *** xref:connectors:sinks/jdbc-clickhouse.adoc[]
 *** xref:connectors:sinks/jdbc-mariadb.adoc[]
 *** xref:connectors:sinks/jdbc-postgres.adoc[]
-*** xref:connectors:sinks/jsbc-sqllite.adoc[]
+*** xref:connectors:sinks/jdbc-sqllite.adoc[]
 *** xref:connectors:sinks/kafka.adoc[]
 *** xref:connectors:sinks/kinesis.adoc[]
 *** xref:connectors:sinks/snowflake.adoc[]

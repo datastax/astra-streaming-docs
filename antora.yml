@@ -46,6 +46,7 @@ asciidoc:
     edit-sink: 'include::ROOT:partial$sinks/edit.adoc[]'
     get-started-source: 'include::ROOT:partial$sources/get-started.adoc[]'
     edit-source: 'include::ROOT:partial$sources/edit.adoc[]'
+    astra: 'Astra'
 
     # LEGACY ATTRIBUTES - CONSIDER REMOVING
     langstream: 'RAGStack'
