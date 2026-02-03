@@ -39,5 +39,5 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE
 .Example configuration data structure
 [source,json,subs="+attributes"]
 ----
-include::common:streaming:example$connectors/sources/{connectorType}/sample-data.adoc[]
+include::common:streaming:example$connectors/sources/{connectorType}/sample-data.json[]
 ----
