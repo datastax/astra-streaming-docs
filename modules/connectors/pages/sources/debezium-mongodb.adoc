@@ -1,0 +1,42 @@
+= Debezium MongoDB
+:connectorType: debezium-mongodb
+
+The Debezium MongoDB source connector tracks either a MongoDB replica set or a MongoDB sharded cluster for document changes in databases and collections.
+It streams those changes as messages to a {pulsar-short} topic.
+
+The connector automatically handles the following:
+
+* Addition and removal of shards in a sharded cluster.
+* Changes in membership for each replica set.
+* Elections within each replica set.
+* Resolution of communications issues with replica set members.
+
+[#compatibility]
+== Compatibility
+
+include::common:streaming:partial$connectors/sources/debezium-compatibility.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sources/get-started.adoc[]
+
+== Edit the connector
+
+include::ROOT:partial$sources/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} source connector properties
+
+include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
+
+[#configs]
+=== Debezium MongoDB source connector properties (`configs`)
+
+include::common:streaming:partial$connectors/sources/debezium-mongodb-propeties.adoc[]

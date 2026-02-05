@@ -138,8 +138,6 @@ CREATE TABLE click_data.product_clicks (
 The console prints create statements describing the keyspace itself and the two tables.
 +
 .Result
-[%collapsible]
-====
 [source,console]
 ----
 token@cqlsh> describe click_data;
@@ -193,7 +191,6 @@ CREATE TABLE click_data.product_clicks (
     AND read_repair = 'BLOCKING'
     AND speculative_retry = '99PERCENTILE';
 ----
-====
 
 === Connect the topics to the store
 

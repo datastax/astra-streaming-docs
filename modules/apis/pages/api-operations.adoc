@@ -7,7 +7,7 @@ Use the {product} {pulsar-short} Admin API to manage resources within your {prod
 [TIP]
 ====
 This page summarizes commonly used endpoints.
-For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
+For more information and all endpoints, see the xref:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 ====
 
 Other available APIs include the xref:apis:index.adoc[{product} {devops-api}] and the xref:developing:using-curl.adoc[OSS {pulsar-reg} REST APIs].
@@ -93,8 +93,6 @@ curl -sS --fail -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT"
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
@@ -102,7 +100,6 @@ curl -sS --fail -L -X GET "https://$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT"
   "mytenant/mynamespace"
 ]
 ----
-====
 
 === Create a namespace
 
@@ -117,18 +114,17 @@ curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/**NAMESP
 
 There are many settings you can configure for a namespace, such as message retention, backlog quota, and message TTL.
 If the request body is empty, default values are used for the namespace configuration.
-For more information, see the xref:astra-streaming:apis:attachment$pulsar-admin.html#tag/namespaces/operation/Namespaces_createNamespace[`PUT /admin/v2/namespaces/$TENANT/$NAMESPACE` specification].
+For more information, see the xref:apis:attachment$pulsar-admin.html#tag/namespaces/operation/Namespaces_createNamespace[`PUT /admin/v2/namespaces/$TENANT/$NAMESPACE` specification].
 
 === Edit namespace policies
 
 After you create a namespace, you can use targeted endpoints to get and set specific policies without needing to pass the entire namespace configuration in the request.
 
 The following examples demonstrate some of these endpoints.
-For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
+For more information and all endpoints, see the xref:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 
-.Message retention policy
-[%collapsible]
-======
+==== Message retention policy
+
 Get the message retention settings for a namespace:
 
 [source,curl]
@@ -163,11 +159,9 @@ curl -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESPACE/retenti
 ----
 
 include::ROOT:partial$curl-get-template-tip.adoc[]
-======
 
-.Backlog quota policy
-[%collapsible]
-======
+==== Backlog quota policy
+
 Get the backlog quota settings for a namespace:
 
 [source,curl]
@@ -208,11 +202,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 ----
 
 include::ROOT:partial$curl-get-template-tip.adoc[]
-======
 
-.Message TTL policy
-[%collapsible]
-======
+==== Message TTL policy
+
 Get the message time-to-live (TTL) setting for a namespace:
 
 [source,curl]
@@ -233,11 +225,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 --header "Content-Type: application/json" \
 --data 5000
 ----
-======
 
-.Automatic topic creation policy
-[%collapsible]
-======
+==== Automatic topic creation policy
+
 Edit the automatic topic creation settings for the specified namespace, passing the new settings in the request body:
 
 [source,curl]
@@ -259,11 +249,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 `topicType` indicates the type of topic that can be automatically created.
 It can be either `non-partitioned` or `partitioned`.
 If set to `non-partitioned`, then the `defaultNumPartitions` field is ignored.
-======
 
-.Maximum consumers per topic policy
-[%collapsible]
-======
+==== Maximum consumers per topic policy
+
 Get the maximum number of consumers allowed for each topic in a namespace:
 
 [source,curl]
@@ -282,11 +270,9 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 --header "Content-Type: application/json" \
 --data 100
 ----
-======
 
-.Maximum topics per namespace policy
-[%collapsible]
-======
+==== Maximum topics per namespace policy
+
 Get the maximum number of topics allowed in a namespace:
 
 [source,curl]
@@ -305,11 +291,10 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/$NAMESP
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 --data 1000
 ----
-======
 
 === Delete a namespace
 
-[source,curl]
+[source,curl,subs="+quotes"]
 ----
 curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v2/namespaces/$TENANT/**NAMESPACE_TO_DELETE**" \
 --header "Authorization: Bearer $PULSAR_TOKEN"
@@ -441,11 +426,10 @@ curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v2/non-persistent/$TENANT/$
 There are multiple endpoints you can use to get information about topics, including filtered and unfiltered responses.
 
 The following examples demonstrate some of these endpoints.
-For more information and all endpoints, see the xref:astra-streaming:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
+For more information and all endpoints, see the xref:apis:attachment$pulsar-admin.html[{product} {pulsar-short} Admin API specification reference].
 
-.Get internal statistics for a persistent, non-partitioned topic
-[%collapsible]
-======
+==== Get internal statistics for a persistent, non-partitioned topic
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/internalStats" \
@@ -487,11 +471,9 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   }
 }
 ----
-======
 
-.Get statistics for a persistent, non-partitioned topic
-[%collapsible]
-======
+==== Get statistics for a persistent, non-partitioned topic
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/stats" \
@@ -537,11 +519,9 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   ...TRUNCATED FOR READABILITY...
 }
 ----
-======
 
-.Get statistics for a persistent, partitioned topic
-[%collapsible]
-======
+==== Get statistics for a persistent, partitioned topic
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPACE/$TOPIC/partitioned-stats" \
@@ -658,11 +638,9 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   ...TRUNCATED FOR READABILITY...
 }
 ----
-======
 
-.Get statistics for all topics in a namespace
-[%collapsible]
-======
+==== Get statistics for all topics in a namespace
+
 [source,curl]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/stats/topics/$TENANT/$NAMESPACE" \
@@ -792,7 +770,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/stats/topics/$TENANT/$NAMES
   ...TRUNCATED FOR READABILITY...
 }
 ----
-======
 
 == Subscription operations
 
@@ -816,8 +793,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
@@ -825,7 +800,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESPA
   "subscript2"
 ]
 ----
-====
 
 === Create a subscription
 
@@ -871,7 +845,7 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v2/persistent/$TENANT/$NAMESP
 
 == Function operations
 
-Use the following {product} {pulsar-short} Admin API endpoints to manage xref:astra-streaming:developing:astream-functions.adoc[{pulsar-short} functions].
+Use the following {product} {pulsar-short} Admin API endpoints to manage xref:developing:astream-functions.adoc[{pulsar-short} functions].
 
 === Get functions in a namespace
 
@@ -883,15 +857,12 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
   "testfunction1"
 ]
 ----
-====
 
 === Get function status
 
@@ -903,8 +874,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -931,7 +900,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
   ]
 }
 ----
-====
 
 === Get function statistics
 
@@ -943,8 +911,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -984,7 +950,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
   ]
 }
 ----
-====
 
 === Get function details
 
@@ -996,8 +961,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1073,7 +1036,6 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPAC
   "subscriptionPosition": "Latest"
 }
 ----
-====
 
 === Start a function
 
@@ -1099,17 +1061,34 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/functions/$TENANT/$NAMESPA
 --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
+[#sink-connector-operations]
 == Sink connector operations
 
-Use the following {product} {pulsar-short} Admin API endpoints to manage sink connectors.
+Use the following {product} {pulsar-short} Admin API endpoints to manage xref:connectors:index.adoc[sink connectors].
 
 [TIP]
 ====
 The {product} {pulsar-short} Admin API endpoints for source and sink connectors have similar paths and parameters.
 If you reuse requests for both sources and sinks, be sure to set the `/sources` or `/sinks` path accordingly.
+
+Additionally, each connector has different configuration options.
+For configuration details, see the documentation for your preferred xref:connectors:index.adoc[sink and source connectors].
 ====
 
+=== Get available sink connectors
+
+Get a list of sink connectors that are available in your {product} {pulsar-short} tenant:
+
+[source,curl]
+----
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+| python3 -mjson.tool
+----
+
 === Get sinks in a namespace
+
+Get a list of sinks deployed in a namespace:
 
 [source,curl]
 ----
@@ -1119,28 +1098,28 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE" \
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
   "mysink1"
 ]
 ----
-====
 
+[#get-sink-connector-status]
 === Get the status of a sink
+
+Get the status of all instances of a sink connector:
 
 [source,curl]
 ----
-curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SINK/status" \
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SINK_NAME/status" \
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 | python3 -mjson.tool
 ----
 
+The response includes an `instances` array with one object for each connector instance:
+
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1166,20 +1145,59 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
   ]
 }
 ----
-====
 
-=== Get sink details
+Get the status of an individual instance of a sink connector:
 
 [source,curl]
 ----
-curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" \
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME/$SINK_INSTANCE_ID/status" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
+----
+
+The response includes a single object with the details for the specified connector instance:
+
+.Result
+[source,json]
+----
+{
+ "running": true,
+ "error": "string",
+ "numRestarts": 0,
+ "numReadFromPulsar": 0,
+ "numSystemExceptions": 0,
+ "latestSystemExceptions": [
+   {
+     "exceptionString": "string",
+     "timestampMs": 0
+   }
+ ],
+ "numSinkExceptions": 0,
+ "latestSinkExceptions": [
+   {
+     "exceptionString": "string",
+     "timestampMs": 0
+   }
+ ],
+ "numWrittenToSink": 0,
+ "lastReceivedTime": 0,
+ "workerId": "string"
+}
+----
+
+[#get-sink-connector-configuration-data]
+=== Get sink details
+
+Get the configuration for an existing sink connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME" \
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 | python3 -mjson.tool
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1233,11 +1251,10 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$S
   "transformFunctionConfig": null
 }
 ----
-====
 
 === Create a sink
 
-To create a sink connector on a topic, you must provide the sink connector configuration in JSON format.
+To create a sink connector on a topic, you must provide the xref:connectors:index.adoc[sink connector configuration] in JSON format.
 
 The following example configures the built-in Kafka sink connector in {product}:
 
@@ -1277,48 +1294,108 @@ The following example uses the previous configuration file example, `kafka-sink-
 
 [source,curl]
 ----
-curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" \
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME" \
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 --form "sinkConfig=@kafka-sink-config.json;type=application/json"
 ----
 
 include::ROOT:partial$curl-file-input-tip.adoc[]
 
+[#start-a-sink-connector]
 === Start a sink
 
+Start all instances of a sink connector:
+
 [source,curl]
 ----
-curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/start" \
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME/start" \
 --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
+Start an individual instance of a sink connector
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME/$SINK_INSTANCE_ID/start" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+[#stop-a-sink-connector]
 === Stop a sink
 
+Stop all instances of a sink connector:
+
 [source,curl]
 ----
-curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK/stop" \
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME/stop" \
 --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
+Stop an individual instance of a sink connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME/$SINK_INSTANCE_ID/stop" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+[#restart-a-sink-connector]
+=== Restart a sink
+
+Restart all instances of a sink connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME/restart" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+Restart an individual instance of a sink connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME/$SINK_INSTANCE_ID/restart" \
+  --header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+[#delete-a-sink-connector]
 === Delete a sink
 
+Delete all instances of a sink connector from a namespace:
+
 [source,curl]
 ----
-curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK" \
+curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME" \
 --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
+[#source-connector-operations]
 == Source connector operations
 
-Use the following {product} {pulsar-short} Admin API endpoints to manage source connectors.
+Use the following {product} {pulsar-short} Admin API endpoints to xref:connectors:index.adoc[manage source connectors].
 
 [TIP]
 ====
 The {product} {pulsar-short} Admin API endpoints for source and sink connectors have similar paths and parameters.
 If you reuse requests for both sources and sinks, be sure to set the `/sources` or `/sinks` path accordingly.
+
+Additionally, each connector has different configuration options.
+For configuration details, see the documentation for your preferred xref:connectors:index.adoc[sink and source connectors].
 ====
 
+=== Get available source connectors
+
+Get a list of source connectors that are available in your {product} {pulsar-short} tenant:
+
+[source,curl]
+----
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/builtinsources" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
 === Get sources in a namespace
+
+Get a list of source connectors deployed in a namespace:
 
 [source,curl]
 ----
@@ -1328,28 +1405,28 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE"
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 [
   "mysource1"
 ]
 ----
-====
 
+[#get-source-connector-status]
 === Get the status of a source
+
+Get the status of all instances of a source connector:
 
 [source,curl]
 ----
-curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/status" \
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/status" \
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 | python3 -mjson.tool
 ----
 
+The response includes an `instances` array with one object for each connector instance:
+
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1375,20 +1452,59 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
   ]
 }
 ----
-====
 
-=== Get source details
+Get the status of an individual instance of a source connector:
 
 [source,curl]
 ----
-curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" \
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/$SOURCE_INSTANCE_ID/status" \
+--header "Authorization: Bearer $PULSAR_TOKEN" \
+| python3 -mjson.tool
+----
+
+The response includes a single object with the details for the specified connector instance:
+
+.Result
+[source,json]
+----
+{
+  "running": true,
+  "error": "string",
+  "numRestarts": 0,
+  "numReceivedFromSource": 0,
+  "numSystemExceptions": 0,
+  "latestSystemExceptions": [
+    {
+      "exceptionString": "string",
+      "timestampMs": 0
+    }
+  ],
+  "numSourceExceptions": 0,
+  "latestSourceExceptions": [
+    {
+      "exceptionString": "string",
+      "timestampMs": 0
+    }
+  ],
+  "numWritten": 0,
+  "lastReceivedTime": 0,
+  "workerId": "string"
+}
+----
+
+[#get-source-connector-configuration-data]
+=== Get source details
+
+Get the configuration for an existing source connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME" \
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 | python3 -mjson.tool
 ----
 
 .Result
-[%collapsible]
-====
 [source,json]
 ----
 {
@@ -1427,44 +1543,87 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/
   "topicName": "persistent://testcreate/ns0/t1"
 }
 ----
-====
 
 === Create a source
 
-To create a source connector on a topic, you must provide the source connector configuration in JSON format.
+To create a source connector on a topic, you must provide the xref:connectors:index.adoc[source connector configuration] in JSON format.
 You can pass the configuration in-line or with a configuration file.
 The following example uses a configuration file name `mynetty-source-config.json`:
 
 [source,curl]
 ----
-curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" \
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME" \
 --header "Authorization: Bearer $PULSAR_TOKEN" \
 --form "sourceConfig=@mynetty-source-config.json;type=application/json"
 ----
 
 include::ROOT:partial$curl-file-input-tip.adoc[]
 
+[#start-a-source-connector]
 === Start a source
 
+Start all instances of a source connector:
+
 [source,curl]
 ----
-curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/start" \
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/start" \
 --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
+Start an individual instance of a source connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/$SOURCE_INSTANCE_ID/start" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+[#stop-a-source-connector]
 === Stop a source
 
+Start all instances of a source connector:
+
 [source,curl]
 ----
-curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE/stop" \
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/stop" \
 --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 
-=== Delete a source
+Start an individual instance of a source connector:
 
 [source,curl]
 ----
-curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE" \
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/$SOURCE_INSTANCE_ID/stop" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+[#restart-a-source-connector]
+=== Restart a source
+
+Restart all instances of a source connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/restart" \
+--header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+Restart an individual instance of a source connector:
+
+[source,curl]
+----
+curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME/$SOURCE_INSTANCE_ID/restart" \
+  --header "Authorization: Bearer $PULSAR_TOKEN"
+----
+
+[#delete-a-source-connector]
+=== Delete a source
+
+Delete all instances of a source connector from a namespace:
+
+[source,curl]
+----
+curl -sS --fail -L -X DELETE "$WEB_SERVICE_URL/admin/v3/sources/$TENANT/$NAMESPACE/$SOURCE_NAME" \
 --header "Authorization: Bearer $PULSAR_TOKEN"
 ----
 

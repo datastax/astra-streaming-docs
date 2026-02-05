@@ -1,0 +1,26 @@
+To update a connector, pass the new configuration definition to the connector.
+For example, if you created the connector with a configuration file, you can pass an updated configuration file.
+
+You can include the entire configuration or only the properties that you want to change.
+Additionally, some properties can be modified with specific arguments, such as `--parallelism`.
+
+To get the current configuration, see xref:apis:api-operations.adoc#get-sink-connector-configuration-data[Get sink connector configuration data].
+
+.pulsar-admin CLI
+[source,shell,subs="+attributes"]
+----
+./bin/pulsar-admin sinks update \
+  --sink-type {connectorType} \
+  --name "$SINK_NAME" \
+  --inputs "persistent://$TENANT/$NAMESPACE/$TOPIC" \
+  --tenant "$TENANT" \
+  --parallelism 2
+----
+
+.{pulsar-short} Admin API
+[source,shell]
+----
+curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME" \
+  --header "Authorization: Bearer $PULSAR_TOKEN" \
+  --form "sinkConfig=@configs.json;type=application/json"
+----

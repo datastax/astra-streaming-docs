@@ -97,11 +97,7 @@ image::operations:astream-prometheus-graph.png[Scraping {product} with Prometheu
 
 With your Prometheus scrape container running, you can use curl commands to decompress your Prometheus scrape data:
 
-[tabs]
-======
-Deflate::
-+
---
+.Deflate
 [source,bash]
 ----
 curl -v \
@@ -110,11 +106,8 @@ curl -v \
 https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
 --compressed
 ----
---
 
-Gzip::
-+
---
+.Gzip
 [source,bash]
 ----
 curl -v \
@@ -123,8 +116,6 @@ curl -v \
 https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
 | zcat
 ----
---
-======
 
 Deflate or Gzip will extract your scraped metrics in a format such as the following:
 
@@ -153,4 +144,3 @@ A tenant can only access its own metrics on the broker pod or function worker po
 * xref:monitoring/index.adoc[]
 * xref:getting-started:index.adoc[]
 * https://prometheus.io/docs/introduction/overview/[Prometheus documentation]
-

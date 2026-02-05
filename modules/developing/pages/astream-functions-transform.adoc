@@ -1,0 +1,55 @@
+= {product} {pulsar-short} transform functions configuration reference
+:navtitle: Transform functions configuration reference
+
+include::common:streaming:partial$transform-functions/intro.adoc[]
+
+To deploy transform functions, see xref:developing:astream-functions.adoc#deploy-functions-in-the-astra-portal[Deploy functions in the {astra-ui}].
+
+== Configure transform functions
+
+include::common:streaming:partial$transform-functions/config.adoc[]
+
+[#expression-language]
+=== Expression language
+
+include::common:streaming:partial$transform-functions/expression-language.adoc[]
+
+[#conditional-steps]
+=== Conditional steps
+
+include::common:streaming:partial$transform-functions/when.adoc[]
+
+[#cast]
+== Cast
+
+include::common:streaming:partial$transform-functions/cast.adoc[]
+
+[#compute]
+== Compute
+
+include::common:streaming:partial$transform-functions/compute.adoc[]
+
+[#drop]
+== Drop
+
+include::common:streaming:partial$transform-functions/drop.adoc[]
+
+[#drop-fields]
+== Drop fields
+
+include::common:streaming:partial$transform-functions/drop-fields.adoc[]
+
+[#flatten]
+== Flatten
+
+include::common:streaming:partial$transform-functions/flatten.adoc[]
+
+[#merge-keyvalue]
+== Merge KeyValue
+
+include::common:streaming:partial$transform-functions/merge-keyvalue.adoc[]
+
+[#unwrap-keyvalue]
+== Unwrap KeyValue
+
+include::common:streaming:partial$transform-functions/unwrap-keyvalue.adoc[]

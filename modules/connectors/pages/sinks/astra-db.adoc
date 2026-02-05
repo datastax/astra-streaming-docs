@@ -1,0 +1,47 @@
+= {astra-db} and {cass}
+:connectorType: cassandra-enhanced
+
+include::common:streaming:partial$connectors/sinks/astra-db-intro.adoc[]
+
+== Create the connector
+
+include::ROOT:partial$sinks/get-started.adoc[]
+
+[TIP]
+====
+The preceding example connects to a self-managed {cass-short} cluster.
+
+For an {astra-db} example, see <<topic>>.
+
+For all connection properties, see <<configs>>.
+====
+
+== Edit the connector
+
+include::ROOT:partial$sinks/edit.adoc[]
+
+== Manage the connector
+
+include::common:streaming:partial$connectors/manage.adoc[]
+
+== Connector configuration reference
+
+include::common:streaming:partial$connectors/connector-params-intro.adoc[]
+
+=== {pulsar-short} sink connector properties
+
+include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
+
+[#configs]
+=== {company} {pulsar} sink connector properties (`configs`)
+
+include::common:streaming:partial$connectors/sinks/astra-db-properties.adoc[]
+
+[#topic]
+=== Topic-to-table mapping properties (`topic`)
+
+include::common:streaming:partial$connectors/sinks/astra-db-topic.adoc[]
+
+== See also
+
+* https://github.com/datastax/pulsar-sink[{company} {pulsar} connector GitHub repository]
