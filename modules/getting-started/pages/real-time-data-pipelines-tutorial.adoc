@@ -89,9 +89,9 @@ You now have a `production` namespace with two topics, as well as the `default` 
 
 . Click **Create database**, and then complete the fields as follows:
 +
-* **Type**: Select **Serverless (non-vector)** to follow along with this tutorial.
+* **Type**: Select **{db-serverless}** to follow along with this tutorial.
 +
-If you select **Serverless (vector)**, you must modify the tutorial to use the `default_keyspace` keyspace or create the tutorial keyspace after you create your database.
+If you select **{db-serverless-vector}**, you must modify the tutorial to use the `default_keyspace` keyspace or create the tutorial keyspace after you create your database.
 
 * **Database name**: Enter `webstore-clicks`.
 * **Keyspace name**: Enter `click_data`.
@@ -138,8 +138,6 @@ CREATE TABLE click_data.product_clicks (
 The console prints create statements describing the keyspace itself and the two tables.
 +
 .Result
-[%collapsible]
-====
 [source,console]
 ----
 token@cqlsh> describe click_data;
@@ -193,7 +191,6 @@ CREATE TABLE click_data.product_clicks (
     AND read_repair = 'BLOCKING'
     AND speculative_retry = '99PERCENTILE';
 ----
-====
 
 === Connect the topics to the store
 

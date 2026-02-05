@@ -17,7 +17,8 @@ asciidoc:
     astra-ui: 'Astra Portal'
     astra-url: 'https://astra.datastax.com'
     astra-ui-link: '{astra-url}[{astra-ui}^]'
-    db-serverless-vector: 'Serverless (Vector)'
+    db-serverless: 'Serverless (non-vector)'
+    db-serverless-vector: 'Serverless (vector)'
     devops-api: 'DevOps API'
     devops-api-ref-url: 'xref:astra-api-docs:ROOT:attachment$devops-api/index.html'
     cass: 'Apache Cassandra'
@@ -28,10 +29,19 @@ asciidoc:
     pulsar-reg: 'Apache Pulsar(TM)'
     pulsar-version: '3.1' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
     pulsar-version-patch: '3.1.0'
+
     starlight-kafka: 'Starlight for Kafka'
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
     astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'
+    scb: 'Secure Connect Bundle (SCB)'
+    scb-short: 'SCB'
+    scb-brief: 'Secure Connect Bundle'
+
+    # Required for include::common partials that are shared with Luna Streaming
+    web-ui: '{astra-ui}'
+    debezium-version: '1.7'
+    astra: 'Astra'
 
     # LEGACY ATTRIBUTES - CONSIDER REMOVING
     langstream: 'RAGStack'

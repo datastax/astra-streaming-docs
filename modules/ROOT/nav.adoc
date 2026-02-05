@@ -19,11 +19,35 @@
 ** xref:ROOT:astream-subscriptions-shared.adoc[]
 ** xref:ROOT:astream-subscriptions-failover.adoc[]
 ** xref:ROOT:astream-subscriptions-keyshared.adoc[]
-* xref:developing:astream-functions.adoc[]
+* {pulsar-short} functions
+** xref:developing:astream-functions.adoc[]
+** xref:developing:astream-functions-transform.adoc[]
 * xref:developing:starlight.adoc[]
 * xref:developing:astream-cdc.adoc[]
 * xref:developing:gpt-schema-translator.adoc[]
-* xref:streaming-learning:pulsar-io:connectors/index.adoc[IO connectors reference]
+* I/O connectors
+** xref:connectors:index.adoc[]
+** Sinks
+*** xref:connectors:sinks/astra-db.adoc[]
+*** xref:connectors:sinks/cloud-storage.adoc[]
+*** xref:connectors:sinks/elastic-search.adoc[]
+*** xref:connectors:sinks/google-bigquery.adoc[]
+*** xref:connectors:sinks/jdbc-clickhouse.adoc[]
+*** xref:connectors:sinks/jdbc-mariadb.adoc[]
+*** xref:connectors:sinks/jdbc-postgres.adoc[]
+*** xref:connectors:sinks/jdbc-sqllite.adoc[]
+*** xref:connectors:sinks/kafka.adoc[]
+*** xref:connectors:sinks/kinesis.adoc[]
+*** xref:connectors:sinks/snowflake.adoc[]
+** Sources
+*** xref:connectors:sources/data-generator.adoc[]
+*** xref:connectors:sources/debezium-mongodb.adoc[]
+*** xref:connectors:sources/debezium-mysql.adoc[]
+*** xref:connectors:sources/debezium-oracle.adoc[]
+*** xref:connectors:sources/debezium-postgres.adoc[]
+*** xref:connectors:sources/debezium-sqlserver.adoc[]
+*** xref:connectors:sources/kafka.adoc[]
+*** xref:connectors:sources/kinesis.adoc[]
 
 .Operations
 * xref:operations:create-delete-tenants.adoc[]
