@@ -87,4 +87,4 @@ Your ElasticSearch and Snowflake deployments can be in different regions than yo
 
 == Request a region
 
-If your preferred region isn't available, contact your {company} account representative or {support_url}[{company} Support].
+If your preferred region isn't available, contact your {company} account representative or {support-url}[IBM Support].
