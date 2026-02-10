@@ -30,7 +30,7 @@ To use a private link service or private endpoint for {product}, do the followin
 * Microsoft Azure Private Link: Azure subscription IDs
 * Google Cloud Private Service Connect: GCP project IDs
 
-. Contact {support_url}[{company} Support] to request private connectivity for {product}.
+. Contact {support-url}[IBM Support] to request private connectivity for {product}.
 
 === Private connections for inbound traffic
 
