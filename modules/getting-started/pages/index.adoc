@@ -7,7 +7,7 @@ This quickstart explains how to create and use a streaming tenant running {pulsa
 
 == Prerequisites
 
-* An active {astra-url}[{product-short} account^]
+* An active {astra-url}[{astra} account^]
 
 == Create a streaming tenant
 

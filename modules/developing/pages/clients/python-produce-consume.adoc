@@ -4,7 +4,7 @@
 
 You can use the Python {pulsar-short} client with {product} to produce and consume messages.
 
-For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
+For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
 
 == Prerequisites
 

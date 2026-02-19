@@ -1,12 +1,13 @@
-= Kafka
+= {kafka-short}
+:navtitle: {kafka-short}
 :connectorType: kafka
 
-The Kafka sink connector reads messages from {pulsar-short} topics and writes them to https://kafka.apache.org/[Kafka] topics.
+The {kafka-short} sink connector reads messages from {pulsar-short} topics and writes them to https://kafka.apache.org/[{kafka-reg}] topics.
 
 [#compatibility]
 == Compatibility
 
-{product} supports {pulsar-reg} {pulsar-version}, which uses the https://github.com/apache/kafka/tree/2.7[Kafka 2.7.2 library].
+{product} supports {pulsar-reg} {pulsar-version}, which uses the https://github.com/apache/kafka/tree/2.7[{kafka} 2.7.2 library].
 
 == Create the connector
 
@@ -29,9 +30,9 @@ include::common:streaming:partial$connectors/connector-params-intro.adoc[]
 include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
 
 [#configs]
-=== Kafka sink connector properties (`configs`)
+=== {kafka-short} sink connector properties (`configs`)
 
 Set these properties in the `configs` section of the connector configuration.
 
-Generally, all properties provided in the https://pulsar.apache.org/docs/io-kafka-sink[OSS {pulsar} Kafka sink connector] are supported.
+Generally, all properties provided in the https://pulsar.apache.org/docs/io-kafka-sink[OSS {pulsar} {kafka-short} sink connector] are supported.
 Exceptions include properties that aren't relevant to {product} and properties that aren't present in {pulsar} {pulsar-version}.

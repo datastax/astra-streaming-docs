@@ -17,7 +17,7 @@ Other available APIs include the xref:apis:index.adoc[{product} {devops-api}] an
 
 To send requests to the {product} {pulsar-short} Admin API, you need the following:
 
-* An active {product-short} account with access to {product}.
+* An active {astra} account with access to {product}.
 
 * A {product} tenant.
 
@@ -25,7 +25,7 @@ To send requests to the {product} {pulsar-short} Admin API, you need the followi
 +
 [IMPORTANT]
 ====
-An {product-short} application token _isn't_ the same as a {pulsar-short} token.
+An {astra} application token _isn't_ the same as a {pulsar-short} token.
 For more information, see xref:operations:astream-token-gen.adoc[].
 ====
 
@@ -1256,7 +1256,7 @@ curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$S
 
 To create a sink connector on a topic, you must provide the xref:connectors:index.adoc[sink connector configuration] in JSON format.
 
-The following example configures the built-in Kafka sink connector in {product}:
+The following example configures the built-in {kafka-reg} sink connector in {product}:
 
 .kafka-sink-config.json
 [source,json]

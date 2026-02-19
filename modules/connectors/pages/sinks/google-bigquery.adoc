@@ -25,11 +25,11 @@ include::common:streaming:partial$connectors/connector-params-intro.adoc[]
 include::common:streaming:partial$connectors/sinks/pulsar-config-params.adoc[]
 
 [#configs]
-=== Kafka Connect adaptor properties (`configs`)
+=== {kafka-connect} adaptor properties (`configs`)
 
 include::common:streaming:partial$connectors/sinks/google-bigquery-properties.adoc[]
 
 [#kafkaConnectorConfigProperties]
-=== Kafka Connect BigQuery Sink properties (`kafkaConnectorConfigProperties`)
+=== {kafka-connect} BigQuery Sink properties (`kafkaConnectorConfigProperties`)
 
 include::common:streaming:partial$connectors/sinks/google-bigquery-sink-properties.adoc[]

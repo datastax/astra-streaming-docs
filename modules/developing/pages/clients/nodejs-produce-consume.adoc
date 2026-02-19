@@ -4,7 +4,7 @@
 
 You can produce and consume messages with the Node.js {pulsar-short} client and {product}.
 
-For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
+For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
 
 == Prerequisites
 
