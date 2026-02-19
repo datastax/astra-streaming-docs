@@ -18,9 +18,9 @@ This tool uses generative AI,based on the `GPT-4` model, to automatically genera
 * An xref:connectors:sinks/astra-db.adoc[{astra-db} sink connector].
 The {gpt-schema-translator} is available for the {astra-db} sink connector only.
 
-== JSON-to-CQL mapping example
+== JSON-to-{cql-short} mapping example
 
-This example uses a JSON schema for a {pulsar-short} topic, and a CQL schema for an {astra-db} table.
+This example uses a JSON schema for a {pulsar-short} topic, and a {cql-short} schema for an {astra-db} table.
 The {gpt-schema-translator} generates a mapping between the two schemas that the {astra-db} sink connector can use to write data from the {pulsar-short} topic to the {astra-db} table.
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
@@ -126,7 +126,7 @@ id=key, file1=value.file1, file2=value.file2, file3=value.file3
 You can check the {astra-ui} logs to confirm that the data is flowing into your table without errors.
 
 [#pulsar-topic-to-cql-table]
-=== AVRO-to-CQL mapping example
+=== AVRO-to-{cql-short} mapping example
 
 This example demonstrates how you can generates schema mapping in real time.
 
@@ -365,9 +365,9 @@ This example demonstrates how you can generates schema mapping in real time.
 }
 ----
 
-. The {astra-db} sink connector writes data to the {cass-short} table with a CQL schema.
+. The {astra-db} sink connector writes data to the {cass-short} table with a {cql-short} schema.
 +
-.CQL schema example
+.{cql-short} schema example
 [source,cql]
 ----
 "cassandra_table_schemas": {
@@ -408,7 +408,7 @@ When a topic schema is available to the {gpt-schema-translator}, click *Generate
 +
 image::developing:create-schema-mapping.png[Schema mapping,320,240]
 +
-The {gpt-schema-translator} generates an AVRO-to-CQL schema mapping while messages are processed.
+The {gpt-schema-translator} generates an AVRO-to-{cql-short} schema mapping while messages are processed.
 +
 [source,plain]
 ----

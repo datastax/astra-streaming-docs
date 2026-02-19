@@ -1,20 +1,20 @@
 = Manage tokens
 
-{product} uses two types of tokens that you can generate in {product-short}.
+{product} uses two types of tokens that you can generate in {astra}.
 
 [#astra-token]
-== {product-short} application tokens
+== {astra} application tokens
 
-{product-short} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{product} {devops-api}].
+{astra} application tokens are access tokens for authentication to the {astra-ui} and the xref:apis:index.adoc[{product} {devops-api}].
 You use these tokens for tenant administration, such as creating tenants and {pulsar-short} tokens (JWT)
 
-To create an {product-short} application token, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
+To create an {astra} application token, see xref:astra-db-serverless:administration:manage-application-tokens.adoc[].
 
 [#pulsar-token]
 == {product} {pulsar-short} tokens (JWT)
 
 {product} {pulsar-short} tokens are {pulsar-reg} https://jwt.io/introduction/[JSON Web Token (JWT)] for authentication to your {product} {pulsar-short} cluster through the {pulsar-short} CLI, runtime clients, or the {pulsar-short} Admin API.
-If necessary, {product-short} forwards the JWT to the {pulsar-short} cluster for role verification.
+If necessary, {product} forwards the JWT to the {pulsar-short} cluster for role verification.
 
 You need a {pulsar-short} JWT for actions related to {pulsar-short} tenants, namespaces, messages, topics, and functions, as well as {pulsar-short} CLI/API commands.
 
@@ -61,7 +61,7 @@ export ASTRA_TOKEN=**ASTRA_APPLICATION_TOKEN**
 The required credentials and connection details depend on the tool you use to interact with {product}:
 
 {product} {devops-api}::
-To send requests to the xref:apis:index.adoc[{product} {devops-api}], use an {product-short} application token.
+To send requests to the xref:apis:index.adoc[{product} {devops-api}], use an {astra} application token.
 +
 For the {devops-api}, the base URL is always `\https://api.astra.datastax.com`.
 +
@@ -107,7 +107,7 @@ bin/pulsar-admin sinks status
 ----
 
 {astra-cli}::
-Use an {product-short} application token to authenticate with the xref:developing:astra-cli.adoc[{astra-cli}].
+Use an {astra} application token to authenticate with the xref:developing:astra-cli.adoc[{astra-cli}].
 
 == See also
 

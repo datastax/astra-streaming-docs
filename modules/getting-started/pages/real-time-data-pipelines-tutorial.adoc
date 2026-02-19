@@ -1,4 +1,4 @@
-= Build real-time data pipelines with {product-short} and Decodable
+= Build real-time data pipelines with {product} and Decodable
 :navtitle: Build real-time data pipelines
 
 This tutorial shows you how to build real-time data processing pipelines using {product} and Decodable.
@@ -30,7 +30,7 @@ Simulated e-commerce site clicks are captured and streamed to a Decodable REST e
 The resulting event data is written to {astra-db} database tables through {product} topics and sinks.
 
 Decodable::
-This tutorial uses Decodable's real-time stream processing, which is powered by Apache Flink(TM).
+This tutorial uses Decodable's real-time stream processing, which is powered by {flink-reg}.
 Specifically, you will create the following Decodable objects:
 +
 * HTTP connection: A managed REST endpoint for posting click data
@@ -41,9 +41,9 @@ Specifically, you will create the following Decodable objects:
 * Product clicks pipeline: A SQL-based pipeline that takes normalized click data and filters for a subset of clicks associated with product entries on the e-commerce site
 * Product clicks stream: A flow of filtered product click data that other Decodable objects can listen to
 
-{product-short}::
-Within {product-short}, the tutorial uses {astra-db} and {product}, which are powered by {cass-reg} and {pulsar-reg} respectively.
-Specifically, you will create the following {product-short} objects:
+{astra}::
+Within {astra}, the tutorial uses {astra-db} and {product}, which are powered by {cass-reg} and {pulsar-reg} respectively.
+Specifically, you will create the following {astra} objects:
 +
 * {product} tenant: A dedicated streaming environment for your data pipelines
 * {product} topic for all clicks: A collection of messages with normalized click data from all web click events
@@ -54,13 +54,13 @@ Specifically, you will create the following {product-short} objects:
 
 == Prerequisites
 
-* An {astra-url}/signupstreaming[{product-short} account^]
+* An {astra-url}/signupstreaming[{astra} account^]
 
 * A https://app.decodable.co/-/accounts/create[Decodable account]
 
 * A place to store credentials securely for the duration of this tutorial
 
-== Create {product-short} objects
+== Create {astra} objects
 
 First, you need to create a streaming tenant in {product} with a namespace and topics, create an {astra-db} database, and then hook the streaming topics and database together with a sink connector.
 
@@ -85,7 +85,7 @@ You now have a `production` namespace with two topics, as well as the `default` 
 
 === Store the stream of click data
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *{product-short}*.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *{astra}*.
 
 . Click **Create database**, and then complete the fields as follows:
 +
@@ -100,9 +100,9 @@ If you select **{db-serverless-vector}**, you must modify the tutorial to use th
 . Click **Create Database**, and then wait for the database to initialize.
 This can take several minutes.
 
-. From your database's overview page, click **CQL Console**, and then wait for `cqlsh` to start.
+. From your database's overview page, click **{cql-console}**, and then wait for the built-in {cql-shell} (`cqlsh`) to start.
 
-. Enter the following CQL statement into the CQL console, and then press kbd:[Enter].
+. Enter the following {cql-short} statement into the {cql-console}, and then press kbd:[Enter].
 +
 This statement creates a table named `all_clicks` in the `click_data` keyspace that will store all unfiltered web click data.
 +
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS click_data.all_clicks (
 );
 ----
 
-. Run the following command in the CQL console to create another table that will store filtered web click data for product clicks only.
+. Run the following command in the {cql-console} to create another table that will store filtered web click data for product clicks only.
 +
 [source,cql]
 ----
@@ -205,7 +205,7 @@ CREATE TABLE click_data.product_clicks (
 * **Name**: Enter `all-clicks`.
 * **Input topic**: Select your `all-clicks` topic in your `production` namespace.
 * **Database**: Select your `webstore-clicks` database.
-* **Token**: Click the link to create an {product-short} application token with the **Organization Administrator** role, and then enter the token in the sink's **Token** field.
+* **Token**: Click the link to create an {astra} application token with the **Organization Administrator** role, and then enter the token in the sink's **Token** field.
 Store the token securely, you will use it multiple times during this tutorial.
 * **Keyspace**: Enter `click_data`.
 * **Table Name**: Enter `all_clicks`.
@@ -235,7 +235,7 @@ The deployment logs are printed in this terminal output area, including semi-ver
 
 == Create Decodable objects
 
-After you create the required {product-short} objects, you can create pipelines for processing incoming data and connectors that bond a Decodable stream of data with the {product} topics.
+After you create the required {astra} objects, you can create pipelines for processing incoming data and connectors that bond a Decodable stream of data with the {product} topics.
 
 === Get the {product} tenant details
 
@@ -267,10 +267,10 @@ In Decodable, create a connection to stream data for all web clicks to the corre
 . Use your {product} tenant details to complete the Decodable connection fields, and then click **Next**:
 +
 * **Connection Type**: Select **Sink**.
-* **Broker Service URL**: Enter the Pulsar broker service URL from your {product} tenant.
-* **Web Service URL**: Enter the Pulsar web service URL from your {product} tenant.
+* **Broker Service URL**: Enter the {pulsar-short} broker service URL from your {product} tenant.
+* **Web Service URL**: Enter the {pulsar-short} web service URL from your {product} tenant.
 * **Topic**: Enter `persistent://webstore-clicks/production/all-clicks`.
-* **Authentication Token**: Enter the Pulsar token you created for your {product} tenant.
+* **Authentication Token**: Enter the {pulsar-short} token you created for your {product} tenant.
 * **Value Format**: Select **JSON**.
 
 . On the **Where should this Connection get its data** dialog, select **New Stream**, name the stream `Webstore-Normalized-Clicks-Stream`, and then click **Next**.
@@ -322,10 +322,10 @@ Create another connection in Decodable to stream product clicks:
 All values are the same as the other connection except the **Topic**.
 +
 * **Connection Type**: Select **Sink**.
-* **Broker Service URL**: Enter the Pulsar broker service URL from your {product} tenant.
-* **Web Service URL**: Enter the Pulsar web service URL from your {product} tenant.
+* **Broker Service URL**: Enter the {pulsar-short} broker service URL from your {product} tenant.
+* **Web Service URL**: Enter the {pulsar-short} web service URL from your {product} tenant.
 * **Topic**: Enter `persistent://webstore-clicks/production/product-clicks`.
-* **Authentication Token**: Enter the Pulsar token you created for your {product} tenant.
+* **Authentication Token**: Enter the {pulsar-short} token you created for your {product} tenant.
 * **Value Format**: Select **JSON**.
 
 . On the **Where should this Connection get its data** dialog, select **New Stream**, name the stream `Webstore-Product-Clicks-Stream`, and then click **Next**.
@@ -512,8 +512,8 @@ A confirmation message appears if the connector receives the data.
 [#follow-the-data]
 === Follow the data
 
-After the REST connector ingests the simulated click event data, the normalize pipeline receives the raw click data, processes it, and writes it to the `all_clicks` table in {astra_db}.
-Because the simulated payload was a product click, the product clicks pipeline receives the normalized click data, and then writes it to the `product_clicks` table in {astra_db}.
+After the REST connector ingests the simulated click event data, the normalize pipeline receives the raw click data, processes it, and writes it to the `all_clicks` table in {astra-db}.
+Because the simulated payload was a product click, the product clicks pipeline receives the normalized click data, and then writes it to the `product_clicks` table in {astra-db}.
 
 You can confirm that the data was received and processed by inspecting the metrics for the pipelines, connectors, topics, and sink.
 You can also query your database tables to verify that the data was written to them as expected.
@@ -545,7 +545,7 @@ This means the sink consumed a message from the topic, and then wrote the data t
 
 . In the {astra-ui} header, click icon:grip[name="Applications"], and then select *{astra-db}*.
 
-. Go to your **webstore-clicks** database, click **CQL Console**, and then run the following CQL statement to inspect the data that was written to the `all_clicks` table:
+. Go to your **webstore-clicks** database, click **{cql-console}**, and then run the following {cql-short} statement to inspect the data that was written to the `all_clicks` table:
 +
 [source,cql]
 ----
@@ -594,7 +594,7 @@ Next, inspect the product clicks pipeline.
 
 . In the {astra-ui} header, click icon:grip[name="Applications"], and then select *{astra-db}*.
 
-. Go to your **webstore-clicks** database, click **CQL Console**, and then run the following CQL statement to inspect the data that was written to the `product_clicks` table:
+. Go to your **webstore-clicks** database, click **{cql-console}**, and then run the following {cql-short} statement to inspect the data that was written to the `product_clicks` table:
 +
 [source,cql]
 ----
@@ -671,7 +671,7 @@ There are two tools you can use to debug this at various stages of the pipeline:
 
 == Clean up the tutorial resources
 
-To clean up the resources created for this tutorial, you need to remove the Decodable and {product-short} objects you created.
+To clean up the resources created for this tutorial, you need to remove the Decodable and {astra} objects you created.
 
 === Remove Decodable objects
 
@@ -685,7 +685,7 @@ To clean up the resources created for this tutorial, you need to remove the Deco
 
 . Optional: Go to the **Streams** tab, and then delete the tutorial's streams.
 
-=== Remove {product-short} objects
+=== Remove {astra} objects
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 
@@ -693,7 +693,7 @@ To clean up the resources created for this tutorial, you need to remove the Deco
 +
 This removes the tenant and all associated sinks, topics, messages, and namespaces.
 
-. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select **{product-short}**.
+. In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select **{astra}**.
 
 . Find the `webstore-clicks` database, click icon:ellipsis-vertical[name="More"], and then select **Terminate**.
 +

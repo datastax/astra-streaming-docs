@@ -1,11 +1,11 @@
-= Stream {product-short} audit logs
+= Stream {astra} audit logs
 
-Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{product-short} audit logs] through {product} to an external system.
+Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra} audit logs] through {product} to an external system.
 
 To enable audit log streaming, you must do one of the following:
 
  * Provide the **Full Name** of your {product} topic and the streaming tenant's `client.conf` file to {support-url}[IBM Support] or your {company} account representative.
- * POST your configuration to the {devops-api-ref-url}#tag/Organization-Operations/operation/configureTelemetry[{product-short} {devops-api} telemetry endpoint].
+ * POST your configuration to the {devops-api-ref-url}#tag/Organization-Operations/operation/configureTelemetry[{astra} {devops-api} telemetry endpoint].
 
 == Create an {product} topic for audit logs
 
@@ -30,16 +30,16 @@ You can use topics to organize audit logs by event type or other criteria.
 . To finalize the configuration, do one of the following:
 +
 * Send your topic's full name and the `client.conf` file to {support-url}[IBM Support] or your {company} account representative, and then {company} will complete the setup.
-* <<use-the-devops-api,Use the {product-short} {devops-api} to complete the setup.>>
+* <<use-the-devops-api,Use the {astra} {devops-api} to complete the setup.>>
 
 [#use-the-devops-api]
 == Configure audit log streaming with the {devops-api}
 
-You can use the {devops-api-ref-url}#tag/Organization-Operations/operation/configureTelemetry[{product-short} {devops-api} telemetry endpoint] to configure audit log streaming instead of providing the configuration details to IBM Support.
+You can use the {devops-api-ref-url}#tag/Organization-Operations/operation/configureTelemetry[{astra} {devops-api} telemetry endpoint] to configure audit log streaming instead of providing the configuration details to IBM Support.
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Admin*.
 
-. Click **Tokens**, and then create an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{product-short} application token] with the **Organization Administrator** role.
+. Click **Tokens**, and then create an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra} application token] with the **Organization Administrator** role.
 
 . Create the audit log streaming configuration using the values from the tenant's `client.conf` file and your {pulsar-short} configuration:
 +
@@ -61,11 +61,11 @@ curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/organizations/**OR
 +
 Replace the following:
 +
-* `**ORG_ID**`: Your {product-short} organization ID.
-* `**APPLICATION_TOKEN**`: Your {product-short} application token.
+* `**ORG_ID**`: Your {astra} organization ID.
+* `**APPLICATION_TOKEN**`: Your {astra} application token.
 * `**BROKER_SERVICE_URL**`: The {product} broker service URL, such as `ssl://pulsar-aws-useast2.streaming.datastax.com:6651`.
 * `**TOPIC_FULL_NAME**`: The full name of the {product} topic where you want to stream audit logs.
-* The `auth_strategy` and other authentication details depend on your Pulsar configuration.
+* The `auth_strategy` and other authentication details depend on your {pulsar-short} configuration.
 +
 .Result
 [source,json]

@@ -17,7 +17,7 @@ If you're new to {product}, try the xref:getting-started:index.adoc[{product} qu
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Streaming*.
 . Click *Create tenant*.
 . Enter a name for the streaming tenant.
-. Select a xref:operations:astream-regions.adoc[cloud provider and region that supports {astra-stream}].
+. Select a xref:operations:astream-regions.adoc[cloud provider and region that supports {product}].
 Not all {astra-db} regions support {product}.
 If your preferred region isn't available, contact your {company} account representative or {support-url}[IBM Support].
 . Click *Create tenant*.
@@ -69,7 +69,7 @@ Use `xref:astra-cli:commands:astra-streaming-get.adoc[astra streaming get]`.
 * **Return to all namespaces**: When modifying an individual namespace, click **Back to Namespaces** to return to the list of all namespaces in the current tenant.
 
 API::
-See xref:apis:api-operations.adoc#pulsar-api-namespace-operations[Pulsar Admin API namespace operations].
+See xref:apis:api-operations.adoc#pulsar-api-namespace-operations[{pulsar-short} Admin API namespace operations].
 
 === Manage topics
 
@@ -83,7 +83,7 @@ See xref:apis:api-operations.adoc#pulsar-api-namespace-operations[Pulsar Admin A
 * **Delete a topic**: Click icon:chevron-down[name="Expand"] to view the list of topics in a specific namespace, find the topic you want to delete, click icon:ellipsis[name="More"], and then select *Delete Topic*.
 
 API::
-See xref:apis:api-operations.adoc#pulsar-admin-api-topic-operations[Pulsar Admin API topic operations].
+See xref:apis:api-operations.adoc#pulsar-admin-api-topic-operations[{pulsar-short} Admin API topic operations].
 
 == Terminate a tenant
 

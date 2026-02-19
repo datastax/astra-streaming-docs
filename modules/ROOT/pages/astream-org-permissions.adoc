@@ -1,8 +1,8 @@
 = Manage {product} roles and permissions
 :navtitle: Manage roles and permissions
 
-You manage role-based access control (RBAC) for {product} through your {product-short} organization.
-For information about {product-short} RBAC, including default roles, custom roles, permissions, and user management, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
+You manage role-based access control (RBAC) for {product} through your {astra} organization.
+For information about {astra} RBAC, including default roles, custom roles, permissions, and user management, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
 
 == {product} permissions
 
@@ -12,7 +12,7 @@ Permissions specific to {product} include the following:
 
 === Default roles for {product}
 
-There are no default {product-short} roles specifically scoped to {product}.
+There are no default {astra} roles specifically scoped to {product}.
 However, the following default roles have the *Manage Streaming* permission:
 
 * *Organization Administrator*
@@ -36,7 +36,7 @@ Additional permissions might be required, depending on the tasks the role needs 
 To control access to specific streaming tenants, you can set granular xref:astra-db-serverless:administration:manage-database-access.adoc#role-scopes[resource scopes] on custom roles.
 ====
 
-== Authentication and authorization in {pulsar-reg} and {product-short}
+== Authentication and authorization in {pulsar-reg} and {astra}
 
 {pulsar-short} has the concept of https://pulsar.apache.org/docs/security-authorization/[clients with role tokens].
 In {pulsar-short}, authentication is the process of verifying a provided token (JWT), and authorization is the process of determining if the role claimed in that token is allowed to complete the requested action.
@@ -44,14 +44,14 @@ In {pulsar-short}, authentication is the process of verifying a provided token (
 {product} uses the {company} version of {pulsar} (xref:luna-streaming::index.adoc[Luna Streaming]).
 The https://github.com/datastax/pulsar[Luna project] is an open fork of the {pulsar-short} project that maintains feature parity with OSS {pulsar-short}. {product}, as a managed service, abstracts some features/options of {pulsar-short} to ensure continuous, reliable service.
 
-On a shared cluster, your {product-short} organization has one or more tenants on a shared {pulsar-short} cluster.
-Each of your tenants is secured by {pulsar-short} authentication and authorization models, as well as your {product-short} organization's authentication and authorization ({product-short} RBAC).
+On a shared cluster, your {astra} organization has one or more tenants on a shared {pulsar-short} cluster.
+Each of your tenants is secured by {pulsar-short} authentication and authorization models, as well as your {astra} organization's authentication and authorization ({astra} RBAC).
 
 {product} shared clusters are created and administered by {product} administrators.
 Each tenant is assigned a custom role and permissions limited to that tenant only.
 All tokens created within a tenant are assigned roles similar to the assigning tenant.
 
-For programmatic access, you use {product-short} application tokens or {pulsar-short} JWT, depending on the operation you need to perform.
+For programmatic access, you use {astra} application tokens or {pulsar-short} JWT, depending on the operation you need to perform.
 For more information, see xref:operations:astream-token-gen.adoc[].
 
 == See also

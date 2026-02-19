@@ -12,7 +12,7 @@ asciidoc:
     support-url: 'https://www.ibm.com/mysupport/s/'
     astra-db: 'Astra DB'
     product: 'Astra Streaming'
-    product-short: 'Astra'
+    astra: 'Astra' # This attribute is also used in include::common partials.
     astra-cli: 'Astra CLI'
     astra-ui: 'Astra Portal'
     astra-url: 'https://astra.datastax.com'
@@ -24,26 +24,37 @@ asciidoc:
     cass: 'Apache Cassandra'
     cass-reg: 'Apache Cassandra(R)'
     cass-short: 'Cassandra'
+    cql: 'Cassandra Query Language (CQL)'
+    cql-short: 'CQL'
+    cql-shell: 'CQL shell'
+    cql-console: 'CQL console'
     pulsar: 'Apache Pulsar'
     pulsar-short: 'Pulsar'
     pulsar-reg: 'Apache Pulsar(TM)'
-    pulsar-version: '3.1' #DO NOT INCLUDE PATCH VERSION <MAJOR>.<MINOR>.<PATCH>
+    pulsar-version: '3.1' #Don't include patch version (major.minor.patch)
     pulsar-version-patch: '3.1.0'
-
+    kafka-reg: 'Apache Kafka(R)'
+    kafka: 'Apache Kafka'
+    kafka-short: 'Kafka'
+    kafka-connect: 'Kafka Connect'
+    maven-reg: 'Apache Maven(TM)'
+    maven-short: 'Maven'
+    flink-reg: 'Apache Flink(R)'
+    geode-reg: 'Apache Geode(TM)'
+    hbase-reg: 'Apache HBase(R)'
+    kudu-reg: 'Apache Kudu(TM)'
+    phoenix-reg: 'Apache Phoenix(TM)'
+    solr-reg: 'Apache Solr(TM)'
     starlight-kafka: 'Starlight for Kafka'
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
-    astra-streaming-examples-repo: 'https://raw.githubusercontent.com/datastax/astra-streaming-examples/master'
+    astra-streaming-examples-repo: https://github.com/datastax/astra-streaming-examples
+
+    # Required for include::common partials; some shared with Luna Streaming
+    web-ui: '{astra-ui}'
+    debezium-version: '1.7'
     scb: 'Secure Connect Bundle (SCB)'
     scb-short: 'SCB'
     scb-brief: 'Secure Connect Bundle'
 
-    # Required for include::common partials that are shared with Luna Streaming
-    web-ui: '{astra-ui}'
-    debezium-version: '1.7'
-    astra: 'Astra'
-
-    # LEGACY ATTRIBUTES - CONSIDER REMOVING
-    langstream: 'RAGStack'
-    ragstack: 'RAGStack'
-    streaming_signup_url: 'https://astra.datastax.com/streaming'
+    # For more attributes, see release.yml in the datastax-docs-site repo
