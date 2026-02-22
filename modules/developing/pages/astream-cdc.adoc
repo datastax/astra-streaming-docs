@@ -161,7 +161,7 @@ For complex types, the key is represented in JSON.
 * Doesn't manage time-to-live (TTL)
 * Doesn't support range deletes
 * Doesn't manage table truncates
-* Doesn't allow {cql-short} column names that match a {pulsar-short} primitive type name, such as `INT32`
+* Doesn't allow CQL column names that match a {pulsar-short} primitive type name, such as `INT32`
 * Doesn't support multi-table mutations
 
 == Configure CDC for {astra-db}

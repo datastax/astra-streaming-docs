@@ -25,7 +25,6 @@ asciidoc:
     cass-reg: 'Apache Cassandra(R)'
     cass-short: 'Cassandra'
     cql: 'Cassandra Query Language (CQL)'
-    cql-short: 'CQL'
     cql-shell: 'CQL shell'
     cql-console: 'CQL console'
     pulsar: 'Apache Pulsar'

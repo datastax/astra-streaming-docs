@@ -102,7 +102,7 @@ This can take several minutes.
 
 . From your database's overview page, click **{cql-console}**, and then wait for the built-in {cql-shell} (`cqlsh`) to start.
 
-. Enter the following {cql-short} statement into the {cql-console}, and then press kbd:[Enter].
+. Enter the following CQL statement into the {cql-console}, and then press kbd:[Enter].
 +
 This statement creates a table named `all_clicks` in the `click_data` keyspace that will store all unfiltered web click data.
 +
@@ -545,7 +545,7 @@ This means the sink consumed a message from the topic, and then wrote the data t
 
 . In the {astra-ui} header, click icon:grip[name="Applications"], and then select *{astra-db}*.
 
-. Go to your **webstore-clicks** database, click **{cql-console}**, and then run the following {cql-short} statement to inspect the data that was written to the `all_clicks` table:
+. Go to your **webstore-clicks** database, click **{cql-console}**, and then run the following CQL statement to inspect the data that was written to the `all_clicks` table:
 +
 [source,cql]
 ----
@@ -594,7 +594,7 @@ Next, inspect the product clicks pipeline.
 
 . In the {astra-ui} header, click icon:grip[name="Applications"], and then select *{astra-db}*.
 
-. Go to your **webstore-clicks** database, click **{cql-console}**, and then run the following {cql-short} statement to inspect the data that was written to the `product_clicks` table:
+. Go to your **webstore-clicks** database, click **{cql-console}**, and then run the following CQL statement to inspect the data that was written to the `product_clicks` table:
 +
 [source,cql]
 ----
