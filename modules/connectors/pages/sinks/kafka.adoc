@@ -1,5 +1,4 @@
 = {kafka-short}
-:navtitle: {kafka-short}
 :connectorType: kafka
 
 The {kafka-short} sink connector reads messages from {pulsar-short} topics and writes them to https://kafka.apache.org/[{kafka-reg}] topics.
