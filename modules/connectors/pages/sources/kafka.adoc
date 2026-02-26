@@ -1,7 +1,7 @@
-= Kafka
+= {kafka-short}
 :connectorType: kafka
 
-The Kafka source connector pulls data from https://kafka.apache.org/[Kafka] topics and persists it to {pulsar-short} topics.
+The {kafka-short} source connector pulls data from https://kafka.apache.org/[{kafka-reg}] topics and persists it to {pulsar-short} topics.
 
 == Create the connector
 
@@ -24,9 +24,9 @@ include::common:streaming:partial$connectors/connector-params-intro.adoc[]
 include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
 
 [#configs]
-=== Kafka source connector properties (`configs`)
+=== {kafka-short} source connector properties (`configs`)
 
 Set these properties in the `configs` section of the connector configuration.
 
-Generally, all properties provided in the https://pulsar.apache.org/docs/io-kafka-source[OSS {pulsar} Kafka source connector] are supported.
+Generally, all properties provided in the https://pulsar.apache.org/docs/io-kafka-source[OSS {pulsar} {kafka-short} source connector] are supported.
 Exceptions include properties that aren't relevant to {product} and properties that aren't present in {pulsar} {pulsar-version}.

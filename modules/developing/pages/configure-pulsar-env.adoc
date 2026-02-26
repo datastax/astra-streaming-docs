@@ -14,7 +14,7 @@ To get started, you must download a compatible {pulsar-short} artifact, and then
 . Download the binaries for the https://pulsar.apache.org/download/[latest {pulsar-version} patch release].
 +
 Replace `**PATCH**` with the specific patch version you want to use.
-For example, to download Pulsar version `3.1.0`, use patch version `0`.
+For example, to download {pulsar-short} version `3.1.0`, use patch version `0`.
 +
 [source,bash,subs="+quotes,+attributes"]
 ----

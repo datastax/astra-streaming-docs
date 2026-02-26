@@ -2,7 +2,7 @@
 :description: Learn about the {product} {devops-api}.
 
 The {product} {devops-api} is one of the APIs that you can use to manage your {pulsar-reg} tenants and their resources.
-Use this API to manage higher-level {product} objects associated with your {product-short} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, georeplication, {pulsar-short} stats, and {pulsar-short} tokens.
+Use this API to manage higher-level {product} objects associated with your {astra} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, georeplication, {pulsar-short} stats, and {pulsar-short} tokens.
 
 .More endpoints
 [TIP]
@@ -18,9 +18,9 @@ Other available APIs include the xref:apis:api-operations.adoc[{product} {pulsar
 
 To use the {product} {devops-api}, you need the following:
 
-* An active {product-short} account with access to {product}.
+* An active {astra} account with access to {product}.
 
-* An xref:operations:astream-token-gen.adoc[{product-short} application token] that has a role with {product} permissions.
+* An xref:operations:astream-token-gen.adoc[{astra} application token] that has a role with {product} permissions.
 
 * Depending on the operations you need to perform, you might need additional information about your tenant, such as the cluster name or {pulsar-short} instance name.
 You can get this information with `<<get-tenant-details,GET "https://api.astra.datastax.com/v2/streaming/tenants">>` or from the xref:operations:create-delete-tenants.adoc#get-tenant-details[**Tenant Details** section in the {astra-ui}].
@@ -338,7 +338,7 @@ For more information, see xref:operations:astream-token-gen.adoc[].
 
 [TIP]
 ====
-For {product-short} application tokens, use the core xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}].
+For {astra} application tokens, use the core xref:astra-db-serverless:api-reference:devops-api.adoc[{astra} {devops-api}].
 ====
 
 [#get-existing-pulsar-tokens]

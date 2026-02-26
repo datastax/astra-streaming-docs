@@ -1,13 +1,14 @@
 = Use the {astra-cli}
 
-The xref:astra-cli:ROOT:index.adoc[{astra-cli}] is a command-line interface that lets you create and manage {astra-db} and {astra-stream} resources from your terminal.
+The xref:astra-cli:ROOT:index.adoc[{astra-cli}] is a command-line interface that lets you create and manage {astra-db} and {product} resources from your terminal.
 
 For example:
 
-* Create and manage {astra-db} databases, {astra-stream} tenants, and their associated artifacts
+* Create and manage {astra-db} databases, {product} tenants, and their associated artifacts
 * Query and insert data
 * Manage organizations and users
-* Issue CQL statements and Pulsar commands using built-in `cqlsh` and Pulsar shell utilities
+* Issue {cql} statements using the built-in {cql-shell} (`cqlsh`) utility
+* Issue {pulsar-reg} commands using the built-in {pulsar-short} shell utility
 
 For more information and commands, see the xref:astra-cli:ROOT:index.adoc[{astra-cli} documentation]
 

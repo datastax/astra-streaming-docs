@@ -1,13 +1,13 @@
 = {product} pricing
 
-{product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {product-short}.
+{product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra}.
 
 == Subscription plans
 
 There are multiple {product} subscription plans.
-An {product} subscription is associated with an {product-short} organization, but {product} subscription plans are separate from {product-short} organization subscription plans.
+An {product} subscription is associated with an {astra} organization, but {product} subscription plans are separate from {astra} organization subscription plans.
 
-For {product-short} plans and pricing details, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product-short} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[].
+For {astra} plans and pricing details, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[{astra} subscription plans].
 
 == Shared clusters
 
@@ -26,7 +26,7 @@ Streaming Capacity Units are also known as _dedicated clusters_.
 If you prefer not to use shared clusters, you can opt for Streaming Capacity Units.
 
 With Streaming Capacity Units, you have your own private {pulsar-short} cluster with all the benefits of {product} as a managed service.
-You sign in to {product-short} and use {product} in the same way that you would on shared clusters.
+You sign in to {astra} and use {product} in the same way that you would on shared clusters.
 When you create a tenant, you have the option to deploy to your private cluster.
 This means that you can use both shared clusters and Streaming Capacity Units, depending on your tenants' use cases.
 
