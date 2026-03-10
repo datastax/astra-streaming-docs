@@ -2,7 +2,7 @@
 
 This example requires the following:
 
-* https://maven.apache.org/install.html[Apache Maven]
+* https://maven.apache.org/install.html[{maven-reg}]
 
 * https://openjdk.java.net/install/[Java OpenJDK 11]
 

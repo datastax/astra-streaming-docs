@@ -20,7 +20,7 @@ For detailed information about using these APIs, refer to the https://pulsar.apa
 
 To use the {pulsar-short} REST APIs with {product} tenants, you need the following:
 
-* An active {product-short} account with access to {product}.
+* An active {astra} account with access to {product}.
 
 * An active {product} tenant.
 

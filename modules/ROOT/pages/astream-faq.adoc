@@ -100,14 +100,14 @@ The following questions address security and access control in {product}.
 
 === Does {product} support single-sign on?
 
-If your {product-short} organization is on a paid {product-short} subscription plan, your users can use SSO to sign in to the {astra-ui}.
+If your {astra} organization is on a paid {astra} subscription plan, your users can use SSO to sign in to the {astra-ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
-=== How do {product-short} roles and permissions map to {pulsar-short} roles and permissions?
+=== How do {astra} roles and permissions map to {pulsar-short} roles and permissions?
 
 See xref:ROOT:astream-org-permissions.adoc[].
 
-=== What is the difference between {product-short} application tokens and the {pulsar-short} tokens?
+=== What is the difference between {astra} application tokens and the {pulsar-short} tokens?
 
 See xref:operations:astream-token-gen.adoc[].
 
@@ -128,7 +128,7 @@ See the following:
 Unless you are starting a project from scratch, you likely have message data that needs to be brought over to your {product} tenants.
 For migration assistance, contact {support-url}[IBM Support].
 
-Every tenant in {product} comes with custom ports for Kafka and RabbitMQ workloads.
+Every tenant in {product} comes with custom ports for {kafka-reg} and RabbitMQ workloads.
 {company} also offers a fully-compatible JMS implementation for your Java workloads.
 For more information, see xref:developing:starlight.adoc[].
 
@@ -161,7 +161,7 @@ Naturally, you have less control in a managed, serverless cluster than you do in
 Beyond those differences, the effort to develop locally and then move to {product} should not be significant, but {company} recommends that you develop directly in {product}.
 If you are trying to reduce costs, use the free tier of {product} and then switch when you are ready to stage your production services.
 
-=== Can I use {product} with my existing Kafka or RabbitMQ applications?
+=== Can I use {product} with my existing {kafka} or RabbitMQ applications?
 
 Yes, see xref:developing:starlight.adoc[].
 

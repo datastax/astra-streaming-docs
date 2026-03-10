@@ -33,7 +33,7 @@ The following table lists recommended namespace and/or topic metrics as a starti
 | pulsar_topics_count
 | Namespace
 | Gauge
-| The number of Pulsar topics of a namespace.
+| The number of {pulsar-short} topics of a namespace.
 
 | pulsar_producers_count
 | Topic
@@ -48,7 +48,7 @@ The following table lists recommended namespace and/or topic metrics as a starti
 | pulsar_subscriptions_count
 | Topic
 | Gauge
-| The number of Pulsar subscriptions of a topic.
+| The number of {pulsar-short} subscriptions of a topic.
 
 | pulsar_rate_in
 | Topic

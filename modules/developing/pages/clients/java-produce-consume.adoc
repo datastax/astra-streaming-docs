@@ -4,20 +4,20 @@
 
 You can produce and consume messages with the Java {pulsar-short} client and {product}.
 
-For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
+For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
 
 == Prerequisites
 
 For this example, you need the following:
 
 * JRE 8
-* https://maven.apache.org/install.html[Maven]
+* https://maven.apache.org/install.html[{maven-reg}]
 * An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
 == Create a project
 
-. Create a new Maven project:
+. Create a new {maven-short} project:
 +
 [source,shell]
 ----

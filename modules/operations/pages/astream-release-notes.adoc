@@ -132,7 +132,7 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 [discrete]
 ==== {new}
 
-* xref:starlight-for-jms:ROOT:index.adoc[{starlight-kafka}] is now available, bringing built-in Apache Kafka(R) protocol support to {pulsar-short}.
+* xref:starlight-for-jms:ROOT:index.adoc[{starlight-kafka}] is now available, bringing built-in {kafka-reg} protocol support to {pulsar-short}.
 
 [discrete]
 === March 24, 2022

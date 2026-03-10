@@ -4,24 +4,24 @@
 
 You can produce and consume messages with the Java {pulsar-short} client, {product}, and Spring.
 
-For a complete source code example, see the https://github.com/datastax/astra-streaming-examples[{product} Examples repository].
+For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
 
 == Prerequisites
 
 For this example, you need the following:
 
 * JRE 8
-* https://maven.apache.org/install.html[Maven]
+* https://maven.apache.org/install.html[{maven-reg}]
 * An {pulsar-reg} topic in {product}
 * A text editor or IDE
 
-== Create a Maven project in Spring Initializr
+== Create a {maven-short} project in Spring Initializr
 
 You can use Spring Initializr to quickly create a Java project with the required dependencies, including the {pulsar-short} client dependency.
 
 . Go to https://start.spring.io/[Spring Initializr] to initialize a new project.
 
-. Select Maven, Java 17, a non-SNAPSHOT version of Spring Boot, and the {pulsar} dependency:
+. Select {maven-short}, Java 17, a non-`SNAPSHOT` version of Spring Boot, and the {pulsar} dependency:
 +
 image::developing:spring-initializr.png[Spring Initializr]
 
