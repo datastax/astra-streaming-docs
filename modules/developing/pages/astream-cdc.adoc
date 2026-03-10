@@ -283,9 +283,9 @@ For multi-region databases, you must select a tenant for each region where you w
 
 . Repeat to enable CDC on additional tables.
 
-==== Enable CDC with the {product-short} {devops-api}
+==== Enable CDC with the {astra} {devops-api}
 
-Use the xref:astra-db-serverless:api-reference:devops-api.adoc[{product-short} {devops-api}] to enable CDC on one or more tables in the same database in the same request.
+Use the xref:astra-db-serverless:api-reference:devops-api.adoc[{astra} {devops-api}] to enable CDC on one or more tables in the same database in the same request.
 
 To check the CDC configuration for a database or table, see <<get-cdc>>.
 
