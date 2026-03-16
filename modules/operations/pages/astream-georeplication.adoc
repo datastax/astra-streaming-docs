@@ -1,8 +1,8 @@
 = Georeplication
 
-A key feature of {pulsar-reg} is how it handles georeplication. While other pub-sub messaging systems require additional processes to mirror messages between data centers, {pulsar-short} has multi-datacenter replication as an integrated feature.
+A key feature of {pulsar-reg} is how it handles georeplication. While other pub-sub messaging systems require additional processes to mirror messages between datacenters, {pulsar-short} has multi-datacenter replication as an integrated feature.
 
-{pulsar-short}'s serving layer (brokers) and storage layer (bookies) are decoupled in {pulsar-short} architecture, allowing seamless message replication across data centers in different regions.
+{pulsar-short}'s serving layer (brokers) and storage layer (bookies) are decoupled in {pulsar-short} architecture, allowing seamless message replication across datacenters in different regions.
 
 Georeplication typically provides redundancy in the event of datacenter outages, but can also be used for any application where {pulsar-short} messages are produced and consumed across regions.
 
