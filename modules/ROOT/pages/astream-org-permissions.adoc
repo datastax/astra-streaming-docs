@@ -41,8 +41,8 @@ To control access to specific streaming tenants, you can set granular xref:astra
 {pulsar-short} has the concept of https://pulsar.apache.org/docs/security-authorization/[clients with role tokens].
 In {pulsar-short}, authentication is the process of verifying a provided token (JWT), and authorization is the process of determining if the role claimed in that token is allowed to complete the requested action.
 
-{product} uses the {company} version of {pulsar} (xref:luna-streaming::index.adoc[Luna Streaming]).
-The https://github.com/datastax/pulsar[Luna project] is an open fork of the {pulsar-short} project that maintains feature parity with OSS {pulsar-short}. {product}, as a managed service, abstracts some features/options of {pulsar-short} to ensure continuous, reliable service.
+{product} uses the xref:luna-streaming::index.adoc[{company} distribution of {pulsar}].
+This project is an https://github.com/datastax/pulsar[open fork of the {pulsar-reg} project] that maintains feature parity with OSS {pulsar-short}. {product}, as a managed service, abstracts some features/options of {pulsar-short} to ensure continuous, reliable service.
 
 On a shared cluster, your {astra} organization has one or more tenants on a shared {pulsar-short} cluster.
 Each of your tenants is secured by {pulsar-short} authentication and authorization models, as well as your {astra} organization's authentication and authorization ({astra} RBAC).

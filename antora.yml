@@ -48,6 +48,7 @@ asciidoc:
     starlight-rabbitmq: 'Starlight for RabbitMQ'
     gpt-schema-translator: 'GPT schema translator'
     astra-streaming-examples-repo: 'https://github.com/datastax/astra-streaming-examples'
+    luna-streaming: 'IBM Elite Support for Apache Pulsar'
 
     # Required for include::common partials; some shared with Luna Streaming
     web-ui: '{astra-ui}'
