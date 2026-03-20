@@ -4,8 +4,6 @@
 
 This example demonstrates how you can produce and consume messages with the Java {pulsar-short} client, {product}, and Spring.
 
-For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
-
 == Prerequisites
 
 For this example, you need the following:
