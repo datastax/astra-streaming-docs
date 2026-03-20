@@ -242,7 +242,7 @@ Delete a source connector::
 
 == See also
 
-* {astra-streaming-examples-repo}[{product} examples GitHub repository]
+* xref:developing:clients/index.adoc[]
 * xref:astream-functions.adoc[]
 * xref:astream-cdc.adoc[]
 * xref:connectors:index.adoc[]

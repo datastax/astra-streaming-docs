@@ -1,5 +1,7 @@
 = Key shared subscriptions in {pulsar-reg}
 :navtitle: Key shared
+:subscription-comment: // Subscription type is set to Key_Shared
+:subscription-type: .subscriptionType(SubscriptionType.Key_Shared)
 
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
@@ -14,16 +16,45 @@ Keys are generated with hashing that converts arbitrary values like `topic-name`
 
 This page explains how to use {pulsar-short}'s key shared subscription model to manage your topic consumption.
 
+== Prerequisites
+
 include::ROOT:partial$subscription-prereq.adoc[]
 
-[#example]
-== Key shared subscription example
+== Prepare example project and producer
 
-. To try out a {pulsar-short} key shared subscription, add `.subscriptionType(SubscriptionType.Key_Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
+include::ROOT:partial$subscription-setup-project.adoc[]
+
+[#example]
+== Create consumer with key shared subscription
+
+To create a {pulsar-short} key shared subscription, create a `pulsarConsumer` with `{subscription-type}` and a `keySharedPolicy` configuration.
+The `keySharedPolicy` defines how hashed values are assigned to subscribed consumers.
+
+For the simplest configuration, use the `<<use-autosplithashrange,autoSplitHashRange>>` policy.
+
+If you need to set fixed hash ranges, use the `<<use-stickyhashrange,stickyHashRange>>` policy.
+
+[#use-autosplithashrange]
+=== Use autoSplitHashRange
+
+To automatically assign hash ranges to consumers, use the `autoSplitHashRange` policy.
+Running multiple consumers with `autoSplitHashRange` balances the messaging load across all available consumers, like a xref:astream-subscriptions-shared.adoc[shared subscription].
+
+. In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
 +
 .SimplePulsarConsumer.java
-[source,java]
+[source,java,subs="+attributes"]
 ----
+include::ROOT:partial$simplepulsarconsumer.java[]
+----
+
+. In `pulsarConsumer`, add `.keySharedPolicy(KeySharedPolicy.autoSplitHashRange())`:
++
+.SimplePulsarConsumer.java with autoSplitHashRange
+[source,java,subs="+attributes"]
+----
+...
+
 pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .topic("persistent://"
         + conf.getTenantName() + "/"
@@ -32,19 +63,30 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
     .startMessageIdInclusive()
     .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
     .subscriptionName("SimplePulsarConsumer")
-    .subscriptionType(SubscriptionType.Key_Shared)
+    {subscription-comment}
+    {subscription-type}
+    // Define key shared policy for hash range assignment
     .keySharedPolicy(KeySharedPolicy.autoSplitHashRange())
     .subscribe();
-----
-+
-The `keySharedPolicy` defines how hashed values are assigned to subscribed consumers.
-+
-The above example uses `autoSplitHashRange`, which is an auto-hashing policy.
-Running multiple consumers with auto-hashing balances the messaging load across all available consumers, like a xref:astream-subscriptions-shared.adoc[shared subscription].
-+
-If you want to set a fixed hash range, use `KeySharedPolicy.stickyHashRange()`, as demonstrated in the following steps.
 
-. To use a sticky hashed key shared subscription, import the following classes to `SimplePulsarConsumer.java`:
+...
+----
+
+[#use-stickyhashrange]
+=== Use stickyHashRange
+
+To set a fixed hash range, use the `stickyHashRange` policy.
+This policy requires additional dependencies and producer configuration changes, in addition to the consumer configuration.
+
+. In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
++
+.SimplePulsarConsumer.java
+[source,java,subs="+attributes"]
+----
+include::ROOT:partial$simplepulsarconsumer.java[]
+----
+
+. Import the following additional classes that are required for the `stickyHashRange` policy:
 +
 .SimplePulsarConsumer.java
 [source,java]
@@ -54,7 +96,45 @@ import org.apache.pulsar.client.api.KeySharedPolicy;
 import org.apache.pulsar.client.api.SubscriptionType;
 ----
 
-. Add the following classes to `SimplePulsarProducer.java`:
+. In `pulsarConsumer`, add the sticky hash key policy: `.keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(int,int)))`.
++
+The following example sets all possible hashes (`0-65535`) on this subscription to one consumer:
++
+.SimplePulsarConsumer.java with stickyHashRange for one consumer
+[source,java]
+----
+...
+
+pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
+    .topic("persistent://"
+        + conf.getTenantName() + "/"
+        + conf.getNamespace() + "/"
+        + conf.getTopicName())
+    .startMessageIdInclusive()
+    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
+    .subscriptionName("SimplePulsarConsumer")
+    {subscription-comment}
+    {subscription-type}
+    // Policy assigns all possible hashes to one consumer
+    .keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(0,65535)))
+    .subscribe();
+
+...
+----
++
+To split the hash range between multiple consumers, add a `Range.of()` argument for each consumer with the assigned hash range.
+For example:
++
+.SimplePulsarConsumer.java with stickyHashRange for two consumers
+[source,java]
+----
+    // Policy assigns half of the hash range to one consumer and half to another
+    .keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(0,32767), Range.of(32768,65535)))
+----
+
+. Modify the producer configuration to support `stickyHashRange`:
++
+.. In `SimplePulsarProducer.java`, import the following classes:
 +
 .SimplePulsarProducer.java
 [source,java]
@@ -63,7 +143,7 @@ import org.apache.pulsar.client.api.BatcherBuilder;
 import org.apache.pulsar.client.api.HashingScheme;
 ----
 
-. In `SimplePulsarProducer.java`, modify the `pulsarProducer` to use the `JavaStringHash` hashing scheme:
+.. Configure the `pulsarProducer` to use the `JavaStringHash` hashing scheme:
 +
 .SimplePulsarProducer.java
 [source,java]
@@ -74,32 +154,16 @@ pulsarProducer = pulsarClient
                 + conf.getTenantName() + "/"
                 + conf.getNamespace() + "/"
                 + conf.getTopicName())
+    // Send messages with the same key to the same consumer
     .batcherBuilder(BatcherBuilder.KEY_BASED)
+    // Generate hash values for messages based on their keys
     .hashingScheme(HashingScheme.JavaStringHash)
     .create();
 ----
 
-. In `SimplePulsarConsumer.java`, modify the `pulsarConsumer` to use sticky hashing.
-This example sets all possible hashes (`0-65535`) on this subscription to one consumer.
-+
-.SimplePulsarConsumer.java
-[source,java]
-----
-.subscriptionType(SubscriptionType.Key_Shared)
-.keySharedPolicy(KeySharedPolicy.stickyHashRange().ranges(Range.of(0,65535)))
-----
+== Test key shared subscription
 
-. In the `pulsar-examples` project, run `SimplePulsarConsumer.java` to begin consuming messages.
-+
-The confirmation message and a cursor appear to indicate the consumer is ready:
-+
-.Result
-[source,console]
-----
-[main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
-...
-[pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
-----
+include::ROOT:partial$subscription-start-consumer.adoc[]
 
 . In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
 +
@@ -123,9 +187,13 @@ In the `SimplePulsarConsumer` terminal, the consumer begins receiving messages:
 
 . In a new terminal window, try to run a new instance of `SimplePulsarConsumer.java`.
 +
-The new consumer cannot subscribe to the topic because the `SimplePulsarConsumer` configuration reserved the entire hash range for the first consumer:
+If you used `autoSplitHashRange`, then the new consumer subscribes to the topic and consumes messages.
+The auto-hashing policy balances hash ranges across available consumers.
 +
-.Result
+If you used sticky hashing with one `Range.of()` argument, then the new consumer cannot subscribe to the topic because the `SimplePulsarConsumer` configuration reserved the entire hash range for the first consumer.
+For example:
++
+.Result when using sticky hashing limited to one consumer
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
@@ -137,8 +205,8 @@ Caused by: org.apache.pulsar.client.api.PulsarClientException$ConsumerAssignExce
 	at org.apache.pulsar.client.impl.ConsumerBuilderImpl.subscribe(ConsumerBuilderImpl.java:101)
 	at com.datastax.pulsar.SimplePulsarConsumer.main(SimplePulsarConsumer.java:47)
 ----
-
-. To run multiple consumers with sticky hashing, modify the `SimplePulsarConsumer.java` configuration to split the hash range between consumers or use auto-hashing.
++
+To run multiple consumers with sticky hashing, you must modify `SimplePulsarConsumer.java` to split the hash range between consumers, as explained in <<use-stickyhashrange>>.
 Then, you can launch multiple instances of `SimplePulsarConsumer.java` to consume messages from different hash ranges.
 
 == See also

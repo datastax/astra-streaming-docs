@@ -1,5 +1,7 @@
 = Shared subscriptions in {pulsar-reg}
 :navtitle: Shared
+:subscription-comment: // Subscription type is set to Shared
+:subscription-type: .subscriptionType(SubscriptionType.Shared)
 
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
@@ -9,39 +11,30 @@ However, there is a risk of losing message ordering guarantees and acknowledgmen
 
 This page explains how you can use {pulsar-short}'s shared subscription model to manage your topic consumption.
 
+== Prerequisites
+
 include::ROOT:partial$subscription-prereq.adoc[]
 
+== Prepare example project and producer
+
+include::ROOT:partial$subscription-setup-project.adoc[]
+
 [#example]
-== Shared subscription example
+== Create consumer with shared subscription
 
-To try out a {pulsar-short} shared subscription, add `.subscriptionType(SubscriptionType.Shared)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
+To create a {pulsar-short} shared subscription, create a `pulsarConsumer` with `{subscription-type}`.
 
+. In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
++
 .SimplePulsarConsumer.java
-[source,java]
+[source,java,subs="+attributes"]
 ----
-pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
-    .topic("persistent://"
-        + conf.getTenantName() + "/"
-        + conf.getNamespace() + "/"
-        + conf.getTopicName())
-    .startMessageIdInclusive()
-    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
-    .subscriptionName("SimplePulsarConsumer")
-    .subscriptionType(SubscriptionType.Shared)
-    .subscribe();
+include::ROOT:partial$simplepulsarconsumer.java[]
 ----
 
-. In the `pulsar-subscription-example` project, run `SimplePulsarConsumer.java` to begin consuming messages.
-+
-The confirmation message and a cursor appear to indicate the consumer is ready:
-+
-.Result
-[source,console]
-----
-[main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
-...
-[pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
-----
+== Test shared subscription
+
+include::ROOT:partial$subscription-start-consumer.adoc[]
 
 . In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
 +

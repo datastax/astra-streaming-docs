@@ -1,5 +1,7 @@
 = Failover subscriptions in {pulsar-reg}
 :navtitle: Failover
+:subscription-comment: // Subscription type is set to Failover
+:subscription-type: .subscriptionType(SubscriptionType.Failover)
 
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
@@ -10,39 +12,30 @@ If the primary consumer disconnects, the standby consumers begin consuming the s
 
 This page explains how to use {pulsar-short}'s failover subscription model to manage your topic consumption.
 
+== Prerequisites
+
 include::ROOT:partial$subscription-prereq.adoc[]
 
+== Prepare example project and producer
+
+include::ROOT:partial$subscription-setup-project.adoc[]
+
 [#example]
-== Failover subscription example
+== Create consumer with failover subscription
 
-To try out a {pulsar-short} failover subscription, add `.subscriptionType(SubscriptionType.Failover)` to the `pulsarConsumer` in `SimplePulsarConsumer.java`:
+To create a {pulsar-short} failover subscription, create a `pulsarConsumer` with `{subscription-type}`.
 
+. In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
++
 .SimplePulsarConsumer.java
-[source,java]
+[source,java,subs="+attributes"]
 ----
-pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
-    .topic("persistent://"
-        + conf.getTenantName() + "/"
-        + conf.getNamespace() + "/"
-        + conf.getTopicName())
-    .startMessageIdInclusive()
-    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
-    .subscriptionName("SimplePulsarConsumer")
-    .subscriptionType(SubscriptionType.Failover)
-    .subscribe();
+include::ROOT:partial$simplepulsarconsumer.java[]
 ----
 
-. In the `pulsar-subscription-example` project, run `SimplePulsarConsumer.java` to begin consuming messages as the primary consumer.
-+
-The confirmation message and a cursor appear to indicate the consumer is ready:
-+
-.Result
-[source,console]
-----
-[main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
-...
-[pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
-----
+== Test failover subscription
+
+include::ROOT:partial$subscription-start-consumer.adoc[]
 
 . In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
 +
@@ -70,8 +63,8 @@ In the `SimplePulsarConsumer` terminal, the primary consumer begins consuming me
 . In a new terminal window, run a new instance of `SimplePulsarConsumer.java` as a backup consumer.
 The backup consumer subscribes to the topic but does not immediately begin consuming messages.
 
-. In the primary `SimplePulsarConsumer` terminal, stop the process (`Ctrl+C`).
-In the second `SimplePulsarConsumer` terminal, the backup consumer begins consuming messages where the first consumer left off:
+. In your first `SimplePulsarConsumer` terminal, stop the process (`Ctrl+C`), and then switch to your second `SimplePulsarConsumer` terminal.
+Notice that the backup consumer begins consuming messages where the first consumer left off:
 +
 .Result
 [source,console]
