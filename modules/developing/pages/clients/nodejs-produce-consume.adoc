@@ -2,9 +2,7 @@
 :navtitle: Node.js
 :description: Produce and consume messages with the Node.js {pulsar-short} client and {product}.
 
-You can produce and consume messages with the Node.js {pulsar-short} client and {product}.
-
-For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
+This example demonstrates how you can produce and consume messages with the Node.js {pulsar-short} client and {product}.
 
 == Prerequisites
 
@@ -46,8 +44,8 @@ sudo ldconfig
 
 == Create a project
 
-In a terminal, run the following script to create a new Node.js project.
-If NPM asks for project values, use the automatically suggested defaults.
+In a terminal, create a new Node.js project, `index.js` file, and install the {pulsar-short} client npm package.
+If NPM asks for project values, use the suggested default values.
 
 [source,shell]
 ----
@@ -164,6 +162,65 @@ At this point, the script produces a message that waits to be consumed and ackno
 .index.js
 [source,javascript]
 ----
+  await consumer.close();
+  await client.close();
+})();
+----
+
+The complete `index.js` script is as follows:
+
+.index.js
+[source,javascript]
+----
+const Pulsar = require("pulsar-client");
+
+(async () => {
+  const serviceUrl = "<REPLACE_WITH_SERVICE_URL>";
+  const pulsarToken = "<REPLACE_WITH_PULSAR_TOKEN>";
+
+  const tenantName = "<REPLACE_WITH_TENANT_NAME>";
+  const namespace = "<REPLACE_WITH_NAMESPACE>";
+  const topicName = "<REPLACE_WITH_TOPIC>";
+
+  const topic = `persistent://${tenantName}/${namespace}/${topicName}`;
+
+  // Debian Ubuntu:
+  const trustStore = '/etc/ssl/certs/ca-certificates.crt'
+  // CentOS RHEL:
+  // const trustStore = "/etc/ssl/certs/ca-bundle.crt";
+
+  const auth = new Pulsar.AuthenticationToken({ token: pulsarToken });
+
+  const client = new Pulsar.Client({
+    serviceUrl: serviceUrl,
+    authentication: auth,
+    tlsTrustCertsFilePath: trustStore,
+    operationTimeoutSeconds: 30,
+  });
+
+  const producer = await client.createProducer({
+    topic: topic,
+  });
+
+  producer.send({
+    data: Buffer.from("Hello World"),
+  });
+  console.log("sent message");
+
+  await producer.flush();
+  await producer.close();
+
+  const consumer = await client.subscribe({
+    topic: topic,
+    subscription: "examples-subscription",
+    subscriptionType: "Exclusive",
+    ackTimeoutMs: 10000,
+  });
+
+  const msg = await consumer.receive();
+  console.log(msg.getData().toString());
+  consumer.acknowledge(msg);
+
   await consumer.close();
   await client.close();
 })();

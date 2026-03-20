@@ -2,9 +2,7 @@
 :navtitle: C#
 :description: Produce and consume messages with the C# {pulsar-short} client and {product}.
 
-You can produce and consume messages with the C# {pulsar-short} client and {product}.
-
-For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
+This example demonstrates how you can produce and consume messages with the C# {pulsar-short} client and {product}.
 
 == Prerequisites
 

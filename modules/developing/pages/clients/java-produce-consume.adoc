@@ -2,7 +2,7 @@
 :navtitle: Java
 :description: Produce and consume messages with the Java {pulsar-short} client and {product}.
 
-You can produce and consume messages with the Java {pulsar-short} client and {product}.
+This example demonstrates how you can produce and consume messages with the Java {pulsar-short} client and {product}.
 
 For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
 
