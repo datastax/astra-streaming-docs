@@ -1,7 +1,9 @@
 = Namespace dashboard
 
-The {astra-streaming-examples-repo}/blob/master/grafana-dashboards/as-namespace.json[namespace dashboard] aggregates metrics at the namespace level.
-In the variable section, you can choose a cluster, tenant, and namespace.
+The namespace dashboard aggregates metrics at the namespace level.
+
+Download the xref:operations:attachment$as-namespace.json[namespace dashboard JSON file] to import into your Grafana instance.
+In the `templating` section, you can define the cluster, tenant, and namespace variables.
 
 == Namespace overview
 
@@ -43,4 +45,5 @@ Georeplication displays the time series metrics chart summarized at the namespac
 
 == See also
 
-Dashboards are available for scraping metrics at {pulsar-short}'s xref:monitoring/overview-dashboard.adoc[tenant], xref:monitoring/namespace-dashboard.adoc[namespace], and xref:monitoring/topic-dashboard.adoc[topic] levels.
+* xref:monitoring/overview-dashboard.adoc[]
+* xref:monitoring/topic-dashboard.adoc[]

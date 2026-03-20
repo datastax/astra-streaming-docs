@@ -1,17 +1,10 @@
 = Grafana dashboards for {product} metrics
 
-{company} offers Grafana dashboards for core message processing for exposed {product} metrics.
+{company} provides Grafana dashboards for core message processing for exposed {product} metrics.
+Use these dashboards as a starting point for xref:monitoring/index.adoc[monitoring your {product} deployment], and then customize them as needed.
 
-You can get the dashboards from the {astra-streaming-examples-repo}/tree/master/grafana-dashboards[{product} Examples repository].
+Dashboards are available for scraping metrics {pulsar-short}'s tenant, namespace, and topic levels:
 
-Dashboards are available for scraping metrics at {pulsar-short}'s tenant, namespace, and topic levels:
-
-* xref:monitoring/overview-dashboard.adoc[Overview Dashboard]
-* xref:monitoring/namespace-dashboard.adoc[Namespace Dashboard]
-* xref:monitoring/topic-dashboard.adoc[Topic Dashboard]
-
-== See also
-
-* xref:monitoring/index.adoc[]
-* xref:monitoring/integration.adoc[]
-* xref:monitoring/new-relic.adoc[]
+* Tenant level metrics: xref:monitoring/overview-dashboard.adoc[]
+* Namespace level metrics: xref:monitoring/namespace-dashboard.adoc[]
+* Topic level metrics: xref:monitoring/topic-dashboard.adoc[]
