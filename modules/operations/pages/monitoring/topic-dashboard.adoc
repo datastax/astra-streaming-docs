@@ -1,7 +1,10 @@
 = Topic dashboard
 
-The {astra-streaming-examples-repo}/blob/master/grafana-dashboards/as-topic.json[topic dashboard] aggregates metrics at the topic level. In the variable section, you can choose a cluster, tenant, and namespace, and topic.
-This dashboard analyzes metrics at the parent topic level, not at the partition level.
+The topic dashboard aggregates metrics at the parent topic level.
+This dashboard doesn't analyze metrics at the partition level.
+
+Download the xref:operations:attachment$as-topic.json[topic dashboard JSON file] to import into your Grafana instance.
+In the `templating` section, you can define the cluster, tenant, namespace, and topic variables.
 
 == Topic overview
 
@@ -59,4 +62,5 @@ Georeplication displays the time series metrics chart summarized at the topic le
 
 == See also
 
-Dashboards are available for scraping metrics at {pulsar-short}'s xref:monitoring/overview-dashboard.adoc[tenant], xref:monitoring/namespace-dashboard.adoc[namespace], and xref:monitoring/topic-dashboard.adoc[topic] levels.
+* xref:monitoring/overview-dashboard.adoc[]
+* xref:monitoring/namespace-dashboard.adoc[]

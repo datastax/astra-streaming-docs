@@ -1,5 +1,3 @@
-== Prerequisites
-
 This example requires the following:
 
 * https://maven.apache.org/install.html[{maven-reg}]
@@ -7,17 +5,3 @@ This example requires the following:
 * https://openjdk.java.net/install/[Java OpenJDK 11]
 
 * {product} access with at least one streaming tenant and one topic
-
-* A local clone of the https://github.com/datastax/pulsar-subscription-example[{company} {pulsar-short} Subscription Example repository]
-
-* In the `pulsar-subscription-example` repo, navigate to `src/main/resources`, and then edit `application.properties` to connect to your {product} cluster:
-+
-.application.properties
-[source,conf,subs="+quotes"]
-----
-service_url=**BROKER_SERVICE_URL**
-namespace=default
-tenant_name=my-tenant
-authentication_token=**ASTRA_APPLICATION_TOKEN**
-topic_name=my-topic
-----

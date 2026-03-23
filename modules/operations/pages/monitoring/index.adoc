@@ -332,7 +332,7 @@ sum(pulsar_msg_backlog{namespace=~"$namespace", topic !~ ".*__.*"})
 ----
 
 Get the total message backlog of a tenant, excluding system topics::
-`$tenant` is a (Grafana dashboard) variable that represents a specific tenant.
+`$tenant` is a Grafana dashboard variable that represents a specific tenant.
 For example:
 +
 [source,pgsql]

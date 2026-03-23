@@ -1,0 +1,11 @@
+. Run `SimplePulsarConsumer.java` to begin consuming messages as the primary consumer.
++
+The confirmation message and a cursor appear to indicate the consumer is ready:
++
+.Result
+[source,console]
+----
+[main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
+...
+[pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
+----

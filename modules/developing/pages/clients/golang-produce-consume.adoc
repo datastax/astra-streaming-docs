@@ -2,9 +2,7 @@
 :navtitle: Golang
 :description: Produce and consume messages with the Golang {pulsar-short} client and {product}.
 
-You can produce and consume messages with the Golang {pulsar-short} client and {product}.
-
-For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
+This example demonstrates how you can produce and consume messages with the Golang {pulsar-short} client and {product}.
 
 == Prerequisites
 
@@ -14,11 +12,17 @@ For a complete source code example, see the {astra-streaming-examples-repo}[{pro
 
 == Create a project
 
-. Run the following script to create a project folder, change directory into it, and then initialize a new Go project:
+. If needed, install Golang:
 +
 [source,shell]
 ----
 sudo apt install -y golang-go
+----
+
+. Create a project folder, change directory into the new folder, and then initialize a new Go project:
++
+[source,shell]
+----
 mkdir SimpleProducerConsumer && cd SimpleProducerConsumer
 
 go mod init SimpleProducerConsumer
@@ -79,7 +83,7 @@ Your editor might show errors until you complete the next steps.
 +
 include::ROOT:partial$client-variables-table.adoc[]
 
-. Use the client to create a producer.
+. Use the client to create a producer:
 +
 .main.go
 [source,golang]

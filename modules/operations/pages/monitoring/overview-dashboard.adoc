@@ -1,8 +1,14 @@
 = Overview dashboard
 
-The {astra-streaming-examples-repo}/blob/master/grafana-dashboards/as-overview.json[overview dashboard] has three major sections which display the highest aggregation level - tenant level, tenant level with namespace level separation, and the variable section, where you can choose a cluster and a tenant.
+The overview dashboard aggregates metrics at the tenant level.
+
+Download the xref:operations:attachment$as-overview.json[overview dashboard JSON file] to import into your Grafana instance.
+In the `templating` section, you can define the cluster and tenant variables.
+
+The overview dashboard includes overall tenant-level metrics, and tenant-level metrics separated by namespace.
 
 == Tenant overview
+
 Overview displays the aggregated total metrics values summarized at the tenant level. The following metrics are included:
 
 * Total number of namespaces
@@ -43,4 +49,5 @@ Messaging displays the time series metrics chart summarized at the tenant level.
 
 == See also
 
-Dashboards are available for scraping metrics at {pulsar-short}'s xref:monitoring/overview-dashboard.adoc[tenant], xref:monitoring/namespace-dashboard.adoc[namespace], and xref:monitoring/topic-dashboard.adoc[topic] levels.
+* xref:monitoring/namespace-dashboard.adoc[]
+* xref:monitoring/topic-dashboard.adoc[]

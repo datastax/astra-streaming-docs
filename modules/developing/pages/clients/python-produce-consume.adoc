@@ -2,9 +2,7 @@
 :navtitle: Python
 :description: Use the Python {pulsar-short} client with {product} to produce and consume messages.
 
-You can use the Python {pulsar-short} client with {product} to produce and consume messages.
-
-For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
+This example demonstrates how you can use the Python {pulsar-short} client with {product} to produce and consume messages.
 
 == Prerequisites
 
@@ -16,10 +14,8 @@ For a complete source code example, see the {astra-streaming-examples-repo}[{pro
 
 == Create a project
 
-. Create a folder for a new Python project.
+Create a directory for your Python project, create an `index.py` file, and then install the {pulsar-short} client library with pip:
 
-. In your new directory, install the {pulsar-short} client library with pip:
-+
 [source,shell]
 ----
 mkdir SimpleProducerConsumer && cd SimpleProducerConsumer
@@ -31,8 +27,12 @@ pip install pulsar-client==2.10
 
 == Write the script
 
-. Create an `index.py` file containing the following code.
-This code creates a {pulsar-short} client instance with the topic URL and token authentication.
+In the following steps you will add code to `index.py` to create a complete script that produces and consumes messages with the Python {pulsar-short} client and {product}.
+Your IDE might show errors until you have completed the script.
+
+. Open `index.py` in a text editor or IDE.
+
+. Import the required libraries, and then create a {pulsar-short} client instance with the topic URL and token authentication:
 +
 .index.py
 [source,python]
@@ -51,9 +51,6 @@ topic = "persistent://{0}/{1}/{2}".format(tenantName, namespace, topicName)
 
 client = pulsar.Client(serviceUrl, authentication=pulsar.AuthenticationToken(pulsarToken))
 ----
-+
-This script is intentionally incomplete.
-Your IDE might show errors until you complete the next steps.
 
 . Provide values for the following variables:
 +
@@ -108,6 +105,49 @@ while waitingForMsg:
 +
 [source,python]
 ----
+client.close()
+----
+
+The complete `index.py` script is as follows:
+
+.index.py
+[source,python]
+----
+import pulsar
+import time
+
+serviceUrl = "<REPLACE_WITH_SERVICE_URL>";
+pulsarToken = "<REPLACE_WITH_PULSAR_TOKEN>";
+
+tenantName = "<REPLACE_WITH_TENANT_NAME>";
+namespace = "<REPLACE_WITH_NAMESPACE>";
+topicName = "<REPLACE_WITH_TOPIC>";
+
+topic = "persistent://{0}/{1}/{2}".format(tenantName, namespace, topicName)
+
+client = pulsar.Client(serviceUrl, authentication=pulsar.AuthenticationToken(pulsarToken))
+
+producer = client.create_producer(topic)
+
+producer.send('Hello World'.encode('utf-8'))
+
+consumer = client.subscribe(topic, 'my-subscription')
+
+waitingForMsg = True
+while waitingForMsg:
+    try:
+        msg = consumer.receive(2000)
+        print("Received message '{}' id='{}'".format(msg.data(), msg.message_id()))
+
+        # Acknowledging the message to remove from message backlog
+        consumer.acknowledge(msg)
+
+        waitingForMsg = False
+    except:
+        print("Still waiting for a message...");
+
+    time.sleep(1)
+
 client.close()
 ----
 

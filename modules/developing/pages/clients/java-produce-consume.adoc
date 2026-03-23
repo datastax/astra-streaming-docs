@@ -2,9 +2,7 @@
 :navtitle: Java
 :description: Produce and consume messages with the Java {pulsar-short} client and {product}.
 
-You can produce and consume messages with the Java {pulsar-short} client and {product}.
-
-For a complete source code example, see the {astra-streaming-examples-repo}[{product} Examples repository].
+This example demonstrates how you can produce and consume messages with the Java {pulsar-short} client and {product}.
 
 == Prerequisites
 
@@ -35,11 +33,11 @@ mvn archetype:generate \
 .pom.xml
 [source,xml]
 ----
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-client</artifactId>
-  <version>2.10.2</version>
-</dependency>
+        <dependency>
+            <groupId>org.apache.pulsar</groupId>
+            <artifactId>pulsar-client</artifactId>
+            <version>2.10.2</version>
+        </dependency>
 ----
 
 . For this example, add the following build target in `pom.xml`.
@@ -48,23 +46,23 @@ This example creates a single artifact.
 .pom.xml
 [source,xml]
 ----
-<build>
-  <plugins>
-    <plugin>
-      <artifactId>maven-assembly-plugin</artifactId>
-      <configuration>
-        <archive>
-          <manifest>
-            <mainClass>org.example.App</mainClass>
-          </manifest>
-        </archive>
-        <descriptorRefs>
-          <descriptorRef>jar-with-dependencies</descriptorRef>
-        </descriptorRefs>
-      </configuration>
-    </plugin>
-  </plugins>
-</build>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.example.App</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 ----
 
 . If necessary, specify the compiler versions in `pom.xml`:
@@ -72,19 +70,19 @@ This example creates a single artifact.
 .pom.xml
 [source,xml]
 ----
-<properties>
-  <maven.compiler.source>11</maven.compiler.source>
-  <maven.compiler.target>11</maven.compiler.target>
-</properties>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 ----
 
 == Write the script
 
-. In your project, navigate to `src/main/java/org/example`, and then open `App.java`.
+. In `src/main/java/org/example`, create or open `App.java`.
 
 . Remove any existing content from the file, and then add the following code that imports dependencies, creates a client instance, and configures the instance to use your {product} tenant:
 +
-.App.java
+./src/main/java/org/example/App.java
 [source,java]
 ----
 package org.example;
@@ -123,7 +121,7 @@ include::ROOT:partial$client-variables-table.adoc[]
 . Use the client to create a producer.
 The producer builds on the client configuration for directions about what topic to produce messages to.
 +
-.App.java
+./src/main/java/org/example/App.java
 [source,java]
 ----
     Producer<String> producer = client.newProducer(Schema.STRING)
@@ -133,7 +131,7 @@ The producer builds on the client configuration for directions about what topic 
 
 . Asynchronously send a single message to the broker and wait for acknowledgment, and close the producer:
 +
-.App.java
+./src/main/java/org/example/App.java
 [source,java]
 ----
     producer.send("Hello World");
@@ -144,7 +142,7 @@ The producer builds on the client configuration for directions about what topic 
 . Create a new consumer instance.
 This code directs the consumer to watch a certain topic, identifies the subscription for watching topics, and begins the subscription.
 +
-.App.java
+./src/main/java/org/example/App.java
 [source,java]
 ----
     Consumer<String> consumer = client.newConsumer(Schema.STRING)
@@ -155,7 +153,7 @@ This code directs the consumer to watch a certain topic, identifies the subscrip
 
 . Receive the messages added by the producer:
 +
-.App.java
+./src/main/java/org/example/App.java
 [source,java]
 ----
     boolean receivedMsg = false;
@@ -178,7 +176,7 @@ This code directs the consumer to watch a certain topic, identifies the subscrip
 
 . Clean up and close the class:
 +
-.App.java
+./src/main/java/org/example/App.java
 [source,java]
 ----
     consumer.close();

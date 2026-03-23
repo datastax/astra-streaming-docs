@@ -1,5 +1,7 @@
 = Exclusive subscriptions in {pulsar-reg}
 :navtitle: Exclusive
+:subscription-comment: // Subscription type is set to Exclusive
+:subscription-type: .subscriptionType(SubscriptionType.Exclusive)
 
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
@@ -7,42 +9,48 @@ An _exclusive subscription_ describes a basic publish-subscribe (pub-sub) patter
 
 This page explains how to use {pulsar-short}'s exclusive subscription model to manage your topic consumption.
 
+== Prerequisites
+
 include::ROOT:partial$subscription-prereq.adoc[]
 
-[#example]
-== Exclusive subscription example
+== Prepare example project and producer
 
-. To configure a {pulsar-short} exclusive subscription, define a `pulsarConsumer` object in `SimplePulsarConsumer.java`, as you would for other subscription types.
-However, you don't need to declare a `subscriptionType`.
-Whereas other subscription types required you to declare a specific `subscriptionType`, {pulsar-short} creates an exclusive subscription by default if you don't declare a `subscriptionType`.
+include::ROOT:partial$subscription-setup-project.adoc[]
+
+
+[#example]
+== Create consumer with exclusive subscription
+
+To create a {pulsar-short} exclusive subscription, create a `pulsarConsumer` with `{subscription-type}`.
+
+. In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
 +
 .SimplePulsarConsumer.java
+[source,java,subs="+attributes"]
+----
+include::ROOT:partial$simplepulsarconsumer.java[]
+----
++
+Alternatively, you can omit the `.subscriptionType` declaration because `Exclusive` is the default subscription type:
++
+.SimplePulsarConsumer.java with implied exclusive subscription
 [source,java]
 ----
-pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
-    .topic("persistent://"
-            + conf.getTenantName() + "/"
-            + conf.getNamespace() + "/"
-            + conf.getTopicName())
-    .startMessageIdInclusive()
-    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
-    .subscriptionName("SimplePulsarConsumer")
-    .subscribe();
+            pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
+                    .topic("persistent://"
+                            + conf.getTenantName() + "/"
+                            + conf.getNamespace() + "/"
+                            + conf.getTopicName())
+                    .startMessageIdInclusive()
+                    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
+                    .subscriptionName("SimplePulsarConsumer")
+                    // No subscriptionType declaration, defaults to Exclusive
+                    .subscribe();
 ----
-+
-If you want to explicitly define an exclusive subscription, you can add `.subscriptionType(SubscriptionType.Exclusive)` to the consumer.
 
-. In the `pulsar-subscription-example` project, run `SimplePulsarConsumer.java` to begin consuming messages.
-+
-The confirmation message and a cursor appear to indicate the consumer is ready:
-+
-.Result
-[source,console]
-----
-[main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully
-...
-[pulsar-client-io-1-1] INFO org.apache.pulsar.client.impl.ConsumerImpl - [persistent://<tenant_name>/<namespace>/in][SimplePulsarConsumer] Subscribed to topic on <service_url> -- consumer: 0
-----
+== Test exclusive subscription
+
+include::ROOT:partial$subscription-start-consumer.adoc[]
 
 . In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
 +
