@@ -3,7 +3,7 @@
 Systems in streaming pipelines can use different representations for schema and data types.
 
 Schema mapping is required to align congruent types in a pipeline.
-For example, to send data from a CDC-enabled {cass-reg} table to a {pulsar-reg} topic, you must define schema mapping between the {cass-short} table and the {pulsar-short} topic.
+For example, to send data from a CDC-enabled {cass-reg} table to an {pulsar-reg} topic, you must define schema mapping between the {cass-short} table and the {pulsar-short} topic.
 If the schema includes more complex data types, like maps and nested data structures, schema management becomes more difficult.
 
 Schema management is a complicated, tedious, and error-prone tasks that requires you to understand and translate multiple sets of schema rules.

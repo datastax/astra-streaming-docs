@@ -19,7 +19,7 @@ To send requests to the {product} {pulsar-short} Admin API, you need the followi
 
 * An active {astra} account with access to {product}.
 
-* A {product} tenant.
+* An {product} tenant.
 
 * A xref:operations:astream-token-gen.adoc[{pulsar-short} token] for your tenant.
 +
