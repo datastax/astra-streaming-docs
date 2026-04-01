@@ -65,7 +65,7 @@ The private link service pattern is the same across cloud providers, but the hos
 
 === Private connections for outbound traffic
 
-On a case-by-case basis, {product} can support private outbound traffic flowing from a {product} private endpoint to your private link service.
+On a case-by-case basis, {product} can support private outbound traffic flowing from an {product} private endpoint to your private link service.
 
 {company} opens a port on the tenant's firewall to allow connectors and functions running in a dedicated namespace on an {product} cluster to connect to your private network.
 Each tenant has its own firewall.

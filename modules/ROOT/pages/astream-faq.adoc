@@ -33,7 +33,7 @@ And finally {product} offers a user-friendly interface and free tier to satisfy 
 
 == Why does {company} call {product} "serverless"?
 
-Running a {pulsar-reg} cluster that can handle at-scale workloads is not a trivial task.
+Running an {pulsar-reg} cluster that can handle at-scale workloads is not a trivial task.
 It requires many (virtual) machines to be configured in a very particular way.
 
 In traditional cloud environments, you would pay hourly for every machine whether they are being used for workloads or not, and you would carry the burden of maintaining the server infrastructure.
