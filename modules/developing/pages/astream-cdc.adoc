@@ -179,7 +179,7 @@ To enable CDC for {astra-db}, you need the following:
 
 * An active {astra-url}[{astra} account] with access to an organization that has an {product} subscription plan.
 +
-You need a role that grants permission to manage streaming tenants, such as the *Organization Administrator* role.
+You need a role that grants permission to manage streaming tenants, such as the {organization-administrator-role} role.
 
 * An active xref:astra-db-serverless:databases:create-database.adoc[database] with at least one xref:astra-db-serverless:databases:manage-keyspaces.adoc[keyspace].
 

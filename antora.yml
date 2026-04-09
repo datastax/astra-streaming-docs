@@ -55,4 +55,14 @@ asciidoc:
     scb-short: 'SCB'
     scb-brief: 'Secure Connect Bundle'
 
+    # Astra role attributes (compare with astra-vector-docs antora.yml)
+    organization-administrator-role: 'xref:astra-db-serverless:administration:rbac.adoc#organization-administrator-role[Organization Administrator]'
+    administrator-service-account-role: 'xref:astra-db-serverless:administration:rbac.adoc#administrator-service-account-role[Administrator Service Account]'
+    api-administrator-service-account-role: 'xref:astra-db-serverless:administration:rbac.adoc#api-administrator-service-account-role[API Administrator Service Account]'
+    api-administrator-user-role: 'xref:astra-db-serverless:administration:rbac.adoc#api-administrator-user-role[API Administrator User]'
+
+    # Astra permission attributes (compare with astra-vector-docs antora.yml)
+    manage-streaming-permission: 'xref:astra-db-serverless:administration:rbac.adoc#manage-streaming-permission[Manage Streaming]'
+    view-db-permission: 'xref:astra-db-serverless:administration:rbac.adoc#view-db-permission[View DB]'
+
     # For more attributes, see release.yml in the datastax-docs-site repo
