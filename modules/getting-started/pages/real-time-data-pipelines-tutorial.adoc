@@ -205,7 +205,7 @@ CREATE TABLE click_data.product_clicks (
 * **Name**: Enter `all-clicks`.
 * **Input topic**: Select your `all-clicks` topic in your `production` namespace.
 * **Database**: Select your `webstore-clicks` database.
-* **Token**: Click the link to create an {astra} application token with the **Organization Administrator** role, and then enter the token in the sink's **Token** field.
+* **Token**: Click the link to create an {astra} application token with the {organization-administrator-role} role, and then enter the token in the sink's **Token** field.
 Store the token securely, you will use it multiple times during this tutorial.
 * **Keyspace**: Enter `click_data`.
 * **Table Name**: Enter `all_clicks`.

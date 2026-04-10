@@ -39,7 +39,7 @@ You can use the {devops-api-ref-url}#tag/Organization-Operations/operation/confi
 
 . In the {astra-ui-link} header, click icon:grip[name="Applications"], and then select *Admin*.
 
-. Click **Tokens**, and then create an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra} application token] with the **Organization Administrator** role.
+. Click **Tokens**, and then create an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra} application token] with the {organization-administrator-role} role.
 
 . Create the audit log streaming configuration using the values from the tenant's `client.conf` file and your {pulsar-short} configuration:
 +

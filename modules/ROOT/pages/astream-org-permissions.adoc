@@ -8,17 +8,17 @@ For information about {astra} RBAC, including default roles, custom roles, permi
 
 Permissions specific to {product} include the following:
 
-* *Manage Streaming* (`org-stream-manage`): View, add, edit, or remove {product} configurations.
+* {manage-streaming-permission} (`org-stream-manage`): View, add, edit, or remove {product} configurations.
 
 === Default roles for {product}
 
 There are no default {astra} roles specifically scoped to {product}.
-However, the following default roles have the *Manage Streaming* permission:
+However, the following default roles have the {manage-streaming-permission} permission:
 
-* *Organization Administrator*
-* *Administrator Service Account*
-* *API Administrator Service Account*
-* *API Administrator User*
+* {organization-administrator-role}
+* {administrator-service-account-role}
+* {api-administrator-service-account-role}
+* {api-administrator-user-role}
 
 For information about permissions assigned to default roles, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
 
@@ -26,8 +26,8 @@ For information about permissions assigned to default roles, see xref:astra-db-s
 
 If you xref:astra-db-serverless:administration:manage-database-access.adoc#custom-roles[create custom roles] for {product}, those roles must have the following permissions, at minimum:
 
-* *Manage Streaming* (`org-stream-manage`): View and manage {product} in the {astra-ui}.
-* *View DB* (`org-db-view`): View the {astra-ui} in general.
+* {manage-streaming-permission} (`org-stream-manage`): View and manage {product} in the {astra-ui}.
+* {view-db-permission} (`org-db-view`): View the {astra-ui} in general.
 
 Additional permissions might be required, depending on the tasks the role needs to perform.
 
