@@ -2,38 +2,33 @@
 :navtitle: Manage roles and permissions
 
 You manage role-based access control (RBAC) for {product} through your {astra} organization.
-For information about {astra} RBAC, including default roles, custom roles, permissions, and user management, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
+For more information about {astra} RBAC, see xref:astra-db-serverless:administration:rbac.adoc[].
 
-== {product} permissions
+== {astra} roles and permissions for {product}
 
-Permissions specific to {product} include the following:
+To access {product}, the minimum required permissions are as follows:
 
-* {manage-streaming-permission} (`org-stream-manage`): View, add, edit, or remove {product} configurations.
+* **{manage-streaming-permission} (`org-stream-manage`)**: Create, read, update, and delete {product} resources in the {astra-ui} and with the APIs.
+* **{view-db-permission} (`org-db-view`)**: View the {astra-ui}.
+This permission is required for a user to access {product} through the {astra-ui}.
+This permission isn't required for programmatic access.
 
-=== Default roles for {product}
+By default, {astra} has no roles that are scoped exclusively to {product}.
 
-There are no default {astra} roles specifically scoped to {product}.
-However, the following default roles have the {manage-streaming-permission} permission:
+The following built-in roles have the {manage-streaming-permission} permission in addition to other permissions:
 
 * {organization-administrator-role}
 * {administrator-service-account-role}
 * {api-administrator-service-account-role}
 * {api-administrator-user-role}
 
-For information about permissions assigned to default roles, see xref:astra-db-serverless:administration:manage-database-access.adoc[].
-
-=== Custom roles for {product}
-
-If you xref:astra-db-serverless:administration:manage-database-access.adoc#custom-roles[create custom roles] for {product}, those roles must have the following permissions, at minimum:
-
-* {manage-streaming-permission} (`org-stream-manage`): View and manage {product} in the {astra-ui}.
-* {view-db-permission} (`org-db-view`): View the {astra-ui} in general.
-
-Additional permissions might be required, depending on the tasks the role needs to perform.
+Additionally, you can  xref:astra-db-serverless:administration:custom-roles.adoc[create custom roles] with a narrower set of permissions.
+Make sure these roles have the minimum required permissions for {product} ({manage-streaming-permission} and {view-db-permssion}), and any other permissions required for the tasks the role needs to perform.
+For example, to enable Change Data Capture (CDC), the role also needs permission to manage the relevant databases.
 
 [TIP]
 ====
-To control access to specific streaming tenants, you can set granular xref:astra-db-serverless:administration:manage-database-access.adoc#role-scopes[resource scopes] on custom roles.
+To control access to specific streaming tenants, you can set granular xref:astra-db-serverless:administration:custom-roles.adoc#role-scopes[resource scopes] on custom roles.
 ====
 
 == Authentication and authorization in {pulsar-reg} and {astra}
