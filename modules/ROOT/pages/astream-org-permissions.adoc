@@ -23,7 +23,7 @@ The following built-in roles have the {manage-streaming-permission} permission i
 * {api-administrator-user-role}
 
 Additionally, you can  xref:astra-db-serverless:administration:custom-roles.adoc[create custom roles] with a narrower set of permissions.
-Make sure these roles have the minimum required permissions for {product} ({manage-streaming-permission} and {view-db-permssion}), and any other permissions required for the tasks the role needs to perform.
+Make sure these roles have the minimum required permissions for {product} ({manage-streaming-permission} and {view-db-permission}), and any other permissions required for the tasks the role needs to perform.
 For example, to enable Change Data Capture (CDC), the role also needs permission to manage the relevant databases.
 
 [TIP]
