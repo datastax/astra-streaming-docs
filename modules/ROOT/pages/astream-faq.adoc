@@ -100,7 +100,7 @@ The following questions address security and access control in {product}.
 
 === Does {product} support single-sign on?
 
-If your {astra} organization is on a paid {astra} subscription plan, your users can use SSO to sign in to the {astra-ui}.
+If your {astra} organization is on a paid {astra} plan, your users can use SSO to sign in to the {astra-ui}.
 For more information, see xref:astra-db-serverless:administration:configure-sso.adoc[].
 
 === How do {astra} roles and permissions map to {pulsar-short} roles and permissions?
