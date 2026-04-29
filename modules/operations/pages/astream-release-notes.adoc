@@ -62,7 +62,7 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 
 === {new}
 
-* Custom functions require a xref:operations:astream-pricing.adoc[paid {product} subscription plan].
+* Custom functions require a xref:operations:astream-pricing.adoc[paid {product} plan].
 
 == February 27, 2023
 

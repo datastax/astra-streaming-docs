@@ -2,12 +2,12 @@
 
 {product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra}.
 
-== Subscription plans
+== Plans
 
-There are multiple {product} subscription plans.
-An {product} subscription is associated with an {astra} organization, but {product} subscription plans are separate from {astra} organization subscription plans.
+There are multiple {product} plans.
+An {product} plan is associated with an {astra} organization, but {product} plans are separate from {astra} organization plans.
 
-For {astra} plans and pricing details, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[{astra} subscription plans].
+For more information, see https://www.ibm.com/docs/en/astra-streaming?topic=astra-streaming-annual-price-plans[{product} pricing] and xref:astra-db-serverless:administration:subscription-plans.adoc[{astra} plans].
 
 == Shared clusters
 
@@ -30,7 +30,7 @@ You sign in to {astra} and use {product} in the same way that you would on share
 When you create a tenant, you have the option to deploy to your private cluster.
 This means that you can use both shared clusters and Streaming Capacity Units, depending on your tenants' use cases.
 
-Streaming Capacity Units are an addition to your base {product} subscription plan, and billing for Streaming Capacity Units is unique to each customer.
+Streaming Capacity Units are an addition to your base {product} plan, and billing for Streaming Capacity Units is unique to each customer.
 
 Like shared clusters, all connections for Streaming Capacity Units in {product} are guarded by authentication, authorization, and secure (TLS) communications.
 By default, these connections are over the public internet.
@@ -38,7 +38,7 @@ Additionally, Streaming Capacity Units support xref:operations:private-connectiv
 
 == Additional billed charges
 
-Regardless of your subscription plan or cluster type, additional customizations can impact your {product} billed charges.
+Regardless of your plan or cluster type, additional customizations can impact your {product} billed charges.
 These include, but are not limited to, the following:
 
 * Message retention duration
@@ -48,7 +48,7 @@ These include, but are not limited to, the following:
 
 == Limits
 
-Regardless of your subscription plan or cluster type, {product} applies xref:astream-limits.adoc[guardrails and limits] on resource creation to ensure best practices, foster availability, and promote optimal configurations for your databases.
+Regardless of your plan or cluster type, {product} applies xref:astream-limits.adoc[guardrails and limits] on resource creation to ensure best practices, foster availability, and promote optimal configurations for your databases.
 
 Streaming Capacity Units have fewer limits than shared clusters.
 
