@@ -72,84 +72,69 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 
 * Launched a refreshed {astra-ui}.
 
-== 2022 release notes
+[#releases-2022]
+== 2022 releases
 
-[discrete]
 === November 21, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * Added support for the Azure `australiaeast` (New South Wales, Australia) region.
 
-[discrete]
 === November 11, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * {product} now supports xref:developing:astream-functions-transform.adoc[transform functions].
 
-[discrete]
 === November 16, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * {product} now supports xref:operations:astream-georeplication.adoc[georeplication].
 
-[discrete]
 === June 7, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * {product} now supports xref:operations:astream-scrape-metrics.adoc[scraping metrics with Prometheus].
 
-[discrete]
 === April 28, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * xref:starlight-for-rabbitmq:ROOT:index.adoc[{starlight-rabbitmq}] is now available, bringing built-in RabbitMQ(R) protocol support to {pulsar-reg}, enabling migration of existing RabbitMQ applications and services to {pulsar-short} without modifying the code.
 
-[discrete]
 === April 19, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * xref:starlight-for-jms:ROOT:index.adoc[{starlight-kafka}] is now available, bringing built-in {kafka-reg} protocol support to {pulsar-short}.
 
-[discrete]
 === March 24, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * xref:developing:astream-cdc.adoc[CDC for {astra-db}] is now available, which automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data into {product} where it can be processed by client applications or sent to downstream systems.
 
-[discrete]
 === January 31, 2022
 
 {boilerplate}
 
-[discrete]
 ==== {new}
 
 * {product} is now generally available.
@@ -157,14 +142,13 @@ For more information, see xref:developing:clients/spring-produce-consume.adoc[Sp
 * xref:operations:astream-token-gen.adoc[{pulsar-short} tokens] simplify connecting to your streaming instances.
 * Enabled xref:operations:astream-pricing.adoc[billing].
 
-== 2021 release notes
+[#releases-2021]
+== 2021 releases
 
-[discrete]
 === December 20, 2021
 
 {boilerplate}
 
-[discrete]
 ==== {security}
 
 * Security upgrade to Log4J 2.17.0 to mitigate CVE-2021-45105.
