@@ -54,6 +54,11 @@ asciidoc:
     scb: 'Secure Connect Bundle (SCB)'
     scb-short: 'SCB'
     scb-brief: 'Secure Connect Bundle'
+    pulsar-admin-functions-cli-ref-url: 'https://pulsar.apache.org/docs/{pulsar-version}.x/functions-cli'
+    pulsar-admin-sinks-ref-url: 'https://pulsar.apache.org/reference/#/{pulsar-version}.x/pulsar-admin/sinks'
+    pulsar-admin-sources-ref-url: 'https://pulsar.apache.org/reference/#/{pulsar-version}.x/pulsar-admin/sources'
+    pulsar-person-class-spec-url: 'https://github.com/apache/pulsar/blob/branch-{pulsar-version}/pulsar-io/data-generator/src/main/java/org/apache/pulsar/io/datagenerator/Person.java'
+    debezium-release-url: 'https://debezium.io/releases/{debezium-version}'
 
     # Astra role attributes (compare with astra-vector-docs antora.yml)
     organization-administrator-role: 'xref:astra-db-serverless:administration:rbac.adoc#organization-administrator-role[Organization Administrator]'
