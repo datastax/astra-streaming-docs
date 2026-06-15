@@ -77,7 +77,7 @@
 Create the `resources` subdirectory if it doesn't already exist.
 +
 ./src/main/resources/application.properties
-[source,conf,subs="+quotes"]
+[source,properties,subs="+quotes"]
 ----
 # ---------------------------------------
 # Configuration of your Astra Streaming tenant

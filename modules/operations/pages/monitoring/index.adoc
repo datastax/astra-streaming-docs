@@ -284,7 +284,7 @@ In {pulsar-short}, end user applications only deal with messages at the parent t
 
 * Exclude reported metrics that are associated with {product}'s system namespaces and topics, which are usually prefixed by two underscores, such as:
 +
-[source,plain]
+[source,console]
 ----
 __kafka
 __transaction_producer_state
