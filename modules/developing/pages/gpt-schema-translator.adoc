@@ -113,7 +113,7 @@ a|
 ----
 
 a|
-[source,plain]
+[source,console]
 ----
 id=key, file1=value.file1, file2=value.file2, file3=value.file3
 ----
@@ -133,7 +133,7 @@ This example demonstrates how you can generates schema mapping in real time.
 . The xref:connectors:sources/data-generator.adoc[Data Generator source connector] generates data for a {pulsar-short} topic with an AVRO schema.
 +
 .AVRO schema example
-[source,avro]
+[source,json]
 ----
 "pulsar_topic_schema": {
         "person": {
@@ -410,7 +410,7 @@ image::developing:create-schema-mapping.png[Schema mapping,320,240]
 +
 The {gpt-schema-translator} generates an AVRO-to-CQL schema mapping while messages are processed.
 +
-[source,plain]
+[source,console]
 ----
 passportnumber=value.passportNumber, age=value.age, firstname=value.firstName, lastname=value.lastName
 ----
@@ -461,7 +461,7 @@ For example, assume you have the following {cass-short} table schema:
 
 The schema translator would generate the following {pulsar-short} JSON schema mapping based on the given {cass-short} table schema:
 
-[source,plain]
+[source,console]
 ----
 passportnumber=value.passportnumber, age=value.age, firstname=value.firstname, lastname=value.lastname
 ----
