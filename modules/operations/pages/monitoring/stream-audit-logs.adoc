@@ -1,6 +1,6 @@
 = Stream {astra} audit logs
 
-Stream your xref:astra-db-serverless:administration:view-account-audit-log.adoc[{astra} audit logs] through {product} to an external system.
+Stream your xref:astra-db-serverless:administration:audit-log.adoc[{astra} audit logs] through {product} to an external system.
 
 To enable audit log streaming, you must do one of the following:
 
