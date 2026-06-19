@@ -5,7 +5,7 @@
 
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
-{pulsar-short}'s xref:astream-subscriptions-shared.adoc[shared subscription] model can increase the message processing rate, but it risks losing message ordering guarantees.
+{pulsar-short}'s xref:ROOT:astream-subscriptions-shared.adoc[shared subscription] model can increase the message processing rate, but it risks losing message ordering guarantees.
 In a round-robin delivery, there's no way for the broker to know which messages are going to which consumer.
 
 _Key shared subscriptions_ allow multiple consumers to subscribe to a topic, and provide additional metadata in the form of _keys_ that link messages to specific consumers.
@@ -38,7 +38,7 @@ If you need to set fixed hash ranges, use the `<<use-stickyhashrange,stickyHashR
 === Use autoSplitHashRange
 
 To automatically assign hash ranges to consumers, use the `autoSplitHashRange` policy.
-Running multiple consumers with `autoSplitHashRange` balances the messaging load across all available consumers, like a xref:astream-subscriptions-shared.adoc[shared subscription].
+Running multiple consumers with `autoSplitHashRange` balances the messaging load across all available consumers, like a xref:ROOT:astream-subscriptions-shared.adoc[shared subscription].
 
 . In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
 +
@@ -211,7 +211,7 @@ Then, you can launch multiple instances of `SimplePulsarConsumer.java` to consum
 
 == See also
 
-* xref:astream-subscriptions.adoc[]
-* xref:astream-subscriptions-exclusive.adoc[]
-* xref:astream-subscriptions-shared.adoc[]
-* xref:astream-subscriptions-failover.adoc[]
+* xref:ROOT:astream-subscriptions.adoc[]
+* xref:ROOT:astream-subscriptions-exclusive.adoc[]
+* xref:ROOT:astream-subscriptions-shared.adoc[]
+* xref:ROOT:astream-subscriptions-failover.adoc[]

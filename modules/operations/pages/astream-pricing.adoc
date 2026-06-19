@@ -48,13 +48,13 @@ These include, but are not limited to, the following:
 
 == Limits
 
-Regardless of your plan or cluster type, {product} applies xref:astream-limits.adoc[guardrails and limits] on resource creation to ensure best practices, foster availability, and promote optimal configurations for your databases.
+Regardless of your plan or cluster type, {product} applies xref:operations:astream-limits.adoc[guardrails and limits] on resource creation to ensure best practices, foster availability, and promote optimal configurations for your databases.
 
 Streaming Capacity Units have fewer limits than shared clusters.
 
 == Regions
 
-With shared clusters, you can create tenants in any of the xref:astream-regions.adoc[supported regions].
+With shared clusters, you can create tenants in any of the xref:operations:astream-regions.adoc[supported regions].
 
 Streaming Capacity Units are open to almost any public cloud region.
 For this reason, Streaming Capacity Units offer more flexibility for xref:operations:astream-georeplication.adoc[georeplication].

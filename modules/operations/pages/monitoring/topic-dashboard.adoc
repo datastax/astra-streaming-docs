@@ -62,5 +62,5 @@ Georeplication displays the time series metrics chart summarized at the topic le
 
 == See also
 
-* xref:monitoring/overview-dashboard.adoc[]
-* xref:monitoring/namespace-dashboard.adoc[]
+* xref:operations:monitoring/overview-dashboard.adoc[]
+* xref:operations:monitoring/namespace-dashboard.adoc[]

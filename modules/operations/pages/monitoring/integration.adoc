@@ -96,11 +96,10 @@ Make sure the additional scrape job is in `UP` status.
 If not, review the configuration instructions and YAML examples to ensure your configuration is correct.
 +
 If the additional scrape job returns a `401 Unauthorized` error, make sure your {pulsar-short} JWT isn't expired.
-For more information, see xref:astream-token-gen.adoc[].
+For more information, see xref:operations:astream-token-gen.adoc[].
 
 == See also
 
-* xref:monitoring/index.adoc[]
-* xref:monitoring/metrics.adoc[]
-* xref:monitoring/new-relic.adoc[]
-
+* xref:operations:monitoring/index.adoc[]
+* xref:operations:monitoring/metrics.adoc[]
+* xref:operations:monitoring/new-relic.adoc[]

@@ -1,10 +1,10 @@
 = Grafana dashboards for {product} metrics
 
 {company} provides Grafana dashboards for core message processing for exposed {product} metrics.
-Use these dashboards as a starting point for xref:monitoring/index.adoc[monitoring your {product} deployment], and then customize them as needed.
+Use these dashboards as a starting point for xref:operations:monitoring/index.adoc[monitoring your {product} deployment], and then customize them as needed.
 
 Dashboards are available for scraping metrics {pulsar-short}'s tenant, namespace, and topic levels:
 
-* Tenant level metrics: xref:monitoring/overview-dashboard.adoc[]
-* Namespace level metrics: xref:monitoring/namespace-dashboard.adoc[]
-* Topic level metrics: xref:monitoring/topic-dashboard.adoc[]
+* Tenant level metrics: xref:operations:monitoring/overview-dashboard.adoc[]
+* Namespace level metrics: xref:operations:monitoring/namespace-dashboard.adoc[]
+* Topic level metrics: xref:operations:monitoring/topic-dashboard.adoc[]
