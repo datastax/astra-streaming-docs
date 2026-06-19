@@ -177,7 +177,7 @@ mvn package
 [#deploy-the-function-with-the-pulsar-cli]
 === Deploy the function with the {pulsar-short} CLI
 
-. If you haven't done so already, xref:configure-pulsar-env.adoc[set up your environment for the {pulsar-short} binaries].
+. If you haven't done so already, xref:developing:configure-pulsar-env.adoc[set up your environment for the {pulsar-short} binaries].
 
 . Create a deployment configuration YAML file that defines the function metadata and associated topics:
 +

@@ -45,5 +45,5 @@ Georeplication displays the time series metrics chart summarized at the namespac
 
 == See also
 
-* xref:monitoring/overview-dashboard.adoc[]
-* xref:monitoring/topic-dashboard.adoc[]
+* xref:operations:monitoring/overview-dashboard.adoc[]
+* xref:operations:monitoring/topic-dashboard.adoc[]

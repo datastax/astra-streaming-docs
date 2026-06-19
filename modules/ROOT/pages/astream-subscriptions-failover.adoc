@@ -5,7 +5,7 @@
 
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
-If an xref:astream-subscriptions-exclusive.adoc[exclusive] consumer fails, the topic backlog accumulates stale, unacknowledged messages.
+If an xref:ROOT:astream-subscriptions-exclusive.adoc[exclusive] consumer fails, the topic backlog accumulates stale, unacknowledged messages.
 {pulsar-short} solves this problem with failover subscriptions.
 In _failover subscriptions_, {pulsar-short} designates one primary consumer and multiple standby consumers.
 If the primary consumer disconnects, the standby consumers begin consuming the subsequent unacknowledged messages.
@@ -78,7 +78,7 @@ To test them, you can progressively end each `SimplePulsarConsumer` process, and
 
 == See also
 
-* xref:astream-subscriptions.adoc[]
-* xref:astream-subscriptions-exclusive.adoc[]
-* xref:astream-subscriptions-shared.adoc[]
-* xref:astream-subscriptions-keyshared.adoc[]
+* xref:ROOT:astream-subscriptions.adoc[]
+* xref:ROOT:astream-subscriptions-exclusive.adoc[]
+* xref:ROOT:astream-subscriptions-shared.adoc[]
+* xref:ROOT:astream-subscriptions-keyshared.adoc[]

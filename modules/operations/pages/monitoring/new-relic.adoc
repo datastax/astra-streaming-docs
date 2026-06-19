@@ -4,13 +4,13 @@ While there are multiple ways to https://docs.newrelic.com/docs/infrastructure/p
 
 == Prerequisites
 
-* Review xref:monitoring/index.adoc[].
+* Review xref:operations:monitoring/index.adoc[].
 * https://docs.newrelic.com/[Set up a New Relic account.]
 * Save your New Relic license key locally.
 
 == Prepare the extra Prometheus server
 
-xref:monitoring/integration.adoc[Install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
+xref:operations:monitoring/integration.adoc[Install an extra Prometheus server] to act as a bridge to forward scraped {product} metrics to New Relic.
 
 This is required because {product} is a managed service, and you cannot modify the {product} Prometheus server as required by the New Relic Prometheus write integration.
 
@@ -64,6 +64,6 @@ prometheus:
 
 == See also
 
-* For a list of exposed endpoints for {product} metrics, see xref:monitoring/metrics.adoc[].
-* To scrape {product} metrics in Kubernetes with an external Prometheus server, see xref:monitoring/integration.adoc[].
-* To scrape {product} metrics into New Relic, see xref:monitoring/new-relic.adoc[].
+* For a list of exposed endpoints for {product} metrics, see xref:operations:monitoring/metrics.adoc[].
+* To scrape {product} metrics in Kubernetes with an external Prometheus server, see xref:operations:monitoring/integration.adoc[].
+* To scrape {product} metrics into New Relic, see xref:operations:monitoring/new-relic.adoc[].

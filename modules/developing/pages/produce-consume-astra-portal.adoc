@@ -31,5 +31,5 @@ Produced and consumed messages are printed in a chat style format in the **Test 
 
 == See also
 
-* xref:astream-functions.adoc[]
-* xref:astream-cdc.adoc[]
+* xref:developing:astream-functions.adoc[]
+* xref:developing:astream-cdc.adoc[]

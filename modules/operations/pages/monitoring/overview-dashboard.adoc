@@ -49,5 +49,5 @@ Messaging displays the time series metrics chart summarized at the tenant level.
 
 == See also
 
-* xref:monitoring/namespace-dashboard.adoc[]
-* xref:monitoring/topic-dashboard.adoc[]
+* xref:operations:monitoring/namespace-dashboard.adoc[]
+* xref:operations:monitoring/topic-dashboard.adoc[]

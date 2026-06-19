@@ -10,9 +10,9 @@ You should use this API version or higher.
 
 For more information and examples, see the following:
 
-* xref:clients/csharp-produce-consume.adoc[C#]
-* xref:clients/golang-produce-consume.adoc[Golang]
-* xref:clients/java-produce-consume.adoc[Java]
-* xref:clients/nodejs-produce-consume.adoc[Node.js]
-* xref:clients/python-produce-consume.adoc[Python]
-* xref:clients/spring-produce-consume.adoc[Spring Boot]
+* xref:developing:clients/csharp-produce-consume.adoc[C#]
+* xref:developing:clients/golang-produce-consume.adoc[Golang]
+* xref:developing:clients/java-produce-consume.adoc[Java]
+* xref:developing:clients/nodejs-produce-consume.adoc[Node.js]
+* xref:developing:clients/python-produce-consume.adoc[Python]
+* xref:developing:clients/spring-produce-consume.adoc[Spring Boot]

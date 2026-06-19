@@ -15,7 +15,7 @@ For a complete {pulsar-short} metrics reference, see:
 
 * https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]
 
-For a complete {product} metrics reference, see xref:monitoring/metrics.adoc[].
+For a complete {product} metrics reference, see xref:operations:monitoring/metrics.adoc[].
 
 == {product} metrics
 
@@ -263,7 +263,7 @@ The following table gives the list of recommended source connector metrics as a 
 [IMPORTANT]
 ====
 Do _not_ aggregate metrics on shared clusters because one cluster can be shared among multiple organizations.
-For more information, see xref:astream-limits.adoc[] and xref:operations:astream-pricing.adoc[].
+For more information, see xref:operations:astream-limits.adoc[] and xref:operations:astream-pricing.adoc[].
 ====
 
 Each externally exposed raw {product} metric is reported at a very low level, at each individual server instance (the `exported_instance` label) and each topic partition (the `topic` label). The same raw metrics could come from multiple server instances. From an {product} user's perspective, the direct monitoring of raw metrics is not really useful. Raw metrics need to be aggregated first - for example, by averaging or summing the raw metrics over a period of time.
@@ -417,6 +417,6 @@ If your receive too many false alarms, adjust the alert threshold to a higher va
 
 == See also
 
-* xref:monitoring/metrics.adoc[]
-* xref:monitoring/integration.adoc[]
-* xref:monitoring/new-relic.adoc[]
+* xref:operations:monitoring/metrics.adoc[]
+* xref:operations:monitoring/integration.adoc[]
+* xref:operations:monitoring/new-relic.adoc[]

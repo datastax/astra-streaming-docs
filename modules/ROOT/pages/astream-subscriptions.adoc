@@ -27,13 +27,12 @@ pulsarConsumer = pulsarClient.newConsumer(Schema.BYTES)
 
 == Subscription types
 
-* xref:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
-* xref:astream-subscriptions-shared.adoc[Shared subscriptions]
-* xref:astream-subscriptions-failover.adoc[Failover subscriptions]
-* xref:astream-subscriptions-keyshared.adoc[Key shared subscriptions]
+* xref:ROOT:astream-subscriptions-exclusive.adoc[Exclusive subscriptions]
+* xref:ROOT:astream-subscriptions-shared.adoc[Shared subscriptions]
+* xref:ROOT:astream-subscriptions-failover.adoc[Failover subscriptions]
+* xref:ROOT:astream-subscriptions-keyshared.adoc[Key shared subscriptions]
 
 == See also
 
 * xref:getting-started:index.adoc[]
 * xref:developing:starlight.adoc[]
-

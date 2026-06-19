@@ -89,7 +89,7 @@ Caused by: org.apache.pulsar.client.api.PulsarClientException$ConsumerBusyExcept
 
 == See also
 
-* xref:astream-subscriptions.adoc[]
-* xref:astream-subscriptions-shared.adoc[]
-* xref:astream-subscriptions-failover.adoc[]
-* xref:astream-subscriptions-keyshared.adoc[]
+* xref:ROOT:astream-subscriptions.adoc[]
+* xref:ROOT:astream-subscriptions-shared.adoc[]
+* xref:ROOT:astream-subscriptions-failover.adoc[]
+* xref:ROOT:astream-subscriptions-keyshared.adoc[]

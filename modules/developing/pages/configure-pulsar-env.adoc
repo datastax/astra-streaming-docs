@@ -80,4 +80,4 @@ Run some commands to validate the binary configuration.
 
 == See also
 
-* xref:produce-consume-pulsar-client.adoc[]
+* xref:developing:produce-consume-pulsar-client.adoc[]

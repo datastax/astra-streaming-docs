@@ -141,6 +141,6 @@ A tenant can only access its own metrics on the broker pod or function worker po
 
 == See also
 
-* xref:monitoring/index.adoc[]
+* xref:operations:monitoring/index.adoc[]
 * xref:getting-started:index.adoc[]
 * https://prometheus.io/docs/introduction/overview/[Prometheus documentation]
