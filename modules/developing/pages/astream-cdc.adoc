@@ -741,21 +741,26 @@ For multi-region databases, you must reconcile concurrent messages transmitted b
 ====
 
 {astra-db}'s eventual consistency policy replicates changes to all regions of a multi-region database, regardless of the original region where the write occurred.
+These cross-region repairs are separate from CDC.
 
-When you enable CDC on a multi-region database, CDC emits writes events for all CDC-enabled tables in all CDC-enabled regions, regardless of the original region.
-This means that all `data-` topics for the same table in all regional tenants eventually receive the same write events, and those topics pass concurrent, duplicate events for the same row to the sink.
+When you enable CDC on a multi-region database, CDC emits write events when any CDC-enabled table in any CDC-enabled regions receives a write directly.
+This means that your sinks could receive duplicate write events, depending on your application's write pattern across regions.
 
-{astra-db} doesn't reconcile concurrent modifications to the same row in multiple regions.
+If your client applications send the same write to the same table in multiple regions, the `data-` topics in the corresponding region-specific tenants _all_ receive that write event.
+As a result, those topics will pass concurrent, duplicate events for the same row to the sink.
+{astra-db} doesn't reconcile these concurrent modifications to the same row in multiple regions.
 Therefore, you are responsible for reconciling concurrent CDC messages transmitted to your sink service deployment.
 
 To assist with reconciling messages, each CDC message contains the entire row, including the partition key and clustering keys, as well as an `eventTime`, which is the internal {cass-short} timestamp for the mutation.
 You can use the primary key and timestamps to reconcile concurrent modifications to the same row in multiple regions.
 
-However, be aware of the following limitations:
+Alternatively, design your applications to write to one region only to avoid duplicate CDC write events.
+{astra-db}'s eventual consistency policy replicates the write to the other regions through cross-region repair _without_ generating duplicate CDC write events.
 
-* Cross-region writes can be received out of order or be missed.
-* Cross-region repairs don't emit CDC events.
-* Ordering between regions isn't guaranteed.
+The appropriate strategy depends on your workload's tolerance for potential delays in cross-region repairs.
+
+Be aware that cross-region writes can be received out of order or be missed.
+Furthermore, ordering between regions isn't guaranteed.
 
 [#get-cdc]
 == Check CDC status
