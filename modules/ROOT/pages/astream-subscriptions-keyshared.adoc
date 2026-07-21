@@ -101,7 +101,7 @@ import org.apache.pulsar.client.api.SubscriptionType;
 The following example sets all possible hashes (`0-65535`) on this subscription to one consumer:
 +
 .SimplePulsarConsumer.java with stickyHashRange for one consumer
-[source,java]
+[source,java,subs="+attributes"]
 ----
 ...
 
