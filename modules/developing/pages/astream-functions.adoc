@@ -31,7 +31,7 @@ You can also use this approach to deploy multiple function classes with a single
 To create a Python function, the `.zip` file must have the correct structure.
 For example, assuming a project named `testpythonfunction`, the extracted archive has the following structure:
 
-[source,plain]
+[source,plaintext]
 ----
 /my-python-function
    python-code/my-python-function.zip
