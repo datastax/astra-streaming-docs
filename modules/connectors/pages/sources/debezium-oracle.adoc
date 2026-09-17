@@ -36,5 +36,9 @@ include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
 
 Set these properties in the `configs` section of the connector configuration.
 
-Generally, all properties provided in the https://debezium.io/documentation/reference/stable/connectors/oracle.html#oracle-connector-properties[Debezium connector for Oracle] and the https://pulsar.apache.org/docs/io-debezium-source[OSS {pulsar} Debezium source connector] are supported.
-Exceptions include properties that aren't relevant to {product} and properties that are only present in <<compatibility,incompatible versions>>.
+Properties provided in the https://debezium.io/documentation/reference/stable/connectors/oracle.html#oracle-connector-properties[Debezium connector for Oracle] and the https://pulsar.apache.org/docs/io-debezium-source[OSS {pulsar} Debezium source connector] are supported with the following exceptions:
+
+* Properties that aren't relevant to {product}
+* Properties that are only present in <<compatibility,incompatible versions>>
+* Properties that are inherently unsupported by your environment
+* Properties that are inherently unsupported by your xref:operations:astream-pricing.adoc[cluster deployment type]

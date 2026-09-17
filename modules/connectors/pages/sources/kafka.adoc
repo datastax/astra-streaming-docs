@@ -28,5 +28,9 @@ include::common:streaming:partial$connectors/sources/pulsar-config-params.adoc[]
 
 Set these properties in the `configs` section of the connector configuration.
 
-Generally, all properties provided in the https://pulsar.apache.org/docs/io-kafka-source[OSS {pulsar} {kafka-short} source connector] are supported.
-Exceptions include properties that aren't relevant to {product} and properties that aren't present in {pulsar} {pulsar-version}.
+Properties provided in the https://pulsar.apache.org/docs/io-kafka-source[OSS {pulsar} {kafka-short} source connector] are supported with the following exceptions:
+
+* Properties that aren't relevant to {product}
+* Properties that aren't present in {pulsar} {pulsar-version}
+* Properties that are inherently unsupported by your environment
+* Properties that are inherently unsupported by your xref:operations:astream-pricing.adoc[cluster deployment type]
