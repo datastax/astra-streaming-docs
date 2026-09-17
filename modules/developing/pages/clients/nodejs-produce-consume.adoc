@@ -18,7 +18,8 @@ Install the {cpp} {pulsar-short} library dependency required by the Node.js {pul
 
 {pulsar-short} Node client versions 1.8 and later don't require installation of the {cpp} {pulsar-short} library dependency.
 
-.Ubuntu-based Debian
+Ubuntu-based Debian::
++
 [source,shell]
 ----
 wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/DEB/apache-pulsar-client.deb
@@ -30,7 +31,8 @@ sudo apt install -y ./apache-pulsar-client*.deb
 sudo ldconfig
 ----
 
-.Centos/RHEL-based rpm
+Centos/RHEL-based rpm::
++
 [source,shell]
 ----
 wget https://archive.apache.org/dist/pulsar/pulsar-2.10.2/RPMS/apache-pulsar-client-2.10.2-1.x86_64.rpm
@@ -62,7 +64,6 @@ npm install pulsar-client
 
 . In your new project, open the `index.js` file, and then add the following code.
 +
-.index.js
 [source,javascript]
 ----
 const Pulsar = require("pulsar-client");
@@ -104,7 +105,6 @@ include::ROOT:partial$client-variables-table.adoc[]
 There are many configuration options for producers.
 For this example, declare the topic where messages should go.
 +
-.index.js
 [source,javascript]
 ----
   const producer = await client.createProducer({
@@ -114,7 +114,6 @@ For this example, declare the topic where messages should go.
 
 . Send a message and receive acknowledgment:
 +
-.index.js
 [source,javascript]
 ----
   producer.send({
@@ -125,7 +124,6 @@ For this example, declare the topic where messages should go.
 
 . Clean up:
 +
-.index.js
 [source,javascript]
 ----
   await producer.flush();
@@ -136,7 +134,6 @@ At this point, the script produces a message that waits to be consumed and ackno
 
 . Create a new consumer subscription, name the subscription, and declare the topic to watch:
 +
-.index.js
 [source,javascript]
 ----
   const consumer = await client.subscribe({
@@ -149,7 +146,6 @@ At this point, the script produces a message that waits to be consumed and ackno
 
 . Receive messages, write them to the console, and acknowledge receipt with the broker:
 +
-.index.js
 [source,javascript]
 ----
   const msg = await consumer.receive();
@@ -159,7 +155,6 @@ At this point, the script produces a message that waits to be consumed and ackno
 
 . Clean up:
 +
-.index.js
 [source,javascript]
 ----
   await consumer.close();
@@ -169,7 +164,6 @@ At this point, the script produces a message that waits to be consumed and ackno
 
 The complete `index.js` script is as follows:
 
-.index.js
 [source,javascript]
 ----
 const Pulsar = require("pulsar-client");

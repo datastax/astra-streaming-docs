@@ -29,7 +29,6 @@ dotnet add package DotPulsar --version 2.7.0
 
 . Enter the following code, starting at line 1:
 +
-.Program.cs
 [source,csharp]
 ----
 using DotPulsar;
@@ -62,7 +61,6 @@ include::ROOT:partial$client-variables-table.adoc[]
 . Create a new `producer` instance, and then instruct it to produce a message in a string format.
 Messages can also be in formats like JSON, byte, and AVRO.
 +
-.Program.cs
 [source,csharp]
 ----
 await using var producer = client.NewProducer(Schema.String)
@@ -72,7 +70,6 @@ await using var producer = client.NewProducer(Schema.String)
 
 . Asynchronously send a single message and wait for acknowledgment:
 +
-.Program.cs
 [source,csharp]
 ----
 await producer.Send("Hello World"); // Send a message and ignore the returned MessageId
@@ -82,7 +79,6 @@ Console.WriteLine("Sent message");
 . Create a new `consumer` instance and instruct it to expect messages in string format.
 The consumer uses broker subscriptions to gather messages.
 +
-.Program.cs
 [source,csharp]
 ----
 await using var consumer = client.NewConsumer(Schema.String)
@@ -97,7 +93,6 @@ In this example, the subscription starts with the `Earliest` unacknowledged mess
 
 . Loop through the messages provided to the consumer's subscription and write their contents:
 +
-.Program.cs
 [source,csharp]
 ----
 var msgCount = 0;

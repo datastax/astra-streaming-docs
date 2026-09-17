@@ -6,7 +6,8 @@ Additionally, some properties can be modified with specific arguments, such as `
 
 To get the current configuration, see xref:apis:api-operations.adoc#get-sink-connector-configuration-data[Get sink connector configuration data].
 
-.pulsar-admin CLI
+pulsar-admin CLI::
++
 [source,shell,subs="+attributes"]
 ----
 ./bin/pulsar-admin sinks update \
@@ -17,7 +18,8 @@ To get the current configuration, see xref:apis:api-operations.adoc#get-sink-con
   --parallelism 2
 ----
 
-.{pulsar-short} Admin API
+{pulsar-short} Admin API::
++
 [source,shell]
 ----
 curl -sS --fail -L -X PUT "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME" \

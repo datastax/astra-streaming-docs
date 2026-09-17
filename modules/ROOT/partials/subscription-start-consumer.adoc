@@ -1,8 +1,7 @@
 . Run `SimplePulsarConsumer.java` to begin consuming messages as the primary consumer.
 +
-The confirmation message and a cursor appear to indicate the consumer is ready:
+A confirmation message and a cursor appear when the consumer is ready:
 +
-.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully

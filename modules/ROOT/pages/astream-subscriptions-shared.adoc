@@ -26,7 +26,6 @@ To create a {pulsar-short} shared subscription, create a `pulsarConsumer` with `
 
 . In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
 +
-.SimplePulsarConsumer.java
 [source,java,subs="+attributes"]
 ----
 include::ROOT:partial$simplepulsarconsumer.java[]
@@ -36,9 +35,10 @@ include::ROOT:partial$simplepulsarconsumer.java[]
 
 include::ROOT:partial$subscription-start-consumer.adoc[]
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
 +
-.Result
+The producer's terminal shows when each message is sent:
++
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 59819331 sent
@@ -50,7 +50,6 @@ include::ROOT:partial$subscription-start-consumer.adoc[]
 +
 In the `SimplePulsarConsumer` terminal, the consumer begins receiving messages:
 +
-.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":59819331,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
@@ -62,7 +61,6 @@ In the `SimplePulsarConsumer` terminal, the consumer begins receiving messages:
 +
 The new consumer subscribes to the topic and consumes messages:
 +
-.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":70129519,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}

@@ -15,9 +15,8 @@ This doc will show you how to scrape an {product} tenant with Prometheus.
 
 . Click the name of your tenant, and then click the *Connect* tab.
 
-. Click *Prometheus* to generate a new configuration file:
+. Click *Prometheus* to generate a new `prometheus.yml` configuration file:
 +
-.prometheus.yml
 [source,yaml,subs="+quotes"]
 ----
 global:
@@ -55,7 +54,7 @@ docker pull prom/prometheus
 
 . Bind-mount your modified `prometheus.yml` file by running the Prometheus Docker container with a modified path in the `-v` argument:
 +
-[source,shell]
+[source,shell,subs="+quotes"]
 ----
 docker run \
   -p 9090:9090 \
@@ -97,24 +96,26 @@ image::operations:astream-prometheus-graph.png[Scraping {product} with Prometheu
 
 With your Prometheus scrape container running, you can use curl commands to decompress your Prometheus scrape data:
 
-.Deflate
+Deflate::
++
 [source,bash]
 ----
 curl -v \
--H "Authorization: Bearer $BEARER_TOKEN" \
--H "Accept-encoding: deflate" \
-https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
---compressed
+  -H "Authorization: Bearer $BEARER_TOKEN" \
+  -H "Accept-encoding: deflate" \
+  https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
+  --compressed
 ----
 
-.Gzip
+Gzip::
++
 [source,bash]
 ----
 curl -v \
--H "Authorization: Bearer $BEARER_TOKEN" \
--H "Accept-encoding: gzip" \
-https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
-| zcat
+  -H "Authorization: Bearer $BEARER_TOKEN" \
+  -H "Accept-encoding: gzip" \
+  https://prometheus-aws-useast1.streaming.datastax.com/pulsarmetrics/tenant-1 \
+  | zcat
 ----
 
 Deflate or Gzip will extract your scraped metrics in a format such as the following:

@@ -67,23 +67,21 @@ For the {devops-api}, the base URL is always `\https://api.astra.datastax.com`.
 +
 For example:
 +
-.Billing report by tenant
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/stats/namespaces/$TENANT" \
---header "Accept: application/json" \
---header "Authorization: Bearer $ASTRA_TOKEN"
+  --header "Accept: application/json" \
+  --header "Authorization: Bearer $ASTRA_TOKEN"
 ----
 
 {product} {pulsar-short} Admin API::
 To send requests to the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], use your tenant's web service URL and a {pulsar-short} token.
 For example:
 +
-.Get built-in sinks
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X GET "$WEB_SERVICE_URL/admin/v3/sinks/builtinsinks" \
--H "Authorization: $ASTRA_PULSAR_TOKEN"
+  --header "Authorization: Bearer $ASTRA_PULSAR_TOKEN"
 ----
 
 OSS {pulsar-short} REST APIs::
@@ -92,15 +90,13 @@ To send requests to the xref:developing:using-curl.adoc[open source {pulsar} pro
 {pulsar-short} CLI::
 Use a {pulsar-short} token to authenticate with the xref:developing:configure-pulsar-env.adoc[{pulsar-short} CLI].
 +
-The following commands use a {pulsar-short} token declared in the `pulsar-admin` binary configuration so the token doesn't have to be passed directly on the command line:
+The following example commands use a {pulsar-short} token declared in the `pulsar-admin` binary configuration so the token doesn't have to be passed directly on the command line:
 +
-.Monitor a topic's health
 [source,shell]
 ----
 bin/pulsar-admin topics stats
 ----
 +
-.Monitor a connector's health
 [source,shell]
 ----
 bin/pulsar-admin sinks status

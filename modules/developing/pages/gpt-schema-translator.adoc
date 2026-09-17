@@ -37,13 +37,11 @@ If this button isn't available, the GPT schema translator doesn't have an availa
 +
 image::developing:two-schemas.png[Schema mapping,320,240]
 +
-.{cass-short}-to-{pulsar-short} schema mapping example
-[cols="1,1,1"]
-|===
-| {cass-short} table schema | {pulsar-short} JSON schema | Generated mapping
-
-a|
-[source,cql]
+The following examples show the progression of the {cass-short}-to-{pulsar-short} schema mapping:
++
+{cass-short} table schema as JSON::
++
+[source,json]
 ----
 {
   "primaryKey": {
@@ -75,8 +73,9 @@ a|
   ]
 }
 ----
-
-a|
++
+{pulsar-short} JSON schema::
++
 [source,json]
 ----
 {
@@ -111,14 +110,13 @@ a|
   ]
 }
 ----
-
-a|
-[source,console]
++
+Generated mapping::
++
+[source,plaintext]
 ----
 id=key, file1=value.file1, file2=value.file2, file3=value.file3
 ----
-
-|===
 
 . Save the mapping configuration.
 
@@ -130,9 +128,8 @@ You can check the {astra-ui} logs to confirm that the data is flowing into your 
 
 This example demonstrates how you can generates schema mapping in real time.
 
-. The xref:connectors:sources/data-generator.adoc[Data Generator source connector] generates data for a {pulsar-short} topic with an AVRO schema.
+. The xref:connectors:sources/data-generator.adoc[Data Generator source connector] generates data for a {pulsar-short} topic with an AVRO schema:
 +
-.AVRO schema example
 [source,json]
 ----
 "pulsar_topic_schema": {
@@ -365,10 +362,9 @@ This example demonstrates how you can generates schema mapping in real time.
 }
 ----
 
-. The {astra-db} sink connector writes data to the {cass-short} table with a CQL schema.
+. The {astra-db} sink connector writes data to the {cass-short} table with the equivalent CQL schema:
 +
-.CQL schema example
-[source,cql]
+[source,json]
 ----
 "cassandra_table_schemas": {
         "person": {
@@ -410,7 +406,7 @@ image::developing:create-schema-mapping.png[Schema mapping,320,240]
 +
 The {gpt-schema-translator} generates an AVRO-to-CQL schema mapping while messages are processed.
 +
-[source,console]
+[source,plaintext]
 ----
 passportnumber=value.passportNumber, age=value.age, firstname=value.firstName, lastname=value.lastName
 ----
@@ -424,9 +420,24 @@ If you don't declare a schema in the {pulsar-short} topic, the schema translator
 When you create the mapping in the {astra-ui}, you can click *Generate Mapping* to create a generic {pulsar-short} topic schema based on your {cass-short} table schema.
 If schema mapping isn't possible for the selected table and topic, the *Generate Mapping* button isn't available.
 
-For example, assume you have the following {cass-short} table schema:
+The following examples show the same schema in CQL, CQL-as-JSON, and the generated JSON schema mapping:
 
+{cass-short} table schema in CQL::
++
 [source,cql]
+----
+CREATE TABLE passport_data (
+  passportnumber text,
+  age varint,
+  firstname text,
+  lastname text,
+  PRIMARY KEY (passportnumber)
+);
+----
+
+{cass-short} table schema in JSON::
++
+[source,json]
 ----
 {
   "primaryKey": {
@@ -459,8 +470,9 @@ For example, assume you have the following {cass-short} table schema:
 }
 ----
 
-The schema translator would generate the following {pulsar-short} JSON schema mapping based on the given {cass-short} table schema:
-
+Translated {pulsar-short} JSON schema mapping::
+The schema translator generates the following {pulsar-short} JSON schema mapping based on the {cass-short} table schema:
++
 [source,console]
 ----
 passportnumber=value.passportnumber, age=value.age, firstname=value.firstname, lastname=value.lastname

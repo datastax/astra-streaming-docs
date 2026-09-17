@@ -137,11 +137,8 @@ CREATE TABLE click_data.product_clicks (
 +
 The console prints create statements describing the keyspace itself and the two tables.
 +
-.Result
 [source,console]
 ----
-token@cqlsh> describe click_data;
-
 CREATE KEYSPACE click_data WITH replication = {'class': 'NetworkTopologyStrategy', 'us-east-1': '3'} AND durable_writes = true;
 
 CREATE TABLE click_data.all_clicks (
@@ -552,13 +549,12 @@ This means the sink consumed a message from the topic, and then wrote the data t
 select * from click_data.all_clicks;
 ----
 +
+Optionally, run `EXPAND ON` before your `SELECT` statement for a more readable output.
++
 The result should look similar to the following:
 +
 [source,console]
 ----
-token@cqlsh> EXPAND ON; //this cleans up the output
-Now Expanded output is enabled
-token@cqlsh> select * from click_data.all_clicks;
 @ Row 1
 ------------------+----------------------------------------
  operating_system | Windows

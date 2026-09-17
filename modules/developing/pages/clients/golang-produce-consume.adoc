@@ -38,7 +38,6 @@ The new project includes a `main` file and the retrieved {pulsar-short} client p
 
 . Open the `main.go` file, and then add the following code to import the required packages, establish an entry point for the application, and create a new instance of a {pulsar-short} client:
 +
-.main.go
 [source,golang]
 ----
 package main
@@ -85,7 +84,6 @@ include::ROOT:partial$client-variables-table.adoc[]
 
 . Use the client to create a producer:
 +
-.main.go
 [source,golang]
 ----
 	log.Printf("creating producer...")
@@ -110,7 +108,6 @@ The full topic address includes the tenant, namespace, and topic names, as well 
 
 . Create a `Hello World` message and send it asynchronously:
 +
-.main.go
 [source,golang]
 ----
 	asyncMsg := pulsar.ProducerMessage{
@@ -129,7 +126,6 @@ The full topic address includes the tenant, namespace, and topic names, as well 
 
 . Use the client to create a new xref:ROOT:astream-subscriptions.adoc[subscription instance] to receive the message:
 +
-.main.go
 [source,golang]
 ----
 	consumer, err := client.Subscribe(pulsar.ConsumerOptions{
@@ -152,7 +148,6 @@ In this example, the subscription starts with the `Earliest` unacknowledged mess
 
 . Make the consumer receive and acknowledge (`ack`) messages provided to the subscription:
 +
-.main.go
 [source,golang]
 ----
 	msg, err := consumer.Receive(ctx)

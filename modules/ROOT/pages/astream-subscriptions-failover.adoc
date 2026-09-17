@@ -27,7 +27,6 @@ To create a {pulsar-short} failover subscription, create a `pulsarConsumer` with
 
 . In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
 +
-.SimplePulsarConsumer.java
 [source,java,subs="+attributes"]
 ----
 include::ROOT:partial$simplepulsarconsumer.java[]
@@ -37,9 +36,10 @@ include::ROOT:partial$simplepulsarconsumer.java[]
 
 include::ROOT:partial$subscription-start-consumer.adoc[]
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
 +
-.Result
+The producer's terminal shows when each message is sent:
++
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 50585599 sent
@@ -52,7 +52,6 @@ include::ROOT:partial$subscription-start-consumer.adoc[]
 +
 In the `SimplePulsarConsumer` terminal, the primary consumer begins consuming messages:
 +
-.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":50585599,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
@@ -66,7 +65,6 @@ The backup consumer subscribes to the topic but does not immediately begin consu
 . In your first `SimplePulsarConsumer` terminal, stop the process (`Ctrl+C`), and then switch to your second `SimplePulsarConsumer` terminal.
 Notice that the backup consumer begins consuming messages where the first consumer left off:
 +
-.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":73260535,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
