@@ -11,13 +11,13 @@ Additionally, of the exposed metrics, not all metrics are recommended for extern
 
 For a complete {pulsar-short} metrics reference, see:
 
-* https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics[Namespace metrics]
+* https://pulsar.apache.org/docs/reference-metrics/#namespace-metrics[{pulsar-short} Namespace metrics]
 
-* https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[Topic metrics]
-
-For a complete {product} metrics reference, see xref:operations:monitoring/metrics.adoc[].
+* https://pulsar.apache.org/docs/reference-metrics/#topic-metrics[{pulsar-short} Topic metrics]
 
 == {product} metrics
+
+For a complete {product} metrics reference, see xref:operations:monitoring/metrics.adoc[].
 
 === Namespace and topic metrics
 

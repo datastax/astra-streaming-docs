@@ -9,82 +9,81 @@ For example, to enable xref:developing:astream-cdc.adoc[CDC for {astra-db}], you
 
 Your ElasticSearch and Snowflake deployments can be in different regions than your {product} tenants.
 
-== AWS regions for {product}
+If your preferred region isn't available, contact your {company} account representative or {support-url}[IBM Support].
 
-[cols="1,1"]
+[cols=3]
 |===
-|Region |Location
+|Cloud provider |Region |Location
 
+|AWS
 |`ap-south-1`
 |Mumbai
 
+|AWS
 |`ap-southeast-1`
 |Singapore
 
+|AWS
 |`ap-southeast-2`
 |Sydney
 
+|AWS
 |`eu-central-1`
 |Frankfurt
 
+|AWS
 |`eu-west-1`
 |Ireland
 
+|AWS
 |`us-east-1`
 |Virginia
 
+|AWS
 |`us-east-2`
 |Ohio
 
+|AWS
 |`us-west-2`
 |Oregon
-|===
 
-== Google Cloud regions for {product}
-
-[cols="1,1"]
-|===
-|Region |Location
-
+|Google Cloud
 |`australia-southeast1`
 |Sydney
 
+|Google Cloud
 |`europe-west1`
 |Belgium
 
+|Google Cloud
 |`europe-west3`
 |Frankfurt
 
+|Google Cloud
 |`us-central1`
 |Iowa
 
+|Google Cloud
 |`us-east1`
 |South Carolina
 
+|Google Cloud
 |`us-east4`
 |Virginia
 
-|===
-
-== Microsoft Azure regions for {product}
-
-[cols="1,1"]
-|===
-|Region |Location
-
+|Azure
 |`australiaeast`
 |New South Wales
 
+|Azure
 |`eastus`
 |Virginia
 
+|Azure
 |`westeurope`
 |Netherlands
 
+|Azure
 |`westus2`
 |Washington
 |===
-
-== Request a region
-
-If your preferred region isn't available, contact your {company} account representative or {support-url}[IBM Support].

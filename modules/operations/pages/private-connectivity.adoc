@@ -32,7 +32,7 @@ To use a private link service or private endpoint for {product}, do the followin
 
 . Contact {support-url}[IBM Support] to request private connectivity for {product}.
 
-=== Private connections for inbound traffic
+== Private connections for inbound traffic
 
 {product} supports private inbound traffic flowing from your private endpoint to {product}.
 Inbound traffic includes {pulsar-reg}, {kafka-reg}, and RabbitMQ messaging traffic, as well as Prometheus metrics traffic.
@@ -63,7 +63,7 @@ The private link service pattern is the same across cloud providers, but the hos
 |`prometheus-**PROVIDER**-**REGION**.private.streaming.datastax.com`
 |===
 
-=== Private connections for outbound traffic
+== Private connections for outbound traffic
 
 On a case-by-case basis, {product} can support private outbound traffic flowing from an {product} private endpoint to your private link service.
 

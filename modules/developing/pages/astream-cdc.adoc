@@ -122,7 +122,6 @@ The conversion for some AVRO structures requires additional tooling that can res
 
 The following table describes the conversion of AVRO logical types:
 
-.AVRO complex types
 [cols="1,1,1,1"]
 |===
 |Name |AVRO type |Fields |Explanation
