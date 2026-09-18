@@ -26,9 +26,9 @@ image::developing:spring-initializr.png[Spring Initializr]
 . Click *Generate Project*, download the zip file, and then extract it.
 
 . Navigate to `src/main/java`, and then open the `DemoApplication.java` file.
++
 This file contains the main method that will run your application with the specified dependencies.
 +
-.DemoApplication.java
 [source,java]
 ----
 package com.example.demo;
@@ -98,7 +98,6 @@ public class DemoApplication
 
 . Replace the following values in `DemoApplication.java` with values from your tenant's *Connect* tab in the {astra-ui}:
 +
-.DemoApplication.java
 [source,java,subs="+quotes"]
 ----
 	private static final String serviceUrl = "pulsar+ssl://pulsar-**PROVIDER**-**REGION**.streaming.datastax.com:**PORT**";
@@ -137,7 +136,6 @@ token: ***
 mvn clean compile
 ----
 +
-.Result
 [source,console]
 ----
 [INFO] ------------------------------------------------------------------------
@@ -155,7 +153,6 @@ mvn clean compile
 mvn spring-boot:run
 ----
 +
-.Result
 [source,console]
 ----
 Message received: Hello World

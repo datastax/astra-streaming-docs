@@ -93,7 +93,6 @@ To deploy a Java function, you must create a `.jar` file.
 
 . Declare dependencies in `pom.xml`:
 +
-.pom.xml
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
@@ -161,7 +160,6 @@ To deploy a Java function, you must create a `.jar` file.
 mvn package
 ----
 +
-.Result
 [source,console]
 ----
 [INFO] ------------------------------------------------------------------------
@@ -179,9 +177,8 @@ mvn package
 
 . If you haven't done so already, xref:developing:configure-pulsar-env.adoc[set up your environment for the {pulsar-short} binaries].
 
-. Create a deployment configuration YAML file that defines the function metadata and associated topics:
+. Create a deployment configuration YAML file, such as `func-create-config.yaml`,that defines the function metadata and associated topics:
 +
-.func-create-config.yaml
 [source,yaml,subs="+quotes"]
 ----
 py: **PATH_TO_FUNCTION_ARCHIVE**
@@ -240,15 +237,15 @@ If your Python function contains only a single script and no dependencies, you c
 [source,bash,subs="+quotes"]
 ----
 ./pulsar-admin functions create \
---py **PATH_TO_PYTHON_FILE** \
---classname **FILE_NAME**.**CLASS_NAME** \
---tenant **TENANT_NAME** \
---namespace **NAMESPACE_NAME** \
---name **DISPLAY_NAME** \
---auto-ack true \
---inputs persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
---output persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
---log-topic persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
+  --py **PATH_TO_PYTHON_FILE** \
+  --classname **FILE_NAME**.**CLASS_NAME** \
+  --tenant **TENANT_NAME** \
+  --namespace **NAMESPACE_NAME** \
+  --name **DISPLAY_NAME** \
+  --auto-ack true \
+  --inputs persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
+  --output persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
+  --log-topic persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME**
 ----
 
 If there isn't a class in the file, the `className` is only the filename without the extension.
@@ -360,8 +357,8 @@ If the function produces output and it has an `output` topic, the output data is
 [source,bash]
 ----
 ./pulsar-client consume persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
---subscription-name my-subscription \
---num-messages 0 # Listen indefinitely
+  --subscription-name my-subscription \
+  --num-messages 0 # Listen indefinitely
 ----
 +
 . Test your function:
@@ -369,10 +366,10 @@ If the function produces output and it has an `output` topic, the output data is
 [source,bash]
 ----
 ./pulsar-admin functions trigger \
---name **FUNCTION_DISPLAY_NAME** \
---tenant **TENANT_NAME** \
---namespace **NAMESPACE_NAME** \
---trigger-value "**MESSAGE**"
+  --name **FUNCTION_DISPLAY_NAME** \
+  --tenant **TENANT_NAME** \
+  --namespace **NAMESPACE_NAME** \
+  --trigger-value "**MESSAGE**"
 ----
 +
 The trigger sends the message string to the function.

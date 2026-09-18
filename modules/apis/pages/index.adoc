@@ -55,14 +55,13 @@ Use the following {product} {devops-api} endpoints to manage {product} {pulsar-s
 [#get-tenant-details]
 === Get tenant details
 
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
-| python3 -mjson.tool
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  | python3 -mjson.tool
 ----
 
-.Result
 [source,json]
 ----
 [
@@ -120,14 +119,13 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants" 
 
 Get cloud provider and regions supported by {product}:
 
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/providers" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
-| python3 -mjson.tool
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  | python3 -mjson.tool
 ----
 
-.Result
 [source,json]
 ----
 {
@@ -159,36 +157,35 @@ You can do this directly in the request body or with a JSON file.
 
 * Create a tenant using in-line input:
 +
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---data-raw '{
-  "cloudProvider": "aws",
-  "cloudRegion": "useast2",
-  "tenantName": "mytenant",
-  "userEmail": "joshua@example.com"
-}' \
-| python3 -mjson.tool
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --data-raw '{
+    "cloudProvider": "aws",
+    "cloudRegion": "useast2",
+    "tenantName": "mytenant",
+    "userEmail": "joshua@example.com"
+  }' \
+  | python3 -mjson.tool
 ----
 
 * Create a tenant using file input:
 +
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---data "@mytenant-config.json" \
-| python3 -mjson.tool
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --data "@mytenant-config.json" \
+  | python3 -mjson.tool
 ----
 +
 include::ROOT:partial$curl-file-input-tip.adoc[]
 
 The output includes the new tenant's details and a `pulsarToken`, which is an initial xref:operations:astream-token-gen.adoc[{pulsar-short} JWT] for the new {pulsar-short} instance:
 
-.Result
 [source,json]
 ----
 {
@@ -221,11 +218,11 @@ The output includes the new tenant's details and a `pulsarToken`, which is an in
 [#delete-a-tenant]
 === Delete a tenant
 
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/clusters/$CLUSTER" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer $ASTRA_TOKEN"
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ASTRA_TOKEN"
 ----
 
 == Georeplication operations
@@ -237,16 +234,15 @@ For more information, see xref:operations:astream-georeplication.adoc[].
 
 Get the georeplication settings for a namespace:
 
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
-| python3 -mjson.tool
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  | python3 -mjson.tool
 ----
 
 If georeplication is enabled, the response includes the replication configuration details.
 
-.Result
 [source,json]
 ----
 {
@@ -295,18 +291,18 @@ If georeplication is enabled, the response includes the replication configuratio
 
 To enable georeplication, provide the origin and destination clusters, the namespace, bidirectional flag, and the email address (if set for the tenant):
 
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---data-raw '{
-  "bidirection": true,
-  "destCluster": "pulsar-aws-uswest2",
-  "email": "",
-  "namespace": "ns0",
-  "originCluster": "pulsar-aws-useast2"
-}'
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --data-raw '{
+    "bidirection": true,
+    "destCluster": "pulsar-aws-uswest2",
+    "email": "",
+    "namespace": "ns0",
+    "originCluster": "pulsar-aws-useast2"
+  }'
 ----
 
 You can get the clusters, email, and namespace from <<get-tenant-details>>.
@@ -315,18 +311,18 @@ You can get the clusters, email, and namespace from <<get-tenant-details>>.
 
 Specify the replication to remove by providing the entire georeplication settings object, including the origin and destination clusters, the namespace, bidirectional flag, and email address (if set for the tenant):
 
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/replications/$INSTANCE/$TENANT/$NAMESPACE" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---data-raw '{
-  "bidirection": true,
-  "destCluster": "pulsar-aws-uswest2",
-  "email": "",
-  "namespace": "ns0",
-  "originCluster": "pulsar-aws-useast2"
-}'
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --data-raw '{
+    "bidirection": true,
+    "destCluster": "pulsar-aws-uswest2",
+    "email": "",
+    "namespace": "ns0",
+    "originCluster": "pulsar-aws-useast2"
+  }'
 ----
 
 You can get the clusters, email, and namespace from <<get-tenant-details>>.
@@ -346,12 +342,12 @@ For {astra} application tokens, use the core xref:astra-db-serverless:api-refere
 
 Get a list of token IDs for a given tenant and cluster:
 
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---header "X-DataStax-Pulsar-Cluster: $CLUSTER" \
-| python3 -mjson.tool
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --header "X-DataStax-Pulsar-Cluster: $CLUSTER" \
+  | python3 -mjson.tool
 ----
 
 You can get the cluster name from <<get-tenant-details>>.
@@ -359,7 +355,6 @@ You can get the cluster name from <<get-tenant-details>>.
 The result is a list of token objects, each containing the token ID and other metadata.
 You can use the token ID to <<get-the-token-string-for-a-pulsar-token-id,get the corresponding {pulsar-short} token (JWT) string>>.
 
-.Result
 [source,json]
 ----
 [
@@ -379,21 +374,16 @@ Token IDs are also listed in the {astra-ui} for each tenant and cluster.
 
 Get the raw string JWT associated with a specific token ID and cluster:
 
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens/**PULSAR_TOKEN_ID**" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---header "X-DataStax-Pulsar-Cluster: $CLUSTER"
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --header "X-DataStax-Pulsar-Cluster: $CLUSTER"
 ----
 
 You can get token IDs from <<get-existing-pulsar-tokens>>, and you can get the cluster name from <<get-tenant-details>>.
 
-.Result
-[source,json]
-----
-Output: Raw string JWT
-eyJhbGciOiJSUzI1NiIsI...
-----
+The output is the raw JWT as a string.
 
 === Create a {pulsar-short} token
 
@@ -403,43 +393,38 @@ You can get the cluster name from <<get-tenant-details>>.
 v2 endpoint::
 The `v2/streaming/tenants/$TENANT/tokens` endpoint returns a raw string JWT with an unlimited lifetime:
 +
-[source,curl]
+[source,bash]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---header "X-DataStax-Pulsar-Cluster: $CLUSTER"
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --header "X-DataStax-Pulsar-Cluster: $CLUSTER"
 ----
 +
-.Result
-[source,json]
-----
-Output: new raw string JWT
-eyJhbGciOiJSUzI1NiIsI...
-----
+The output is the raw JWT as a string.
 
 v3 endpoint::
 The `v3/streaming/tenants/$TENANT/tokens` endpoint returns a JSON response and accepts additional token parameters:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v3/streaming/tenants/$TENANT/tokens" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---header "X-DataStax-Pulsar-Cluster: $CLUSTER" \
---data-raw '{
-  "exp": "**EXPIRATION**",
-  "role": "**ROLE**",
-  "type": "**TYPE**"
-}'
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --header "X-DataStax-Pulsar-Cluster: $CLUSTER" \
+  --data-raw '{
+    "exp": "**EXPIRATION**",
+    "role": "**ROLE**",
+    "type": "**TYPE**"
+  }'
 ----
 +
 Replace the following:
 +
+--
 * **`EXPIRATION`**: The token lifetime expressed as a number and unit, such as `1d` for one day.
 * **`ROLE`**: A string describing the token's role.
 * **`TYPE`**: The token's privilege level, either `admin` or `non-admin`.
-
+--
 +
-.Result
 [source,json]
 ----
 {
@@ -453,11 +438,11 @@ Replace the following:
 
 Delete a token for a given cluster by token ID:
 
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenants/$TENANT/tokens/**PULSAR_TOKEN_ID**" \
---header "Authorization: Bearer $ASTRA_TOKEN" \
---header "X-DataStax-Pulsar-Cluster: $CLUSTER"
+  --header "Authorization: Bearer $ASTRA_TOKEN" \
+  --header "X-DataStax-Pulsar-Cluster: $CLUSTER"
 ----
 
 You can get the token ID from <<get-existing-pulsar-tokens>>, and you can get the cluster name from <<get-tenant-details>>.

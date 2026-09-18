@@ -38,7 +38,6 @@ kubectl create secret generic nr-license-key --from-literal=value=**LICENSE_KEY*
 
 . In your extra Prometheus server's `custom-values.yaml` file, add the `remoteWrite` configuration to send local Prometheus metrics to New Relic through `remote_write`:
 +
-.custom-values.yaml
 [source,yaml,subs="+quotes"]
 ----
 prometheus:

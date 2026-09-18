@@ -25,7 +25,6 @@ To create a {pulsar-short} exclusive subscription, create a `pulsarConsumer` wit
 
 . In `src/main/java/com/datastax/pulsar`, create a `SimplePulsarConsumer.java` file with the following contents:
 +
-.SimplePulsarConsumer.java
 [source,java,subs="+attributes"]
 ----
 include::ROOT:partial$simplepulsarconsumer.java[]
@@ -33,7 +32,6 @@ include::ROOT:partial$simplepulsarconsumer.java[]
 +
 Alternatively, you can omit the `.subscriptionType` declaration because `Exclusive` is the default subscription type:
 +
-.SimplePulsarConsumer.java with implied exclusive subscription
 [source,java]
 ----
             pulsarConsumer = pulsarClient.newConsumer(Schema.JSON(DemoBean.class))
@@ -52,9 +50,10 @@ Alternatively, you can omit the `.subscriptionType` declaration because `Exclusi
 
 include::ROOT:partial$subscription-start-consumer.adoc[]
 
-. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages:
+. In a new terminal window, run `SimplePulsarProducer.java` to begin producing messages.
 +
-.Result
+The producer's terminal shows when each message is sent:
++
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarProducer - Message 93573631 sent
@@ -64,7 +63,6 @@ include::ROOT:partial$subscription-start-consumer.adoc[]
 +
 In the `SimplePulsarConsumer` terminal, the consumer begins consuming the produced messages:
 +
-.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.SimplePulsarConsumer - Message received: {"show_id":93573631,"cast":"LeBron James, Anthony Davis, Kyrie Irving, Damian Lillard, Klay Thompson...","country":"United States","date_added":"July 16, 2021","description":"NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel.","director":"Malcolm D. Lee","duration":"120 min","listed_in":"Animation, Adventure, Comedy","rating":"PG","release_year":2021,"title":"Space Jam: A New Legacy","type":"Movie"}
@@ -76,7 +74,6 @@ In the `SimplePulsarConsumer` terminal, the consumer begins consuming the produc
 +
 The second consumer cannot subscribe to the topic because the subscription is exclusive:
 +
-.Result
 [source,console]
 ----
 [main] INFO com.datastax.pulsar.Configuration - Configuration has been loaded successfully

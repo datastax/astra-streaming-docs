@@ -122,7 +122,6 @@ The conversion for some AVRO structures requires additional tooling that can res
 
 The following table describes the conversion of AVRO logical types:
 
-.AVRO complex types
 [cols="1,1,1,1"]
 |===
 |Name |AVRO type |Fields |Explanation
@@ -249,7 +248,6 @@ select * from default_keyspace.cdc_demo;
 +
 Currently, the table has no rows:
 +
-.Result
 [source,console]
 ----
  key | c1
@@ -295,11 +293,11 @@ It supports initial CDC setup and extending CDC to new tables in databases where
 +
 . Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to check the database's existing CDC configuration:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json"
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json"
 ----
 +
 Replace the following:
@@ -313,38 +311,38 @@ If the database has an existing CDC configuration, copy the `databaseName`, `tab
 +
 For databases where you previously enabled CDC, you only need to include new tables and regions in this `POST` request.
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json" \
---data '{
-  "databaseName": "**DB_NAME**",
-  "tables": [
-    {
-      "tableName": "**TABLE_NAME**",
-      "keyspaceName": "**KEYSPACE_NAME**"
-    },
-    {
-      "tableName": "**TABLE_NAME**",
-      "keyspaceName": "**KEYSPACE_NAME**"
-    }
-  ],
-  "regions": [
-    {
-      "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
-      "datacenterRegion": "**REGION_NAME**",
-      "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
-      "streamingTenantName": "**STREAMING_TENANT_NAME**"
-    },
-    {
-      "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
-      "datacenterRegion": "**REGION_NAME**",
-      "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
-      "streamingTenantName": "**STREAMING_TENANT_NAME**"
-    }
-  ]
-}'
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json" \
+  --data '{
+    "databaseName": "**DB_NAME**",
+    "tables": [
+      {
+        "tableName": "**TABLE_NAME**",
+        "keyspaceName": "**KEYSPACE_NAME**"
+      },
+      {
+        "tableName": "**TABLE_NAME**",
+        "keyspaceName": "**KEYSPACE_NAME**"
+      }
+    ],
+    "regions": [
+      {
+        "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
+        "datacenterRegion": "**REGION_NAME**",
+        "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+        "streamingTenantName": "**STREAMING_TENANT_NAME**"
+      },
+      {
+        "datacenterID": "**DB_ID**-**REGION_SUFFIX**",
+        "datacenterRegion": "**REGION_NAME**",
+        "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+        "streamingTenantName": "**STREAMING_TENANT_NAME**"
+      }
+    ]
+  }'
 ----
 +
 Provide the following:
@@ -366,26 +364,26 @@ You can get these names with the xref:apis:index.adoc#astra-streaming-devops-api
 `/v2/databases/$DB_ID/datacenters`::
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/addDatacenters[POST /v2/databases/**DB_ID**/datacenters]` to add a region to a multi-region database _and_ enable CDC in the same command:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/databases/**DB_ID**/datacenters" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json" \
---data '{
-  [
-    {
-      "tier": "serverless",
-      "status": "ACTIVE",
-      "cloudProvider": "**CLOUD_PROVIDER**",
-      "region": "**REGION_NAME**",
-      "pcuGroupUUID": "**PCU_GROUP_ID**",
-      "streamingTenant": {
-        "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
-        "streamingTenantName": "**STREAMING_TENANT_NAME**"
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json" \
+  --data '{
+    [
+      {
+        "tier": "serverless",
+        "status": "ACTIVE",
+        "cloudProvider": "**CLOUD_PROVIDER**",
+        "region": "**REGION_NAME**",
+        "pcuGroupUUID": "**PCU_GROUP_ID**",
+        "streamingTenant": {
+          "streamingClusterName": "**STREAMING_CLUSTER_NAME**",
+          "streamingTenantName": "**STREAMING_TENANT_NAME**"
+        }
       }
-    }
-  ]
-}'
+    ]
+  }'
 ----
 +
 Replace the following:
@@ -489,7 +487,6 @@ select * from default_keyspace.cdc_demo;
 +
 The demo table now has two rows:
 +
-.Result
 [source,console]
 ----
  key | c1
@@ -504,10 +501,10 @@ The demo table now has two rows:
 +
 For example, if you have an Elasticsearch sink, you can send a `GET` request to your Elasticsearch deployment:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X POST "**ELASTICSEARCH_URL**/**INDEX_NAME**/_search?pretty" \
--header "Authorization: ApiKey '**API_KEY**'"
+  --header "Authorization: ApiKey '**API_KEY**'"
 ----
 +
 Replace `**ELASTICSEARCH_URL**`, `**INDEX_NAME**`, and `**API_KEY**` with the values from your https://cloud.elastic.co/[Elasticsearch deployment] that you used to <<connect-a-sink,connect the sink>>.
@@ -664,7 +661,6 @@ bin/pulsar-admin topics partitioned-stats persistent://**DATA_TOPIC_STRING**
 +
 Replace `**DATA_TOPIC_STRING**` with the `data-` topic string in the format of `**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_NAME**`.
 +
-.Result
 [source,json]
 ----
 {
@@ -780,11 +776,11 @@ You can check your active CDC configurations in the {astra-ui} or with the {astr
 By database::
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get CDC configuration details for an entire database:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json"
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json"
 ----
 +
 Replace `**DB_ID**` with the xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID], and replace `**APPLICATION_TOKEN**` with an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token].
@@ -826,11 +822,11 @@ For multi-region databases with CDC enabled in multiple regions, the `regions` a
 By table::
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc]` to get CDC configuration details for a specific table:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/keyspaces/**KEYSPACE_NAME**/tables/**TABLE_NAME**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json"
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json"
 ----
 +
 In the path, replace `**DB_ID**` with the xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID], and replace `**KEYSPACE_NAME**` and `**TABLE_NAME**` with the name of the keyspace and table where you want to check the CDC configuration.
@@ -872,11 +868,11 @@ If CDC is already enabled, the request updates the existing CDC configuration.
 
 . Use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get the current CDC configuration details for the database:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json"
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json"
 ----
 +
 Replace `**DB_ID**` with the xref:astra-db-serverless:databases:create-database.adoc#get-db-id[database ID], and replace `**APPLICATION_TOKEN**` with an xref:astra-db-serverless:administration:manage-application-tokens.adoc[{astra-db} application token].
@@ -944,36 +940,36 @@ Make sure that you include all existing tables and regions that you want to keep
 If you omit any existing tables or regions from the request, CDC is disabled for those tables or regions.
 ====
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X PUT "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json" \
---data '{
-  "databaseName": "test_db",
-  "tables": [
-    {
-      "tableName": "table1",
-      "keyspaceName": "default_keyspace"
-    },
-    {
-      "tableName": "table2",
-      "keyspaceName": "default_keyspace"
-    },
-    {
-      "tableName": "table3",
-      "keyspaceName": "other_keyspace"
-    }
-  ],
-  "regions": [
-    {
-      "datacenterID": "1234-5678-90080012-2323-1",
-      "datacenterRegion": "us-east1",
-      "streamingClusterName": "pulsar-gcp-useast1-dev",
-      "streamingTenantName": "cdc-streaming"
-    }
-  ]
-}'
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json" \
+  --data '{
+    "databaseName": "test_db",
+    "tables": [
+      {
+        "tableName": "table1",
+        "keyspaceName": "default_keyspace"
+      },
+      {
+        "tableName": "table2",
+        "keyspaceName": "default_keyspace"
+      },
+      {
+        "tableName": "table3",
+        "keyspaceName": "other_keyspace"
+      }
+    ],
+    "regions": [
+      {
+        "datacenterID": "1234-5678-90080012-2323-1",
+        "datacenterRegion": "us-east1",
+        "streamingClusterName": "pulsar-gcp-useast1-dev",
+        "streamingTenantName": "cdc-streaming"
+      }
+    ]
+  }'
 ----
 +
 Replace the following:
@@ -984,11 +980,11 @@ Replace the following:
 
 . To verify that the changes were applied as expected, use `{devops-api-ref-url}#tag/Database-Operations/operation/getCDC[GET /v3/databases/**DB_ID**/cdc]` to get the new CDC configuration details for the database:
 +
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X GET "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json"
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json"
 ----
 
 . If you removed any tables from the existing CDC configuration, decide whether you want to delete the associated namespace, topics, and {product} tenant.
@@ -1028,20 +1024,20 @@ Deleting the namespace also deletes the topics within that namespace.
 
 Use `{devops-api-ref-url}#tag/Database-Operations/operation/deleteCDC[DELETE /v3/databases/**DB_ID**/cdc]` to disable CDC for a table:
 
-[source,curl,subs="+quotes"]
+[source,bash,subs="+quotes"]
 ----
 curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v3/databases/**DB_ID**/cdc" \
---header "Authorization: Bearer **APPLICATION_TOKEN**" \
---header "Accept: application/json" \
---data '{
-  "databaseID": "**DB_ID**",
-  "tables": [
-    {
-      "tableName": "**TABLE_NAME**",
-      "keyspaceName": "**KEYSPACE_NAME**"
-    }
-  ]
-}'
+  --header "Authorization: Bearer **APPLICATION_TOKEN**" \
+  --header "Accept: application/json" \
+  --data '{
+    "databaseID": "**DB_ID**",
+    "tables": [
+      {
+        "tableName": "**TABLE_NAME**",
+        "keyspaceName": "**KEYSPACE_NAME**"
+      }
+    ]
+  }'
 ----
 
 Replace the following:

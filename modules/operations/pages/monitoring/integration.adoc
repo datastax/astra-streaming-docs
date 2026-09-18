@@ -23,7 +23,6 @@ For more information, see xref:operations:astream-scrape-metrics.adoc[Scrape met
 This example uses a job named `astra-pulsar-metrics-demo`.
 The values in your `config.yml` depend on your tenant configuration.
 +
-.config.yml
 [source,yaml,subs="+quotes"]
 ----
   - job_name: "astra-pulsar-metrics-demo"
@@ -58,7 +57,6 @@ You can change the name of the YAML output file, if desired.
 . Create a customized values file (`custom-values.yml`) for the Prometheus Community Kubernetes Helm chart.
 In the 'additionalScrapeConfigsSecret' section, make sure the `name` and `key` match the name if your Kubernetes secret and config file name, such as `astra-secret` and `config.yml`.
 +
-.custom-values.yml
 [source,yaml,subs="+quotes"]
 ----
 prometheus:

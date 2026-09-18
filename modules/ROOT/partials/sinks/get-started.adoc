@@ -17,7 +17,8 @@ For example: `{connectorType}-sink-prod-us-east-1`.
 . Create the connector using JSON-formatted connector configuration data.
 You can pass the configuration directly or with a configuration file.
 +
-.pulsar-admin CLI
+pulsar-admin CLI::
++
 [source,shell,subs="+attributes"]
 ----
 ./bin/pulsar-admin sinks create \
@@ -28,7 +29,8 @@ You can pass the configuration directly or with a configuration file.
   --sink-config-file configs.json
 ----
 +
-.{pulsar-short} Admin API
+{pulsar-short} Admin API::
++
 [source,shell]
 ----
 curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$SINK_NAME" \
@@ -36,7 +38,8 @@ curl -sS --fail -L -X POST "$WEB_SERVICE_URL/admin/v3/sinks/$TENANT/$NAMESPACE/$
   --form "sinkConfig=@configs.json;type=application/json"
 ----
 +
-.Example configuration data structure
+Example configuration data structure::
++
 [source,json]
 ----
 include::common:streaming:example$connectors/sinks/{connectorType}/sample-data.json[]

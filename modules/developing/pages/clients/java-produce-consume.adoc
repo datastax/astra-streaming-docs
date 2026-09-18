@@ -30,7 +30,6 @@ mvn archetype:generate \
 
 . Add the {pulsar-short} client dependency in `pom.xml`:
 +
-.pom.xml
 [source,xml]
 ----
         <dependency>
@@ -43,7 +42,6 @@ mvn archetype:generate \
 . For this example, add the following build target in `pom.xml`.
 This example creates a single artifact.
 +
-.pom.xml
 [source,xml]
 ----
     <build>
@@ -67,7 +65,6 @@ This example creates a single artifact.
 
 . If necessary, specify the compiler versions in `pom.xml`:
 +
-.pom.xml
 [source,xml]
 ----
     <properties>
@@ -82,7 +79,6 @@ This example creates a single artifact.
 
 . Remove any existing content from the file, and then add the following code that imports dependencies, creates a client instance, and configures the instance to use your {product} tenant:
 +
-./src/main/java/org/example/App.java
 [source,java]
 ----
 package org.example;
@@ -121,7 +117,6 @@ include::ROOT:partial$client-variables-table.adoc[]
 . Use the client to create a producer.
 The producer builds on the client configuration for directions about what topic to produce messages to.
 +
-./src/main/java/org/example/App.java
 [source,java]
 ----
     Producer<String> producer = client.newProducer(Schema.STRING)
@@ -131,7 +126,6 @@ The producer builds on the client configuration for directions about what topic 
 
 . Asynchronously send a single message to the broker and wait for acknowledgment, and close the producer:
 +
-./src/main/java/org/example/App.java
 [source,java]
 ----
     producer.send("Hello World");
@@ -142,7 +136,6 @@ The producer builds on the client configuration for directions about what topic 
 . Create a new consumer instance.
 This code directs the consumer to watch a certain topic, identifies the subscription for watching topics, and begins the subscription.
 +
-./src/main/java/org/example/App.java
 [source,java]
 ----
     Consumer<String> consumer = client.newConsumer(Schema.STRING)
@@ -153,7 +146,6 @@ This code directs the consumer to watch a certain topic, identifies the subscrip
 
 . Receive the messages added by the producer:
 +
-./src/main/java/org/example/App.java
 [source,java]
 ----
     boolean receivedMsg = false;
@@ -176,7 +168,6 @@ This code directs the consumer to watch a certain topic, identifies the subscrip
 
 . Clean up and close the class:
 +
-./src/main/java/org/example/App.java
 [source,java]
 ----
     consumer.close();

@@ -34,7 +34,6 @@ Your IDE might show errors until you have completed the script.
 
 . Import the required libraries, and then create a {pulsar-short} client instance with the topic URL and token authentication:
 +
-.index.py
 [source,python]
 ----
 import pulsar
@@ -58,7 +57,6 @@ include::ROOT:partial$client-variables-table.adoc[]
 
 . Use the client to create a producer:
 +
-.index.py
 [source,python]
 ----
 producer = client.create_producer(topic)
@@ -66,7 +64,6 @@ producer = client.create_producer(topic)
 
 . Send a message:
 +
-.index.py
 [source,python]
 ----
 producer.send('Hello World'.encode('utf-8'))
@@ -74,7 +71,6 @@ producer.send('Hello World'.encode('utf-8'))
 
 . Use the Python client instance to create a consumer subscription to the same topic that you sent a message to:
 +
-.index.py
 [source,python]
 ----
 consumer = client.subscribe(topic, 'my-subscription')
@@ -82,7 +78,6 @@ consumer = client.subscribe(topic, 'my-subscription')
 
 . Iterate through messages and write their data:
 +
-.index.py
 [source,python]
 ----
 waitingForMsg = True
@@ -110,7 +105,6 @@ client.close()
 
 The complete `index.py` script is as follows:
 
-.index.py
 [source,python]
 ----
 import pulsar

@@ -31,9 +31,9 @@ For example:
 [source,shell]
 ----
 ./bin/pulsar-client produce \
-"$TENANT/$NAMESPACE/$TOPIC" \
---messages "Hi there" \
---num-produce 1
+  "$TENANT/$NAMESPACE/$TOPIC" \
+  --messages "Hi there" \
+  --num-produce 1
 ----
 +
 Your topic now has a new, unacknowledged message.
@@ -43,9 +43,9 @@ Your topic now has a new, unacknowledged message.
 [source,shell]
 ----
 ./bin/pulsar-client consume \
-"$TENANT/$NAMESPACE/$TOPIC" \
---subscription-name "examples-subscriber" \
---num-messages 1
+  "$TENANT/$NAMESPACE/$TOPIC" \
+  --subscription-name "examples-subscriber" \
+  --num-messages 1
 ----
 
 . Make sure the output includes your message:
