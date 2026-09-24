@@ -288,4 +288,4 @@ In the configuration, `isReplicated` is now `true` for this subscription:
 
 == See also
 
-For more on multiregion georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[{pulsar-short} documentation].
+For more on multi-region georeplication, including region awareness and rack awareness, see the https://pulsar.apache.org/docs/concepts-replication/[{pulsar-short} documentation].
