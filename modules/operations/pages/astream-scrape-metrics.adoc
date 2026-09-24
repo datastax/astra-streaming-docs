@@ -36,7 +36,7 @@ scrape_configs:
 ----
 +
 The default `prometheus.yml` scrapes the `target` tenant every 60 seconds, and it uses the specified `**PULSAR_TOKEN**` for authentication.
-The `job_name` is added as a label to any timeseries scraped with this configuration.
+The `job_name` is added as a label to any time series scraped with this configuration.
 
 . Copy the configuration YAML or download the `prometheus.yml` file.
 
