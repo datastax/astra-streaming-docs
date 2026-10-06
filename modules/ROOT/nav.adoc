@@ -24,7 +24,6 @@
 ** xref:developing:astream-functions-transform.adoc[]
 * xref:developing:starlight.adoc[]
 * xref:developing:astream-cdc.adoc[]
-* xref:developing:gpt-schema-translator.adoc[]
 * I/O connectors
 ** xref:connectors:index.adoc[]
 ** Sinks

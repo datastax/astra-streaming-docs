@@ -46,7 +46,6 @@ asciidoc:
     solr-reg: 'Apache Solr(TM)'
     starlight-kafka: 'Starlight for Kafka'
     starlight-rabbitmq: 'Starlight for RabbitMQ'
-    gpt-schema-translator: 'GPT schema translator'
 
     # Required for include::common partials; some shared with Luna Streaming
     web-ui: '{astra-ui}'

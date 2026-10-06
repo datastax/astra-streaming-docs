@@ -1,6 +1,7 @@
 = {product} release notes
 :navtitle: Release notes
 :page-toclevels: 1
+:page-aliases: developing:gpt-schema-translator.adoc
 :description: This page summarizes significant changes and updates to {product}.
 :new: New features and enhancements
 :security: Security updates
@@ -9,6 +10,17 @@
 :boilerplate: This release includes the following changes and updates:
 
 This page summarizes significant changes and updates to {product}.
+
+[#releases-2026]
+== October 2026
+
+{boilerplate}
+
+Removed features::
++
+* The GPT schema translator is discontinued for the xref:connectors:sinks/astra-db.adoc[{astra-db} Sink Connector].
+The *Generate mapping with GPT* option is no longer available in the Cassandra Enhanced sink configuration.
+*Generate Mapping* is unchanged.
 
 == June 2023
 
