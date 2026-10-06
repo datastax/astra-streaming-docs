@@ -16,7 +16,7 @@ This page summarizes significant changes and updates to {product}.
 
 {boilerplate}
 
-Discontinued features::
+Removed features::
 +
 * The GPT schema translator is discontinued for the xref:connectors:sinks/astra-db.adoc[{astra-db} Sink Connector].
 The *Generate mapping with GPT* option is no longer available in the Cassandra Enhanced sink configuration.
