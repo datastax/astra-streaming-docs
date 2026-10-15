@@ -129,7 +129,7 @@ These namespace policies are initially provisioned in the default settings for {
 |Enabled
 |Yes
 
-|Message deduplicate
+|Message deduplication
 |Disabled
 |No
 

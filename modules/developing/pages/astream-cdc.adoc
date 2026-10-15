@@ -15,7 +15,7 @@ By design, the Change Data Capture (CDC) component has a one-to-one corresponden
 
 == Supported data structures
 
-CDC for {astra-db} supports the following xref:astra@cql:reference:data-types.adoc[{cql} data types] and corresponding AVRO or logical types:
+CDC for {astra-db} supports the following xref:astra-db-serverless:cql:reference/data-types.adoc[{cql} data types] and corresponding AVRO or logical types:
 
 [cols="1,1"]
 |===
