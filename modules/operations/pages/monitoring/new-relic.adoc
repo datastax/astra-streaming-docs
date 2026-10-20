@@ -65,4 +65,3 @@ prometheus:
 
 * For a list of exposed endpoints for {product} metrics, see xref:operations:monitoring/metrics.adoc[].
 * To scrape {product} metrics in Kubernetes with an external Prometheus server, see xref:operations:monitoring/integration.adoc[].
-* To scrape {product} metrics into New Relic, see xref:operations:monitoring/new-relic.adoc[].

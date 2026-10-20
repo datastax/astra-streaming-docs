@@ -615,7 +615,7 @@ The simulated web click data was a product click, so the data was filtered to th
 To simulate a production workload to test the pipeline, you need a way to continuously post data to your Decodable REST endpoint.
 For this tutorial, you can use the following sample website:
 
-. Download the sample `xref:ROOT:attachment$web-clicks-website.zip[web-click-website.zip]`.
+. Download the sample `xref:ROOT:attachment$web-clicks-website.zip[web-clicks-website.zip]`.
 +
 This is a static HTML e-commerce catalog that silently posts click data to an endpoint.
 The sample site is a copy of the https://www.demoblaze.com/[Demoblaze site] from https://www.blazemeter.com/[BlazeMeter].

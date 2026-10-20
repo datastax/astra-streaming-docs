@@ -40,7 +40,7 @@ Inbound traffic includes {pulsar-reg}, {kafka-reg}, and RabbitMQ messaging traff
 You create a connection to the {company} private link service, and then {company} routes traffic to your {product} Streaming Capacity Units.
 
 If you have multiple tenants, they can have different VPCs.
-Each VPC will have the same private FQDN with different VNETs.
+Each VPC will have the same private FQDN with different VNets.
 The traffic on separate private end point connections is isolated until it reaches the {company} load balancer.
 
 The private link service pattern is the same across cloud providers, but the hostname depends on your {product} cluster's cloud provider and region:

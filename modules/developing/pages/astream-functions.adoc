@@ -354,7 +354,7 @@ If the function produces output and it has an `output` topic, the output data is
 
 . Listen for messages on the `output` topic:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
 ./pulsar-client consume persistent://**TENANT_NAME**/**NAMESPACE_NAME**/**TOPIC_NAME** \
   --subscription-name my-subscription \
@@ -363,7 +363,7 @@ If the function produces output and it has an `output` topic, the output data is
 +
 . Test your function:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
 ./pulsar-admin functions trigger \
   --name **FUNCTION_DISPLAY_NAME** \

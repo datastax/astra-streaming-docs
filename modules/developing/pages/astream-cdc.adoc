@@ -219,7 +219,7 @@ Don't create any namespaces or topics in your tenant because CDC does this autom
 [#create-table]
 === Create a table
 
-If you haven't done so already, xref:astra-db-serverless:databases:manage-collections.adoc#tables[create one or more tables] in your database.
+If you haven't done so already, xref:astra-db-serverless:databases:manage-collections.adoc#create-a-table[create one or more tables] in your database.
 
 Alternatively, you can follow these steps to create a small demo table to test CDC for {astra-db} before enabling it on your production tables:
 
@@ -654,7 +654,7 @@ persistent://**TENANT_NAME**/astracdc/data-**DB_ID**-**KEYSPACE_NAME**.**TABLE_N
 
 . Confirm that the topic was updated to have the desired number of partitions:
 +
-[source,bash]
+[source,bash,subs="+quotes"]
 ----
 bin/pulsar-admin topics partitioned-stats persistent://**DATA_TOPIC_STRING**
 ----
@@ -882,7 +882,7 @@ You can add new tables and regions, remove existing tables and regions, and chan
 +
 If the database has no existing CDC configuration, use the following example as a template:
 +
-[source,json]
+[source,json,subs="+quotes"]
 ----
 {
   "databaseName": "**DB_NAME**",
