@@ -33,9 +33,9 @@ Messaging displays the time series metrics chart summarized at the namespace lev
 * Total message drop rate of the namespace divided by topics
 * Total Producer/Consumer/Subscription count of the namespace divided by topics
 
-== Georeplication
+== Geo-replication
 
-Georeplication displays the time series metrics chart summarized at the namespace level with an additional level of detail (remote clusters).
+Geo-replication displays the time series metrics chart summarized at the namespace level with an additional level of detail (remote clusters).
 
 * Total incoming replication rate (msg/s) to the namespace divided by remote clusters
 * Total outgoing replication rate (msg/s) from the namespace divided by remote clusters

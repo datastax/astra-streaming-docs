@@ -67,7 +67,7 @@ Launched a refreshed {astra-ui}.
 +
 * Added support for the Azure `australiaeast` (New South Wales, Australia) region.
 * {product} now supports xref:developing:astream-functions-transform.adoc[transform functions].
-* {product} now supports xref:operations:astream-georeplication.adoc[georeplication].
+* {product} now supports xref:operations:astream-geo-replication.adoc[geo-replication].
 
 == June 2022
 
