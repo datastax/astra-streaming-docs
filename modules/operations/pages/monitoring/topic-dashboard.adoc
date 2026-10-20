@@ -50,9 +50,9 @@ Subscription displays the time series metrics chart summarized at the subscripti
 * Total subscription messages rejected by EntryFilter, divided by individual subscriptions
 * Total subscription messages rescheduled by EntryFilter, divided by individual subscriptions
 
-== Georeplication
+== Geo-replication
 
-Georeplication displays the time series metrics chart summarized at the topic level with an additional level of detail (remote clusters).
+Geo-replication displays the time series metrics chart summarized at the topic level with an additional level of detail (remote clusters).
 
 * Incoming replication rate (msg/s) to the topic divided by remote clusters
 * Outgoing replication rate (msg/s) from the topic divided by remote clusters

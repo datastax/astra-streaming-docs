@@ -2,7 +2,7 @@
 :description: Learn about the {product} {devops-api}.
 
 The {product} {devops-api} is one of the APIs that you can use to manage your {pulsar-reg} tenants and their resources.
-Use this API to manage higher-level {product} objects associated with your {astra} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, georeplication, {pulsar-short} stats, and {pulsar-short} tokens.
+Use this API to manage higher-level {product} objects associated with your {astra} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, geo-replication, {pulsar-short} stats, and {pulsar-short} tokens.
 
 .More endpoints
 [TIP]
@@ -225,14 +225,14 @@ curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenant
   --header "Authorization: Bearer $ASTRA_TOKEN"
 ----
 
-== Georeplication operations
+== Geo-replication operations
 
-Use the following {product} {devops-api} endpoints to manage georeplication for {product} namespaces.
+Use the following {product} {devops-api} endpoints to manage geo-replication for {product} namespaces.
 For more information, see xref:operations:astream-georeplication.adoc[].
 
-=== Get georeplication settings
+=== Get geo-replication settings
 
-Get the georeplication settings for a namespace:
+Get the geo-replication settings for a namespace:
 
 [source,bash]
 ----
@@ -241,7 +241,7 @@ curl -sS --fail -L -X GET "https://api.astra.datastax.com/v2/streaming/replicati
   | python3 -mjson.tool
 ----
 
-If georeplication is enabled, the response includes the replication configuration details.
+If geo-replication is enabled, the response includes the replication configuration details.
 
 [source,json]
 ----
@@ -287,9 +287,9 @@ If georeplication is enabled, the response includes the replication configuratio
 }
 ----
 
-=== Enable georeplication
+=== Enable geo-replication
 
-To enable georeplication, provide the origin and destination clusters, the namespace, bidirectional flag, and the email address (if set for the tenant):
+To enable geo-replication, provide the origin and destination clusters, the namespace, bidirectional flag, and the email address (if set for the tenant):
 
 [source,bash]
 ----
@@ -307,9 +307,9 @@ curl -sS --fail -L -X POST "https://api.astra.datastax.com/v2/streaming/replicat
 
 You can get the clusters, email, and namespace from <<get-tenant-details>>.
 
-=== Disable (remove) georeplication
+=== Disable (remove) geo-replication
 
-Specify the replication to remove by providing the entire georeplication settings object, including the origin and destination clusters, the namespace, bidirectional flag, and email address (if set for the tenant):
+Specify the replication to remove by providing the entire geo-replication settings object, including the origin and destination clusters, the namespace, bidirectional flag, and email address (if set for the tenant):
 
 [source,bash]
 ----

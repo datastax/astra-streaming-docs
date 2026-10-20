@@ -22,7 +22,7 @@ For instructions, see the xref:getting-started:index.adoc[{product} quickstart] 
 . For this example, use the default values for the **Connection type**, **Read position**, **Subscription**, and **Subscription Type** settings.
 In future tests, you might want to change these settings.
 
-. Click *Connect* to open a websocket connection in your browser with the producer topic.
+. Click *Connect* to open a WebSocket connection in your browser with the producer topic.
 
 . In the *Send message* field, enter a test message, and then click *Send*.
 

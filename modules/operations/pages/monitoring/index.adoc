@@ -113,7 +113,7 @@ The following table lists recommended namespace and/or topic metrics as a starti
 
 === Replication metrics
 
-When georeplication is enabled for a particular namespace, a subset of namespace metrics is available specifically for georeplication purposes. Below is the list of recommended georeplication metrics as a starting point.
+When geo-replication is enabled for a particular namespace, a subset of namespace metrics is available specifically for geo-replication purposes. Below is the list of recommended geo-replication metrics as a starting point.
 
 [cols=4]
 |===
@@ -376,7 +376,7 @@ However, {company} recommends that you monitor the following metrics for unexpec
 | The total backlog size (in bytes) of a topic.
 
 | pulsar_replication_backlog
-| Georeplication
+| Geo-replication
 | Gauge
 | The total message backlog of the namespace replicating to a remote cluster.
 
