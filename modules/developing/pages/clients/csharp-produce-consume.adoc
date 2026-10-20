@@ -12,7 +12,7 @@ This example demonstrates how you can produce and consume messages with the C# {
 
 == Create a console project
 
-Create a new console project, and then add a reference to the https://www.nuget.org/packages/DotPulsar/[dotpulsar client]:
+Create a new console project, and then add a reference to the https://www.nuget.org/packages/DotPulsar/[DotPulsar client]:
 
 [source,shell]
 ----
