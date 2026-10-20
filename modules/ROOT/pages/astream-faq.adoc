@@ -92,7 +92,7 @@ Shared clusters can replicate between any xref:operations:astream-regions.adoc[s
 +
 Streaming Capacity Units can use almost any region supported by your cloud provider, as well as across cloud providers.
 
-For more on geo-replication, see xref:operations:astream-geo-replication.adoc[].
+For more on geo-replication, see xref:operations:astream-georeplication.adoc[].
 
 == Security and access control
 

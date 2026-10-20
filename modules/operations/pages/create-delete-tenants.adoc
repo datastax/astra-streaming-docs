@@ -64,7 +64,7 @@ Use `xref:astra-cli:commands:astra-streaming-get.adoc[astra streaming get]`.
 . Click the name of your tenant, and then click the *Namespace And Topics* tab to manage namespaces:
 +
 * **Create a namespace**: Click *Create Namespace*, enter a namespace name, and then click *Create Namespace*.
-* **Configure replication**: See xref:operations:astream-geo-replication.adoc[].
+* **Configure replication**: See xref:operations:astream-georeplication.adoc[].
 * **Delete a namespace**: Find the namespace you want to delete, click **Modify Namespace**, find the **Delete This Namespace** section, and then click *Delete Namespace*.
 * **Return to all namespaces**: When modifying an individual namespace, click **Back to Namespaces** to return to the list of all namespaces in the current tenant.
 

@@ -228,7 +228,7 @@ curl -sS --fail -L -X DELETE "https://api.astra.datastax.com/v2/streaming/tenant
 == Geo-replication operations
 
 Use the following {product} {devops-api} endpoints to manage geo-replication for {product} namespaces.
-For more information, see xref:operations:astream-geo-replication.adoc[].
+For more information, see xref:operations:astream-georeplication.adoc[].
 
 === Get geo-replication settings
 

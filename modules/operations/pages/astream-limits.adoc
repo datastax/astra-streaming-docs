@@ -332,7 +332,7 @@ The following configurations cannot be changed:
 ** Bundle level clear backlog
 ** Bundle level unload
 ** Bundle level subscribe and unsubscribe
-* Replication (separate from xref:operations:astream-geo-replication.adoc[geo-replication])
+* Replication (separate from xref:operations:astream-georeplication.adoc[geo-replication])
 * Delayed delivery
 * Offload policy
 * Offload deletion
