@@ -1,6 +1,8 @@
 = Private connectivity for {product}
 :navtitle: Private connectivity
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 By default, {product} shared clusters and Streaming Capacity Units use secure connections over the public internet.
 
 With Streaming Capacity Units, you have the option to connect your {product} clusters to a private link service for inbound connections or to a private endpoint for outbound connections.

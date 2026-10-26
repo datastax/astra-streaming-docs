@@ -1,6 +1,8 @@
 = Use the {product} {pulsar-short} Admin API
 :description: Learn about the {product} {pulsar-short} Admin API.
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 Use the {product} {pulsar-short} Admin API to manage resources within your {product} tenants, such as namespaces, topics, and subscriptions.
 
 .More endpoints

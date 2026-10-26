@@ -1,5 +1,7 @@
 = Geo-replication
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 A key feature of {pulsar-reg} is how it handles geo-replication. While other pub-sub messaging systems require additional processes to mirror messages between datacenters, {pulsar-short} has multi-datacenter replication as an integrated feature.
 
 {pulsar-short}'s serving layer (brokers) and storage layer (bookies) are decoupled in {pulsar-short} architecture, allowing seamless message replication across datacenters in different regions.

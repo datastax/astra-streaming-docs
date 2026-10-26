@@ -1,5 +1,7 @@
 = Manage tokens
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 {product} uses two types of tokens that you can generate in {astra}.
 
 [#astra-token]

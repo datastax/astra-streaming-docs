@@ -1,6 +1,8 @@
 = Use OSS {pulsar-short} REST APIs
 :description: Interact with {product} using OSS {pulsar-reg} REST APIs.
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 In addition to the xref:apis:index.adoc[{product} {devops-api}] and the xref:apis:api-operations.adoc[{product} {pulsar-short} Admin API], you can use some of the functionality provided by the https://pulsar.apache.org/docs/reference-rest-api-overview/[open source {pulsar-reg} project's REST APIs] to programmatically interact with your tenants.
 
 == Limitations

@@ -16,6 +16,10 @@ This page summarizes significant changes and updates to {product}.
 
 {boilerplate}
 
+{dep}::
++
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 Removed features::
 +
 * The GPT schema translator is discontinued for the xref:connectors:sinks/astra-db.adoc[{astra-db} Sink Connector].

@@ -1,6 +1,8 @@
 = {pulsar-short} I/O connectors in {product}
 :navtitle: {pulsar-short} I/O connectors reference
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 {product} offers fully-managed versions of https://pulsar.apache.org/docs/en/io-overview/[{pulsar-reg} sink and source connectors].
 
 [IMPORTANT]

@@ -2,6 +2,8 @@
 :navtitle: Enable Change Data Capture (CDC)
 :description: CDC for {astra-db} automatically captures changes in real time, de-duplicates the changes, and streams the clean set of changed data to {product}.
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 [IMPORTANT]
 ====
 Change Data Capture (CDC) for {astra-db} incurs billed charges based on your {product} usage.

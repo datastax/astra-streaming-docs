@@ -1,5 +1,7 @@
 = {product} pricing
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 {product} is a fully-managed, software-as-a-service (SaaS) offering embedded in {astra}.
 
 == Plans

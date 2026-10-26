@@ -2,6 +2,8 @@
 :navtitle: Configure the {pulsar-short} CLI
 :description: Download a compatible {pulsar-short} artifact and configure the binaries for use with {product}.
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 {product} runs a {company} version of {pulsar-reg}.
 The benefits of OSS {pulsar-short} are also available in {product}.
 

@@ -3,6 +3,8 @@
 :subscription-comment: // Subscription type is set to Key_Shared
 :subscription-type: .subscriptionType(SubscriptionType.Key_Shared)
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
 {pulsar-short}'s xref:ROOT:astream-subscriptions-shared.adoc[shared subscription] model can increase the message processing rate, but it risks losing message ordering guarantees.

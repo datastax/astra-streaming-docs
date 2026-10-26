@@ -1,5 +1,7 @@
 = Scrape {product} metrics with Prometheus
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 Prometheus collects system metrics by scraping targets at intervals. These metrics are used to monitor deployments, generate alerts, and diagnose problems.
 
 This doc will show you how to scrape an {product} tenant with Prometheus.

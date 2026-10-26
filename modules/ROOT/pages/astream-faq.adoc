@@ -2,6 +2,8 @@
 :navtitle: FAQs
 :page-aliases: operations:onboarding-faq.adoc
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 When considering {product} for your production workloads, you might have questions about what options are available for connecting and consuming your serverless clusters.
 This page answers some common questions about getting started with and using {product}.
 

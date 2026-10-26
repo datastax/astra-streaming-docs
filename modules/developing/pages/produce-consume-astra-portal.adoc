@@ -2,6 +2,8 @@
 :navtitle: Test tenants in the {astra-ui}
 :description: Use this guide to create and consume a topic message using the {astra-ui}.
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 To verify that your {product} tenant can produce and consume messages, you can use the **Try Me** feature in the {astra-ui}.
 
 == Prerequisites
