@@ -1,6 +1,6 @@
 [IMPORTANT]
 ====
-Effective October 9, 2026, the {product} subscriptions are discontinued and the service is considered deprecated.
+Effective October 9, 2026, {product} subscriptions are discontinued and the service is considered deprecated.
 For existing subscriptions, access to the service remains available for the duration of your subscription.
-For more information, see the https://www.ibm.com/docs/en/announcements/cloud-services-ordering-completion-astra-streaming-support-only-service-ordering-completion-elite-support-apache-pulsar[{product} discontinuation announcement], contact your account representative, or contact {support-url}[IBM Support].
+For more information, see the https://www.ibm.com/docs/announcements/cloud-services-ordering-completion-astra-streaming-support-only-service-ordering-completion-elite-support-apache-pulsar[{product} discontinuation announcement], contact your account representative, or contact {support-url}[IBM Support].
 ====
