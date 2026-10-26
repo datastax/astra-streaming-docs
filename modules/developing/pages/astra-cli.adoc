@@ -1,5 +1,7 @@
 = Use the {astra-cli}
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 The xref:astra-cli:ROOT:index.adoc[{astra-cli}] is a command-line interface that lets you create and manage {astra-db} and {product} resources from your terminal.
 
 For example:

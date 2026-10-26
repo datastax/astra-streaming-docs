@@ -1,6 +1,8 @@
 = {company} Starlight suite of {pulsar-reg} extensions
 :navtitle: Use the Starlight extensions
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 The Starlight suite of extensions is a collection of {pulsar-reg} protocol handlers that extend an existing {pulsar-short} cluster.
 The goal of these extensions is to create a native, seamless interaction with a {pulsar-short} cluster using existing tooling and clients.
 

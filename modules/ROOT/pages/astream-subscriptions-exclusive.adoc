@@ -3,6 +3,8 @@
 :subscription-comment: // Subscription type is set to Exclusive
 :subscription-type: .subscriptionType(SubscriptionType.Exclusive)
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 _Subscriptions_ in {pulsar-reg} describe which consumers are consuming data from a topic and how they want to consume that data.
 
 An _exclusive subscription_ describes a basic publish-subscribe (pub-sub) pattern where a single consumer subscribes to a single topic and consumes from it.

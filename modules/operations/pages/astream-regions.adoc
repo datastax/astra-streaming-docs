@@ -1,6 +1,8 @@
 = {product} regions
 :description: {product} is available in specific AWS, Microsoft Azure, and Google Cloud regions.
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 {product} is available in a subset of the xref:astra-db-serverless:databases:regions.adoc[{astra-db} regions], including AWS, Microsoft Azure, and Google Cloud regions.
 
 {product} tenants are regionally isolated.

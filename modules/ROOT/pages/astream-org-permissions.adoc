@@ -1,6 +1,8 @@
 = Manage {product} roles and permissions
 :navtitle: Manage roles and permissions
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 You manage role-based access control (RBAC) for {product} through your {astra} organization.
 For more information about {astra} RBAC, see xref:astra-db-serverless:administration:rbac.adoc[].
 

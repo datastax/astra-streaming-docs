@@ -2,6 +2,8 @@
 :navtitle: Use the {pulsar-short} CLI
 :description: Use the {pulsar-short} CLIs to interact with your {product} tenants
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 You can use the `pulsar-client` and `pulsar-admin` CLIs to interact with your {product} tenants.
 
 == Prerequisites

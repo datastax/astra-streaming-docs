@@ -1,6 +1,8 @@
 = {product} {pulsar-short} transform functions configuration reference
 :navtitle: Transform functions configuration reference
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 include::common:streaming:partial$transform-functions/intro.adoc[]
 
 To deploy transform functions, see xref:developing:astream-functions.adoc#deploy-functions-in-the-astra-portal[Deploy functions in the {astra-ui}].

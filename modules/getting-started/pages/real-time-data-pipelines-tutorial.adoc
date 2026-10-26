@@ -1,6 +1,8 @@
 = Build real-time data pipelines with {product} and Decodable
 :navtitle: Build real-time data pipelines
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 This tutorial shows you how to build real-time data processing pipelines using {product} and Decodable.
 Specifically, this tutorial simulates capturing web click data from an e-commerce website.
 It describes how to create, integrate, run, and test all components required to capture, process, and store real-time web click events.

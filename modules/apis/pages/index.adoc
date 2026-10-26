@@ -1,6 +1,8 @@
 = Use the {product} {devops-api}
 :description: Learn about the {product} {devops-api}.
 
+include::ROOT:partial$discontinuation-notice.adoc[]
+
 The {product} {devops-api} is one of the APIs that you can use to manage your {pulsar-reg} tenants and their resources.
 Use this API to manage higher-level {product} objects associated with your {astra} organization, such as the Change Data Capture (CDC) settings, {pulsar-short} tenants, geo-replication, {pulsar-short} stats, and {pulsar-short} tokens.
 
