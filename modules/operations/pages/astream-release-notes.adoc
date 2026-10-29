@@ -1,7 +1,6 @@
 = {product} release notes
 :navtitle: Release notes
 :page-toclevels: 1
-:page-aliases: developing:gpt-schema-translator.adoc
 :description: This page summarizes significant changes and updates to {product}.
 :new: New features and enhancements
 :security: Security updates
