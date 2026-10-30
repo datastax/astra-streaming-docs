@@ -1,6 +1,5 @@
 = {product} FAQs
 :navtitle: FAQs
-:page-aliases: operations:onboarding-faq.adoc
 
 include::ROOT:partial$discontinuation-notice.adoc[]
 
